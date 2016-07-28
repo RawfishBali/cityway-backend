@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CityView</title>
+  <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <%= stylesheet_link_tag    'admin', media: 'all', 'data-turbolinks-track' => true %>
+
+
+
+  <%= csrf_meta_tags %>
+</head>
+<body class="login_page">
+  <%= yield %>
+  <%= javascript_include_tag 'admin'%>
+  <script>
+        // check for theme
+    if (typeof(Storage) !== "undefined") {
+        var root = document.getElementsByTagName( 'html' )[0],
+            theme = localStorage.getItem("altair_theme");
+        if(theme == 'app_theme_dark' || root.classList.contains('app_theme_dark')) {
+            root.className += ' app_theme_dark';
+        }
+    }
+  </script>
+</body>
+</html>

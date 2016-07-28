@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CityView</title>
+  <%= stylesheet_link_tag    'admin', media: 'all' %>
+
+
+
+  <%= csrf_meta_tags %>
+</head>
+  <body class="sidebar_main_open">
+
+      <!-- main header -->
+      <header id="header_main"></header>
+
+      <!-- main sidebar -->
+      <aside id="sidebar_main">
+        <%= yield %>
+      </aside>
+
+      <!-- main content-->
+
+      <!-- secondary sidebar -->
+      <aside id="sidebar_secondary"></aside>
+
+      <!-- google web fonts -->
+
+
+      <!-- momentJS date library -->
+
+      <!-- common functions -->
+
+      <!-- uikit functions -->
+
+      <!-- altair common functions/helpers -->
+
+      <!-- enable hires images -->
+        <%= javascript_include_tag 'admin' %>
+  </body>
+</html>
