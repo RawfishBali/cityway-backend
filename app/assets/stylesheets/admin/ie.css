@@ -2,11 +2,11 @@
 
 /* main sidebar */
 #sidebar_main {
-    -ms-transform: translateX(240px);
+    -ms-transform: translateX(-240px);
 }
 @media only screen and (max-width: 767px) {
     #sidebar_main {
-        -ms-transform: translateY(280px);
+        -ms-transform: translateY(-280px);
     }
 }
 
@@ -17,7 +17,7 @@
 
 /* secondary sidebar */
 #sidebar_secondary {
-    -ms-transform: translateX(-288px);
+    -ms-transform: translateX(288px);
 }
 
 .sidebar_secondary_active #sidebar_secondary {

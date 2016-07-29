@@ -1,0 +1,17 @@
+#header-custom-background{
+  background: #7fb1b6 !important; /* Old browsers */
+  background: -moz-linear-gradient(-45deg,  #7fb1b6 0%, #2989d8 50%, #0288d1 50%, #d8e903 100%) !important; /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg,  #7fb1b6 0%,#2989d8 50%,#0288d1 50%,#d8e903 100%) !important; /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg,  #7fb1b6 0%,#2989d8 50%,#0288d1 50%,#d8e903 100%) !important; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7fb1b6', endColorstr='#d8e903',GradientType=1 )!important;
+}
+
+.sidebar-header{
+  width: 65% !important;
+  padding: 10px;
+}
+
+.sidebar-header-link{
+  color: #fff !important;
+  padding: 10px;
+}

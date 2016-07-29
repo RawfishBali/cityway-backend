@@ -556,7 +556,12 @@
     // 3.5 main sidebar (left)
     altair_main_sidebar = {
         init: function() {
+        	$sidebar_main = $('#sidebar_main');
+        	$sidebar_main_toggle = $('#sidebar_main_toggle');
+        	$body = $('body')
+        	
             if($sidebar_main.length) {
+            	
                 // check if browser support localstorage
                 if(lsTest()) {
                     // check if mini sidebar is enabled
@@ -595,6 +600,7 @@
                 } else {
 
                     $sidebar_main_toggle.on('click', function(e) {
+                    	
                         e.preventDefault();
                         ( $body.hasClass('sidebar_main_active') || ($body.hasClass('sidebar_main_open') && $window.width() >= 1220) ) ? altair_main_sidebar.hide_sidebar() : altair_main_sidebar.show_sidebar();
                     });
@@ -630,7 +636,7 @@
             }
         },
         hide_sidebar: function() {
-
+        	
             $body.addClass('sidebar_main_hiding').removeClass('sidebar_main_active sidebar_main_open');
             if( $window.width() < 1220 ) {
                 altair_page_content.show_content_sidebar();
@@ -642,7 +648,7 @@
 
         },
         show_sidebar: function() {
-
+        	
             $body.addClass('sidebar_main_active');
             if( $window.width() < 1220 ) {
                 altair_page_content.hide_content_sidebar();
@@ -954,6 +960,7 @@
         init: function() {
             altair_main_header.search_activate();
             altair_main_header.search_autocomplete();
+            $header_main = $('#header_main')
         },
         search_activate: function() {
 
