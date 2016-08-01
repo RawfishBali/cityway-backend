@@ -1,3 +1,21 @@
+module Devise
+  # Checks the scope in the given environment and returns the associated failure app.
+  class Delegator
+    def call(env)
+      failure_app(env).call(env)
+    end
+
+    def failure_app(env)
+
+      if env["warden.options"] && scope = env["warden.options"][:scope]  && Devise.mappings[env["warden.options"][:scope] .to_sym]
+        app = (Devise.mappings[env["warden.options"][:scope]]).failure_app
+      end
+      app || CityView::Api::V1::FailureApp
+    end
+  end
+end
+
+
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
@@ -84,6 +102,13 @@ Devise.setup do |config|
   # passing skip: :sessions to `devise_for` in your config/routes.rb
   config.skip_session_storage = [:http_auth]
 
+
+  config.warden do |manager|
+    manager.strategies.add :bearer, Warden::OAuth2::Strategies::Bearer
+    manager.strategies.add :client, Warden::OAuth2::Strategies::Client
+
+    manager.scope_defaults :offline_access, strategies: [:bearer, :client], failure_app: CityView::Api::V1::FailureApp
+  end
   # By default, Devise cleans up the CSRF token on authentication to
   # avoid CSRF token fixation attacks. This means that, when using AJAX
   # requests for sign in and sign up, you need to get a new CSRF token

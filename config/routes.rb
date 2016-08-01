@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   devise_for :admins
   devise_for :users
-  use_doorkeeper
+  # use_doorkeeper
 
 
 
@@ -15,5 +15,6 @@ Rails.application.routes.draw do
 
   end
 
-  mount CityView::Haha => '/api'
+  # mount CityView::Haha => '/api'
+  mount CityView::Api::V1::Base => '/api'
 end

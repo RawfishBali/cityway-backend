@@ -34,9 +34,18 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 gem 'devise'
+
 gem 'grape'
-gem 'doorkeeper', '3.1.0'
+gem 'grape-entity'
+
 gem 'hashie-forbidden_attributes'
+
+# gem 'doorkeeper', '3.1.0'
+gem 'warden', '1.2.3'
+gem 'warden-oauth2'
+
+gem 'annotate'
+
 
 
 group :development, :test do

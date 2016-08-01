@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160728031213) do
+ActiveRecord::Schema.define(version: 20160730073419) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "access_tokens", force: :cascade do |t|
+    t.string   "token"
+    t.datetime "expired_at"
+    t.integer  "client_application_id"
+    t.integer  "user_id"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -33,6 +42,23 @@ ActiveRecord::Schema.define(version: 20160728031213) do
 
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true, using: :btree
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
+
+  create_table "cities", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.float    "lat",        null: false
+    t.float    "long",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "client_applications", force: :cascade do |t|
+    t.string   "name"
+    t.string   "key"
+    t.string   "secret"
+    t.integer  "client_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "oauth_access_grants", force: :cascade do |t|
     t.integer  "resource_owner_id", null: false
@@ -86,6 +112,7 @@ ActiveRecord::Schema.define(version: 20160728031213) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "password_digest"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
   end
