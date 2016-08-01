@@ -18,10 +18,8 @@ module CityView
             end
           end
           get do
-            cities = City.all
-
+            cities = City.all.page params[:page]
             add_pagination_headers cities
-
             present cities, with: CityView::Api::V1::Entities::City
           end
         end
