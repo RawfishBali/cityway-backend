@@ -10,3 +10,18 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require admin/common
+//= require admin/uikit_custom
+//= require admin/altair_admin_common
+//= require admin/d3
+//= require admin/metricsgraphics
+//= require admin/handlebars
+//= require admin/handlebars_helpers
+//= require admin/maplace
+//= require admin/jquery.peity
+//= require admin/jquery.easypiechart
+//= require admin/clndr.min
+//= require admin/jquery.fitvids
+//= require admin/login.min
+//= require admin/dashboard
+//= require admin/easypiechart
