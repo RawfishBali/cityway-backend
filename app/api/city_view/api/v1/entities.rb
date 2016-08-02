@@ -17,6 +17,7 @@ module CityView
           expose :expires_in, :documentation => {:type => "integer", :desc => "How many seconds left until expires"} do |access_token, options|
             access_token.expired_in_seconds
           end
+          expose :refresh_token, :documentation => {:type => "string", :desc => "Refresh Token"}
         end
       end
     end

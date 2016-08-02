@@ -13,7 +13,6 @@
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :string
 #  last_sign_in_ip        :string
-#  password_digest        :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
@@ -27,7 +26,7 @@ class User < ActiveRecord::Base
   # has_secure_password
 
   has_many :access_tokens
-  has_and_belongs_to_many :client_applications
+  # has_and_belongs_to_many :client_applications
 
   validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
 
@@ -58,12 +57,9 @@ class User < ActiveRecord::Base
       # Create the user if it's a new registration
       if user.nil?
         user = User.new(
-        name: auth.extra.raw_info.name,
-        #username: auth.info.nickname || auth.uid,
         email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
         password: Devise.friendly_token[0,20]
         )
-        user.skip_confirmation!
         user.save!
       end
     end
