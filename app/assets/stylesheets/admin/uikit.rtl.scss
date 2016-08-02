@@ -450,10 +450,10 @@ iframe {
     }
 }
 
-/*.uk-grid-divider:not(:empty) {
-    margin-right: -25px;
-    margin-left: -25px;
-}*/
+// .uk-grid-divider:not(:empty) {
+//     margin-right: -25px;
+//     margin-left: -25px;
+// }
 
 .uk-grid-divider > * {
     padding-right: 25px;
@@ -485,10 +485,10 @@ iframe {
 }
 
 @media (min-width:1220px) {
-    /*.uk-grid-divider:not(: empty) {
-        margin-right: -35px;
-        margin-left: -35px;
-    }*/
+    // .uk-grid-divider:not(: empty) {
+    //     margin-right: -35px;
+    //     margin-left: -35px;
+    // }
     .uk-grid-divider > * {
         padding-right: 35px;
         padding-left: 35px;

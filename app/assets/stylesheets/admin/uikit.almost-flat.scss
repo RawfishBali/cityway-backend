@@ -536,10 +536,10 @@ iframe {
  * Only works with the default gutter. Does not work with gutter collapse, small or large.
  * Does not work with `uk-push-*`, `uk-pull-*` and not if the columns float into the next row.
  */
-/*.uk-grid-divider:not(:empty) {
-  margin-left: -25px;
-  margin-right: -25px;
-}*/
+// .uk-grid-divider:not(:empty) {
+//   margin-left: -25px;
+//   margin-right: -25px;
+// }
 .uk-grid-divider > * {
   padding-left: 25px;
   padding-right: 25px;
@@ -572,10 +572,10 @@ iframe {
   /*
      * Large gutter
      */
-  /*.uk-grid-divider:not(:empty) {
-    margin-left: -35px;
-    margin-right: -35px;
-  }*/
+  // .uk-grid-divider:not(:empty) {
+  //   margin-left: -35px;
+  //   margin-right: -35px;
+  // }
   .uk-grid-divider > * {
     padding-left: 35px;
     padding-right: 35px;
