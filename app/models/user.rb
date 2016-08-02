@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
    :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
-  def self.find_for_oauth(auth, signed_in_resource = nil)
+  def self.find_for_oauth(auth,email, signed_in_resource = nil)
 
     # Get the identity and user if they exist
     identity = Identity.find_for_oauth(auth)
@@ -50,9 +50,9 @@ class User < ActiveRecord::Base
       # Get the existing user by email if the provider gives us a verified email.
       # If no verified email was provided we assign a temporary email and ask the
       # user to verify it on the next step via UsersController.finish_signup
-      email_is_verified = auth.info.email && (auth.info.verified || auth.info.verified_email)
-      email = auth.info.email if email_is_verified
-      user = User.where(:email => email).first if email
+      # email_is_verified = auth.info.email && (auth.info.verified || auth.info.verified_email)
+      # email = auth.info.email if email_is_verified
+      user = User.where(:email => email).first
 
       # Create the user if it's a new registration
       if user.nil?

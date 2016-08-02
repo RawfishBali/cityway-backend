@@ -39,25 +39,13 @@ module CityView
 
             desc "Sign Up With Facebook"
             params do
-              requires :auth, type: Hash do
-                requires :uid, type: String, desc: "Facebook Uid"
-                requires :info, type: Hash do
-                  requires :email, type: String, desc: "Facebook Email"
-                  requires :verified_email, type: String, desc: "Facebook verified_email Email"
-                  requires :verified, type: Boolean, desc: "Facebook verified boolean"
-                  optional :nickname, type: String, desc: "Facebook nickname"
-                end
-                optional :extra, type: Hash do
-                  optional :raw_info, type: Hash do
-                    optional :name, type: String, desc: "Facebook Name"
-                  end
-                end
-                requires :provider, type: String, desc: "Oauth Provider"
-              end
+              requires :email, type: String, desc: "Facebook Email"
+              requires :uid, type: String, desc: "Facebook Uid"
+
             end
             post :facebook do
-              signed_in_resource = User.find_by(email: params[:auth][:info][:email]) || nil
-              user = User.find_for_oauth(params[:auth], signed_in_resource)
+              signed_in_resource = User.find_by(email: params[:email]) || nil
+              user = User.find_for_oauth(params[:uid], signed_in_resource)
 
               error!({error: "Failed Authentication With Facebook"}, 401) and return unless user
 
