@@ -59,7 +59,7 @@ module CityView
               signed_in_resource = User.find_by(email: params[:auth][:info][:email]) || nil
               user = User.find_for_oauth(params[:auth], signed_in_resource)
 
-              error!({error: "invalid_request"}, 400) and return unless user
+              error!({error: "Failed Authentication With Facebook"}, 400) and return unless user
 
               token = current_client.access_tokens.where(user: user).first_or_create
 
@@ -74,7 +74,7 @@ module CityView
             post :sign_in do
               user = User.authenticate(params[:email],params[:password])
 
-              error!({error: "invalid_request"}, 400) and return unless user
+              error!({error: "Invalid email or password"}, 400) and return unless user
 
               token = current_client.access_tokens.where(user: user).first_or_create
 
@@ -87,7 +87,7 @@ module CityView
             end
             post :token do
               access_token = AccessToken.find_by(refresh_token: params[:refresh_token])
-              error!({error: "invalid_request"}, 400) and return unless access_token
+              error!({error: "Invalid Refresh Token"}, 400) and return unless access_token
 
               access_token.refresh_token_if_expired
 
