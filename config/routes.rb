@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get '/attivita', to: 'home#attivita'
 
   devise_for :admins
-  devise_for :users
+  devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks' }
   # use_doorkeeper
 
 

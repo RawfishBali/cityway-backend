@@ -1,4 +1,3 @@
-
 module CityView
   module Api
     module V1
@@ -13,6 +12,7 @@ module CityView
 
           desc "List Cities"
           params do
+            optional :page , type: Integer
             optional :sort, type: Hash do
               optional :name, type: String, values: -> { ['asc', 'desc'] }
             end
