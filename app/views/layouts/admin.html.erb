@@ -2,39 +2,110 @@
 <html>
 <head>
   <title>CityView</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
   <%= stylesheet_link_tag    'admin', media: 'all' %>
-
+  <%= javascript_include_tag 'admin'%>
 
 
   <%= csrf_meta_tags %>
 </head>
-  <body class="sidebar_main_open">
+<body class="sidebar_main_open">
 
-      <!-- main header -->
-      <header id="header_main"></header>
+  <!-- main header -->
+  <header id="header_main">
+    <div class="header_main_content">
+      <nav class="uk-navbar">
 
-      <!-- main sidebar -->
-      <aside id="sidebar_main">
-        <%= yield %>
-      </aside>
+        <!-- main sidebar switch -->
+        <a href="#" id="sidebar_main_toggle" class="sSwitch sSwitch_left">
+          <span class="sSwitchIcon"></span>
+        </a>
 
-      <!-- main content-->
+        <!-- secondary sidebar switch -->
 
-      <!-- secondary sidebar -->
-      <aside id="sidebar_secondary"></aside>
+        <div class="uk-navbar-flip">
+          <ul class="uk-navbar-nav user_actions">
+            <li data-uk-dropdown="{mode:'click',pos:'bottom-right'}">
+              <a href="#" class="user_action_image"><img class="md-user-image" src="assets/avatars/avatar_11_tn.png" alt=""/></a>
+              <div class="uk-dropdown uk-dropdown-small">
+                <ul class="uk-nav js-uk-prevent">
+                  <li><%= link_to('Logout', destroy_admin_session_path, method: 'DELETE') %></li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
 
-      <!-- google web fonts -->
+  </header>
+
+  <!-- main sidebar -->
+  <aside id="sidebar_main">
+    <div class="sidebar_main_header" id="header-custom-background">
+      <%= image_tag "logo_main_white@2x.png" , class: 'sidebar-header'%>
+      <br />
+      <%= link_to 'Admin', '#', class:'sidebar-header-link'%>
+    </div>
+    <div class="menu_section">
+      <ul>
+        <li class="current_section" title="Principale">
+          <a href="/">
+            <span class="menu_icon"><i class="material-icons">&#xE871;</i></span>
+            <span class="menu_title">Principale</span>
+          </a>
+        </li>
+        <li class="current_section" title="Attività">
+          <a href="/attivita">
+            <span class="menu_icon"><i class="material-icons">&#xE8CB;</i></span>
+            <span class="menu_title">Attività</span>
+          </a>
+        </li>
+        <li class="current_section" title="Promos">
+          <a href="/">
+            <span class="menu_icon"><i class="material-icons">&#xE53E;</i></span>
+            <span class="menu_title">Promos</span>
+          </a>
+        </li>
+        <li class="current_section" title="Ads">
+          <a href="/">
+            <span class="menu_icon"><i class="material-icons ">&#xE0B9;</i></span>
+            <span class="menu_title">Ads</span>
+          </a>
+        </li>
+        <li class="current_section" title="Comuni">
+          <a href="/">
+            <span class="menu_icon"><i class="material-icons">&#xE1BD;</i></span>
+            <span class="menu_title">Comuni</span>
+          </a>
+        </li>
+        <li class="current_section" title="Opzioni">
+          <a href="/">
+            <span class="menu_icon"><i class="material-icons">&#xE87B;</i></span>
+            <span class="menu_title">Opzioni</span>
+          </a>
+        </li>
+      </ul>
+
+    </div>
+  </aside>
+
+  <!-- main content-->
+  <div id="page_content">
+    <div id="page_content_inner">
+      <%= yield %>
+    </div>
+  </div>
+
+  <!-- secondary sidebar -->
+  <aside id="sidebar_secondary"></aside>
 
 
-      <!-- momentJS date library -->
+  <!-- main content-->
 
-      <!-- common functions -->
 
-      <!-- uikit functions -->
 
-      <!-- altair common functions/helpers -->
 
-      <!-- enable hires images -->
-        <%= javascript_include_tag 'admin' %>
-  </body>
+</body>
 </html>

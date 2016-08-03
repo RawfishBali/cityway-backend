@@ -11,17 +11,23 @@
   <%= csrf_meta_tags %>
 </head>
 <body class="login_page">
+  <% flash.each do |type, message| %>
+    <div class="uk-notify uk-notify-top-center" style="display: block;">
+      <div class="uk-notify-message" style="opacity: 1; margin-top: -50px; margin-bottom: 10px;">
+        <a class="uk-close"></a>
+        <div>
+          <%= message %>
+        </div>
+
+      </div>
+    </div>
+  <% end %>
+
+
+
+
   <%= yield %>
   <%= javascript_include_tag 'admin'%>
-  <script>
-        // check for theme
-    if (typeof(Storage) !== "undefined") {
-        var root = document.getElementsByTagName( 'html' )[0],
-            theme = localStorage.getItem("altair_theme");
-        if(theme == 'app_theme_dark' || root.classList.contains('app_theme_dark')) {
-            root.className += ' app_theme_dark';
-        }
-    }
-  </script>
+
 </body>
 </html>
