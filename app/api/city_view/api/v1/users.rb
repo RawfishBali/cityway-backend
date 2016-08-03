@@ -45,7 +45,7 @@ module CityView
             end
             post :facebook do
               signed_in_resource = User.find_by(email: params[:email]) || nil
-              user = User.find_for_oauth(params[:uid], signed_in_resource)
+              user = User.find_for_oauth(params[:uid], params[:email],  signed_in_resource)
 
               error!({error: "Failed Authentication With Facebook"}, 401) and return unless user
 

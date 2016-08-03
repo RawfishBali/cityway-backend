@@ -49,6 +49,7 @@ GEM
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
     byebug (9.0.5)
+    cancancan (1.15.0)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
     coffee-rails (4.1.1)
@@ -180,6 +181,7 @@ GEM
       json (~> 1.4)
     responders (2.2.0)
       railties (>= 4.2.0, < 5.1)
+    rolify (5.1.0)
     sass (3.4.22)
     sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
@@ -232,6 +234,7 @@ PLATFORMS
 DEPENDENCIES
   annotate
   byebug
+  cancancan
   coffee-rails (~> 4.1.0)
   devise
   geokit-rails
@@ -246,6 +249,7 @@ DEPENDENCIES
   omniauth-facebook
   pg
   rails (= 4.2.7)
+  rolify
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   seed_dump
