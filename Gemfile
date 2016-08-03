@@ -43,6 +43,8 @@ gem 'grape_on_rails_routes'
 
 gem 'hashie-forbidden_attributes'
 
+gem 'geokit-rails'
+
 # gem 'doorkeeper', '3.1.0'
 gem 'warden', '1.2.3'
 gem 'warden-oauth2'

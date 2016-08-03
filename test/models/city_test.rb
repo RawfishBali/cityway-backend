@@ -8,6 +8,7 @@
 #  long       :float            not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  distance   :float
 #
 
 require 'test_helper'
