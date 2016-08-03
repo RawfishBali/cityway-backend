@@ -13,13 +13,7 @@
 }
 
 .login-form-override{
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#d8e903+0,2989d8+50,0288d1+51,7fb1b6+100 */
-  background: #d8e903 !important; /* Old browsers */
-  background: -moz-linear-gradient(-45deg,  #d8e903 0%, #0288D1 50%, #0288d1 51%, #7fb1b6 100%) !important; /* FF3.6-15 */
-  background: -webkit-linear-gradient(-45deg,  #d8e903 0%,#0288D1 50%,#0288d1 51%,#7fb1b6 100%) !important; /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(135deg,  #d8e903 0%,#0288D1 50%,#0288d1 51%,#7fb1b6 100%) !important; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d8e903', endColorstr='#7fb1b6',GradientType=1 ) !important; /* IE6-9 fallback on horizontal gradient */
-
+  background: #7fb1b6 !important;
 }
 
 .white-label{
