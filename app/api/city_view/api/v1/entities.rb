@@ -6,9 +6,10 @@ module CityView
         class City < Grape::Entity
           expose :id, documentation: {:type => "integer", :desc => "City ID"}
           expose :name, documentation: {:type => "string", :desc => "City Name"}
-          expose :lat, documentation: {:type => "float", :desc => "City Latitude"}
-          expose :long, documentation: {:type => "float", :desc => "City Longitude"}
-          expose :distance, documentation: {:type => "float", :desc => "City's distance from user's location"}
+          expose :latitude, documentation: {:type => "float", :desc => "City Latitude"}
+          expose :longitude, documentation: {:type => "float", :desc => "City Longitude"}
+          expose :distance, if: lambda { |object, options| object.respond_to?(:distance) }
+          expose :description, documentation: {:type => "string", :desc => "City description"}
         end
 
         class AccessToken < Grape::Entity

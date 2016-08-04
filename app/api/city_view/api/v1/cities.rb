@@ -16,13 +16,12 @@ module CityView
             optional :sort, type: Hash do
               optional :name, type: String, values: -> { ['asc', 'desc'] }
             end
-            optional :lat, type: String, desc: "User Latitude"
-            optional :lng, type: String, desc: "User Longitude"
+            optional :latitude, type: String, desc: "User Latitude"
+            optional :longitude, type: String, desc: "User Longitude"
           end
           get do
-            if params[:lat] && params[:lng]
-              # origin = Geokit::LatLng.new(params[:lat],params[:lng])
-              cities = City.near([params[:lat],params[:lng]], 20, :units => :km).page params[:page]
+            if params[:latitude] && params[:longitude]
+              cities = City.near([params[:latitude],params[:longitude]], 20, :units => :km).page params[:page]
             else
               cities = City.all.page params[:page]
             end

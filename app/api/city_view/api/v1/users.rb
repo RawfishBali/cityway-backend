@@ -68,24 +68,7 @@ module CityView
 
               present token, with: CityView::Api::V1::Entities::AccessToken
             end
-
-            desc "Refresh access token"
-            params do
-              requires :refresh_token, type: String, desc: "refresh_token"
-            end
-            post :token do
-              access_token = AccessToken.find_by(refresh_token: params[:refresh_token])
-              error!({error: "Invalid Refresh Token"}, 401) and return unless access_token
-
-              access_token.refresh_token_if_expired
-
-              present access_token, with: CityView::Api::V1::Entities::AccessToken
-            end
           end
-
-
-
-
         end
       end
     end

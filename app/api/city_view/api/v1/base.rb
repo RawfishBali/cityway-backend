@@ -51,7 +51,7 @@ module CityView
 
           def add_pagination_headers data
             header "X-Total",       data.total_count.to_s
-            header "X-Total-Pages", data.num_pages.to_s
+            header "X-Total-Pages", data.total_pages.to_s
             header "X-Per-Page",    (params[:per_page].presence || Kaminari.config.default_per_page).to_s
             header "X-Page",        data.current_page.to_s
             header "X-Next-Page",   data.next_page.to_s
