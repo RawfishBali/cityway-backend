@@ -26,7 +26,9 @@ class AccessToken < ActiveRecord::Base
 
 	# OPTIONAL
 	def expired?
-		DateTime.now >= self.expired_at
+		# Never Expired Token Hahaha
+		# DateTime.now >= self.expired_at
+		false
 	end
 
 	# OPTIONAL
@@ -81,6 +83,6 @@ class AccessToken < ActiveRecord::Base
 	end
 
 	def set_expiration
-		self.expired_at = DateTime.now + 1.day
+		self.expired_at = DateTime.now + 100.years
 	end
 end

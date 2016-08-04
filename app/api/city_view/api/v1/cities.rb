@@ -21,8 +21,8 @@ module CityView
           end
           get do
             if params[:lat] && params[:lng]
-              origin = Geokit::LatLng.new(params[:lat],params[:lng])
-              cities = City.within(5, :units => :kms, :origin => origin).page params[:page]
+              # origin = Geokit::LatLng.new(params[:lat],params[:lng])
+              cities = City.near([params[:lat],params[:lng]], 20, :units => :km).page params[:page]
             else
               cities = City.all.page params[:page]
             end
