@@ -61,6 +61,9 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'seed_dump'
+  gem 'rspec-rails'
+  gem 'shoulda-matchers'
+  gem 'simplecov'
 end
 
 group :development do
