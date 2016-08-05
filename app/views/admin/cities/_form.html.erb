@@ -1,0 +1,41 @@
+<%= form_for(@city, url: admin_cities_path(@city) ) do |f| %>
+
+<div class="uk-width-medium-1-1 uk-grid-margin uk-row-first">
+  <div class="md-input-wrapper <%= @city.name.blank? ? '' : 'md-input-filled'%>">
+    <%= f.label :name, 'Name *' %><%= f.text_field :name, class: 'md-input uk-form-width-large md-input-filled', required: true %>
+  </div>
+</div>
+
+<div class="uk-width-medium-1-1 uk-grid-margin uk-row-first">
+  <div class="md-input-wrapper <%= @city.description.blank? ? '' : 'md-input-filled'%>">
+    <%= f.label :description, 'Description *' %><%= f.text_field :description, class: 'md-input uk-form-width-large md-input-filled', required: true %>
+  </div>
+</div>
+
+<div class="uk-width-medium-1-1 uk-grid-margin uk-row-first">
+  <div class="md-input-wrapper <%= @city.latitude.blank? ? '' : 'md-input-filled'%>">
+    <%= f.label :latitude, 'Latitude *' %><%= f.text_field :latitude, class: 'md-input uk-form-width-large md-input-filled', required: true %>
+  </div>
+</div>
+
+<div class="uk-width-medium-1-1 uk-grid-margin uk-row-first">
+  <div class="md-input-wrapper <%= @city.longitude.blank? ? '' : 'md-input-filled'%>">
+    <%= f.label :longitude, 'Longitude *' %><%= f.text_field :longitude, class: 'md-input uk-form-width-large', required: true %>
+  </div>
+</div>
+
+<div class="uk-width-medium-1-1 uk-grid-margin uk-row-first">
+  <span class="uk-input-group-addon"></span>
+</div>
+
+
+
+  <div class="uk-width-medium-1-1 uk-grid-margin uk-row-first">
+
+    <span class="uk-input-group-addon">
+      <%= link_to 'Cancel', admin_cities_path, class: 'md-btn md-btn-flat uk-modal-close md-btn-wave waves-effect waves-button'%>
+      <%= f.submit 'Save',  class:"md-btn" %>
+    </span>
+  </div>
+
+<% end %>

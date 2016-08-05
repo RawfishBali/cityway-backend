@@ -1,5 +1,8 @@
 class Admin::CitiesController < Admin::BaseController
+  before_action :set_city, except: [:index, :new, :create]
+
   def index
+    @city = City.new
     @cities = City.all.page(20).page params[:page]
   end
 
@@ -15,19 +18,20 @@ class Admin::CitiesController < Admin::BaseController
 
   # GET /posts/1/edit
   def edit
+    set_city
   end
 
   # POST /posts
   # POST /posts.json
   def create
-    @city = City.new(post_params)
+    @city = City.new(city_params)
 
     respond_to do |format|
       if @city.save
-        format.html { redirect_to @city, notice: 'City was successfully created.' }
+        format.html { redirect_to admin_cities_path, notice: 'City was successfully created.' }
         format.json { render :show, status: :created, location: @city }
       else
-        format.html { render :new }
+        format.html { redirect_to :back, notice: @city.errors.full_messages }
         format.json { render json: @city.errors, status: :unprocessable_entity }
       end
     end
@@ -60,7 +64,7 @@ class Admin::CitiesController < Admin::BaseController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_city
-      @post = City.find(params[:id])
+      @city = City.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

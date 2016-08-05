@@ -26,6 +26,7 @@
             <td class="uk-width-1-10"><%= "Photo Here" %></td>
             <td class="uk-width-1-10">
               <%= link_to '<i class="md-icon material-icons">&#xE254;</i>'.html_safe, edit_admin_city_path(city) %>
+              <%= link_to '<i class="material-icons"></i>'.html_safe, admin_city_path(city), method: :delete, data: { confirm: 'Are you sure?' } %>
             </td>
           </tr>
           <% end %>
@@ -34,8 +35,58 @@
     </div>
 
     <ul class="uk-pagination uk-margin-medium-top">
-
       <%= paginate @cities %>
     </ul>
+
+    <div class="md-fab-wrapper">
+      <a class="md-fab md-fab-accent md-fab-wave waves-effect waves-button" href="#new_task" data-uk-modal="{ center:true }">
+        <i class="material-icons"></i>
+      </a>
+    </div>
+  </div>
+</div>
+
+
+<div class="uk-modal" id="new_task">
+  <div class="uk-modal-dialog">
+    <div class="uk-modal-header">
+      <h3 class="uk-modal-title">New City</h3>
+    </div>
+    <%= form_for(@city, url: admin_cities_path(@city) ) do |f| %>
+
+    <div class="uk-width-medium-1-1 uk-grid-margin uk-row-first">
+      <div class="md-input-wrapper <%= @city.name.blank? ? '' : 'md-input-filled'%>">
+        <%= f.label :name, 'Name *' %><%= f.text_field :name, class: 'md-input uk-form-width-large md-input-filled', required: true %>
+      </div>
+    </div>
+
+    <div class="uk-width-medium-1-1 uk-grid-margin uk-row-first">
+      <div class="md-input-wrapper <%= @city.description.blank? ? '' : 'md-input-filled'%>">
+        <%= f.label :description, 'Description *' %><%= f.text_field :description, class: 'md-input uk-form-width-large md-input-filled', required: true %>
+      </div>
+    </div>
+
+    <div class="uk-width-medium-1-1 uk-grid-margin uk-row-first">
+      <div class="md-input-wrapper <%= @city.latitude.blank? ? '' : 'md-input-filled'%>">
+        <%= f.label :latitude, 'Latitude *' %><%= f.text_field :latitude, class: 'md-input uk-form-width-large md-input-filled', required: true %>
+      </div>
+    </div>
+
+    <div class="uk-width-medium-1-1 uk-grid-margin uk-row-first">
+      <div class="md-input-wrapper <%= @city.longitude.blank? ? '' : 'md-input-filled'%>">
+        <%= f.label :longitude, 'Longitude *' %><%= f.text_field :longitude, class: 'md-input uk-form-width-large', required: true %>
+      </div>
+    </div>
+
+    <div class="uk-width-medium-1-1 uk-grid-margin uk-row-first">
+      <span class="uk-input-group-addon"></span>
+    </div>
+
+
+    <div class="uk-modal-footer uk-text-right">
+      <button type="button" class="md-btn md-btn-flat uk-modal-close md-btn-wave waves-effect waves-button">Close</button>
+      <%= f.submit 'Add City',  class:"md-btn md-btn-flat md-btn-flat-primary" %>
+    </div>
+    <% end %>
   </div>
 </div>
