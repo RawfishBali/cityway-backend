@@ -9,7 +9,9 @@ module CityView
           expose :latitude, documentation: {:type => "float", :desc => "City Latitude"}
           expose :longitude, documentation: {:type => "float", :desc => "City Longitude"}
           expose :distance, if: lambda { |object, options| object.respond_to?(:distance) }
-          expose :description, documentation: {:type => "string", :desc => "City description"}
+          expose :description, documentation: {:type => "string", :desc => "City description"} do |citi, options|
+            citi.description.nil? ? "No Description" : citi.description
+          end
         end
 
         class AccessToken < Grape::Entity
