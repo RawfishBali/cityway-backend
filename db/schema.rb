@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160804084318) do
+ActiveRecord::Schema.define(version: 20160808034612) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,18 @@ ActiveRecord::Schema.define(version: 20160804084318) do
 
   add_index "admins_roles", ["admin_id", "role_id"], name: "index_admins_roles_on_admin_id_and_role_id", using: :btree
 
+  create_table "categories", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.integer  "parent_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "categories_merchants", force: :cascade do |t|
+    t.integer "merchant_id", null: false
+    t.integer "category_id", null: false
+  end
+
   create_table "cities", force: :cascade do |t|
     t.string   "name",        null: false
     t.float    "latitude",    null: false
@@ -79,6 +91,23 @@ ActiveRecord::Schema.define(version: 20160804084318) do
   end
 
   add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
+
+  create_table "merchants", force: :cascade do |t|
+    t.string   "name",                                 null: false
+    t.string   "address",                              null: false
+    t.string   "phone"
+    t.string   "email"
+    t.string   "website"
+    t.string   "facebook"
+    t.string   "instagram"
+    t.text     "description"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.boolean  "support_disabilities", default: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.integer  "city_id"
+  end
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"

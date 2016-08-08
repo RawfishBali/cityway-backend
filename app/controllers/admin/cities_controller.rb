@@ -42,7 +42,7 @@ class Admin::CitiesController < Admin::BaseController
   def update
     respond_to do |format|
       if @city.update(post_params)
-        format.html { redirect_to @city, notice: 'Post was successfully updated.' }
+        format.html { redirect_to admin_cities_path, notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @city }
       else
         format.html { render :edit }

@@ -87,6 +87,8 @@ module CityView
         mount CityView::Api::V1::Token
         mount CityView::Api::V1::Cities
         mount CityView::Api::V1::Users
+        mount CityView::Api::V1::Attivitas
+        mount CityView::Api::V1::Categories
 
       end
     end
