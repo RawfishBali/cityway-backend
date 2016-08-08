@@ -29,18 +29,6 @@ module CityView
             add_pagination_headers cities
             present cities, with: CityView::Api::V1::Entities::City
           end
-
-          desc  "List Of Attivita Of City"
-          params do
-            requires :id, type: Integer, desc: "City ID", values: -> { City.ids }
-          end
-          get get '/:id/attivitas/' do
-            city = City.find(params[:id])
-            merchants = city.merchants.page params[:page]
-
-            add_pagination_headers merchants
-            present merchants, with: CityView::Api::V1::Entities::Merchant
-          end
         end
 
       end

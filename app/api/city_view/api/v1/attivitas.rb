@@ -26,6 +26,18 @@ module CityView
             add_pagination_headers merchants
             present merchants, with: CityView::Api::V1::Entities::Merchant
           end
+
+
+          desc  "Show Attivita"
+          params do
+            requires :id, type: Integer, desc: "Merchant ID", values: -> { Merchant.ids }
+          end
+          get '/:id' do
+            merchant = Merchant.find(params[:id])
+
+            present merchant, with: CityView::Api::V1::Entities::Merchant
+          end
+
         end
 
       end
