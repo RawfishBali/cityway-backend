@@ -20,14 +20,16 @@ module CityView
             params do
               requires :email, type: String, desc: "email"
               requires :password, type: String, desc: "Password"
-              requires :password_confirmation, type: String, desc: "Password Confirmation"
+              requires :firstname, type: String, desc: "firstname"
+              requires :lastname, type: String, desc: "lastname"
+              requires :newsletter, type: Boolean, desc: "newsletter"
+
             end
             post :sign_up do
-              error!({error: "Password and password_confirmation doesn't match"}, 400) and return if params[:password] != params[:password_confirmation]
 
               user =  User.find_by(email: params[:email])
               error!({error: "User already exist"}, 401) and return if user
-              user = User.new(email: params[:email], password: params[:password])
+              user = User.new(email: params[:email], password: params[:password], firstname: params[:firstname], lastname: params[:lastname], newsletter: params[:newsletter])
 
               if user.save
                 token = current_client.access_tokens.where(user: user).first_or_create
@@ -41,11 +43,13 @@ module CityView
             params do
               requires :email, type: String, desc: "Facebook Email"
               requires :uid, type: String, desc: "Facebook Uid"
+              requires :firstname, type: String, desc: "firstname"
+              requires :lastname, type: String, desc: "lastname"
 
             end
             post :facebook do
               signed_in_resource = User.find_by(email: params[:email]) || nil
-              user = User.find_for_oauth(params[:uid], params[:email],  signed_in_resource)
+              user = User.find_for_oauth(params[:uid], params[:email], params[:firstname], params[:lastname],  signed_in_resource)
 
               error!({error: "Failed Authentication With Facebook"}, 401) and return unless user
 

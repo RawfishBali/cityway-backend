@@ -15,6 +15,9 @@
 #  last_sign_in_ip        :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  firstname              :string
+#  lastname               :string
+#  newsletter             :boolean          default(FALSE)
 #
 
 class User < ActiveRecord::Base
@@ -34,10 +37,10 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
    :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
-  def self.find_for_oauth(auth,email, signed_in_resource = nil)
+  def self.find_for_oauth(uid,email, firstname,lastname, signed_in_resource = nil)
 
     # Get the identity and user if they exist
-    identity = Identity.find_for_oauth(auth)
+    identity = Identity.find_for_oauth(uid)
 
     # If a signed_in_resource is provided it always overrides the existing user
     # to prevent the identity being locked with accidentally created accounts.
@@ -59,6 +62,8 @@ class User < ActiveRecord::Base
       if user.nil?
         user = User.new(
         email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
+        firstname: firstname,
+        lastname: lastname,
         password: Devise.friendly_token[0,20]
         )
         user.save!
