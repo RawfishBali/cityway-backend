@@ -48,7 +48,7 @@ class User < ActiveRecord::Base
     # can be cleaned up at a later date.
     user = signed_in_resource ? signed_in_resource : identity.user
 
-    # Create the user if needed
+    # Create the user if needed 
     if user.nil?
 
       # Get the existing user by email if the provider gives us a verified email.
