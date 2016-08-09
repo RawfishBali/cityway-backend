@@ -15,7 +15,7 @@ module CityView
 
           end
           get do
-            categories = Category.all.page params[:page]
+            categories = Category.parent_categories.page params[:page]
             add_pagination_headers categories
             present categories, with: CityView::Api::V1::Entities::Category
           end

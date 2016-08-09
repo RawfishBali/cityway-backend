@@ -17,9 +17,13 @@
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  city_id              :integer
+#  category_id          :integer
 #
 
 class Merchant < ActiveRecord::Base
-  has_and_belongs_to_many :categories
+  has_and_belongs_to_many :subcategories, class_name: 'Category'
+  belongs_to :category
   belongs_to :city
+
+  
 end

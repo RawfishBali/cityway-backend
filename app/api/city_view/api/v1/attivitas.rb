@@ -18,7 +18,7 @@ module CityView
           get do
             city = City.find(params[:city_id])
             if params[:category_id]
-              merchants = Merchant.joins(:categories).where('categories.id = ? and merchants.city_id = ?', params[:category_id], params[:city_id]).page params[:page]
+              merchants = Merchant.joins(:category).where('categories.id = ? and merchants.city_id = ?', params[:category_id], params[:city_id]).page params[:page]
             else
               merchants = Merchant.where('merchants.city_id = ?', params[:city_id]).page params[:page]
             end
