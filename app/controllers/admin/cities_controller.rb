@@ -3,7 +3,7 @@ class Admin::CitiesController < Admin::BaseController
 
   def index
     @city = City.new
-    @cities = City.all.page(20).page params[:page]
+    @cities = City.all.order('Name ASC').page(20).page params[:page]
   end
 
   # GET /posts/1
@@ -41,8 +41,8 @@ class Admin::CitiesController < Admin::BaseController
   # PATCH/PUT /posts/1.json
   def update
     respond_to do |format|
-      if @city.update(post_params)
-        format.html { redirect_to admin_cities_path, notice: 'Post was successfully updated.' }
+      if @city.update(city_params)
+        format.html { redirect_to admin_cities_path, notice: 'City was successfully updated.' }
         format.json { render :show, status: :ok, location: @city }
       else
         format.html { render :edit }

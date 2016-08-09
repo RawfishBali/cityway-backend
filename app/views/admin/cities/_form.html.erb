@@ -1,4 +1,4 @@
-<%= form_for(@city, url: admin_cities_path(@city) ) do |f| %>
+<%= form_for(@city, url: admin_city_path(@city.id) ) do |f| %>
 
 <div class="uk-width-medium-1-1 uk-grid-margin uk-row-first">
   <div class="md-input-wrapper <%= @city.name.blank? ? '' : 'md-input-filled'%>">
