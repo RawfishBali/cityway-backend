@@ -45,7 +45,7 @@ class Admin::CitiesController < Admin::BaseController
         format.html { redirect_to admin_cities_path, notice: 'City was successfully updated.' }
         format.json { render :show, status: :ok, location: @city }
       else
-        format.html { render :edit }
+        format.html { redirect_to edit_admin_city_path(@city), notice: @city.errors.full_messages }
         format.json { render json: @city.errors, status: :unprocessable_entity }
       end
     end
@@ -69,6 +69,6 @@ class Admin::CitiesController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def city_params
-      params.require(:city).permit(:name, :latitude, :longitude, :description)
+      params.require(:city).permit(:name, :latitude, :longitude, :description, :photo)
     end
 end

@@ -9,25 +9,17 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  description :text
+#  photo       :string
 #
 
 class City < ActiveRecord::Base
-  # acts_as_mappable :default_units => :kms,
-  #                  :default_formula => :sphere,
-  #                  :distance_field_name => :distance,
-  #                  :lat_column_name => :lat,
-  #                  :lng_column_name => :long
-  # geocoded_by :full_street_address   # can also be an IP address
-  # after_validation :geocode          # auto-fetch coordinates
-  # after_validation :reverse_geocode  # auto-fetch address
-
   validates :name, presence: true
-  validates :latitude, presence: true
-  validates :longitude, presence: true
   validates :description, presence: true
 
-  reverse_geocoded_by :latitude, :longitude
   has_many :merchants, dependent: :destroy
 
+  geocoded_by :name
+  after_validation :geocode
 
+  mount_uploader :photo, PhotoUploader
 end

@@ -1,4 +1,4 @@
-<%= form_for(@city, url: admin_city_path(@city.id) ) do |f| %>
+<%= form_for(@city, url: admin_city_path(@city.id), multipart: true ) do |f| %>
 
 <div class="uk-width-medium-1-1 uk-grid-margin uk-row-first">
   <div class="md-input-wrapper <%= @city.name.blank? ? '' : 'md-input-filled'%>">
@@ -13,16 +13,15 @@
 </div>
 
 <div class="uk-width-medium-1-1 uk-grid-margin uk-row-first">
-  <div class="md-input-wrapper <%= @city.latitude.blank? ? '' : 'md-input-filled'%>">
-    <%= f.label :latitude, 'Latitude *' %><%= f.text_field :latitude, class: 'md-input uk-form-width-large md-input-filled', required: true %>
+  <div class="md-input-wrapper">
+    <%= f.label :photo %>
+    <%= f.file_field :photo, class: 'dropify', 'data-default-file' => @city.photo%>
+    <!-- <input type="file" id="input-file-b" class="dropify" data-default-file="assets/img/gallery/Image08.jpg"/> -->
+
   </div>
 </div>
 
-<div class="uk-width-medium-1-1 uk-grid-margin uk-row-first">
-  <div class="md-input-wrapper <%= @city.longitude.blank? ? '' : 'md-input-filled'%>">
-    <%= f.label :longitude, 'Longitude *' %><%= f.text_field :longitude, class: 'md-input uk-form-width-large', required: true %>
-  </div>
-</div>
+
 
 <div class="uk-width-medium-1-1 uk-grid-margin uk-row-first">
   <span class="uk-input-group-addon"></span>
@@ -33,8 +32,8 @@
   <div class="uk-width-medium-1-1 uk-grid-margin uk-row-first">
 
     <span class="uk-input-group-addon">
-      <%= link_to 'Cancel', admin_cities_path, class: 'md-btn md-btn-flat uk-modal-close md-btn-wave waves-effect waves-button'%>
-      <%= f.submit 'Save',  class:"md-btn" %>
+      <%= link_to 'Cancel', admin_cities_path, class: 'md-btn md-btn-warning md-btn-wave-light waves-effect waves-button waves-light'%>
+      <%= f.submit 'Save',  class:"md-btn md-btn-primary waves-effect waves-effect waves-button waves-light" %>
     </span>
   </div>
 

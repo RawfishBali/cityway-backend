@@ -23,7 +23,7 @@
             <td class="uk-width-1-10"><%= city.latitude %></td>
             <td class="uk-width-1-10"><%= city.longitude %></td>
             <td class="uk-width-1-10"><%= city.description %></td>
-            <td class="uk-width-1-10"><%= "Photo Here" %></td>
+            <td class="uk-width-1-10"><%= image_tag city.photo.thumb.url %></td>
             <td class="uk-width-1-10">
               <%= link_to '<i class="md-icon material-icons">&#xE254;</i>'.html_safe, edit_admin_city_path(city) %>
               <%= link_to '<i class="material-icons"></i>'.html_safe, admin_city_path(city), method: :delete, data: { confirm: 'Are you sure?' } %>
@@ -66,17 +66,7 @@
       </div>
     </div>
 
-    <div class="uk-width-medium-1-1 uk-grid-margin uk-row-first">
-      <div class="md-input-wrapper <%= @city.latitude.blank? ? '' : 'md-input-filled'%>">
-        <%= f.label :latitude, 'Latitude *' %><%= f.text_field :latitude, class: 'md-input uk-form-width-large md-input-filled', required: true %>
-      </div>
-    </div>
-
-    <div class="uk-width-medium-1-1 uk-grid-margin uk-row-first">
-      <div class="md-input-wrapper <%= @city.longitude.blank? ? '' : 'md-input-filled'%>">
-        <%= f.label :longitude, 'Longitude *' %><%= f.text_field :longitude, class: 'md-input uk-form-width-large', required: true %>
-      </div>
-    </div>
+    
 
     <div class="uk-width-medium-1-1 uk-grid-margin uk-row-first">
       <span class="uk-input-group-addon"></span>
