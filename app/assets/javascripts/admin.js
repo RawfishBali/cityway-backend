@@ -27,5 +27,7 @@
 //= require admin/login.min
 //= require admin/dashboard
 //= require admin/easypiechart
+//= require admin/parsley
 //= require admin/dropify
 //= require admin/forms_file_input
+//= require admin/forms_validation

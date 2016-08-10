@@ -4,10 +4,7 @@
       <table class="uk-table uk-table-nowrap table_check">
         <thead>
           <tr>
-            <th class="uk-width-1-10 uk-text-center small_col"><input type="checkbox" data-md-icheck class="check_all"></th>
             <th class="uk-width-1-10 ">City Name</th>
-            <th class="uk-width-1-10">Latitude</th>
-            <th class="uk-width-1-10 ">Longitude</th>
             <th class="uk-width-1-10 ">Description</th>
             <th class="uk-width-1-10 ">Photo</th>
             <th class="uk-width-1-10 ">Actions</th>
@@ -16,12 +13,7 @@
         <tbody>
           <% @cities.each do |city| %>
           <tr>
-            <td class="uk-text-center uk-table-middle small_col"><input type="checkbox" data-md-icheck class="check_row"></td>
-
-
             <td class="uk-width-1-10"><%= city.name %></td>
-            <td class="uk-width-1-10"><%= city.latitude %></td>
-            <td class="uk-width-1-10"><%= city.longitude %></td>
             <td class="uk-width-1-10"><%= city.description %></td>
             <td class="uk-width-1-10"><%= image_tag city.photo.thumb.url %></td>
             <td class="uk-width-1-10">
@@ -44,39 +36,47 @@
       </a>
     </div>
   </div>
-</div>
+  <div class="uk-modal" id="new_task">
+    <div class="uk-modal-dialog">
+      <div class="uk-modal-header">
+        <h3 class="uk-modal-title">New City</h3>
+      </div>
+      <%= form_for(@city, url: admin_cities_path(@city) ) do |f| %>
+        <div class="uk-width-medium-1-1 uk-grid-margin uk-row-first">
+          <div class="md-input-wrapper <%= @city.name.blank? ? '' : 'md-input-filled'%>">
+            <%= f.label :name, 'Name *' %><%= f.text_field :name, class: 'md-input uk-form-width-large md-input-filled', required: true %>
+          </div>
+        </div>
 
+        <div class="uk-width-medium-1-1 uk-grid-margin uk-row-first">
+          <div class="md-input-wrapper <%= @city.description.blank? ? '' : 'md-input-filled'%>">
+            <%= f.label :description, 'City Description, Maximum 50 Characters *' %>
+            <%= f.text_area :description , class: 'md-input uk-form-width-large', cols: 6, rows: 2, 'data-parsley-trigger':"keyup" ,'data-parsley-maxlength':"50", 'data-parsley-maxlength-message': "Maximum Characters is 50", required: true %>
+        </div>
+        </div>
 
-<div class="uk-modal" id="new_task">
-  <div class="uk-modal-dialog">
-    <div class="uk-modal-header">
-      <h3 class="uk-modal-title">New City</h3>
-    </div>
-    <%= form_for(@city, url: admin_cities_path(@city) ) do |f| %>
-
-    <div class="uk-width-medium-1-1 uk-grid-margin uk-row-first">
-      <div class="md-input-wrapper <%= @city.name.blank? ? '' : 'md-input-filled'%>">
-        <%= f.label :name, 'Name *' %><%= f.text_field :name, class: 'md-input uk-form-width-large md-input-filled', required: true %>
+        <div class="uk-width-medium-1-1 uk-grid-margin uk-row-first">
+      <div class="md-input-wrapper">
+        <h3 class="heading_a uk-margin-small-bottom">City Photo</h3>
+        <%= f.file_field :photo, class: 'dropify w500i', 'data-default-file' => @city.photo%>
       </div>
     </div>
 
-    <div class="uk-width-medium-1-1 uk-grid-margin uk-row-first">
-      <div class="md-input-wrapper <%= @city.description.blank? ? '' : 'md-input-filled'%>">
-        <%= f.label :description, 'Description *' %><%= f.text_field :description, class: 'md-input uk-form-width-large md-input-filled', required: true %>
-      </div>
-    </div>
 
-    
-
-    <div class="uk-width-medium-1-1 uk-grid-margin uk-row-first">
+        <div class="uk-width-medium-1-1 uk-grid-margin uk-row-first">
       <span class="uk-input-group-addon"></span>
     </div>
 
+        <div class="uk-width-medium-1-1 uk-grid-margin uk-row-first">
 
-    <div class="uk-modal-footer uk-text-right">
-      <button type="button" class="md-btn md-btn-flat uk-modal-close md-btn-wave waves-effect waves-button">Close</button>
-      <%= f.submit 'Add City',  class:"md-btn md-btn-flat md-btn-flat-primary" %>
+      <span class="uk-input-group-addon">
+        <button type="button" class="md-btn md-btn-warning  uk-modal-close md-btn-wave waves-effect waves-button">Close</button>
+
+        <%= f.submit 'Save',  class:"md-btn md-btn-primary waves-effect waves-effect waves-button waves-light" %>
+      </span>
     </div>
-    <% end %>
+
+      <% end %>
+    </div>
   </div>
 </div>
