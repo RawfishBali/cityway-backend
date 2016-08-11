@@ -49,6 +49,12 @@ module CityView
           expose :instagram, documentation: {:type => "string", :desc => "Merchant instagram"}
           expose :support_disabilities, documentation: {:type => "boolean", :desc => "Merchant support_disabilities"}
         end
+
+        class User < Grape::Entity
+          expose :firstname, documentation: {:type => "String", :desc => "User firstname"}
+          expose :lastname, documentation: {:type => "String", :desc => "User lastname"}
+          expose :newsletter, documentation: {:type => "Boolean", :desc => "User newsletter subscription"}
+        end
       end
     end
   end

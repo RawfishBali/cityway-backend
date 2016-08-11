@@ -72,6 +72,20 @@ module CityView
 
               present token, with: CityView::Api::V1::Entities::AccessToken
             end
+
+
+            desc "Update User Newsletter"
+            params do
+              requires :newsletter, type: Boolean, desc: "newsletter"
+            end
+            put do
+              unless current_user
+                error!({error: "User doesn't exist"}, 401)
+              else
+                current_user.update(newsletter: params[:newsletter])
+                present current_user, with: CityView::Api::V1::Entities::User
+              end
+            end
           end
         end
       end
