@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160811042234) do
+ActiveRecord::Schema.define(version: 20160815073042) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,11 +52,10 @@ ActiveRecord::Schema.define(version: 20160811042234) do
   add_index "admins_roles", ["admin_id", "role_id"], name: "index_admins_roles_on_admin_id_and_role_id", using: :btree
 
   create_table "arounds", force: :cascade do |t|
-    t.string   "description"
     t.string   "photo"
     t.integer  "city_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "categories", force: :cascade do |t|
@@ -92,20 +91,18 @@ ActiveRecord::Schema.define(version: 20160811042234) do
   end
 
   create_table "commonplaces", force: :cascade do |t|
-    t.string   "description"
     t.string   "photo"
     t.string   "icon"
     t.integer  "city_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "discovers", force: :cascade do |t|
-    t.string   "description"
     t.string   "photo"
     t.integer  "city_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "identities", force: :cascade do |t|
@@ -176,11 +173,10 @@ ActiveRecord::Schema.define(version: 20160811042234) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "utilities", force: :cascade do |t|
-    t.string   "description"
     t.string   "photo"
     t.integer  "city_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "identities", "users"

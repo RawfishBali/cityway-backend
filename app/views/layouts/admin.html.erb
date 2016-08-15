@@ -54,6 +54,12 @@
       <ul>
         <% if current_admin.has_role?(:super_admin) || current_admin.has_role?(:city_admin) %>
         <li class="current_section" title="Comuni">
+          <a href="/admin/cities">
+            <span class="menu_icon"><i class="material-icons">&#xE1BD;</i></span>
+            <span class="menu_title">Cities</span>
+          </a>
+        </li>
+        <li class="current_section" title="Comuni">
           <a href="/">
             <span class="menu_icon"><i class="material-icons">&#xE1BD;</i></span>
             <span class="menu_title">Comuni</span>

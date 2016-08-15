@@ -4,28 +4,24 @@ module CityWay
       module Entities
 
         class Around < Grape::Entity
-          expose :description, documentation: {:type => "String", :desc => "Around Desc"}
           expose :photo, documentation: {:type => "String", :desc => "Around Photo"} do |aro, options|
             aro.photo.url
           end
         end
 
         class Commonplace < Grape::Entity
-          expose :description, documentation: {:type => "String", :desc => "Commonplace Desc"}
           expose :photo, documentation: {:type => "String", :desc => "Commonplace Photo"} do |common, options|
             common.photo.url
           end
         end
 
         class Discover < Grape::Entity
-          expose :description, documentation: {:type => "String", :desc => "Discover Desc"}
           expose :photo, documentation: {:type => "String", :desc => "Discover Photo"} do |disc, options|
             disc.photo.url
           end
         end
 
         class Utility < Grape::Entity
-          expose :description, documentation: {:type => "String", :desc => "Utility Desc"}
           expose :photo, documentation: {:type => "String", :desc => "Utility Photo"} do |disc, options|
             disc.photo.url
           end
