@@ -1,4 +1,4 @@
-module CityView
+module CityWay
   module Api
     module V1
       class Attivitas < Grape::API
@@ -24,7 +24,7 @@ module CityView
             end
 
             add_pagination_headers merchants
-            present merchants, with: CityView::Api::V1::Entities::Merchant
+            present merchants, with: CityWay::Api::V1::Entities::Merchant
           end
 
 
@@ -35,7 +35,7 @@ module CityView
           get '/:id' do
             merchant = Merchant.find(params[:id])
 
-            present merchant, with: CityView::Api::V1::Entities::Merchant
+            present merchant, with: CityWay::Api::V1::Entities::Merchant
           end
 
         end

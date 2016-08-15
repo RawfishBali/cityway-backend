@@ -1,4 +1,4 @@
-module CityView
+module CityWay
   module Api
     module V1
       class Users < Grape::API
@@ -33,7 +33,7 @@ module CityView
 
               if user.save
                 token = current_client.access_tokens.where(user: user).first_or_create
-                present token, with: CityView::Api::V1::Entities::AccessToken
+                present token, with: CityWay::Api::V1::Entities::AccessToken
               else
                 return error!({error: user.errors.full_messages}, 401)
               end
@@ -55,7 +55,7 @@ module CityView
 
               token = current_client.access_tokens.where(user: user).first_or_create
 
-              present token, with: CityView::Api::V1::Entities::AccessToken
+              present token, with: CityWay::Api::V1::Entities::AccessToken
             end
 
             desc "Sign In With Email"
@@ -70,7 +70,7 @@ module CityView
 
               token = current_client.access_tokens.where(user: user).first_or_create
 
-              present token, with: CityView::Api::V1::Entities::AccessToken
+              present token, with: CityWay::Api::V1::Entities::AccessToken
             end
 
 
@@ -83,7 +83,7 @@ module CityView
                 error!({error: "User doesn't exist"}, 401)
               else
                 current_user.update(newsletter: params[:newsletter])
-                present current_user, with: CityView::Api::V1::Entities::User
+                present current_user, with: CityWay::Api::V1::Entities::User
               end
             end
           end

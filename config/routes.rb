@@ -9,6 +9,5 @@ Rails.application.routes.draw do
     resources :cities
   end
 
-  # mount CityView::Haha => '/api'
-  mount CityView::Api::V1::Base => '/api'
+  mount CityWay::Api::V1::Base => '/api'
 end

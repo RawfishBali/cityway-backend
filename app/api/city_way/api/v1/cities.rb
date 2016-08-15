@@ -1,4 +1,4 @@
-module CityView
+module CityWay
   module Api
     module V1
       class Cities < Grape::API
@@ -27,7 +27,7 @@ module CityView
             end
 
             add_pagination_headers cities
-            present cities, with: CityView::Api::V1::Entities::City
+            present cities, with: CityWay::Api::V1::Entities::City
           end
         end
 

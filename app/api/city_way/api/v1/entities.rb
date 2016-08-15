@@ -1,4 +1,4 @@
-module CityView
+module CityWay
   module Api
     module V1
       module Entities
@@ -40,10 +40,10 @@ module CityView
           expose :description, documentation: {:type => "string", :desc => "City description"} do |city, options|
             city.description.nil? ? "No Description" : city.description
           end
-          expose :around, using: CityView::Api::V1::Entities::Around, if: lambda { |object, options| object.around }, as: 'intorno'
-          expose :commonplace, using: CityView::Api::V1::Entities::Commonplace, if: lambda { |object, options| object.commonplace }, as: 'comune'
-          expose :discover, using: CityView::Api::V1::Entities::Discover, if: lambda { |object, options| object.discover }, as: 'scopri'
-          expose :utility, using: CityView::Api::V1::Entities::Utility, if: lambda { |object, options| object.utility }, as: 'utilita'
+          expose :around, using: CityWay::Api::V1::Entities::Around, if: lambda { |object, options| object.around }, as: 'intorno'
+          expose :commonplace, using: CityWay::Api::V1::Entities::Commonplace, if: lambda { |object, options| object.commonplace }, as: 'comune'
+          expose :discover, using: CityWay::Api::V1::Entities::Discover, if: lambda { |object, options| object.discover }, as: 'scopri'
+          expose :utility, using: CityWay::Api::V1::Entities::Utility, if: lambda { |object, options| object.utility }, as: 'utilita'
         end
 
         class AccessToken < Grape::Entity

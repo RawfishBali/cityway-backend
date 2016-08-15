@@ -1,4 +1,4 @@
-module CityView
+module CityWay
   module Api
     module V1
       class FailureApp

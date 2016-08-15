@@ -10,7 +10,7 @@ module Devise
       if env["warden.options"] && scope = env["warden.options"][:scope]  && Devise.mappings[env["warden.options"][:scope] .to_sym]
         app = (Devise.mappings[env["warden.options"][:scope]]).failure_app
       end
-      app || CityView::Api::V1::FailureApp
+      app || CityWay::Api::V1::FailureApp
     end
   end
 end
@@ -108,7 +108,7 @@ Devise.setup do |config|
     manager.strategies.add :bearer, Warden::OAuth2::Strategies::Bearer
     manager.strategies.add :client, Warden::OAuth2::Strategies::Client
 
-    manager.scope_defaults :offline_access, strategies: [:bearer, :client], failure_app: CityView::Api::V1::FailureApp
+    manager.scope_defaults :offline_access, strategies: [:bearer, :client], failure_app: CityWay::Api::V1::FailureApp
   end
   # By default, Devise cleans up the CSRF token on authentication to
   # avoid CSRF token fixation attacks. This means that, when using AJAX

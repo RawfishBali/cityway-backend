@@ -10,7 +10,7 @@ module StrongParamsHelpers
   end
 end
 
-module CityView
+module CityWay
   module Api
     module V1
       class Base < Grape::API
@@ -84,12 +84,12 @@ module CityView
           {message: "Up to date"}
         end
 
-        mount CityView::Api::V1::Token
-        mount CityView::Api::V1::Cities
-        mount CityView::Api::V1::Users
-        mount CityView::Api::V1::Attivitas
-        mount CityView::Api::V1::Categories
-        mount CityView::Api::V1::Arounds
+        mount CityWay::Api::V1::Token
+        mount CityWay::Api::V1::Cities
+        mount CityWay::Api::V1::Users
+        mount CityWay::Api::V1::Attivitas
+        mount CityWay::Api::V1::Categories
+        mount CityWay::Api::V1::Arounds
 
       end
     end

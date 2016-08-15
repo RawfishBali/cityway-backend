@@ -1,4 +1,4 @@
-module CityView
+module CityWay
   module Api
     module V1
       class Categories < Grape::API
@@ -17,7 +17,7 @@ module CityView
           get do
             categories = Category.parent_categories.page params[:page]
             add_pagination_headers categories
-            present categories, with: CityView::Api::V1::Entities::Category
+            present categories, with: CityWay::Api::V1::Entities::Category
           end
         end
 

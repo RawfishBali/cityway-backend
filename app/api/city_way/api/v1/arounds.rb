@@ -1,4 +1,4 @@
-module CityView
+module CityWay
   module Api
     module V1
       class Arounds < Grape::API
@@ -17,7 +17,7 @@ module CityView
           get do
             arounds = Around.all
             # add_pagination_headers arounds
-            present arounds, with: CityView::Api::V1::Entities::Around
+            present arounds, with: CityWay::Api::V1::Entities::Around
           end
         end
 
