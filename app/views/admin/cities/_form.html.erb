@@ -1,36 +1,63 @@
 <%= form_for(@city, url: admin_city_path(@city.id), multipart: true, id:'form_validation' ) do |f| %>
+  <div class="uk-grid">
 
-  <div class="uk-width-medium-1-1 uk-grid-margin uk-row-first">
+  <div class="uk-width-medium-1-1 uk-grid-margin">
     <div class="md-input-wrapper <%= @city.name.blank? ? '' : 'md-input-filled'%>">
       <%= f.label :name, 'Name *' %><%= f.text_field :name, class: 'md-input uk-form-width-large md-input-filled', required: true %>
     </div>
   </div>
 
-  <div class="uk-width-medium-1-1 uk-grid-margin uk-row-first">
+  <div class="uk-width-medium-1-1 uk-grid-margin">
     <div class="md-input-wrapper <%= @city.description.blank? ? '' : 'md-input-filled'%>">
       <%= f.label :description, 'City Description, Maximum 50 Characters *' %>
-      <%= f.text_area :description , class: 'md-input uk-form-width-large', cols: 6, rows: 2, 'data-parsley-trigger':"keyup" ,'data-parsley-maxlength':"50", 'data-parsley-maxlength-message': "Maximum Characters is 50", required: true, 'data-parsley-minlength': '1', 'data-parsley-minlength-message': "Description can't be blank." %>
-  </div>
-  </div>
-
-  <div class="uk-width-medium-1-1 uk-grid-margin uk-row-first">
-    <div class="md-input-wrapper">
-      <h3 class="heading_a uk-margin-small-bottom">City Photo</h3>
-      <%= f.file_field :photo, class: 'dropify md-input uk-form-width-large w500i', 'data-default-file' => @city.photo%>
+      <%= f.text_area :description , class: 'md-input uk-form-width-large', cols: 6, rows: 2, 'data-parsley-trigger':"keyup" ,'data-parsley-maxlength':"50", 'data-parsley-maxlength-message': "Maximum Characters is 50", required: true %>
     </div>
   </div>
 
-
-  <div class="uk-width-medium-1-1 uk-grid-margin uk-row-first">
-    <span class="uk-input-group-addon"></span>
+  <div class="uk-width-medium-1-5 uk-grid-margin">
+    <div class="md-input-wrapper">
+      <h3 class="heading_a uk-margin-small-bottom">City Photo</h3>
+      <%= f.file_field :photo, class: 'dropify ', 'data-default-file' => @city.photo, 'data-allowed-formats':"portrait"  %>
+    </div>
+  </div>
+  <div class="uk-width-medium-1-5 uk-grid-margin">
+    <div class="md-input-wrapper">
+      <h3 class="heading_a uk-margin-small-bottom">Intorno Photo</h3>
+      <%= f.fields_for :discover do |ff| %>
+      <%= ff.file_field :photo, class: 'dropify ', 'data-default-file' => @discover.photo %>
+      <% end %>
+    </div>
+  </div>
+  <div class="uk-width-medium-1-5 uk-grid-margin">
+    <div class="md-input-wrapper">
+      <h3 class="heading_a uk-margin-small-bottom">Scopri Photo</h3>
+      <%= f.fields_for :around do |fff| %>
+      <%= fff.file_field :photo, class: 'dropify ', 'data-default-file' => @around.photo %>
+      <% end %>
+    </div>
+  </div>
+  <div class="uk-width-medium-1-5 uk-grid-margin">
+    <div class="md-input-wrapper">
+      <h3 class="heading_a uk-margin-small-bottom">Comune Photo</h3>
+      <%= f.fields_for :commonplace do |ffff| %>
+      <%= ffff.file_field :photo, class: 'dropify ', 'data-default-file' => @commonplace.photo %>
+    </div>
+    <% end %>
+  </div>
+  <div class="uk-width-medium-1-5 uk-grid-margin">
+    <div class="md-input-wrapper">
+      <h3 class="heading_a uk-margin-small-bottom">Utilita Photo</h3>
+      <%= f.fields_for :utility do |fffff| %>
+      <%= fffff.file_field :photo, class: 'dropify ', 'data-default-file' => @utility.photo %>
+      <% end %>
+    </div>
+  </div>
+  <div class="uk-width-medium-1-1 uk-grid-margin">
+    <div class="md-input-wrapper uk-text-right">
+      <%= link_to 'Close', admin_cities_path, class: 'md-btn md-btn-warning md-btn-wave waves-effect waves-button'%>
+      <%= f.submit 'Save',  class: "md-btn md-btn-primary waves-effect waves-effect waves-button waves-light" %>
+    </div>
   </div>
 
-  <div class="uk-width-medium-1-1 uk-grid-margin uk-row-first">
-
-  <span class="uk-input-group-addon">
-    <%= link_to 'Cancel', admin_cities_path, class: 'md-btn md-btn-warning md-btn-wave-light waves-effect waves-button waves-light'%>
-    <%= f.submit 'Save',  class:"md-btn md-btn-primary waves-effect waves-effect waves-button waves-light" %>
-  </span>
 </div>
-
 <% end %>

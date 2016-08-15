@@ -3,15 +3,47 @@ module CityView
     module V1
       module Entities
 
+        class Around < Grape::Entity
+          expose :description, documentation: {:type => "String", :desc => "Around Desc"}
+          expose :photo, documentation: {:type => "String", :desc => "Around Photo"} do |aro, options|
+            aro.photo.url
+          end
+        end
+
+        class Commonplace < Grape::Entity
+          expose :description, documentation: {:type => "String", :desc => "Commonplace Desc"}
+          expose :photo, documentation: {:type => "String", :desc => "Commonplace Photo"} do |common, options|
+            common.photo.url
+          end
+        end
+
+        class Discover < Grape::Entity
+          expose :description, documentation: {:type => "String", :desc => "Discover Desc"}
+          expose :photo, documentation: {:type => "String", :desc => "Discover Photo"} do |disc, options|
+            disc.photo.url
+          end
+        end
+
+        class Utility < Grape::Entity
+          expose :description, documentation: {:type => "String", :desc => "Utility Desc"}
+          expose :photo, documentation: {:type => "String", :desc => "Utility Photo"} do |disc, options|
+            disc.photo.url
+          end
+        end
+
         class City < Grape::Entity
           expose :id, documentation: {:type => "integer", :desc => "City ID"}
           expose :name, documentation: {:type => "string", :desc => "City Name"}
           expose :latitude, documentation: {:type => "float", :desc => "City Latitude"}
           expose :longitude, documentation: {:type => "float", :desc => "City Longitude"}
           expose :distance, if: lambda { |object, options| object.respond_to?(:distance) }
-          expose :description, documentation: {:type => "string", :desc => "City description"} do |citi, options|
-            citi.description.nil? ? "No Description" : citi.description
+          expose :description, documentation: {:type => "string", :desc => "City description"} do |city, options|
+            city.description.nil? ? "No Description" : city.description
           end
+          expose :around, using: CityView::Api::V1::Entities::Around, if: lambda { |object, options| object.around }, as: 'intorno'
+          expose :commonplace, using: CityView::Api::V1::Entities::Commonplace, if: lambda { |object, options| object.commonplace }, as: 'comune'
+          expose :discover, using: CityView::Api::V1::Entities::Discover, if: lambda { |object, options| object.discover }, as: 'scopri'
+          expose :utility, using: CityView::Api::V1::Entities::Utility, if: lambda { |object, options| object.utility }, as: 'utilita'
         end
 
         class AccessToken < Grape::Entity
@@ -55,6 +87,8 @@ module CityView
           expose :lastname, documentation: {:type => "String", :desc => "User lastname"}
           expose :newsletter, documentation: {:type => "Boolean", :desc => "User newsletter subscription"}
         end
+
+
       end
     end
   end

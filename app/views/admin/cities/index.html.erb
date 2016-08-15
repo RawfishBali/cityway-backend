@@ -7,6 +7,7 @@
             <th class="uk-width-1-10 ">City Name</th>
             <th class="uk-width-1-10 ">Description</th>
             <th class="uk-width-1-10 ">Photo</th>
+            <th class="uk-width-1-10 ">Stemma</th>
             <th class="uk-width-1-10 ">Actions</th>
           </tr>
         </thead>
@@ -16,6 +17,8 @@
             <td class="uk-width-1-10"><%= city.name %></td>
             <td class="uk-width-1-10"><%= city.description %></td>
             <td class="uk-width-1-10"><%= image_tag city.photo.thumb.url %></td>
+            <td class="uk-width-1-10">
+            </td>
             <td class="uk-width-1-10">
               <%= link_to '<i class="md-icon material-icons">&#xE254;</i>'.html_safe, edit_admin_city_path(city) %>
               <%= link_to '<i class="material-icons"></i>'.html_safe, admin_city_path(city), method: :delete, data: { confirm: 'Are you sure?' } %>
@@ -42,40 +45,67 @@
         <h3 class="uk-modal-title">New City</h3>
       </div>
       <%= form_for(@city, url: admin_cities_path(@city) ) do |f| %>
-        <div class="uk-width-medium-1-1 uk-grid-margin uk-row-first">
-          <div class="md-input-wrapper <%= @city.name.blank? ? '' : 'md-input-filled'%>">
-            <%= f.label :name, 'Name *' %><%= f.text_field :name, class: 'md-input uk-form-width-large md-input-filled', required: true %>
+        <div class="uk-grid">
+
+          <div class="uk-width-medium-1-1 uk-grid-margin">
+            <div class="md-input-wrapper <%= @city.name.blank? ? '' : 'md-input-filled'%>">
+              <%= f.label :name, 'Name *' %><%= f.text_field :name, class: 'md-input uk-form-width-large md-input-filled', required: true %>
+            </div>
           </div>
+
+          <div class="uk-width-medium-1-1 uk-grid-margin">
+            <div class="md-input-wrapper <%= @city.description.blank? ? '' : 'md-input-filled'%>">
+              <%= f.label :description, 'City Description, Maximum 50 Characters *' %>
+              <%= f.text_area :description , class: 'md-input uk-form-width-large', cols: 6, rows: 2, 'data-parsley-trigger':"keyup" ,'data-parsley-maxlength':"50", 'data-parsley-maxlength-message': "Maximum Characters is 50", required: true %>
+            </div>
+          </div>
+
+          <div class="uk-width-medium-1-5 uk-grid-margin">
+            <div class="md-input-wrapper">
+              <h3 class="heading_a uk-margin-small-bottom">City Photo</h3>
+              <%= f.file_field :photo, class: 'dropify ', 'data-default-file' => @city.photo, 'data-errors-position':"overlay",  'data-allowed-formats':"portrait", 'data-max-height':"10"%>
+            </div>
+          </div>
+          <div class="uk-width-medium-1-5 uk-grid-margin">
+            <div class="md-input-wrapper">
+              <h3 class="heading_a uk-margin-small-bottom">Intorno Photo</h3>
+              <%= f.fields_for :discover do |ff| %>
+              <%= ff.file_field :photo, class: 'dropify ', 'data-default-file' => @discover.photo, 'data-errors-position':"overlay",  'data-allowed-formats':"portrait" %>
+              <% end %>
+            </div>
+          </div>
+          <div class="uk-width-medium-1-5 uk-grid-margin">
+            <div class="md-input-wrapper">
+              <h3 class="heading_a uk-margin-small-bottom">Scopri Photo</h3>
+              <%= f.fields_for :around do |fff| %>
+              <%= fff.file_field :photo, class: 'dropify ', 'data-default-file' => @around.photo, 'data-errors-position':"overlay",  'data-allowed-formats':"portrait" %>
+              <% end %>
+            </div>
+          </div>
+          <div class="uk-width-medium-1-5 uk-grid-margin">
+            <div class="md-input-wrapper">
+              <h3 class="heading_a uk-margin-small-bottom">Comune Photo</h3>
+              <%= f.fields_for :commonplace do |ffff| %>
+              <%= ffff.file_field :photo, class: 'dropify ', 'data-default-file' => @commonplace.photo, 'data-errors-position':"overlay",  'data-allowed-formats':"portrait" %>
+            </div>
+            <% end %>
+          </div>
+          <div class="uk-width-medium-1-5 uk-grid-margin">
+            <div class="md-input-wrapper">
+              <h3 class="heading_a uk-margin-small-bottom">Utilita Photo</h3>
+              <%= f.fields_for :utility do |fffff| %>
+              <%= fffff.file_field :photo, class: 'dropify ', 'data-default-file' => @utility.photo, 'data-errors-position':"overlay",  'data-allowed-formats':"portrait"  %>
+              <% end %>
+            </div>
+          </div>
+          <div class="uk-width-medium-1-1 uk-grid-margin">
+            <div class="md-input-wrapper uk-text-right">
+              <button type="button" class="md-btn md-btn-warning  uk-modal-close md-btn-wave waves-effect waves-button">Close</button>
+              <%= f.submit 'Save',  class:"md-btn md-btn-primary waves-effect waves-effect waves-button waves-light" %>
+            </div>
+          </div>
+
         </div>
-
-        <div class="uk-width-medium-1-1 uk-grid-margin uk-row-first">
-          <div class="md-input-wrapper <%= @city.description.blank? ? '' : 'md-input-filled'%>">
-            <%= f.label :description, 'City Description, Maximum 50 Characters *' %>
-            <%= f.text_area :description , class: 'md-input uk-form-width-large', cols: 6, rows: 2, 'data-parsley-trigger':"keyup" ,'data-parsley-maxlength':"50", 'data-parsley-maxlength-message': "Maximum Characters is 50", required: true %>
-        </div>
-        </div>
-
-        <div class="uk-width-medium-1-1 uk-grid-margin uk-row-first">
-      <div class="md-input-wrapper">
-        <h3 class="heading_a uk-margin-small-bottom">City Photo</h3>
-        <%= f.file_field :photo, class: 'dropify w500i', 'data-default-file' => @city.photo%>
-      </div>
-    </div>
-
-
-        <div class="uk-width-medium-1-1 uk-grid-margin uk-row-first">
-      <span class="uk-input-group-addon"></span>
-    </div>
-
-        <div class="uk-width-medium-1-1 uk-grid-margin uk-row-first">
-
-      <span class="uk-input-group-addon">
-        <button type="button" class="md-btn md-btn-warning  uk-modal-close md-btn-wave waves-effect waves-button">Close</button>
-
-        <%= f.submit 'Save',  class:"md-btn md-btn-primary waves-effect waves-effect waves-button waves-light" %>
-      </span>
-    </div>
-
       <% end %>
     </div>
   </div>

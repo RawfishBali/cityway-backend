@@ -17,9 +17,15 @@ class City < ActiveRecord::Base
   validates :description, presence: true
 
   has_many :merchants, dependent: :destroy
+  has_one :around
+  has_one :commonplace
+  has_one :discover
+  has_one :utility
 
   geocoded_by :name
   after_validation :geocode
 
   mount_uploader :photo, PhotoUploader
+
+  accepts_nested_attributes_for :around, :commonplace, :discover, :utility,  allow_destroy: true
 end

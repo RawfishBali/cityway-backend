@@ -89,6 +89,7 @@ module CityView
         mount CityView::Api::V1::Users
         mount CityView::Api::V1::Attivitas
         mount CityView::Api::V1::Categories
+        mount CityView::Api::V1::Arounds
 
       end
     end

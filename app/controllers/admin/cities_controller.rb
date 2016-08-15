@@ -3,6 +3,10 @@ class Admin::CitiesController < Admin::BaseController
 
   def index
     @city = City.new
+    @around = @city.build_around
+    @utility = @city.build_utility
+    @commonplace = @city.build_commonplace
+    @discover = @city.build_discover
     @cities = City.all.order('Name ASC').page(20).page params[:page]
   end
 
@@ -65,10 +69,14 @@ class Admin::CitiesController < Admin::BaseController
     # Use callbacks to share common setup or constraints between actions.
     def set_city
       @city = City.find(params[:id])
+      @around = @city.around || @city.build_around
+      @utility = @city.utility || @city.build_utility
+      @commonplace = @city.commonplace || @city.build_commonplace
+      @discover = @city.discover || @city.build_discover
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def city_params
-      params.require(:city).permit(:name, :latitude, :longitude, :description, :photo)
+      params.require(:city).permit(:name, :latitude, :longitude, :description, :photo, discover_attributes: [:id , :photo, :city_id], around_attributes: [:id , :photo, :city_id], commonplace_attributes: [:id , :photo, :icon, :city_id], utility_attributes: [:id , :photo, :city_id])
     end
 end
