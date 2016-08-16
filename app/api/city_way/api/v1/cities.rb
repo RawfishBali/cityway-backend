@@ -29,6 +29,16 @@ module CityWay
             add_pagination_headers cities
             present cities, with: CityWay::Api::V1::Entities::City
           end
+
+          desc "City Detail"
+          params do
+            requires :id , type: Integer, values: -> { City.ids }
+
+          end
+          get '/:id' do
+            city = City.find(params[:id])
+            present city, with: CityWay::Api::V1::Entities::City
+          end
         end
 
       end
