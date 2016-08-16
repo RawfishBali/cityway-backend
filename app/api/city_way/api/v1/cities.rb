@@ -25,6 +25,9 @@ module CityWay
             else
               cities = City.all.page params[:page]
             end
+            if cities.blank?
+              cities = City.near([params[:latitude],params[:longitude]], 20000, units: :km).page
+            end
 
             add_pagination_headers cities
             present cities, with: CityWay::Api::V1::Entities::City
