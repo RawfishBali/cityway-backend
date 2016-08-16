@@ -86,6 +86,34 @@ module CityWay
                 present current_user, with: CityWay::Api::V1::Entities::User
               end
             end
+
+
+            desc "Forgot password"
+            params do
+            end
+            post :forgot_password do
+              unless current_user
+                error!({error: "User doesn't exist"}, 401)
+              else
+                current_user.send_reset_password_instructions
+                {message: "Reset Email Send To #{current_user.email} !"}
+              end
+            end
+
+            desc "Show User"
+            params do
+            end
+            get do
+              unless current_user
+                error!({error: "User doesn't exist"}, 401)
+              else
+                present current_user, with: CityWay::Api::V1::Entities::User
+              end
+            end
+
+
+            # "user"=>{"reset_password_token"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Change my password"}
+
           end
         end
       end
