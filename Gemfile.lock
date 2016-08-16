@@ -160,6 +160,7 @@ GEM
     pg (0.18.4)
     pkg-config (1.1.7)
     powerpack (0.1.1)
+    puma (3.4.0)
     rack (1.6.4)
     rack-accept (0.4.5)
       rack (>= 0.4)
@@ -302,6 +303,7 @@ DEPENDENCIES
   omniauth-facebook
   open-weather
   pg
+  puma
   rails (= 4.2.7)
   rails_12factor
   rolify
@@ -318,6 +320,9 @@ DEPENDENCIES
   warden (= 1.2.3)
   warden-oauth2
   web-console (~> 2.0)
+
+RUBY VERSION
+   ruby 2.2.5p319
 
 BUNDLED WITH
    1.12.5

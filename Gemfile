@@ -1,3 +1,5 @@
+ruby '2.2.5'
+
 source 'https://rubygems.org'
 
 
@@ -58,6 +60,8 @@ gem 'kaminari'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'rubocop', require: false
+
+gem 'puma'
 
 group :production do
   gem 'rails_12factor'
