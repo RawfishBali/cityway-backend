@@ -62,6 +62,7 @@ gem 'mini_magick'
 gem 'rubocop', require: false
 
 gem 'puma'
+gem 'newrelic_rpm'
 
 group :production do
   gem 'rails_12factor'
