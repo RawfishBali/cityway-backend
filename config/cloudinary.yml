@@ -1,0 +1,18 @@
+development:
+  cloud_name: hpjjdchal
+  api_key: '817456671593443'
+  api_secret: Nj7vDsPaVSWLB_-HsImAsxt4neg
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: hpjjdchal
+  api_key: '817456671593443'
+  api_secret: Nj7vDsPaVSWLB_-HsImAsxt4neg
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: hpjjdchal
+  api_key: '817456671593443'
+  api_secret: Nj7vDsPaVSWLB_-HsImAsxt4neg
+  enhance_image_tag: true
+  static_image_support: false
