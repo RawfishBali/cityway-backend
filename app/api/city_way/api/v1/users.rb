@@ -90,13 +90,15 @@ module CityWay
 
             desc "Forgot password"
             params do
+              requires :email, type: String, desc: "User's Email"
             end
             post :forgot_password do
-              unless current_user
+              user = User.find_by(email: params[:email])
+              unless user
                 error!({error: "User doesn't exist"}, 401)
               else
-                current_user.send_reset_password_instructions
-                {message: "Reset Email Send To #{current_user.email} !"}
+                user.send_reset_password_instructions
+                {message: "Reset Email Send To #{user.email} !"}
               end
             end
 
@@ -110,10 +112,6 @@ module CityWay
                 present current_user, with: CityWay::Api::V1::Entities::User
               end
             end
-
-
-            # "user"=>{"reset_password_token"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Change my password"}
-
           end
         end
       end
