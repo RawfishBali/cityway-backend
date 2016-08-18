@@ -11,6 +11,5 @@ class AddMissingIndexes < ActiveRecord::Migration
     add_index :arounds, :city_id
     add_index :categories, :parent_id
     add_index :categories_merchants, :merchant_id
-    add_index :subcategories, :category_id
   end
 end
