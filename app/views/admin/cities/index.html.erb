@@ -18,9 +18,13 @@
             <td class="uk-width-1-10"><%= city.description %></td>
             <td class="uk-width-1-10"><%= image_tag city.photo.thumb.url %></td>
             <td class="uk-width-1-10">
-              <span class="uk-input-group-addon">
-                <a href="#commune_<%= city.commonplace.id %>" class="btnSectionClone" data-uk-modal="{ center:true }"><i class="material-icons md-24"></i></a>
-              </span>
+              <% if city.commonplace %>
+                <span class="uk-input-group-addon">
+                  <a href="#commune_<%= city.commonplace.id %>" class="btnSectionClone" data-uk-modal="{ center:true }"><i class="material-icons md-24"></i></a>
+                </span>
+              <% else %>
+                "City Hall is not available"
+              <% end %>
             </td>
             <td class="uk-width-1-10">
               <%= link_to '<i class="md-icon material-icons">&#xE254;</i>'.html_safe, edit_admin_city_path(city) %>
@@ -125,7 +129,7 @@
               <%= f.file_field :photo, class: 'dropify ', 'data-default-file' => commune.photo %>
 
             </div>
-            
+
             <div class="uk-width-medium-1-1 uk-grid-margin">
               <div class="md-input-wrapper uk-text-right">
                 <button type="button" class="md-btn md-btn-warning  uk-modal-close md-btn-wave waves-effect waves-button">Close</button>

@@ -40,7 +40,7 @@ module CityWay
             city.photo.url
           end
           expose :around, using: CityWay::Api::V1::Entities::Around, if: lambda { |object, options| object.around }
-          expose :commonplace, using: CityWay::Api::V1::Entities::Commonplace, if: lambda { |object, options| object.commonplace }
+          expose :commonplace, using: CityWay::Api::V1::Entities::Commonplace, if: lambda { |object, options| object.commonplace }, as: 'city_hall'
           expose :discover, using: CityWay::Api::V1::Entities::Discover, if: lambda { |object, options| object.discover }
           expose :utility, using: CityWay::Api::V1::Entities::Utility, if: lambda { |object, options| object.utility }
         end
