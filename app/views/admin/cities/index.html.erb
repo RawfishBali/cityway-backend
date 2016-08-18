@@ -119,7 +119,7 @@
 
   <% @cities.each do  |city| %>
     <% commune = city.commonplace %>
-    <% if city.commune %>
+    <% if commune %>
     <div class="uk-modal" id="commune_<%= commune.id %>">
       <div class="uk-modal-dialog">
         <%= form_for(commune, url: admin_commonplaces_path(commune)) do |f| %>
