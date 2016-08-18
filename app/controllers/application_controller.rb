@@ -9,11 +9,11 @@ class ApplicationController < ActionController::Base
 
   def layout_by_resource
     puts params[:controller]
-    return 'application' if devise_controller? && params[:controller] == 'devise/passwords'
+    return 'application' if params[:controller] == 'devise/passwords'
     if admin_signed_in?
       "admin"
     else
-      "application"
+      "devise"
     end
   end
 end
