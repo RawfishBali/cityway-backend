@@ -24,6 +24,11 @@ class City < ActiveRecord::Base
 
   geocoded_by :name
   after_validation :geocode
+  reverse_geocoded_by :latitude, :longitude do |obj,results|
+    if geo = results[1]
+      obj.name    = geo.city
+    end
+  end
 
   mount_uploader :photo, PhotoUploader
 

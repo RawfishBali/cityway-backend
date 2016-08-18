@@ -28,7 +28,10 @@ module CityWay
         end
 
         class City < Grape::Entity
-          expose :id, documentation: {:type => "integer", :desc => "City ID"}
+          expose :message, if: lambda { |object, options| options[:message] } do |object, options|
+            options[:message]
+          end
+          expose :id, documentation: {:type => "integer", :desc => "City ID"}, if: lambda { |object, options| !object.id.blank? }
           expose :name, documentation: {:type => "string", :desc => "City Name"}
           expose :latitude, documentation: {:type => "float", :desc => "City Latitude"}
           expose :longitude, documentation: {:type => "float", :desc => "City Longitude"}
@@ -41,6 +44,17 @@ module CityWay
           expose :discover, using: CityWay::Api::V1::Entities::Discover, if: lambda { |object, options| object.discover }, as: 'scopri'
           expose :utility, using: CityWay::Api::V1::Entities::Utility, if: lambda { |object, options| object.utility }, as: 'utilita'
         end
+
+        class CityWithMessages < Grape::Entity
+
+          expose :nearerst_city do |city, options|
+            CityWay::Api::V1::Entities::City.represent city, message: options[:message]
+          end
+          expose :nearby_cities, if: lambda { |instance, options| options[:cities] } do |cities, options|
+            CityWay::Api::V1::Entities::City.represent options[:cities]
+          end
+        end
+
 
         class AccessToken < Grape::Entity
           expose :access_token, :documentation => {:type => "string", :desc => "Access Token"} do |access_token, options|

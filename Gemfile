@@ -77,6 +77,8 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'simplecov'
+  gem 'rails_best_practices'
+  gem 'lol_dba'
 end
 
 group :development do

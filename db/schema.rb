@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160815073042) do
+ActiveRecord::Schema.define(version: 20160818021618) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,9 @@ ActiveRecord::Schema.define(version: 20160815073042) do
     t.datetime "updated_at",            null: false
     t.string   "refresh_token"
   end
+
+  add_index "access_tokens", ["client_application_id"], name: "index_access_tokens_on_client_application_id", using: :btree
+  add_index "access_tokens", ["user_id"], name: "index_access_tokens_on_user_id", using: :btree
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -58,6 +61,8 @@ ActiveRecord::Schema.define(version: 20160815073042) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "arounds", ["city_id"], name: "index_arounds_on_city_id", using: :btree
+
   create_table "categories", force: :cascade do |t|
     t.string   "name",       null: false
     t.integer  "parent_id"
@@ -65,10 +70,15 @@ ActiveRecord::Schema.define(version: 20160815073042) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "categories", ["parent_id"], name: "index_categories_on_parent_id", using: :btree
+
   create_table "categories_merchants", force: :cascade do |t|
     t.integer "merchant_id", null: false
     t.integer "category_id", null: false
   end
+
+  add_index "categories_merchants", ["category_id"], name: "index_categories_merchants_on_category_id", using: :btree
+  add_index "categories_merchants", ["merchant_id"], name: "index_categories_merchants_on_merchant_id", using: :btree
 
   create_table "cities", force: :cascade do |t|
     t.string   "name",        null: false
@@ -98,12 +108,16 @@ ActiveRecord::Schema.define(version: 20160815073042) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "commonplaces", ["city_id"], name: "index_commonplaces_on_city_id", using: :btree
+
   create_table "discovers", force: :cascade do |t|
     t.string   "photo"
     t.integer  "city_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "discovers", ["city_id"], name: "index_discovers_on_city_id", using: :btree
 
   create_table "identities", force: :cascade do |t|
     t.integer  "user_id"
@@ -133,6 +147,9 @@ ActiveRecord::Schema.define(version: 20160815073042) do
     t.integer  "category_id"
   end
 
+  add_index "merchants", ["category_id"], name: "index_merchants_on_category_id", using: :btree
+  add_index "merchants", ["city_id"], name: "index_merchants_on_city_id", using: :btree
+
   create_table "roles", force: :cascade do |t|
     t.string   "name"
     t.integer  "resource_id"
@@ -150,6 +167,8 @@ ActiveRecord::Schema.define(version: 20160815073042) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  add_index "subcategories", ["category_id"], name: "index_subcategories_on_category_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
@@ -178,6 +197,8 @@ ActiveRecord::Schema.define(version: 20160815073042) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "utilities", ["city_id"], name: "index_utilities_on_city_id", using: :btree
 
   add_foreign_key "identities", "users"
 end

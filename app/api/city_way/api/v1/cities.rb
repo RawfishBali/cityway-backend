@@ -16,21 +16,26 @@ module CityWay
             optional :sort, type: Hash do
               optional :name, type: String, values: -> { ['asc', 'desc'] }
             end
-            optional :latitude, type: String, desc: "User Latitude"
-            optional :longitude, type: String, desc: "User Longitude"
+            requires :latitude, type: String, desc: "User Latitude"
+            requires :longitude, type: String, desc: "User Longitude"
           end
           get do
-            if params[:latitude] && params[:longitude]
-              cities = City.near([params[:latitude],params[:longitude]], 20, units: :km, order: 'name ASC').page params[:page]
+            user_city = City.new(latitude: params[:latitude], longitude: params[:longitude])
+            city_name = user_city.reverse_geocode
+
+            alpha_cities = City.where.not(name: city_name).near([params[:latitude],params[:longitude]], 20000, units: :km, order: 'name ASC').page params[:page]
+
+            city = City.find_by(name: city_name)
+
+            if city
+              message = "You're in"
             else
-              cities = City.all.page params[:page]
-            end
-            if cities.blank?
-              cities = City.near([params[:latitude],params[:longitude]], 20000, units: :km).page
+              city = City.near([params[:latitude],params[:longitude]], 20000, units: :km).first
+              message = "You're not in the city list. The nearest city is"
             end
 
-            add_pagination_headers cities
-            present cities, with: CityWay::Api::V1::Entities::City
+            add_pagination_headers alpha_cities
+            present city, with: CityWay::Api::V1::Entities::CityWithMessages, cities: alpha_cities, message: message
           end
 
           desc "City Detail"

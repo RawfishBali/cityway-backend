@@ -1,25 +1,69 @@
-<h2>Change your password</h2>
+<header id="header_main">
+  <nav class="uk-navbar">
+    <div class="uk-container uk-container-center">
+      <a href="" class="uk-navbar-brand">
+        <%= image_tag "logo_main_white@2x.png" , class: 'city-way-logo' %>
+      </a>
+    </div>
+  </nav>
+</header>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
-  <%= f.hidden_field :reset_password_token %>
+<section class="section section_large" id="sect-contact">
+  <div class="uk-container uk-container-center">
+    <div class="uk-grid uk-grid-divider" data-uk-grid-margin>
+      <div class="uk-width-large-2-5">
+        <h3 class="heading_c uk-margin-large-bottom">Cambia Password</h3>
+        <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+          <%= f.hidden_field :reset_password_token %>
+          <div class="uk-form-row">
+            <%= f.label :password, "Nuova password" %>
+            <%= f.password_field :password, autofocus: false, autocomplete: "off", class: 'md-input' %>
+          </div>
+          <div class="uk-form-row">
+            <%= f.label :password_confirmation, "Conferma nuova password" %>
+            <%= f.password_field :password_confirmation, autofocus: true, autocomplete: "off", class: 'md-input' %>
+          </div>
 
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
-    <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "off" %>
+          <div class="uk-form-row">
+            <button class="md-btn md-btn-success md-btn-large submit-password">Invia</button>
+          </div>
+        <% end %>
+      </div>
+      <div class="uk-width-large-3-5">
+        <h3 class="heading_c uk-margin-large-bottom">Contatta CityWay</h3>
+        <p class="uk-margin-large-bottom">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores dolorum enim repellat sit
+          veritatis? Alias assumenda cupiditate debitis dolorum, explicabo illo laboriosam nisi quibusdam
+          quod vel velit voluptas voluptate voluptatem?
+        </p>
+        <p>
+          <i class="material-icons md-24 uk-margin-small-right">&#xE551;</i> 123-456-789
+        </p>
+        <p>
+          <i class="material-icons md-24 uk-margin-small-right">&#xE0E1;</i> example@mailserver.com
+        </p>
+        <p>
+          <i class="material-icons md-24 uk-margin-small-right">&#xE0C8;</i> Via Roma, 25, RM 20147
+        </p>
+      </div>
+    </div>
   </div>
+</section>
 
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+<section class="section section_dark md-bg-blue-grey-700 bottom-footer">
+  <div class="uk-container uk-container-center">
+    <div class="uk-grid" data-uk-grid-margin>
+      <div class="uk-width-medium-3-5 uk-text-center-medium">
+        Copyright &copy; <%= Time.now.year %> CityWay, All rights reserved.
+      </div>
+      <div class="uk-width-medium-2-5">
+        <div class="uk-align-medium-right uk-text-center-medium">
+          <a href="#" class="uk-margin-medium-right" data-uk-tooltip="{offset: 12}" title="Facebook"><i class="uk-icon-facebook uk-icon-small md-color-white"></i></a><!--
+          --><a href="#" class="uk-margin-medium-right" data-uk-tooltip="{offset: 12}" title="Twitter"><i class="uk-icon-twitter uk-icon-small md-color-white"></i></a><!--
+        --><a href="#" class="uk-margin-medium-right" data-uk-tooltip="{offset: 12}" title="LinkedIn"><i class="uk-icon-linkedin uk-icon-small md-color-white"></i></a><!--
+      --><a href="#" data-uk-tooltip="{offset: 12}" title="Google Plus"><i class="uk-icon-google-plus uk-icon-small md-color-white"></i></a>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</section>
