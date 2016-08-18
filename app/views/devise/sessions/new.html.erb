@@ -11,7 +11,7 @@
         </div>
         <div class="uk-form-row">
           <label for="login_password" class="white-label">Password</label>
-          <%= f.password_field :password,  class: "md-input white-label" %>
+          <%= f.password_field :password,  class: "md-input white-label", autocomplete: :off %>
         </div>
         <div class="uk-margin-medium-top">
           <%= f.submit 'Sign in' , class: "md-btn md-btn-primary md-btn-block md-btn-large yellow-button"%>

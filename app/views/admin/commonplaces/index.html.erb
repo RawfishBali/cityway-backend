@@ -19,12 +19,9 @@
             <td class="uk-width-1-10"><%= image_tag city.photo.thumb.url %></td>
             <td class="uk-width-1-10">
               <% if city.commonplace %>
-                  <% if city.commonplace.icon.blank? %>
-                    <%= link_to '<i class="material-icons md-24"></i>'.html_safe, edit_admin_commonplace_path(city.commonplace), class: '' %>
-                  <% else %>
-                    <%= link_to (image_tag city.commonplace.icon.thumb.url), edit_admin_commonplace_path(city.commonplace), class: '' %>
-                  <% end %>
-
+                <span class="uk-input-group-addon">
+                  <a href="#commune_<%= city.commonplace.id %>" class="btnSectionClone" data-uk-modal="{ center:true }"><i class="material-icons md-24"></i></a>
+                </span>
               <% else %>
                 "City Hall is not available"
               <% end %>

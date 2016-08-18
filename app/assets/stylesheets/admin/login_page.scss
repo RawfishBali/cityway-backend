@@ -4472,7 +4472,7 @@ textarea.no_autosize {
 }
 .md-input-wrapper {
   position: relative;
-  padding-top: 4px;
+  padding-top: 18px;
   width: 100%;
   display: block;
 }
@@ -4491,7 +4491,7 @@ textarea.no_autosize {
   bottom: 0;
   width: 0;
   height: 2px;
-  background: #7FB1B6;
+  background: #fff;
   -webkit-transition: width 400ms cubic-bezier(0.4, 0, 0.2, 1);
   transition: width 400ms cubic-bezier(0.4, 0, 0.2, 1);
 }

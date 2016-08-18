@@ -1,13 +1,16 @@
 class Admin::CommonplacesController < ApplicationController
   before_action :set_commonplace, except: [:index, :new, :create]
 
+  def edit
+  end
+
   def update
     respond_to do |format|
       if @commonplace.update(commonplace_params)
-        format.html { redirect_to admin_commonplaces_path, notice: 'Commune was successfully updated.' }
+        format.html { redirect_to admin_cities_path, notice: 'Commune was successfully updated.' }
         format.json { render :show, status: :ok, location: @commonplace }
       else
-        format.html { redirect_to admin_commonplaces_path, notice: @commonplace.errors.full_messages }
+        format.html { redirect_to admin_cities_path, notice: @commonplace.errors.full_messages }
         format.json { render json: @commonplace.errors, status: :unprocessable_entity }
       end
     end

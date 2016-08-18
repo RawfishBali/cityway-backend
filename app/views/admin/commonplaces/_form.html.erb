@@ -1,0 +1,18 @@
+<%= form_for(@commonplace, url: admin_commonplace_path(@commonplace.id), multipart: true, id:'form_validation' ) do |f| %>
+<div class="uk-grid">
+
+  <div class="uk-width-medium-1-5 uk-grid-margin">
+    <div class="md-input-wrapper">
+      <h3 class="heading_a uk-margin-small-bottom">Stemma</h3>
+      <%= f.file_field :icon, class: 'dropify ', 'data-default-file' => @commonplace.icon, 'data-allowed-formats':"portrait"  %>
+    </div>
+  </div>
+  <div class="uk-width-medium-1-1 uk-grid-margin">
+    <div class="md-input-wrapper uk-text-right">
+      <%= link_to 'Close', :back, class: 'md-btn md-btn-warning md-btn-wave waves-effect waves-button'%>
+      <%= f.submit 'Save',  class: "md-btn md-btn-primary waves-effect waves-effect waves-button waves-light" %>
+    </div>
+  </div>
+</div>
+
+<% end %>
