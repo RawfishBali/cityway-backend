@@ -49,7 +49,6 @@ gem 'grape_on_rails_routes'
 gem 'hashie-forbidden_attributes'
 
 gem 'geocoder'
-gem 'open-weather'
 
 gem 'warden', '1.2.3'
 gem 'warden-oauth2'
@@ -60,6 +59,8 @@ gem 'kaminari'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'cloudinary'
+gem 'open-weather'
+gem 'forecast_io'
 
 gem 'rubocop', require: false
 
