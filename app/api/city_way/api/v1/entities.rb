@@ -36,10 +36,13 @@ module CityWay
           expose :description, documentation: {:type => "string", :desc => "City description"} do |city, options|
             city.description.nil? ? "No Description" : city.description
           end
-          expose :around, using: CityWay::Api::V1::Entities::Around, if: lambda { |object, options| object.around }, as: 'intorno'
-          expose :commonplace, using: CityWay::Api::V1::Entities::Commonplace, if: lambda { |object, options| object.commonplace }, as: 'comune'
-          expose :discover, using: CityWay::Api::V1::Entities::Discover, if: lambda { |object, options| object.discover }, as: 'scopri'
-          expose :utility, using: CityWay::Api::V1::Entities::Utility, if: lambda { |object, options| object.utility }, as: 'utilita'
+          expose :photo, documentation: {:type => "string", :desc => "City Photo"} do |city , options|
+            city.photo.url
+          end
+          expose :around, using: CityWay::Api::V1::Entities::Around, if: lambda { |object, options| object.around }
+          expose :commonplace, using: CityWay::Api::V1::Entities::Commonplace, if: lambda { |object, options| object.commonplace }
+          expose :discover, using: CityWay::Api::V1::Entities::Discover, if: lambda { |object, options| object.discover }
+          expose :utility, using: CityWay::Api::V1::Entities::Utility, if: lambda { |object, options| object.utility }
         end
 
         class CityWithMessages < Grape::Entity

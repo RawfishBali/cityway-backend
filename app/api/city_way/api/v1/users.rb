@@ -45,11 +45,11 @@ module CityWay
               requires :uid, type: String, desc: "Facebook Uid"
               requires :firstname, type: String, desc: "firstname"
               requires :lastname, type: String, desc: "lastname"
-
+              optional :newsletter, type: Boolean, desc: "newsletter setting"
             end
             post :facebook do
               signed_in_resource = User.find_by(email: params[:email]) || nil
-              user = User.find_for_oauth(params[:uid], params[:email], params[:firstname], params[:lastname],  signed_in_resource)
+              user = User.find_for_oauth(params[:uid], params[:email], params[:firstname], params[:lastname], (params[:newsletter] || false), signed_in_resource)
 
               error!({error: "Failed Authentication With Facebook"}, 401) and return unless user
 
