@@ -47,7 +47,7 @@ module CityWay
 
         class CityWithMessages < Grape::Entity
 
-          expose :nearerst_city do |city, options|
+          expose :nearest_city do |city, options|
             CityWay::Api::V1::Entities::City.represent city, message: options[:message]
           end
           expose :message do |city, options|
