@@ -23,8 +23,6 @@ module CityWay
             user_city = City.new(latitude: params[:latitude], longitude: params[:longitude])
             city_name = user_city.reverse_geocode
 
-            alpha_cities = City.where.not(name: city_name).near([params[:latitude],params[:longitude]], 20000, units: :km, order: 'name ASC').page params[:page]
-
             city = City.find_by(name: city_name)
 
             if city
@@ -33,6 +31,8 @@ module CityWay
               city = City.near([params[:latitude],params[:longitude]], 20000, units: :km).first
               message = "You're not in the city list. The nearest city is"
             end
+
+            alpha_cities = City.where.not(name: city.name).near([params[:latitude],params[:longitude]], 20000, units: :km, order: 'name ASC').page params[:page]
 
             add_pagination_headers alpha_cities
             present city, with: CityWay::Api::V1::Entities::CityWithMessages, cities: alpha_cities, message: message
