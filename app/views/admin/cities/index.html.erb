@@ -73,14 +73,14 @@
         <div class="uk-width-medium-1-5 uk-grid-margin">
           <div class="md-input-wrapper">
             <h3 class="heading_a uk-margin-small-bottom">City Photo</h3>
-            <%= f.file_field :photo, class: 'dropify ', 'data-default-file' => @city.photo, 'data-errors-position':"overlay",  'data-allowed-formats':"portrait", 'data-max-height':"10"%>
+            <%= f.file_field :photo, class: 'dropify ', 'data-default-file' => @city.photo, 'data-errors-position':"overlay",  'data-allowed-formats':"portrait", 'data-max-height':"10" , required: true ,  'data-errors-position': "outside" %>
           </div>
         </div>
         <div class="uk-width-medium-1-5 uk-grid-margin">
           <div class="md-input-wrapper">
             <h3 class="heading_a uk-margin-small-bottom">Intorno Photo</h3>
             <%= f.fields_for :discover do |ff| %>
-            <%= ff.file_field :photo, class: 'dropify ', 'data-default-file' => @discover.photo, 'data-errors-position':"overlay",  'data-allowed-formats':"portrait" %>
+            <%= ff.file_field :photo, class: 'dropify ', 'data-default-file' => @discover.photo, 'data-errors-position':"overlay",  'data-allowed-formats':"portrait", required: true ,  'data-errors-position': "outside"  %>
             <% end %>
           </div>
         </div>
@@ -88,7 +88,7 @@
           <div class="md-input-wrapper">
             <h3 class="heading_a uk-margin-small-bottom">Scopri Photo</h3>
             <%= f.fields_for :around do |fff| %>
-            <%= fff.file_field :photo, class: 'dropify ', 'data-default-file' => @around.photo, 'data-errors-position':"overlay",  'data-allowed-formats':"portrait" %>
+            <%= fff.file_field :photo, class: 'dropify ', 'data-default-file' => @around.photo, 'data-errors-position':"overlay",  'data-allowed-formats':"portrait", required: true ,  'data-errors-position': "outside"  %>
             <% end %>
           </div>
         </div>
@@ -96,7 +96,7 @@
           <div class="md-input-wrapper">
             <h3 class="heading_a uk-margin-small-bottom">Comune Photo</h3>
             <%= f.fields_for :commonplace do |ffff| %>
-            <%= ffff.file_field :photo, class: 'dropify ', 'data-default-file' => @commonplace.photo, 'data-errors-position':"overlay",  'data-allowed-formats':"portrait" %>
+            <%= ffff.file_field :photo, class: 'dropify ', 'data-default-file' => @commonplace.photo, 'data-errors-position':"overlay",  'data-allowed-formats':"portrait", required: true ,  'data-errors-position': "outside"  %>
           </div>
           <% end %>
         </div>
@@ -104,7 +104,7 @@
           <div class="md-input-wrapper">
             <h3 class="heading_a uk-margin-small-bottom">Utilita Photo</h3>
             <%= f.fields_for :utility do |fffff| %>
-            <%= fffff.file_field :photo, class: 'dropify ', 'data-default-file' => @utility.photo, 'data-errors-position':"overlay",  'data-allowed-formats':"portrait"  %>
+            <%= fffff.file_field :photo, class: 'dropify ', 'data-default-file' => @utility.photo, 'data-errors-position':"overlay",  'data-allowed-formats':"portrait" , required: true ,  'data-errors-position': "outside"  %>
             <% end %>
           </div>
         </div>
@@ -119,35 +119,4 @@
       <% end %>
     </div>
   </div>
-
-  <% @cities.each do  |city| %>
-    <% commune = city.commonplace %>
-    <% if commune %>
-    <div class="uk-modal" id="commune_<%= commune.id %>">
-      <div class="uk-modal-dialog">
-        <%= form_for(commune, url: admin_commonplaces_path(commune)) do |f| %>
-          <div class="uk-grid">
-            <div class="md-input-wrapper">
-              <h3 class="heading_a uk-margin-small-bottom">Stemma Photo</h3>
-
-              <%= f.file_field :photo, class: 'dropify ', 'data-default-file' => commune.photo %>
-
-            </div>
-
-            <div class="uk-width-medium-1-1 uk-grid-margin">
-              <div class="md-input-wrapper uk-text-right">
-                <button type="button" class="md-btn md-btn-warning  uk-modal-close md-btn-wave waves-effect waves-button">Close</button>
-                <%= f.submit 'Save',  class:"md-btn md-btn-primary waves-effect waves-effect waves-button waves-light" %>
-              </div>
-            </div>
-          <%#= render "shared/errors", object: commune %>
-
-          <%#= f.text_field :field_1, class: "form-control" %>
-
-        <% end %>
-        <%#= image_tag commune.photo.url %>
-      </div>
-    </div>
-    <% end %>
-  <% end %>
 </div>
