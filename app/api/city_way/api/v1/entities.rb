@@ -39,10 +39,42 @@ module CityWay
           expose :photo, documentation: {:type => "string", :desc => "City Photo"} do |city , options|
             city.photo.url
           end
-          expose :around, using: CityWay::Api::V1::Entities::Around, if: lambda { |object, options| object.around }
-          expose :commonplace, using: CityWay::Api::V1::Entities::Commonplace, if: lambda { |object, options| object.commonplace }, as: 'city_hall'
-          expose :discover, using: CityWay::Api::V1::Entities::Discover, if: lambda { |object, options| object.discover }
-          expose :utility, using: CityWay::Api::V1::Entities::Utility, if: lambda { |object, options| object.utility }
+          expose :around do |city, options|
+            if city.around
+              CityWay::Api::V1::Entities::Around.represent city.around
+            else
+              {
+                "photo": "http://res-4.cloudinary.com/hpjjdchal/image/upload/v1471332519/cool-iphone-wallpaper-1.jpg"
+              }
+            end
+          end
+          expose :commonplace, as: 'city_hall' do |city, options|
+            if city.commonplace
+              CityWay::Api::V1::Entities::Commonplace.represent city.commonplace
+            else
+              {
+                "photo": "http://res-4.cloudinary.com/hpjjdchal/image/upload/v1471332519/cool-iphone-wallpaper-1.jpg"
+              }
+            end
+          end
+          expose :discover do |city, options|
+            if city.discover
+              CityWay::Api::V1::Entities::Discover.represent city.discover
+            else
+              {
+                "photo": "http://res-4.cloudinary.com/hpjjdchal/image/upload/v1471332519/cool-iphone-wallpaper-1.jpg"
+              }
+            end
+          end
+          expose :utility do |city, options|
+            if city.utility
+              CityWay::Api::V1::Entities::Utility.represent city.utility
+            else
+              {
+                "photo": "http://res-4.cloudinary.com/hpjjdchal/image/upload/v1471332519/cool-iphone-wallpaper-1.jpg"
+              }
+            end
+          end
         end
 
         class CityWithMessages < Grape::Entity
@@ -51,13 +83,15 @@ module CityWay
             CityWay::Api::V1::Entities::City.represent city, message: options[:message]
           end
           expose :message do |city, options|
-
             options[:message]
-
           end
           expose :nearby_cities, if: lambda { |instance, options| options[:cities] } do |cities, options|
             CityWay::Api::V1::Entities::City.represent options[:cities]
           end
+        end
+
+
+        class CityComplete < Grape::Entity
         end
 
 
