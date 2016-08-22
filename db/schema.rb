@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160818021618) do
+ActiveRecord::Schema.define(version: 20160822063059) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,24 @@ ActiveRecord::Schema.define(version: 20160818021618) do
   end
 
   add_index "admins_roles", ["admin_id", "role_id"], name: "index_admins_roles_on_admin_id_and_role_id", using: :btree
+
+  create_table "advertisements", force: :cascade do |t|
+    t.string   "photo"
+    t.boolean  "active",     default: false
+    t.integer  "position"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  create_table "advertisements_cities", force: :cascade do |t|
+    t.integer "city_id",          null: false
+    t.integer "advertisement_id", null: false
+  end
+
+  add_index "advertisements_cities", ["advertisement_id"], name: "index_advertisements_cities_on_advertisement_id", using: :btree
+  add_index "advertisements_cities", ["city_id"], name: "index_advertisements_cities_on_city_id", using: :btree
 
   create_table "arounds", force: :cascade do |t|
     t.string   "photo"

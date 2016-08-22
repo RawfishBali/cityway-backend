@@ -13,17 +13,24 @@
 #
 
 class City < ActiveRecord::Base
-  validates :name, presence: true
-  validates :description, presence: true
 
   has_many :merchants, dependent: :destroy
+  has_and_belongs_to_many :advertisements
   has_one :around
   has_one :commonplace
   has_one :discover
   has_one :utility
 
+  validates :name, presence: true
+  validates :description, presence: true
+  validates_presence_of :around
+  validates_presence_of :commonplace
+  validates_presence_of :discover
+  validates_presence_of :utility
+
   geocoded_by :name
   after_validation :geocode
+  
   reverse_geocoded_by :latitude, :longitude do |obj,results|
     if geo = results[1]
       obj.name    = geo.city

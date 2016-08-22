@@ -75,6 +75,9 @@ module CityWay
               }
             end
           end
+          expose :advertisements do |city, options|
+            CityWay::Api::V1::Entities::Advertisement.represent city.advertisements
+          end
         end
 
         class CityWithMessages < Grape::Entity
@@ -89,11 +92,6 @@ module CityWay
             CityWay::Api::V1::Entities::City.represent options[:cities]
           end
         end
-
-
-        class CityComplete < Grape::Entity
-        end
-
 
         class AccessToken < Grape::Entity
           expose :access_token, :documentation => {:type => "string", :desc => "Access Token"} do |access_token, options|
@@ -135,6 +133,11 @@ module CityWay
           expose :firstname, documentation: {:type => "String", :desc => "User firstname"}
           expose :lastname, documentation: {:type => "String", :desc => "User lastname"}
           expose :newsletter, documentation: {:type => "Boolean", :desc => "User newsletter subscription"}
+        end
+
+        class Advertisement < Grape::Entity
+          expose :photo, documentation: {:type => "String", :desc => "Advertisement's photo"}
+          expose :position, documentation: {:type => "String", :desc => "Advertisement's position"}
         end
 
 
