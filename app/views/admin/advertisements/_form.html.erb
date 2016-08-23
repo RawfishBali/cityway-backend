@@ -1,0 +1,55 @@
+<%= form_for(@advertisement, url: admin_advertisement_path(@advertisement), multipart: true ) do |f| %>
+<div class="uk-grid">
+  <div class="uk-width-medium-1-1 uk-grid-margin">
+    <div class="md-input-wrapper">
+      <h3 class="heading_a uk-margin-small-bottom">Advertisement Photo</h3>
+      <%= f.file_field :photo, class: 'dropify ', 'data-default-file' => @advertisement.photo, 'data-allowed-formats':"portrait square" , 'data-errors-position': "outside" , 'data-height':"119" %>
+    </div>
+  </div>
+  <div class="uk-width-medium-1-1 uk-grid-margin">
+    <div class="md-input-wrapper md-input-filled">
+      <%= f.label :position, 'Position *' %>
+      <%= f.select "position", options_for_select(Advertisement.positions.map {|position| [ position[0], position[0] ]}, selected: @advertisement.position), {}, {required: 'true', class: 'md-input uk-form-width-large md-input-filled'} %>
+
+    </div>
+  </div>
+  <div class="uk-width-medium-1-1 uk-grid-margin">
+    <div class="md-input-wrapper md-input-filled">
+      <%= f.label :start_date, 'Start Date *' %>
+      <%= f.text_field :start_date, class: 'md-input uk-form-width-large ','data-uk-datepicker': "{format:'YYYY-MM-DD' }" , required: true %>
+    </div>
+  </div>
+  <div class="uk-width-medium-1-1 uk-grid-margin">
+    <div class="md-input-wrapper md-input-filled">
+      <%= f.label :end_date, 'End Date *' %><%= f.text_field :end_date, class: 'md-input uk-form-width-large md-input-filled','data-uk-datepicker': "{format:'YYYY-MM-DD' }", required: true %>
+    </div>
+  </div>
+  <div class="uk-width-medium-1-1 uk-grid-margin">
+
+    <div class="md-input-wrapper <%= @advertisement.cities.blank? ? '' : 'md-input-filled'%>">
+      <div class="parsley-row">
+        <label for="cities" class="uk-form-label">Cities (1 minimum):</label>
+
+
+        <%= hidden_field_tag("advertisement[city_ids][]", nil) %>
+        <br />
+        <% City.order(:name).each do |city| %>
+        <span class="icheck-inline">
+          <%= check_box_tag("advertisement[city_ids][]", city.id, city.id.in?(@advertisement.cities.collect(&:id)), 'data-md-icheck': true, 'data-parsley-mincheck':"1" ) %>
+        <label class="inline-label"> <%= city.name %></label>
+      </span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="uk-width-medium-1-1 uk-grid-margin">
+    <div class="md-input-wrapper uk-text-right">
+      <%= link_to 'Close', admin_advertisements_path, class: 'md-btn md-btn-warning md-btn-wave waves-effect waves-button'%>
+      <%= f.submit 'Save',  class:"md-btn md-btn-primary waves-effect waves-effect waves-button waves-light" %>
+    </div>
+  </div>
+
+</div>
+<% end %>

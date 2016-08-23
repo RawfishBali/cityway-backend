@@ -31,3 +31,7 @@
 .w500i{
   width: 500px !important;
 }
+
+.advertisement-photo-container:parent{
+  width: 200px !important;
+}

@@ -230,6 +230,7 @@ Dropify.prototype.setSize = function()
 {
     if (this.settings.height) {
         this.wrapper.height(this.settings.height);
+        this.wrapper.width(this.settings.height * 3.1);
     }
 };
 

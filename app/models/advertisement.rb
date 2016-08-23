@@ -13,10 +13,16 @@
 #
 
 class Advertisement < ActiveRecord::Base
-  has_and_belongs_to_many :cities
+  has_and_belongs_to_many :cities, through: :advertisements_cities
+  has_many :advertisements_cities
   validates :photo, presence: true
   validates :start_date, presence: true
   validates :end_date, presence: true
 
   mount_uploader :photo, PhotoUploader
+
+  enum position: {
+    'top': 0,
+    'bottom': 1
+  }
 end

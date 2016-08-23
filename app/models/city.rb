@@ -15,7 +15,8 @@
 class City < ActiveRecord::Base
 
   has_many :merchants, dependent: :destroy
-  has_and_belongs_to_many :advertisements
+  has_and_belongs_to_many :advertisements, through: :advertisements_cities
+  has_many :advertisements_cities
   has_one :around
   has_one :commonplace
   has_one :discover
@@ -30,7 +31,7 @@ class City < ActiveRecord::Base
 
   geocoded_by :name
   after_validation :geocode
-  
+
   reverse_geocoded_by :latitude, :longitude do |obj,results|
     if geo = results[1]
       obj.name    = geo.city

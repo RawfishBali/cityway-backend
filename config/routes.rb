@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    resources :advertisements
+  end
   get '/ping', to: proc { [200, {}, ['']] }
 
   devise_for :admins
