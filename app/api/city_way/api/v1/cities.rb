@@ -16,6 +16,7 @@ module CityWay
             optional :sort, type: Hash do
               optional :name, type: String, values: -> { ['asc', 'desc'] }
             end
+            optional :list , type: Boolean
             requires :latitude, type: String, desc: "User Latitude"
             requires :longitude, type: String, desc: "User Longitude"
           end
@@ -35,7 +36,7 @@ module CityWay
             alpha_cities = City.where.not(name: city.name).near([params[:latitude],params[:longitude]], 20000, units: :km, order: 'name ASC').page params[:page]
 
             add_pagination_headers alpha_cities
-            present city, with: CityWay::Api::V1::Entities::CityWithMessages, cities: alpha_cities, message: message
+            present city, with: CityWay::Api::V1::Entities::CityWithMessages, cities: alpha_cities, message: message, list: params[:list]
           end
 
           desc "City Detail"
