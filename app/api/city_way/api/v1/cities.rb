@@ -23,14 +23,14 @@ module CityWay
           get do
             user_city = City.new(latitude: params[:latitude], longitude: params[:longitude])
             city_name = user_city.reverse_geocode
-
+            
             city = City.find_by(name: city_name)
 
             if city
-              message = "You're in"
+              message = "Premi 'ACCEDI' per visualizzare #{city_name}, la città più vicina. Oppure scegli 'Cambia città' "
             else
               city = City.near([params[:latitude],params[:longitude]], 20000, units: :km).first
-              message = "You're not in the city list. The nearest city is"
+              message = "Cityway sarà presto presente anche a #{city_name}"
             end
 
             alpha_cities = City.where.not(name: city.name).near([params[:latitude],params[:longitude]], 20000, units: :km, order: 'name ASC').page params[:page]
