@@ -33,11 +33,18 @@ module CityWay
           expose :latitude, documentation: {:type => "float", :desc => "City Latitude"}
           expose :longitude, documentation: {:type => "float", :desc => "City Longitude"}
           expose :distance, if: lambda { |object, options| object.respond_to?(:distance) }
-          expose :description, documentation: {:type => "string", :desc => "City description"} do |city, options|
-            city.description.nil? ? "No Description" : city.description
-          end
-          expose :photo, documentation: {:type => "string", :desc => "City Photo"} do |city , options|
-            city.photo.url
+          expose :home do |city, options|
+            {
+              photo: city.photo.url,
+              weather: {
+                temperature: 21,
+                weather_icon: 'cloudy',
+                weather_message: "It's time to eat brocolli!"
+              },
+              top_advertisements: CityWay::Api::V1::Entities::Advertisement.represent(city.active_advertisements(0)),
+              categories: CityWay::Api::V1::Entities::Category.represent(city.categories),
+              bottom_advertisements: CityWay::Api::V1::Entities::Advertisement.represent(city.active_advertisements(1))
+            }
           end
           expose :around do |city, options|
             if city.around
@@ -74,9 +81,6 @@ module CityWay
                 "photo": "http://res-4.cloudinary.com/hpjjdchal/image/upload/v1471332519/cool-iphone-wallpaper-1.jpg"
               }
             end
-          end
-          expose :advertisements do |city, options|
-            CityWay::Api::V1::Entities::Advertisement.represent city.advertisements
           end
         end
 
@@ -139,8 +143,9 @@ module CityWay
         end
 
         class Advertisement < Grape::Entity
-          expose :photo, documentation: {:type => "String", :desc => "Advertisement's photo"}
-          expose :position, documentation: {:type => "String", :desc => "Advertisement's position"}
+          expose :photo, documentation: {:type => "String", :desc => "Advertisement's photo"} do |advertisement, options|
+            advertisement.photo.url
+          end
         end
 
 

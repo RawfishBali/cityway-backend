@@ -7,12 +7,16 @@
 #  parent_id  :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  photo      :string
 #
 
 class Category < ActiveRecord::Base
   has_many :subcategories, :class_name => "Category", :foreign_key => "parent_id", :dependent => :destroy
   belongs_to :parent_category, :class_name => "Category", :foreign_key => "parent_id"
   has_many :merchants, dependent: :nullify
+
+  has_many :cities, through: :categories_cities
+  has_many :categories_cities
 
   validates :name, uniqueness: {scope: :parent_id, allow_blank: false}
 
