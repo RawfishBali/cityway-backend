@@ -34,21 +34,32 @@ module CityWay
           expose :longitude, documentation: {:type => "float", :desc => "City Longitude"}
           expose :distance, if: lambda { |object, options| object.respond_to?(:distance) }
           expose :home do |city, options|
-            {
-              photo: city.photo.url,
-              weather: {
-                temperature: 21,
-                weather_icon: 'cloudy',
-                weather_message: "It's time to eat brocolli!"
-              },
-              top_advertisements: CityWay::Api::V1::Entities::Advertisement.represent(city.active_advertisements(0)),
-              categories: CityWay::Api::V1::Entities::Category.represent(city.categories),
-              bottom_advertisements: CityWay::Api::V1::Entities::Advertisement.represent(city.active_advertisements(1))
-            }
+            if options[:simple]
+              {
+                photo: city.photo.url
+              }
+            else
+              {
+                photo: city.photo.url,
+                weather: {
+                  temperature: 21,
+                  weather_icon: 'cloudy',
+                  weather_message: "It's time to eat brocolli!"
+                },
+                top_advertisements: CityWay::Api::V1::Entities::Advertisement.represent(city.active_advertisements(0)),
+                categories: CityWay::Api::V1::Entities::Category.represent(city.categories),
+                bottom_advertisements: CityWay::Api::V1::Entities::Advertisement.represent(city.active_advertisements(1))
+              }
+            end
+
           end
           expose :around do |city, options|
             if city.around
-              CityWay::Api::V1::Entities::Around.represent city.around
+              if options[:simple]
+                CityWay::Api::V1::Entities::Around.represent city.around
+              else
+                CityWay::Api::V1::Entities::Around.represent city.around
+              end
             else
               {
                 "photo": "http://res-4.cloudinary.com/hpjjdchal/image/upload/v1471332519/cool-iphone-wallpaper-1.jpg"
@@ -57,7 +68,10 @@ module CityWay
           end
           expose :commonplace, as: 'city_hall' do |city, options|
             if city.commonplace
-              CityWay::Api::V1::Entities::Commonplace.represent city.commonplace
+              if options[:simple]
+                CityWay::Api::V1::Entities::Commonplace.represent city.commonplace
+              else
+              end
             else
               {
                 "photo": "http://res-4.cloudinary.com/hpjjdchal/image/upload/v1471332519/cool-iphone-wallpaper-1.jpg"
@@ -66,7 +80,10 @@ module CityWay
           end
           expose :discover do |city, options|
             if city.discover
-              CityWay::Api::V1::Entities::Discover.represent city.discover
+              if options[:simple]
+                CityWay::Api::V1::Entities::Discover.represent city.discover
+              else
+              end
             else
               {
                 "photo": "http://res-4.cloudinary.com/hpjjdchal/image/upload/v1471332519/cool-iphone-wallpaper-1.jpg"
@@ -75,7 +92,11 @@ module CityWay
           end
           expose :utility do |city, options|
             if city.utility
-              CityWay::Api::V1::Entities::Utility.represent city.utility
+              if options[:simple]
+                CityWay::Api::V1::Entities::Utility.represent city.utility
+              else
+              end
+
             else
               {
                 "photo": "http://res-4.cloudinary.com/hpjjdchal/image/upload/v1471332519/cool-iphone-wallpaper-1.jpg"
@@ -84,10 +105,10 @@ module CityWay
           end
         end
 
-        class CityWithMessages < Grape::Entity
+        class CityStructure < Grape::Entity
 
           expose :nearest_city do |city, options|
-            CityWay::Api::V1::Entities::City.represent city, message: options[:message]
+            CityWay::Api::V1::Entities::City.represent city, message: options[:message], simple: options[:simple]
           end
           expose :message do |city, options|
             options[:message]
@@ -96,7 +117,7 @@ module CityWay
             options[:actual_city]
           end
           expose :nearby_cities, if: lambda { |instance, options| options[:cities] && options[:list] } do |cities, options|
-            CityWay::Api::V1::Entities::City.represent options[:cities]
+            CityWay::Api::V1::Entities::City.represent options[:cities], simple: options[:simple]
           end
         end
 
