@@ -88,6 +88,9 @@ module CityWay
           expose :message do |city, options|
             options[:message]
           end
+          expose :actual_city , if: lambda { |instance, options| options[:actual_city] } do |cities, options|
+            options[:actual_city]
+          end
           expose :nearby_cities, if: lambda { |instance, options| options[:cities] && options[:list] } do |cities, options|
             CityWay::Api::V1::Entities::City.represent options[:cities]
           end

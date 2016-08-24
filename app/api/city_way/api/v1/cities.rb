@@ -23,20 +23,20 @@ module CityWay
           get do
             user_city = City.new(latitude: params[:latitude], longitude: params[:longitude])
             city_name = user_city.reverse_geocode
-            
+
             city = City.find_by(name: city_name)
 
             if city
               message = "Premi 'ACCEDI' per visualizzare #{city_name}, la città più vicina. Oppure scegli 'Cambia città' "
             else
               city = City.near([params[:latitude],params[:longitude]], 20000, units: :km).first
-              message = "Cityway sarà presto presente anche a #{city_name}"
+              message = "Cityway sarà presto presente anche a"
             end
 
             alpha_cities = City.where.not(name: city.name).near([params[:latitude],params[:longitude]], 20000, units: :km, order: 'name ASC').page params[:page]
 
             add_pagination_headers alpha_cities
-            present city, with: CityWay::Api::V1::Entities::CityWithMessages, cities: alpha_cities, message: message, list: params[:list]
+            present city, with: CityWay::Api::V1::Entities::CityWithMessages, cities: alpha_cities, message: message, list: params[:list], actual_city: city_name
           end
 
           desc "City Detail"
