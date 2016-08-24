@@ -2,14 +2,16 @@
 #
 # Table name: advertisements
 #
-#  id         :integer          not null, primary key
-#  photo      :string
-#  active     :boolean          default(FALSE)
-#  position   :integer
-#  start_date :datetime
-#  end_date   :datetime
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id                :integer          not null, primary key
+#  photo             :string
+#  active            :boolean          default(FALSE)
+#  position          :integer
+#  start_date        :datetime
+#  end_date          :datetime
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  second_start_date :datetime
+#  second_end_date   :datetime
 #
 
 require 'rails_helper'

@@ -33,8 +33,8 @@ module CityWay
           expose :latitude, documentation: {:type => "float", :desc => "City Latitude"}
           expose :longitude, documentation: {:type => "float", :desc => "City Longitude"}
           expose :distance, if: lambda { |object, options| object.respond_to?(:distance) }
-          expose :home do |city, options|
-            if options[:simple]
+          expose :home, if: lambda { |object, options| options[:sections].blank? || options[:sections] == 'home'  } do |city, options|
+            if options[:simple] == 'true'
               {
                 photo: city.photo.url
               }
@@ -53,60 +53,65 @@ module CityWay
             end
 
           end
-          expose :around do |city, options|
-            if city.around
-              if options[:simple]
-                CityWay::Api::V1::Entities::Around.represent city.around
-              else
-                CityWay::Api::V1::Entities::Around.represent city.around
-              end
+          expose :around, if: lambda { |object, options| options[:sections].blank? || options[:sections] == 'around' } do |city, options|
+            if options[:simple] == 'true'
+              {
+                photo: city.around.photo.url
+              }
             else
               {
-                "photo": "http://res-4.cloudinary.com/hpjjdchal/image/upload/v1471332519/cool-iphone-wallpaper-1.jpg"
+                photo: city.around.photo.url,
+                top_advertisements: CityWay::Api::V1::Entities::Advertisement.represent(city.active_advertisements(0)),
+                main_section: [],
+                bottom_advertisements: CityWay::Api::V1::Entities::Advertisement.represent(city.active_advertisements(1))
               }
             end
           end
-          expose :commonplace, as: 'city_hall' do |city, options|
-            if city.commonplace
-              if options[:simple]
-                CityWay::Api::V1::Entities::Commonplace.represent city.commonplace
-              else
-              end
+          expose :commonplace, if: lambda { |object, options| options[:sections].blank? || options[:sections] == 'city_hall' }, as: 'city_hall' do |city, options|
+            if options[:simple] == 'true'
+              {
+                photo: city.commonplace.photo.url
+              }
             else
               {
-                "photo": "http://res-4.cloudinary.com/hpjjdchal/image/upload/v1471332519/cool-iphone-wallpaper-1.jpg"
+                photo: city.commonplace.photo.url,
+                top_advertisements: CityWay::Api::V1::Entities::Advertisement.represent(city.active_advertisements(0)),
+                main_section: [],
+                bottom_advertisements: CityWay::Api::V1::Entities::Advertisement.represent(city.active_advertisements(1))
               }
             end
           end
-          expose :discover do |city, options|
-            if city.discover
-              if options[:simple]
-                CityWay::Api::V1::Entities::Discover.represent city.discover
-              else
-              end
+          expose :discover, if: lambda { |object, options| options[:sections].blank? || options[:sections] == 'discover' } do |city, options|
+            if options[:simple] == 'true'
+              {
+                photo: city.discover.photo.url
+              }
             else
               {
-                "photo": "http://res-4.cloudinary.com/hpjjdchal/image/upload/v1471332519/cool-iphone-wallpaper-1.jpg"
+                photo: city.discover.photo.url,
+                top_advertisements: CityWay::Api::V1::Entities::Advertisement.represent(city.active_advertisements(0)),
+                main_section: [],
+                bottom_advertisements: CityWay::Api::V1::Entities::Advertisement.represent(city.active_advertisements(1))
               }
             end
           end
-          expose :utility do |city, options|
-            if city.utility
-              if options[:simple]
-                CityWay::Api::V1::Entities::Utility.represent city.utility
-              else
-              end
-
+          expose :utility, if: lambda { |object, options| options[:sections].blank? || options[:sections] == 'utility' } do |city, options|
+            if options[:simple] == 'true'
+              {
+                photo: city.utility.photo.url
+              }
             else
               {
-                "photo": "http://res-4.cloudinary.com/hpjjdchal/image/upload/v1471332519/cool-iphone-wallpaper-1.jpg"
+                photo: city.utility.photo.url,
+                top_advertisements: CityWay::Api::V1::Entities::Advertisement.represent(city.active_advertisements(0)),
+                main_section: [],
+                bottom_advertisements: CityWay::Api::V1::Entities::Advertisement.represent(city.active_advertisements(1))
               }
             end
           end
         end
 
         class CityStructure < Grape::Entity
-
           expose :nearest_city do |city, options|
             CityWay::Api::V1::Entities::City.represent city, message: options[:message], simple: options[:simple]
           end
@@ -120,6 +125,7 @@ module CityWay
             CityWay::Api::V1::Entities::City.represent options[:cities], simple: options[:simple]
           end
         end
+
 
         class AccessToken < Grape::Entity
           expose :access_token, :documentation => {:type => "string", :desc => "Access Token"} do |access_token, options|
