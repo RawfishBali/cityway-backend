@@ -49,15 +49,7 @@ class Admin::AdvertisementsController < Admin::BaseController
         else
           @advertisement.advertisements_cities.where('city_id NOT IN (?)', params[:advertisement][:city_ids].reject { |c| c.empty? }).destroy_all
         end
-        # new_city_ids = params[:advertisement][:city_ids].reject { |c| c.empty? }.uniq.sort.to_a - @advertisement.advertisements_cities.pluck(:city_id).uniq.sort.to_a
-        #
-        # puts "--------------------"
-        # puts params[:advertisement][:city_ids].reject { |c| c.empty? }
-        # puts "--------------------"
-        # puts @advertisement.advertisements_cities.pluck(:city_id).uniq
-        # puts "--------------------"
-        # puts new_city_ids
-        # puts "--------------------"
+
         params[:advertisement][:city_ids].reject { |c| c.empty? }.each do |city_id|
           AdvertisementsCity.find_or_create_by(advertisement_id: @advertisement.id , city_id: city_id)
         end
@@ -90,6 +82,6 @@ class Admin::AdvertisementsController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_advertisement_params
-      params.require(:advertisement).permit(:photo, :start_date, :end_date, :position, :city_ids)
+      params.require(:advertisement).permit(:photo, :start_date, :end_date, :second_start_date, :second_end_date, :position, :city_ids)
     end
 end

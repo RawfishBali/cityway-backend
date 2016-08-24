@@ -8,6 +8,8 @@
             <th class="uk-width-1-10 uk-text-center">position</th>
             <th class="uk-width-1-10 uk-text-center">Start Date</th>
             <th class="uk-width-1-10 uk-text-center">End Date</th>
+            <th class="uk-width-1-10 uk-text-center">Second Start Date</th>
+            <th class="uk-width-1-10 uk-text-center">Second End Date</th>
             <th class="uk-width-1-10 uk-text-center">Cities</th>
             <th class="uk-width-1-10 ">Actions</th>
           </tr>
@@ -15,10 +17,12 @@
         <tbody>
           <% @advertisements.each do |ad| %>
           <tr>
-            <td class="uk-width-1-10"><%= image_tag ad.photo.url %></td>
+            <td class="uk-width-1-10"><%= image_tag ad.photo.thumb.url %></td>
             <td class="uk-width-1-10 uk-text-center"><%= ad.position %></td>
             <td class="uk-width-1-10 uk-text-center"><%= ad.start_date.strftime("%A %B %d %Y") %></td>
             <td class="uk-width-1-10 uk-text-center"><%= ad.end_date.strftime("%A %B %d %Y") %></td>
+            <td class="uk-width-1-10 uk-text-center"><%= ad.second_start_date.strftime("%A %B %d %Y") if ad.second_start_date %></td>
+            <td class="uk-width-1-10 uk-text-center"><%= ad.second_end_date.strftime("%A %B %d %Y") if ad.second_end_date %></td>
             <% unless ad.cities.count == 0 %>
             <td class="uk-width-1-10 uk-text-center"><%= link_to '<i class="md-icon material-icons"></i>'.html_safe, "#city_list_#{ad.id}", class: '', 'data-uk-modal':"{ center:true }" %></td>
             <% else %>
@@ -74,6 +78,17 @@
       <div class="uk-width-medium-1-1 uk-grid-margin">
         <div class="md-input-wrapper">
           <%= f.label :end_date, 'End Date *' %><%= f.text_field :end_date, class: 'md-input uk-form-width-large md-input-filled','data-uk-datepicker': "{format:'YYYY-MM-DD' }", required: true %>
+        </div>
+      </div>
+      <div class="uk-width-medium-1-1 uk-grid-margin">
+        <div class="md-input-wrapper">
+          <%= f.label :second_start_date, 'Second Start Date *' %>
+          <%= f.text_field :second_start_date, class: 'md-input uk-form-width-large ','data-uk-datepicker': "{format:'YYYY-MM-DD' }"  %>
+        </div>
+      </div>
+      <div class="uk-width-medium-1-1 uk-grid-margin">
+        <div class="md-input-wrapper">
+          <%= f.label :second_end_date, 'Second End Date *' %><%= f.text_field :second_end_date, class: 'md-input uk-form-width-large md-input-filled','data-uk-datepicker': "{format:'YYYY-MM-DD' }" %>
         </div>
       </div>
       <div class="uk-width-medium-1-1 uk-grid-margin">

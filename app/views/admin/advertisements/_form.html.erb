@@ -25,6 +25,17 @@
     </div>
   </div>
   <div class="uk-width-medium-1-1 uk-grid-margin">
+    <div class="md-input-wrapper md-input-filled">
+      <%= f.label :second_start_date, 'Second Start Date *' %>
+      <%= f.text_field :second_start_date, class: 'md-input uk-form-width-large ','data-uk-datepicker': "{format:'YYYY-MM-DD' }"  %>
+    </div>
+  </div>
+  <div class="uk-width-medium-1-1 uk-grid-margin">
+    <div class="md-input-wrapper md-input-filled">
+      <%= f.label :second_end_date, 'Second End Date *' %><%= f.text_field :second_end_date, class: 'md-input uk-form-width-large md-input-filled','data-uk-datepicker': "{format:'YYYY-MM-DD' }" %>
+    </div>
+  </div>
+  <div class="uk-width-medium-1-1 uk-grid-margin">
 
     <div class="md-input-wrapper <%= @advertisement.cities.blank? ? '' : 'md-input-filled'%>">
       <div class="parsley-row">
