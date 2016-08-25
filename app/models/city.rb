@@ -16,16 +16,16 @@ class City < ActiveRecord::Base
 
   has_many :merchants, dependent: :destroy
   has_and_belongs_to_many :advertisements, through: :advertisements_cities
-  has_many :advertisements_cities
+  has_many :advertisements_cities, dependent: :destroy
   has_many :categories, through: :categories_cities
-  has_many :categories_cities
-  has_one :around
-  has_one :commonplace
-  has_one :discover
-  has_one :utility
+  has_many :categories_cities, dependent: :destroy
+  has_one :around, dependent: :destroy
+  has_one :commonplace, dependent: :destroy
+  has_one :discover, dependent: :destroy
+  has_one :utility, dependent: :destroy
 
-  validates :name, presence: true
-  validates :description, presence: true
+  validates_presence_of :name
+  validates_presence_of :description
   validates_presence_of :around
   validates_presence_of :commonplace
   validates_presence_of :discover
@@ -51,6 +51,5 @@ class City < ActiveRecord::Base
   def parent_categories
     categories.where(parent_id: nil)
   end
-
 
 end

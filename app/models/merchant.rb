@@ -24,9 +24,17 @@
 
 class Merchant < ActiveRecord::Base
   has_and_belongs_to_many :subcategories, class_name: 'Category'
-  has_many :promos
+  has_many :promos, dependent: :destroy
   belongs_to :category
   belongs_to :city
 
+  validates_presence_of :name
+  validates_presence_of :address
+  validates_presence_of :photo
+  validates_presence_of :icon
+
   mount_uploader :photo, PhotoUploader
+
+  geocoded_by :address
+  after_validation :geocode
 end

@@ -185,12 +185,12 @@ module CityWay
         end
 
         class CategoryMerchants < Grape::Entity
-          expose :merchants do |city, options|
+          expose :merchants do |merchant, options|
             CityWay::Api::V1::Entities::Merchant.represent merchant
           end
 
-          expose :subcategories do |city, options|
-            CityWay::Api::V1::Entities::Category.represent subcategories
+          expose :subcategories do |merchant, options|
+            CityWay::Api::V1::Entities::Category.represent options[:subcategories]
           end
         end
       end

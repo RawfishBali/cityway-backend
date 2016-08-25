@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Admin Merchants</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @admin_merchants.each do |admin_merchant| %>
+      <tr>
+        <td><%= link_to 'Show', admin_merchant_path(admin_merchant) %></td>
+        <td><%= link_to 'Edit', edit_admin_merchant_path(admin_merchant) %></td>
+        <td><%= link_to 'Destroy', admin_merchant_path(admin_merchant), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Merchant', new_admin_merchant_path %>
