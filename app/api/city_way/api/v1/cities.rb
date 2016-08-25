@@ -27,7 +27,7 @@ module CityWay
             city = City.find_by(name: city_name)
 
             if city
-              message = "Ti trovi a "
+              message = "Ti trovi a"
             else
               city = City.near([params[:latitude],params[:longitude]], 20000, units: :km).first
               message = "Cityway sarà presto presente anche a"
