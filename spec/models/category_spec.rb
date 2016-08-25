@@ -8,6 +8,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  photo      :string
+#  icon       :string
 #
 
 require 'rails_helper'

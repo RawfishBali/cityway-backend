@@ -134,20 +134,26 @@ module CityWay
         end
 
         class Category < Grape::Entity
-          expose :id, documentation: {:type => "integer", :desc => "Category ID"}
-          expose :name, documentation: {:type => "string", :desc => "City Name"}
-          expose :is_parent_category, documentation: {:type => "boolean", :desc => ""} do |category, options|
-            category.parent_id.blank?
+          expose :id, documentation: {:type => "Integer", :desc => "Category ID"}
+          expose :name, documentation: {:type => "String", :desc => "Category Name"}
+          expose :photo, documentation: {:type => "String", :desc => "Category Photo"} do |category, options|
+            category.photo.url
           end
-          expose :subcategories, if: lambda { |object, options| !object.subcategories.blank? } do |category, options|
-            category.subcategories.map { |subcategory|
-                {
-                  id: subcategory.id,
-                  name: subcategory.name
-                }
-              }
-
+          expose :icon, documentation: {:type => "String", :desc => "Category Icon"} do |category, options|
+            category.icon.url
           end
+          # expose :is_parent_category, documentation: {:type => "boolean", :desc => ""} do |category, options|
+          #   category.parent_id.blank?
+          # end
+          # expose :subcategories, if: lambda { |object, options| !object.subcategories.blank? } do |category, options|
+          #   category.subcategories.map { |subcategory|
+          #       {
+          #         id: subcategory.id,
+          #         name: subcategory.name
+          #       }
+          #     }
+          #
+          # end
         end
 
         class Merchant < Grape::Entity

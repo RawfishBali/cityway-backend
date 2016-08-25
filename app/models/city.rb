@@ -48,5 +48,9 @@ class City < ActiveRecord::Base
     advertisements.where('position = ? and ( (start_date <= ? and end_date >= ?) or (second_start_date <= ? and second_end_date >= ?) )', position, Time.now, Time.now, Time.now, Time.now)
   end
 
+  def parent_categories
+    categories.where(parent_id: nil)
+  end
+
 
 end

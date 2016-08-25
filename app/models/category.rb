@@ -8,6 +8,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  photo      :string
+#  icon       :string
 #
 
 class Category < ActiveRecord::Base
@@ -19,7 +20,12 @@ class Category < ActiveRecord::Base
   has_many :categories_cities
 
   validates :name, uniqueness: {scope: :parent_id, allow_blank: false}
+  validates :photo, presence: true
+  validates :icon, presence: true
 
   scope :subcategories, -> { where("parent_id IS NOT NULL") }
   scope :parent_categories, -> { where("parent_id IS NULL") }
+
+  mount_uploader :photo, PhotoUploader
+  mount_uploader :icon, PhotoUploader
 end
