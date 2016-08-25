@@ -47,6 +47,17 @@ module CityWay
             city = City.find(params[:id])
             present city, with: CityWay::Api::V1::Entities::City, sections: params[:sections], simple: params[:simple]
           end
+
+          desc "City's Merchant Per Category"
+          params do
+            requires :id , type: Integer, values: -> { City.ids }
+            requires :category_id , type: Integer, values: -> { Category.ids }
+          end
+          get '/:id/category/:category_id' do
+            merchants = Merchant.where(city_id: params[:id] , category_id: params[:category_id])
+            subcategories = Category.find(params[:category_id]).subcategories
+            present merchants, with: CityWay::Api::V1::Entities::CategoryMerchants, subcategories: subcategories
+          end
         end
 
       end

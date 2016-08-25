@@ -18,12 +18,15 @@
 #  updated_at           :datetime         not null
 #  city_id              :integer
 #  category_id          :integer
+#  photo                :string
+#  icon                 :string
 #
 
 class Merchant < ActiveRecord::Base
   has_and_belongs_to_many :subcategories, class_name: 'Category'
+  has_many :promos
   belongs_to :category
   belongs_to :city
 
-  
+  mount_uploader :photo, PhotoUploader
 end

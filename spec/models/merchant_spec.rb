@@ -18,6 +18,8 @@
 #  updated_at           :datetime         not null
 #  city_id              :integer
 #  category_id          :integer
+#  photo                :string
+#  icon                 :string
 #
 
 require 'rails_helper'

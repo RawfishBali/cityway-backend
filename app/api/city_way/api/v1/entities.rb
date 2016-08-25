@@ -126,7 +126,6 @@ module CityWay
           end
         end
 
-
         class AccessToken < Grape::Entity
           expose :access_token, :documentation => {:type => "string", :desc => "Access Token"} do |access_token, options|
             access_token.token
@@ -181,7 +180,19 @@ module CityWay
           end
         end
 
+        class Category < Grape::Entity
 
+        end
+
+        class CategoryMerchants < Grape::Entity
+          expose :merchants do |city, options|
+            CityWay::Api::V1::Entities::Merchant.represent merchant
+          end
+
+          expose :subcategories do |city, options|
+            CityWay::Api::V1::Entities::Category.represent subcategories
+          end
+        end
       end
     end
   end
