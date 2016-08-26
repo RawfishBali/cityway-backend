@@ -55,8 +55,7 @@ module CityWay
           end
           get '/:id/category/:category_id' do
             merchants = Merchant.where(city_id: params[:id] , category_id: params[:category_id])
-            subcategories = Category.find(params[:category_id]).subcategories
-            present merchants, with: CityWay::Api::V1::Entities::CategoryMerchants, subcategories: subcategories
+            present merchants, with: CityWay::Api::V1::Entities::Merchant
           end
         end
 

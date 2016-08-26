@@ -20,8 +20,8 @@ class Category < ActiveRecord::Base
   has_many :categories_cities, dependent: :destroy
 
   validates :name, uniqueness: {scope: :parent_id, allow_blank: false}
-  validates :photo, presence: true
-  validates :icon, presence: true
+  # validates :photo, presence: true, if: :parent_id?
+  # validates :icon, presence: true, if: :parent_id?
 
   scope :subcategories, -> { where("parent_id IS NOT NULL") }
   scope :parent_categories, -> { where("parent_id IS NULL") }

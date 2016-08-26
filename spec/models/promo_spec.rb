@@ -13,6 +13,8 @@
 #  merchant_id          :integer
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
+#  city_id              :integer
+#  approval             :boolean          default(FALSE)
 #
 
 require 'rails_helper'
