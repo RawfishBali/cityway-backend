@@ -173,6 +173,9 @@ module CityWay
           expose :instagram, documentation: {:type => "string", :desc => "Merchant instagram"}
           expose :support_disabilities, documentation: {:type => "boolean", :desc => "Merchant support_disabilities"}
           expose :distance, if: lambda { |object, options| object.respond_to?(:distance) }
+          expose :has_promos, documentation: {:type => "Boolean", :desc => "Merchant Has Promos Or Not"} do |merchant , options|
+            merchant.promos.any? 
+          end
         end
 
         class User < Grape::Entity
