@@ -141,18 +141,24 @@ module CityWay
           expose :icon, documentation: {:type => "String", :desc => "Category Icon"} do |category, options|
             category.icon.url
           end
-          # expose :is_parent_category, documentation: {:type => "boolean", :desc => ""} do |category, options|
-          #   category.parent_id.blank?
-          # end
-          # expose :subcategories, if: lambda { |object, options| !object.subcategories.blank? } do |category, options|
-          #   category.subcategories.map { |subcategory|
-          #       {
-          #         id: subcategory.id,
-          #         name: subcategory.name
-          #       }
-          #     }
-          #
-          # end
+        end
+
+        class CategoryWithMerchants < Grape::Entity
+          expose :merchants do |category , options|
+            CityWay::Api::V1::Entities::Merchant.represent(options[:merchants])
+          end
+          expose :subcategories, if: lambda { |object, options| !options[:subcategories].blank? } do |category , options|
+            CityWay::Api::V1::Entities::Category.represent(options[:subcategories])
+          end
+        end
+
+        class CategoryWithPromos < Grape::Entity
+          expose :promos do |category , options|
+            CityWay::Api::V1::Entities::Promo.represent(options[:promos])
+          end
+          expose :subcategories do |category , options|
+            CityWay::Api::V1::Entities::Category.represent(options[:subcategories])
+          end
         end
 
         class Merchant < Grape::Entity
@@ -180,8 +186,15 @@ module CityWay
           end
         end
 
-        class Category < Grape::Entity
 
+        class Promo < Grape::Entity
+          expose :id, documentation: {:type => "String", :desc => "Promo's photo"}
+          expose :photo, documentation: {:type => "String", :desc => "Promo's photo"}
+          expose :description, documentation: {:type => "Text", :desc => "Promo's description"}
+          expose :terms_and_conditions, documentation: {:type => "Text", :desc => "Promo's terms_and_conditions"}
+          expose :discount, documentation: {:type => "Float", :desc => "Promo's discount"}
+          expose :original_price, documentation: {:type => "Float", :desc => "Promo's original_price"}
+          expose :discount_price, documentation: {:type => "Float", :desc => "Promo's discount_price"}
         end
       end
     end

@@ -1,0 +1,1 @@
+json.partial! "admin_promos/admin_promo", admin_promo: @admin_promo
