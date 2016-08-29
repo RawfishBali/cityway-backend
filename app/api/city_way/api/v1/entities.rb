@@ -166,6 +166,9 @@ module CityWay
           expose :name, documentation: {:type => "string", :desc => "Merchant Name"}
           expose :description, documentation: {:type => "string", :desc => "Merchant description"}
           expose :address, documentation: {:type => "string", :desc => "Merchant address"}
+          expose :photo, documentation: {:type => "string", :desc => "Merchant photo"} do |merchant , options|
+            merchant.photo.url
+          end
           expose :phone, documentation: {:type => "string", :desc => "Merchant phone"}
           expose :email, documentation: {:type => "string", :desc => "Merchant email"}
           expose :website, documentation: {:type => "string", :desc => "Merchant website"}
@@ -174,7 +177,7 @@ module CityWay
           expose :support_disabilities, documentation: {:type => "boolean", :desc => "Merchant support_disabilities"}
           expose :distance, if: lambda { |object, options| object.respond_to?(:distance) }
           expose :has_promos, documentation: {:type => "Boolean", :desc => "Merchant Has Promos Or Not"} do |merchant , options|
-            merchant.promos.any? 
+            merchant.promos.any?
           end
         end
 
