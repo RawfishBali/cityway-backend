@@ -54,11 +54,13 @@ module CityWay
             present city, with: CityWay::Api::V1::Entities::City, sections: params[:sections], simple: params[:simple]
           end
 
-          desc "City's Merchant Per Category V2"
+          desc "City's Merchant Per Category Or Per Subcategory"
           params do
             requires :id , type: Integer, values: -> { City.ids }
             requires :category_id , type: Integer, values: -> { Category.ids }
             optional :subcategory_id , type: Integer, values: -> { Category.subcategories.ids }
+            optional :latitude, type: Float
+            optional :longitude, type: Float
           end
 
           get '/:id/merchants' do
@@ -69,13 +71,11 @@ module CityWay
             else
               merchants = Merchant.joins(:subcategories).where('merchants.city_id = ? AND categories_merchants.category_id = ?' ,params[:id], params[:subcategory_id]).page params[:page]
             end
-
+            merchants = merchants.near([params[:latitude],params[:longitude]], 100, units: :km) if params[:latitude] && params[:longitude]
             add_pagination_headers merchants
 
             present category, with: CityWay::Api::V1::Entities::CategoryWithMerchants, merchants: merchants, subcategories: subcategories
           end
-
-
 
 
           desc "City's Promos"
