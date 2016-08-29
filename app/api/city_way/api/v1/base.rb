@@ -90,7 +90,7 @@ module CityWay
         mount CityWay::Api::V1::Attivitas
         mount CityWay::Api::V1::Categories
         mount CityWay::Api::V1::Arounds
-
+        mount CityWay::Api::V1::Merchants
       end
     end
   end
