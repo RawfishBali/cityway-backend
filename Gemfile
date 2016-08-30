@@ -67,6 +67,8 @@ gem 'rubocop', require: false
 gem 'puma'
 gem 'newrelic_rpm'
 
+gem 'working_hours'
+
 group :production do
   gem 'rails_12factor'
 end

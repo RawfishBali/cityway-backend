@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160826042846) do
+ActiveRecord::Schema.define(version: 20160829085637) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,6 +82,21 @@ ActiveRecord::Schema.define(version: 20160826042846) do
   end
 
   add_index "arounds", ["city_id"], name: "index_arounds_on_city_id", using: :btree
+
+  create_table "business_hours", force: :cascade do |t|
+    t.integer  "day",                                null: false
+    t.time     "morning_open_time",                  null: false
+    t.time     "morning_close_time",                 null: false
+    t.time     "evening_open_time"
+    t.time     "evening_close_time"
+    t.boolean  "open_all_day",       default: false
+    t.integer  "marketable_id"
+    t.string   "marketable_type"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
+
+  add_index "business_hours", ["marketable_type", "marketable_id"], name: "index_business_hours_on_marketable_type_and_marketable_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       null: false
