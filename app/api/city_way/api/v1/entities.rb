@@ -182,13 +182,24 @@ module CityWay
           end
         end
 
+        class Photo < Grape::Entity
+          expose :picture do |photo, options|
+            photo.picture.url
+          end
+          expose :is_primary
+        end
+
         class Merchant < Grape::Entity
           expose :id, documentation: {:type => "integer", :desc => "Merchant ID"}
           expose :name, documentation: {:type => "string", :desc => "Merchant Name"}
           expose :description,if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "string", :desc => "Merchant description"}
           expose :address, documentation: {:type => "string", :desc => "Merchant address"}
-          expose :photo, documentation: {:type => "string", :desc => "Merchant photo"} do |merchant , options|
-            merchant.photo.url
+          expose :photos, documentation: {:type => "string", :desc => "Merchant photo"} do |merchant , options|
+            if options[:simple] == 'false'
+              CityWay::Api::V1::Entities::Photo.represent(merchant.photos) if merchant.photos.length > 0
+            else
+              merchant.photos.first.picture.url if merchant.photos.length > 0
+            end
           end
           expose :icon, documentation: {:type => "string", :desc => "Merchant icon"} do |merchant , options|
             merchant.icon.url

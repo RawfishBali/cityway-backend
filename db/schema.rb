@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160829085637) do
+ActiveRecord::Schema.define(version: 20160830091403) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -198,6 +198,17 @@ ActiveRecord::Schema.define(version: 20160829085637) do
 
   add_index "merchants", ["category_id"], name: "index_merchants_on_category_id", using: :btree
   add_index "merchants", ["city_id"], name: "index_merchants_on_city_id", using: :btree
+
+  create_table "photos", force: :cascade do |t|
+    t.string   "picture"
+    t.integer  "imageable_id"
+    t.string   "imageable_type"
+    t.boolean  "is_primary",     default: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "photos", ["imageable_type", "imageable_id"], name: "index_photos_on_imageable_type_and_imageable_id", using: :btree
 
   create_table "promos", force: :cascade do |t|
     t.text     "title"
