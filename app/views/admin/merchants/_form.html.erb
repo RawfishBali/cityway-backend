@@ -58,13 +58,13 @@
     <div class="uk-width-medium-1-5 uk-grid-margin">
       <div class="md-input-wrapper">
         <h3 class="heading_a uk-margin-small-bottom">Merchant's Photo</h3>
-        <%= f.file_field :photo, class: 'dropify ', 'data-default-file' => @admin_merchant.photo, 'data-allowed-formats':"portrait square" , 'data-errors-position': "outside" , 'data-height':"150", required: true %>
+        <%= f.file_field :photo, class: 'dropify ', 'data-default-file' => @admin_merchant.photo, 'data-allowed-formats':"portrait square" , 'data-errors-position': "outside" , 'data-height':"150"%>
       </div>
     </div>
     <div class="uk-width-medium-1-5 uk-grid-margin">
       <div class="md-input-wrapper">
         <h3 class="heading_a uk-margin-small-bottom">Merchant's Icon</h3>
-        <%= f.file_field :icon, class: 'dropify ', 'data-default-file' => @admin_merchant.icon, 'data-allowed-formats':"portrait square" , 'data-errors-position': "outside" , 'data-height':"150", required: true %>
+        <%= f.file_field :icon, class: 'dropify ', 'data-default-file' => @admin_merchant.icon, 'data-allowed-formats':"portrait square" , 'data-errors-position': "outside" , 'data-height':"150"%>
       </div>
     </div>
     <%= f.submit %>
