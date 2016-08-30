@@ -41,8 +41,8 @@ class Merchant < ActiveRecord::Base
   after_create :create_default_business_hours
 
   def create_default_business_hours
-    6.times do |i|
-      self.business_hours << BusinessHour.create(day: i, open_time: '00:00', close_time: '00:00')
+    7.times do |i|
+      self.business_hours << BusinessHour.create(day: i,morning_open_time: '00:00', morning_close_time: '00:00', evening_open_time: '00:00', evening_close_time: '00:00')
     end
   end
 end

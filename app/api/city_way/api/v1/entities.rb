@@ -163,13 +163,19 @@ module CityWay
 
         class BusinessHours < Grape::Entity
           expose :day do |business_hour , options|
-            Date::DAYNAMES[business_hour.day]
+            Date::ABBR_DAYNAMES[business_hour.day]
           end
-          expose :open_time do |business_hour , options|
-            business_hour.open_time.strftime("%H:%M")
+          expose :morning_open_time do |business_hour , options|
+            business_hour.morning_open_time.strftime("%H:%M")
           end
-          expose :close_time do |business_hour , options|
-            business_hour.close_time.strftime("%H:%M")
+          expose :morning_close_time do |business_hour , options|
+            business_hour.morning_close_time.strftime("%H:%M")
+          end
+          expose :evening_open_time do |business_hour , options|
+            business_hour.evening_open_time.strftime("%H:%M")
+          end
+          expose :evening_close_time do |business_hour , options|
+            business_hour.evening_close_time.strftime("%H:%M")
           end
           expose :is_open do |business_hour , options|
             business_hour.is_open? Time.now
@@ -195,7 +201,7 @@ module CityWay
             merchant.promos.any?
           end
           expose :business_hours do |merchant , options|
-            CityWay::Api::V1::Entities::BusinessHours.represent(merchant.business_hours)
+            CityWay::Api::V1::Entities::BusinessHours.represent(merchant.business_hours.order('day ASC'))
           end
         end
 

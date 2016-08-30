@@ -82,6 +82,8 @@ group :development, :test do
   gem 'simplecov'
   gem 'rails_best_practices'
   gem 'lol_dba'
+  gem 'hirb'
+  gem 'pry-rails'
 end
 
 group :development do
