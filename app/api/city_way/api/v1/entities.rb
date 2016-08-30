@@ -185,7 +185,7 @@ module CityWay
         class Merchant < Grape::Entity
           expose :id, documentation: {:type => "integer", :desc => "Merchant ID"}
           expose :name, documentation: {:type => "string", :desc => "Merchant Name"}
-          expose :description, documentation: {:type => "string", :desc => "Merchant description"}
+          expose :description,if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "string", :desc => "Merchant description"}
           expose :address, documentation: {:type => "string", :desc => "Merchant address"}
           expose :photo, documentation: {:type => "string", :desc => "Merchant photo"} do |merchant , options|
             merchant.photo.url
