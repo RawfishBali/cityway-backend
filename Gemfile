@@ -67,6 +67,8 @@ gem 'rubocop', require: false
 gem 'puma'
 gem 'newrelic_rpm'
 
+gem 'working_hours'
+
 group :production do
   gem 'rails_12factor'
 end
@@ -80,6 +82,8 @@ group :development, :test do
   gem 'simplecov'
   gem 'rails_best_practices'
   gem 'lol_dba'
+  gem 'hirb'
+  gem 'pry-rails'
 end
 
 group :development do

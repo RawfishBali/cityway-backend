@@ -63,6 +63,7 @@ GEM
       rest-client
     code_analyzer (0.4.6)
       sexp_processor
+    coderay (1.1.1)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
     coffee-rails (4.1.1)
@@ -117,6 +118,7 @@ GEM
     hashie (3.4.4)
     hashie-forbidden_attributes (0.1.1)
       hashie (>= 3.0)
+    hirb (0.7.3)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
     i18n (0.7.0)
@@ -141,6 +143,7 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.4)
       mime-types (>= 1.16, < 4)
+    method_source (0.8.2)
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
@@ -180,6 +183,12 @@ GEM
     pg (0.18.4)
     pkg-config (1.1.7)
     powerpack (0.1.1)
+    pry (0.10.4)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
+    pry-rails (0.3.4)
+      pry (>= 0.9.10)
     puma (3.4.0)
     rack (1.6.4)
     rack-accept (0.4.5)
@@ -280,6 +289,7 @@ GEM
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.0)
+    slop (3.6.0)
     spring (1.7.2)
     sprockets (3.7.0)
       concurrent-ruby (~> 1.0)
@@ -316,6 +326,9 @@ GEM
       binding_of_caller (>= 0.7.2)
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
+    working_hours (1.1.2)
+      activesupport (>= 3.2)
+      tzinfo
 
 PLATFORMS
   ruby
@@ -334,6 +347,7 @@ DEPENDENCIES
   grape-entity
   grape_on_rails_routes
   hashie-forbidden_attributes
+  hirb
   jbuilder (~> 2.0)
   jquery-rails
   kaminari
@@ -344,6 +358,7 @@ DEPENDENCIES
   omniauth-facebook
   open-weather
   pg
+  pry-rails
   puma
   rails (= 4.2.7.1)
   rails_12factor
@@ -362,6 +377,7 @@ DEPENDENCIES
   warden (= 1.2.3)
   warden-oauth2
   web-console (~> 2.0)
+  working_hours
 
 RUBY VERSION
    ruby 2.2.5p319

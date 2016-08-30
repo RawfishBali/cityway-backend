@@ -25,6 +25,7 @@
 class Merchant < ActiveRecord::Base
   has_and_belongs_to_many :subcategories, class_name: 'Category'
   has_many :promos, dependent: :destroy
+  has_many :business_hours, as: :marketable, dependent: :destroy
   belongs_to :category
   belongs_to :city
 
@@ -38,4 +39,11 @@ class Merchant < ActiveRecord::Base
 
   geocoded_by :address
   after_validation :geocode
+  after_create :create_default_business_hours
+
+  def create_default_business_hours
+    7.times do |i|
+      self.business_hours << BusinessHour.create(day: i,morning_open_time: '00:00', morning_close_time: '00:00', evening_open_time: '00:00', evening_close_time: '00:00')
+    end
+  end
 end

@@ -161,6 +161,27 @@ module CityWay
           end
         end
 
+        class BusinessHours < Grape::Entity
+          expose :day do |business_hour , options|
+            Date::ABBR_DAYNAMES[business_hour.day]
+          end
+          expose :morning_open_time do |business_hour , options|
+            business_hour.morning_open_time.strftime("%H:%M")
+          end
+          expose :morning_close_time do |business_hour , options|
+            business_hour.morning_close_time.strftime("%H:%M")
+          end
+          expose :evening_open_time do |business_hour , options|
+            business_hour.evening_open_time.strftime("%H:%M")
+          end
+          expose :evening_close_time do |business_hour , options|
+            business_hour.evening_close_time.strftime("%H:%M")
+          end
+          expose :is_open do |business_hour , options|
+            business_hour.is_open? Time.now
+          end
+        end
+
         class Merchant < Grape::Entity
           expose :id, documentation: {:type => "integer", :desc => "Merchant ID"}
           expose :name, documentation: {:type => "string", :desc => "Merchant Name"}
@@ -182,6 +203,9 @@ module CityWay
           expose :has_promos, documentation: {:type => "Boolean", :desc => "Merchant Has Promos Or Not"} do |merchant , options|
             merchant.promos.any?
           end
+          expose :business_hours do |merchant , options|
+            CityWay::Api::V1::Entities::BusinessHours.represent(merchant.business_hours.order('day ASC'))
+          end
         end
 
         class User < Grape::Entity
@@ -195,7 +219,6 @@ module CityWay
             advertisement.photo.url
           end
         end
-
 
         class Promo < Grape::Entity
           expose :id, documentation: {:type => "String", :desc => "Promo's photo"}
