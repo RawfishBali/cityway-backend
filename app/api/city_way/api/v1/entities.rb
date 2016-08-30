@@ -193,6 +193,8 @@ module CityWay
           expose :icon, documentation: {:type => "string", :desc => "Merchant icon"} do |merchant , options|
             merchant.icon.url
           end
+          expose :latitude, documentation: {:type => "float", :desc => "Merchant Latitude"}
+          expose :longitude, documentation: {:type => "float", :desc => "Merchant Longitude"}
           expose :phone, documentation: {:type => "string", :desc => "Merchant phone"}
           expose :email, documentation: {:type => "string", :desc => "Merchant email"}
           expose :website, documentation: {:type => "string", :desc => "Merchant website"}
