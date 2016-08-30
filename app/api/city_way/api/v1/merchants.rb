@@ -16,7 +16,7 @@ module CityWay
           end
           get '/:id' do
             merchant = Merchant.find(params[:id])
-            present merchant, with: CityWay::Api::V1::Entities::Merchant
+            present merchant, with: CityWay::Api::V1::Entities::Merchant, simple: 'false'
           end
         end
 

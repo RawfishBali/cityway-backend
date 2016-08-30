@@ -195,17 +195,17 @@ module CityWay
           end
           expose :latitude, documentation: {:type => "float", :desc => "Merchant Latitude"}
           expose :longitude, documentation: {:type => "float", :desc => "Merchant Longitude"}
-          expose :phone, documentation: {:type => "string", :desc => "Merchant phone"}
-          expose :email, documentation: {:type => "string", :desc => "Merchant email"}
-          expose :website, documentation: {:type => "string", :desc => "Merchant website"}
-          expose :facebook, documentation: {:type => "string", :desc => "Merchant facebook"}
-          expose :instagram, documentation: {:type => "string", :desc => "Merchant instagram"}
+          expose :phone,if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "string", :desc => "Merchant phone"}
+          expose :email,if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "string", :desc => "Merchant email"}
+          expose :website, if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "string", :desc => "Merchant website"}
+          expose :facebook, if: lambda { |object, options| options[:simple] == 'false' },documentation: {:type => "string", :desc => "Merchant facebook"}
+          expose :instagram, if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "string", :desc => "Merchant instagram"}
           expose :support_disabilities, documentation: {:type => "boolean", :desc => "Merchant support_disabilities"}
           expose :distance, if: lambda { |object, options| object.respond_to?(:distance) }
           expose :has_promos, documentation: {:type => "Boolean", :desc => "Merchant Has Promos Or Not"} do |merchant , options|
             merchant.promos.any?
           end
-          expose :business_hours do |merchant , options|
+          expose :business_hours,if: lambda { |object, options| options[:simple] == 'false' } do |merchant , options|
             CityWay::Api::V1::Entities::BusinessHours.represent(merchant.business_hours.order('day ASC'))
           end
         end
