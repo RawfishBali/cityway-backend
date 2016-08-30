@@ -34,6 +34,7 @@ class Merchant < ActiveRecord::Base
   validates_presence_of :icon
 
   mount_uploader :photo, PhotoUploader
+  mount_uploader :icon, PhotoUploader
 
   geocoded_by :address
   after_validation :geocode

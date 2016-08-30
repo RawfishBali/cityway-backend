@@ -169,6 +169,9 @@ module CityWay
           expose :photo, documentation: {:type => "string", :desc => "Merchant photo"} do |merchant , options|
             merchant.photo.url
           end
+          expose :icon, documentation: {:type => "string", :desc => "Merchant icon"} do |merchant , options|
+            merchant.icon.url
+          end
           expose :phone, documentation: {:type => "string", :desc => "Merchant phone"}
           expose :email, documentation: {:type => "string", :desc => "Merchant email"}
           expose :website, documentation: {:type => "string", :desc => "Merchant website"}
