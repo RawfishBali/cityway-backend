@@ -224,6 +224,9 @@ module CityWay
           expose :business_hours,if: lambda { |object, options| options[:simple] == 'false' } do |merchant , options|
             CityWay::Api::V1::Entities::BusinessHours.represent(merchant.business_hours.order('day ASC'))
           end
+          expose :is_open do |merchant , options|
+            merchant.is_open_now?
+          end
         end
 
         class User < Grape::Entity

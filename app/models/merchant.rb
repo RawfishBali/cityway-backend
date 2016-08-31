@@ -49,4 +49,11 @@ class Merchant < ActiveRecord::Base
   def primary_photo
     photos.where(is_primary: true) || [photos.first]
   end
+
+  def is_open_now?
+    business_hours.each do |business_hour|
+      return true if business_hour.is_open? Time.now
+    end
+    return false
+  end
 end
