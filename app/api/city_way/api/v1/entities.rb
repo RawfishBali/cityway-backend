@@ -211,7 +211,13 @@ module CityWay
           expose :facebook, if: lambda { |object, options| options[:simple] == 'false' },documentation: {:type => "string", :desc => "Merchant facebook"}
           expose :instagram, if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "string", :desc => "Merchant instagram"}
           expose :support_disabilities, documentation: {:type => "boolean", :desc => "Merchant support_disabilities"}
-          expose :distance, if: lambda { |object, options| object.respond_to?(:distance) }
+          expose :distance, if: lambda { |object, options| object.respond_to?(:distance) || options[:latitude] && options[:longitude] } do |merchant , options|
+            if merchant.respond_to?(:distance)
+              merchant.distance
+            elsif options[:latitude] && options[:longitude]
+              merchant.distance_from([options[:latitude], options[:longitude]])
+            end
+          end
           expose :has_promos, documentation: {:type => "Boolean", :desc => "Merchant Has Promos Or Not"} do |merchant , options|
             merchant.promos.any?
           end

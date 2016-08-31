@@ -13,10 +13,12 @@ module CityWay
           desc "Merchant Detail"
           params do
             requires :id , type: Integer, values: -> { Merchant.ids }
+            optional :latitude, type: Float
+            optional :longitude, type: Float
           end
           get '/:id' do
             merchant = Merchant.find(params[:id])
-            present merchant, with: CityWay::Api::V1::Entities::Merchant, simple: 'false'
+            present merchant, with: CityWay::Api::V1::Entities::Merchant, simple: 'false', latitude: params[:latitude], longitude: params[:longitude]
           end
         end
 
