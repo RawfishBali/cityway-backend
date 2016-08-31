@@ -183,10 +183,9 @@ module CityWay
         end
 
         class Photo < Grape::Entity
-          expose :picture do |photo, options|
+          expose :picture, as: 'photo' do |photo, options|
             photo.picture.url
           end
-          expose :is_primary
         end
 
         class Merchant < Grape::Entity
@@ -198,7 +197,7 @@ module CityWay
             if options[:simple] == 'false'
               CityWay::Api::V1::Entities::Photo.represent(merchant.photos) if merchant.photos.length > 0
             else
-              merchant.primary_photo.picture.url if merchant.photos.length > 0
+              CityWay::Api::V1::Entities::Photo.represent(merchant.primary_photo) if merchant.photos.length > 0
             end
           end
           expose :icon, documentation: {:type => "string", :desc => "Merchant icon"} do |merchant , options|

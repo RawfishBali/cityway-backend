@@ -47,6 +47,6 @@ class Merchant < ActiveRecord::Base
   end
 
   def primary_photo
-    photos.find_by(is_primary: true) || photos.first
+    photos.where(is_primary: true) || [photos.first]
   end
 end
