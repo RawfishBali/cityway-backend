@@ -91,6 +91,7 @@ module CityWay
         mount CityWay::Api::V1::Categories
         mount CityWay::Api::V1::Arounds
         mount CityWay::Api::V1::Merchants
+        mount CityWay::Api::V1::Promos
       end
     end
   end
