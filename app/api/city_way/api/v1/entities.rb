@@ -236,11 +236,17 @@ module CityWay
         class Promo < Grape::Entity
           expose :id, documentation: {:type => "String", :desc => "Promo's photo"}
           expose :photo, documentation: {:type => "String", :desc => "Promo's photo"}
-          expose :description, documentation: {:type => "Text", :desc => "Promo's description"}
-          expose :terms_and_conditions, documentation: {:type => "Text", :desc => "Promo's terms_and_conditions"}
+          expose :description,if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "Text", :desc => "Promo's description"}
+          expose :terms_and_conditions,if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "Text", :desc => "Promo's terms_and_conditions"}
           expose :discount, documentation: {:type => "Float", :desc => "Promo's discount"}
           expose :original_price, documentation: {:type => "Float", :desc => "Promo's original_price"}
           expose :discount_price, documentation: {:type => "Float", :desc => "Promo's discount_price"}
+          # expose :merchant do |promo, options|
+          #   promo.merchant.name
+          # end
+          # expose :distance, if: lambda { |object, options| options[:latitude] && options[:longitude] } do |promo, options|
+          #   promo.merchant.distance_from([options[:latitude], options[:longitude]])
+          # end
         end
       end
     end

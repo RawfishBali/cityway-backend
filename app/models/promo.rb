@@ -20,13 +20,15 @@
 class Promo < ActiveRecord::Base
   belongs_to :merchant
   belongs_to :city
-  
+
   validates_presence_of :title
   validates_presence_of :photo
   validates_presence_of :description
   validates_presence_of :terms_and_conditions
   validates_presence_of :discount
   validates_presence_of :original_price
+  validates_presence_of :merchant
+  validates_presence_of :city
 
   def category
     merchant.category
