@@ -198,7 +198,7 @@ module CityWay
             if options[:simple] == 'false'
               CityWay::Api::V1::Entities::Photo.represent(merchant.photos) if merchant.photos.length > 0
             else
-              merchant.photos.first.picture.url if merchant.photos.length > 0
+              merchant.primary_photo.picture.url if merchant.photos.length > 0
             end
           end
           expose :icon, documentation: {:type => "string", :desc => "Merchant icon"} do |merchant , options|

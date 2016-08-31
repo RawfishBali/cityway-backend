@@ -45,4 +45,8 @@ class Merchant < ActiveRecord::Base
       self.business_hours << BusinessHour.create(day: i,morning_open_time: '00:00', morning_close_time: '00:00', evening_open_time: '00:00', evening_close_time: '00:00')
     end
   end
+
+  def primary_photo
+    photos.find_by(is_primary: true) || photos.first
+  end
 end
