@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get '/ping', to: proc { [200, {}, ['']] }
 
   devise_for :admins
-  devise_for :users
+  devise_for :users, controllers: {passwords: "user/passwords"}
 
   root 'home#index'
 
