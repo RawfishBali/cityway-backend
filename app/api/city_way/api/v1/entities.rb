@@ -244,7 +244,7 @@ module CityWay
         class Promo < Grape::Entity
           expose :id, documentation: {:type => "String", :desc => "Promo's photo"}
           expose :photo, documentation: {:type => "String", :desc => "Promo's photo"} do |promo, options|
-            photo.url
+            promo.photo.url
           end
           expose :description,if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "Text", :desc => "Promo's description"}
           expose :terms_and_conditions,if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "Text", :desc => "Promo's terms_and_conditions"}
