@@ -49,6 +49,7 @@ GEM
     bcrypt (3.1.11)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    browser (2.2.0)
     builder (3.2.2)
     byebug (9.0.5)
     cancancan (1.15.0)
@@ -335,6 +336,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
+  browser
   byebug
   cancancan
   carrierwave

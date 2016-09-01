@@ -68,6 +68,7 @@ gem 'puma'
 gem 'newrelic_rpm'
 
 gem 'working_hours'
+gem 'browser'
 
 group :production do
   gem 'rails_12factor'
