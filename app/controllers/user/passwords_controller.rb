@@ -13,15 +13,12 @@ class User::PasswordsController < Devise::PasswordsController
         set_flash_message!(:notice, :updated_not_active)
       end
       if browser.platform.ios? || browser.platform.android?
-        url_password = 'citiway://login'
+        url_password = 'cityway://login'
       else
         url_password = after_resetting_password_path_for(resource)
       end
       respond_with resource, location: url_password
     else
-      puts "--------------------------"
-      puts resource.errors.inspect
-      puts "--------------------------"
       set_minimum_password_length
       respond_with resource
     end
