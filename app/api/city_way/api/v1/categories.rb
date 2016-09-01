@@ -19,6 +19,15 @@ module CityWay
             add_pagination_headers categories
             present categories, with: CityWay::Api::V1::Entities::Category
           end
+
+          desc  "List Of SubCategories"
+          params do
+            requires :id , type: Integer, values: -> { Category.parent_categories.ids }
+          end
+          get '/:id' do
+            subcategories = Category.find(params[:id]).subcategories
+            present subcategories, with: CityWay::Api::V1::Entities::Category
+          end
         end
 
       end

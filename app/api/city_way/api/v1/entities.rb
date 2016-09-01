@@ -135,10 +135,10 @@ module CityWay
         class Category < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "Category ID"}
           expose :name, documentation: {:type => "String", :desc => "Category Name"}
-          expose :photo, documentation: {:type => "String", :desc => "Category Photo"} do |category, options|
+          expose :photo,if: lambda { |object, options| !object.parent_id }, documentation: {:type => "String", :desc => "Category Photo"} do |category, options|
             category.photo.url
           end
-          expose :icon, documentation: {:type => "String", :desc => "Category Icon"} do |category, options|
+          expose :icon,if: lambda { |object, options| !object.parent_id }, documentation: {:type => "String", :desc => "Category Icon"} do |category, options|
             category.icon.url
           end
         end
