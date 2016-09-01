@@ -20,7 +20,7 @@ class User::PasswordsController < Devise::PasswordsController
       respond_with resource, location: url_password
     else
       puts "--------------------------"
-      puts resources.errors.inspect
+      puts resource.errors.inspect
       puts "--------------------------"
       set_minimum_password_length
       respond_with resource
