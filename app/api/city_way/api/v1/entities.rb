@@ -208,7 +208,16 @@ module CityWay
           expose :phone,if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "string", :desc => "Merchant phone"}
           expose :email,if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "string", :desc => "Merchant email"}
           expose :website, if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "string", :desc => "Merchant website"}
-          expose :facebook, if: lambda { |object, options| options[:simple] == 'false' },documentation: {:type => "string", :desc => "Merchant facebook"}
+          expose :facebook, if: lambda { |object, options| options[:simple] == 'false' },
+            documentation: {:type => "string", :desc => "Merchant facebook"} do |merchant, options|
+            matches = merchant.facebook.match(/(?:https?:\/\/)?(?:www\.)?facebook\.com\/(?:(?:\w)*#!\/)?(?:groups\/)?(?:pages\/)?(?:[\w\-]*\/)*?(\/)?([\w\-\.]*)/)
+            if matches
+              matches[2]
+            else
+              merchant.facebook
+            end
+             
+          end
           expose :instagram, if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "string", :desc => "Merchant instagram"}
           expose :support_disabilities, documentation: {:type => "boolean", :desc => "Merchant support_disabilities"}
           expose :distance, if: lambda { |object, options| object.respond_to?(:distance) || options[:latitude] && options[:longitude] } do |merchant , options|
