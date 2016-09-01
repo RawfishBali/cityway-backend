@@ -108,7 +108,7 @@ module CityWay
             end
 
             add_pagination_headers promos
-            present promos, with: CityWay::Api::V1::Entities::Promo
+            present promos, with: CityWay::Api::V1::Entities::Promo, latitude: params[:latitude], longitude: params[:longitude]
           end
         end
 

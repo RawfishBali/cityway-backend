@@ -221,7 +221,7 @@ module CityWay
           expose :has_promos, documentation: {:type => "Boolean", :desc => "Merchant Has Promos Or Not"} do |merchant , options|
             merchant.promos.any?
           end
-          expose :business_hours,if: lambda { |object, options| options[:simple] == 'false' } do |merchant , options|
+          expose :business_hours,if: lambda { |object, options| options[:simple] == 'false' && options[:promo_mode] != 'true' } do |merchant , options|
             CityWay::Api::V1::Entities::BusinessHours.represent(merchant.business_hours.order('day ASC'))
           end
           expose :is_open do |merchant , options|
@@ -249,12 +249,16 @@ module CityWay
           expose :discount, documentation: {:type => "Float", :desc => "Promo's discount"}
           expose :original_price, documentation: {:type => "Float", :desc => "Promo's original_price"}
           expose :discount_price, documentation: {:type => "Float", :desc => "Promo's discount_price"}
-          # expose :merchant do |promo, options|
-          #   promo.merchant.name
-          # end
-          # expose :distance, if: lambda { |object, options| options[:latitude] && options[:longitude] } do |promo, options|
-          #   promo.merchant.distance_from([options[:latitude], options[:longitude]])
-          # end
+          expose :distance, if: lambda { |object, options| options[:latitude] && options[:longitude] } do |promo , options|
+            promo.merchant.distance_from([options[:latitude], options[:longitude]])
+          end
+          expose :merchant do |promo, options|
+            if options[:simple] == 'false'
+              CityWay::Api::V1::Entities::Merchant.represent promo.merchant
+            else
+              promo.merchant.name
+            end
+          end
         end
       end
     end
