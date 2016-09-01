@@ -39,11 +39,11 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.default_url_options = { :host => 'mighty-chamber-39984.herokuapp.com' }
   ActionMailer::Base.smtp_settings = {
     :user_name => 'vitorios',
     :password => 'p5W0cN1ZxyiGP8by',
-    :domain => 'localhost:3000',
+    :domain => 'mighty-chamber-39984.herokuapp.com',
     :address => 'smtp.sendgrid.net',
     :port => 587,
     :authentication => :plain,
