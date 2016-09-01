@@ -30,6 +30,8 @@ class Promo < ActiveRecord::Base
   validates_presence_of :merchant
   validates_presence_of :city
 
+  mount_uploader :photo, PhotoUploader
+
   def category
     merchant.category
   end
