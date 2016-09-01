@@ -90,22 +90,24 @@ module CityWay
           get '/:id/promos' do
             if params[:category_id]
               category = Category.find(params[:category_id])
-              subcategories = category.subcategories
               if params[:subcategory_id].blank?
-                promos = Promo.joins(:merchant).where('merchants.city_id = ? and merchants.category_id = ?', params[:id], params[:category_id]).page params[:page]
+                subcategories = category.subcategories
+                merchants = Merchant.where(city_id: params[:id] , category_id: params[:category_id])
               else
                 merchants = Merchant.joins(:subcategories).where('merchants.city_id = ? AND categories_merchants.category_id = ?' ,params[:id], params[:subcategory_id])
-                temp_promos = []
-                merchants.each do |m|
-                  m.promos.each do |promo|
-                    temp_promos << promo
-                  end
-                end
-                promos = Kaminari.paginate_array(temp_promos).page(params[:page])
               end
             else
-              promos = Promo.where(city_id: params[:id]).page params[:page]
+              merchants = Merchant.where(city_id: params[:id])
             end
+
+            merchants = merchants.near([params[:latitude],params[:longitude]], 100, units: :km) if params[:latitude] && params[:longitude]
+            temp_promos = []
+            merchants.each do |m|
+              m.promos.each do |promo|
+                temp_promos << promo
+              end
+            end
+            promos = Kaminari.paginate_array(temp_promos).page(params[:page])
 
             add_pagination_headers promos
             present promos, with: CityWay::Api::V1::Entities::Promo, latitude: params[:latitude], longitude: params[:longitude]
