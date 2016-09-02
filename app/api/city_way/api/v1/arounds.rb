@@ -18,7 +18,7 @@ module CityWay
           end
           get '/:id' do
             around = Around.find(params[:id])
-            present around, with: CityWay::Api::V1::Entities::Around, latitude: params[:latitude], longitude: params[:longitude]
+            present around, with: CityWay::Api::V1::Entities::Around, latitude: params[:latitude], longitude: params[:longitude], simple: 'false'
           end
 
 

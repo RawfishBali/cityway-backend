@@ -35,14 +35,14 @@ module CityWay
 
 
         class Around < Grape::Entity
-          expose :id, documentation: {:type => "Integer", :desc => "Around ID"} 
+          expose :id, documentation: {:type => "Integer", :desc => "Around ID"}
           expose :photo, documentation: {:type => "String", :desc => "Around Photo"} do |around, options|
             around.photo.url
           end
           expose :top_advertisements do |around, options|
             CityWay::Api::V1::Entities::Advertisement.represent(around.city.active_advertisements(0))
           end
-          expose :events do |around, options|
+          expose :events, if: lambda { |object, options| options[:simple] == 'false' } do |around, options|
             CityWay::Api::V1::Entities::Event.represent(around.active_events)
           end
           expose :bottom_advertisements do |around, options|
@@ -246,7 +246,7 @@ module CityWay
             else
               merchant.facebook
             end
-             
+
           end
           expose :instagram, if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "string", :desc => "Merchant instagram"}
           expose :support_disabilities, documentation: {:type => "boolean", :desc => "Merchant support_disabilities"}
