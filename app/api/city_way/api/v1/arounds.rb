@@ -10,17 +10,30 @@ module CityWay
             authenticate!
           end
 
-          desc  "List Of Arounds"
+          desc "Around Detail"
           params do
+            requires :id , type: Integer, values: -> { Around.ids }
+            optional :latitude, type: Float
+            optional :longitude, type: Float
+          end
+          get '/:id' do
+            around = Around.find(params[:id])
+            present around, with: CityWay::Api::V1::Entities::Around, latitude: params[:latitude], longitude: params[:longitude]
+          end
 
+
+          desc "Around Events"
+          params do
+            requires :id , type: Integer, values: -> { Around.ids }
+            optional :latitude, type: Float
+            optional :longitude, type: Float
           end
-          get do
-            arounds = Around.all
-            # add_pagination_headers arounds
-            present arounds, with: CityWay::Api::V1::Entities::Around
+          get '/:id/events' do
+            around = Around.find(params[:id])
+            present around.active_events, with: CityWay::Api::V1::Entities::Event, simple: 'true', latitude: params[:latitude], longitude: params[:longitude], promo_mode: 'true'
           end
+
         end
-
       end
     end
   end

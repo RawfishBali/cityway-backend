@@ -3,9 +3,50 @@ module CityWay
     module V1
       module Entities
 
+        class Event < Grape::Entity
+          expose :id, documentation: {:type => "Integer", :desc => "Event ID"}
+          expose :title, documentation: {:type => "String", :desc => "Event Title"}
+          expose :photo, documentation: {:type => "String", :desc => "Event Photo"} do |event, options|
+            event.photo.url
+          end
+          expose :address, documentation: {:type => "String", :desc => "Event Address"}
+          expose :latitude, documentation: {:type => "Float", :desc => "Event Latitude"}
+          expose :longitude, documentation: {:type => "Float", :desc => "Event Longitude"}
+          expose :website, if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "String", :desc => "Event Website"}
+          expose :email, if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "String", :desc => "Event Email"}
+          expose :facebook, if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "String", :desc => "Event Facebook"} do |event, options|
+            matches = event.facebook.match(/(?:https?:\/\/)?(?:www\.)?facebook\.com\/(?:(?:\w)*#!\/)?(?:groups\/)?(?:pages\/)?(?:[\w\-]*\/)*?(\/)?([\w\-\.]*)/) if event.facebook
+            if matches
+              matches[2]
+            else
+              event.facebook
+            end
+          end
+          expose :instagram,  if: lambda { |object, options| options[:simple] == 'false' },documentation: {:type => "String", :desc => "Event Instagram"}
+          expose :support_disabilities, documentation: {:type => "Boolean", :desc => "Event Disabilities Support"}
+          expose :event_start, documentation: {:type => "DateTime", :desc => "Event Start"} do |event, options|
+            (Date.parse((event.event_start).to_s) - Date.today).to_i
+          end
+          expose :distance, if: lambda { |object, options| options[:latitude] && options[:longitude] } do |event , options|
+            event.distance_from([options[:latitude], options[:longitude]])
+          end
+          expose :description, documentation: {:type => "Text", :desc => "Event Description"}
+        end
+
+
         class Around < Grape::Entity
-          expose :photo, documentation: {:type => "String", :desc => "Around Photo"} do |aro, options|
-            aro.photo.url
+          expose :id, documentation: {:type => "Integer", :desc => "Around ID"} 
+          expose :photo, documentation: {:type => "String", :desc => "Around Photo"} do |around, options|
+            around.photo.url
+          end
+          expose :top_advertisements do |around, options|
+            CityWay::Api::V1::Entities::Advertisement.represent(around.city.active_advertisements(0))
+          end
+          expose :events do |around, options|
+            CityWay::Api::V1::Entities::Event.represent(around.active_events)
+          end
+          expose :bottom_advertisements do |around, options|
+            CityWay::Api::V1::Entities::Advertisement.represent(around.city.active_advertisements(1))
           end
         end
 
@@ -54,18 +95,7 @@ module CityWay
 
           end
           expose :around, if: lambda { |object, options| options[:sections].blank? || options[:sections] == 'around' } do |city, options|
-            if options[:simple] == 'true'
-              {
-                photo: city.around.photo.url
-              }
-            else
-              {
-                photo: city.around.photo.url,
-                top_advertisements: CityWay::Api::V1::Entities::Advertisement.represent(city.active_advertisements(0)),
-                main_section: [],
-                bottom_advertisements: CityWay::Api::V1::Entities::Advertisement.represent(city.active_advertisements(1))
-              }
-            end
+            CityWay::Api::V1::Entities::Around.represent(city.around)
           end
           expose :commonplace, if: lambda { |object, options| options[:sections].blank? || options[:sections] == 'city_hall' }, as: 'city_hall' do |city, options|
             if options[:simple] == 'true'
