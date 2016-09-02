@@ -30,7 +30,9 @@ module CityWay
           end
           get '/:id/events' do
             around = Around.find(params[:id])
-            present around.active_events, with: CityWay::Api::V1::Entities::Event, simple: 'true', latitude: params[:latitude], longitude: params[:longitude], promo_mode: 'true'
+            events = around.active_events.page params[:page]
+            add_pagination_headers events
+            present events, with: CityWay::Api::V1::Entities::Event, simple: 'true', latitude: params[:latitude], longitude: params[:longitude], promo_mode: 'true'
           end
 
         end
