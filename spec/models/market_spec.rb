@@ -13,6 +13,7 @@
 #  day_opens   :integer          is an Array
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  around_id   :integer
 #
 
 require 'rails_helper'

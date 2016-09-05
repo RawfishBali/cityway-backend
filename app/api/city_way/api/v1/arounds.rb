@@ -35,6 +35,19 @@ module CityWay
             present events, with: CityWay::Api::V1::Entities::Event, simple: 'true', latitude: params[:latitude], longitude: params[:longitude], promo_mode: 'true'
           end
 
+
+          desc "Around Markets"
+          params do
+            requires :id , type: Integer, values: -> { Around.ids }
+            optional :latitude, type: Float
+            optional :longitude, type: Float
+          end
+          get '/:id/markets' do
+            around = Around.find(params[:id])
+            markets = around.markets.page params[:page]
+            add_pagination_headers markets
+            present markets, with: CityWay::Api::V1::Entities::Market, simple: 'true', latitude: params[:latitude], longitude: params[:longitude]
+          end
         end
       end
     end

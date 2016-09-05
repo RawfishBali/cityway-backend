@@ -13,6 +13,7 @@
 #  day_opens   :integer          is an Array
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  around_id   :integer
 #
 
 class Market < ActiveRecord::Base
@@ -20,7 +21,31 @@ class Market < ActiveRecord::Base
   validates_presence_of :address
   validates_presence_of :open_time
   validates_presence_of :close_time
-  validates_inclusion_of :day_opens, in: 0..6
+  validates_presence_of :around
+  validate :validate_day_opens
 
   has_many :photos, as: :imageable, dependent: :destroy
+
+  belongs_to :around
+
+  geocoded_by :address
+  after_validation :geocode
+
+  VALID_DAYS = (0..6).to_a
+
+  def primary_photo
+    photos.where(is_primary: true) || [photos.first]
+  end
+  
+  private
+
+  def validate_day_opens
+    if (day_opens = (self.day_opens - VALID_DAYS))
+      day_opens.each do |day_open|
+        errors.add(:day_opens, day_open.to_s + " is not a valid days")
+      end
+    end
+  end
+
+
 end
