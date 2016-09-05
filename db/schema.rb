@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160902024743) do
+ActiveRecord::Schema.define(version: 20160905030222) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -193,6 +193,21 @@ ActiveRecord::Schema.define(version: 20160902024743) do
   end
 
   add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
+
+  create_table "markets", force: :cascade do |t|
+    t.string   "name",        null: false
+    t.string   "address",     null: false
+    t.float    "latitude"
+    t.float    "longitude"
+    t.time     "open_time",   null: false
+    t.time     "close_time",  null: false
+    t.text     "description"
+    t.integer  "day_opens",                array: true
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "markets", ["day_opens"], name: "index_markets_on_day_opens", using: :btree
 
   create_table "merchants", force: :cascade do |t|
     t.string   "name",                                 null: false
