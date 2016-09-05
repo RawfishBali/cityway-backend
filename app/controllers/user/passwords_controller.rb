@@ -5,13 +5,8 @@ class User::PasswordsController < Devise::PasswordsController
 
     if resource.errors.empty?
       resource.unlock_access! if unlockable?(resource)
-      if Devise.sign_in_after_reset_password
-        flash_message = resource.active_for_authentication? ? :updated : :updated_not_active
-        set_flash_message!(:notice, flash_message)
-        sign_in(resource_name, resource)
-      else
-        set_flash_message!(:notice, :updated_not_active)
-      end
+      set_flash_message!(:notice, :updated_not_active)
+
       if browser.platform.ios? || browser.platform.android?
         url_password = 'cityway://login'
       else
