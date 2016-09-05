@@ -93,6 +93,7 @@ module CityWay
         mount CityWay::Api::V1::Merchants
         mount CityWay::Api::V1::Promos
         mount CityWay::Api::V1::Events
+        mount CityWay::Api::V1::Markets
       end
     end
   end
