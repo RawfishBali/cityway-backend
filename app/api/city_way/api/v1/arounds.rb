@@ -41,10 +41,16 @@ module CityWay
             requires :id , type: Integer, values: -> { Around.ids }
             optional :latitude, type: Float
             optional :longitude, type: Float
+            optional :day_id, type: Integer
           end
           get '/:id/markets' do
             around = Around.find(params[:id])
-            markets = around.markets.page params[:page]
+            if params[:day_id]
+              markets = around.markets.where("? = ANY (day_opens)", params[:day_id]).page params[:page]
+            else
+              markets = around.markets.page params[:page]
+            end
+
             add_pagination_headers markets
             present markets, with: CityWay::Api::V1::Entities::Market, simple: 'true', latitude: params[:latitude], longitude: params[:longitude]
           end
