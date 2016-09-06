@@ -341,11 +341,7 @@ module CityWay
             promo.merchant.distance_from([options[:latitude], options[:longitude]])
           end
           expose :merchant do |promo, options|
-            if options[:simple] == 'false'
               CityWay::Api::V1::Entities::Merchant.represent promo.merchant
-            else
-              promo.merchant.name
-            end
           end
         end
       end
