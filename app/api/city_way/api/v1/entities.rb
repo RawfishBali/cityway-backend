@@ -61,6 +61,24 @@ module CityWay
           end
         end
 
+        class Park < Grape::Entity
+          expose :id, documentation: {:type => "Integer", :desc => "Park ID"}
+          expose :address, documentation: {:type => "String", :desc => "Park Address"}
+          expose :latitude, documentation: {:type => "Float", :desc => "Park latitude"}
+          expose :longitude, documentation: {:type => "Float", :desc => "Park longitude"}
+          expose :description, if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "Text", :desc => "Park Description"}
+          expose :distance, if: lambda { |object, options| options[:latitude] && options[:longitude] } do |market , options|
+            market.distance_from([options[:latitude], options[:longitude]])
+          end
+          expose :photos, documentation: {:type => "string", :desc => "Park photo"} do |market , options|
+            if options[:simple] == 'false'
+              CityWay::Api::V1::Entities::Photo.represent(market.photos) if market.photos.length > 0
+            else
+              CityWay::Api::V1::Entities::Photo.represent(market.primary_photo) if market.photos.length > 0
+            end
+          end
+        end
+
 
         class Around < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "Around ID"}

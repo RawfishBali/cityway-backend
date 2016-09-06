@@ -13,6 +13,7 @@ class Around < ActiveRecord::Base
   belongs_to :city
   has_many :events , dependent: :destroy
   has_many :markets , dependent: :destroy
+  has_many :parks , dependent: :destroy
   mount_uploader :photo, PhotoUploader
 
   def active_events

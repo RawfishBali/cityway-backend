@@ -94,6 +94,7 @@ module CityWay
         mount CityWay::Api::V1::Promos
         mount CityWay::Api::V1::Events
         mount CityWay::Api::V1::Markets
+        mount CityWay::Api::V1::Parks
       end
     end
   end

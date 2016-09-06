@@ -54,6 +54,19 @@ module CityWay
             add_pagination_headers markets
             present markets, with: CityWay::Api::V1::Entities::Market, simple: 'true', latitude: params[:latitude], longitude: params[:longitude]
           end
+
+
+          desc "Around Parks"
+          params do
+            requires :id , type: Integer, values: -> { Around.ids }
+            optional :latitude, type: Float
+            optional :longitude, type: Float
+          end
+          get '/:id/parks' do
+            parks = Around.find(params[:id]).parks.page params[:page]
+            add_pagination_headers parks
+            present parks, with: CityWay::Api::V1::Entities::Park, simple: 'true', latitude: params[:latitude], longitude: params[:longitude]
+          end
         end
       end
     end
