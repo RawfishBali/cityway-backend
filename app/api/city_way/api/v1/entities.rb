@@ -97,8 +97,19 @@ module CityWay
         end
 
         class Commonplace < Grape::Entity
-          expose :photo, documentation: {:type => "String", :desc => "Commonplace Photo"} do |common, options|
+          expose :photo, documentation: {:type => "String", :desc => "Comune Photo"} do |common, options|
             common.photo.url
+          end
+          expose :top_advertisements do |around, options|
+            CityWay::Api::V1::Entities::Advertisement.represent(around.city.active_advertisements(0))
+          end
+          expose :facebook, documentation: {:type => "string", :desc => "Comune Facebook"}
+          expose :twitter, documentation: {:type => "string", :desc => "Comune Twitter"}
+          expose :instagram, documentation: {:type => "string", :desc => "Comune Instagram"}
+          expose :google_plus, documentation: {:type => "string", :desc => "Comune G+"}
+          expose :history, documentation: {:type => "string", :desc => "Comune History"}
+          expose :bottom_advertisements do |around, options|
+            CityWay::Api::V1::Entities::Advertisement.represent(around.city.active_advertisements(1))
           end
         end
 
@@ -144,18 +155,7 @@ module CityWay
             CityWay::Api::V1::Entities::Around.represent(city.around)
           end
           expose :commonplace, if: lambda { |object, options| options[:sections].blank? || options[:sections] == 'city_hall' }, as: 'city_hall' do |city, options|
-            if options[:simple] == 'true'
-              {
-                photo: city.commonplace.photo.url
-              }
-            else
-              {
-                photo: city.commonplace.photo.url,
-                top_advertisements: CityWay::Api::V1::Entities::Advertisement.represent(city.active_advertisements(0)),
-                main_section: [],
-                bottom_advertisements: CityWay::Api::V1::Entities::Advertisement.represent(city.active_advertisements(1))
-              }
-            end
+            CityWay::Api::V1::Entities::Commonplace.represent(city.commonplace)
           end
           expose :discover, if: lambda { |object, options| options[:sections].blank? || options[:sections] == 'discover' } do |city, options|
             if options[:simple] == 'true'
