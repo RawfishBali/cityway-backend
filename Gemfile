@@ -59,7 +59,7 @@ gem 'kaminari'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'cloudinary'
-gem 'open-weather'
+
 gem 'forecast_io'
 
 gem 'rubocop', require: false
@@ -67,7 +67,7 @@ gem 'rubocop', require: false
 gem 'puma'
 gem 'newrelic_rpm'
 
-gem 'working_hours'
+
 gem 'browser'
 
 group :production do

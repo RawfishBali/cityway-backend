@@ -111,9 +111,9 @@ module CityWay
               {
                 photo: city.photo.url,
                 weather: {
-                  temperature: 21,
-                  weather_icon: 'cloudy',
-                  weather_message: "It's time to eat brocolli!"
+                  temperature: options[:forecast].currently[:temperature],
+                  weather_icon: options[:forecast].currently[:icon],
+                  weather_message: options[:forecast].daily[:summary]
                 },
                 top_advertisements: CityWay::Api::V1::Entities::Advertisement.represent(city.active_advertisements(0)),
                 categories: CityWay::Api::V1::Entities::Category.represent(city.categories),
