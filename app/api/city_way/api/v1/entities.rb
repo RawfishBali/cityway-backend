@@ -328,6 +328,7 @@ module CityWay
 
         class Promo < Grape::Entity
           expose :id, documentation: {:type => "String", :desc => "Promo's photo"}
+          expose :title,as: 'name',  documentation: {:type => "String", :desc => "Promo's Name"}
           expose :photo, documentation: {:type => "String", :desc => "Promo's photo"} do |promo, options|
             promo.photo.url
           end
