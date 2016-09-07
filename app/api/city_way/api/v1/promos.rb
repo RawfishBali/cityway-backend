@@ -18,7 +18,7 @@ module CityWay
           end
           get '/:id' do
             merchant = Promo.find(params[:id])
-            present merchant, with: CityWay::Api::V1::Entities::Promo, simple: 'false', latitude: params[:latitude], longitude: params[:longitude], promo_mode: 'true'
+            present merchant, with: CityWay::Api::V1::Entities::Promo, simple: 'false', latitude: params[:latitude], longitude: params[:longitude]
           end
         end
 
