@@ -16,6 +16,8 @@
 #
 
 class Commonplace < ActiveRecord::Base
+  has_many :news , dependent: :destroy
+  
   belongs_to :city
   mount_uploader :photo, PhotoUploader
   mount_uploader :icon, PhotoUploader

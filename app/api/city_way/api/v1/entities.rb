@@ -33,6 +33,17 @@ module CityWay
           expose :description, documentation: {:type => "Text", :desc => "Event Description"}
         end
 
+        class News < Grape::Entity
+          expose :id, documentation: {:type => "Integer", :desc => "News' ID"}
+          expose :title, documentation: {:type => "String", :desc => "News' Title"}
+          expose :description, documentation: {:type => "Text", :desc => "News' Description"}
+          expose :published_at, documentation: {:type => "Text", :desc => "News' Published Date"} do |news , options|
+            news.published_at.strftime("%B %d %Y %H:%M")
+          end
+          expose :photo, documentation: {:type => "Text", :desc => "News' Photo"}  do |news, options|
+            news.photo.url
+          end
+        end
 
         class Market < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "Market ID"}
@@ -97,8 +108,12 @@ module CityWay
         end
 
         class Commonplace < Grape::Entity
+          expose :id, documentation: {:type => "Integer", :desc => "Comune ID"}
           expose :photo, documentation: {:type => "String", :desc => "Comune Photo"} do |common, options|
             common.photo.url
+          end
+          expose :icon, documentation: {:type => "String", :desc => "Comune Icon"} do |common, options|
+            common.icon.url
           end
           expose :top_advertisements do |around, options|
             CityWay::Api::V1::Entities::Advertisement.represent(around.city.active_advertisements(0))
@@ -108,6 +123,9 @@ module CityWay
           expose :instagram, documentation: {:type => "string", :desc => "Comune Instagram"}
           expose :google_plus, documentation: {:type => "string", :desc => "Comune G+"}
           expose :history, documentation: {:type => "string", :desc => "Comune History"}
+          expose :news, documentation: {:type => "string", :desc => "Comune News"} do |common, options|
+            CityWay::Api::V1::Entities::News.represent(common.news)
+          end
           expose :bottom_advertisements do |around, options|
             CityWay::Api::V1::Entities::Advertisement.represent(around.city.active_advertisements(1))
           end
