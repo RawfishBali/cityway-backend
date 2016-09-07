@@ -139,6 +139,12 @@ module CityWay
           end
         end
 
+        class Security < Grape::Entity
+          expose :id, documentation: {:type => "String", :desc => "Security ID"}
+          expose :name, documentation: {:type => "String", :desc => "Security name"}
+          expose :url, documentation: {:type => "String", :desc => "Security url"}
+        end
+
         class Commonplace < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "Comune ID"}
           expose :photo, documentation: {:type => "String", :desc => "Comune Photo"} do |common, options|
@@ -160,6 +166,9 @@ module CityWay
           end
           expose :administration do |common, options|
             CityWay::Api::V1::Entities::Administration.represent(common)
+          end
+          expose :securities do |common, options|
+            CityWay::Api::V1::Entities::Security.represent(common.securities)
           end
           expose :bottom_advertisements do |around, options|
             CityWay::Api::V1::Entities::Advertisement.represent(around.city.active_advertisements(1))
