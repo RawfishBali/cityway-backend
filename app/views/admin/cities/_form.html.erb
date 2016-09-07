@@ -22,7 +22,7 @@
   </div>
   <div class="uk-width-medium-1-5 uk-grid-margin">
     <div class="md-input-wrapper">
-      <h3 class="heading_a uk-margin-small-bottom">Intorno Photo</h3>
+      <h3 class="heading_a uk-margin-small-bottom">Scopri Photo</h3>
       <%= f.fields_for :discover do |ff| %>
       <%= ff.file_field :photo, class: 'dropify ', 'data-default-file' => @discover.photo, required: true  ,  'data-errors-position': "outside" %>
       <% end %>
@@ -30,7 +30,7 @@
   </div>
   <div class="uk-width-medium-1-5 uk-grid-margin">
     <div class="md-input-wrapper">
-      <h3 class="heading_a uk-margin-small-bottom">Scopri Photo</h3>
+      <h3 class="heading_a uk-margin-small-bottom">Intorno Photo</h3>
       <%= f.fields_for :around do |fff| %>
       <%= fff.file_field :photo, class: 'dropify ', 'data-default-file' => @around.photo, required: true ,  'data-errors-position': "outside"   %>
       <% end %>
