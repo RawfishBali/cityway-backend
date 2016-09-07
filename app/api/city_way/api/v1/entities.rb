@@ -107,6 +107,38 @@ module CityWay
           end
         end
 
+
+        class Profile < Grape::Entity
+          expose :id, documentation: {:type => "Integer", :desc => "Profile ID"}
+          expose :role, documentation: {:type => "String", :desc => "Profile Role"}
+          expose :emails, documentation: {:type => "String", :desc => "Profile Emails"}
+          expose :fax, documentation: {:type => "String", :desc => "Profile Fax"}
+          expose :phone, documentation: {:type => "String", :desc => "Profile Phone"}
+          expose :days_open, documentation: {:type => "String", :desc => "Profile Days Open"}
+          expose :appointment_start, documentation: {:type => "String", :desc => "Profile appointment start"}  do |profile , options|
+            profile.appointment_start.strftime("%H:%M")
+          end
+          expose :appointment_end, documentation: {:type => "String", :desc => "Profile appointment end"} do |profile , options|
+            profile.appointment_end.strftime("%H:%M")
+          end
+          expose :photo, documentation: {:type => "String", :desc => "Profile photo"}  do |profile, options|
+            profile.photo.url
+          end
+
+        end
+
+        class Administration < Grape::Entity
+          expose :major do |commonplace, options|
+            CityWay::Api::V1::Entities::Profile.represent commonplace.major
+          end
+          expose :city_council do |commonplace, options|
+            CityWay::Api::V1::Entities::Profile.represent commonplace.city_councils
+          end
+          expose :council do |commonplace, options|
+            CityWay::Api::V1::Entities::Profile.represent commonplace.politic_parties
+          end
+        end
+
         class Commonplace < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "Comune ID"}
           expose :photo, documentation: {:type => "String", :desc => "Comune Photo"} do |common, options|
@@ -125,6 +157,9 @@ module CityWay
           expose :history, documentation: {:type => "string", :desc => "Comune History"}
           expose :news, documentation: {:type => "string", :desc => "Comune News"} do |common, options|
             CityWay::Api::V1::Entities::News.represent(common.news)
+          end
+          expose :administration do |common, options|
+            CityWay::Api::V1::Entities::Administration.represent(common)
           end
           expose :bottom_advertisements do |around, options|
             CityWay::Api::V1::Entities::Advertisement.represent(around.city.active_advertisements(1))

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160906093819) do
+ActiveRecord::Schema.define(version: 20160907075948) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -270,6 +270,31 @@ ActiveRecord::Schema.define(version: 20160906093819) do
   end
 
   add_index "photos", ["imageable_type", "imageable_id"], name: "index_photos_on_imageable_type_and_imageable_id", using: :btree
+
+  create_table "politic_groups", force: :cascade do |t|
+    t.string   "name",           null: false
+    t.integer  "commonplace_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "profiles", force: :cascade do |t|
+    t.string   "name",                                   null: false
+    t.string   "role"
+    t.string   "emails",                                              array: true
+    t.string   "phone"
+    t.string   "fax"
+    t.integer  "days_open",                                           array: true
+    t.time     "appointment_start"
+    t.time     "appointment_end"
+    t.string   "photo"
+    t.boolean  "is_major",               default: false
+    t.boolean  "is_city_council_member", default: false
+    t.integer  "politic_group_id"
+    t.integer  "commonplace_id"
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+  end
 
   create_table "promos", force: :cascade do |t|
     t.text     "title"

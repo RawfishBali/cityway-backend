@@ -17,8 +17,21 @@
 
 class Commonplace < ActiveRecord::Base
   has_many :news , dependent: :destroy
-  
+  has_many :profiles , dependent: :destroy
+
   belongs_to :city
   mount_uploader :photo, PhotoUploader
   mount_uploader :icon, PhotoUploader
+
+  def major
+    profiles.find_by(is_major: true)
+  end
+
+  def city_councils
+    profiles.where(is_city_council_member: true)
+  end
+
+  def politic_parties
+    profiles.where(is_city_council_member: false).group(:political_group_id , :id)
+  end
 end
