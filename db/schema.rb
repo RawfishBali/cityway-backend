@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160907093249) do
+ActiveRecord::Schema.define(version: 20160908013914) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -189,6 +189,8 @@ ActiveRecord::Schema.define(version: 20160907093249) do
     t.datetime "updated_at",                           null: false
   end
 
+  add_index "events", ["around_id"], name: "index_events_on_around_id", using: :btree
+
   create_table "identities", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "provider"
@@ -213,6 +215,7 @@ ActiveRecord::Schema.define(version: 20160907093249) do
     t.integer  "around_id"
   end
 
+  add_index "markets", ["around_id"], name: "index_markets_on_around_id", using: :btree
   add_index "markets", ["day_opens"], name: "index_markets_on_day_opens", using: :btree
 
   create_table "merchants", force: :cascade do |t|
@@ -248,6 +251,8 @@ ActiveRecord::Schema.define(version: 20160907093249) do
     t.datetime "updated_at",     null: false
   end
 
+  add_index "news", ["commonplace_id"], name: "index_news_on_commonplace_id", using: :btree
+
   create_table "parks", force: :cascade do |t|
     t.string   "name"
     t.string   "address"
@@ -259,6 +264,8 @@ ActiveRecord::Schema.define(version: 20160907093249) do
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
   end
+
+  add_index "parks", ["around_id"], name: "index_parks_on_around_id", using: :btree
 
   create_table "photos", force: :cascade do |t|
     t.string   "picture"
@@ -278,6 +285,8 @@ ActiveRecord::Schema.define(version: 20160907093249) do
     t.datetime "updated_at",     null: false
   end
 
+  add_index "politic_groups", ["commonplace_id"], name: "index_politic_groups_on_commonplace_id", using: :btree
+
   create_table "profiles", force: :cascade do |t|
     t.string   "name",                                   null: false
     t.string   "role"
@@ -296,6 +305,9 @@ ActiveRecord::Schema.define(version: 20160907093249) do
     t.datetime "updated_at",                             null: false
   end
 
+  add_index "profiles", ["commonplace_id"], name: "index_profiles_on_commonplace_id", using: :btree
+  add_index "profiles", ["politic_group_id"], name: "index_profiles_on_politic_group_id", using: :btree
+
   create_table "promos", force: :cascade do |t|
     t.text     "title"
     t.string   "photo"
@@ -310,6 +322,27 @@ ActiveRecord::Schema.define(version: 20160907093249) do
     t.integer  "city_id"
     t.boolean  "approval",             default: false
   end
+
+  add_index "promos", ["city_id"], name: "index_promos_on_city_id", using: :btree
+  add_index "promos", ["merchant_id"], name: "index_promos_on_merchant_id", using: :btree
+
+  create_table "public_offices", force: :cascade do |t|
+    t.string   "name",           null: false
+    t.string   "photo"
+    t.text     "description"
+    t.string   "email"
+    t.string   "address"
+    t.string   "phone"
+    t.string   "fax"
+    t.integer  "days_open",                   array: true
+    t.time     "open_time"
+    t.time     "close_time"
+    t.integer  "commonplace_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "public_offices", ["commonplace_id"], name: "index_public_offices_on_commonplace_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
@@ -329,6 +362,8 @@ ActiveRecord::Schema.define(version: 20160907093249) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
   end
+
+  add_index "securities", ["commonplace_id"], name: "index_securities_on_commonplace_id", using: :btree
 
   create_table "subcategories", force: :cascade do |t|
     t.string   "name",        null: false

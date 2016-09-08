@@ -91,6 +91,28 @@ module CityWay
         end
 
 
+        class PublicOffice < Grape::Entity
+          expose :id, documentation: {:type => "Integer", :desc => "Public Office ID"}
+          expose :name, documentation: {:type => "Integer", :desc => "Public Office Name"}
+          expose :photo, documentation: {:type => "Integer", :desc => "Public Office Photo"}  do |public_office , options|
+            public_office.photo.url
+          end
+          expose :description, documentation: {:type => "Integer", :desc => "Public Office Description"}
+          expose :email, documentation: {:type => "Integer", :desc => "Public Office Email"}
+          expose :address, documentation: {:type => "Integer", :desc => "Public Office Address"}
+          expose :phone, documentation: {:type => "Integer", :desc => "Public Office Phone"}
+          expose :fax, documentation: {:type => "Integer", :desc => "Public Office fax"}
+          expose :days_open, documentation: {:type => "Integer", :desc => "Public Office days_open"} do |public_office , options|
+            public_office.days_open.collect { |x| Date::DAYNAMES[x] }.join(" , ") if public_office.days_open
+          end
+          expose :open_time, documentation: {:type => "Integer", :desc => "Public Office Open Time"} do |public_office , options|
+            public_office.open_time.strftime("%H:%M") if public_office.open_time
+          end
+          expose :close_time, documentation: {:type => "Integer", :desc => "Public Office Close Time"} do |public_office , options|
+            public_office.close_time.strftime("%H:%M") if public_office.close_time
+          end
+        end
+
         class Around < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "Around ID"}
           expose :photo, documentation: {:type => "String", :desc => "Around Photo"} do |around, options|
@@ -166,6 +188,9 @@ module CityWay
           end
           expose :administration do |common, options|
             CityWay::Api::V1::Entities::Administration.represent(common)
+          end
+          expose :public_offices do |common, options|
+            CityWay::Api::V1::Entities::PublicOffice.represent(common.public_offices)
           end
           expose :securities do |common, options|
             CityWay::Api::V1::Entities::Security.represent(common.securities)

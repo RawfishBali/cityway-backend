@@ -16,4 +16,6 @@ class Security < ActiveRecord::Base
   validates_presence_of :name
   validates_presence_of :url
   validates_presence_of :commonplace
+
+  validates_format_of :url, :with => URI::regexp(%w(http https))
 end
