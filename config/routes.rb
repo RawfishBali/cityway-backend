@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     resources :merchants
     resources :promos
   end
-  
+
   get '/ping', to: proc { [200, {}, ['']] }
 
   devise_for :admins

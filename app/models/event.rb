@@ -35,5 +35,4 @@ class Event < ActiveRecord::Base
     after_validation :geocode
 
     mount_uploader :photo, PhotoUploader
-     
 end

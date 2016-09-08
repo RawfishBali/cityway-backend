@@ -36,7 +36,7 @@ class Market < ActiveRecord::Base
   def primary_photo
     photos.where(is_primary: true) || [photos.first]
   end
-  
+
   private
 
   def validate_day_opens
