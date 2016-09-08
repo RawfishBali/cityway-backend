@@ -296,11 +296,15 @@ module CityWay
           end
           expose :instagram, if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "string", :desc => "Merchant instagram"}
           expose :support_disabilities, documentation: {:type => "boolean", :desc => "Merchant support_disabilities"}
-          expose :distance, if: lambda { |object, options| object.respond_to?(:distance) || options[:latitude] && options[:longitude] } do |merchant , options|
-            if merchant.respond_to?(:distance)
-              merchant.distance
-            elsif options[:latitude] && options[:longitude]
-              merchant.distance_from([options[:latitude], options[:longitude]])
+          expose :distance do |merchant , options|
+            if  merchant.respond_to?(:distance) || options[:latitude] && options[:longitude]
+              if merchant.respond_to?(:distance)
+                merchant.distance
+              elsif options[:latitude] && options[:longitude]
+                merchant.distance_from([options[:latitude], options[:longitude]])
+              end
+            else
+              "No distance"
             end
           end
           expose :has_promos, documentation: {:type => "Boolean", :desc => "Merchant Has Promos Or Not"} do |merchant , options|
@@ -337,8 +341,12 @@ module CityWay
           expose :discount, documentation: {:type => "Float", :desc => "Promo's discount"}
           expose :original_price, documentation: {:type => "Float", :desc => "Promo's original_price"}
           expose :discount_price, documentation: {:type => "Float", :desc => "Promo's discount_price"}
-          expose :distance, if: lambda { |object, options| options[:latitude] && options[:longitude] } do |promo , options|
-            promo.merchant.distance_from([options[:latitude], options[:longitude]])
+          expose :distance do |promo , options|
+            if options[:latitude] && options[:longitude]
+              promo.merchant.distance_from([options[:latitude], options[:longitude]])
+            else
+              "No distance"
+            end
           end
           expose :merchant do |promo, options|
               CityWay::Api::V1::Entities::Merchant.represent promo.merchant
