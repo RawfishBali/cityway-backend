@@ -435,6 +435,15 @@ module CityWay
             end
           end
         end
+
+        class Message < Grape::Entity
+          expose :id, documentation: {:type => "Integer", :desc => "Message id"}
+          expose :firstname, documentation: {:type => "String", :desc => "Message firstname"}
+          expose :lastname, documentation: {:type => "String", :desc => "Message lastname"}
+          expose :email, documentation: {:type => "String", :desc => "Message email"}
+          expose :message, documentation: {:type => "String", :desc => "Message content"}
+          expose :message_type, documentation: {:type => "Integer", :desc => "Message message_type"}
+        end
       end
     end
   end
