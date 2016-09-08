@@ -83,32 +83,39 @@ module CityWay
           params do
             requires :id , type: Integer, values: -> { City.ids }
             optional :category_id , type: Integer, values: -> { Category.ids }
+            optional :merchant_id , type: Integer, values: -> { Merchant.ids }
             optional :subcategory_id , type: Integer, values: -> { Category.ids }
             optional :latitude, type: Float
             optional :longitude, type: Float
           end
 
           get '/:id/promos' do
-            if params[:category_id]
-              category = Category.find(params[:category_id])
-              if params[:subcategory_id].blank?
-                subcategories = category.subcategories
-                merchants = Merchant.where(city_id: params[:id] , category_id: params[:category_id])
-              else
-                merchants = Merchant.joins(:subcategories).where('merchants.city_id = ? AND categories_merchants.category_id = ?' ,params[:id], params[:subcategory_id])
-              end
+            if params[:merchant_id]
+              merchant = Merchant.find(params[:merchant_id])
+              promos = merchant.promos.page params[:page]
+              add_pagination_headers promos
             else
-              merchants = Merchant.where(city_id: params[:id])
-            end
-
-            merchants = merchants.near([params[:latitude],params[:longitude]], 100, units: :km) if params[:latitude] && params[:longitude]
-            temp_promos = []
-            merchants.each do |m|
-              m.promos.each do |promo|
-                temp_promos << promo
+              if params[:category_id]
+                category = Category.find(params[:category_id])
+                if params[:subcategory_id].blank?
+                  subcategories = category.subcategories
+                  merchants = Merchant.where(city_id: params[:id] , category_id: params[:category_id])
+                else
+                  merchants = Merchant.joins(:subcategories).where('merchants.city_id = ? AND categories_merchants.category_id = ?' ,params[:id], params[:subcategory_id])
+                end
+              else
+                merchants = Merchant.where(city_id: params[:id])
               end
+
+              merchants = merchants.near([params[:latitude],params[:longitude]], 100, units: :km) if params[:latitude] && params[:longitude]
+              temp_promos = []
+              merchants.each do |m|
+                m.promos.each do |promo|
+                  temp_promos << promo
+                end
+              end
+              promos = Kaminari.paginate_array(temp_promos).page(params[:page])
             end
-            promos = Kaminari.paginate_array(temp_promos).page(params[:page])
 
             add_pagination_headers promos
             present promos, with: CityWay::Api::V1::Entities::Promo, latitude: params[:latitude], longitude: params[:longitude]

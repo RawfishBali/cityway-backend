@@ -21,7 +21,7 @@ module CityWay
             present merchant, with: CityWay::Api::V1::Entities::Merchant, simple: 'false', latitude: params[:latitude], longitude: params[:longitude]
           end
 
-          desc "Merchant Detail"
+          desc "Merchant Promos"
           params do
             requires :id , type: Integer, values: -> { Merchant.ids }
             optional :latitude, type: Float
@@ -31,7 +31,7 @@ module CityWay
             merchant = Merchant.find(params[:id])
             promos = merchant.promos.page params[:page]
             add_pagination_headers promos
-            present promos, with: CityWay::Api::V1::Entities::Promo
+            present promos, with: CityWay::Api::V1::Entities::Promo, latitude: params[:latitude], longitude: params[:longitude]
           end
         end
 
