@@ -16,7 +16,25 @@
 #
 
 class Commonplace < ActiveRecord::Base
+  has_many :news , dependent: :destroy
+  has_many :profiles , dependent: :destroy
+  has_many :politic_groups , dependent: :destroy
+  has_many :securities , dependent: :destroy
+  has_many :public_offices , dependent: :destroy
+
   belongs_to :city
   mount_uploader :photo, PhotoUploader
   mount_uploader :icon, PhotoUploader
+
+  def major
+    profiles.find_by(is_major: true)
+  end
+
+  def city_councils
+    profiles.where(is_city_council_member: true)
+  end
+
+  def politic_parties
+    profiles.group(:politic_group_id , :id)
+  end
 end

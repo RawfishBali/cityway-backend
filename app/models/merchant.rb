@@ -35,6 +35,7 @@ class Merchant < ActiveRecord::Base
   validates_presence_of :name
   validates_presence_of :address
   validates_presence_of :icon
+  validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :save }
 
   mount_uploader :icon, PhotoUploader
 

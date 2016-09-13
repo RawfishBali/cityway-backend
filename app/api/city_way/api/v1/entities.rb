@@ -33,6 +33,17 @@ module CityWay
           expose :description, documentation: {:type => "Text", :desc => "Event Description"}
         end
 
+        class News < Grape::Entity
+          expose :id, documentation: {:type => "Integer", :desc => "News' ID"}
+          expose :title, documentation: {:type => "String", :desc => "News' Title"}
+          expose :description, documentation: {:type => "Text", :desc => "News' Description"}
+          expose :published_at, documentation: {:type => "Text", :desc => "News' Published Date"} do |news , options|
+            news.published_at.strftime("%B %d %Y %H:%M")
+          end
+          expose :photo, documentation: {:type => "Text", :desc => "News' Photo"}  do |news, options|
+            news.photo.url
+          end
+        end
 
         class Market < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "Market ID"}
@@ -80,6 +91,28 @@ module CityWay
         end
 
 
+        class PublicOffice < Grape::Entity
+          expose :id, documentation: {:type => "Integer", :desc => "Public Office ID"}
+          expose :name, documentation: {:type => "Integer", :desc => "Public Office Name"}
+          expose :photo, documentation: {:type => "Integer", :desc => "Public Office Photo"}  do |public_office , options|
+            public_office.photo.url
+          end
+          expose :description, documentation: {:type => "Integer", :desc => "Public Office Description"}
+          expose :email, documentation: {:type => "Integer", :desc => "Public Office Email"}
+          expose :address, documentation: {:type => "Integer", :desc => "Public Office Address"}
+          expose :phone, documentation: {:type => "Integer", :desc => "Public Office Phone"}
+          expose :fax, documentation: {:type => "Integer", :desc => "Public Office fax"}
+          expose :days_open, documentation: {:type => "Integer", :desc => "Public Office days_open"} do |public_office , options|
+            public_office.days_open.collect { |x| Date::DAYNAMES[x] }.join(" , ") if public_office.days_open
+          end
+          expose :open_time, documentation: {:type => "Integer", :desc => "Public Office Open Time"} do |public_office , options|
+            public_office.open_time.strftime("%H:%M") if public_office.open_time
+          end
+          expose :close_time, documentation: {:type => "Integer", :desc => "Public Office Close Time"} do |public_office , options|
+            public_office.close_time.strftime("%H:%M") if public_office.close_time
+          end
+        end
+
         class Around < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "Around ID"}
           expose :photo, documentation: {:type => "String", :desc => "Around Photo"} do |around, options|
@@ -96,9 +129,87 @@ module CityWay
           end
         end
 
+
+        class Profile < Grape::Entity
+          expose :id, documentation: {:type => "Integer", :desc => "Profile ID"}
+          expose :role, documentation: {:type => "String", :desc => "Profile Role"}
+          expose :emails, documentation: {:type => "String", :desc => "Profile Emails"} do |profile, options|
+            profile.emails.join(",") if profile.emails
+          end
+          expose :fax, documentation: {:type => "String", :desc => "Profile Fax"}
+          expose :phone, documentation: {:type => "String", :desc => "Profile Phone"}
+          expose :days_open, documentation: {:type => "String", :desc => "Profile Days Open"} do |profile, options|
+            profile.days_open.collect { |x| Date::DAYNAMES[x] }.join(" , ") if profile.days_open
+          end
+          expose :appointment_start, documentation: {:type => "String", :desc => "Profile appointment start"}  do |profile , options|
+            profile.appointment_start.strftime("%H:%M")
+          end
+          expose :appointment_end, documentation: {:type => "String", :desc => "Profile appointment end"} do |profile , options|
+            profile.appointment_end.strftime("%H:%M")
+          end
+          expose :photo, documentation: {:type => "String", :desc => "Profile photo"}  do |profile, options|
+            profile.photo.url
+          end
+
+        end
+
+
+        class PoliticParty < Grape::Entity
+          expose :id, documentation: {:type => "Integer", :desc => "Politic Party ID"}
+          expose :name, documentation: {:type => "String", :desc => "Politic Party Name"}
+          expose :members do |politic_party, options|
+            CityWay::Api::V1::Entities::Profile.represent politic_party.profiles
+          end
+        end
+
+        class Administration < Grape::Entity
+          expose :major do |commonplace, options|
+            CityWay::Api::V1::Entities::Profile.represent commonplace.major
+          end
+          expose :city_council do |commonplace, options|
+            CityWay::Api::V1::Entities::Profile.represent commonplace.city_councils
+          end
+          expose :council do |commonplace, options|
+            CityWay::Api::V1::Entities::PoliticParty.represent commonplace.politic_groups
+          end
+        end
+
+        class Security < Grape::Entity
+          expose :id, documentation: {:type => "String", :desc => "Security ID"}
+          expose :name, documentation: {:type => "String", :desc => "Security name"}
+          expose :url, documentation: {:type => "String", :desc => "Security url"}
+        end
+
         class Commonplace < Grape::Entity
-          expose :photo, documentation: {:type => "String", :desc => "Commonplace Photo"} do |common, options|
+          expose :id, documentation: {:type => "Integer", :desc => "Comune ID"}
+          expose :photo, documentation: {:type => "String", :desc => "Comune Photo"} do |common, options|
             common.photo.url
+          end
+          expose :icon, documentation: {:type => "String", :desc => "Comune Icon"} do |common, options|
+            common.icon.url
+          end
+          expose :top_advertisements do |around, options|
+            CityWay::Api::V1::Entities::Advertisement.represent(around.city.active_advertisements(0))
+          end
+          expose :facebook, documentation: {:type => "string", :desc => "Comune Facebook"}
+          expose :twitter, documentation: {:type => "string", :desc => "Comune Twitter"}
+          expose :instagram, documentation: {:type => "string", :desc => "Comune Instagram"}
+          expose :google_plus, documentation: {:type => "string", :desc => "Comune G+"}
+          expose :history, documentation: {:type => "string", :desc => "Comune History"}
+          expose :news, documentation: {:type => "string", :desc => "Comune News"} do |common, options|
+            CityWay::Api::V1::Entities::News.represent(common.news)
+          end
+          expose :administration do |common, options|
+            CityWay::Api::V1::Entities::Administration.represent(common)
+          end
+          expose :public_offices do |common, options|
+            CityWay::Api::V1::Entities::PublicOffice.represent(common.public_offices)
+          end
+          expose :securities do |common, options|
+            CityWay::Api::V1::Entities::Security.represent(common.securities)
+          end
+          expose :bottom_advertisements do |around, options|
+            CityWay::Api::V1::Entities::Advertisement.represent(around.city.active_advertisements(1))
           end
         end
 
@@ -144,18 +255,7 @@ module CityWay
             CityWay::Api::V1::Entities::Around.represent(city.around)
           end
           expose :commonplace, if: lambda { |object, options| options[:sections].blank? || options[:sections] == 'city_hall' }, as: 'city_hall' do |city, options|
-            if options[:simple] == 'true'
-              {
-                photo: city.commonplace.photo.url
-              }
-            else
-              {
-                photo: city.commonplace.photo.url,
-                top_advertisements: CityWay::Api::V1::Entities::Advertisement.represent(city.active_advertisements(0)),
-                main_section: [],
-                bottom_advertisements: CityWay::Api::V1::Entities::Advertisement.represent(city.active_advertisements(1))
-              }
-            end
+            CityWay::Api::V1::Entities::Commonplace.represent(city.commonplace)
           end
           expose :discover, if: lambda { |object, options| options[:sections].blank? || options[:sections] == 'discover' } do |city, options|
             if options[:simple] == 'true'
@@ -345,6 +445,15 @@ module CityWay
           expose :merchant do |promo, options|
               CityWay::Api::V1::Entities::Merchant.represent promo.merchant
           end
+        end
+
+        class Message < Grape::Entity
+          expose :id, documentation: {:type => "Integer", :desc => "Message id"}
+          expose :firstname, documentation: {:type => "String", :desc => "Message firstname"}
+          expose :lastname, documentation: {:type => "String", :desc => "Message lastname"}
+          expose :email, documentation: {:type => "String", :desc => "Message email"}
+          expose :message, documentation: {:type => "String", :desc => "Message content"}
+          expose :message_type, documentation: {:type => "Integer", :desc => "Message message_type"}
         end
       end
     end
