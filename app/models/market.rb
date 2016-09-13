@@ -34,9 +34,14 @@ class Market < ActiveRecord::Base
   VALID_DAYS = (0..6).to_a
 
   def primary_photo
-    photos.where(is_primary: true) || [photos.first]
+    primary_photo = photos.where(is_primary: true)
+    if primary_photo.length > 0
+      primary_photo
+    else
+      [photos.first]
+    end
   end
-  
+
   private
 
   def validate_day_opens
