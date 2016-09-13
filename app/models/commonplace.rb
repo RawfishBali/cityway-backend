@@ -33,8 +33,4 @@ class Commonplace < ActiveRecord::Base
   def city_councils
     profiles.where(is_city_council_member: true)
   end
-
-  def politic_parties
-    profiles.group(:politic_group_id , :id)
-  end
 end
