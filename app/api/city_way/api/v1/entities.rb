@@ -25,7 +25,7 @@ module CityWay
           expose :instagram,  if: lambda { |object, options| options[:simple] == 'false' },documentation: {:type => "String", :desc => "Event Instagram"}
           expose :support_disabilities, documentation: {:type => "Boolean", :desc => "Event Disabilities Support"}
           expose :event_start, documentation: {:type => "DateTime", :desc => "Event Start"} do |event, options|
-            (Date.parse((event.event_start).to_s) - Date.today).to_i
+            event.event_start.strftime("%m/%d/%Y")
           end
           expose :distance, if: lambda { |object, options| options[:latitude] && options[:longitude] } do |event , options|
             event.distance_from([options[:latitude], options[:longitude]])
