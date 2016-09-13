@@ -5,7 +5,7 @@ module CityWay
 
         class Event < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "Event ID"}
-          expose :title, documentation: {:type => "String", :desc => "Event Title"}
+          expose :title, as: 'name',  documentation: {:type => "String", :desc => "Event Title"}
           expose :photo, documentation: {:type => "String", :desc => "Event Photo"} do |event, options|
             event.photo.url
           end
@@ -47,6 +47,7 @@ module CityWay
 
         class Market < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "Market ID"}
+          expose :name, documentation: {:type => "String", :desc => "Market Name"}
           expose :address, documentation: {:type => "String", :desc => "Market Address"}
           expose :latitude, documentation: {:type => "Float", :desc => "Market latitude"}
           expose :longitude, documentation: {:type => "Float", :desc => "Market longitude"}
@@ -74,6 +75,7 @@ module CityWay
 
         class Park < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "Park ID"}
+          expose :name, documentation: {:type => "String", :desc => "Park Name"}
           expose :address, documentation: {:type => "String", :desc => "Park Address"}
           expose :latitude, documentation: {:type => "Float", :desc => "Park latitude"}
           expose :longitude, documentation: {:type => "Float", :desc => "Park longitude"}
@@ -89,7 +91,6 @@ module CityWay
             end
           end
         end
-
 
         class PublicOffice < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "Public Office ID"}
