@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160906040656) do
+ActiveRecord::Schema.define(version: 20160913060404) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -151,8 +151,13 @@ ActiveRecord::Schema.define(version: 20160906040656) do
     t.string   "photo"
     t.string   "icon"
     t.integer  "city_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.text     "history"
+    t.string   "facebook"
+    t.string   "instagram"
+    t.string   "twitter"
+    t.string   "google_plus"
   end
 
   add_index "commonplaces", ["city_id"], name: "index_commonplaces_on_city_id", using: :btree
@@ -184,6 +189,8 @@ ActiveRecord::Schema.define(version: 20160906040656) do
     t.datetime "updated_at",                           null: false
   end
 
+  add_index "events", ["around_id"], name: "index_events_on_around_id", using: :btree
+
   create_table "identities", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "provider"
@@ -208,6 +215,7 @@ ActiveRecord::Schema.define(version: 20160906040656) do
     t.integer  "around_id"
   end
 
+  add_index "markets", ["around_id"], name: "index_markets_on_around_id", using: :btree
   add_index "markets", ["day_opens"], name: "index_markets_on_day_opens", using: :btree
 
   create_table "merchants", force: :cascade do |t|
@@ -228,10 +236,37 @@ ActiveRecord::Schema.define(version: 20160906040656) do
     t.integer  "category_id"
     t.string   "photo"
     t.string   "icon"
+    t.string   "twitter"
+    t.string   "google_plus"
   end
 
   add_index "merchants", ["category_id"], name: "index_merchants_on_category_id", using: :btree
   add_index "merchants", ["city_id"], name: "index_merchants_on_city_id", using: :btree
+
+  create_table "messages", force: :cascade do |t|
+    t.string   "firstname"
+    t.string   "lastname"
+    t.string   "email"
+    t.integer  "message_type",   null: false
+    t.text     "message",        null: false
+    t.integer  "commonplace_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "messages", ["commonplace_id"], name: "index_messages_on_commonplace_id", using: :btree
+
+  create_table "news", force: :cascade do |t|
+    t.string   "title",          null: false
+    t.string   "photo"
+    t.datetime "published_at",   null: false
+    t.text     "description",    null: false
+    t.integer  "commonplace_id", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "news", ["commonplace_id"], name: "index_news_on_commonplace_id", using: :btree
 
   create_table "parks", force: :cascade do |t|
     t.string   "name"
@@ -245,6 +280,8 @@ ActiveRecord::Schema.define(version: 20160906040656) do
     t.datetime "updated_at",           null: false
   end
 
+  add_index "parks", ["around_id"], name: "index_parks_on_around_id", using: :btree
+
   create_table "photos", force: :cascade do |t|
     t.string   "picture"
     t.integer  "imageable_id"
@@ -255,6 +292,36 @@ ActiveRecord::Schema.define(version: 20160906040656) do
   end
 
   add_index "photos", ["imageable_type", "imageable_id"], name: "index_photos_on_imageable_type_and_imageable_id", using: :btree
+
+  create_table "politic_groups", force: :cascade do |t|
+    t.string   "name",           null: false
+    t.integer  "commonplace_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "politic_groups", ["commonplace_id"], name: "index_politic_groups_on_commonplace_id", using: :btree
+
+  create_table "profiles", force: :cascade do |t|
+    t.string   "name",                                   null: false
+    t.string   "role"
+    t.string   "emails",                                              array: true
+    t.string   "phone"
+    t.string   "fax"
+    t.integer  "days_open",                                           array: true
+    t.time     "appointment_start"
+    t.time     "appointment_end"
+    t.string   "photo"
+    t.boolean  "is_major",               default: false
+    t.boolean  "is_city_council_member", default: false
+    t.integer  "politic_group_id"
+    t.integer  "commonplace_id"
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+  end
+
+  add_index "profiles", ["commonplace_id"], name: "index_profiles_on_commonplace_id", using: :btree
+  add_index "profiles", ["politic_group_id"], name: "index_profiles_on_politic_group_id", using: :btree
 
   create_table "promos", force: :cascade do |t|
     t.text     "title"
@@ -271,6 +338,27 @@ ActiveRecord::Schema.define(version: 20160906040656) do
     t.boolean  "approval",             default: false
   end
 
+  add_index "promos", ["city_id"], name: "index_promos_on_city_id", using: :btree
+  add_index "promos", ["merchant_id"], name: "index_promos_on_merchant_id", using: :btree
+
+  create_table "public_offices", force: :cascade do |t|
+    t.string   "name",           null: false
+    t.string   "photo"
+    t.text     "description"
+    t.string   "email"
+    t.string   "address"
+    t.string   "phone"
+    t.string   "fax"
+    t.integer  "days_open",                   array: true
+    t.time     "open_time"
+    t.time     "close_time"
+    t.integer  "commonplace_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "public_offices", ["commonplace_id"], name: "index_public_offices_on_commonplace_id", using: :btree
+
   create_table "roles", force: :cascade do |t|
     t.string   "name"
     t.integer  "resource_id"
@@ -281,6 +369,16 @@ ActiveRecord::Schema.define(version: 20160906040656) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
+
+  create_table "securities", force: :cascade do |t|
+    t.string   "name",           null: false
+    t.string   "url",            null: false
+    t.integer  "commonplace_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "securities", ["commonplace_id"], name: "index_securities_on_commonplace_id", using: :btree
 
   create_table "subcategories", force: :cascade do |t|
     t.string   "name",        null: false

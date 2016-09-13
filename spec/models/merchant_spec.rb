@@ -20,6 +20,8 @@
 #  category_id          :integer
 #  photo                :string
 #  icon                 :string
+#  twitter              :string
+#  google_plus          :string
 #
 
 require 'rails_helper'
