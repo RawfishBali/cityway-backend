@@ -133,10 +133,14 @@ module CityWay
         class Profile < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "Profile ID"}
           expose :role, documentation: {:type => "String", :desc => "Profile Role"}
-          expose :emails, documentation: {:type => "String", :desc => "Profile Emails"}
+          expose :emails, documentation: {:type => "String", :desc => "Profile Emails"} do |profile, options|
+            profile.emails.join(",") if profile.emails
+          end
           expose :fax, documentation: {:type => "String", :desc => "Profile Fax"}
           expose :phone, documentation: {:type => "String", :desc => "Profile Phone"}
-          expose :days_open, documentation: {:type => "String", :desc => "Profile Days Open"}
+          expose :days_open, documentation: {:type => "String", :desc => "Profile Days Open"} do |profile, options|
+            profile.days_open.collect { |x| Date::DAYNAMES[x] }.join(" , ") if profile.days_open
+          end
           expose :appointment_start, documentation: {:type => "String", :desc => "Profile appointment start"}  do |profile , options|
             profile.appointment_start.strftime("%H:%M")
           end
@@ -149,6 +153,15 @@ module CityWay
 
         end
 
+
+        class PoliticParty < Grape::Entity
+          expose :id, documentation: {:type => "Integer", :desc => "Politic Party ID"}
+          expose :name, documentation: {:type => "String", :desc => "Politic Party Name"}
+          expose :members do |politic_party, options|
+            CityWay::Api::V1::Entities::Profile.represent politic_party.profiles
+          end
+        end
+
         class Administration < Grape::Entity
           expose :major do |commonplace, options|
             CityWay::Api::V1::Entities::Profile.represent commonplace.major
@@ -157,7 +170,7 @@ module CityWay
             CityWay::Api::V1::Entities::Profile.represent commonplace.city_councils
           end
           expose :council do |commonplace, options|
-            CityWay::Api::V1::Entities::Profile.represent commonplace.politic_parties
+            CityWay::Api::V1::Entities::PoliticParty.represent commonplace.politic_groups
           end
         end
 
