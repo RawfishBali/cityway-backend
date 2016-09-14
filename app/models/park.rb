@@ -27,6 +27,11 @@ class Park < ActiveRecord::Base
   after_validation :geocode
 
   def primary_photo
-    photos.where(is_primary: true).first || [photos.first]
+    primary_photo = photos.where(is_primary: true).limit(1)
+    if primary_photo.length > 0
+      primary_photo
+    else
+      [photos.first]
+    end
   end
 end
