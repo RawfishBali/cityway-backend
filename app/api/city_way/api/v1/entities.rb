@@ -6,8 +6,8 @@ module CityWay
         class Event < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "Event ID"}
           expose :title, as: 'name',  documentation: {:type => "String", :desc => "Event Title"}
-          expose :photo, documentation: {:type => "String", :desc => "Event Photo"} do |event, options|
-            event.photo.url
+          expose :photos, documentation: {:type => "String", :desc => "Event Photo"} do |event, options|
+            CityWay::Api::V1::Entities::Photo.represent([event.photo]) if event.photo
           end
           expose :address, documentation: {:type => "String", :desc => "Event Address"}
           expose :latitude, documentation: {:type => "Float", :desc => "Event Latitude"}
@@ -361,7 +361,12 @@ module CityWay
 
         class Photo < Grape::Entity
           expose :picture, as: 'photo' do |photo, options|
-            photo.picture.url
+            if photo.class.name == 'Photo'
+              photo.picture.url
+            else
+              photo.url
+            end
+
           end
         end
 
