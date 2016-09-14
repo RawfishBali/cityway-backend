@@ -11,5 +11,19 @@
 
 class Discover < ActiveRecord::Base
   belongs_to :city
+
+  has_many :places
+  has_many :culinaries
+
   mount_uploader :photo, PhotoUploader
+
+  def place_by_type place_type
+    return [] if (Place.place_types[place_type]).blank?
+    places.where("place_type = ?",Place.place_types[place_type])
+  end
+
+  def culinary_by_type culinary_type
+    return [] if (Culinary.culinary_types[culinary_type]).blank?
+    culinaries.where("culinary_type = ?",Culinary.culinary_types[culinary_type])
+  end
 end
