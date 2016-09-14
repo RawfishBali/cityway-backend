@@ -26,6 +26,29 @@ module CityWay
           expose :google_plus,if: lambda { |object, options| options[:simple] == 'false' && object.google_plus }, documentation: {:type => "String", :desc => "Place google_plus"}
         end
 
+        class Step < Grape::Entity
+          expose :id, documentation: {:type => "Integer", :desc => "Step ID"}
+          expose :address, documentation: {:type => "String", :desc => "Step address"}
+          expose :latitude, documentation: {:type => "Float", :desc => "Step latitude"}
+          expose :longitude, documentation: {:type => "Float", :desc => "Step longitude"}
+        end
+
+        class Itinerary < Grape::Entity
+          expose :id, documentation: {:type => "Integer", :desc => "Itinerary ID"}
+          expose :name, documentation: {:type => "String", :desc => "Itinerary Name"}
+          expose :description, documentation: {:type => "Text", :desc => "Itinerary description"}
+          expose :photos, documentation: {:type => "string", :desc => "Park photo"} do |itinerary , options|
+            if options[:simple] == 'false'
+              CityWay::Api::V1::Entities::Photo.represent(itinerary.photos) if itinerary.photos.length > 0
+            else
+              CityWay::Api::V1::Entities::Photo.represent(itinerary.primary_photo) if itinerary.photos.length > 0
+            end
+          end
+          expose :steps,if: lambda { |object, options| options[:simple] == 'false' && object.steps } do |itinerary , options|
+            CityWay::Api::V1::Entities::Step.represent(itinerary.steps)
+          end
+        end
+
         class Event < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "Event ID"}
           expose :title, as: 'name',  documentation: {:type => "String", :desc => "Event Title"}
