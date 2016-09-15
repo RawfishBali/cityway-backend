@@ -6,10 +6,10 @@ module CityWay
         class Place < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "Place ID"}
           expose :name, documentation: {:type => "String", :desc => "Place Name"}
-          expose :description, documentation: {:type => "String", :desc => "Place description"}
-          expose :address, documentation: {:type => "String", :desc => "Place address"}
-          expose :latitude, documentation: {:type => "Float", :desc => "Place latitude"}
-          expose :longitude, documentation: {:type => "Float", :desc => "Place longitude"}
+          expose :description, documentation: {:type => "String", :desc => "Place description"}, if: lambda { |object, options| options[:simple] == 'false'}
+          expose :address, documentation: {:type => "String", :desc => "Place address"}, if: lambda { |object, options| options[:simple] == 'false'}
+          expose :latitude, documentation: {:type => "Float", :desc => "Place latitude"}, if: lambda { |object, options| options[:simple] == 'false'}
+          expose :longitude, documentation: {:type => "Float", :desc => "Place longitude"}, if: lambda { |object, options| options[:simple] == 'false'}
           expose :email, if: lambda { |object, options| options[:simple] == 'false' && object.email }, documentation: {:type => "String", :desc => "Place email"}
           expose :website, if: lambda { |object, options| options[:simple] == 'false' && object.website }, documentation: {:type => "String", :desc => "Place website"}
           expose :facebook, if: lambda { |object, options| options[:simple] == 'false' && object.facebook }, documentation: {:type => "String", :desc => "Place facebook"} do |place, options|

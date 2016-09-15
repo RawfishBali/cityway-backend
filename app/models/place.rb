@@ -35,7 +35,6 @@ class Place < ActiveRecord::Base
   after_validation :geocode
 
   has_many :photos, as: :imageable, dependent: :destroy
-  has_many :business_hours
 
   validate :validate_number_of_photos
 
@@ -59,5 +58,8 @@ class Place < ActiveRecord::Base
       self.business_hours << BusinessHour.create(day: i,morning_open_time: '00:00', morning_close_time: '00:00', evening_open_time: '00:00', evening_close_time: '00:00')
     end
   end
+
+  
+
 
 end
