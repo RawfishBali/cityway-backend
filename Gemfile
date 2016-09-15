@@ -58,6 +58,8 @@ gem 'newrelic_rpm'
 
 gem 'browser'
 
+gem 'skylight'
+
 group :production do
   gem 'rails_12factor'
 end
