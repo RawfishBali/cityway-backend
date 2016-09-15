@@ -274,9 +274,6 @@ module CityWay
           expose :securities do |common, options|
             CityWay::Api::V1::Entities::Security.represent(common.securities)
           end
-          expose :bottom_advertisements do |around, options|
-            CityWay::Api::V1::Entities::Advertisement.represent(around.city.active_advertisements(1))
-          end
         end
 
         class Discover < Grape::Entity
