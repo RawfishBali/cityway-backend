@@ -318,6 +318,9 @@ module CityWay
           expose :icon,if: lambda { |object, options| !object.parent_id }, documentation: {:type => "String", :desc => "Category Icon"} do |category, options|
             category.icon.url
           end
+          expose :subcategories,if: lambda { |object, options| !object.parent_id && object.subcategories.length > 0 } do |category, options|
+            CityWay::Api::V1::Entities::Category.represent(category.subcategories)
+          end
         end
 
         class CategoryWithMerchants < Grape::Entity
