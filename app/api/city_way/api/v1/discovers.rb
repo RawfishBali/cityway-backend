@@ -10,7 +10,7 @@ module CityWay
             authenticate!
           end
 
-          desc "Visit city"
+          desc "Discover city"
           params do
             requires :id , type: Integer, values: -> { Discover.ids }
             requires :section , type: String, values: -> { ['visit', 'culture', 'culinary', 'story'] }

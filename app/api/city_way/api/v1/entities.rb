@@ -36,7 +36,7 @@ module CityWay
         class Itinerary < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "Itinerary ID"}
           expose :name, documentation: {:type => "String", :desc => "Itinerary Name"}
-          expose :description, documentation: {:type => "Text", :desc => "Itinerary description"}
+          expose :description,if: lambda { |object, options| options[:simple] == 'false'}, documentation: {:type => "Text", :desc => "Itinerary description"}
           expose :photos, documentation: {:type => "string", :desc => "Park photo"} do |itinerary , options|
             if options[:simple] == 'false'
               CityWay::Api::V1::Entities::Photo.represent(itinerary.photos) if itinerary.photos.length > 0
@@ -304,7 +304,9 @@ module CityWay
         end
 
         class DiscoverCityStories < Grape::Entity
-          expose :itineraries
+          expose :itineraries do |discover, options|
+              CityWay::Api::V1::Entities::Itinerary.represent discover.itineraries
+          end
         end
 
         class Utility < Grape::Entity
