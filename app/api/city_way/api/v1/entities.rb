@@ -277,6 +277,7 @@ module CityWay
         end
 
         class Discover < Grape::Entity
+          expose :id, documentation: {:type => "Integer", :desc => "Discover ID"}
           expose :top_advertisements do |discover, options|
             CityWay::Api::V1::Entities::Advertisement.represent(discover.city.active_advertisements(0))
           end
