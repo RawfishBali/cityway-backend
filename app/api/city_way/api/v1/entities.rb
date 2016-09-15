@@ -196,7 +196,6 @@ module CityWay
           end
         end
 
-
         class Profile < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "Profile ID"}
           expose :role, documentation: {:type => "String", :desc => "Profile Role"}
@@ -218,7 +217,6 @@ module CityWay
             profile.photo.url
           end
         end
-
 
         class PoliticParty < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "Politic Party ID"}
@@ -287,7 +285,6 @@ module CityWay
           expose :bottom_advertisements do |discover, options|
             CityWay::Api::V1::Entities::Advertisement.represent(discover.city.active_advertisements(1))
           end
-
         end
 
         class DiscoverVistingCity < Grape::Entity
@@ -367,18 +364,7 @@ module CityWay
             CityWay::Api::V1::Entities::Commonplace.represent(city.commonplace)
           end
           expose :discover, if: lambda { |object, options| options[:sections].blank? || options[:sections] == 'discover' } do |city, options|
-            if options[:simple] == 'true'
-              {
-                photo: city.discover.photo.url
-              }
-            else
-              {
-                photo: city.discover.photo.url,
-                top_advertisements: CityWay::Api::V1::Entities::Advertisement.represent(city.active_advertisements(0)),
-                main_section: [],
-                bottom_advertisements: CityWay::Api::V1::Entities::Advertisement.represent(city.active_advertisements(1))
-              }
-            end
+            CityWay::Api::V1::Entities::Discover.represent(city.discover)
           end
           expose :utility, if: lambda { |object, options| options[:sections].blank? || options[:sections] == 'utility' } do |city, options|
             if options[:simple] == 'true'
