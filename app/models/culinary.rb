@@ -34,5 +34,5 @@ class Culinary < ActiveRecord::Base
     else
       [photos.first]
     end
-   end
+  end
 end

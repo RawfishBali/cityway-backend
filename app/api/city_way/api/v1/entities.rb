@@ -24,6 +24,13 @@ module CityWay
           expose :instagram,if: lambda { |object, options| options[:simple] == 'false' && object.instagram }, documentation: {:type => "String", :desc => "Place instagram"}
           expose :twitter, if: lambda { |object, options| options[:simple] == 'false' && object.twitter }, documentation: {:type => "String", :desc => "Place twitter"}
           expose :google_plus,if: lambda { |object, options| options[:simple] == 'false' && object.google_plus }, documentation: {:type => "String", :desc => "Place google_plus"}
+          expose :photos, documentation: {:type => "string", :desc => "Place photo"} do |place , options|
+            if options[:simple] == 'false'
+              CityWay::Api::V1::Entities::Photo.represent(place.photos) if place.photos.length > 0
+            else
+              CityWay::Api::V1::Entities::Photo.represent(place.primary_photo) if place.photos.length > 0
+            end
+          end
         end
 
         class Step < Grape::Entity
@@ -287,23 +294,25 @@ module CityWay
 
         class DiscoverVistingCity < Grape::Entity
           expose :monuments do |discover, options|
-            discover.place_by_type "monument"
+            CityWay::Api::V1::Entities::Place.represent discover.place_by_type "monument"
           end
-          expose :itineraries
+          expose :itineraries do |discover, options|
+            CityWay::Api::V1::Entities::Itinerary.represent discover.itineraries
+          end
         end
 
         class DiscoverCulture < Grape::Entity
           expose :libraries do |discover, options|
-            discover.place_by_type "library"
+            CityWay::Api::V1::Entities::Place.represent discover.place_by_type "library"
           end
           expose :theaters do |discover, options|
-            discover.place_by_type "theater"
+            CityWay::Api::V1::Entities::Place.represent discover.place_by_type "theater"
           end
           expose :museums do |discover, options|
-            discover.place_by_type "museum"
+            CityWay::Api::V1::Entities::Place.represent discover.place_by_type "museum"
           end
           expose :cinemas do |discover, options|
-            discover.place_by_type "cinema"
+            CityWay::Api::V1::Entities::Place.represent discover.place_by_type "cinema"
           end
         end
 

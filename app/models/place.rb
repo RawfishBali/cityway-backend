@@ -34,4 +34,29 @@ class Place < ActiveRecord::Base
   geocoded_by :address
   after_validation :geocode
 
+  has_many :photos, as: :imageable, dependent: :destroy
+
+  validate :validate_number_of_photos
+
+  after_create :create_default_business_hours
+
+  def validate_number_of_photos
+    errors.add(:photos, "Maximum photos is 3") if photos.size > 2
+  end
+
+  def primary_photo
+    primary_photo = photos.where(is_primary: true).limit(1)
+    if primary_photo.length > 0
+      primary_photo
+    else
+      [photos.first]
+    end
+  end
+
+  def create_default_business_hours
+    7.times do |i|
+      self.business_hours << BusinessHour.create(day: i,morning_open_time: '00:00', morning_close_time: '00:00', evening_open_time: '00:00', evening_close_time: '00:00')
+    end
+  end
+
 end
