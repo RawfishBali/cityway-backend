@@ -35,6 +35,7 @@ class Place < ActiveRecord::Base
   after_validation :geocode
 
   has_many :photos, as: :imageable, dependent: :destroy
+  has_many :business_hours
 
   validate :validate_number_of_photos
 
