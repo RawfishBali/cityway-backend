@@ -3,6 +3,72 @@ module CityWay
     module V1
       module Entities
 
+        class Place < Grape::Entity
+          expose :id, documentation: {:type => "Integer", :desc => "Place ID"}
+          expose :name, documentation: {:type => "String", :desc => "Place Name"}
+          expose :description, documentation: {:type => "String", :desc => "Place description"}, if: lambda { |object, options| options[:simple] == 'false'}
+          expose :address, documentation: {:type => "String", :desc => "Place address"}, if: lambda { |object, options| options[:simple] == 'false'}
+          expose :latitude, documentation: {:type => "Float", :desc => "Place latitude"}, if: lambda { |object, options| options[:simple] == 'false'}
+          expose :longitude, documentation: {:type => "Float", :desc => "Place longitude"}, if: lambda { |object, options| options[:simple] == 'false'}
+          expose :email, if: lambda { |object, options| options[:simple] == 'false' && object.email }, documentation: {:type => "String", :desc => "Place email"}
+          expose :website, if: lambda { |object, options| options[:simple] == 'false' && object.website }, documentation: {:type => "String", :desc => "Place website"}
+          expose :facebook, if: lambda { |object, options| options[:simple] == 'false' && object.facebook }, documentation: {:type => "String", :desc => "Place facebook"} do |place, options|
+            matches = place.facebook.match(/(?:https?:\/\/)?(?:www\.)?facebook\.com\/(?:(?:\w)*#!\/)?(?:groups\/)?(?:pages\/)?(?:[\w\-]*\/)*?(\/)?([\w\-\.]*)/)
+            if matches
+              matches[2]
+            else
+              place.facebook
+            end
+
+          end
+          expose :instagram,if: lambda { |object, options| options[:simple] == 'false' && object.instagram }, documentation: {:type => "String", :desc => "Place instagram"}
+          expose :twitter, if: lambda { |object, options| options[:simple] == 'false' && object.twitter }, documentation: {:type => "String", :desc => "Place twitter"}
+          expose :google_plus,if: lambda { |object, options| options[:simple] == 'false' && object.google_plus }, documentation: {:type => "String", :desc => "Place google_plus"}
+          expose :photos, documentation: {:type => "string", :desc => "Place photo"} do |place , options|
+            if options[:simple] == 'false'
+              CityWay::Api::V1::Entities::Photo.represent(place.photos) if place.photos.length > 0
+            else
+              CityWay::Api::V1::Entities::Photo.represent(place.primary_photo) if place.photos.length > 0
+            end
+          end
+        end
+
+        class Step < Grape::Entity
+          expose :id, documentation: {:type => "Integer", :desc => "Step ID"}
+          expose :address, documentation: {:type => "String", :desc => "Step address"}
+          expose :latitude, documentation: {:type => "Float", :desc => "Step latitude"}
+          expose :longitude, documentation: {:type => "Float", :desc => "Step longitude"}
+        end
+
+        class Itinerary < Grape::Entity
+          expose :id, documentation: {:type => "Integer", :desc => "Itinerary ID"}
+          expose :name, documentation: {:type => "String", :desc => "Itinerary Name"}
+          expose :description,if: lambda { |object, options| options[:simple] == 'false'}, documentation: {:type => "Text", :desc => "Itinerary description"}
+          expose :photos, documentation: {:type => "string", :desc => "Park photo"} do |itinerary , options|
+            if options[:simple] == 'false'
+              CityWay::Api::V1::Entities::Photo.represent(itinerary.photos) if itinerary.photos.length > 0
+            else
+              CityWay::Api::V1::Entities::Photo.represent(itinerary.primary_photo) if itinerary.photos.length > 0
+            end
+          end
+          expose :steps,if: lambda { |object, options| options[:simple] == 'false' && object.steps } do |itinerary , options|
+            CityWay::Api::V1::Entities::Step.represent(itinerary.steps)
+          end
+        end
+
+        class Culinary < Grape::Entity
+          expose :id, documentation: {:type => "Integer", :desc => "Culinary ID"}
+          expose :name, documentation: {:type => "String", :desc => "Culinary Name"}
+          expose :description,if: lambda { |object, options| options[:simple] == 'false'}, documentation: {:type => "Text", :desc => "Culinary description"}
+          expose :photos, documentation: {:type => "string", :desc => "Culinary photo"} do |culinary , options|
+            if options[:simple] == 'false'
+              CityWay::Api::V1::Entities::Photo.represent(culinary.photos) if culinary.photos.length > 0
+            else
+              CityWay::Api::V1::Entities::Photo.represent(culinary.primary_photo) if culinary.photos.length > 0
+            end
+          end
+        end
+
         class Event < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "Event ID"}
           expose :title, as: 'name',  documentation: {:type => "String", :desc => "Event Title"}
@@ -151,7 +217,6 @@ module CityWay
           expose :photo, documentation: {:type => "String", :desc => "Profile photo"}  do |profile, options|
             profile.photo.url
           end
-
         end
 
 
@@ -215,8 +280,54 @@ module CityWay
         end
 
         class Discover < Grape::Entity
-          expose :photo, documentation: {:type => "String", :desc => "Discover Photo"} do |disc, options|
-            disc.photo.url
+          expose :top_advertisements do |discover, options|
+            CityWay::Api::V1::Entities::Advertisement.represent(discover.city.active_advertisements(0))
+          end
+          expose :photo, documentation: {:type => "String", :desc => "Discover Photo"} do |discover, options|
+            discover.photo.url
+          end
+          expose :bottom_advertisements do |discover, options|
+            CityWay::Api::V1::Entities::Advertisement.represent(discover.city.active_advertisements(1))
+          end
+
+        end
+
+        class DiscoverVistingCity < Grape::Entity
+          expose :monuments do |discover, options|
+            CityWay::Api::V1::Entities::Place.represent discover.place_by_type "monument"
+          end
+          expose :itineraries do |discover, options|
+            CityWay::Api::V1::Entities::Itinerary.represent discover.itineraries
+          end
+        end
+
+        class DiscoverCulture < Grape::Entity
+          expose :libraries do |discover, options|
+            CityWay::Api::V1::Entities::Place.represent discover.place_by_type "library"
+          end
+          expose :theaters do |discover, options|
+            CityWay::Api::V1::Entities::Place.represent discover.place_by_type "theater"
+          end
+          expose :museums do |discover, options|
+            CityWay::Api::V1::Entities::Place.represent discover.place_by_type "museum"
+          end
+          expose :cinemas do |discover, options|
+            CityWay::Api::V1::Entities::Place.represent discover.place_by_type "cinema"
+          end
+        end
+
+        class DiscoverCulinary < Grape::Entity
+          expose :grastonomies do |discover, options|
+            CityWay::Api::V1::Entities::Culinary.represent discover.culinary_by_type "grastonomy"
+          end
+          expose :traditional_culinaries do |discover, options|
+            CityWay::Api::V1::Entities::Culinary.represent discover.culinary_by_type "traditional"
+          end
+        end
+
+        class DiscoverCityStories < Grape::Entity
+          expose :itineraries do |discover, options|
+            CityWay::Api::V1::Entities::Itinerary.represent discover.itineraries
           end
         end
 
@@ -250,7 +361,6 @@ module CityWay
                 bottom_advertisements: CityWay::Api::V1::Entities::Advertisement.represent(city.active_advertisements(1))
               }
             end
-
           end
           expose :around, if: lambda { |object, options| options[:sections].blank? || options[:sections] == 'around' } do |city, options|
             CityWay::Api::V1::Entities::Around.represent(city.around)
@@ -394,7 +504,7 @@ module CityWay
           expose :email,if: lambda { |object, options| options[:simple] == 'false' && object.email }, documentation: {:type => "string", :desc => "Merchant email"}
           expose :website, if: lambda { |object, options| options[:simple] == 'false' && object.website }, documentation: {:type => "string", :desc => "Merchant website"}
           expose :facebook, if: lambda { |object, options| options[:simple] == 'false' && object.facebook },
-            documentation: {:type => "string", :desc => "Merchant facebook"} do |merchant, options|
+          documentation: {:type => "string", :desc => "Merchant facebook"} do |merchant, options|
             matches = merchant.facebook.match(/(?:https?:\/\/)?(?:www\.)?facebook\.com\/(?:(?:\w)*#!\/)?(?:groups\/)?(?:pages\/)?(?:[\w\-]*\/)*?(\/)?([\w\-\.]*)/)
             if matches
               matches[2]
@@ -452,7 +562,7 @@ module CityWay
             promo.merchant.distance_from([options[:latitude], options[:longitude]])
           end
           expose :merchant do |promo, options|
-              CityWay::Api::V1::Entities::Merchant.represent promo.merchant
+            CityWay::Api::V1::Entities::Merchant.represent promo.merchant
           end
         end
 

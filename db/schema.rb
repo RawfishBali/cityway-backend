@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160913060404) do
+ActiveRecord::Schema.define(version: 20160914073827) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -162,6 +162,15 @@ ActiveRecord::Schema.define(version: 20160913060404) do
 
   add_index "commonplaces", ["city_id"], name: "index_commonplaces_on_city_id", using: :btree
 
+  create_table "culinaries", force: :cascade do |t|
+    t.string   "name",          null: false
+    t.text     "description"
+    t.integer  "discover_id"
+    t.integer  "culinary_type"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
   create_table "discovers", force: :cascade do |t|
     t.string   "photo"
     t.integer  "city_id"
@@ -200,6 +209,14 @@ ActiveRecord::Schema.define(version: 20160913060404) do
   end
 
   add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
+
+  create_table "itineraries", force: :cascade do |t|
+    t.string   "name",        null: false
+    t.text     "description"
+    t.integer  "discover_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "markets", force: :cascade do |t|
     t.string   "name",        null: false
@@ -293,6 +310,24 @@ ActiveRecord::Schema.define(version: 20160913060404) do
 
   add_index "photos", ["imageable_type", "imageable_id"], name: "index_photos_on_imageable_type_and_imageable_id", using: :btree
 
+  create_table "places", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.string   "address"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "email"
+    t.string   "website"
+    t.string   "facebook"
+    t.string   "instagram"
+    t.string   "twitter"
+    t.string   "google_plus"
+    t.integer  "discover_id"
+    t.integer  "place_type"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "politic_groups", force: :cascade do |t|
     t.string   "name",           null: false
     t.integer  "commonplace_id"
@@ -379,6 +414,15 @@ ActiveRecord::Schema.define(version: 20160913060404) do
   end
 
   add_index "securities", ["commonplace_id"], name: "index_securities_on_commonplace_id", using: :btree
+
+  create_table "steps", force: :cascade do |t|
+    t.string   "address",      null: false
+    t.float    "latitude"
+    t.float    "longitude"
+    t.integer  "itinerary_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
 
   create_table "subcategories", force: :cascade do |t|
     t.string   "name",        null: false

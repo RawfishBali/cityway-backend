@@ -97,6 +97,10 @@ module CityWay
         mount CityWay::Api::V1::Parks
         mount CityWay::Api::V1::CityHalls
         mount CityWay::Api::V1::Messages
+        mount CityWay::Api::V1::Discovers
+        mount CityWay::Api::V1::Itineraries
+        mount CityWay::Api::V1::Culinaries
+        mount CityWay::Api::V1::Places
       end
     end
   end
