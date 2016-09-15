@@ -49,6 +49,19 @@ module CityWay
           end
         end
 
+        class Culinary < Grape::Entity
+          expose :id, documentation: {:type => "Integer", :desc => "Culinary ID"}
+          expose :name, documentation: {:type => "String", :desc => "Culinary Name"}
+          expose :description,if: lambda { |object, options| options[:simple] == 'false'}, documentation: {:type => "Text", :desc => "Culinary description"}
+          expose :photos, documentation: {:type => "string", :desc => "Culinary photo"} do |culinary , options|
+            if options[:simple] == 'false'
+              CityWay::Api::V1::Entities::Photo.represent(culinary.photos) if culinary.photos.length > 0
+            else
+              CityWay::Api::V1::Entities::Photo.represent(culinary.primary_photo) if culinary.photos.length > 0
+            end
+          end
+        end
+
         class Event < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "Event ID"}
           expose :title, as: 'name',  documentation: {:type => "String", :desc => "Event Title"}
@@ -296,16 +309,16 @@ module CityWay
 
         class DiscoverCulinary < Grape::Entity
           expose :grastonomies do |discover, options|
-            discover.culinary_by_type "traditional"
+            CityWay::Api::V1::Entities::Culinary.represent discover.culinary_by_type "grastonomy"
           end
           expose :traditional_culinaries do |discover, options|
-            discover.culinary_by_type "grastonomy"
+            CityWay::Api::V1::Entities::Culinary.represent discover.culinary_by_type "traditional"
           end
         end
 
         class DiscoverCityStories < Grape::Entity
           expose :itineraries do |discover, options|
-              CityWay::Api::V1::Entities::Itinerary.represent discover.itineraries
+            CityWay::Api::V1::Entities::Itinerary.represent discover.itineraries
           end
         end
 

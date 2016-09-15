@@ -99,6 +99,7 @@ module CityWay
         mount CityWay::Api::V1::Messages
         mount CityWay::Api::V1::Discovers
         mount CityWay::Api::V1::Itineraries
+        mount CityWay::Api::V1::Culinaries
       end
     end
   end
