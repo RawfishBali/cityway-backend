@@ -260,18 +260,18 @@ module CityWay
           expose :instagram, documentation: {:type => "string", :desc => "Comune Instagram"}
           expose :google_plus, documentation: {:type => "string", :desc => "Comune G+"}
           expose :history, documentation: {:type => "string", :desc => "Comune History"}
-          expose :news, documentation: {:type => "string", :desc => "Comune News"} do |common, options|
-            CityWay::Api::V1::Entities::News.represent(common.news)
-          end
-          expose :administration do |common, options|
-            CityWay::Api::V1::Entities::Administration.represent(common)
-          end
-          expose :public_offices do |common, options|
-            CityWay::Api::V1::Entities::PublicOffice.represent(common.public_offices)
-          end
-          expose :securities do |common, options|
-            CityWay::Api::V1::Entities::Security.represent(common.securities)
-          end
+          # expose :news, if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "string", :desc => "Comune News"} do |common, options|
+          #   CityWay::Api::V1::Entities::News.represent(common.news)
+          # end
+          # expose :administration do |common, options|
+          #   CityWay::Api::V1::Entities::Administration.represent(common)
+          # end
+          # expose :public_offices,if: lambda { |object, options| options[:simple] == 'false' } do |common, options|
+          #   CityWay::Api::V1::Entities::PublicOffice.represent(common.public_offices)
+          # end
+          # expose :securities,if: lambda { |object, options| options[:simple] == 'false' } do |common, options|
+          #   CityWay::Api::V1::Entities::Security.represent(common.securities)
+          # end
         end
 
         class Discover < Grape::Entity
@@ -332,6 +332,36 @@ module CityWay
           end
         end
 
+        class Weather < Grape::Entity
+          expose :temperature do |weather, options|
+            weather.currently[:temperature]
+          end
+          expose :weather_icon do |weather, options|
+            weather.currently[:icon]
+          end
+          expose :weather_message do |weather, options|
+            weather.currently[:summary]
+          end
+        end
+
+        class Home < Grape::Entity
+          expose :photo do |home , options|
+            home.photo.url
+          end
+          expose :weather do |home, options|
+            CityWay::Api::V1::Entities::Weather.represent options[:forecast]
+          end
+          expose :top_advertisements do |home , options|
+            CityWay::Api::V1::Entities::Advertisement.represent(home.active_advertisements(0))
+          end
+          expose :categories do |home , options|
+            CityWay::Api::V1::Entities::Category.represent(home.categories)
+          end
+          expose :bottom_advertisements do |home , options|
+            CityWay::Api::V1::Entities::Advertisement.represent(home.active_advertisements(1))
+          end
+        end
+
         class City < Grape::Entity
           expose :id, documentation: {:type => "integer", :desc => "City ID"}, if: lambda { |object, options| !object.id.blank? }
           expose :name, documentation: {:type => "string", :desc => "City Name"}
@@ -339,23 +369,7 @@ module CityWay
           expose :longitude, documentation: {:type => "float", :desc => "City Longitude"}
           expose :distance, if: lambda { |object, options| object.respond_to?(:distance) }
           expose :home, if: lambda { |object, options| options[:sections].blank? || options[:sections] == 'home'  } do |city, options|
-            if options[:simple] == 'true'
-              {
-                photo: city.photo.url
-              }
-            else
-              {
-                photo: city.photo.url,
-                weather: {
-                  temperature: options[:forecast].currently[:temperature],
-                  weather_icon: options[:forecast].currently[:icon],
-                  weather_message: options[:forecast].daily[:summary]
-                },
-                top_advertisements: CityWay::Api::V1::Entities::Advertisement.represent(city.active_advertisements(0)),
-                categories: CityWay::Api::V1::Entities::Category.represent(city.categories),
-                bottom_advertisements: CityWay::Api::V1::Entities::Advertisement.represent(city.active_advertisements(1))
-              }
-            end
+            CityWay::Api::V1::Entities::Home.represent(city, options)
           end
           expose :around, if: lambda { |object, options| options[:sections].blank? || options[:sections] == 'around' } do |city, options|
             CityWay::Api::V1::Entities::Around.represent(city.around)
@@ -495,7 +509,6 @@ module CityWay
             else
               merchant.facebook
             end
-
           end
           expose :instagram, if: lambda { |object, options| options[:simple] == 'false' && object.instagram }, documentation: {:type => "string", :desc => "Merchant instagram"}
           expose :twitter, if: lambda { |object, options| options[:simple] == 'false' && object.twitter }, documentation: {:type => "string", :desc => "Merchant twitter"}
