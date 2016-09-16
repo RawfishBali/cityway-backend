@@ -18,7 +18,8 @@ module CityWay
           end
           get '/:id' do
             around = Around.find(params[:id])
-            present around, with: CityWay::Api::V1::Entities::Around, latitude: params[:latitude], longitude: params[:longitude]
+            advertisements = around.city.active_advertisements
+            present around, with: CityWay::Api::V1::Entities::Around, latitude: params[:latitude], longitude: params[:longitude], advertisements: advertisements, simple: 'false'
           end
 
 

@@ -44,8 +44,8 @@ class City < ActiveRecord::Base
 
   accepts_nested_attributes_for :around, :commonplace, :discover, :utility,  allow_destroy: true
 
-  def active_advertisements position
-    advertisements.where('position = ? and ( (start_date <= ? and end_date >= ?) or (second_start_date <= ? and second_end_date >= ?) )', position, Time.now, Time.now, Time.now, Time.now)
+  def active_advertisements
+    advertisements.where('( (start_date <= ? and end_date >= ?) or (second_start_date <= ? and second_end_date >= ?) )', Time.now, Time.now, Time.now, Time.now).group_by(&:position)
   end
 
   def parent_categories

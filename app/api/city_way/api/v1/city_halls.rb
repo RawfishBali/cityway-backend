@@ -18,7 +18,8 @@ module CityWay
           end
           get '/:id' do
             commonplace = Commonplace.find(params[:id])
-            present commonplace, with: CityWay::Api::V1::Entities::Commonplace, simple: 'false', latitude: params[:latitude], longitude: params[:longitude]
+            advertisements = commonplace.city.active_advertisements
+            present commonplace, with: CityWay::Api::V1::Entities::Commonplace, simple: 'false', latitude: params[:latitude], longitude: params[:longitude], advertisements: advertisements
           end
 
 
