@@ -97,6 +97,9 @@ module CityWay
             event.distance_from([options[:latitude], options[:longitude]])
           end
           expose :description, documentation: {:type => "Text", :desc => "Event Description"}
+          expose :business_hours,if: lambda { |object, options| options[:simple] == 'false' } do |event , options|
+            CityWay::Api::V1::Entities::BusinessHours.represent(event.business_hours.order('day ASC'))
+          end
         end
 
         class News < Grape::Entity
@@ -155,6 +158,9 @@ module CityWay
             else
               CityWay::Api::V1::Entities::Photo.represent(market.primary_photo) if market.photos.length > 0
             end
+          end
+          expose :business_hours,if: lambda { |object, options| options[:simple] == 'false' } do |event , options|
+            CityWay::Api::V1::Entities::BusinessHours.represent(event.business_hours.order('day ASC'))
           end
         end
 
@@ -260,18 +266,6 @@ module CityWay
           expose :instagram, documentation: {:type => "string", :desc => "Comune Instagram"}
           expose :google_plus, documentation: {:type => "string", :desc => "Comune G+"}
           expose :history, documentation: {:type => "string", :desc => "Comune History"}
-          # expose :news, if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "string", :desc => "Comune News"} do |common, options|
-          #   CityWay::Api::V1::Entities::News.represent(common.news)
-          # end
-          # expose :administration do |common, options|
-          #   CityWay::Api::V1::Entities::Administration.represent(common)
-          # end
-          # expose :public_offices,if: lambda { |object, options| options[:simple] == 'false' } do |common, options|
-          #   CityWay::Api::V1::Entities::PublicOffice.represent(common.public_offices)
-          # end
-          # expose :securities,if: lambda { |object, options| options[:simple] == 'false' } do |common, options|
-          #   CityWay::Api::V1::Entities::Security.represent(common.securities)
-          # end
         end
 
         class Discover < Grape::Entity
@@ -459,10 +453,10 @@ module CityWay
           expose :morning_close_time do |business_hour , options|
             business_hour.morning_close_time.strftime("%H:%M")
           end
-          expose :evening_open_time do |business_hour , options|
+          expose :evening_open_time, if: lambda{ |object, options| !object.evening_open_time.blank? } do |business_hour , options|
             business_hour.evening_open_time.strftime("%H:%M")
           end
-          expose :evening_close_time do |business_hour , options|
+          expose :evening_close_time, if: lambda{ |object, options| !object.evening_close_time.blank? } do |business_hour , options|
             business_hour.evening_close_time.strftime("%H:%M")
           end
           expose :is_open do |business_hour , options|

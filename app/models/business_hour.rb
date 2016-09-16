@@ -19,7 +19,7 @@ class BusinessHour < ActiveRecord::Base
   belongs_to :marketable, polymorphic: true
 
   validates_inclusion_of :day, in: 0..6
-  validates :day, uniqueness: {scope: :marketable_id}
+  validates :day, uniqueness: {scope: [:marketable_id, :marketable_type]}
   validates :morning_open_time , presence: true
   validates :morning_close_time , presence: true
   validates :marketable_id , presence: true
@@ -40,7 +40,12 @@ class BusinessHour < ActiveRecord::Base
   end
 
   def is_open? now
-    (parsed_time(morning_open_time) <= now && parsed_time(morning_close_time) >= now  && now.wday == day) || (parsed_time(evening_open_time) <= now && parsed_time(evening_close_time) >= now  && now.wday == day)
+    if evening_open_time && evening_close_time
+      (parsed_time(morning_open_time) <= now && parsed_time(morning_close_time) >= now  && now.wday == day) || (parsed_time(evening_open_time) <= now && parsed_time(evening_close_time) >= now  && now.wday == day)
+    else
+      (parsed_time(morning_open_time) <= now && parsed_time(morning_close_time) >= now  && now.wday == day)
+    end
+
   end
 
   def parsed_time field_time

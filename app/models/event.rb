@@ -22,17 +22,26 @@
 
 class Event < ActiveRecord::Base
 
-    belongs_to :around
+  belongs_to :around
 
-    validates_presence_of :title
-    validates_presence_of :address
-    validates_presence_of :description
-    validates_presence_of :event_start
-    validates_presence_of :around
-    validates_presence_of :photo
+  validates_presence_of :title
+  validates_presence_of :address
+  validates_presence_of :description
+  validates_presence_of :event_start
+  validates_presence_of :around
+  validates_presence_of :photo
 
-    geocoded_by :address
-    after_validation :geocode
+  geocoded_by :address
+  after_validation :geocode
+  after_create :create_default_business_hours
 
-    mount_uploader :photo, PhotoUploader
+  mount_uploader :photo, PhotoUploader
+  
+  has_many :business_hours, as: :marketable, dependent: :destroy
+
+  def create_default_business_hours
+    7.times do |i|
+      self.business_hours << BusinessHour.create(day: i,morning_open_time: '00:00', morning_close_time: '00:00')
+    end
+  end
 end
