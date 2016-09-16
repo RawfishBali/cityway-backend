@@ -52,6 +52,41 @@ module CityWay
             present securities, with: CityWay::Api::V1::Entities::Security, simple: 'false'
           end
 
+          desc "CityHall News"
+          params do
+            requires :id , type: Integer, values: -> { Commonplace.ids }
+          end
+          get '/:id/news' do
+            commonplace = Commonplace.find(params[:id])
+            news = commonplace.news.page params[:page]
+            add_pagination_headers news
+
+            present news, with: CityWay::Api::V1::Entities::News
+          end
+
+          desc "CityHall Administrations"
+          params do
+            requires :id , type: Integer, values: -> { Commonplace.ids }
+          end
+          get '/:id/administrations' do
+            commonplace = Commonplace.find(params[:id])
+
+            present commonplace, with: CityWay::Api::V1::Entities::Administration
+          end
+
+          desc "CityHall Public Offices"
+          params do
+            requires :id , type: Integer, values: -> { Commonplace.ids }
+          end
+          get '/:id/public_offices' do
+            public_offices = Commonplace.find(params[:id])
+            public_offices = commonplace.public_offices.page params[:page]
+            add_pagination_headers public_offices
+
+            present public_offices, with: CityWay::Api::V1::Entities::PublicOffice
+          end
+
+
         end
       end
     end
