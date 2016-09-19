@@ -19,11 +19,28 @@ module CityWay
             else
               place.facebook
             end
-
           end
-          expose :instagram,if: lambda { |object, options| options[:simple] == 'false' && object.instagram }, documentation: {:type => "String", :desc => "Place instagram"}
-          expose :twitter, if: lambda { |object, options| options[:simple] == 'false' && object.twitter }, documentation: {:type => "String", :desc => "Place twitter"}
-          expose :google_plus,if: lambda { |object, options| options[:simple] == 'false' && object.google_plus }, documentation: {:type => "String", :desc => "Place google_plus"}
+          expose :instagram,if: lambda { |object, options| options[:simple] == 'false' && object.instagram }, documentation: {:type => "String", :desc => "Place instagram"} do |place, options|
+            unless place.instagram[/\Ahttp:\/\//] || place.instagram[/\Ahttps:\/\//]
+              "https://#{place.instagram}"
+            else
+              place.instagram
+            end
+          end
+          expose :twitter, if: lambda { |object, options| options[:simple] == 'false' && object.twitter }, documentation: {:type => "String", :desc => "Place twitter"} do |place, options|
+            unless place.twitter[/\Ahttp:\/\//] || place.twitter[/\Ahttps:\/\//]
+              "https://#{place.twitter}"
+            else
+              place.twitter
+            end
+          end
+          expose :google_plus,if: lambda { |object, options| options[:simple] == 'false' && object.google_plus }, documentation: {:type => "String", :desc => "Place google_plus"} do |place, options|
+            unless place.google_plus[/\Ahttp:\/\//] || place.google_plus[/\Ahttps:\/\//]
+              "https://#{place.google_plus}"
+            else
+              place.google_plus
+            end
+          end
           expose :photos, documentation: {:type => "string", :desc => "Place photo"} do |place , options|
             if options[:simple] == 'false'
               CityWay::Api::V1::Entities::Photo.represent(place.photos) if place.photos.length > 0
@@ -88,7 +105,13 @@ module CityWay
               event.facebook
             end
           end
-          expose :instagram,  if: lambda { |object, options| options[:simple] == 'false' },documentation: {:type => "String", :desc => "Event Instagram"}
+          expose :instagram,  if: lambda { |object, options| options[:simple] == 'false' && object.instagram },documentation: {:type => "String", :desc => "Event Instagram"} do |event, options|
+            unless event.instagram[/\Ahttp:\/\//] || event.instagram[/\Ahttps:\/\//]
+              "https://#{event.instagram}"
+            else
+              event.instagram
+            end
+          end
           expose :support_disabilities, documentation: {:type => "Boolean", :desc => "Event Disabilities Support"}
           expose :event_start, documentation: {:type => "DateTime", :desc => "Event Start"} do |event, options|
             event.event_start.strftime("%m/%d/%Y")
@@ -262,7 +285,13 @@ module CityWay
         class Security < Grape::Entity
           expose :id, documentation: {:type => "String", :desc => "Security ID"}
           expose :name, documentation: {:type => "String", :desc => "Security name"}
-          expose :url, documentation: {:type => "String", :desc => "Security url"}
+          expose :url, if: lambda { |object, options| object.url }, documentation: {:type => "String", :desc => "Security url"} do |security, options|
+            unless security.url[/\Ahttp:\/\//] || security.url[/\Ahttps:\/\//]
+              "https://#{security.url}"
+            else
+              security.url
+            end
+          end
         end
 
         class Commonplace < Grape::Entity
@@ -276,10 +305,35 @@ module CityWay
           expose :top_advertisements, if: lambda { |object, options| options[:simple] == 'false' }  do |around, options|
             CityWay::Api::V1::Entities::Advertisement.represent(options[:advertisements]["top"])
           end
-          expose :facebook, documentation: {:type => "string", :desc => "Comune Facebook"}
-          expose :twitter, documentation: {:type => "string", :desc => "Comune Twitter"}
-          expose :instagram, documentation: {:type => "string", :desc => "Comune Instagram"}
-          expose :google_plus, documentation: {:type => "string", :desc => "Comune G+"}
+          expose :facebook, if: lambda { |object, options| options[:simple] == 'false' && object.facebook }, documentation: {:type => "string", :desc => "Comune Facebook"} do |around, options|
+            matches = around.facebook.match(/(?:https?:\/\/)?(?:www\.)?facebook\.com\/(?:(?:\w)*#!\/)?(?:groups\/)?(?:pages\/)?(?:[\w\-]*\/)*?(\/)?([\w\-\.]*)/)
+            if matches
+              matches[2]
+            else
+              around.facebook
+            end
+          end
+          expose :twitter, if: lambda { |object, options| options[:simple] == 'false' && object.twitter }, documentation: {:type => "string", :desc => "Comune Twitter"} do |common, options|
+            unless common.instagram[/\Ahttp:\/\//] || common.instagram[/\Ahttps:\/\//]
+              "https://#{common.twitter}"
+            else
+              common.twitter
+            end
+          end
+          expose :instagram, if: lambda { |object, options| options[:simple] == 'false' && object.instagram }, documentation: {:type => "string", :desc => "Comune Instagram"} do |common, options|
+            unless common.instagram[/\Ahttp:\/\//] || common.instagram[/\Ahttps:\/\//]
+              "https://#{common.instagram}"
+            else
+              common.instagram
+            end
+          end
+          expose :google_plus, if: lambda { |object, options| options[:simple] == 'false' && object.google_plus }, documentation: {:type => "string", :desc => "Comune G+"} do |common, options|
+            unless common.google_plus[/\Ahttp:\/\//] || common.google_plus[/\Ahttps:\/\//]
+              "https://#{common.google_plus}"
+            else
+              common.google_plus
+            end
+          end
           expose :history, documentation: {:type => "string", :desc => "Comune History"}
         end
 
@@ -517,7 +571,13 @@ module CityWay
           expose :longitude, documentation: {:type => "float", :desc => "Merchant Longitude"}
           expose :phone,if: lambda { |object, options| options[:simple] == 'false'  && object.phone }, documentation: {:type => "string", :desc => "Merchant phone"}
           expose :email,if: lambda { |object, options| options[:simple] == 'false' && object.email }, documentation: {:type => "string", :desc => "Merchant email"}
-          expose :website, if: lambda { |object, options| options[:simple] == 'false' && object.website }, documentation: {:type => "string", :desc => "Merchant website"}
+          expose :website, if: lambda { |object, options| options[:simple] == 'false' && object.website }, documentation: {:type => "string", :desc => "Merchant website"} do |merchant, options|
+            unless merchant.website[/\Ahttp:\/\//] || merchant.website[/\Ahttps:\/\//]
+              "https://#{merchant.website}"
+            else
+              merchant.website
+            end
+          end
           expose :facebook, if: lambda { |object, options| options[:simple] == 'false' && object.facebook },
           documentation: {:type => "string", :desc => "Merchant facebook"} do |merchant, options|
             matches = merchant.facebook.match(/(?:https?:\/\/)?(?:www\.)?facebook\.com\/(?:(?:\w)*#!\/)?(?:groups\/)?(?:pages\/)?(?:[\w\-]*\/)*?(\/)?([\w\-\.]*)/)
@@ -527,9 +587,27 @@ module CityWay
               merchant.facebook
             end
           end
-          expose :instagram, if: lambda { |object, options| options[:simple] == 'false' && object.instagram }, documentation: {:type => "string", :desc => "Merchant instagram"}
-          expose :twitter, if: lambda { |object, options| options[:simple] == 'false' && object.twitter }, documentation: {:type => "string", :desc => "Merchant twitter"}
-          expose :google_plus, if: lambda { |object, options| options[:simple] == 'false' && object.google_plus }, documentation: {:type => "string", :desc => "Merchant G+"}
+          expose :instagram, if: lambda { |object, options| options[:simple] == 'false' && object.instagram }, documentation: {:type => "string", :desc => "Merchant instagram"} do |merchant, options|
+            unless merchant.instagram[/\Ahttp:\/\//] || merchant.instagram[/\Ahttps:\/\//]
+              "https://#{merchant.instagram}"
+            else
+              merchant.instagram
+            end
+          end
+          expose :twitter, if: lambda { |object, options| options[:simple] == 'false' && object.twitter }, documentation: {:type => "string", :desc => "Merchant twitter"} do |merchant, options|
+            unless merchant.twitter[/\Ahttp:\/\//] || merchant.twitter[/\Ahttps:\/\//]
+              "https://#{merchant.twitter}"
+            else
+              merchant.twitter
+            end
+          end
+          expose :google_plus, if: lambda { |object, options| options[:simple] == 'false' && object.google_plus }, documentation: {:type => "string", :desc => "Merchant G+"} do |merchant, options|
+            unless merchant.google_plus[/\Ahttp:\/\//] || merchant.google_plus[/\Ahttps:\/\//]
+              "https://#{merchant.google_plus}"
+            else
+              merchant.google_plus
+            end
+          end
           expose :support_disabilities, documentation: {:type => "boolean", :desc => "Merchant support_disabilities"}
           expose :distance, if: lambda { |object, options| object.respond_to?(:distance) || options[:latitude] && options[:longitude] } do |merchant , options|
             if merchant.respond_to?(:distance)
