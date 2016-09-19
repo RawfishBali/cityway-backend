@@ -100,6 +100,9 @@ module CityWay
           expose :business_hours,if: lambda { |object, options| options[:simple] == 'false' } do |event , options|
             CityWay::Api::V1::Entities::BusinessHours.represent(event.business_hours.order('day ASC'))
           end
+          expose :type do |event, options|
+            event.class.name.downcase
+          end
         end
 
         class News < Grape::Entity
@@ -140,6 +143,9 @@ module CityWay
               CityWay::Api::V1::Entities::Photo.represent(market.primary_photo) if market.photos.length > 0
             end
           end
+          expose :type do |market, options|
+            market.class.name.downcase
+          end
         end
 
         class Park < Grape::Entity
@@ -161,6 +167,9 @@ module CityWay
           end
           expose :business_hours,if: lambda { |object, options| options[:simple] == 'false' } do |event , options|
             CityWay::Api::V1::Entities::BusinessHours.represent(event.business_hours.order('day ASC'))
+          end
+          expose :type do |park, options|
+            park.class.name.downcase
           end
         end
 
