@@ -396,9 +396,17 @@ module CityWay
           end
         end
 
+        class CityWithoutSection < Grape::Entity
+          expose :id, documentation: {:type => "integer", :desc => "City ID"}, if: lambda { |object, options| !object.id.blank? }
+          expose :name, documentation: {:type => "string", :desc => "City Name"}
+          expose :latitude, documentation: {:type => "float", :desc => "City Latitude"}
+          expose :longitude, documentation: {:type => "float", :desc => "City Longitude"}
+          expose :distance, if: lambda { |object, options| object.respond_to?(:distance) }
+        end
+
         class CityStructure < Grape::Entity
           expose :nearest_city do |city, options|
-            CityWay::Api::V1::Entities::City.represent city, message: options[:message], simple: options[:simple]
+            CityWay::Api::V1::Entities::CityWithoutSection.represent city, message: options[:message], simple: options[:simple]
           end
           expose :message do |city, options|
             options[:message]
@@ -407,7 +415,7 @@ module CityWay
             options[:actual_city]
           end
           expose :nearby_cities, if: lambda { |instance, options| options[:cities] && options[:list] } do |cities, options|
-            CityWay::Api::V1::Entities::City.represent options[:cities], simple: options[:simple]
+            CityWay::Api::V1::Entities::CityWithoutSection.represent options[:cities], simple: options[:simple]
           end
         end
 

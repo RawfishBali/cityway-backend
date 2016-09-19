@@ -41,7 +41,7 @@ module CityWay
             else
               alpha_cities = City.all.order('name ASC').page params[:page]
               add_pagination_headers alpha_cities
-              present alpha_cities, with: CityWay::Api::V1::Entities::City, simple: 'true'
+              present alpha_cities, with: CityWay::Api::V1::Entities::CityWithoutSection, simple: 'true'
             end
           end
 
