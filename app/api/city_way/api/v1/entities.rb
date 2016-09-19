@@ -96,7 +96,7 @@ module CityWay
           expose :distance, if: lambda { |object, options| options[:latitude] && options[:longitude] } do |event , options|
             event.distance_from([options[:latitude], options[:longitude]])
           end
-          expose :description, documentation: {:type => "Text", :desc => "Event Description"}
+          expose :description, documentation: {:type => "Text", :desc => "Event Description"}, if: lambda { |object, options| options[:simple] == 'false' }
           expose :business_hours,if: lambda { |object, options| options[:simple] == 'false' } do |event , options|
             CityWay::Api::V1::Entities::BusinessHours.represent(event.business_hours.order('day ASC'))
           end
@@ -120,14 +120,14 @@ module CityWay
           expose :address, documentation: {:type => "String", :desc => "Market Address"}
           expose :latitude, documentation: {:type => "Float", :desc => "Market latitude"}
           expose :longitude, documentation: {:type => "Float", :desc => "Market longitude"}
-          expose :open_time, documentation: {:type => "String", :desc => "Market Open Time"} do |market , options|
+          expose :open_time, documentation: {:type => "String", :desc => "Market Open Time"}, if: lambda { |object, options| options[:simple] == 'false' } do |market , options|
             market.open_time.strftime("%H:%M")
           end
-          expose :close_time, documentation: {:type => "String", :desc => "Market Close Time"} do |market , options|
+          expose :close_time, documentation: {:type => "String", :desc => "Market Close Time"}, if: lambda { |object, options| options[:simple] == 'false' } do |market , options|
             market.close_time.strftime("%H:%M")
           end
-          expose :description, documentation: {:type => "Text", :desc => "Market Description"}
-          expose :day_opens, documentation: {:type => "Array", :desc => "Market Open Days"} do |market , options|
+          expose :description, documentation: {:type => "Text", :desc => "Market Description"}, if: lambda { |object, options| options[:simple] == 'false' }
+          expose :day_opens, documentation: {:type => "Array", :desc => "Market Open Days"}, if: lambda { |object, options| options[:simple] == 'false' } do |market , options|
             market.day_opens.collect { |x| Date::DAYNAMES[x] }.join(" , ")
           end
           expose :distance, if: lambda { |object, options| options[:latitude] && options[:longitude] } do |market , options|
@@ -191,13 +191,19 @@ module CityWay
           expose :photo, documentation: {:type => "String", :desc => "Around Photo"} do |around, options|
             around.photo.url
           end
-          expose :top_advertisements, if: lambda { |object, options| options[:simple] == 'false' }  do |around, options|
+          expose :top_advertisements do |around, options|
             CityWay::Api::V1::Entities::Advertisement.represent(options[:advertisements]["top"])
           end
-          expose :events, if: lambda { |object, options| options[:simple] == 'false' } do |around, options|
+          expose :events do |around, options|
             CityWay::Api::V1::Entities::Event.represent(around.active_events)
           end
-          expose :bottom_advertisements, if: lambda { |object, options| options[:simple] == 'false' }  do |around, options|
+          expose :parks do |around, options|
+            CityWay::Api::V1::Entities::Park.represent(around.parks)
+          end
+          expose :markets do |around, options|
+            CityWay::Api::V1::Entities::Market.represent(around.markets)
+          end
+          expose :bottom_advertisements do |around, options|
             CityWay::Api::V1::Entities::Advertisement.represent(options[:advertisements]["bottom"])
           end
         end
