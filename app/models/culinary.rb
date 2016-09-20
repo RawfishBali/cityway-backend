@@ -18,6 +18,7 @@ class Culinary < ActiveRecord::Base
 
   validates_presence_of :discover
   validates_presence_of :name
+  validates_presence_of :culinary_type
 
   has_many :photos, as: :imageable, dependent: :destroy
 

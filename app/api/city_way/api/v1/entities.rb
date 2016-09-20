@@ -7,6 +7,9 @@ module CityWay
           expose :id, documentation: {:type => "Integer", :desc => "Place ID"}
           expose :name, documentation: {:type => "String", :desc => "Place Name"}
           expose :description, documentation: {:type => "String", :desc => "Place description"}
+          expose :type ,documentation: {:type => "String", :desc => "Place Type"}, if: lambda { |object, options| object.place_type} do |place, options|
+            object.place_type
+          end
           expose :address, documentation: {:type => "String", :desc => "Place address"}, if: lambda { |object, options| options[:simple] == 'false'}
           expose :latitude, documentation: {:type => "Float", :desc => "Place latitude"}, if: lambda { |object, options| options[:simple] == 'false'}
           expose :longitude, documentation: {:type => "Float", :desc => "Place longitude"}, if: lambda { |object, options| options[:simple] == 'false'}
@@ -76,6 +79,9 @@ module CityWay
 
         class Culinary < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "Culinary ID"}
+          expose :type , documentation: {:type => "Integer", :desc => "Culinary type"} do |object, options|
+            object.culinary_type
+          end
           expose :name, documentation: {:type => "String", :desc => "Culinary Name"}
           expose :description,if: lambda { |object, options| options[:simple] == 'false'}, documentation: {:type => "Text", :desc => "Culinary description"}
           expose :photos, documentation: {:type => "string", :desc => "Culinary photo"} do |culinary , options|
@@ -559,11 +565,14 @@ module CityWay
               photo.url
             end
           end
-          expose :position ,if: lambda { |object, options| object.position }
+          expose :position ,if: lambda { |object, options| object.position && photo.class.name == 'Photo' }
         end
 
         class Merchant < Grape::Entity
           expose :id, documentation: {:type => "integer", :desc => "Merchant ID"}
+          expose :type , documentation: {:type => "integer", :desc => "Merchant Type"} do |object, options|
+            object.class.name.downcase
+          end
           expose :name, documentation: {:type => "string", :desc => "Merchant Name"}
           expose :description,if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "string", :desc => "Merchant description"}
           expose :address, documentation: {:type => "string", :desc => "Merchant address"}
