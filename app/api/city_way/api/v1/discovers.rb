@@ -26,7 +26,7 @@ module CityWay
             elsif params[:section] == 'culinary'
               present discover, with: CityWay::Api::V1::Entities::DiscoverCulinary, latitude: params[:latitude], longitude: params[:longitude]
             elsif params[:section] == 'story'
-              present discover.story, with: CityWay::Api::V1::Entities::Story
+              present discover, with: CityWay::Api::V1::Entities::DiscoverCityStories, latitude: params[:latitude], longitude: params[:longitude]
             end
           end
         end

@@ -565,7 +565,7 @@ module CityWay
               photo.url
             end
           end
-          expose :position ,if: lambda { |object, options| object.class.name == 'Photo' }
+          expose :position ,if: lambda { |object, options| object.respond_to?(:position) && object.class.name == 'Photo' }
         end
 
         class Merchant < Grape::Entity
