@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160914073827) do
+ActiveRecord::Schema.define(version: 20160920084006) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -171,6 +171,17 @@ ActiveRecord::Schema.define(version: 20160914073827) do
     t.datetime "updated_at",    null: false
   end
 
+  create_table "devices", force: :cascade do |t|
+    t.integer  "device_type"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "address"
+    t.string   "external_url"
+    t.integer  "utility_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "discovers", force: :cascade do |t|
     t.string   "photo"
     t.integer  "city_id"
@@ -211,11 +222,12 @@ ActiveRecord::Schema.define(version: 20160914073827) do
   add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
 
   create_table "itineraries", force: :cascade do |t|
-    t.string   "name",        null: false
+    t.string   "name",          null: false
     t.text     "description"
     t.integer  "discover_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "visiting_time"
   end
 
   create_table "markets", force: :cascade do |t|
@@ -306,6 +318,7 @@ ActiveRecord::Schema.define(version: 20160914073827) do
     t.boolean  "is_primary",     default: false
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
+    t.integer  "position"
   end
 
   add_index "photos", ["imageable_type", "imageable_id"], name: "index_photos_on_imageable_type_and_imageable_id", using: :btree
@@ -422,6 +435,14 @@ ActiveRecord::Schema.define(version: 20160914073827) do
     t.integer  "itinerary_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+  end
+
+  create_table "stories", force: :cascade do |t|
+    t.text     "top_text"
+    t.text     "bottom_text"
+    t.integer  "discover_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "subcategories", force: :cascade do |t|

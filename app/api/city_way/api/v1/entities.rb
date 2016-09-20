@@ -326,6 +326,19 @@ module CityWay
           end
         end
 
+        class Device < Grape::Entity
+          expose :id, documentation: {:type => "Integer", :desc => "Device ID"}
+          expose :type, documentation: {:type => "String", :desc => "Device Type"} do |object, options|
+            object.device_type
+          end
+          expose :latitude, documentation: {:type => "Float", :desc => "Device latitude"}
+          expose :longitude, documentation: {:type => "Float", :desc => "Device longitude"}
+          expose :external_url, documentation: {:type => "Float", :desc => "Device External Url"}
+          expose :distance, if: lambda { |object, options| options[:latitude] && options[:longitude] } do |object , options|
+            object.distance_from([options[:latitude], options[:longitude]])
+          end
+        end
+
         class Utility < Grape::Entity
           expose :photo, documentation: {:type => "String", :desc => "Utility Photo"} do |disc, options|
             disc.photo.url
