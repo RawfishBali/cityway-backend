@@ -394,6 +394,7 @@ module CityWay
           expose :id, documentation: {:type => "integer", :desc => "Story ID"}
           expose :top_text, documentation: {:type => "text", :desc => "Story Top Text"}
           expose :bottom_text, documentation: {:type => "text", :desc => "Story Bottom Text"}
+          expose :external_link, documentation: {:type => "string", :desc => "Story External Link"}
           expose :photos, documentation: {:type => "String", :desc => "Story Photos"} do |story, options|
             CityWay::Api::V1::Entities::Photo.represent(story.photos.order('position ASC'))
           end

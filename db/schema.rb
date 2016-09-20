@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160920042622) do
+ActiveRecord::Schema.define(version: 20160920093311) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -169,6 +169,17 @@ ActiveRecord::Schema.define(version: 20160920042622) do
     t.integer  "culinary_type"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+  end
+
+  create_table "devices", force: :cascade do |t|
+    t.integer  "device_type"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "address"
+    t.string   "external_url"
+    t.integer  "utility_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "discovers", force: :cascade do |t|
@@ -430,8 +441,9 @@ ActiveRecord::Schema.define(version: 20160920042622) do
     t.text     "top_text"
     t.text     "bottom_text"
     t.integer  "discover_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "external_link"
   end
 
   create_table "subcategories", force: :cascade do |t|
