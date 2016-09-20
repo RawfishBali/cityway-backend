@@ -15,6 +15,7 @@ class Discover < ActiveRecord::Base
   has_many :places
   has_many :culinaries
   has_many :itineraries
+  has_one :story
 
   mount_uploader :photo, PhotoUploader
 

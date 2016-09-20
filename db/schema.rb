@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160920033612) do
+ActiveRecord::Schema.define(version: 20160920042622) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -307,6 +307,7 @@ ActiveRecord::Schema.define(version: 20160920033612) do
     t.boolean  "is_primary",     default: false
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
+    t.integer  "position"
   end
 
   add_index "photos", ["imageable_type", "imageable_id"], name: "index_photos_on_imageable_type_and_imageable_id", using: :btree
@@ -423,6 +424,14 @@ ActiveRecord::Schema.define(version: 20160920033612) do
     t.integer  "itinerary_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+  end
+
+  create_table "stories", force: :cascade do |t|
+    t.text     "top_text"
+    t.text     "bottom_text"
+    t.integer  "discover_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "subcategories", force: :cascade do |t|

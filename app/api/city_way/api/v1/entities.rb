@@ -384,9 +384,18 @@ module CityWay
           end
         end
 
+        class Story < Grape::Entity
+          expose :id, documentation: {:type => "integer", :desc => "Story ID"}
+          expose :top_text, documentation: {:type => "text", :desc => "Story Top Text"}
+          expose :bottom_text, documentation: {:type => "text", :desc => "Story Bottom Text"}
+          expose :photos, documentation: {:type => "String", :desc => "Story Photos"} do |story, options|
+            CityWay::Api::V1::Entities::Photo.represent(story.photos.order('position ASC'))
+          end
+        end
+
         class DiscoverCityStories < Grape::Entity
-          expose :itineraries do |discover, options|
-            CityWay::Api::V1::Entities::Itinerary.represent discover.itineraries
+          expose :story do |discover, options|
+            CityWay::Api::V1::Entities::Story.represent discover.story
           end
         end
 
@@ -549,8 +558,8 @@ module CityWay
             else
               photo.url
             end
-
           end
+          expose :position ,if: lambda { |object, options| object.position }
         end
 
         class Merchant < Grape::Entity
