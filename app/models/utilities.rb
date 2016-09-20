@@ -14,4 +14,9 @@ class Utility < ActiveRecord::Base
 
   belongs_to :city
   mount_uploader :photo, PhotoUploader
+
+  def devices_by_type device_type
+    return [] if (Device.device_types[device_type]).blank?
+    devices.where("device_type = ?",Device.device_types[device_type])
+  end
 end
