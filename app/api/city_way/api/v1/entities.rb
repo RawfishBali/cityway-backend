@@ -6,7 +6,7 @@ module CityWay
         class Place < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "Place ID"}
           expose :name, documentation: {:type => "String", :desc => "Place Name"}
-          expose :description, documentation: {:type => "String", :desc => "Place description"}, if: lambda { |object, options| options[:simple] == 'false'}
+          expose :description, documentation: {:type => "String", :desc => "Place description"}
           expose :address, documentation: {:type => "String", :desc => "Place address"}, if: lambda { |object, options| options[:simple] == 'false'}
           expose :latitude, documentation: {:type => "Float", :desc => "Place latitude"}, if: lambda { |object, options| options[:simple] == 'false'}
           expose :longitude, documentation: {:type => "Float", :desc => "Place longitude"}, if: lambda { |object, options| options[:simple] == 'false'}
@@ -60,6 +60,7 @@ module CityWay
         class Itinerary < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "Itinerary ID"}
           expose :name, documentation: {:type => "String", :desc => "Itinerary Name"}
+          expose :visiting_time, documentation: {:type => "String", :desc => "Itinerary Visiting Time"}
           expose :description,if: lambda { |object, options| options[:simple] == 'false'}, documentation: {:type => "Text", :desc => "Itinerary description"}
           expose :photos, documentation: {:type => "string", :desc => "Park photo"} do |itinerary , options|
             if options[:simple] == 'false'

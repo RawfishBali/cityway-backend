@@ -2,12 +2,13 @@
 #
 # Table name: itineraries
 #
-#  id          :integer          not null, primary key
-#  name        :string           not null
-#  description :text
-#  discover_id :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id            :integer          not null, primary key
+#  name          :string           not null
+#  description   :text
+#  discover_id   :integer
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  visiting_time :string
 #
 
 class Itinerary < ActiveRecord::Base
