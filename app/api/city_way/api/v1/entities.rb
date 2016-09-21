@@ -339,6 +339,21 @@ module CityWay
           end
         end
 
+        class Taxi < Grape::Entity
+          expose :id, documentation: {:type => "Integer", :desc => "Taxi ID"}
+          expose :contact_name , documentation: {:type => "String", :desc => "Taxi Contact Name"}
+          expose :phone_number, documentation: {:type => "String", :desc => "Taxi Phone Number"}
+          expose :website, documentation: {:type => "String", :desc => "Taxi Website"}
+        end
+
+        class UtilityNumber < Grape::Entity
+          expose :id, documentation: {:type => "Integer", :desc => "Utility Number ID"}
+          expose :name, documentation: {:type => "String", :desc => "Utility Number Name"}
+          expose :local_number, documentation: {:type => "String", :desc => "Utility Number Local Number"}
+          expose :national_number, documentation: {:type => "String", :desc => "Utility Number National Number"}
+          expose :address, documentation: {:type => "String", :desc => "Utility Number Address"}            
+        end
+
         class Utility < Grape::Entity
           expose :photo, documentation: {:type => "String", :desc => "Utility Photo"} do |disc, options|
             disc.photo.url
