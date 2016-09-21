@@ -11,6 +11,7 @@
 
 class Utility < ActiveRecord::Base
   has_many :devices
+  has_many :utility_places, as: :visitables, dependent: :destroy
 
   belongs_to :city
   mount_uploader :photo, PhotoUploader

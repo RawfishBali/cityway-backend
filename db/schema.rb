@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160920084006) do
+ActiveRecord::Schema.define(version: 20160921025854) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -441,8 +441,9 @@ ActiveRecord::Schema.define(version: 20160920084006) do
     t.text     "top_text"
     t.text     "bottom_text"
     t.integer  "discover_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "external_link"
   end
 
   create_table "subcategories", force: :cascade do |t|
@@ -483,6 +484,25 @@ ActiveRecord::Schema.define(version: 20160920084006) do
   end
 
   add_index "utilities", ["city_id"], name: "index_utilities_on_city_id", using: :btree
+
+  create_table "utility_places", force: :cascade do |t|
+    t.string   "name"
+    t.string   "denomination"
+    t.text     "description"
+    t.string   "address"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "email"
+    t.string   "phone"
+    t.integer  "place_type"
+    t.integer  "visitable_id"
+    t.string   "visitable_type"
+    t.boolean  "is_public",      default: true
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "utility_places", ["visitable_type", "visitable_id"], name: "index_utility_places_on_visitable_type_and_visitable_id", using: :btree
 
   add_foreign_key "identities", "users"
 end
