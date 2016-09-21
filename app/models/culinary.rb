@@ -12,7 +12,7 @@
 #
 
 class Culinary < ActiveRecord::Base
-  enum culinary_type: [:traditional, :grastonomy]
+  enum culinary_type: [:traditional, :gastronomy]
 
   belongs_to :discover
 

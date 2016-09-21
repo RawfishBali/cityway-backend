@@ -382,8 +382,8 @@ module CityWay
         end
 
         class DiscoverCulinary < Grape::Entity
-          expose :grastonomies do |discover, options|
-            CityWay::Api::V1::Entities::Culinary.represent discover.culinary_by_type "grastonomy"
+          expose :gastronomies do |discover, options|
+            CityWay::Api::V1::Entities::Culinary.represent discover.culinary_by_type "gastronomy"
           end
           expose :traditional_culinaries do |discover, options|
             CityWay::Api::V1::Entities::Culinary.represent discover.culinary_by_type "traditional"
