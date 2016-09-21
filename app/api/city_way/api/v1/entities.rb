@@ -62,6 +62,9 @@ module CityWay
 
         class Itinerary < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "Itinerary ID"}
+          expose :type , documentation: {:type => "String", :desc => "Itinerary Type"} do |itinerary, options|
+            itinerary.class.name.downcase
+          end
           expose :name, documentation: {:type => "String", :desc => "Itinerary Name"}
           expose :visiting_time, documentation: {:type => "String", :desc => "Itinerary Visiting Time"}
           expose :description,if: lambda { |object, options| options[:simple] == 'false'}, documentation: {:type => "Text", :desc => "Itinerary description"}
