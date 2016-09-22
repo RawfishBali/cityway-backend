@@ -36,12 +36,16 @@ class Event < ActiveRecord::Base
   after_create :create_default_business_hours
 
   mount_uploader :photo, PhotoUploader
-  
+
   has_many :business_hours, as: :marketable, dependent: :destroy
 
   def create_default_business_hours
     7.times do |i|
       self.business_hours << BusinessHour.create(day: i,morning_open_time: '00:00', morning_close_time: '00:00')
     end
+  end
+
+  def self.events_open_on day
+    Event.joins(:business_hours).where('business_hours.is_open_today = true AND business_hours.day = ?', day)
   end
 end

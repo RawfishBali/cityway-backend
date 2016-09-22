@@ -28,10 +28,18 @@ module CityWay
             requires :id , type: Integer, values: -> { Around.ids }
             optional :latitude, type: Float
             optional :longitude, type: Float
+            optional :day, type: Integer
           end
           get '/:id/events' do
             around = Around.find(params[:id])
-            events = around.active_events.page params[:page]
+
+            if params[:day]
+              events = (Event.events_open_on params[:day]).page params[:page]
+            else
+              events = around.active_events.page params[:page]
+            end
+
+
             add_pagination_headers events
             present events, with: CityWay::Api::V1::Entities::Event, simple: 'true', latitude: params[:latitude], longitude: params[:longitude], promo_mode: 'true'
           end
@@ -42,12 +50,12 @@ module CityWay
             requires :id , type: Integer, values: -> { Around.ids }
             optional :latitude, type: Float
             optional :longitude, type: Float
-            optional :day_id, type: Integer
+            optional :day, type: Integer
           end
           get '/:id/markets' do
             around = Around.find(params[:id])
-            if params[:day_id]
-              markets = around.markets.where("? = ANY (day_opens)", params[:day_id]).page params[:page]
+            if params[:day]
+              markets = (Market.markets_open_on params[:day]).page params[:page]
             else
               markets = around.markets.page params[:page]
             end
