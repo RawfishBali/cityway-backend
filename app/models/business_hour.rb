@@ -13,6 +13,7 @@
 #  marketable_type    :string
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
+#  is_open_today      :boolean          default(FALSE)
 #
 
 class BusinessHour < ActiveRecord::Base
@@ -25,6 +26,7 @@ class BusinessHour < ActiveRecord::Base
   validates :marketable_id , presence: true
   validates :marketable_type , presence: true
   validate :close_time_cannot_be_sooner_than_open_time
+  before_save :check_if_open_today
 
 
   def close_time_cannot_be_sooner_than_open_time
@@ -50,5 +52,13 @@ class BusinessHour < ActiveRecord::Base
 
   def parsed_time field_time
     Time.parse "#{field_time.hour}:#{field_time.min}"
+  end
+
+  private
+
+  def check_if_open_today
+    if self.morning_open_time.to_i == 946684800 && self.morning_close_time.to_i == 946684800 && ( (self.evening_open_time.to_i == 946684800 && self.evening_close_time.to_i == 946684800) || (self.evening_open_time.to_i == nil && self.evening_close_time.to_i == nil) )
+      self.is_open_today = false
+    end
   end
 end

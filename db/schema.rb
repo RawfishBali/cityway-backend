@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160922024523) do
+ActiveRecord::Schema.define(version: 20160922084820) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(version: 20160922024523) do
     t.string   "marketable_type"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
+    t.boolean  "is_open_today",      default: false
   end
 
   add_index "business_hours", ["marketable_type", "marketable_id"], name: "index_business_hours_on_marketable_type_and_marketable_id", using: :btree
@@ -235,17 +236,13 @@ ActiveRecord::Schema.define(version: 20160922024523) do
     t.string   "address",     null: false
     t.float    "latitude"
     t.float    "longitude"
-    t.time     "open_time",   null: false
-    t.time     "close_time",  null: false
     t.text     "description"
-    t.integer  "day_opens",                array: true
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "around_id"
   end
 
   add_index "markets", ["around_id"], name: "index_markets_on_around_id", using: :btree
-  add_index "markets", ["day_opens"], name: "index_markets_on_day_opens", using: :btree
 
   create_table "merchants", force: :cascade do |t|
     t.string   "name",                                 null: false

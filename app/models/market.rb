@@ -7,10 +7,7 @@
 #  address     :string           not null
 #  latitude    :float
 #  longitude   :float
-#  open_time   :time             not null
-#  close_time  :time             not null
 #  description :text
-#  day_opens   :integer          is an Array
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  around_id   :integer
@@ -19,17 +16,16 @@
 class Market < ActiveRecord::Base
   validates_presence_of :name
   validates_presence_of :address
-  validates_presence_of :open_time
-  validates_presence_of :close_time
   validates_presence_of :around
-  validate :validate_day_opens
 
   has_many :photos, as: :imageable, dependent: :destroy
+  has_many :business_hours, as: :marketable, dependent: :destroy
 
   belongs_to :around
 
   geocoded_by :address
   after_validation :geocode
+  after_create :create_default_business_hours
 
   VALID_DAYS = (0..6).to_a
 
@@ -41,16 +37,15 @@ class Market < ActiveRecord::Base
       [photos.first]
     end
   end
-  
-  private
 
-  def validate_day_opens
-    if (day_opens = (self.day_opens - VALID_DAYS))
-      day_opens.each do |day_open|
-        errors.add(:day_opens, day_open.to_s + " is not a valid days")
-      end
+  def create_default_business_hours
+    7.times do |i|
+      self.business_hours << BusinessHour.create(day: i,morning_open_time: '00:00', morning_close_time: '00:00')
     end
   end
 
+  def self.markets_open_on day
+    Market.joins(:business_hours).where('business_hours.is_open_today = true AND business_hours.day = ?', day)
+  end
 
 end
