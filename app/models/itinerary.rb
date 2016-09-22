@@ -40,4 +40,23 @@ class Itinerary < ActiveRecord::Base
     response = HTTParty.get("https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=#{latitude},#{longitude}&destinations=#{self.steps.first.latitude},#{self.steps.first.longitude}&key=AIzaSyC1wjCJ5r9hwVMu4uxLNbcKOfBEaPpchnA")
   end
 
+  def time_to_complete
+    duration = 0
+    steps.order('position ASC').each_with_index do |step,i|
+      next_step = steps[i+1]
+      unless next_step.blank?
+        response = HTTParty.get("https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=#{step.latitude},#{step.longitude}&destinations=#{next_step.latitude},#{next_step.longitude}&key=AIzaSyC1wjCJ5r9hwVMu4uxLNbcKOfBEaPpchnA")
+        if response["rows"][0]["elements"][0]["status"] == "OK"
+          duration += response["rows"][0]["elements"][0]["duration"]["value"]
+        end
+      end
+    end
+    d = Duration.new(duration)
+    if d.hours && d.hours > 0
+      "#{d.hours} hours and #{d.minutes} minutes"
+    else
+      "#{d.minutes} minutes"
+    end
+  end
+
 end

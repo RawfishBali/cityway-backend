@@ -62,6 +62,8 @@ gem 'skylight'
 
 gem 'httparty'
 
+gem 'ruby-duration'
+
 group :production do
   gem 'rails_12factor'
 end

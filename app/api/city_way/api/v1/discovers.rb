@@ -20,13 +20,13 @@ module CityWay
           get '/:id' do
             discover = Discover.find(params[:id])
             if params[:section] == 'visit'
-              present discover, with: CityWay::Api::V1::Entities::DiscoverVistingCity, latitude: params[:latitude], longitude: params[:longitude]
+              present discover, with: CityWay::Api::V1::Entities::DiscoverVistingCity, latitude: params[:latitude], longitude: params[:longitude], with_distance: 'true'
             elsif params[:section] == 'culture'
-              present discover, with: CityWay::Api::V1::Entities::DiscoverCulture, latitude: params[:latitude], longitude: params[:longitude]
+              present discover, with: CityWay::Api::V1::Entities::DiscoverCulture, latitude: params[:latitude], longitude: params[:longitude], with_distance: 'true'
             elsif params[:section] == 'culinary'
               present discover, with: CityWay::Api::V1::Entities::DiscoverCulinary, latitude: params[:latitude], longitude: params[:longitude]
             elsif params[:section] == 'story'
-              present discover, with: CityWay::Api::V1::Entities::DiscoverCityStories, latitude: params[:latitude], longitude: params[:longitude]
+              present discover, with: CityWay::Api::V1::Entities::DiscoverCityStories, latitude: params[:latitude], longitude: params[:longitude], with_distance: 'true'
             else
               present discover, with: CityWay::Api::V1::Entities::DiscoverComplete, latitude: params[:latitude], longitude: params[:longitude]
             end

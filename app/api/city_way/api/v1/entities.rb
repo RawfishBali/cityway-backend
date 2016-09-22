@@ -54,7 +54,10 @@ module CityWay
           expose :business_hours,if: lambda { |object, options| options[:simple] == 'false' && (object.place_type == 'monument' || object.place_type == 'library' || object.place_type == 'theater') } do |place , options|
             CityWay::Api::V1::Entities::BusinessHours.represent(place.business_hours.order('day ASC'))
           end
-          expose :duration, if: lambda { |object, options| options[:latitude] && options[:longitude] } do |object , options|
+          expose :distance, if: lambda { |object, options| options[:latitude] && options[:longitude] } do |object , options|
+            object.distance_from([options[:latitude], options[:longitude]])
+          end
+          expose :duration, if: lambda { |object, options| options[:latitude] && options[:longitude] && options[:with_distance] == 'true' } do |object , options|
             response = object.get_duration_from(options[:latitude], options[:longitude])
             if response["rows"][0]["elements"][0]["status"] == "OK"
               response["rows"][0]["elements"][0]["duration"]["text"]
@@ -94,7 +97,10 @@ module CityWay
           expose :steps,if: lambda { |object, options| options[:simple] == 'false' && object.steps } do |itinerary , options|
             CityWay::Api::V1::Entities::Step.represent(itinerary.steps.order('position ASC'))
           end
-          expose :duration, if: lambda { |object, options| options[:latitude] && options[:longitude] } do |object , options|
+          expose :distance, if: lambda { |object, options| options[:latitude] && options[:longitude] } do |object , options|
+            object.steps.order('position ASC').first.distance_from([options[:latitude], options[:longitude]])
+          end
+          expose :duration, if: lambda { |object, options| options[:latitude] && options[:longitude] && options[:with_distance] == 'true' } do |object , options|
             response = object.get_duration_from(options[:latitude], options[:longitude])
             if response["rows"][0]["elements"][0]["status"] == "OK"
               response["rows"][0]["elements"][0]["duration"]["text"]
