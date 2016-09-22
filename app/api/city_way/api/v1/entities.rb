@@ -10,7 +10,7 @@ module CityWay
           expose :type ,documentation: {:type => "String", :desc => "Place Type"}, if: lambda { |object, options| object.place_type} do |place, options|
             object.place_type
           end
-          expose :address, documentation: {:type => "String", :desc => "Place address"}, if: lambda { |object, options| options[:simple] == 'false'}
+          expose :address, documentation: {:type => "String", :desc => "Place address"}
           expose :latitude, documentation: {:type => "Float", :desc => "Place latitude"}, if: lambda { |object, options| options[:simple] == 'false'}
           expose :longitude, documentation: {:type => "Float", :desc => "Place longitude"}, if: lambda { |object, options| options[:simple] == 'false'}
           expose :email, if: lambda { |object, options| options[:simple] == 'false' && object.email }, documentation: {:type => "String", :desc => "Place email"}
@@ -51,10 +51,26 @@ module CityWay
               CityWay::Api::V1::Entities::Photo.represent(place.primary_photo) if place.photos.length > 0
             end
           end
+          expose :business_hours,if: lambda { |object, options| options[:simple] == 'false' && (object.place_type == 'monument' || object.place_type == 'library' || object.place_type == 'theater') } do |place , options|
+            CityWay::Api::V1::Entities::BusinessHours.represent(place.business_hours.order('day ASC'))
+          end
+          expose :duration do |object , options|
+            response = object.get_duration_from(options[:latitude], options[:longitude])
+            if response["rows"][0]["elements"][0]["status"] == "OK"
+              response["rows"][0]["elements"][0]["duration"]["text"]
+              # if we need customs value text later
+              # response["rows"][0]["elements"][0]["duration"]["value"]
+            else
+              response["rows"][0]["elements"][0]["status"]
+            end
+          end
         end
 
         class Step < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "Step ID"}
+          expose :position, documentation: {:type => "Integer", :desc => "Step position"}
+          expose :name, documentation: {:type => "String", :desc => "Step name"}
+          expose :description, documentation: {:type => "String", :desc => "Step address"}
           expose :address, documentation: {:type => "String", :desc => "Step address"}
           expose :latitude, documentation: {:type => "Float", :desc => "Step latitude"}
           expose :longitude, documentation: {:type => "Float", :desc => "Step longitude"}
@@ -67,7 +83,7 @@ module CityWay
           end
           expose :name, documentation: {:type => "String", :desc => "Itinerary Name"}
           expose :visiting_time, documentation: {:type => "String", :desc => "Itinerary Visiting Time"}
-          expose :description,if: lambda { |object, options| options[:simple] == 'false'}, documentation: {:type => "Text", :desc => "Itinerary description"}
+          expose :description, documentation: {:type => "Text", :desc => "Itinerary description"}
           expose :photos, documentation: {:type => "string", :desc => "Park photo"} do |itinerary , options|
             if options[:simple] == 'false'
               CityWay::Api::V1::Entities::Photo.represent(itinerary.photos) if itinerary.photos.length > 0
@@ -76,7 +92,17 @@ module CityWay
             end
           end
           expose :steps,if: lambda { |object, options| options[:simple] == 'false' && object.steps } do |itinerary , options|
-            CityWay::Api::V1::Entities::Step.represent(itinerary.steps)
+            CityWay::Api::V1::Entities::Step.represent(itinerary.steps.order('position ASC'))
+          end
+          expose :duration do |object , options|
+            response = object.get_duration_from(options[:latitude], options[:longitude])
+            if response["rows"][0]["elements"][0]["status"] == "OK"
+              response["rows"][0]["elements"][0]["duration"]["text"]
+              # if we need customs value text later
+              # response["rows"][0]["elements"][0]["duration"]["value"]
+            else
+              response["rows"][0]["elements"][0]["status"]
+            end
           end
         end
 
@@ -86,7 +112,7 @@ module CityWay
             object.culinary_type
           end
           expose :name, documentation: {:type => "String", :desc => "Culinary Name"}
-          expose :description,if: lambda { |object, options| options[:simple] == 'false'}, documentation: {:type => "Text", :desc => "Culinary description"}
+          expose :description, documentation: {:type => "Text", :desc => "Culinary description"}
           expose :photos, documentation: {:type => "string", :desc => "Culinary photo"} do |culinary , options|
             if options[:simple] == 'false'
               CityWay::Api::V1::Entities::Photo.represent(culinary.photos) if culinary.photos.length > 0
@@ -360,36 +386,52 @@ module CityWay
           end
         end
 
+        class DiscoverComplete < Grape::Entity
+          expose :id, documentation: {:type => "Integer", :desc => "Discover ID"}
+          expose :visit do |discover, options|
+            CityWay::Api::V1::Entities::DiscoverVistingCity.represent discover, options
+          end
+          expose :culture do |discover, options|
+            CityWay::Api::V1::Entities::DiscoverCulture.represent discover, options
+          end
+          expose :culinary do |discover, options|
+            CityWay::Api::V1::Entities::DiscoverCulinary.represent discover, options
+          end
+          expose :story do |discover, options|
+            CityWay::Api::V1::Entities::DiscoverCityStories.represent discover, options
+          end
+        end
+
         class DiscoverVistingCity < Grape::Entity
           expose :monuments do |discover, options|
-            CityWay::Api::V1::Entities::Place.represent discover.place_by_type "monument"
+            CityWay::Api::V1::Entities::Place.represent discover.place_by_type("monument"), options
           end
           expose :itineraries do |discover, options|
-            CityWay::Api::V1::Entities::Itinerary.represent discover.itineraries
+            CityWay::Api::V1::Entities::Itinerary.represent discover.itineraries, options
           end
         end
 
         class DiscoverCulture < Grape::Entity
           expose :libraries do |discover, options|
-            CityWay::Api::V1::Entities::Place.represent discover.place_by_type "library"
+            CityWay::Api::V1::Entities::Place.represent discover.place_by_type("library"), options
           end
           expose :theaters do |discover, options|
-            CityWay::Api::V1::Entities::Place.represent discover.place_by_type "theater"
+            CityWay::Api::V1::Entities::Place.represent discover.place_by_type("theater"), options
           end
           expose :museums do |discover, options|
-            CityWay::Api::V1::Entities::Place.represent discover.place_by_type "museum"
+            CityWay::Api::V1::Entities::Place.represent discover.place_by_type("museum"), options
           end
           expose :cinemas do |discover, options|
-            CityWay::Api::V1::Entities::Place.represent discover.place_by_type "cinema"
+            CityWay::Api::V1::Entities::Place.represent discover.place_by_type("cinema"), options
           end
         end
 
         class DiscoverCulinary < Grape::Entity
           expose :gastronomies do |discover, options|
-            CityWay::Api::V1::Entities::Culinary.represent discover.culinary_by_type "gastronomy"
+            CityWay::Api::V1::Entities::Culinary.represent discover.culinary_by_type("gastronomy"), options
           end
           expose :traditional_culinaries do |discover, options|
-            CityWay::Api::V1::Entities::Culinary.represent discover.culinary_by_type "traditional"
+            CityWay::Api::V1::Entities::Culinary.represent discover.culinary_by_type("traditional"), options
           end
         end
 

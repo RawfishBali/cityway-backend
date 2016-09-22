@@ -36,4 +36,8 @@ class Itinerary < ActiveRecord::Base
     end
   end
 
+  def get_duration_from latitude , longitude
+    response = HTTParty.get("https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=#{latitude},#{longitude}&destinations=#{self.steps.first.latitude},#{self.steps.first.longitude}&key=AIzaSyC1wjCJ5r9hwVMu4uxLNbcKOfBEaPpchnA")
+  end
+
 end

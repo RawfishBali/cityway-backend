@@ -13,7 +13,7 @@ module CityWay
           desc "Discover city"
           params do
             requires :id , type: Integer, values: -> { Discover.ids }
-            requires :section , type: String, values: -> { ['visit', 'culture', 'culinary', 'story'] }
+            optional :section , type: String, values: -> { ['visit', 'culture', 'culinary', 'story'] }
             optional :latitude, type: Float
             optional :longitude, type: Float
           end
@@ -27,6 +27,8 @@ module CityWay
               present discover, with: CityWay::Api::V1::Entities::DiscoverCulinary, latitude: params[:latitude], longitude: params[:longitude]
             elsif params[:section] == 'story'
               present discover, with: CityWay::Api::V1::Entities::DiscoverCityStories, latitude: params[:latitude], longitude: params[:longitude]
+            else
+              present discover, with: CityWay::Api::V1::Entities::DiscoverComplete, latitude: params[:latitude], longitude: params[:longitude]
             end
           end
         end

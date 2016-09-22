@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160920093311) do
+ActiveRecord::Schema.define(version: 20160922024523) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -435,6 +435,9 @@ ActiveRecord::Schema.define(version: 20160920093311) do
     t.integer  "itinerary_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.string   "name"
+    t.text     "description"
+    t.integer  "position"
   end
 
   create_table "stories", force: :cascade do |t|
@@ -454,6 +457,15 @@ ActiveRecord::Schema.define(version: 20160920093311) do
   end
 
   add_index "subcategories", ["category_id"], name: "index_subcategories_on_category_id", using: :btree
+
+  create_table "taxis", force: :cascade do |t|
+    t.string   "contact_name"
+    t.string   "phone_number"
+    t.string   "website"
+    t.integer  "utility_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
@@ -484,6 +496,47 @@ ActiveRecord::Schema.define(version: 20160920093311) do
   end
 
   add_index "utilities", ["city_id"], name: "index_utilities_on_city_id", using: :btree
+
+  create_table "utility_numbers", force: :cascade do |t|
+    t.string   "name"
+    t.string   "local_number"
+    t.string   "national_number"
+    t.string   "address"
+    t.integer  "utility_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  create_table "utility_places", force: :cascade do |t|
+    t.string   "name"
+    t.string   "denomination"
+    t.text     "description"
+    t.string   "address"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "email"
+    t.string   "phone"
+    t.integer  "place_type"
+    t.integer  "visitable_id"
+    t.string   "visitable_type"
+    t.boolean  "is_public",      default: true
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "utility_places", ["visitable_type", "visitable_id"], name: "index_utility_places_on_visitable_type_and_visitable_id", using: :btree
+
+  create_table "waste_managements", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "website"
+    t.text     "note"
+    t.boolean  "delivered_together", default: false
+    t.integer  "utility_id"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
 
   add_foreign_key "identities", "users"
 end
