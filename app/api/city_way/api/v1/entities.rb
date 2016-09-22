@@ -11,8 +11,8 @@ module CityWay
             object.place_type
           end
           expose :address, documentation: {:type => "String", :desc => "Place address"}
-          expose :latitude, documentation: {:type => "Float", :desc => "Place latitude"}, if: lambda { |object, options| options[:simple] == 'false'}
-          expose :longitude, documentation: {:type => "Float", :desc => "Place longitude"}, if: lambda { |object, options| options[:simple] == 'false'}
+          expose :latitude, documentation: {:type => "Float", :desc => "Place latitude"}
+          expose :longitude, documentation: {:type => "Float", :desc => "Place longitude"}
           expose :email, if: lambda { |object, options| options[:simple] == 'false' && object.email }, documentation: {:type => "String", :desc => "Place email"}
           expose :website, if: lambda { |object, options| options[:simple] == 'false' && object.website }, documentation: {:type => "String", :desc => "Place website"}
           expose :facebook, if: lambda { |object, options| options[:simple] == 'false' && object.facebook }, documentation: {:type => "String", :desc => "Place facebook"} do |place, options|
