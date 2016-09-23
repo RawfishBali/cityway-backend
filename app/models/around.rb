@@ -17,6 +17,6 @@ class Around < ActiveRecord::Base
   mount_uploader :photo, PhotoUploader
 
   def active_events
-    events.where('event_start >= ?', Time.now).order('event_start ASC')
+    events.joins(:event_dates).where('event_dates.event_date >= ?', Time.now)
   end
 end
