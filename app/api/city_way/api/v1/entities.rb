@@ -170,7 +170,7 @@ module CityWay
             event.distance_from([options[:latitude], options[:longitude]])
           end
           expose :description, documentation: {:type => "Text", :desc => "Event Description"}, if: lambda { |object, options| options[:simple] == 'false' }
-          expose :is_open_today do |event, options|
+          expose :is_open do |event, options|
             event.is_open_today
           end
           expose :event_dates do |event, options|
