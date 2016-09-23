@@ -28,7 +28,7 @@ module CityWay
             requires :id , type: Integer, values: -> { Around.ids }
             optional :latitude, type: Float
             optional :longitude, type: Float
-            optional :day, type: Integer
+            optional :day, type: String
           end
           get '/:id/events' do
             around = Around.find(params[:id])
@@ -50,7 +50,7 @@ module CityWay
             requires :id , type: Integer, values: -> { Around.ids }
             optional :latitude, type: Float
             optional :longitude, type: Float
-            optional :day, type: Integer
+            optional :day, type: String
           end
           get '/:id/markets' do
             around = Around.find(params[:id])
