@@ -199,16 +199,7 @@ module CityWay
           expose :address, documentation: {:type => "String", :desc => "Market Address"}
           expose :latitude, documentation: {:type => "Float", :desc => "Market latitude"}
           expose :longitude, documentation: {:type => "Float", :desc => "Market longitude"}
-          expose :open_time, documentation: {:type => "String", :desc => "Market Open Time"}, if: lambda { |object, options| options[:simple] == 'false' } do |market , options|
-            market.open_time.strftime("%H:%M")
-          end
-          expose :close_time, documentation: {:type => "String", :desc => "Market Close Time"}, if: lambda { |object, options| options[:simple] == 'false' } do |market , options|
-            market.close_time.strftime("%H:%M")
-          end
           expose :description, documentation: {:type => "Text", :desc => "Market Description"}, if: lambda { |object, options| options[:simple] == 'false' }
-          expose :day_opens, documentation: {:type => "Array", :desc => "Market Open Days"}, if: lambda { |object, options| options[:simple] == 'false' } do |market , options|
-            market.day_opens.collect { |x| Date::DAYNAMES[x] }.join(" , ")
-          end
           expose :distance, if: lambda { |object, options| options[:latitude] && options[:longitude] } do |market , options|
             market.distance_from([options[:latitude], options[:longitude]])
           end
@@ -221,6 +212,9 @@ module CityWay
           end
           expose :type do |market, options|
             market.class.name.downcase
+          end
+          expose :business_hours do |object, options|
+            CityWay::Api::V1::Entities::BusinessHours.represent(object.business_hours)
           end
         end
 
