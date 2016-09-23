@@ -14,7 +14,6 @@
 #  instagram            :string
 #  support_disabilities :boolean          default(FALSE)
 #  description          :text
-#  event_start          :datetime         not null
 #  around_id            :integer          not null
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
@@ -27,25 +26,24 @@ class Event < ActiveRecord::Base
   validates_presence_of :title
   validates_presence_of :address
   validates_presence_of :description
-  validates_presence_of :event_start
   validates_presence_of :around
   validates_presence_of :photo
 
   geocoded_by :address
   after_validation :geocode
-  after_create :create_default_business_hours
 
   mount_uploader :photo, PhotoUploader
 
-  has_many :business_hours, as: :marketable, dependent: :destroy
-
-  def create_default_business_hours
-    7.times do |i|
-      self.business_hours << BusinessHour.create(day: i,morning_open_time: '00:00', morning_close_time: '00:00')
-    end
-  end
+  has_many :event_dates, dependent: :destroy
 
   def self.events_open_on day
-    Event.joins(:business_hours).where('business_hours.is_open_today = true AND business_hours.day = ?', day)
+    Event.joins(:event_dates).where('event_dates.day_name = ? AND event_dates.event_date >= ?', day.titleize, Time.now)
+  end
+
+  def is_open_today
+    event_dates.each do |event_date|
+      return true if event_date.event_date == Date.today
+    end
+    return false
   end
 end

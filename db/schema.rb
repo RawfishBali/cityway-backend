@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160922084820) do
+ActiveRecord::Schema.define(version: 20160923031612) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -192,6 +192,18 @@ ActiveRecord::Schema.define(version: 20160922084820) do
 
   add_index "discovers", ["city_id"], name: "index_discovers_on_city_id", using: :btree
 
+  create_table "event_dates", force: :cascade do |t|
+    t.date     "event_date"
+    t.string   "day_name"
+    t.time     "open_time"
+    t.time     "close_time"
+    t.integer  "event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "event_dates", ["event_id"], name: "index_event_dates_on_event_id", using: :btree
+
   create_table "events", force: :cascade do |t|
     t.string   "title",                                null: false
     t.string   "photo",                                null: false
@@ -204,7 +216,6 @@ ActiveRecord::Schema.define(version: 20160922084820) do
     t.string   "instagram"
     t.boolean  "support_disabilities", default: false
     t.text     "description"
-    t.datetime "event_start",                          null: false
     t.integer  "around_id",                            null: false
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false

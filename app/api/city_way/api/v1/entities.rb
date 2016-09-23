@@ -128,6 +128,17 @@ module CityWay
           end
         end
 
+        class EventDate < Grape::Entity
+          expose :id, documentation: {:type => "Integer", :desc => "EventDate ID"}
+          expose :event_date, documentation: {:type => "Date", :desc => "EventDate Date"}
+          expose :open_time, documentation: {:type => "Time", :desc => "EventDate Open Time"} do |object, options|
+            object.open_time.strftime("%H:%M")
+          end
+          expose :close_time, documentation: {:type => "Close", :desc => "EventDate Close Time"}do |object, options|
+            object.close_time.strftime("%H:%M")
+          end
+        end
+
         class Event < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "Event ID"}
           expose :title, as: 'name',  documentation: {:type => "String", :desc => "Event Title"}
@@ -155,15 +166,15 @@ module CityWay
             end
           end
           expose :support_disabilities, documentation: {:type => "Boolean", :desc => "Event Disabilities Support"}
-          expose :event_start, documentation: {:type => "DateTime", :desc => "Event Start"} do |event, options|
-            event.event_start.strftime("%m/%d/%Y")
-          end
           expose :distance, if: lambda { |object, options| options[:latitude] && options[:longitude] } do |event , options|
             event.distance_from([options[:latitude], options[:longitude]])
           end
           expose :description, documentation: {:type => "Text", :desc => "Event Description"}, if: lambda { |object, options| options[:simple] == 'false' }
-          expose :business_hours,if: lambda { |object, options| options[:simple] == 'false' } do |event , options|
-            CityWay::Api::V1::Entities::BusinessHours.represent(event.business_hours.order('day ASC'))
+          expose :is_open_today do |event, options|
+            event.is_open_today
+          end
+          expose :event_dates do |event, options|
+            CityWay::Api::V1::Entities::EventDate.represent event.event_dates.order('event_date ASC')
           end
           expose :type do |event, options|
             event.class.name.downcase
