@@ -57,7 +57,7 @@ class BusinessHour < ActiveRecord::Base
   private
 
   def check_if_open_today
-    if self.morning_open_time.to_i == 946684800 && self.morning_close_time.to_i == 946684800 && ( (self.evening_open_time.to_i == 946684800 && self.evening_close_time.to_i == 946684800) || (self.evening_open_time.to_i == nil && self.evening_close_time.to_i == nil) )
+    if self.morning_open_time.to_i == 946684800 && self.morning_close_time.to_i == 946684800 && ( (self.evening_open_time.to_i == 946684800 && self.evening_close_time.to_i == 946684800) || (self.evening_open_time.to_i == 0 && self.evening_close_time.to_i == 0) )
       self.is_open_today = false
     else
       self.is_open_today = true
