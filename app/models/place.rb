@@ -38,8 +38,6 @@ class Place < ActiveRecord::Base
 
   validate :validate_number_of_photos
 
-  after_create :create_default_business_hours
-
   def validate_number_of_photos
     errors.add(:photos, "Maximum photos is 3") if photos.size > 2
   end
@@ -53,17 +51,18 @@ class Place < ActiveRecord::Base
     end
   end
 
-  def create_default_business_hours
-    7.times do |i|
-      self.business_hours << BusinessHour.create(day: i,morning_open_time: '00:00', morning_close_time: '00:00', evening_open_time: '00:00', evening_close_time: '00:00')
-    end
-  end
-
   def get_duration_from latitude , longitude
     response = HTTParty.get("https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=#{latitude},#{longitude}&destinations=#{self.latitude},#{self.longitude}&key=AIzaSyC1wjCJ5r9hwVMu4uxLNbcKOfBEaPpchnA")
   end
 
-
+  def all_business_hours
+    mb = (self.business_hours).to_a
+    return mb if mb.size == 7
+    ((0..6).to_a  - mb.map(&:day)).each do |m|
+      mb << BusinessHour.new(morning_open_time: '00:00', morning_close_time: '00:00', evening_open_time: nil, evening_close_time: nil, day: m, marketable_type: self.class.name, marketable_id: self.id)
+    end
+    mb
+  end
 
 
 end

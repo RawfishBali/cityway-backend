@@ -25,7 +25,6 @@ class Market < ActiveRecord::Base
 
   geocoded_by :address
   after_validation :geocode
-  after_create :create_default_business_hours
 
   VALID_DAYS = (0..6).to_a
 
@@ -38,14 +37,17 @@ class Market < ActiveRecord::Base
     end
   end
 
-  def create_default_business_hours
-    7.times do |i|
-      self.business_hours << BusinessHour.create(day: i,morning_open_time: '00:00', morning_close_time: '00:00')
-    end
-  end
-
   def self.markets_open_on day
     Market.joins(:business_hours).where('business_hours.is_open_today = true AND business_hours.day = ?', Date::DAYNAMES.index(day.titleize))
+  end
+
+  def all_business_hours
+    mb = (self.business_hours).to_a
+    return mb if mb.size == 7
+    ((0..6).to_a  - mb.map(&:day)).each do |m|
+      mb << BusinessHour.new(morning_open_time: '00:00', morning_close_time: '00:00', evening_open_time: nil, evening_close_time: nil, day: m, marketable_type: self.class.name, marketable_id: self.id)
+    end
+    mb
   end
 
 end

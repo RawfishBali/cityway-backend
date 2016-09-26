@@ -52,7 +52,7 @@ module CityWay
             end
           end
           expose :business_hours,if: lambda { |object, options| options[:simple] == 'false' && (object.place_type == 'monument' || object.place_type == 'library' || object.place_type == 'theater') } do |place , options|
-            CityWay::Api::V1::Entities::BusinessHours.represent(place.business_hours.order('day ASC'))
+            CityWay::Api::V1::Entities::BusinessHours.represent(place.all_business_hours)
           end
           expose :distance, if: lambda { |object, options| options[:latitude] && options[:longitude] } do |object , options|
             object.distance_from([options[:latitude], options[:longitude]])
@@ -214,7 +214,7 @@ module CityWay
             market.class.name.downcase
           end
           expose :business_hours do |object, options|
-            CityWay::Api::V1::Entities::BusinessHours.represent(object.business_hours)
+            CityWay::Api::V1::Entities::BusinessHours.represent(object.all_business_hours)
           end
         end
 
@@ -236,7 +236,7 @@ module CityWay
             end
           end
           expose :business_hours,if: lambda { |object, options| options[:simple] == 'false' } do |event , options|
-            CityWay::Api::V1::Entities::BusinessHours.represent(event.business_hours.order('day ASC'))
+            CityWay::Api::V1::Entities::BusinessHours.represent(event.all_business_hours)
           end
           expose :type do |park, options|
             park.class.name.downcase
@@ -696,7 +696,7 @@ module CityWay
             merchant.promos.any?
           end
           expose :business_hours,if: lambda { |object, options| options[:simple] == 'false' } do |merchant , options|
-            CityWay::Api::V1::Entities::BusinessHours.represent(merchant.business_hours.order('day ASC'))
+            CityWay::Api::V1::Entities::BusinessHours.represent(merchant.all_business_hours)
           end
           expose :is_open do |merchant , options|
             merchant.is_open_now?
