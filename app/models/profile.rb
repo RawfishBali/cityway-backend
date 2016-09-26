@@ -18,6 +18,9 @@
 #  commonplace_id         :integer
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  address                :string
+#  latitude               :float
+#  longitude              :float
 #
 
 class Profile < ActiveRecord::Base
@@ -28,4 +31,7 @@ class Profile < ActiveRecord::Base
   validates_presence_of :commonplace
 
   mount_uploader :photo, PhotoUploader
+
+  geocoded_by :address
+  after_validation :geocode
 end

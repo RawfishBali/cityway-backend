@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160923031612) do
+ActiveRecord::Schema.define(version: 20160926063723) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -301,6 +301,7 @@ ActiveRecord::Schema.define(version: 20160923031612) do
     t.integer  "commonplace_id", null: false
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.string   "url"
   end
 
   add_index "news", ["commonplace_id"], name: "index_news_on_commonplace_id", using: :btree
@@ -374,6 +375,9 @@ ActiveRecord::Schema.define(version: 20160923031612) do
     t.integer  "commonplace_id"
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
+    t.string   "address"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   add_index "profiles", ["commonplace_id"], name: "index_profiles_on_commonplace_id", using: :btree

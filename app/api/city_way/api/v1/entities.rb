@@ -184,6 +184,7 @@ module CityWay
         class News < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "News' ID"}
           expose :title, documentation: {:type => "String", :desc => "News' Title"}
+          expose :url, documentation: {:type => "String", :desc => "News' URL"}
           expose :description, documentation: {:type => "Text", :desc => "News' Description"}
           expose :published_at, documentation: {:type => "Text", :desc => "News' Published Date"} do |news , options|
             news.published_at.strftime("%B %d %Y %H:%M")
@@ -289,6 +290,7 @@ module CityWay
 
         class Profile < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "Profile ID"}
+          expose :name, documentation: {:type => "String", :desc => "Profile Name"}
           expose :role, documentation: {:type => "String", :desc => "Profile Role"}
           expose :emails, documentation: {:type => "String", :desc => "Profile Emails"} do |profile, options|
             profile.emails.join(",") if profile.emails
@@ -307,25 +309,28 @@ module CityWay
           expose :photo, documentation: {:type => "String", :desc => "Profile photo"}  do |profile, options|
             profile.photo.url
           end
+          expose :distance, if: lambda { |object, options| options[:latitude] && options[:longitude] } do |object , options|
+            object.distance_from([options[:latitude], options[:longitude]])
+          end
         end
 
         class PoliticParty < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "Politic Party ID"}
           expose :name, documentation: {:type => "String", :desc => "Politic Party Name"}
           expose :members do |politic_party, options|
-            CityWay::Api::V1::Entities::Profile.represent politic_party.profiles
+            CityWay::Api::V1::Entities::Profile.represent politic_party.profiles ,latitude: options[:latitude], longitude: options[:longitude]
           end
         end
 
         class Administration < Grape::Entity
           expose :major do |commonplace, options|
-            CityWay::Api::V1::Entities::Profile.represent commonplace.major
+            CityWay::Api::V1::Entities::Profile.represent commonplace.major,latitude: options[:latitude], longitude: options[:longitude]
           end
           expose :city_council do |commonplace, options|
-            CityWay::Api::V1::Entities::Profile.represent commonplace.city_councils
+            CityWay::Api::V1::Entities::Profile.represent commonplace.city_councils,latitude: options[:latitude], longitude: options[:longitude]
           end
           expose :council do |commonplace, options|
-            CityWay::Api::V1::Entities::PoliticParty.represent commonplace.politic_groups
+            CityWay::Api::V1::Entities::PoliticParty.represent commonplace.politic_groups,latitude: options[:latitude], longitude: options[:longitude]
           end
         end
 

@@ -34,7 +34,7 @@ module CityWay
             offices = commonplace.public_offices.page params[:page]
             add_pagination_headers offices
 
-            present offices, with: CityWay::Api::V1::Entities::PublicOffice, simple: 'false'
+            present offices, with: CityWay::Api::V1::Entities::PublicOffice, simple: 'false', latitude: params[:latitude], longitude: params[:longitude]
           end
 
 
@@ -71,7 +71,7 @@ module CityWay
           get '/:id/administrations' do
             commonplace = Commonplace.find(params[:id])
 
-            present commonplace, with: CityWay::Api::V1::Entities::Administration
+            present commonplace, with: CityWay::Api::V1::Entities::Administration, latitude: params[:latitude], longitude: params[:longitude]
           end
 
           desc "CityHall Public Offices"
