@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160926063723) do
+ActiveRecord::Schema.define(version: 20160927031835) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -378,6 +378,7 @@ ActiveRecord::Schema.define(version: 20160926063723) do
     t.string   "address"
     t.float    "latitude"
     t.float    "longitude"
+    t.string   "website"
   end
 
   add_index "profiles", ["commonplace_id"], name: "index_profiles_on_commonplace_id", using: :btree
@@ -534,6 +535,7 @@ ActiveRecord::Schema.define(version: 20160926063723) do
     t.boolean  "is_public",      default: true
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
+    t.string   "website"
   end
 
   add_index "utility_places", ["visitable_type", "visitable_id"], name: "index_utility_places_on_visitable_type_and_visitable_id", using: :btree

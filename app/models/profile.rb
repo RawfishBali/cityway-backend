@@ -21,6 +21,7 @@
 #  address                :string
 #  latitude               :float
 #  longitude              :float
+#  website                :string
 #
 
 class Profile < ActiveRecord::Base
