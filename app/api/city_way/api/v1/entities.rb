@@ -292,9 +292,7 @@ module CityWay
           expose :id, documentation: {:type => "Integer", :desc => "Profile ID"}
           expose :name, documentation: {:type => "String", :desc => "Profile Name"}
           expose :role, documentation: {:type => "String", :desc => "Profile Role"}
-          expose :emails, documentation: {:type => "String", :desc => "Profile Emails"} do |profile, options|
-            profile.emails.join(",") if profile.emails
-          end
+          expose :email, documentation: {:type => "String", :desc => "Profile Emails"} 
           expose :website, documentation: {:type => "String", :desc => "Profile Website"}
           expose :description, documentation: {:type => "Text", :desc => "Profile Description"}
           expose :fax, documentation: {:type => "String", :desc => "Profile Fax"}

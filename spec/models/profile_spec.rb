@@ -5,7 +5,6 @@
 #  id                     :integer          not null, primary key
 #  name                   :string           not null
 #  role                   :string
-#  emails                 :string           is an Array
 #  phone                  :string
 #  fax                    :string
 #  days_open              :integer          is an Array
@@ -23,6 +22,7 @@
 #  longitude              :float
 #  website                :string
 #  description            :text
+#  email                  :string
 #
 
 require 'rails_helper'
