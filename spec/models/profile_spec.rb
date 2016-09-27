@@ -22,6 +22,7 @@
 #  latitude               :float
 #  longitude              :float
 #  website                :string
+#  description            :text
 #
 
 require 'rails_helper'

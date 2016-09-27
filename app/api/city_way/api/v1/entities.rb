@@ -296,6 +296,7 @@ module CityWay
             profile.emails.join(",") if profile.emails
           end
           expose :website, documentation: {:type => "String", :desc => "Profile Website"}
+          expose :description, documentation: {:type => "Text", :desc => "Profile Description"}
           expose :fax, documentation: {:type => "String", :desc => "Profile Fax"}
           expose :phone, documentation: {:type => "String", :desc => "Profile Phone"}
           expose :days_open, documentation: {:type => "String", :desc => "Profile Days Open"} do |profile, options|
