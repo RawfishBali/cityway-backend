@@ -23,6 +23,7 @@
 #  website                :string
 #  description            :text
 #  email                  :string
+#  city_hall_name         :string
 #
 
 require 'rails_helper'

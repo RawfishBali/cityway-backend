@@ -292,8 +292,9 @@ module CityWay
           expose :id, documentation: {:type => "Integer", :desc => "Profile ID"}
           expose :name, documentation: {:type => "String", :desc => "Profile Name"}
           expose :role, documentation: {:type => "String", :desc => "Profile Role"}
-          expose :email, documentation: {:type => "String", :desc => "Profile Emails"} 
+          expose :email, documentation: {:type => "String", :desc => "Profile Emails"}
           expose :website, documentation: {:type => "String", :desc => "Profile Website"}
+          expose :city_hall_name, documentation: {:type => "String", :desc => "Profile City Hall Name"} 
           expose :description, documentation: {:type => "Text", :desc => "Profile Description"}
           expose :fax, documentation: {:type => "String", :desc => "Profile Fax"}
           expose :phone, documentation: {:type => "String", :desc => "Profile Phone"}
