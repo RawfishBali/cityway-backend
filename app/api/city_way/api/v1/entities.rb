@@ -294,7 +294,7 @@ module CityWay
           expose :role, documentation: {:type => "String", :desc => "Profile Role"}
           expose :email, documentation: {:type => "String", :desc => "Profile Emails"}
           expose :website, documentation: {:type => "String", :desc => "Profile Website"}
-          expose :city_hall_name, documentation: {:type => "String", :desc => "Profile City Hall Name"} 
+          expose :city_hall_name, documentation: {:type => "String", :desc => "Profile City Hall Name"}
           expose :description, documentation: {:type => "Text", :desc => "Profile Description"}
           expose :fax, documentation: {:type => "String", :desc => "Profile Fax"}
           expose :phone, documentation: {:type => "String", :desc => "Profile Phone"}
@@ -637,7 +637,7 @@ module CityWay
 
         class CategoryWithMerchants < Grape::Entity
           expose :merchants do |category , options|
-            CityWay::Api::V1::Entities::Merchant.represent(options[:merchants])
+            CityWay::Api::V1::Entities::Merchant.represent(options[:merchants] , latitude: options[:latitude], longitude: options[:longitude])
           end
           expose :subcategories, if: lambda { |object, options| !options[:subcategories].blank? } do |category , options|
             CityWay::Api::V1::Entities::Category.represent(options[:subcategories])
@@ -746,11 +746,7 @@ module CityWay
           end
           expose :support_disabilities, documentation: {:type => "boolean", :desc => "Merchant support_disabilities"}
           expose :distance, if: lambda { |object, options| object.respond_to?(:distance) || options[:latitude] && options[:longitude] } do |merchant , options|
-            if merchant.respond_to?(:distance)
-              merchant.distance
-            elsif options[:latitude] && options[:longitude]
-              merchant.distance_from([options[:latitude], options[:longitude]])
-            end
+            merchant.distance_from([options[:latitude], options[:longitude]])
           end
           expose :has_promos, documentation: {:type => "Boolean", :desc => "Merchant Has Promos Or Not"} do |merchant , options|
             merchant.promos.any?

@@ -73,10 +73,9 @@ module CityWay
             else
               merchants = Merchant.joins(:subcategories).where('merchants.city_id = ? AND categories_merchants.category_id = ?' ,params[:id], params[:subcategory_id]).page params[:page]
             end
-            merchants = merchants.near([params[:latitude],params[:longitude]], 100, units: :km) if params[:latitude] && params[:longitude]
             add_pagination_headers merchants
 
-            present category, with: CityWay::Api::V1::Entities::CategoryWithMerchants, merchants: merchants, subcategories: subcategories, simple: 'true'
+            present category, with: CityWay::Api::V1::Entities::CategoryWithMerchants, merchants: merchants, subcategories: subcategories, simple: 'true', latitude: params[:latitude], longitude: params[:longitude]
           end
 
 
