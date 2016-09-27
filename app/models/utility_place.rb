@@ -19,12 +19,11 @@
 #  updated_at     :datetime         not null
 #  website        :string
 #
-# UtilityPlace.create(name: 'Farmacia Centrale Valeri', description: 'Farmacia Centrale Valeri', address: ' Corso Andrea Palladio, 136, 36100 Vicenza VI, Italy', phone: '+39 0444 321964' , place_type: 'pharmacies', visitable_id: 14, visitable_type: 'Utility')
 
 class UtilityPlace < ActiveRecord::Base
-  enum place_type: [:post_office , :pharmacies, :water_house, :waste_recycling, :bikes, :public_swimming_pool, :tennis_court, :stadium, :structures, :social_services, :voluntary_association, :elder_home, :young_people_place, :kindergardern, :primary_school, :first_secondary_school, :second_secondary_school, :universities, :music]
+  enum place_type: [:post_office , :pharmacies, :water_house, :waste_recycling, :bikes, :public_swimming_pool, :tennis_court, :stadium, :structures, :social_services, :voluntary_association, :elder_home, :young_people_place, :kindergardern, :primary_school, :first_secondary_school, :second_secondary_school, :universities, :music, :large_garbage]
 
-  HAS_BUSINESSHOUR = ['voluntary_association', 'social_services', 'structures', 'tennis_court','public_swimming_pool', 'post_office', 'pharmacies']
+  HAS_BUSINESSHOUR = ['voluntary_association', 'social_services', 'structures', 'tennis_court','public_swimming_pool', 'post_office', 'pharmacies', 'large_garbage']
 
   has_many :business_hours, as: :marketable, dependent: :destroy
   has_many :photos, as: :imageable, dependent: :destroy
