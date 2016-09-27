@@ -14,7 +14,6 @@
 #  instagram            :string
 #  support_disabilities :boolean          default(FALSE)
 #  description          :text
-#  event_start          :datetime         not null
 #  around_id            :integer          not null
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null

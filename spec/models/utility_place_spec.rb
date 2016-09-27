@@ -17,6 +17,7 @@
 #  is_public      :boolean          default(TRUE)
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  website        :string
 #
 
 require 'rails_helper'

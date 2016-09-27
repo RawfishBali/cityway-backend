@@ -9,6 +9,9 @@
 #  itinerary_id :integer
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  name         :string
+#  description  :text
+#  position     :integer
 #
 
 class Step < ActiveRecord::Base

@@ -13,6 +13,7 @@
 #  marketable_type    :string
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
+#  is_open_today      :boolean          default(FALSE)
 #
 
 require 'rails_helper'

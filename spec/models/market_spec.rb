@@ -7,10 +7,7 @@
 #  address     :string           not null
 #  latitude    :float
 #  longitude   :float
-#  open_time   :time             not null
-#  close_time  :time             not null
 #  description :text
-#  day_opens   :integer          is an Array
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  around_id   :integer

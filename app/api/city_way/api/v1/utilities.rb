@@ -10,26 +10,30 @@ module CityWay
             authenticate!
           end
 
-          desc "webcams list"
+          desc "devices list"
           params do
-            requires :id , type: Integer, values: -> { Device.ids }
+            requires :id , type: Integer, values: -> { Utility.ids }
+            requires :device_type, type: String, values: -> { ["wifi", "webcam"] }
             optional :latitude, type: Float
             optional :longitude, type: Float
           end
-          get '/:id/webcams' do
+          get '/:id/devices' do
             utility = Utility.find(params[:id])
-            present utility.devices_by_type("webcam"), with: CityWay::Api::V1::Entities::Device, simple: 'false', latitude: params[:latitude], longitude: params[:longitude]
+            present utility.devices_by_type(params[:device_type]), with: CityWay::Api::V1::Entities::Device, simple: 'false', latitude: params[:latitude], longitude: params[:longitude]
           end
 
-          desc "wifi list"
+
+          desc "Places list"
           params do
-            requires :id , type: Integer, values: -> { Device.ids }
+            requires :id , type: Integer, values: -> { Utility.ids }
+            requires :place_type, type: String, values: -> { ["post_office","pharmacies","water_house","waste_recycling","bikes","public_swimming_pool","tennis_court","stadium","structures","social_services","voluntary_association","elder_home","young_people_place","kindergardern","primary_school","first_secondary_school","second_secondary_school","universities","music"] }
+            optional :private, type: Boolean
             optional :latitude, type: Float
             optional :longitude, type: Float
           end
-          get '/:id/wifis' do
+          get '/:id/places' do
             utility = Utility.find(params[:id])
-            present utility.devices_by_type("wifi"), with: CityWay::Api::V1::Entities::Device, simple: 'false', latitude: params[:latitude], longitude: params[:longitude]
+            present utility.places_by_type(params[:place_type]), with: CityWay::Api::V1::Entities::UtilityPlace, simple: 'false', latitude: params[:latitude], longitude: params[:longitude], private: params[:private]
           end
         end
       end

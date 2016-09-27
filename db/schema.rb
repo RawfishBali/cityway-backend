@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160921072340) do
+ActiveRecord::Schema.define(version: 20160926092526) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(version: 20160921072340) do
     t.string   "marketable_type"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
+    t.boolean  "is_open_today",      default: false
   end
 
   add_index "business_hours", ["marketable_type", "marketable_id"], name: "index_business_hours_on_marketable_type_and_marketable_id", using: :btree
@@ -191,6 +192,18 @@ ActiveRecord::Schema.define(version: 20160921072340) do
 
   add_index "discovers", ["city_id"], name: "index_discovers_on_city_id", using: :btree
 
+  create_table "event_dates", force: :cascade do |t|
+    t.date     "event_date"
+    t.string   "day_name"
+    t.time     "open_time"
+    t.time     "close_time"
+    t.integer  "event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "event_dates", ["event_id"], name: "index_event_dates_on_event_id", using: :btree
+
   create_table "events", force: :cascade do |t|
     t.string   "title",                                null: false
     t.string   "photo",                                null: false
@@ -203,7 +216,6 @@ ActiveRecord::Schema.define(version: 20160921072340) do
     t.string   "instagram"
     t.boolean  "support_disabilities", default: false
     t.text     "description"
-    t.datetime "event_start",                          null: false
     t.integer  "around_id",                            null: false
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
@@ -235,17 +247,13 @@ ActiveRecord::Schema.define(version: 20160921072340) do
     t.string   "address",     null: false
     t.float    "latitude"
     t.float    "longitude"
-    t.time     "open_time",   null: false
-    t.time     "close_time",  null: false
     t.text     "description"
-    t.integer  "day_opens",                array: true
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "around_id"
   end
 
   add_index "markets", ["around_id"], name: "index_markets_on_around_id", using: :btree
-  add_index "markets", ["day_opens"], name: "index_markets_on_day_opens", using: :btree
 
   create_table "merchants", force: :cascade do |t|
     t.string   "name",                                 null: false
@@ -293,6 +301,7 @@ ActiveRecord::Schema.define(version: 20160921072340) do
     t.integer  "commonplace_id", null: false
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.string   "url"
   end
 
   add_index "news", ["commonplace_id"], name: "index_news_on_commonplace_id", using: :btree
@@ -366,6 +375,9 @@ ActiveRecord::Schema.define(version: 20160921072340) do
     t.integer  "commonplace_id"
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
+    t.string   "address"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   add_index "profiles", ["commonplace_id"], name: "index_profiles_on_commonplace_id", using: :btree
@@ -435,6 +447,9 @@ ActiveRecord::Schema.define(version: 20160921072340) do
     t.integer  "itinerary_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.string   "name"
+    t.text     "description"
+    t.integer  "position"
   end
 
   create_table "stories", force: :cascade do |t|
@@ -519,6 +534,7 @@ ActiveRecord::Schema.define(version: 20160921072340) do
     t.boolean  "is_public",      default: true
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
+    t.string   "website"
   end
 
   add_index "utility_places", ["visitable_type", "visitable_id"], name: "index_utility_places_on_visitable_type_and_visitable_id", using: :btree
