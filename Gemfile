@@ -64,8 +64,6 @@ gem 'httparty'
 
 gem 'ruby-duration'
 
-gem 'tunemygc'
-
 group :production do
   gem 'rails_12factor'
 end
