@@ -469,6 +469,60 @@ module CityWay
           end
         end
 
+        class Device < Grape::Entity
+          expose :id, documentation: {:type => "Integer", :desc => "Device ID"}
+          expose :type, documentation: {:type => "String", :desc => "Device Type"} do |object, options|
+            object.device_type
+          end
+          expose :latitude, documentation: {:type => "Float", :desc => "Device latitude"}
+          expose :longitude, documentation: {:type => "Float", :desc => "Device longitude"}
+          expose :external_url, documentation: {:type => "Float", :desc => "Device External Url"}
+          expose :distance, if: lambda { |object, options| options[:latitude] && options[:longitude] } do |object , options|
+            object.distance_from([options[:latitude], options[:longitude]])
+          end
+        end
+
+        class Taxi < Grape::Entity
+          expose :id, documentation: {:type => "Integer", :desc => "Taxi ID"}
+          expose :contact_name , documentation: {:type => "String", :desc => "Taxi Contact Name"}
+          expose :phone_number, documentation: {:type => "String", :desc => "Taxi Phone Number"}
+          expose :website, documentation: {:type => "String", :desc => "Taxi Website"}
+        end
+
+        class UtilityNumber < Grape::Entity
+          expose :id, documentation: {:type => "Integer", :desc => "Utility Number ID"}
+          expose :name, documentation: {:type => "String", :desc => "Utility Number Name"}
+          expose :local_number, documentation: {:type => "String", :desc => "Utility Number Local Number"}
+          expose :national_number, documentation: {:type => "String", :desc => "Utility Number National Number"}
+          expose :address, documentation: {:type => "String", :desc => "Utility Number Address"}
+        end
+
+        class UtilityPlace < Grape::Entity
+          expose :id, documentation: {:type => "Integer", :desc => "Utility Place ID"}
+          expose :name, documentation: {:type => "String", :desc => "Utility Place Name"}
+          expose :denomination, documentation: {:type => "String", :desc => "Utility Place denomination"},if: lambda { |object, options| options[:simple] == 'false' && object.denomination }
+          expose :address, documentation: {:type => "String", :desc => "Utility Place Address"}
+          expose :photos, documentation: {:type => "string", :desc => "Merchant photo"} do |object , options|
+            if options[:simple] == 'false'
+              CityWay::Api::V1::Entities::Photo.represent(object.photos) if object.photos.length > 0
+            else
+              CityWay::Api::V1::Entities::Photo.represent(object.primary_photo) if object.photos.length > 0
+            end
+          end
+          expose :phone, documentation: {:type => "String", :desc => "Utility Place Phone"},if: lambda { |object, options| options[:simple] == 'false' }
+          expose :business_hours,if: lambda { |object, options| options[:simple] == 'false' && object.business_hours.length > 0 } do |object , options|
+            CityWay::Api::V1::Entities::BusinessHours.represent(object.all_business_hours)
+          end
+          expose :latitude, documentation: {:type => "float", :desc => "Utility Place Latitude"}
+          expose :longitude, documentation: {:type => "float", :desc => "Utility Place Longitude"}
+          expose :type, documentation: {:type => "float", :desc => "Utility Place place_type"} do |object, options|
+            object.place_type
+          end
+          expose :distance, if: lambda { |object, options| options[:latitude] && options[:longitude] } do |object , options|
+            object.distance_from([options[:latitude], options[:longitude]])
+          end
+        end
+
         class Utility < Grape::Entity
           expose :photo, documentation: {:type => "String", :desc => "Utility Photo"} do |disc, options|
             disc.photo.url

@@ -10,6 +10,20 @@
 #
 
 class Utility < ActiveRecord::Base
+  has_many :devices
+  has_many :taxis
+  has_many :utility_places, as: :visitable, dependent: :destroy
+
   belongs_to :city
   mount_uploader :photo, PhotoUploader
+
+  def devices_by_type device_type
+    return [] if (Device.device_types[device_type]).blank?
+    devices.where("device_type = ?",Device.device_types[device_type])
+  end
+
+  def places_by_type place_type
+    return [] if (UtilityPlace.place_types[place_type]).blank?
+    utility_places.where("place_type = ?", UtilityPlace.place_types[place_type])
+  end
 end
