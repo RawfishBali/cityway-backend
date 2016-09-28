@@ -51,9 +51,18 @@ module CityWay
           end
           get '/:id' do
             city = City.find(params[:id])
-            forecast = ForecastIO.forecast(city.latitude, city.longitude, params: { units: 'si' })
             advertisements = city.active_advertisements
-            present city, with: CityWay::Api::V1::Entities::City, sections: params[:sections], simple: 'false', forecast: forecast, advertisements: advertisements
+            present city, with: CityWay::Api::V1::Entities::City, sections: params[:sections], simple: 'false', advertisements: advertisements
+          end
+
+          desc "City Weather"
+          params do
+            requires :id , type: Integer, values: -> { City.ids }
+          end
+          get '/:id/weather' do
+            city = City.find(params[:id])
+            forecast = ForecastIO.forecast(city.latitude, city.longitude, params: { units: 'si' })
+            present forecast, with: CityWay::Api::V1::Entities::Weather
           end
 
           desc "City's Merchant Per Category Or Per Subcategory"
