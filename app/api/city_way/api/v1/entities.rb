@@ -539,8 +539,15 @@ module CityWay
         end
 
         class Utility < Grape::Entity
+          expose :id, documentation: {:type => "Integer", :desc => "Utility ID"}
+          expose :top_advertisements, if: lambda { |object, options| options[:simple] == 'false' }  do |discover, options|
+            CityWay::Api::V1::Entities::Advertisement.represent(options[:advertisements]["top"])
+          end
           expose :photo, documentation: {:type => "String", :desc => "Utility Photo"} do |disc, options|
             disc.photo.url
+          end
+          expose :bottom_advertisements, if: lambda { |object, options| options[:simple] == 'false' }  do |discover, options|
+            CityWay::Api::V1::Entities::Advertisement.represent(options[:advertisements]["bottom"])
           end
         end
 
@@ -593,18 +600,7 @@ module CityWay
             CityWay::Api::V1::Entities::Discover.represent(city.discover, options)
           end
           expose :utility, if: lambda { |object, options| options[:sections].blank? || options[:sections] == 'utility' } do |city, options|
-            if options[:simple] == 'true'
-              {
-                photo: city.utility.photo.url
-              }
-            else
-              {
-                photo: city.utility.photo.url,
-                top_advertisements: CityWay::Api::V1::Entities::Advertisement.represent(options[:advertisements]["top"]),
-                main_section: [],
-                bottom_advertisements: CityWay::Api::V1::Entities::Advertisement.represent(options[:advertisements]["bottom"])
-              }
-            end
+            CityWay::Api::V1::Entities::Utility.represent(city.utility, options)
           end
         end
 
