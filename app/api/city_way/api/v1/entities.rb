@@ -505,6 +505,12 @@ module CityWay
           end
         end
 
+        class GarbageGlossary < Grape::Entity
+          expose :id, documentation: {:type => "Integer", :desc => "GarbageGlossary Area ID"}
+          expose :name, documentation: {:type => "String", :desc => "GarbageGlossary Area Name"}
+          expose :description, documentation: {:type => "Text", :desc => "GarbageGlossary Area Name"},if: lambda { |object, options| options[:simple] == 'false' && object.description }
+        end
+
         class UtilityNumber < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "Utility Number ID"}
           expose :name, documentation: {:type => "String", :desc => "Utility Number Name"}

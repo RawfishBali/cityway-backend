@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160928063724) do
+ActiveRecord::Schema.define(version: 20160928082304) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -223,6 +223,14 @@ ActiveRecord::Schema.define(version: 20160928063724) do
   end
 
   add_index "events", ["around_id"], name: "index_events_on_around_id", using: :btree
+
+  create_table "garbage_glossaries", force: :cascade do |t|
+    t.string   "name",        null: false
+    t.text     "description", null: false
+    t.integer  "utility_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "identities", force: :cascade do |t|
     t.integer  "user_id"
