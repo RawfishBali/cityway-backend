@@ -27,4 +27,9 @@ class Utility < ActiveRecord::Base
     return [] if (UtilityPlace.place_types[place_type]).blank?
     utility_places.where("place_type = ?", UtilityPlace.place_types[place_type])
   end
+
+  def transportation_by_type transport_type
+    return [] if (PublicTransport.transport_types[transport_type]).blank?
+    public_transports.where("transport_type = ?", PublicTransport.transport_types[transport_type])
+  end
 end

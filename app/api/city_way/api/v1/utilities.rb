@@ -43,7 +43,7 @@ module CityWay
           end
           get '/:id/transportations' do
             utility = Utility.find(params[:id])
-            present utility.public_transports(params[:transportation_type]), with: CityWay::Api::V1::Entities::PublicTransport, simple: 'false', latitude: params[:latitude], longitude: params[:longitude]
+            present utility.transportation_by_type(params[:transportation_type]), with: CityWay::Api::V1::Entities::PublicTransport, simple: 'false', latitude: params[:latitude], longitude: params[:longitude]
           end
 
         end
