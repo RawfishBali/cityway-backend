@@ -9,6 +9,9 @@
 #  utility_id   :integer
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  address      :string
+#  latitude     :float
+#  longitude    :float
 #
 
 require 'rails_helper'

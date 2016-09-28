@@ -46,6 +46,16 @@ module CityWay
             present utility.transportation_by_type(params[:transportation_type]), with: CityWay::Api::V1::Entities::PublicTransport, simple: 'false', latitude: params[:latitude], longitude: params[:longitude]
           end
 
+          desc "Taxi list"
+          params do
+            requires :id , type: Integer, values: -> { Utility.ids }
+            optional :latitude, type: Float
+            optional :longitude, type: Float
+          end
+          get '/:id/taxis' do
+            utility = Utility.find(params[:id])
+            present utility.taxis, with: CityWay::Api::V1::Entities::Taxi, simple: 'false', latitude: params[:latitude], longitude: params[:longitude]
+          end
         end
       end
     end

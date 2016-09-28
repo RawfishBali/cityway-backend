@@ -9,8 +9,14 @@
 #  utility_id   :integer
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  address      :string
+#  latitude     :float
+#  longitude    :float
 #
 
 class Taxi < ActiveRecord::Base
   belongs_to :utility
+
+  geocoded_by :address
+  after_validation :geocode
 end

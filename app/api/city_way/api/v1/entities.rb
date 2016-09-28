@@ -486,6 +486,9 @@ module CityWay
           expose :id, documentation: {:type => "Integer", :desc => "Taxi ID"}
           expose :contact_name , documentation: {:type => "String", :desc => "Taxi Contact Name"}
           expose :phone_number, documentation: {:type => "String", :desc => "Taxi Phone Number"}
+          expose :address, documentation: {:type => "String", :desc => "Taxi Phone Address"}
+          expose :latitude, documentation: {:type => "String", :desc => "Taxi Phone Latitude"}
+          expose :longitude, documentation: {:type => "String", :desc => "Taxi Phone Longitude"}
           expose :website, documentation: {:type => "String", :desc => "Taxi Website"}
         end
 
