@@ -1,6 +1,5 @@
 require 'client_application'
 require 'access_token'
-# require 'gcfs/oauth2/failure_app'
 
 module StrongParamsHelpers
   extend Grape::API::Helpers

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160928033727) do
+ActiveRecord::Schema.define(version: 20160928063724) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -320,6 +320,18 @@ ActiveRecord::Schema.define(version: 20160928033727) do
   end
 
   add_index "news", ["commonplace_id"], name: "index_news_on_commonplace_id", using: :btree
+
+  create_table "parking_areas", force: :cascade do |t|
+    t.string   "name"
+    t.string   "address"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.integer  "total_parking_lot"
+    t.integer  "available_parking_lot"
+    t.integer  "utility_id"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
 
   create_table "parks", force: :cascade do |t|
     t.string   "name"

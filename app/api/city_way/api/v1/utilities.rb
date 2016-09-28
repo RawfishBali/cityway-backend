@@ -56,6 +56,17 @@ module CityWay
             utility = Utility.find(params[:id])
             present utility.taxis, with: CityWay::Api::V1::Entities::Taxi, simple: 'false', latitude: params[:latitude], longitude: params[:longitude]
           end
+
+          desc "Parking Area list"
+          params do
+            requires :id , type: Integer, values: -> { Utility.ids }
+            optional :latitude, type: Float
+            optional :longitude, type: Float
+          end
+          get '/:id/parking_areas' do
+            utility = Utility.find(params[:id])
+            present utility.parking_areas, with: CityWay::Api::V1::Entities::ParkingArea, simple: 'false', latitude: params[:latitude], longitude: params[:longitude]
+          end
         end
       end
     end

@@ -492,6 +492,19 @@ module CityWay
           expose :website, documentation: {:type => "String", :desc => "Taxi Website"}
         end
 
+        class ParkingArea < Grape::Entity
+          expose :id, documentation: {:type => "Integer", :desc => "Parking Area ID"}
+          expose :name, documentation: {:type => "String", :desc => "Parking Area Name"}
+          expose :address, documentation: {:type => "String", :desc => "Parking Area Address"}
+          expose :latitude, documentation: {:type => "Float", :desc => "Parking Area Latitude"}
+          expose :longitude, documentation: {:type => "Float", :desc => "Parking Area Longitude"}
+          expose :total_parking_lot, documentation: {:type => "Integer", :desc => "Parking Area Total Paring Lot"}
+          expose :available_parking_lot, documentation: {:type => "Integer", :desc => "Parking Area Available Parking Lot"}
+          expose :distance, if: lambda { |object, options| options[:latitude] && options[:longitude] } do |object , options|
+            object.distance_from([options[:latitude], options[:longitude]])
+          end
+        end
+
         class UtilityNumber < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "Utility Number ID"}
           expose :name, documentation: {:type => "String", :desc => "Utility Number Name"}
