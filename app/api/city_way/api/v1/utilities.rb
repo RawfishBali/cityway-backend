@@ -35,6 +35,17 @@ module CityWay
             utility = Utility.find(params[:id])
             present utility.places_by_type(params[:place_type]), with: CityWay::Api::V1::Entities::UtilityPlace, simple: 'false', latitude: params[:latitude], longitude: params[:longitude], private: params[:private]
           end
+
+          desc "Transportation list"
+          params do
+            requires :id , type: Integer, values: -> { Utility.ids }
+            requires :transportation_type, type: String, values: -> { ["bus", "regional_bus", "autobus", "tram", "underground"] }
+          end
+          get '/:id/transportations' do
+            utility = Utility.find(params[:id])
+            present utility.public_transports(params[:transportation_type]), with: CityWay::Api::V1::Entities::PublicTransport, simple: 'false', latitude: params[:latitude], longitude: params[:longitude]
+          end
+
         end
       end
     end

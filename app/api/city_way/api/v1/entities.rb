@@ -523,6 +523,18 @@ module CityWay
           end
         end
 
+        class PublicTransport < Grape::Entity
+          expose :id, documentation: {:type => "Integer", :desc => "Transport ID"}
+          expose :type, documentation: {:type => "Integer", :desc => "Transport Type"} do |object, options|
+            object.transport_type
+          end
+          expose :name, documentation: {:type => "String", :desc => "Taxi Name"}
+          expose :path, documentation: {:type => "Text", :desc => "Taxi Path"}
+          expose :attachment, documentation: {:type => "Text", :desc => "Taxi attachment"} do |object, options|
+            object.attachment.url
+          end
+        end
+
         class Utility < Grape::Entity
           expose :photo, documentation: {:type => "String", :desc => "Utility Photo"} do |disc, options|
             disc.photo.url

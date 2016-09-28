@@ -13,6 +13,7 @@ class Utility < ActiveRecord::Base
   has_many :devices
   has_many :taxis
   has_many :utility_places, as: :visitable, dependent: :destroy
+  has_many :public_transports, dependent: :destroy
 
   belongs_to :city
   mount_uploader :photo, PhotoUploader
