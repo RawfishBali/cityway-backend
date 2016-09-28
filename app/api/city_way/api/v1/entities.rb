@@ -586,9 +586,6 @@ module CityWay
           expose :photo do |home , options|
             home.photo.url
           end
-          expose :weather, if: lambda { |object, options| options[:simple] == 'false'  }  do |home, options|
-            CityWay::Api::V1::Entities::Weather.represent options[:forecast]
-          end
           expose :top_advertisements, if: lambda { |object, options| options[:simple] == 'false'  }  do |home , options|
             CityWay::Api::V1::Entities::Advertisement.represent(options[:advertisements]["top"])
           end
