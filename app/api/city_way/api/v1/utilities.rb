@@ -45,6 +45,17 @@ module CityWay
             present utility.places_by_type(params[:place_type]), with: CityWay::Api::V1::Entities::UtilityPlace, simple: 'false', latitude: params[:latitude], longitude: params[:longitude], private: params[:private]
           end
 
+
+          desc "Place Detail"
+          params do
+            requires :id , type: Integer, values: -> { Utility.ids }
+            requires :place_id , type: Integer, values: -> { UtilityPlace.ids }
+          end
+          get '/:id/places/:place_id' do
+            utility = Utility.find(params[:id])
+            present utility.utility_places.find_by(id: params[:place_id]), with: CityWay::Api::V1::Entities::UtilityPlace, simple: 'false', latitude: params[:latitude], longitude: params[:longitude], private: params[:private]
+          end
+
           desc "Transportation list"
           params do
             requires :id , type: Integer, values: -> { Utility.ids }
