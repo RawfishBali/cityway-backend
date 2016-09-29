@@ -78,6 +78,18 @@ module CityWay
             utility = Utility.find(params[:id])
             present utility.garbage_glossaries, with: CityWay::Api::V1::Entities::GarbageGlossary
           end
+
+
+          desc "ZTL list"
+          params do
+            requires :id , type: Integer, values: -> { Utility.ids }
+            optional :latitude, type: Float
+            optional :longitude, type: Float
+          end
+          get '/:id/ztls' do
+            utility = Utility.find(params[:id])
+            present utility.ztls, with: CityWay::Api::V1::Entities::Ztl
+          end
         end
       end
     end

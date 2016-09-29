@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160928082304) do
+ActiveRecord::Schema.define(version: 20160928092900) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -162,6 +162,14 @@ ActiveRecord::Schema.define(version: 20160928082304) do
   end
 
   add_index "commonplaces", ["city_id"], name: "index_commonplaces_on_city_id", using: :btree
+
+  create_table "coordinates", force: :cascade do |t|
+    t.float    "latitude"
+    t.float    "longitude"
+    t.integer  "ztl_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "culinaries", force: :cascade do |t|
     t.string   "name",          null: false
@@ -600,6 +608,14 @@ ActiveRecord::Schema.define(version: 20160928082304) do
     t.integer  "utility_id"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
+  end
+
+  create_table "ztls", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "utility_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   add_foreign_key "identities", "users"

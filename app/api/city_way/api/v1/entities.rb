@@ -557,6 +557,20 @@ module CityWay
           end
         end
 
+        class Coordinate < Grape::Entity
+          expose :latitude, documentation: {:type => "Float", :desc => "Coordinate Latitude"}
+          expose :longitude, documentation: {:type => "Float", :desc => "Coordinate Longitude"}
+        end
+
+        class Ztl < Grape::Entity
+          expose :id, documentation: {:type => "Integer", :desc => "ZTL ID"}
+          expose :name, documentation: {:type => "Integer", :desc => "ZTL Name"}
+          expose :description, documentation: {:type => "Integer", :desc => "ZTL Description"}
+          expose :coordinates, documentation: {:type => "Integer", :desc => "ZTL coordinates"} do |object, options|
+            CityWay::Api::V1::Entities::Coordinate.represent(object.coordinates)
+          end
+        end
+
         class Utility < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "Utility ID"}
           expose :top_advertisements, if: lambda { |object, options| options[:simple] == 'false' }  do |discover, options|
