@@ -110,6 +110,18 @@ module CityWay
             utility = Utility.find(params[:id])
             present utility.ztls, with: CityWay::Api::V1::Entities::Ztl
           end
+
+          desc "Sports list"
+          params do
+            requires :id , type: Integer, values: -> { Utility.ids }
+            optional :latitude, type: Float
+            optional :longitude, type: Float
+          end
+          get '/:id/sports' do
+            utility = Utility.find(params[:id])
+            places = utility.utility_places.where(place_type: [5,6,7])
+            present places, with: CityWay::Api::V1::Entities::UtilityPlace, simple: 'false', latitude: params[:latitude], longitude: params[:longitude], private: params[:private]
+          end
         end
       end
     end
