@@ -13,4 +13,8 @@
 #
 
 class UtilityNumber < ActiveRecord::Base
+  validates_presence_of :name
+  validates_presence_of :utility
+
+  belongs_to :utility
 end

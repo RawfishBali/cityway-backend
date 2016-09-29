@@ -13,6 +13,7 @@ class Utility < ActiveRecord::Base
   has_many :devices
   has_many :taxis
   has_many :utility_places, as: :visitable, dependent: :destroy
+  has_many :utility_numbers, dependent: :destroy
   has_many :public_transports, dependent: :destroy
   has_many :parking_areas, dependent: :destroy
   has_many :garbage_glossaries, dependent: :destroy
