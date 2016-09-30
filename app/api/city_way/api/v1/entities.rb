@@ -547,7 +547,19 @@ module CityWay
           expose :commercial, documentation: {:type => "Boolean", :desc => "Utility Place commercial"}
         end
 
-        class  Path < Grape::Entity
+        class UtilitySports < Grape::Entity
+          expose :public_swimming_pool do |object , options|
+            CityWay::Api::V1::Entities::UtilityPlace.represent(object.utility_places.where(place_type:[5]), simple: 'false', latitude: options[:latitude], longitude: options[:longitude])
+          end
+          expose :tennis_court do |object , options|
+            CityWay::Api::V1::Entities::UtilityPlace.represent(object.utility_places.where(place_type:[6]), simple: 'false', latitude: options[:latitude], longitude: options[:longitude])
+          end
+          expose :stadium do |object , options|
+            CityWay::Api::V1::Entities::UtilityPlace.represent(object.utility_places.where(place_type:[7]), simple: 'false', latitude: options[:latitude], longitude: options[:longitude])
+          end
+        end
+
+        class Path < Grape::Entity
           expose :path, documentation: {:type => "Text", :desc => "Path's path"}
         end
 
