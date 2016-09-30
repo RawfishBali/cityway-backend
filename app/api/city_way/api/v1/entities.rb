@@ -543,6 +543,8 @@ module CityWay
           expose :distance, if: lambda { |object, options| options[:latitude] && options[:longitude] } do |object , options|
             object.distance_from([options[:latitude], options[:longitude]])
           end
+          expose :is_public, documentation: {:type => "Boolean", :desc => "Utility Place Public"}
+          expose :commercial, documentation: {:type => "Boolean", :desc => "Utility Place commercial"}
         end
 
         class  Path < Grape::Entity
