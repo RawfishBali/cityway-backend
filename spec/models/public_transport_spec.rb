@@ -6,7 +6,6 @@
 #  name           :string
 #  attachment     :string
 #  transport_type :integer
-#  path           :text
 #  utility_id     :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null

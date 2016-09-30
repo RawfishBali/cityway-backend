@@ -545,13 +545,19 @@ module CityWay
           end
         end
 
+        class  Path < Grape::Entity
+          expose :path, documentation: {:type => "Text", :desc => "Path's path"}
+        end
+
         class PublicTransport < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "Transport ID"}
           expose :type, documentation: {:type => "Integer", :desc => "Transport Type"} do |object, options|
             object.transport_type
           end
           expose :name, documentation: {:type => "String", :desc => "Taxi Name"}
-          expose :path, documentation: {:type => "Text", :desc => "Taxi Path"}
+          expose :paths, documentation: {:type => "Text", :desc => "Taxi Path"} do |object, options|
+            CityWay::Api::V1::Entities::Path.represent(object.paths)
+          end
           expose :attachment, documentation: {:type => "Text", :desc => "Taxi attachment"} do |object, options|
             object.attachment.url
           end

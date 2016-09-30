@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160929095242) do
+ActiveRecord::Schema.define(version: 20160930025016) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -363,6 +363,13 @@ ActiveRecord::Schema.define(version: 20160929095242) do
 
   add_index "parks", ["around_id"], name: "index_parks_on_around_id", using: :btree
 
+  create_table "paths", force: :cascade do |t|
+    t.text     "path",                null: false
+    t.integer  "public_transport_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
   create_table "photos", force: :cascade do |t|
     t.string   "picture"
     t.integer  "imageable_id"
@@ -469,7 +476,6 @@ ActiveRecord::Schema.define(version: 20160929095242) do
     t.string   "name"
     t.string   "attachment"
     t.integer  "transport_type"
-    t.text     "path"
     t.integer  "utility_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
