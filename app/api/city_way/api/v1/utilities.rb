@@ -35,13 +35,14 @@ module CityWay
           params do
             requires :id , type: Integer, values: -> { Utility.ids }
             requires :place_type, type: String, values: -> { ["post_office","pharmacies","water_house","waste_recycling","bikes","public_swimming_pool","tennis_court","stadium","structures","social_services","voluntary_association","elder_home","young_people_place","kindergarten","primary_school","first_secondary_school","second_secondary_school","universities","music"] }
-            optional :private, type: Boolean
+            optional :public, type: Boolean
+            optional :commercial, type: Boolean
             optional :latitude, type: Float
             optional :longitude, type: Float
           end
           get '/:id/places' do
             utility = Utility.find(params[:id])
-            present utility.places_by_type(params[:place_type]), with: CityWay::Api::V1::Entities::UtilityPlace, simple: 'false', latitude: params[:latitude], longitude: params[:longitude], private: params[:private]
+            present utility.places_by_type(params[:place_type], params[:public], params[:commercial]), with: CityWay::Api::V1::Entities::UtilityPlace, simple: 'false', latitude: params[:latitude], longitude: params[:longitude]
           end
 
           desc "Place Detail"

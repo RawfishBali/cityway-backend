@@ -27,9 +27,13 @@ class Utility < ActiveRecord::Base
     devices.where("device_type = ?",Device.device_types[device_type])
   end
 
-  def places_by_type place_type
+  def places_by_type place_type, is_public=nil, commercial=nil
     return [] if (UtilityPlace.place_types[place_type]).blank?
-    utility_places.where("place_type = ?", UtilityPlace.place_types[place_type])
+    return utility_places.where("place_type = ?", UtilityPlace.place_types[place_type]) if is_public.nil? && commercial.nil?
+    return utility_places.where("place_type = ? and commercial = ?", UtilityPlace.place_types[place_type], commercial) if is_public.nil? && !commercial.nil?
+    return utility_places.where("place_type = ? and is_public = ?", UtilityPlace.place_types[place_type], is_public) if !is_public.nil? && commercial.nil?
+    return utility_places.where("place_type = ? and is_public = ? and commercial = ?", UtilityPlace.place_types[place_type], is_public, commercial) if !is_public.nil? && !commercial.nil?
+
   end
 
   def transportation_by_type transport_type
