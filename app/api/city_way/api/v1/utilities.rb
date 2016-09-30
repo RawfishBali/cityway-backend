@@ -34,15 +34,29 @@ module CityWay
           desc "Places list"
           params do
             requires :id , type: Integer, values: -> { Utility.ids }
-            requires :place_type, type: String, values: -> { ["post_office","pharmacies","water_house","waste_recycling","bikes","public_swimming_pool","tennis_court","stadium","structures","social_services","voluntary_association","elder_home","young_people_place","kindergarten","primary_school","first_secondary_school","second_secondary_school","universities","music"] }
+            optional :place_type, type: String, values: -> { ["post_office","pharmacies","water_house","waste_recycling","bikes","public_swimming_pool","tennis_court","stadium","structures","social_services","voluntary_association","elder_home","young_people_place","kindergarten","primary_school","first_secondary_school","second_secondary_school","universities","music"] }
             optional :public, type: Boolean
             optional :commercial, type: Boolean
+            optional :place_group, type: String
             optional :latitude, type: Float
             optional :longitude, type: Float
+            optional :simple, type: Boolean
           end
           get '/:id/places' do
+            simple = params[:simple] || true
             utility = Utility.find(params[:id])
-            present utility.places_by_type(params[:place_type], params[:public], params[:commercial]), with: CityWay::Api::V1::Entities::UtilityPlace, simple: 'false', latitude: params[:latitude], longitude: params[:longitude]
+            if params[:place_group]
+              if params[:place_group] == 'sports'
+                present utility, with: CityWay::Api::V1::Entities::UtilitySports, simple: simple, latitude: params[:latitude], longitude: params[:longitude]
+              elsif params[:place_group] == 'schools'
+                present utility, with: CityWay::Api::V1::Entities::UtilitySchools, simple: simple, latitude: params[:latitude], longitude: params[:longitude]
+              elsif params[:place_group] == 'socials'
+                present utility, with: CityWay::Api::V1::Entities::UtilitySocials, simple: simple, latitude: params[:latitude], longitude: params[:longitude]
+              end
+            else
+              present utility.places_by_type(params[:place_type], params[:public], params[:commercial]), with: CityWay::Api::V1::Entities::UtilityPlaceEntitiy, simple: simple, latitude: params[:latitude], longitude: params[:longitude]
+            end
+
           end
 
           desc "Place Detail"
@@ -52,7 +66,7 @@ module CityWay
           end
           get '/:id/places/:place_id' do
             utility = Utility.find(params[:id])
-            present utility.utility_places.find_by(id: params[:place_id]), with: CityWay::Api::V1::Entities::UtilityPlace, simple: 'false', latitude: params[:latitude], longitude: params[:longitude], private: params[:private]
+            present utility.utility_places.find_by(id: params[:place_id]), with: CityWay::Api::V1::Entities::UtilityPlaceEntitiy, simple: 'false', latitude: params[:latitude], longitude: params[:longitude], private: params[:private]
           end
 
           desc "Transportation list"
@@ -113,18 +127,6 @@ module CityWay
           get '/:id/sports' do
             utility = Utility.find(params[:id])
             present utility, with: CityWay::Api::V1::Entities::UtilitySports, simple: 'false', latitude: params[:latitude], longitude: params[:longitude]
-          end
-
-          desc "Sports Detail"
-          params do
-            requires :id , type: Integer, values: -> { Utility.ids }
-            requires :sport_id , type: Integer, values: -> { Utility.ids }
-            optional :latitude, type: Float
-            optional :longitude, type: Float
-          end
-          get '/:id/sports/:sport_id' do
-            utility = Utility.find(params[:id])
-            present utility.utility_places.where(place_type: [5,6,7]).find_by(id: params[:sport_id]), with: CityWay::Api::V1::Entities::UtilityPlace, simple: 'false', latitude: params[:latitude], longitude: params[:longitude]
           end
         end
       end

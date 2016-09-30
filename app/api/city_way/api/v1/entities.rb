@@ -519,7 +519,7 @@ module CityWay
           expose :address, documentation: {:type => "String", :desc => "Utility Number Address"}
         end
 
-        class UtilityPlace < Grape::Entity
+        class UtilityPlaceEntitiy < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "Utility Place ID"}
           expose :name, documentation: {:type => "String", :desc => "Utility Place Name"}
           expose :denomination, documentation: {:type => "String", :desc => "Utility Place denomination"},if: lambda { |object, options| options[:simple] == 'false' && object.denomination }
@@ -549,13 +549,76 @@ module CityWay
 
         class UtilitySports < Grape::Entity
           expose :public_swimming_pool do |object , options|
-            CityWay::Api::V1::Entities::UtilityPlace.represent(object.utility_places.where(place_type:[5]), simple: 'false', latitude: options[:latitude], longitude: options[:longitude])
+            CityWay::Api::V1::Entities::UtilityPlaceEntitiy.represent(object.utility_places.where(place_type: UtilityPlace.place_types['public_swimming_pool']), simple: options[:simple], latitude: options[:latitude], longitude: options[:longitude])
           end
           expose :tennis_court do |object , options|
-            CityWay::Api::V1::Entities::UtilityPlace.represent(object.utility_places.where(place_type:[6]), simple: 'false', latitude: options[:latitude], longitude: options[:longitude])
+            CityWay::Api::V1::Entities::UtilityPlaceEntitiy.represent(object.utility_places.where(place_type: UtilityPlace.place_types['tennis_court']), simple: options[:simple], latitude: options[:latitude], longitude: options[:longitude])
           end
           expose :stadium do |object , options|
-            CityWay::Api::V1::Entities::UtilityPlace.represent(object.utility_places.where(place_type:[7]), simple: 'false', latitude: options[:latitude], longitude: options[:longitude])
+            CityWay::Api::V1::Entities::UtilityPlaceEntitiy.represent(object.utility_places.where(place_type: UtilityPlace.place_types['stadium']), simple: options[:simple], latitude: options[:latitude], longitude: options[:longitude])
+          end
+        end
+
+        class UtilitySocials < Grape::Entity
+          expose :social_services do |object , options|
+            CityWay::Api::V1::Entities::UtilityPlaceEntitiy.represent(object.utility_places.where(place_type: UtilityPlace.place_types['social_service']), simple: options[:simple], latitude: options[:latitude], longitude: options[:longitude])
+          end
+          expose :voluntary_associations do |object , options|
+            CityWay::Api::V1::Entities::UtilityPlaceEntitiy.represent(object.utility_places.where(place_type: UtilityPlace.place_types['voluntary_association']), simple: options[:simple], latitude: options[:latitude], longitude: options[:longitude])
+          end
+          expose :elder_homes do |object , options|
+            CityWay::Api::V1::Entities::UtilityPlaceEntitiy.represent(object.utility_places.where(place_type: UtilityPlace.place_types['elder_home']), simple: options[:simple], latitude: options[:latitude], longitude: options[:longitude])
+          end
+        end
+
+        class UtilitySchoolPublic < Grape::Entity
+          expose :kindergartens do |object , options|
+            CityWay::Api::V1::Entities::UtilityPlaceEntitiy.represent(object.utility_places.where(place_type: UtilityPlace.place_types['kindergarten'], is_public: true), simple: options[:simple], latitude: options[:latitude], longitude: options[:longitude])
+          end
+          expose :primary_schools do |object , options|
+            CityWay::Api::V1::Entities::UtilityPlaceEntitiy.represent(object.utility_places.where(place_type: UtilityPlace.place_types['primary_school'], is_public: true), simple: options[:simple], latitude: options[:latitude], longitude: options[:longitude])
+          end
+          expose :first_secondary_schools do |object , options|
+            CityWay::Api::V1::Entities::UtilityPlaceEntitiy.represent(object.utility_places.where(place_type: UtilityPlace.place_types['first_secondary_school'], is_public: true), simple: options[:simple], latitude: options[:latitude], longitude: options[:longitude])
+          end
+          expose :second_secondary_schools do |object , options|
+            CityWay::Api::V1::Entities::UtilityPlaceEntitiy.represent(object.utility_places.where(place_type: UtilityPlace.place_types['second_secondary_school'], is_public: true), simple: options[:simple], latitude: options[:latitude], longitude: options[:longitude])
+          end
+          expose :universities do |object , options|
+            CityWay::Api::V1::Entities::UtilityPlaceEntitiy.represent(object.utility_places.where(place_type: UtilityPlace.place_types['universities'], is_public: true), simple: options[:simple], latitude: options[:latitude], longitude: options[:longitude])
+          end
+          expose :musics do |object , options|
+            CityWay::Api::V1::Entities::UtilityPlaceEntitiy.represent(object.utility_places.where(place_type: UtilityPlace.place_types['music'], is_public: true), simple: options[:simple], latitude: options[:latitude], longitude: options[:longitude])
+          end
+        end
+
+        class UtilitySchoolPrivate < Grape::Entity
+          expose :kindergartens do |object , options|
+            CityWay::Api::V1::Entities::UtilityPlaceEntitiy.represent(object.utility_places.where(place_type: UtilityPlace.place_types['kindergarten'], is_public: false), simple: options[:simple], latitude: options[:latitude], longitude: options[:longitude])
+          end
+          expose :primary_schools do |object , options|
+            CityWay::Api::V1::Entities::UtilityPlaceEntitiy.represent(object.utility_places.where(place_type: UtilityPlace.place_types['primary_school'], is_public: false), simple: options[:simple], latitude: options[:latitude], longitude: options[:longitude])
+          end
+          expose :first_secondary_schools do |object , options|
+            CityWay::Api::V1::Entities::UtilityPlaceEntitiy.represent(object.utility_places.where(place_type: UtilityPlace.place_types['first_secondary_school'], is_public: false), simple: options[:simple], latitude: options[:latitude], longitude: options[:longitude])
+          end
+          expose :second_secondary_schools do |object , options|
+            CityWay::Api::V1::Entities::UtilityPlaceEntitiy.represent(object.utility_places.where(place_type: UtilityPlace.place_types['second_secondary_school'], is_public: false), simple: options[:simple], latitude: options[:latitude], longitude: options[:longitude])
+          end
+          expose :universities do |object , options|
+            CityWay::Api::V1::Entities::UtilityPlaceEntitiy.represent(object.utility_places.where(place_type: UtilityPlace.place_types['universities'], is_public: false), simple: options[:simple], latitude: options[:latitude], longitude: options[:longitude])
+          end
+          expose :musics do |object , options|
+            CityWay::Api::V1::Entities::UtilityPlaceEntitiy.represent(object.utility_places.where(place_type: UtilityPlace.place_types['music'], is_public: false), simple: options[:simple], latitude: options[:latitude], longitude: options[:longitude])
+          end
+        end
+
+        class UtilitySchools < Grape::Entity
+          expose :private_schools do |object, options|
+            CityWay::Api::V1::Entities::UtilitySchoolPublic.represent(object, options)
+          end
+          expose :public_schools do |object, options|
+            CityWay::Api::V1::Entities::UtilitySchoolPrivate.represent(object, options)
           end
         end
 
