@@ -114,6 +114,18 @@ module CityWay
             utility = Utility.find(params[:id])
             present utility, with: CityWay::Api::V1::Entities::UtilitySports, simple: 'false', latitude: params[:latitude], longitude: params[:longitude]
           end
+
+          desc "Sports Detail"
+          params do
+            requires :id , type: Integer, values: -> { Utility.ids }
+            requires :sport_id , type: Integer, values: -> { Utility.ids }
+            optional :latitude, type: Float
+            optional :longitude, type: Float
+          end
+          get '/:id/sports/:sport_id' do
+            utility = Utility.find(params[:id])
+            present utility.utility_places.where(place_type: [5,6,7]).find_by(id: params[:sport_id]), with: CityWay::Api::V1::Entities::UtilityPlace, simple: 'false', latitude: params[:latitude], longitude: params[:longitude]
+          end
         end
       end
     end
