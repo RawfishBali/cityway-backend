@@ -603,7 +603,7 @@ module CityWay
           expose :longitude, documentation: {:type => "Float", :desc => "Vehicle longitude"}
           expose :available_parking_lot, documentation: {:type => "Integer", :desc => "Vehicle available_parking_lot"}, if: lambda { |object, options| object.available_parking_lot }
           expose :total_parking_lot, documentation: {:type => "Integer", :desc => "Vehicle total_parking_lot"}, if: lambda { |object, options| object.total_parking_lot }
-          expose :vehicle_type, documentation: {:type => "String", :desc => "Vehicle vehicle_type"} do |object, options|
+          expose :type, documentation: {:type => "String", :desc => "Vehicle vehicle_type"} do |object, options|
             object.vehicle_type
           end
           expose :distance, if: lambda { |object, options| options[:latitude] && options[:longitude] } do |object , options|
