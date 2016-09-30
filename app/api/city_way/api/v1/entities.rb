@@ -571,6 +571,26 @@ module CityWay
           end
         end
 
+        class Vehicle < Grape::Entity
+          expose :id, documentation: {:type => "Integer", :desc => "Vehicle ID"}
+          expose :name, documentation: {:type => "String", :desc => "Vehicle Name"}
+          expose :address, documentation: {:type => "String", :desc => "Vehicle Address"}
+          expose :phone_0, documentation: {:type => "String", :desc => "Vehicle Phone 0"}
+          expose :phone_1, documentation: {:type => "String", :desc => "Vehicle Phone 1"}, if: lambda { |object, options| object.phone_1 }
+          expose :website, documentation: {:type => "String", :desc => "Vehicle website"}
+          expose :email, documentation: {:type => "String", :desc => "Vehicle email"}
+          expose :latitude, documentation: {:type => "Float", :desc => "Vehicle latitude"}
+          expose :longitude, documentation: {:type => "Float", :desc => "Vehicle longitude"}
+          expose :available_parking_lot, documentation: {:type => "Integer", :desc => "Vehicle available_parking_lot"}, if: lambda { |object, options| object.available_parking_lot }
+          expose :total_parking_lot, documentation: {:type => "Integer", :desc => "Vehicle total_parking_lot"}, if: lambda { |object, options| object.total_parking_lot }
+          expose :vehicle_type, documentation: {:type => "String", :desc => "Vehicle vehicle_type"} do |object, options|
+            object.vehicle_type
+          end
+          expose :distance, if: lambda { |object, options| options[:latitude] && options[:longitude] } do |object , options|
+            object.distance_from([options[:latitude], options[:longitude]])
+          end
+        end
+
         class Utility < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "Utility ID"}
           expose :top_advertisements, if: lambda { |object, options| options[:simple] == 'false' }  do |discover, options|

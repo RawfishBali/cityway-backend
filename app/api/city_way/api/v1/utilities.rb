@@ -31,7 +31,6 @@ module CityWay
             present utility.utility_numbers, with: CityWay::Api::V1::Entities::UtilityNumber
           end
 
-
           desc "Places list"
           params do
             requires :id , type: Integer, values: -> { Utility.ids }
@@ -44,7 +43,6 @@ module CityWay
             utility = Utility.find(params[:id])
             present utility.places_by_type(params[:place_type]), with: CityWay::Api::V1::Entities::UtilityPlace, simple: 'false', latitude: params[:latitude], longitude: params[:longitude], private: params[:private]
           end
-
 
           desc "Place Detail"
           params do
@@ -66,26 +64,21 @@ module CityWay
             present utility.transportation_by_type(params[:transportation_type]), with: CityWay::Api::V1::Entities::PublicTransport, simple: 'false', latitude: params[:latitude], longitude: params[:longitude]
           end
 
-          desc "Taxi list"
+          desc 'Moving Within City'
           params do
             requires :id , type: Integer, values: -> { Utility.ids }
+            optional :vehicle_type , type: String, values: -> { ['taxi','bike','parking'] }
             optional :latitude, type: Float
             optional :longitude, type: Float
           end
-          get '/:id/taxis' do
+          get '/:id/vehicles' do
             utility = Utility.find(params[:id])
-            present utility.taxis, with: CityWay::Api::V1::Entities::Taxi, simple: 'false', latitude: params[:latitude], longitude: params[:longitude]
-          end
-
-          desc "Parking Area list"
-          params do
-            requires :id , type: Integer, values: -> { Utility.ids }
-            optional :latitude, type: Float
-            optional :longitude, type: Float
-          end
-          get '/:id/parking_areas' do
-            utility = Utility.find(params[:id])
-            present utility.parking_areas, with: CityWay::Api::V1::Entities::ParkingArea, simple: 'false', latitude: params[:latitude], longitude: params[:longitude]
+            if params[:vehicle_type]
+              vehicles = utility.vehicles_by_type params[:vehicle_type]
+            else
+              vehicles = utility.vehicles
+            end
+            present vehicles, with: CityWay::Api::V1::Entities::Vehicle, simple: 'false', latitude: params[:latitude], longitude: params[:longitude]
           end
 
           desc "GarbageGlossary list"
@@ -98,7 +91,6 @@ module CityWay
             utility = Utility.find(params[:id])
             present utility.garbage_glossaries, with: CityWay::Api::V1::Entities::GarbageGlossary
           end
-
 
           desc "ZTL list"
           params do
