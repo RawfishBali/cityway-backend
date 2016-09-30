@@ -68,14 +68,14 @@ module CityWay
           desc 'Moving Within City'
           params do
             requires :id , type: Integer, values: -> { Utility.ids }
-            optional :vehicle_type , type: String, values: -> { ['taxi','bike','parking'] }
+            optional :type , type: String, values: -> { ['taxi','bike','parking'] }
             optional :latitude, type: Float
             optional :longitude, type: Float
           end
           get '/:id/vehicles' do
             utility = Utility.find(params[:id])
-            if params[:vehicle_type]
-              vehicles = utility.vehicles_by_type params[:vehicle_type]
+            if params[:type]
+              vehicles = utility.vehicles_by_type params[:type]
             else
               vehicles = utility.vehicles
             end
