@@ -2,7 +2,11 @@
   <div class="sidebar_main_header" id="header-custom-background">
     <%= image_tag "logo_main_white@2x.png" , class: 'sidebar-header'%>
     <br />
-    <%= link_to 'Admin', '#', class:'sidebar-header-link'%>
+    <div class="sidebar_actions">
+
+        <%= select_tag "cities", options_from_collection_for_select(@cities, "id", "name", @selected_city.id), class: 'md-input city-selector'%>
+
+    </div>
   </div>
   <%= params[:controller]%>
   <div class="menu_section">

@@ -60,6 +60,7 @@ class Admin::CitiesController < Admin::BaseController
     def set_city
       @city = City.find(params[:id])
       session[:current_city_id] = @city.id
+      @selected_city = City.find(session[:current_city_id])
     end
 
     def city_params

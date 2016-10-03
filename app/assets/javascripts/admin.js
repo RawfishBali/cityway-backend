@@ -32,3 +32,4 @@
 //= require admin/forms_file_input
 //= require admin/forms_validation
 //= require cocoon
+//= require admin/special
