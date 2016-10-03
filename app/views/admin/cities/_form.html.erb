@@ -7,12 +7,6 @@
     </div>
   </div>
 
-  <div class="uk-width-medium-1-1 uk-grid-margin">
-    <div class="md-input-wrapper <%= @city.description.blank? ? '' : 'md-input-filled'%>">
-      <%= f.label :description, 'City Description, Maximum 50 Characters *' %>
-      <%= f.text_area :description , class: 'md-input uk-form-width-large', cols: 6, rows: 2, 'data-parsley-trigger':"keyup" ,'data-parsley-maxlength':"50", 'data-parsley-maxlength-message': "Maximum Characters is 50", required: true %>
-    </div>
-  </div>
 
   <div class="uk-width-medium-1-5 uk-grid-margin">
     <div class="md-input-wrapper">
@@ -20,41 +14,9 @@
       <%= f.file_field :photo, class: 'dropify ', 'data-default-file' => @city.photo, 'data-allowed-formats':"portrait square" , 'data-errors-position': "outside" , required: true  %>
     </div>
   </div>
-  <div class="uk-width-medium-1-5 uk-grid-margin">
-    <div class="md-input-wrapper">
-      <h3 class="heading_a uk-margin-small-bottom">Scopri Photo</h3>
-      <%= f.fields_for :discover do |ff| %>
-      <%= ff.file_field :photo, class: 'dropify ', 'data-default-file' => @discover.photo, required: true  ,  'data-errors-position': "outside" %>
-      <% end %>
-    </div>
-  </div>
-  <div class="uk-width-medium-1-5 uk-grid-margin">
-    <div class="md-input-wrapper">
-      <h3 class="heading_a uk-margin-small-bottom">Intorno Photo</h3>
-      <%= f.fields_for :around do |fff| %>
-      <%= fff.file_field :photo, class: 'dropify ', 'data-default-file' => @around.photo, required: true ,  'data-errors-position': "outside"   %>
-      <% end %>
-    </div>
-  </div>
-  <div class="uk-width-medium-1-5 uk-grid-margin">
-    <div class="md-input-wrapper">
-      <h3 class="heading_a uk-margin-small-bottom">Comune Photo</h3>
-      <%= f.fields_for :commonplace do |ffff| %>
-      <%= ffff.file_field :photo, class: 'dropify ', 'data-default-file' => @commonplace.photo, required: true ,  'data-errors-position': "outside"   %>
-    </div>
-    <% end %>
-  </div>
-  <div class="uk-width-medium-1-5 uk-grid-margin">
-    <div class="md-input-wrapper">
-      <h3 class="heading_a uk-margin-small-bottom">Utilita Photo</h3>
-      <%= f.fields_for :utility do |fffff| %>
-      <%= fffff.file_field :photo, class: 'dropify ', 'data-default-file' => @utility.photo, required: true ,  'data-errors-position': "outside"  %>
-      <% end %>
-    </div>
-  </div>
   <div class="uk-width-medium-1-1 uk-grid-margin">
     <div class="md-input-wrapper uk-text-right">
-      <%= link_to 'Close', admin_cities_path, class: 'md-btn md-btn-warning md-btn-wave waves-effect waves-button'%>
+      <%= link_to 'Close', root_path, class: 'md-btn md-btn-warning md-btn-wave waves-effect waves-button'%>
       <%= f.submit 'Save',  class: "md-btn md-btn-primary waves-effect waves-effect waves-button waves-light" %>
     </div>
   </div>

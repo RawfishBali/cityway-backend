@@ -35,3 +35,7 @@
 .advertisement-photo-container:parent{
   width: 200px !important;
 }
+
+.center{
+  text-align: center !important;
+}
