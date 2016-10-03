@@ -59,10 +59,7 @@ class Admin::CitiesController < Admin::BaseController
   private
     def set_city
       @city = City.find(params[:id])
-      @around = @city.around || @city.build_around
-      @utility = @city.utility || @city.build_utility
-      @commonplace = @city.commonplace || @city.build_commonplace
-      @discover = @city.discover || @city.build_discover
+      session[:current_city_id] = @city.id
     end
 
     def city_params

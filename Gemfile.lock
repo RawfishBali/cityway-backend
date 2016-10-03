@@ -62,6 +62,7 @@ GEM
     cloudinary (1.2.2)
       aws_cf_signer
       rest-client
+    cocoon (1.2.9)
     code_analyzer (0.4.6)
       sexp_processor
     coderay (1.1.1)
@@ -345,6 +346,7 @@ DEPENDENCIES
   cancancan
   carrierwave
   cloudinary
+  cocoon
   coffee-rails (~> 4.1.0)
   devise
   forecast_io

@@ -4,6 +4,7 @@
     <br />
     <%= link_to 'Admin', '#', class:'sidebar-header-link'%>
   </div>
+  <%= params[:controller]%>
   <div class="menu_section">
     <ul>
       <li title="Home">
@@ -12,8 +13,8 @@
           <span class="menu_title">Home</span>
         </a>
         <ul>
-          <li><a href="#">Select Photo</a></li>
-          <li><a href="#">Categories</a></li>
+          <li><a href="#" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/cities'%>">Select Photo</a></li>
+          <li><a href="/admin/categories" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/categories'%>">Categories</a></li>
           <li><a href="#">Subcategories</a></li>
           <li><a href="#">Merchant</a></li>
           <li><a href="#">Promotions</a></li>

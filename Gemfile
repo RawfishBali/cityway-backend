@@ -58,6 +58,8 @@ gem 'httparty'
 
 gem 'ruby-duration'
 
+gem 'cocoon'
+
 group :production do
   gem 'rails_12factor'
 end

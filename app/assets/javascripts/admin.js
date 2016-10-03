@@ -31,3 +31,4 @@
 //= require admin/dropify
 //= require admin/forms_file_input
 //= require admin/forms_validation
+//= require cocoon
