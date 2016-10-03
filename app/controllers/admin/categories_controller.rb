@@ -70,6 +70,6 @@ class Admin::CategoriesController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_category_params
-      params.require(:category).permit(:photo, :icon, :name, :city_ids)
+      params.require(:category).permit(:photo, :icon, :name, :city_ids, subcategories_attributes: [:id, :name, :_destroy])
     end
 end
