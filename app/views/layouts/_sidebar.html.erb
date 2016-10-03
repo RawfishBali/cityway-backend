@@ -17,7 +17,8 @@
           <span class="menu_title">Home</span>
         </a>
         <ul>
-          <li><a href="#" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/cities'%>">Select Photo</a></li>
+
+          <li><%= link_to 'Select Photo', edit_admin_city_path(@selected_city), class: 'act_item current_section_submenu' if params[:controller] == 'admin/cities' %></li>
           <li><a href="/admin/categories" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/categories'%>">Categories</a></li>
           <li><a href="#">Subcategories</a></li>
           <li><a href="#">Merchant</a></li>
