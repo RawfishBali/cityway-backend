@@ -44,7 +44,7 @@
 }
 
 .city-selector{
-  margin-top: -18px;
+  margin-top: -2px;
   background: #fff !important;
   margin-left: -10px;
   width: 220px !important;
@@ -53,4 +53,10 @@
 .subcategory-container{
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+.default-submit{
+  float: right;
+  margin-right: 18px;
+  margin-top: 15px;
 }
