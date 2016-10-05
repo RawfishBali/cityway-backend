@@ -21,6 +21,7 @@ class Commonplace < ActiveRecord::Base
   has_many :politic_groups , dependent: :destroy
   has_many :securities , dependent: :destroy
   has_many :public_offices , dependent: :destroy
+  has_many :online_services , dependent: :destroy
 
   belongs_to :city
   mount_uploader :photo, PhotoUploader

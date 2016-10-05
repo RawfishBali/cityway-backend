@@ -347,6 +347,18 @@ module CityWay
           end
         end
 
+        class OnlineService < Grape::Entity
+          expose :id, documentation: {:type => "String", :desc => "OnlineService ID"}
+          expose :name, documentation: {:type => "String", :desc => "OnlineService name"}
+          expose :url, if: lambda { |object, options| object.url }, documentation: {:type => "String", :desc => "OnlineService url"} do |object, options|
+            unless object.url[/\Ahttp:\/\//] || object.url[/\Ahttps:\/\//]
+              "https://#{object.url}"
+            else
+              object.url
+            end
+          end
+        end
+
         class Commonplace < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "Comune ID"}
           expose :photo, documentation: {:type => "String", :desc => "Comune Photo"} do |common, options|

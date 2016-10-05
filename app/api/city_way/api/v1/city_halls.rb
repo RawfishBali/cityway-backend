@@ -52,6 +52,35 @@ module CityWay
             present securities, with: CityWay::Api::V1::Entities::Security, simple: 'false'
           end
 
+
+          desc "CityHall Online Services"
+          params do
+            requires :id , type: Integer, values: -> { Commonplace.ids }
+            optional :latitude, type: Float
+            optional :longitude, type: Float
+          end
+          get '/:id/online_services' do
+            commonplace = Commonplace.find(params[:id])
+            online_services = commonplace.online_services.order('name ASC').page params[:page]
+            add_pagination_headers online_services
+
+            present online_services, with: CityWay::Api::V1::Entities::OnlineService, simple: 'false'
+          end
+
+          desc "CityHall Online Services Detail"
+          params do
+            requires :id , type: Integer, values: -> { Commonplace.ids }
+            requires :online_service_id, type: Integer, values: -> { OnlineService.ids }
+            optional :latitude, type: Float
+            optional :longitude, type: Float
+          end
+          get '/:id/online_services/:online_service_id' do
+            commonplace = Commonplace.find(params[:id])
+            online_service = commonplace.online_services.find_by(id: params[:online_service_id])
+
+            present online_service, with: CityWay::Api::V1::Entities::OnlineService, simple: 'false'
+          end
+
           desc "CityHall News"
           params do
             requires :id , type: Integer, values: -> { Commonplace.ids }
@@ -64,14 +93,13 @@ module CityWay
             present news, with: CityWay::Api::V1::Entities::News
           end
 
-          desc "CityHall News"
+          desc "CityHall News Detail"
           params do
             requires :id , type: Integer, values: -> { Commonplace.ids }
             requires :news_id , type: Integer, values: -> { News.ids }
           end
           get '/:id/news/:news_id' do
             news = News.find(params[:news_id])
-            
             present news, with: CityWay::Api::V1::Entities::News
           end
 
