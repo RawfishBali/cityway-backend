@@ -17,16 +17,13 @@
                         <td class=""><%= category.name%></td>
                         <td><%= image_tag category.photo.url%></td>
                         <td class="uk-text-center"><%= image_tag category.icon.url%></td>
-                        <td class="uk-text-center"><%= category.subcategories.map(&:name).join(', ')%></td>
+                        <td class="uk-text-center"><%= truncate(category.subcategories.map(&:name).join(', '), length: 25, omission: '...') %></td>
 
                         <td class="">
                             <%= link_to '<i class="md-icon material-icons">&#xE254;</i>'.html_safe , edit_admin_category_path(category)%>
-
-
                         </td>
                     </tr>
                     <% end %>
-
                 </tbody>
             </table>
         </div>
