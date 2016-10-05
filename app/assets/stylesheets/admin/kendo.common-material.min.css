@@ -5975,9 +5975,6 @@ div.k-flatcolorpicker {
     background: url(textures/transparency.png) repeat 0 50%
 }
 
-.k-ie8 .k-flatcolorpicker .k-hsv-gradient {
-    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#00ffffff', GradientType=1) progid: DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#ff000000', GradientType=0)
-}
 
 table.k-editor {
     width: 100%;
