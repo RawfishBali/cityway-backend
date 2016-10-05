@@ -8,7 +8,6 @@
 
     </div>
   </div>
-  <%= params[:controller]%>
   <div class="menu_section">
     <ul>
       <li title="Home">
@@ -17,8 +16,8 @@
           <span class="menu_title">Home</span>
         </a>
         <ul>
-
-          <li><%= link_to 'Select Photo', edit_admin_city_path(@selected_city), class: 'act_item current_section_submenu' if params[:controller] == 'admin/cities' %></li>
+          <% city_class = params[:controller] == 'admin/cities' ? 'act_item current_section_submenu' : '' %>
+          <li><%= link_to 'Select Photo', edit_admin_city_path(@selected_city), class: city_class  %></li>
           <li><a href="/admin/categories" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/categories'%>">Categories</a></li>
           <li><a href="/admin/merchants" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/merchants'%>">Merchant</a></li>
           <li><a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/promos'%>" href="/admin/promos">Promotions</a></li>

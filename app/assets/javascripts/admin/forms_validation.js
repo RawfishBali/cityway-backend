@@ -2,7 +2,10 @@
 
 $(function() {
     // validation (parsley)
-    altair_form_validation.init();
+    if($('form').length > 0){
+      altair_form_validation.init();
+    }
+    
 });
 
 // validation (parsley)

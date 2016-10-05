@@ -32,24 +32,64 @@
           </div>
         </div>
       </div>
-
       <div class="uk-width-medium-1-1">
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-2">
-              <label>Photo</label>
-              <%= f.file_field :photo, class: 'dropify ', 'data-default-file' => @city.photo, 'data-allowed-formats':"portrait square" , 'data-errors-position': "outside", value: @city.photo  %>
+              <label>Description</label>
+              <%= f.text_area :description, class: 'md-input', required: true %>
             </div>
           </div>
         </div>
       </div>
 
+      <div class="uk-width-medium-1-5 uk-grid-margin">
+        <div class="md-input-wrapper">
+          <h3 class="heading_a uk-margin-small-bottom">City Photo</h3>
+          <%= f.file_field :photo, class: 'dropify ', 'data-default-file' => @city.photo, 'data-allowed-formats':"portrait square" , 'data-errors-position': "outside" , required: true  %>
+        </div>
+      </div>
+      <div class="uk-width-medium-1-5 uk-grid-margin">
+        <div class="md-input-wrapper">
+          <h3 class="heading_a uk-margin-small-bottom">Scopri Photo</h3>
+          <%= f.fields_for :discover do |ff| %>
+          <%= ff.file_field :photo, class: 'dropify ', 'data-default-file' => @discover.photo, required: true  ,  'data-errors-position': "outside" %>
+          <% end %>
+        </div>
+      </div>
+      <div class="uk-width-medium-1-5 uk-grid-margin">
+        <div class="md-input-wrapper">
+          <h3 class="heading_a uk-margin-small-bottom">Intorno Photo</h3>
+          <%= f.fields_for :around do |fff| %>
+          <%= fff.file_field :photo, class: 'dropify ', 'data-default-file' => @around.photo, required: true ,  'data-errors-position': "outside"   %>
+          <% end %>
+        </div>
+      </div>
+      <div class="uk-width-medium-1-5 uk-grid-margin">
+        <div class="md-input-wrapper">
+          <h3 class="heading_a uk-margin-small-bottom">Comune Photo</h3>
+          <%= f.fields_for :commonplace do |ffff| %>
+          <%= ffff.file_field :photo, class: 'dropify ', 'data-default-file' => @commonplace.photo, required: true ,  'data-errors-position': "outside"   %>
+        </div>
+        <% end %>
+      </div>
+      <div class="uk-width-medium-1-5 uk-grid-margin">
+        <div class="md-input-wrapper">
+          <h3 class="heading_a uk-margin-small-bottom">Utilita Photo</h3>
+          <%= f.fields_for :utility do |fffff| %>
+          <%= fffff.file_field :photo, class: 'dropify ', 'data-default-file' => @utility.photo, required: true ,  'data-errors-position': "outside"  %>
+          <% end %>
+        </div>
+        <div class="md-input-wrapper">
+          <%= f.submit class: "md-btn default-submit"%>
+        </div>
+      </div>
     </div>
     <div class="uk-width-medium-1-1">
       <div class="uk-form-row">
         <div class="uk-grid" data-uk-grid-margin>
           <div class="uk-width-medium-1-2">
-            <%= f.submit class: "md-btn default-submit"%>
+
           </div>
         </div>
       </div>
