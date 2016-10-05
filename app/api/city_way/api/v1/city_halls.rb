@@ -64,6 +64,17 @@ module CityWay
             present news, with: CityWay::Api::V1::Entities::News
           end
 
+          desc "CityHall News"
+          params do
+            requires :id , type: Integer, values: -> { Commonplace.ids }
+            requires :news_id , type: Integer, values: -> { News.ids }
+          end
+          get '/:id/news/:news_id' do
+            news = News.find(params[:news_id])
+            
+            present news, with: CityWay::Api::V1::Entities::News
+          end
+
           desc "CityHall Administrations"
           params do
             requires :id , type: Integer, values: -> { Commonplace.ids }
