@@ -2,11 +2,6 @@ class Admin::CitiesController < Admin::BaseController
   before_action :set_city, except: [:index, :new, :create]
 
   def index
-    @city = City.new
-    @around = @city.build_around
-    @utility = @city.build_utility
-    @commonplace = @city.build_commonplace
-    @discover = @city.build_discover
     @cities = City.all.order('Name ASC').page(20).page params[:page]
   end
 
@@ -16,6 +11,10 @@ class Admin::CitiesController < Admin::BaseController
 
   def new
     @city = City.new
+    @around = @city.build_around
+    @utility = @city.build_utility
+    @commonplace = @city.build_commonplace
+    @discover = @city.build_discover
   end
 
   def edit
@@ -39,7 +38,7 @@ class Admin::CitiesController < Admin::BaseController
   def update
     respond_to do |format|
       if @city.update(city_params)
-        format.html { redirect_to admin_cities_path, notice: 'City was successfully updated.' }
+        format.html { redirect_to edit_admin_city_path(@city), notice: 'City was successfully updated.' }
         format.json { render :show, status: :ok, location: @city }
       else
         format.html { redirect_to edit_admin_city_path(@city), notice: @city.errors.full_messages }
@@ -59,10 +58,12 @@ class Admin::CitiesController < Admin::BaseController
   private
     def set_city
       @city = City.find(params[:id])
-      @around = @city.around || @city.build_around
-      @utility = @city.utility || @city.build_utility
-      @commonplace = @city.commonplace || @city.build_commonplace
-      @discover = @city.discover || @city.build_discover
+      session[:current_city_id] = @city.id
+      @selected_city = City.find(session[:current_city_id])
+      @around = @city.around
+      @utility = @city.utility
+      @commonplace = @city.commonplace
+      @discover = @city.discover
     end
 
     def city_params

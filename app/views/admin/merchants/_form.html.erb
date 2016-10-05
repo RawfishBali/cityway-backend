@@ -1,72 +1,141 @@
-<%= form_for(@admin_merchant, url: (@admin_merchant.new_record? ? admin_merchants_path(@admin_merchant) : admin_merchant_path(@admin_merchant) ) ) do |f| %>
-  <% if @admin_merchant.errors.any? %>
+<div class="md-card">
+  <div class="md-card-content">
+    <%= form_for(@admin_merchant, url: (@admin_merchant.new_record? ? admin_merchants_path(@admin_merchant) : admin_merchant_path(@admin_merchant)), multipart: true) do |f| %>
+    <% if @admin_merchant.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@admin_merchant.errors.count, "error") %> prohibited this admin_merchant from being saved:</h2>
+      <h2><%= pluralize(@admin_merchant.errors.count, "error") %> prohibited this admin_category from being saved:</h2>
 
       <ul>
-      <% @admin_merchant.errors.full_messages.each do |message| %>
+        <% @admin_merchant.errors.full_messages.each do |message| %>
         <li><%= message %></li>
-      <% end %>
+        <% end %>
       </ul>
     </div>
-  <% end %>
+    <% end %>
+    <h3 class="heading_a">
+      <% if @admin_merchant.new_record?%>
+      New <%= @admin_merchant.class.name %>
+      <% else %>
+      Edit <%= @admin_merchant.name %>
+      <% end %>
+    </h3>
+    <div class="uk-grid" data-uk-grid-margin>
+      <%= f.hidden_field :city_id , value: session[:current_city_id]%>
 
-  <div class="actions">
-    <div class="uk-width-medium-1-1 uk-grid-margin">
-      <div class="md-input-wrapper md-input-filled">
-        <%= f.label :name, 'Name' %>
-        <%= f.text_field :name, class: 'md-input uk-form-width-large ', required: true %>
-      </div>
-    </div>
-    <div class="uk-width-medium-1-1 uk-grid-margin">
-      <div class="md-input-wrapper md-input-filled">
-        <%= f.label :address, 'Address' %>
-        <%= f.text_field :address, class: 'md-input uk-form-width-large ', required: true %>
-      </div>
-    </div>
-    <div class="uk-width-medium-1-1 uk-grid-margin">
-      <div class="md-input-wrapper md-input-filled">
-        <%= f.label :phone, 'Phone' %>
-        <%= f.text_field :phone, class: 'md-input uk-form-width-large ', required: true %>
-      </div>
-    </div>
-    <div class="uk-width-medium-1-1 uk-grid-margin">
-      <div class="md-input-wrapper md-input-filled">
-        <%= f.label :email, 'Email' %>
-        <%= f.text_field :email, class: 'md-input uk-form-width-large ', required: true %>
-      </div>
-    </div>
-    <div class="uk-width-medium-1-1 uk-grid-margin">
-      <div class="md-input-wrapper md-input-filled">
-        <%= f.label :facebook, 'Facebook' %>
-        <%= f.text_field :facebook, class: 'md-input uk-form-width-large ', required: true %>
-      </div>
-    </div>
-    <div class="uk-width-medium-1-1 uk-grid-margin">
-      <div class="md-input-wrapper md-input-filled">
-        <%= f.label :instagram, 'Instagram' %>
-        <%= f.text_field :instagram, class: 'md-input uk-form-width-large ', required: true %>
-      </div>
-    </div>
-    <div class="uk-width-medium-1-1 uk-grid-margin">
-      <div class="md-input-wrapper md-input-filled">
-        <%= f.label :description, 'description' %>
-        <%= f.text_field :description, class: 'md-input uk-form-width-large ', required: true %>
-      </div>
-    </div>
 
-    <div class="uk-width-medium-1-5 uk-grid-margin">
-      <div class="md-input-wrapper">
-        <h3 class="heading_a uk-margin-small-bottom">Merchant's Photo</h3>
-        <%= f.file_field :photo, class: 'dropify ', 'data-default-file' => @admin_merchant.photo, 'data-allowed-formats':"portrait square" , 'data-errors-position': "outside" , 'data-height':"150"%>
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+              <label>Name</label>
+              <%= f.text_field :name, required: true,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+              <label>Address</label>
+              <%= f.text_field :address, required: true,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+              <label>Category</label>
+              <%= f.select :category_id, options_from_collection_for_select(Category.all, 'id', 'name'), {prompt: 'Select Category'}, {'data-md-selectize': true, required: true, class: 'md-input'}  %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+              <label>Subcategories</label>
+              <%= f.select :subcategories, options_from_collection_for_select(Category.all, 'id', 'name'), {prompt: 'Select Subcategory'}, {required: true, class: 'md-input', multiple: true}  %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+              <label>phone</label>
+              <%= f.text_field :phone, required: true,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+              <label>email</label>
+              <%= f.text_field :email, required: true,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+              <label>Facebook</label>
+              <%= f.text_field :facebook, required: true,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+              <label>Instagram</label>
+              <%= f.text_field :instagram, required: true,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+              <label>Description</label>
+              <%= f.text_area :description, required: true,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+              <label>Icon</label>
+              <%= f.file_field :photo, class: 'dropify ', 'data-default-file' => @admin_merchant.icon, 'data-allowed-formats':"portrait square" , 'data-errors-position': "outside"  %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="uk-width-medium-1-1">
+      <div class="uk-form-row">
+        <div class="uk-grid" data-uk-grid-margin>
+          <div class="uk-width-medium-1-2">
+            <%= f.submit class: "md-btn default-submit"%>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="uk-width-medium-1-5 uk-grid-margin">
-      <div class="md-input-wrapper">
-        <h3 class="heading_a uk-margin-small-bottom">Merchant's Icon</h3>
-        <%= f.file_field :icon, class: 'dropify ', 'data-default-file' => @admin_merchant.icon, 'data-allowed-formats':"portrait square" , 'data-errors-position': "outside" , 'data-height':"150"%>
-      </div>
-    </div>
-    <%= f.submit %>
+    <% end %>
   </div>
-<% end %>
+</div>

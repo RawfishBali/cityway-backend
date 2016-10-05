@@ -1831,7 +1831,7 @@ a.uk-datepicker-table-muted {
   bottom: 8px;
 }
 .uk-notify-message {
-  background: #323232;
+  background: #0288D1;
   border-radius: 4px;
   padding: 12px 16px;
   font-size: 14px;
@@ -4346,7 +4346,7 @@ input[type="search"].md-input:focus,
 input[type="tel"].md-input:focus,
 input[type="color"].md-input:focus {
   background: transparent;
-  border-color: rgba(0, 0, 0, 0.12);
+  border-color: #D8E903;
 }
 select.md-input-small,
 textarea.md-input-small,
@@ -5170,12 +5170,12 @@ button {
   outline: none !important;
 }
 a {
-  color: #1e88e5;
+  color: #7FB1B6;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 a:hover,
 a:active {
-  color: #0d47a1;
+  color: #D8E903;
   text-decoration: none;
 }
 pre,

@@ -9,7 +9,7 @@
 
   <%= csrf_meta_tags %>
 </head>
-<body class="sidebar_main_open">
+<body class="<%= 'sidebar_main_open' if params[:controller] != 'home'%>">
 
   <!-- main header -->
   <header id="header_main">
@@ -17,9 +17,11 @@
       <nav class="uk-navbar">
 
         <!-- main sidebar switch -->
+        <% unless params[:controller] == 'home'%>
         <a href="#" id="sidebar_main_toggle" class="sSwitch sSwitch_left">
           <span class="sSwitchIcon"></span>
         </a>
+        <% end %>
 
         <!-- secondary sidebar switch -->
 
@@ -43,56 +45,10 @@
 
 
   <!-- main sidebar -->
-  <aside id="sidebar_main">
-    <div class="sidebar_main_header" id="header-custom-background">
-      <%= image_tag "logo_main_white@2x.png" , class: 'sidebar-header'%>
-      <br />
-      <%= link_to 'Admin', '#', class:'sidebar-header-link'%>
-    </div>
-    <div class="menu_section">
-      <ul>
-        <% if current_admin.has_role?(:super_admin) || current_admin.has_role?(:city_admin) %>
-        <li class="current_section" title="Comuni">
-          <a href="/admin/cities">
-            <span class="menu_icon"><i class="material-icons">&#xE1BD;</i></span>
-            <span class="menu_title">Cities</span>
-          </a>
-        </li>
-        <li class="current_section" title="Comuni">
-          <a href="/">
-            <span class="menu_icon"><i class="material-icons">&#xE1BD;</i></span>
-            <span class="menu_title">Comuni</span>
-          </a>
-        </li>
-        <% end %>
-        <% if current_admin.has_role? :super_admin %>
-        <li class="current_section" title="Attività">
-          <a href="/attivita">
-            <span class="menu_icon"><i class="material-icons">&#xE8CB;</i></span>
-            <span class="menu_title">Attività</span>
-          </a>
-        </li>
-        <% end %>
-        <% if current_admin.has_role? :super_admin %>
-        <li class="current_section" title="Promos">
-          <a href="/">
-            <span class="menu_icon"><i class="material-icons">&#xE53E;</i></span>
-            <span class="menu_title">Promo</span>
-          </a>
-        </li>
-        <% end %>
-        <% if current_admin.has_role?(:super_admin) || current_admin.has_role?(:retail_admin) %>
-        <li class="current_section" title="Ads">
-          <a href="/admin/advertisements">
-            <span class="menu_icon"><i class="material-icons ">&#xE0B9;</i></span>
-            <span class="menu_title">Banner</span>
-          </a>
-        </li>
-        <% end %>
-      </ul>
+  <% unless params[:controller] == 'home'%>
+    <%= render 'layouts/sidebar'%>
+  <% end %>
 
-    </div>
-  </aside>
 
   <% flash.each do |type, message| %>
     <div class="uk-notify uk-notify-top-center" style="display: block;">
@@ -108,14 +64,10 @@
 
   <!-- main content-->
   <div id="page_content">
-    <%= yield %>
+    <div id="page_content_inner">
+      <%= yield %>
+    </div>
   </div>
-
-  <!-- secondary sidebar -->
-  <aside id="sidebar_secondary"></aside>
-
-
-  <!-- main content-->
 
 </body>
 </html>

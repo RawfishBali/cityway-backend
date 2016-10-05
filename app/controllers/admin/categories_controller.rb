@@ -4,7 +4,8 @@ class Admin::CategoriesController < Admin::BaseController
   # GET /admin/categories
   # GET /admin/categories.json
   def index
-    @admin_categories = Category.all
+    city = City.find(session[:current_city_id])
+    @admin_categories = city.categories.order('name ASC')
   end
 
   # GET /admin/categories/1
@@ -28,6 +29,7 @@ class Admin::CategoriesController < Admin::BaseController
 
     respond_to do |format|
       if @admin_category.save
+        @admin_category.cities << City.find(session[:current_city_id])
         format.html { redirect_to admin_categories_url, notice: 'Category was successfully created.' }
         format.json { render :show, status: :created, location: @admin_category }
       else
@@ -69,6 +71,6 @@ class Admin::CategoriesController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_category_params
-      params.require(:category).permit(:photo, :icon, :name, :city_ids)
+      params.require(:category).permit(:photo, :icon, :name, :city_ids, subcategories_attributes: [:id, :name, :_destroy])
     end
 end

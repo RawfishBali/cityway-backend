@@ -23,6 +23,7 @@ class City < ActiveRecord::Base
   has_one :commonplace, dependent: :destroy
   has_one :discover, dependent: :destroy
   has_one :utility, dependent: :destroy
+  has_many :promos, dependent: :destroy
 
   validates_presence_of :name
   validates_presence_of :description

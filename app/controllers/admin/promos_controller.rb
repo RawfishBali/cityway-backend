@@ -1,10 +1,11 @@
-class Admin::PromosController < ApplicationController
+class Admin::PromosController < Admin::BaseController
   before_action :set_admin_promo, only: [:show, :edit, :update, :destroy]
+  before_action :set_merchants
 
   # GET /admin/promos
   # GET /admin/promos.json
   def index
-    @admin_promos = Admin::Promo.all
+    @admin_promos = City.find(session[:current_city_id]).promos
   end
 
   # GET /admin/promos/1
@@ -28,7 +29,7 @@ class Admin::PromosController < ApplicationController
 
     respond_to do |format|
       if @admin_promo.save
-        format.html { redirect_to @admin_promo, notice: 'Promo was successfully created.' }
+        format.html { redirect_to admin_promos_path, notice: 'Promo was successfully created.' }
         format.json { render :show, status: :created, location: @admin_promo }
       else
         format.html { render :new }
@@ -42,7 +43,7 @@ class Admin::PromosController < ApplicationController
   def update
     respond_to do |format|
       if @admin_promo.update(admin_promo_params)
-        format.html { redirect_to @admin_promo, notice: 'Promo was successfully updated.' }
+        format.html { redirect_to admin_promos_path, notice: 'Promo was successfully updated.' }
         format.json { render :show, status: :ok, location: @admin_promo }
       else
         format.html { render :edit }
@@ -69,6 +70,10 @@ class Admin::PromosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_promo_params
-      params.fetch(:admin_promo, {})
+      params.require(:promo).permit(:title, :description, :terms_and_conditions, :photo, :discount, :original_price, :discount_price, :city_id, :merchant_id, :approval)
+    end
+
+    def set_merchants
+      @merchants = City.find(session[:current_city_id]).merchants
     end
 end
