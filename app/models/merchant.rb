@@ -29,6 +29,7 @@ class Merchant < ActiveRecord::Base
   has_many :promos, dependent: :destroy
   has_many :business_hours, as: :marketable, dependent: :destroy
   has_many :photos, as: :imageable, dependent: :destroy
+  accepts_nested_attributes_for :photos, reject_if: :all_blank, allow_destroy: true
   belongs_to :category
   belongs_to :city
 
@@ -43,7 +44,12 @@ class Merchant < ActiveRecord::Base
   after_validation :geocode
 
   def primary_photo
-    photos.where(is_primary: true) || [photos.first]
+    primary_photo = photos.where(is_primary: true)
+    if primary_photo.length > 0
+      primary_photo
+    else
+      [photos.first]
+    end
   end
 
   def is_open_now?

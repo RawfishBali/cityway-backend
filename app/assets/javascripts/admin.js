@@ -31,5 +31,8 @@
 //= require admin/dropify
 //= require admin/forms_file_input
 //= require admin/forms_validation
+//= require admin/kendoui_custom
+//= require admin/dropzone
 //= require cocoon
 //= require admin/special
+//= require admin/custom

@@ -43,7 +43,7 @@ class Admin::MerchantsController < Admin::BaseController
     respond_to do |format|
       if @admin_merchant.update(admin_merchant_params)
         format.html { redirect_to admin_merchants_path, notice: 'Merchant was successfully updated.' }
-        format.json { render :show, status: :ok, location: @admin_merchant }
+        format.json { render :show, status: :ok, location: admin_merchants_path }
       else
         format.html { render :edit }
         format.json { render json: @admin_merchant.errors, status: :unprocessable_entity }
@@ -69,6 +69,6 @@ class Admin::MerchantsController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_merchant_params
-      params.require(:merchant).permit(:name, :address, :description, :photo, :icon, :email, :website, :instagram, :facebook)
+      params.require(:merchant).permit(:name, :address, :description, :photo, :icon, :email, :website, :instagram, :facebook, :city_id, :category_id, :subcategories, :phone)
     end
 end
