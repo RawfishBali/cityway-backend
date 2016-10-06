@@ -46,8 +46,7 @@
 .city-selector{
   margin-top: -2px;
   background: #fff !important;
-  margin-left: -10px;
-  width: 220px !important;
+  width: 200px !important;
 }
 
 .subcategory-container{
@@ -61,4 +60,8 @@
 
 .marginB25{
   margin-bottom: 25px !important;
+}
+
+.text-align-right{
+  text-align: right !important;
 }

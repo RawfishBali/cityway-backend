@@ -1,0 +1,85 @@
+<div class="md-card">
+  <div class="md-card-content">
+    <%= form_for(@admin_park, url: (@admin_park.new_record? ? admin_parks_path(@admin_park) : admin_park_path(@admin_park)), multipart: true) do |f| %>
+    <% if @admin_park.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@admin_park.errors.count, "error") %> prohibited this admin_category from being saved:</h2>
+
+      <ul>
+        <% @admin_park.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
+    <h3 class="heading_a">
+      <% if @admin_park.new_record?%>
+      New <%= @admin_park.class.name %>
+      <% else %>
+      Edit <%= @admin_park.name %>
+      <% end %>
+    </h3>
+    <div class="uk-grid" data-uk-grid-margin>
+      <%= f.hidden_field :around_id , value: @around_id %>
+
+
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+              <label>Name</label>
+              <%= f.text_field :name, required: true,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+              <label>Address</label>
+              <%= f.text_field :address, required: true,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+              <label>Description</label>
+                <%= f.text_area :address, required: true,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="uk-width-medium-1-1">
+      <div class="uk-form-row">
+        <div id="subcategories">
+          <h2>Business Hours</h2>
+          <%= f.fields_for :business_hours do |business_hour| %>
+          <%= render 'business_hour_fields', f: business_hour %>
+          <% end %>
+          <div class="links">
+            <%= link_to_add_association '<i class="material-icons md-24"></i>'.html_safe, f, :business_hours %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    </div>
+    <div class="uk-width-medium-1-1">
+      <div class="uk-form-row">
+        <div class="uk-grid" data-uk-grid-margin>
+          <div class="uk-width-medium-1-2">
+            <%= f.submit class: "md-btn default-submit"%>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>

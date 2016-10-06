@@ -4,7 +4,7 @@
     <br />
     <div class="sidebar_actions">
 
-        <%= select_tag "cities", options_from_collection_for_select(@cities, "id", "name", @selected_city.id), class: 'md-input city-selector'%>
+        <%= select_tag "cities", options_from_collection_for_select(@cities, "id", "name", @selected_city.id), class: 'md-input city-selector', 'data-md-selectize': true%>
 
     </div>
   </div>
@@ -48,7 +48,7 @@
           <li><a href="#">Select Photo</a></li>
           <li><a href="#">Events</a></li>
           <li><a href="#">Mercati</a></li>
-          <li><a href="#">Parci</a></li>
+          <li><a href="/admin/parks">Parci</a></li>
         </ul>
       </li>
 
