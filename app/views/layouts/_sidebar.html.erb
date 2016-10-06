@@ -44,9 +44,9 @@
         </a>
         <ul>
           <li><a href="#">Select Photo</a></li>
-          <li><a href="/admin/events">Events</a></li>
-          <li><a href="/admin/markets">Mercati</a></li>
-          <li><a href="/admin/parks">Parci</a></li>
+          <li><a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/events'%>" href="/admin/events">Events</a></li>
+          <li><a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/markets'%>" href="/admin/markets">Mercati</a></li>
+          <li><a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/parks'%>" href="/admin/parks">Parci</a></li>
         </ul>
       </li>
 
