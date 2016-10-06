@@ -27,6 +27,7 @@ class UtilityPlace < ActiveRecord::Base
   HAS_BUSINESSHOUR = ['voluntary_association', 'social_services', 'structures', 'tennis_court','public_swimming_pool', 'post_office', 'pharmacies', 'large_garbage']
 
   has_many :business_hours, as: :marketable, dependent: :destroy
+  accepts_nested_attributes_for :business_hours, reject_if: :all_blank, allow_destroy: true
   has_many :photos, as: :imageable, dependent: :destroy
 
   geocoded_by :address

@@ -24,6 +24,7 @@ class Place < ActiveRecord::Base
   enum place_type: [:monument, :library, :theater, :museum, :cinema]
 
   has_many :business_hours, as: :marketable, dependent: :destroy
+  accepts_nested_attributes_for :business_hours, reject_if: :all_blank, allow_destroy: true
   belongs_to :discover
 
   validates_presence_of :name

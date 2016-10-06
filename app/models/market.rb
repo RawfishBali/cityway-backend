@@ -20,6 +20,7 @@ class Market < ActiveRecord::Base
 
   has_many :photos, as: :imageable, dependent: :destroy
   has_many :business_hours, as: :marketable, dependent: :destroy
+  accepts_nested_attributes_for :business_hours, reject_if: :all_blank, allow_destroy: true
 
   belongs_to :around
 

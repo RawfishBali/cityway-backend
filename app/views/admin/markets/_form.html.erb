@@ -1,22 +1,22 @@
 <div class="md-card">
   <div class="md-card-content">
-    <%= form_for(@admin_park, url: (@admin_park.new_record? ? admin_parks_path(@admin_park) : admin_park_path(@admin_park)), multipart: true) do |f| %>
-    <% if @admin_park.errors.any? %>
+    <%= form_for(@admin_market, url: (@admin_market.new_record? ? admin_parks_path(@admin_market) : admin_park_path(@admin_market)), multipart: true) do |f| %>
+    <% if @admin_market.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@admin_park.errors.count, "error") %> prohibited this admin_category from being saved:</h2>
+      <h2><%= pluralize(@admin_market.errors.count, "error") %> prohibited this admin_category from being saved:</h2>
 
       <ul>
-        <% @admin_park.errors.full_messages.each do |message| %>
+        <% @admin_market.errors.full_messages.each do |message| %>
         <li><%= message %></li>
         <% end %>
       </ul>
     </div>
     <% end %>
     <h3 class="heading_a">
-      <% if @admin_park.new_record?%>
-      New <%= @admin_park.class.name %>
+      <% if @admin_market.new_record?%>
+      New <%= @admin_market.class.name %>
       <% else %>
-      Edit <%= @admin_park.name %>
+      Edit <%= @admin_market.name %>
       <% end %>
     </h3>
     <div class="uk-grid" data-uk-grid-margin>
