@@ -12,16 +12,16 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <% @admin_markets.each do  |market|%>
+                    <% @admin_events.each do  |event|%>
                     <tr>
 
-                        <td class=""><%= market.name  %></td>
-                        <td class="uk-text-center"><%= market.address %></td>
-                        <td class="uk-text-center"><%= truncate(market.description, length: 25, omission: '...') %></td>
-                        <td class="uk-text-center"><%= image_tag market.primary_photo.first.picture.url unless market.primary_photo.first.blank?  %></td>
+                        <td class=""><%= event.title  %></td>
+                        <td class="uk-text-center"><%= event.address %></td>
+                        <td class="uk-text-center"><%= truncate(event.description, length: 25, omission: '...') %></td>
+                        <td class="uk-text-center"><%= image_tag event.photo.url unless event.photo.blank?  %></td>
 
                         <td class="uk-text-center">
-                            <%= link_to '<i class="md-icon material-icons">&#xE254;</i>'.html_safe , edit_admin_market_path(market)%>
+                            <%= link_to '<i class="md-icon material-icons">&#xE254;</i>'.html_safe , edit_admin_event_path(event)%>
 
 
                         </td>
@@ -33,7 +33,7 @@
         </div>
     </div>
     <div class="md-fab-wrapper">
-        <a class="md-fab md-fab-accent md-fab-wave-light waves-effect waves-button waves-light" href="/admin/markets/new" id="invoice_add">
+        <a class="md-fab md-fab-accent md-fab-wave-light waves-effect waves-button waves-light" href="/admin/events/new" id="invoice_add">
             <i class="material-icons"></i>
         </a>
     </div>

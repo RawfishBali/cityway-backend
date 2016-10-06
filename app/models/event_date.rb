@@ -18,7 +18,6 @@ class EventDate < ActiveRecord::Base
   validates_presence_of :event_date
   validates_presence_of :open_time
   validates_presence_of :close_time
-  validates_presence_of :event
 
   before_save :create_day_name
 

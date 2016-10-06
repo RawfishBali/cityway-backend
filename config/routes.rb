@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :promos
     resources :parks
     resources :markets
+    resources :events
   end
 
   get '/ping', to: proc { [200, {}, ['']] }

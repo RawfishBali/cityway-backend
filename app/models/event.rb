@@ -35,6 +35,7 @@ class Event < ActiveRecord::Base
   mount_uploader :photo, PhotoUploader
 
   has_many :event_dates, dependent: :destroy
+  accepts_nested_attributes_for :event_dates, reject_if: :all_blank, allow_destroy: true
 
   def self.events_open_on day
     Event.joins(:event_dates).where('event_dates.day_name = ? AND event_dates.event_date >= ?', day.titleize, Time.now)
