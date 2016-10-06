@@ -585,10 +585,10 @@ module CityWay
 
         class UtilitySchools < Grape::Entity
           expose :private_schools do |object, options|
-            CityWay::Api::V1::Entities::UtilityPlaceEntitiy.represent(object.utility_places.where(place_type: [UtilityPlace.place_types['kindergarten'] , UtilityPlace.place_types['primary_school'] , UtilityPlace.place_types['first_secondary_school'],  UtilityPlace.place_types['second_secondary_school'], UtilityPlace.place_types['universities'], UtilityPlace.place_types['music']] , is_public: false), simple: options[:simple], latitude: options[:latitude], longitude: options[:longitude])
+            CityWay::Api::V1::Entities::UtilityPlaceEntitiy.represent(object.utility_places.where(place_type: [UtilityPlace.place_types['kindergarten'] , UtilityPlace.place_types['primary_school'] , UtilityPlace.place_types['first_secondary_school'],  UtilityPlace.place_types['second_secondary_school'], UtilityPlace.place_types['universities'], UtilityPlace.place_types['music'], UtilityPlace.place_types['institute'], UtilityPlace.place_types['professional_institute'] ] , is_public: false), simple: options[:simple], latitude: options[:latitude], longitude: options[:longitude])
           end
           expose :public_schools do |object, options|
-            CityWay::Api::V1::Entities::UtilityPlaceEntitiy.represent(object.utility_places.where(place_type: [UtilityPlace.place_types['kindergarten'] , UtilityPlace.place_types['primary_school'] , UtilityPlace.place_types['first_secondary_school'],  UtilityPlace.place_types['second_secondary_school'], UtilityPlace.place_types['universities'], UtilityPlace.place_types['music']] , is_public: true), simple: options[:simple], latitude: options[:latitude], longitude: options[:longitude])
+            CityWay::Api::V1::Entities::UtilityPlaceEntitiy.represent(object.utility_places.where(place_type: [UtilityPlace.place_types['kindergarten'] , UtilityPlace.place_types['primary_school'] , UtilityPlace.place_types['first_secondary_school'],  UtilityPlace.place_types['second_secondary_school'], UtilityPlace.place_types['universities'], UtilityPlace.place_types['music'], UtilityPlace.place_types['institute'],UtilityPlace.place_types['professional_institute'] ] , is_public: true), simple: options[:simple], latitude: options[:latitude], longitude: options[:longitude])
           end
         end
 
