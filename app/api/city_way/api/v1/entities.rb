@@ -269,10 +269,10 @@ module CityWay
           end
         end
 
-        class Ceritificate < Grape::Entity
-          expose :id, documentation: {:type => "Integer", :desc => "Ceritificate ID"}
-          expose :name, documentation: {:type => "String", :desc => "Ceritificate Name"}
-          expose :url, documentation: {:type => "String", :desc => "Ceritificate Url"}
+        class Certificate < Grape::Entity
+          expose :id, documentation: {:type => "Integer", :desc => "Certificate ID"}
+          expose :name, documentation: {:type => "String", :desc => "Certificate Name"}
+          expose :url, documentation: {:type => "String", :desc => "Certificate Url"}
         end
 
         class Around < Grape::Entity
@@ -360,7 +360,7 @@ module CityWay
           expose :online_service do |object , options|
             CityWay::Api::V1::Entities::OnlineService.represent(object.online_services.order('name ASC'))
           end
-          expose :ceritificates do |object , options|
+          expose :certificates do |object , options|
             CityWay::Api::V1::Entities::OnlineService.represent(object.certificates.order('name ASC'))
           end
         end
