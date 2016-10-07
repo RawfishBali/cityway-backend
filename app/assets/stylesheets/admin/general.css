@@ -79,3 +79,15 @@
 .sidebar_actions .md-input-wrapper .selectize-input::after{
   color: #fff !important
 }
+
+.white_icon{
+  color: #fff !important;
+}
+
+.md-content-margin{
+  margin: 15px 0px !important;
+}
+
+.marginTM3{
+  margin-top: -3px !important;
+}

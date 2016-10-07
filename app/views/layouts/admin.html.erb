@@ -25,10 +25,10 @@
 
         <!-- secondary sidebar switch -->
 
-        <div class="uk-navbar-flip">
+        <div class="uk-navbar-flip marginTM3">
           <ul class="uk-navbar-nav user_actions">
             <li data-uk-dropdown="{mode:'click',pos:'bottom-right'}">
-              <%= link_to (image_tag 'avatars/avatar_01_tn.png'), '#', class: 'user_action_image'%>
+              <%= link_to ('<i class="material-icons md-36 white_icon">&#xE8B8;</i>'.html_safe), '#', class: 'user_action_image'%>
               <div class="uk-dropdown uk-dropdown-small">
                 <ul class="uk-nav js-uk-prevent">
                   <li><%= link_to('Logout', destroy_admin_session_path, method: 'GET') %></li>
