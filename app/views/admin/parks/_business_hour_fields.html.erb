@@ -2,39 +2,29 @@
   <div class="uk-grid" data-uk-grid-margin>
     <div class="uk-width-large-1-1 uk-width-1-1">
       <div class="uk-input-group subcategory-container">
-
         <div class="uk-grid" data-uk-grid-margin="">
           <div class="uk-width-medium-1-2 uk-row-first">
-
             <div class="md-input-wrapper md-input-filled"><label>Day</label>
               <%= f.select :day, options_for_select(Date::DAYNAMES), {prompt: 'Select Day'}, {'data-md-selectize': true, required: true, class: 'md-input'}  %>
               <span class="md-input-bar "></span></div>
-
           </div>
         </div>
-
-
         <div class="uk-grid" data-uk-grid-margin="">
           <div class="uk-width-medium-1-2 uk-row-first">
-            <div class="md-input-wrapper md-input-filled"><label>Morning Open Time</label><%= f.text_field :morning_open_time, class: 'md-input', 'data-uk-timepicker': true %><span class="md-input-bar "></span></div>
-
+            <div class="md-input-wrapper md-input-filled"><label>Morning Open Time</label><%= f.text_field :morning_open_time, class: 'md-input', 'data-uk-timepicker': true, value: (f.object.morning_open_time.strftime('%H:%M') if f.object.morning_open_time) %><span class="md-input-bar "></span></div>
           </div>
           <div class="uk-width-medium-1-2">
-            <div class="md-input-wrapper md-input-filled"><label>Morning Close Time</label><%= f.text_field :morning_close_time, class: 'md-input', 'data-uk-timepicker': true %><span class="md-input-bar "></span></div>
-
+            <div class="md-input-wrapper md-input-filled"><label>Morning Close Time</label><%= f.text_field :morning_close_time, class: 'md-input', 'data-uk-timepicker': true, value: (f.object.morning_close_time.strftime('%H:%M') if f.object.morning_close_time) %><span class="md-input-bar "></span></div>
           </div>
         </div>
-
         <div class="uk-grid" data-uk-grid-margin="">
           <div class="uk-width-medium-1-2 uk-row-first">
-            <div class="md-input-wrapper md-input-filled"><label>Evening Open Time</label><%= f.text_field :evening_open_time, class: 'md-input', 'data-uk-timepicker': true %><span class="md-input-bar "></span></div>
-
+            <div class="md-input-wrapper md-input-filled"><label>Evening Open Time</label><%= f.text_field :evening_open_time, class: 'md-input', 'data-uk-timepicker': true, value: (f.object.evening_open_time.strftime('%H:%M') if f.object.evening_open_time) %><span class="md-input-bar "></span></div>
           </div>
           <div class="uk-width-medium-1-2">
-            <div class="md-input-wrapper md-input-filled"><label>Evening Close Time</label><%= f.text_field :evening_close_time, class: 'md-input', 'data-uk-timepicker': true %><span class="md-input-bar "></span></div>
+            <div class="md-input-wrapper md-input-filled"><label>Evening Close Time</label><%= f.text_field :evening_close_time, class: 'md-input', 'data-uk-timepicker': true, value: (f.object.evening_close_time.strftime('%H:%M') if f.object.evening_close_time) %><span class="md-input-bar "></span></div>
           </div>
         </div>
-
         <div class="uk-grid" data-uk-grid-margin="">
           <div class="uk-width-medium-1-2 uk-row-first">
             <div class="md-input-wrapper">
@@ -46,10 +36,7 @@
             </div>
           </div>
         </div>
-
-
       </div>
-
     </div>
   </div>
 </div>
