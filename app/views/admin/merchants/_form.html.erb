@@ -30,12 +30,6 @@
               <label>Name</label>
               <%= f.text_field :name, required: true,class: 'md-input'  %>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="uk-width-medium-1-1">
-        <div class="uk-form-row">
-          <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-2">
               <label>Address</label>
               <%= f.text_field :address, required: true,class: 'md-input'  %>
@@ -43,6 +37,7 @@
           </div>
         </div>
       </div>
+
       <div class="uk-width-medium-1-1">
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
@@ -50,12 +45,6 @@
               <label>Category</label>
               <%= f.select :category_id, options_from_collection_for_select(Category.all, 'id', 'name'), {prompt: 'Select Category'}, {'data-md-selectize': true, required: true, class: 'md-input'}  %>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="uk-width-medium-1-1">
-        <div class="uk-form-row">
-          <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-2">
               <label>Subcategories</label>
               <%= f.select :subcategories, options_from_collection_for_select(Category.all, 'id', 'name'), {prompt: 'Select Subcategory'}, {required: true, class: 'md-input', multiple: true}  %>
@@ -63,6 +52,7 @@
           </div>
         </div>
       </div>
+
       <div class="uk-width-medium-1-1">
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
@@ -70,12 +60,6 @@
               <label>phone</label>
               <%= f.text_field :phone, required: true,class: 'md-input'  %>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="uk-width-medium-1-1">
-        <div class="uk-form-row">
-          <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-2">
               <label>email</label>
               <%= f.text_field :email, required: true,class: 'md-input'  %>
@@ -90,12 +74,6 @@
               <label>Facebook</label>
               <%= f.text_field :facebook, required: true,class: 'md-input'  %>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="uk-width-medium-1-1">
-        <div class="uk-form-row">
-          <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-2">
               <label>Instagram</label>
               <%= f.text_field :instagram, required: true,class: 'md-input'  %>
@@ -104,9 +82,15 @@
         </div>
       </div>
 
+
       <div class="uk-width-medium-1-1">
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
+
+            <div class="uk-width-medium-1-2">
+              <label>Icon</label>
+              <%= f.file_field :photo, class: 'dropify ', 'data-default-file' => @admin_merchant.icon, 'data-allowed-formats':"portrait square" , 'data-errors-position': "outside"  %>
+            </div>
             <div class="uk-width-medium-1-2">
               <label>Description</label>
               <%= f.text_area :description, required: true,class: 'md-input'  %>
@@ -118,23 +102,15 @@
       <div class="uk-width-medium-1-1">
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
-            <div class="uk-width-medium-1-2">
-              <label>Icon</label>
-              <%= f.file_field :photo, class: 'dropify ', 'data-default-file' => @admin_merchant.icon, 'data-allowed-formats':"portrait square" , 'data-errors-position': "outside"  %>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="uk-width-medium-1-1">
-        <div class="uk-form-row">
-          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2"></div>
             <div class="uk-width-medium-1-2">
               <%= f.submit class: "md-btn default-submit"%>
             </div>
           </div>
         </div>
       </div>
+
+      
 
     </div>
 
