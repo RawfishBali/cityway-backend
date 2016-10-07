@@ -17,6 +17,6 @@ class Around < ActiveRecord::Base
   mount_uploader :photo, PhotoUploader
 
   def active_events
-    events.joins(:event_dates).where('event_dates.event_date >= ?', Time.now)
+    (events.joins(:event_dates).where('event_dates.event_date >= ?', Time.now)).uniq
   end
 end
