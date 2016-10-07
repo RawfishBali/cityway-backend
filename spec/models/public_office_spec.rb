@@ -10,12 +10,12 @@
 #  address        :string
 #  phone          :string
 #  fax            :string
-#  days_open      :integer          is an Array
-#  open_time      :time
-#  close_time     :time
 #  commonplace_id :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  website        :string
+#  latitude       :float
+#  longitude      :float
 #
 
 require 'rails_helper'

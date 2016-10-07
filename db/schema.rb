@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161005025632) do
+ActiveRecord::Schema.define(version: 20161007035546) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -127,6 +127,14 @@ ActiveRecord::Schema.define(version: 20161005025632) do
 
   add_index "categories_merchants", ["category_id"], name: "index_categories_merchants_on_category_id", using: :btree
   add_index "categories_merchants", ["merchant_id"], name: "index_categories_merchants_on_merchant_id", using: :btree
+
+  create_table "ceritificates", force: :cascade do |t|
+    t.string   "name"
+    t.string   "url"
+    t.integer  "commonplace_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
 
   create_table "cities", force: :cascade do |t|
     t.string   "name",        null: false
@@ -470,12 +478,12 @@ ActiveRecord::Schema.define(version: 20161005025632) do
     t.string   "address"
     t.string   "phone"
     t.string   "fax"
-    t.integer  "days_open",                   array: true
-    t.time     "open_time"
-    t.time     "close_time"
     t.integer  "commonplace_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.string   "website"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   add_index "public_offices", ["commonplace_id"], name: "index_public_offices_on_commonplace_id", using: :btree

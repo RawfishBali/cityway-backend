@@ -34,6 +34,20 @@ module CityWay
             offices = commonplace.public_offices.page params[:page]
             add_pagination_headers offices
 
+            present offices, with: CityWay::Api::V1::Entities::PublicOffice, simple: 'true', latitude: params[:latitude], longitude: params[:longitude]
+          end
+
+          desc "CityHall Public Office Detail"
+          params do
+            requires :id , type: Integer, values: -> { Commonplace.ids }
+            requires :public_office_id , type: Integer, values: -> { PublicOffice.ids }
+            optional :latitude, type: Float
+            optional :longitude, type: Float
+          end
+          get '/:id/public_offices/:public_office_id' do
+            commonplace = Commonplace.find(params[:id])
+            offices = commonplace.public_offices.find(params[:public_office_id])
+
             present offices, with: CityWay::Api::V1::Entities::PublicOffice, simple: 'false', latitude: params[:latitude], longitude: params[:longitude]
           end
 
@@ -61,10 +75,8 @@ module CityWay
           end
           get '/:id/online_services' do
             commonplace = Commonplace.find(params[:id])
-            online_services = commonplace.online_services.order('name ASC').page params[:page]
-            add_pagination_headers online_services
 
-            present online_services, with: CityWay::Api::V1::Entities::OnlineService, simple: 'false'
+            present commonplace, with: CityWay::Api::V1::Entities::OnlineServices, simple: 'false'
           end
 
           desc "CityHall Online Services Detail"
@@ -111,18 +123,6 @@ module CityWay
             commonplace = Commonplace.find(params[:id])
 
             present commonplace, with: CityWay::Api::V1::Entities::Administration, latitude: params[:latitude], longitude: params[:longitude]
-          end
-
-          desc "CityHall Public Offices"
-          params do
-            requires :id , type: Integer, values: -> { Commonplace.ids }
-          end
-          get '/:id/public_offices' do
-            public_offices = Commonplace.find(params[:id])
-            public_offices = commonplace.public_offices.page params[:page]
-            add_pagination_headers public_offices
-
-            present public_offices, with: CityWay::Api::V1::Entities::PublicOffice
           end
 
 

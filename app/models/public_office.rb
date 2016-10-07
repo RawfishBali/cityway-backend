@@ -10,12 +10,12 @@
 #  address        :string
 #  phone          :string
 #  fax            :string
-#  days_open      :integer          is an Array
-#  open_time      :time
-#  close_time     :time
 #  commonplace_id :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  website        :string
+#  latitude       :float
+#  longitude      :float
 #
 
 class PublicOffice < ActiveRecord::Base
@@ -23,6 +23,14 @@ class PublicOffice < ActiveRecord::Base
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :save }
 
   belongs_to :commonplace
+
+  has_many :photos, as: :imageable, dependent: :destroy
+  accepts_nested_attributes_for :photos, reject_if: :all_blank, allow_destroy: true
+  has_many :business_hours, as: :marketable, dependent: :destroy
+  accepts_nested_attributes_for :business_hours, reject_if: :all_blank, allow_destroy: true
+
+  geocoded_by :address
+  after_validation :geocode
 
   mount_uploader :photo, PhotoUploader
 end

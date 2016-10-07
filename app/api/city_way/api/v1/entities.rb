@@ -247,23 +247,32 @@ module CityWay
         class PublicOffice < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "Public Office ID"}
           expose :name, documentation: {:type => "Integer", :desc => "Public Office Name"}
-          expose :photo, documentation: {:type => "Integer", :desc => "Public Office Photo"}  do |public_office , options|
-            public_office.photo.url
+          expose :photos, documentation: {:type => "String", :desc => "Story Photos"} do |object, options|
+            CityWay::Api::V1::Entities::Photo.represent(object.photos.order('position ASC'))
           end
-          expose :description, documentation: {:type => "Integer", :desc => "Public Office Description"}
-          expose :email, documentation: {:type => "Integer", :desc => "Public Office Email"}
-          expose :address, documentation: {:type => "Integer", :desc => "Public Office Address"}
-          expose :phone, documentation: {:type => "Integer", :desc => "Public Office Phone"}
-          expose :fax, documentation: {:type => "Integer", :desc => "Public Office fax"}
-          expose :days_open, documentation: {:type => "Integer", :desc => "Public Office days_open"} do |public_office , options|
-            public_office.days_open.collect { |x| Date::DAYNAMES[x] }.join(" , ") if public_office.days_open
+          expose :description,if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "Text", :desc => "Public Office Description"}
+          expose :email,if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "String", :desc => "Public Office Email"}
+          expose :address, documentation: {:type => "String", :desc => "Public Office Address"}
+          expose :phone,if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "String", :desc => "Public Office Phone"}
+          expose :fax,if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "String", :desc => "Public Office fax"}
+          expose :website,if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "String", :desc => "Public Office website"}
+          expose :distance, if: lambda { |object, options| options[:latitude] && options[:longitude] } do |object , options|
+            object.distance_from([options[:latitude], options[:longitude]])
           end
-          expose :open_time, documentation: {:type => "Integer", :desc => "Public Office Open Time"} do |public_office , options|
-            public_office.open_time.strftime("%H:%M") if public_office.open_time
+          expose :business_hours,if: lambda { |object, options| options[:simple] == 'false' && object.business_hours.length > 0 } do |object , options|
+            CityWay::Api::V1::Entities::BusinessHours.represent(object.all_business_hours)
           end
-          expose :close_time, documentation: {:type => "Integer", :desc => "Public Office Close Time"} do |public_office , options|
-            public_office.close_time.strftime("%H:%M") if public_office.close_time
+          expose :latitude, documentation: {:type => "String", :desc => "Public Office latitude"}
+          expose :longitude, documentation: {:type => "String", :desc => "Public Office longitude"}
+          expose :simple do |object, options|
+            options[:simple]
           end
+        end
+
+        class Ceritificate < Grape::Entity
+          expose :id, documentation: {:type => "Integer", :desc => "Ceritificate ID"}
+          expose :name, documentation: {:type => "String", :desc => "Ceritificate Name"}
+          expose :url, documentation: {:type => "String", :desc => "Ceritificate Url"}
         end
 
         class Around < Grape::Entity
@@ -347,6 +356,15 @@ module CityWay
           end
         end
 
+        class OnlineServices < Grape::Entity
+          expose :online_service do |object , options|
+            CityWay::Api::V1::Entities::OnlineService.represent(object.online_services.order('name ASC'))
+          end
+          expose :ceritificates do |object , options|
+            CityWay::Api::V1::Entities::OnlineService.represent(object.ceritificates.order('name ASC'))
+          end
+        end
+
         class OnlineService < Grape::Entity
           expose :id, documentation: {:type => "String", :desc => "OnlineService ID"}
           expose :name, documentation: {:type => "String", :desc => "OnlineService name"}
@@ -356,6 +374,9 @@ module CityWay
             else
               object.url
             end
+          end
+          expose :type do |object, options|
+            object.class.name.downcase
           end
         end
 
