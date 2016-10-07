@@ -1,6 +1,6 @@
-class CreateCeritificates < ActiveRecord::Migration
+class CreateCertificates < ActiveRecord::Migration
   def change
-    create_table :ceritificates do |t|
+    create_table :certificates do |t|
       t.string :name
       t.string :url
       t.references :commonplace

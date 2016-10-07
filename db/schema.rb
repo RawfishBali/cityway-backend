@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161007035546) do
+ActiveRecord::Schema.define(version: 20161007041759) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -129,6 +129,14 @@ ActiveRecord::Schema.define(version: 20161007035546) do
   add_index "categories_merchants", ["merchant_id"], name: "index_categories_merchants_on_merchant_id", using: :btree
 
   create_table "ceritificates", force: :cascade do |t|
+    t.string   "name"
+    t.string   "url"
+    t.integer  "commonplace_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "certificates", force: :cascade do |t|
     t.string   "name"
     t.string   "url"
     t.integer  "commonplace_id"

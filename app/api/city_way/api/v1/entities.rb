@@ -361,7 +361,7 @@ module CityWay
             CityWay::Api::V1::Entities::OnlineService.represent(object.online_services.order('name ASC'))
           end
           expose :ceritificates do |object , options|
-            CityWay::Api::V1::Entities::OnlineService.represent(object.ceritificates.order('name ASC'))
+            CityWay::Api::V1::Entities::OnlineService.represent(object.certificates.order('name ASC'))
           end
         end
 

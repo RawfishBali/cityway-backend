@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: ceritificates
+# Table name: certificates
 #
 #  id             :integer          not null, primary key
 #  name           :string
@@ -12,6 +12,6 @@
 
 require 'rails_helper'
 
-RSpec.describe Ceritificate, type: :model do
+RSpec.describe Certificate, type: :model do
   pending "add some examples to (or delete) #{__FILE__}"
 end

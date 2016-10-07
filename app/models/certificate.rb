@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: ceritificates
+# Table name: certificates
 #
 #  id             :integer          not null, primary key
 #  name           :string
@@ -10,7 +10,7 @@
 #  updated_at     :datetime         not null
 #
 
-class Ceritificate < ActiveRecord::Base
+class Certificate < ActiveRecord::Base
   belongs_to :commonplace
 
   validates_presence_of :name
