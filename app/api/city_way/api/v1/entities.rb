@@ -698,7 +698,7 @@ module CityWay
             CityWay::Api::V1::Entities::Advertisement.represent(options[:advertisements]["top"])
           end
           expose :categories, if: lambda { |object, options| options[:simple] == 'false'  }  do |home , options|
-            CityWay::Api::V1::Entities::Category.represent(home.categories)
+            CityWay::Api::V1::Entities::Category.represent(home.categories.order('Name ASC'))
           end
           expose :bottom_advertisements, if: lambda { |object, options| options[:simple] == 'false'  }  do |home , options|
             CityWay::Api::V1::Entities::Advertisement.represent(options[:advertisements]["bottom"])
@@ -767,7 +767,7 @@ module CityWay
             category.icon.url
           end
           expose :subcategories,if: lambda { |object, options| !object.parent_id && object.subcategories.length > 0 } do |category, options|
-            CityWay::Api::V1::Entities::Category.represent(category.subcategories)
+            CityWay::Api::V1::Entities::Category.represent(category.subcategories.order('Name ASC'))
           end
         end
 
