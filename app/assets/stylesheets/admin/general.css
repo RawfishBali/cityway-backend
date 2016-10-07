@@ -65,3 +65,20 @@
 .text-align-right{
   text-align: right !important;
 }
+
+.green_selectize{
+  background: #7FB1B6 !important;
+  color: #fff !important;
+}
+.green_selectize +div{
+  background: #7FB1B6 !important;
+  color: #fff !important;
+}
+.sidebar_actions .md-input-wrapper .selectize-input{
+  background: #7FB1B6 !important;
+  color: #fff !important;
+}
+
+.sidebar_actions .md-input-wrapper .selectize-input::after{
+  color: #fff !important
+}
