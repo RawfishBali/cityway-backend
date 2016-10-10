@@ -594,7 +594,7 @@ module CityWay
           end
           expose :latitude, documentation: {:type => "float", :desc => "Utility Place Latitude"}
           expose :longitude, documentation: {:type => "float", :desc => "Utility Place Longitude"}
-          expose :type, documentation: {:type => "float", :desc => "Utility Place place_type"} do |object, options|
+          expose :type, documentation: {:type => "string", :desc => "Utility Place place_type"} do |object, options|
             object.place_type
           end
           expose :distance, if: lambda { |object, options| options[:latitude] && options[:longitude] } do |object , options|
@@ -618,7 +618,7 @@ module CityWay
 
         class UtilitySocials < Grape::Entity
           expose :social_services do |object , options|
-            CityWay::Api::V1::Entities::UtilityPlaceEntitiy.represent(object.utility_places.where(place_type: UtilityPlace.place_types['social_service']), simple: options[:simple], latitude: options[:latitude], longitude: options[:longitude])
+            CityWay::Api::V1::Entities::UtilityPlaceEntitiy.represent(object.utility_places.where(place_type: UtilityPlace.place_types['social_services']), simple: options[:simple], latitude: options[:latitude], longitude: options[:longitude])
           end
           expose :voluntary_associations do |object , options|
             CityWay::Api::V1::Entities::UtilityPlaceEntitiy.represent(object.utility_places.where(place_type: UtilityPlace.place_types['voluntary_association']), simple: options[:simple], latitude: options[:latitude], longitude: options[:longitude])
