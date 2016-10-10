@@ -1,6 +1,6 @@
 <div class="md-card">
   <div class="md-card-content">
-    <%= form_for(@admin_market, url: (@admin_market.new_record? ? admin_parks_path(@admin_market) : admin_park_path(@admin_market)), multipart: true) do |f| %>
+    <%= form_for(@admin_market, url: (@admin_market.new_record? ? admin_markets_path(@admin_market) : admin_market_path(@admin_market)), multipart: true) do |f| %>
     <% if @admin_market.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@admin_market.errors.count, "error") %> prohibited this admin_category from being saved:</h2>

@@ -36,6 +36,7 @@ class Place < ActiveRecord::Base
   after_validation :geocode
 
   has_many :photos, as: :imageable, dependent: :destroy
+  accepts_nested_attributes_for :photos, reject_if: :all_blank, allow_destroy: true
 
   validate :validate_number_of_photos
 

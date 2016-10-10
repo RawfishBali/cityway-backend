@@ -1,0 +1,160 @@
+<div class="md-card">
+  <div class="md-card-content">
+    <%= form_for(@admin_place, url: (@admin_place.new_record? ? admin_places_path(@admin_place) : admin_place_path(@admin_place)), multipart: true) do |f| %>
+    <% if @admin_place.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@admin_place.errors.count, "error") %> prohibited this admin_category from being saved:</h2>
+
+      <ul>
+        <% @admin_place.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
+    <h3 class="heading_a">
+      <% if @admin_place.new_record?%>
+      New <%= @admin_place.class.name %>
+      <% else %>
+      Edit <%= @admin_place.name %>
+      <% end %>
+    </h3>
+    <div class="uk-grid" data-uk-grid-margin>
+      <%= f.hidden_field :discover_id , value: @discover_id %>
+      <%= f.hidden_field :place_type , value: Place.place_types[@admin_place.place_type] ||   Place.place_types[params[:place_type]]%>
+
+      <div class="uk-width-medium-1-2">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <label>name</label>
+              <%= f.text_field :name,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <label>address</label>
+              <%= f.text_field :address,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <label>description</label>
+              <%= f.text_area :description,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <label>email</label>
+              <%= f.text_field :email,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <label>website</label>
+              <%= f.text_field :website, required: true,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <label>facebook</label>
+              <%= f.text_field :facebook,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <label>instagram</label>
+              <%= f.text_field :instagram,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <label>twitter</label>
+              <%= f.text_field :twitter,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <label>google_plus</label>
+              <%= f.text_field :google_plus,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+      <div class="uk-width-medium-1-2 marginTM50">
+        <div class="uk-form-row">
+          <div id="subcategories">
+            <h2>Business Hours</h2>
+            <%= f.fields_for :business_hours do |business_hour| %>
+            <%= render 'business_hour_fields', f: business_hour %>
+            <% end %>
+            <div class="links">
+              <%= link_to_add_association '<i class="material-icons md-24"></i>'.html_safe, f, :business_hours %>
+            </div>
+          </div>
+        </div>
+        <div class="uk-form-row">
+          <div id="photos">
+            <h2>Photos</h2>
+            <%= f.fields_for :photos do |photo| %>
+            <%= render 'photo_fields', f: photo %>
+            <% end %>
+            <div class="links">
+              <%= link_to_add_association '<i class="material-icons md-24"></i>'.html_safe, f, :photos %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="uk-width-medium-1-2">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+
+          </div>
+        </div>
+      </div>
+      <div class="uk-width-medium-1-2">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <%= f.submit class: "md-btn default-submit"%>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>

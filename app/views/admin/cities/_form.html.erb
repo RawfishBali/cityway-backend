@@ -46,14 +46,22 @@
       <div class="uk-width-medium-1-5 uk-grid-margin">
         <div class="md-input-wrapper">
           <h3 class="heading_a uk-margin-small-bottom">City Photo</h3>
-          <%= f.file_field :photo, class: 'dropify ', 'data-default-file' => @city.photo, 'data-allowed-formats':"portrait square" , 'data-errors-position': "outside"   %>
+
+
+          <div class="dropzone" data-url="" data-image="<%= f.object.photo.url%>" data-width="135" data-ghost="true" data-canvas="false" data-originalsize="false" data-height="240" data-ajax="false"  style="width: 100%;">
+            <%= f.file_field :photo, class: 'md-input', required: true%>
+          </div>
+
+
         </div>
       </div>
       <div class="uk-width-medium-1-5 uk-grid-margin">
         <div class="md-input-wrapper">
           <h3 class="heading_a uk-margin-small-bottom">Scopri Photo</h3>
           <%= f.fields_for :discover do |ff| %>
-          <%= ff.file_field :photo, class: 'dropify ', 'data-default-file' => @discover.photo, 'data-errors-position': "outside" %>
+          <div class="dropzone" data-url="" data-image="<%= ff.object.photo.url%>" data-width="135" data-ghost="true" data-canvas="false" data-originalsize="false" data-height="240" data-ajax="false"  style="width: 100%;">
+            <%= ff.file_field :photo, class: 'md-input'%>
+          </div>
           <% end %>
         </div>
       </div>
@@ -61,7 +69,9 @@
         <div class="md-input-wrapper">
           <h3 class="heading_a uk-margin-small-bottom">Intorno Photo</h3>
           <%= f.fields_for :around do |fff| %>
-          <%= fff.file_field :photo, class: 'dropify ', 'data-default-file' => @around.photo,  'data-errors-position': "outside"   %>
+          <div class="dropzone" data-url="" data-image="<%= fff.object.photo.url%>" data-width="135" data-ghost="true" data-canvas="false" data-originalsize="false" data-height="240" data-ajax="false"  style="width: 100%;">
+            <%= fff.file_field :photo, class: 'md-input'%>
+          </div>
           <% end %>
         </div>
       </div>
@@ -69,7 +79,9 @@
         <div class="md-input-wrapper">
           <h3 class="heading_a uk-margin-small-bottom">Comune Photo</h3>
           <%= f.fields_for :commonplace do |ffff| %>
-          <%= ffff.file_field :photo, class: 'dropify ', 'data-default-file' => @commonplace.photo,  'data-errors-position': "outside"   %>
+          <div class="dropzone" data-url="" data-image="<%= ffff.object.photo.url%>" data-width="135" data-ghost="true" data-canvas="false" data-originalsize="false" data-height="240" data-ajax="false"  style="width: 100%;">
+            <%= ffff.file_field :photo, class: 'md-input'%>
+          </div>
         </div>
         <% end %>
       </div>
@@ -77,7 +89,9 @@
         <div class="md-input-wrapper">
           <h3 class="heading_a uk-margin-small-bottom">Utilita Photo</h3>
           <%= f.fields_for :utility do |fffff| %>
-          <%= fffff.file_field :photo, class: 'dropify ', 'data-default-file' => @utility.photo,   'data-errors-position': "outside"  %>
+          <div class="dropzone" data-url="" data-image="<%= fffff.object.photo.url%>" data-width="135" data-ghost="true" data-canvas="false" data-originalsize="false" data-height="240" data-ajax="false"  style="width: 100%;">
+            <%= fffff.file_field :photo, class: 'md-input'%>
+          </div>
           <% end %>
         </div>
         <div class="md-input-wrapper">
