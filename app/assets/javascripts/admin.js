@@ -36,3 +36,4 @@
 //= require cocoon
 //= require admin/special
 //= require admin/custom
+//= require admin/bootstrap
