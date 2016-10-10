@@ -184,7 +184,13 @@ module CityWay
         class News < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "News' ID"}
           expose :title, documentation: {:type => "String", :desc => "News' Title"}
-          expose :url, documentation: {:type => "String", :desc => "News' URL"}
+          expose :url, if: lambda { |object, options| object.url }, documentation: {:type => "String", :desc => "News' URL"} do |object, options|
+            unless object.url[/\Ahttp:\/\//] || object.url[/\Ahttps:\/\//]
+              "https://#{object.url}"
+            else
+              object.url
+            end
+          end
           expose :description, documentation: {:type => "Text", :desc => "News' Description"}
           expose :published_at, documentation: {:type => "Text", :desc => "News' Published Date"} do |news , options|
             news.published_at.strftime("%B %d %Y %H:%M")
@@ -272,7 +278,13 @@ module CityWay
         class Certificate < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "Certificate ID"}
           expose :name, documentation: {:type => "String", :desc => "Certificate Name"}
-          expose :url, documentation: {:type => "String", :desc => "Certificate Url"}
+          expose :url, if: lambda { |object, options| object.url }, documentation: {:type => "String", :desc => "Certificate Url"} do |object, options|
+            unless object.url[/\Ahttp:\/\//] || object.url[/\Ahttps:\/\//]
+              "https://#{object.url}"
+            else
+              object.url
+            end
+          end
         end
 
         class Around < Grape::Entity
@@ -347,11 +359,11 @@ module CityWay
         class Security < Grape::Entity
           expose :id, documentation: {:type => "String", :desc => "Security ID"}
           expose :name, documentation: {:type => "String", :desc => "Security name"}
-          expose :url, if: lambda { |object, options| object.url }, documentation: {:type => "String", :desc => "Security url"} do |security, options|
-            unless security.url[/\Ahttp:\/\//] || security.url[/\Ahttps:\/\//]
-              "https://#{security.url}"
+          expose :url, if: lambda { |object, options| object.url }, documentation: {:type => "String", :desc => "Security url"} do |object, options|
+            unless object.url[/\Ahttp:\/\//] || object.url[/\Ahttps:\/\//]
+              "https://#{object.url}"
             else
-              security.url
+              object.url
             end
           end
         end
@@ -489,7 +501,13 @@ module CityWay
           expose :id, documentation: {:type => "integer", :desc => "Story ID"}
           expose :top_text, documentation: {:type => "text", :desc => "Story Top Text"}
           expose :bottom_text, documentation: {:type => "text", :desc => "Story Bottom Text"}
-          expose :external_link, documentation: {:type => "string", :desc => "Story External Link"}
+          expose :external_link, if: lambda { |object, options| object.external_link },  documentation: {:type => "string", :desc => "Story External Link"} do |object, options|
+            unless object.external_link[/\Ahttp:\/\//] || object.external_link[/\Ahttps:\/\//]
+              "https://#{object.external_link}"
+            else
+              object.external_link
+            end
+          end
           expose :photos, documentation: {:type => "String", :desc => "Story Photos"} do |story, options|
             CityWay::Api::V1::Entities::Photo.represent(story.photos.order('position ASC'))
           end
@@ -509,7 +527,13 @@ module CityWay
           expose :name, documentation: {:type => "String", :desc => "Device Name"}
           expose :latitude, documentation: {:type => "Float", :desc => "Device latitude"}
           expose :longitude, documentation: {:type => "Float", :desc => "Device longitude"}
-          expose :external_url, documentation: {:type => "Float", :desc => "Device External Url"}
+          expose :external_url,if: lambda { |object, options| object.external_link },  documentation: {:type => "Float", :desc => "Device External Url"} do |object, options|
+            unless object.external_url[/\Ahttp:\/\//] || object.external_url[/\Ahttps:\/\//]
+              "https://#{object.external_url}"
+            else
+              object.external_url
+            end
+          end
           expose :distance, if: lambda { |object, options| options[:latitude] && options[:longitude] } do |object , options|
             object.distance_from([options[:latitude], options[:longitude]])
           end
