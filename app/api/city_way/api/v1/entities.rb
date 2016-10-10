@@ -527,7 +527,7 @@ module CityWay
           expose :name, documentation: {:type => "String", :desc => "Device Name"}
           expose :latitude, documentation: {:type => "Float", :desc => "Device latitude"}
           expose :longitude, documentation: {:type => "Float", :desc => "Device longitude"}
-          expose :external_url,if: lambda { |object, options| object.external_link },  documentation: {:type => "Float", :desc => "Device External Url"} do |object, options|
+          expose :external_url,if: lambda { |object, options| object.external_url },  documentation: {:type => "Float", :desc => "Device External Url"} do |object, options|
             unless object.external_url[/\Ahttp:\/\//] || object.external_url[/\Ahttps:\/\//]
               "https://#{object.external_url}"
             else
