@@ -13,12 +13,13 @@
 
 class Itinerary < ActiveRecord::Base
   has_many :photos, as: :imageable, dependent: :destroy
+  accepts_nested_attributes_for :photos, reject_if: :all_blank, allow_destroy: true
   has_many :steps, dependent: :destroy
+  accepts_nested_attributes_for :steps, reject_if: :all_blank, allow_destroy: true
 
   belongs_to :discover
 
   validates_presence_of :name
-  validates_presence_of :discover
   validates_length_of :description, maximum: 2000
 
   validate :validate_number_of_photos

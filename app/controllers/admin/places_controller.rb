@@ -4,7 +4,7 @@ class Admin::PlacesController < Admin::BaseController
   # GET /admin/places
   # GET /admin/places.json
   def index
-    @admin_places = Place.where(place_type: Place.place_types[params[:place_type]]).page(params[:page]).per(10)
+    @admin_places = City.find(session[:current_city_id]).discover.places.where(place_type: Place.place_types[params[:place_type]]).page(params[:page]).per(10)
   end
 
   # GET /admin/places/1

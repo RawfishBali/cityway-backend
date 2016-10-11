@@ -17,7 +17,6 @@
 class Step < ActiveRecord::Base
   belongs_to :itinerary
 
-  validates_presence_of :itinerary
   validates_presence_of :address
 
   geocoded_by :address
