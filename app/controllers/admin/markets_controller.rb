@@ -4,7 +4,7 @@ class Admin::MarketsController < Admin::BaseController
   # GET /admin/markets
   # GET /admin/markets.json
   def index
-    @admin_markets = City.find(session[:current_city_id]).around.markets
+    @admin_markets = City.find(session[:current_city_id]).around.markets.page(params[:page]).per(10)
   end
 
   # GET /admin/markets/1

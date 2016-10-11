@@ -4,7 +4,7 @@ class Admin::EventsController < Admin::BaseController
   # GET /admin/events
   # GET /admin/events.json
   def index
-    @admin_events = City.find(session[:current_city_id]).around.events
+    @admin_events = City.find(session[:current_city_id]).around.events.page(params[:page]).per(10)
   end
 
   # GET /admin/events/1

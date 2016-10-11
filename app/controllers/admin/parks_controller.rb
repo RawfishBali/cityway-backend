@@ -4,7 +4,7 @@ class Admin::ParksController < Admin::BaseController
   # GET /admin/parks
   # GET /admin/parks.json
   def index
-    @admin_parks = City.find(session[:current_city_id]).around.parks
+    @admin_parks = City.find(session[:current_city_id]).around.parks.page(params[:page]).per(10)
   end
 
   # GET /admin/parks/1
