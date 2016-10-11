@@ -47,7 +47,7 @@
             </div>
             <div class="uk-width-medium-1-2">
               <label>Subcategories</label>
-              <%= f.select :subcategories, options_from_collection_for_select(Category.all, 'id', 'name'), {prompt: 'Select Subcategory'}, {required: true, class: 'md-input', multiple: true}  %>
+              <%= f.select :subcategory_ids, options_from_collection_for_select(Category.all, 'id', 'name', @admin_merchant.subcategory_ids), {prompt: 'Select Subcategory'}, {required: true, class: 'md-input', multiple: true}  %>
             </div>
           </div>
         </div>
@@ -88,16 +88,50 @@
           <div class="uk-grid" data-uk-grid-margin>
 
             <div class="uk-width-medium-1-2">
-              <label>Icon</label>
-              <%= f.file_field :photo, class: 'dropify ', 'data-default-file' => @admin_merchant.icon, 'data-allowed-formats':"portrait square" , 'data-errors-position': "outside"  %>
-            </div>
-            <div class="uk-width-medium-1-2">
               <label>Description</label>
               <%= f.text_area :description, required: true,class: 'md-input'  %>
+            </div>
+            <div class="uk-width-medium-1-2">
+              <label>Icon</label>
+              <br />
+
+              <div class="dropzone" data-width="960" data-originalsize="false" data-height="540" data-url="canvas.php" style="width: 100%;"  data-image="<%= f.object.icon.url %>"  data-editstart="true" data-dimensionsonly="true", data-ajax="false", data-save="false">
+                <%= f.file_field :icon%>
+              </div>
+
+
+
+              
             </div>
           </div>
         </div>
       </div>
+
+
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+            </div>
+            <div class="uk-width-medium-1-2">
+              <div class="uk-form-row">
+                <div id="photos">
+                  <h2>Photos</h2>
+                  <%= f.fields_for :photos do |photo| %>
+                  <%= render 'photo_fields', f: photo %>
+                  <% end %>
+                  <div class="links">
+                    <%= link_to_add_association '<i class="material-icons md-24"></i>'.html_safe, f, :photos %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
 
       <div class="uk-width-medium-1-1">
         <div class="uk-form-row">
@@ -110,7 +144,7 @@
         </div>
       </div>
 
-      
+
 
     </div>
 

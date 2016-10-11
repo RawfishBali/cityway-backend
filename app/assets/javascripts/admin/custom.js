@@ -1,6 +1,6 @@
 $(document).ready(function(){
-  if($('#merchant_subcategories').length > 0){
-    $('#merchant_subcategories').kendoMultiSelect();
+  if($('#merchant_subcategory_ids').length > 0){
+    $('#merchant_subcategory_ids').kendoMultiSelect();
   }
   $('.dropzone').html5imageupload();
 
