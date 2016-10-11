@@ -14,7 +14,7 @@
                     <% @admin_itineraries.each do  |itinerary|%>
                     <tr>
                         <td ><%= itinerary.name %></td>
-                        <td ><%= itinerary.description %></td>
+                        <td ><%= truncate(itinerary.description, length: 25, omission: '...') %></td>
                         <td><%= image_tag itinerary.primary_photo.first.picture.url %></td>
 
 
