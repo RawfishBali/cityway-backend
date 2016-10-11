@@ -8,7 +8,6 @@
                     <th class="uk-width-1-10 uk-text-center">Promo Discount</th>
                     <th class="uk-width-1-10 uk-text-center">Promo Original Price</th>
                     <th class="uk-width-1-10 uk-text-center">Promo Discounted Price</th>
-                    <th class="uk-width-1-10 uk-text-center">Promo Merchant</th>
                     <th class="uk-width-1-10 uk-text-center">Promo Photos</th>
                     <th class="uk-width-1-10 uk-text-center">Promo Approval</th>
                     <th class="uk-width-1-10 uk-text-center">Actions</th>
@@ -22,8 +21,7 @@
                         <td class="uk-text-center"><%= promo.discount%></td>
                         <td class="uk-text-center"><%= promo.original_price%></td>
                         <td class="uk-text-center"><%= promo.discount_price%></td>
-                        <td class="uk-text-center"><%= promo.merchant.name%></td>
-                        <td class="uk-text-center"><%= image_tag promo.photo.url%></td>
+                        <td class="uk-text-center"><%= image_tag promo.photo.url %></td>
                         <td class="uk-text-center"><%= promo.approval%></td>
                         <td class="uk-text-center">
                             <%= link_to '<i class="md-icon material-icons">&#xE254;</i>'.html_safe , edit_admin_promo_path(promo)%>
