@@ -1,0 +1,73 @@
+<div class="md-card">
+  <div class="md-card-content">
+    <%= form_for(@admin_culinary, url: (@admin_culinary.new_record? ? admin_culinaries_path(@admin_culinary) : admin_culinary_path(@admin_culinary)), multipart: true) do |f| %>
+    <% if @admin_culinary.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@admin_culinary.errors.count, "error") %> prohibited this admin_category from being saved:</h2>
+
+      <ul>
+        <% @admin_culinary.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
+    <h3 class="heading_a">
+      <% if @admin_culinary.new_record?%>
+      New <%= @admin_culinary.class.name %>
+      <% else %>
+      Edit <%= @admin_culinary.name %>
+      <% end %>
+    </h3>
+    <div class="uk-grid" data-uk-grid-margin>
+      <%= f.hidden_field :discover_id , value: @discover_id %>
+      <%= f.hidden_field :culinary_type , value: @admin_culinary.culinary_type || params[:culinary_type]%>
+      <div class="uk-width-medium-1-2">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <label>Name</label>
+              <%= f.text_field :name, required: true,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <label>Description</label>
+              <%= f.text_area :description, required: true,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="uk-width-medium-1-2 ">
+        <div class="uk-form-row">
+          <div id="photos">
+            <h2>Photos</h2>
+            <%= f.fields_for :photos do |photo| %>
+            <%= render 'photo_fields', f: photo %>
+            <% end %>
+            <div class="links">
+              <%= link_to_add_association '<i class="material-icons md-24"></i>'.html_safe, f, :photos %>
+            </div>
+          </div>
+        </div>
+        <div class="uk-form-row">
+          <%= f.submit class: "md-btn default-submit"%>
+        </div>
+      </div>
+    </div>
+
+
+
+    <% end %>
+  </div>
+</div>

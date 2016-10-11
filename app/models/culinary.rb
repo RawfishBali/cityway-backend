@@ -16,11 +16,11 @@ class Culinary < ActiveRecord::Base
 
   belongs_to :discover
 
-  validates_presence_of :discover
   validates_presence_of :name
   validates_presence_of :culinary_type
 
   has_many :photos, as: :imageable, dependent: :destroy
+  accepts_nested_attributes_for :photos, reject_if: :all_blank, allow_destroy: true
 
   validate :validate_number_of_photos
 
