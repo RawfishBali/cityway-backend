@@ -131,7 +131,7 @@ module CityWay
           end
           get '/:id/story' do
             story = Commonplace.find(params[:id]).city_hall_story
-            present story, with: CityWay::Api::V1::Entities::Story
+            present story, with: CityWay::Api::V1::Entities::CityHallStory
           end
 
 
