@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resources :itineraries
     resources :culinaries
     resources :splashes
+    resources :stories
   end
 
   get '/ping', to: proc { [200, {}, ['']] }
