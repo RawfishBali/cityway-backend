@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161012021906) do
+ActiveRecord::Schema.define(version: 20161012071235) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -155,6 +155,14 @@ ActiveRecord::Schema.define(version: 20161012021906) do
   end
 
   add_index "cities", ["latitude", "longitude"], name: "index_cities_on_latitude_and_longitude", using: :btree
+
+  create_table "city_hall_stories", force: :cascade do |t|
+    t.text     "top_text",       null: false
+    t.text     "bottom_text",    null: false
+    t.integer  "commonplace_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
 
   create_table "client_applications", force: :cascade do |t|
     t.string   "name"

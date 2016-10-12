@@ -125,6 +125,15 @@ module CityWay
             present commonplace, with: CityWay::Api::V1::Entities::Administration, latitude: params[:latitude], longitude: params[:longitude]
           end
 
+          desc "CityHall Story"
+          params do
+            requires :id , type: Integer, values: -> { Commonplace.ids }
+          end
+          get '/:id/story' do
+            story = Commonplace.find(params[:id]).city_hall_story
+            present story, with: CityWay::Api::V1::Entities::Story
+          end
+
 
         end
       end

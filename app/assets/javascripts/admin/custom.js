@@ -7,11 +7,9 @@ $(document).ready(function(){
 
   $('.dropzone').html5imageupload({
     onSave: function() {
-      console.log('aaaaa');
     },
     onAfterInitImage: function() {
-		console.log('motherfucker');
-	}
+    }
   });
 
   $('#subcategories')
@@ -19,16 +17,15 @@ $(document).ready(function(){
     $('select').selectize()
     $('.dropzone').html5imageupload({
       onSave: function() {
-        console.log('aaaaa');
       }
     });
   })
 
   $('#photos')
   .on('cocoon:after-insert', function(e, added_task) {
+    $('select').selectize()
     $('.dropzone').html5imageupload({
       onSave: function() {
-        console.log('aaaaa');
       }
     });
   })

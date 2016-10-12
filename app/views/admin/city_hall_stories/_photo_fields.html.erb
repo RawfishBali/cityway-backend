@@ -11,9 +11,13 @@
       <br />
       <div class="uk-width-medium-1-1 uk-row-first">
         <label>Position</label>
-        <%= f.select(:position, (Photo.positions.keys.map {|position| [position.titleize,position]}) , {prompt: 'Select position'}, {'data-md-selectize': true, required: true, class: 'md-input'}  ) %>
-        <span class="md-input-bar "></span>
+          <%= f.select(:position, (Photo.positions.keys.map {|position| [position.titleize,position]}) , {prompt: 'Select position'}, {'data-md-selectize': true, required: true, class: 'md-input'}  ) %>
+
+
+          <span class="md-input-bar "></span>
       </div>
+
+
     </div>
     <br />
     <br />

@@ -16,6 +16,4 @@ class Story < ActiveRecord::Base
   accepts_nested_attributes_for :photos, reject_if: :all_blank, allow_destroy: true
 
   belongs_to :discover
-
-  validates_presence_of :discover
 end

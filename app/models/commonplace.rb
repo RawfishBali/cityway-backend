@@ -23,6 +23,7 @@ class Commonplace < ActiveRecord::Base
   has_many :public_offices , dependent: :destroy
   has_many :online_services , dependent: :destroy
   has_many :certificates , dependent: :destroy
+  has_one :city_hall_story, dependent: :destroy
 
   belongs_to :city
   mount_uploader :photo, PhotoUploader
