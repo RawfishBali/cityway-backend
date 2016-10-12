@@ -27,12 +27,12 @@ class Event < ActiveRecord::Base
   validates_presence_of :address
   validates_presence_of :description
   validates_presence_of :around
-  validates_presence_of :photo
 
   geocoded_by :address
   after_validation :geocode
 
-  mount_uploader :photo, PhotoUploader
+  has_many :photos, as: :imageable, dependent: :destroy
+  accepts_nested_attributes_for :photos, reject_if: :all_blank, allow_destroy: true
 
   has_many :event_dates, dependent: :destroy
   accepts_nested_attributes_for :event_dates, reject_if: :all_blank, allow_destroy: true
@@ -46,5 +46,14 @@ class Event < ActiveRecord::Base
       return true if event_date.event_date == Date.today
     end
     return false
+  end
+
+  def primary_photo
+    primary_photo = photos.where(is_primary: true).limit(1)
+    if primary_photo.length > 0
+      primary_photo
+    else
+      [photos.first]
+    end
   end
 end

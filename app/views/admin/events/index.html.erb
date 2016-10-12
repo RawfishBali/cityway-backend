@@ -18,7 +18,7 @@
                         <td class=""><%= event.title  %></td>
                         <td class="uk-text-center"><%= event.address %></td>
                         <td class="uk-text-center"><%= truncate(event.description, length: 25, omission: '...') %></td>
-                        <td class="uk-text-center"><%= image_tag event.photo.url unless event.photo.blank?  %></td>
+                        <td class="uk-text-center"><%= image_tag event.primary_photo.first.picture.url unless event.primary_photo.first.blank?  %></td>
 
                         <td class="uk-text-center">
                             <%= link_to '<i class="md-icon material-icons">&#xE254;</i>'.html_safe , edit_admin_event_path(event)%>

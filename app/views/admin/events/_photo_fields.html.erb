@@ -1,0 +1,16 @@
+<div class="nested-fields">
+  <div class="uk-grid" data-uk-grid-margin>
+    <div class="uk-width-large-1-1 uk-width-1-1">
+      <div class="uk-width-medium-1-1 uk-row-first">
+        <div class="dropzone" data-width="375" data-height="205" data-ghost="true" data-canvas="false" data-originalsize="false"  data-editstart="true" data-ajax="false" data-save="false" data-canvas="false" data-image="<%= f.object.picture.url%>">
+          <%= f.file_field :picture%>
+        </div>
+      </div>
+      <div class="uk-width-medium-1-1 uk-row-first">
+        <div class="md-input-wrapper text-align-right">
+          <%= link_to_remove_association '<i class="material-icons md-24 "></i>'.html_safe, f, {class: 'btnSectionRemove'} %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -147,8 +147,12 @@ module CityWay
         class Event < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "Event ID"}
           expose :title, as: 'name',  documentation: {:type => "String", :desc => "Event Title"}
-          expose :photos, documentation: {:type => "String", :desc => "Event Photo"} do |event, options|
-            CityWay::Api::V1::Entities::Photo.represent([event.photo]) if event.photo
+          expose :photos, documentation: {:type => "string", :desc => "Market photo"} do |object , options|
+            if options[:simple] == 'false'
+              CityWay::Api::V1::Entities::Photo.represent(object.photos) if object.photos.length > 0
+            else
+              CityWay::Api::V1::Entities::Photo.represent(object.primary_photo) if object.photos.length > 0
+            end
           end
           expose :address, documentation: {:type => "String", :desc => "Event Address"}
           expose :latitude, documentation: {:type => "Float", :desc => "Event Latitude"}
