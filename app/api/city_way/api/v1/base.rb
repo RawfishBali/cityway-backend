@@ -102,6 +102,7 @@ module CityWay
         mount CityWay::Api::V1::Places
         mount CityWay::Api::V1::Utilities
         mount CityWay::Api::V1::Glossaries
+        mount CityWay::Api::V1::Splashes
       end
     end
   end

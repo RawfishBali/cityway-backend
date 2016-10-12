@@ -2,6 +2,11 @@ module CityWay
   module Api
     module V1
       module Entities
+        class Splash < Grape::Entity
+          expose :photos, documentation: {:type => "string", :desc => "Splash photos"} do |object , options|
+            CityWay::Api::V1::Entities::Photo.represent(object.photos) if object.photos.length > 0
+          end
+        end
 
         class Place < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "Place ID"}
