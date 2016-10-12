@@ -12,13 +12,13 @@
       </ul>
     </div>
     <% end %>
-    <h3 class="heading_a">
+    <h2 class="heading_a">
       <% if @admin_city_hall_story.new_record?%>
       New <%= @admin_city_hall_story.class.name %>
       <% else %>
       Edit <%= @admin_city_hall_story.class.name %>
       <% end %>
-    </h3>
+    </h2>
     <div class="uk-grid" data-uk-grid-margin>
       <%= f.hidden_field :commonplace_id , value: @commonplace_id %>
       <div class="uk-width-medium-1-2">
@@ -44,7 +44,7 @@
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
               <div id="photos">
-                <h2>Photos</h2>
+                <h3>Photos</h3>
                 <%= f.fields_for :photos do |photo| %>
                 <%= render 'photo_fields', f: photo %>
                 <% end %>
