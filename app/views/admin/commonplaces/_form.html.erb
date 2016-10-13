@@ -1,18 +1,69 @@
-<%= form_for(@commonplace, url: admin_commonplace_path(@commonplace.id), multipart: true, id:'form_validation' ) do |f| %>
-<div class="uk-grid">
+<div class="md-card">
+  <div class="md-card-content">
+    <%= form_for(@commonplace, url: (@commonplace.new_record? ? admin_commonplaces_path(@commonplace) : admin_commonplace_path(@commonplace)), multipart: true) do |f| %>
+    <% if @commonplace.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@commonplace.errors.count, "error") %> prohibited this admin_category from being saved:</h2>
 
-  <div class="uk-width-medium-1-5 uk-grid-margin">
-    <div class="md-input-wrapper">
-      <h3 class="heading_a uk-margin-small-bottom">Stemma</h3>
-      <%= f.file_field :icon, class: 'dropify ', 'data-default-file' => @commonplace.icon, 'data-allowed-formats':"portrait"  %>
+      <ul>
+        <% @commonplace.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+      </ul>
     </div>
-  </div>
-  <div class="uk-width-medium-1-1 uk-grid-margin">
-    <div class="md-input-wrapper uk-text-right">
-      <%= link_to 'Close', :back, class: 'md-btn md-btn-warning md-btn-wave waves-effect waves-button'%>
-      <%= f.submit 'Save',  class: "md-btn md-btn-primary waves-effect waves-effect waves-button waves-light" %>
+    <% end %>
+    <h2 class="heading_a">
+      <% if @commonplace.new_record?%>
+      New Social Links
+      <% else %>
+      Edit Social Links
+      <% end %>
+    </h2>
+    <div class="uk-grid" data-uk-grid-margin>
+      <div class="uk-width-medium-1-2">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <label>Facebook</label>
+              <%= f.text_field :facebook,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <label>Instagram</label>
+              <%= f.text_field :instagram,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="uk-width-medium-1-2 ">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <label>Twitter</label>
+              <%= f.text_field :twitter,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <label>Google Plus</label>
+              <%= f.text_field :google_plus,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <%= f.submit class: "md-btn default-submit"%>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+    <% end %>
   </div>
 </div>
-
-<% end %>
