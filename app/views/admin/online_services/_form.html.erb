@@ -1,0 +1,63 @@
+<div class="md-card">
+  <div class="md-card-content">
+    <%= form_for(@admin_online_service, url: (@admin_online_service.new_record? ? admin_online_services_path(@admin_online_service) : admin_online_service_path(@admin_online_service)), multipart: true) do |f| %>
+    <% if @admin_online_service.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@admin_online_service.errors.count, "error") %> prohibited this admin_category from being saved:</h2>
+
+      <ul>
+        <% @admin_online_service.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
+    <h3 class="heading_a">
+      <% if @admin_online_service.new_record?%>
+      New <%= @admin_online_service.class.name %>
+      <% else %>
+      Edit <%= @admin_online_service.name %>
+      <% end %>
+    </h3>
+    <div class="uk-grid" data-uk-grid-margin>
+      <%= f.hidden_field :commonplace_id , value: @commonplace_id %>
+
+      <div class="uk-width-medium-1-2">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <label>name</label>
+              <%= f.text_field :name,class: 'md-input', required: true  %>
+            </div>
+          </div>
+        </div>
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <label>url</label>
+              <%= f.text_field :url,class: 'md-input', required: true  %>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="uk-width-medium-1-2">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+
+          </div>
+        </div>
+      </div>
+      <div class="uk-width-medium-1-2">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <%= f.submit class: "md-btn default-submit"%>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
