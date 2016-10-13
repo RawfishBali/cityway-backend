@@ -69,7 +69,7 @@ class Admin::PlacesController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_place_params
-      params.require(:place).permit(:name, :address, :description, :discover_id, business_hours_attributes: [:id, :morning_open_time, :morning_close_time, :evening_open_time,
+      params.require(:place).permit(:name, :address, :description, :discover_id,:website, business_hours_attributes: [:id, :morning_open_time, :morning_close_time, :evening_open_time,
         :evening_close_time, :day, :_destroy] , photos_attributes: [:id, :picture,:is_primary,:position,:_destroy])
     end
 end

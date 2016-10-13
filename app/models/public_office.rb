@@ -33,4 +33,13 @@ class PublicOffice < ActiveRecord::Base
   after_validation :geocode
 
   mount_uploader :photo, PhotoUploader
+
+  def primary_photo
+    primary_photo = photos.where(is_primary: true).limit(1)
+    if primary_photo.length > 0
+      primary_photo
+    else
+      [photos.first]
+    end
+  end
 end

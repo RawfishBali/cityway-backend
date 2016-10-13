@@ -4,7 +4,7 @@ class Admin::NewsController < Admin::BaseController
   # GET /admin/news
   # GET /admin/news.json
   def index
-    @admin_news = Admin::News.all
+    @admin_news = City.find(session[:current_city_id]).commonplace.news.page(params[:page]).per(10)
   end
 
   # GET /admin/news/1

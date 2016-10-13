@@ -82,8 +82,15 @@
           <li><a href="/admin/commonplaces/<%= City.find(session[:current_city_id]).commonplace.id %>/edit" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/commonplaces'%>">Social Links</a></li>
           <li><a href="/admin/news/" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/news'%>">News</a></li>
           <li><a  href="/admin/city_hall_stories/" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/city_hall_stories'%>">Dati Comune</a></li>
-          <li><a href="#">Administration</a></li>
-          <li><a href="#">Ufici publici</a></li>
+          <li>
+            <a href="#">Administration</a>
+            <ul>
+              <li><a>Sindaco</a></li>
+              <li><a>Giunta Comunale</a></li>
+              <li><a>Consiglio</a></li>
+            </ul>
+          </li>
+          <li><a href="/admin/public_offices" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/public_offices'%>">Ufici publici</a></li>
           <li><a href="#">Online Services</a></li>
           <li><a href="#">Sicurezza</a></li>
         </ul>
