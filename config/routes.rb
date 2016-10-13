@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     resources :city_hall_stories
     resources :news
     resources :public_offices
+    resources :securities
   end
 
   get '/ping', to: proc { [200, {}, ['']] }
