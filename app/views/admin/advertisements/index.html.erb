@@ -10,7 +10,6 @@
             <th class="uk-width-1-10 uk-text-center">End Date</th>
             <th class="uk-width-1-10 uk-text-center">Second Start Date</th>
             <th class="uk-width-1-10 uk-text-center">Second End Date</th>
-            <th class="uk-width-1-10 uk-text-center">Cities</th>
             <th class="uk-width-1-10 ">Actions</th>
           </tr>
         </thead>
@@ -23,15 +22,10 @@
             <td class="uk-width-1-10 uk-text-center"><%= ad.end_date.strftime("%A %B %d %Y") %></td>
             <td class="uk-width-1-10 uk-text-center"><%= ad.second_start_date.strftime("%A %B %d %Y") if ad.second_start_date %></td>
             <td class="uk-width-1-10 uk-text-center"><%= ad.second_end_date.strftime("%A %B %d %Y") if ad.second_end_date %></td>
-            <% unless ad.cities.count == 0 %>
-            <td class="uk-width-1-10 uk-text-center"><%= link_to '<i class="md-icon material-icons"></i>'.html_safe, "#city_list_#{ad.id}", class: '', 'data-uk-modal':"{ center:true }" %></td>
-            <% else %>
-            <td class="uk-width-1-10 uk-text-center"><%= link_to '<i class="material-icons md-24"></i>'.html_safe, edit_admin_advertisement_path(ad), class: '' %></td>
-            <% end %>
+
 
             <td class="uk-width-1-10">
               <%= link_to '<i class="md-icon material-icons">&#xE254;</i>'.html_safe, edit_admin_advertisement_path(ad) %>
-              <%= link_to '<i class="material-icons"></i>'.html_safe, admin_advertisement_path(ad), method: :delete, data: { confirm: 'Are you sure?' } %>
             </td>
           </tr>
           <%end %>
@@ -42,104 +36,9 @@
       <%= paginate @advertisements %>
     </ul>
     <div class="md-fab-wrapper">
-      <a class="md-fab md-fab-accent md-fab-wave-light waves-effect waves-button waves-light" href="#new_task" data-uk-modal="{ center:true }">
-        <i class="material-icons"></i>
-      </a>
+        <a class="md-fab md-fab-accent md-fab-wave-light waves-effect waves-button waves-light" href="/admin/advertisements/new" id="invoice_add">
+            <i class="material-icons"></i>
+        </a>
     </div>
   </div>
 </div>
-
-<div class="uk-modal" id="new_task">
-  <div class="uk-modal-dialog">
-    <div class="uk-modal-header">
-      <h3 class="uk-modal-title">New Advertisement</h3>
-    </div>
-    <%= form_for(@advertisement, url: admin_advertisements_path(@advertisement) ) do |f| %>
-    <div class="uk-grid">
-      <div class="uk-width-medium-1-1 uk-grid-margin">
-        <div class="md-input-wrapper">
-          <h3 class="heading_a uk-margin-small-bottom">Advertisement Photo</h3>
-          <%= f.file_field :photo, class: 'dropify advertisement-photo-container', 'data-default-file' => @advertisement.photo, 'data-allowed-formats':"portrait square" , 'data-errors-position': "outside" , 'data-height':"119",'data-min-width':738, 'data-min-height':238, required: true  %>
-        </div>
-      </div>
-      <div class="uk-width-medium-1-1 uk-grid-margin">
-        <div class="md-input-wrapper">
-          <%= f.label :position, 'Position *' %>
-          <%= f.select "position", options_for_select(Advertisement.positions.map {|position| [ position[0], position[0] ]}), {}, {required: 'true', class: 'md-input uk-form-width-large'} %>
-
-        </div>
-      </div>
-      <div class="uk-width-medium-1-1 uk-grid-margin">
-        <div class="md-input-wrapper">
-          <%= f.label :start_date, 'Start Date *' %>
-          <%= f.text_field :start_date, class: 'md-input uk-form-width-large md-input-filled','data-uk-datepicker': "{format:'YYYY-MM-DD' }" , required: true %>
-        </div>
-      </div>
-      <div class="uk-width-medium-1-1 uk-grid-margin">
-        <div class="md-input-wrapper">
-          <%= f.label :end_date, 'End Date *' %><%= f.text_field :end_date, class: 'md-input uk-form-width-large md-input-filled','data-uk-datepicker': "{format:'YYYY-MM-DD' }", required: true %>
-        </div>
-      </div>
-      <div class="uk-width-medium-1-1 uk-grid-margin">
-        <div class="md-input-wrapper">
-          <%= f.label :second_start_date, 'Second Start Date *' %>
-          <%= f.text_field :second_start_date, class: 'md-input uk-form-width-large ','data-uk-datepicker': "{format:'YYYY-MM-DD' }"  %>
-        </div>
-      </div>
-      <div class="uk-width-medium-1-1 uk-grid-margin">
-        <div class="md-input-wrapper">
-          <%= f.label :second_end_date, 'Second End Date *' %><%= f.text_field :second_end_date, class: 'md-input uk-form-width-large md-input-filled','data-uk-datepicker': "{format:'YYYY-MM-DD' }" %>
-        </div>
-      </div>
-      <div class="uk-width-medium-1-1 uk-grid-margin">
-
-        <div class="md-input-wrapper <%= @advertisement.cities.blank? ? '' : 'md-input-filled'%>">
-          <div class="parsley-row">
-            <label for="cities" class="uk-form-label">Cities (1 minimum):</label>
-
-
-            <%= hidden_field_tag("advertisement[city_ids][]", nil) %>
-            <br />
-            <% City.order(:name).each do |city| %>
-            <span class="icheck-inline">
-              <%= check_box_tag("advertisement[city_ids][]", city.id, city.id.in?(@advertisement.cities.collect(&:id)), 'data-md-icheck': true, 'data-parsley-mincheck':"1" ) %>
-              <label class="inline-label"> <%= city.name %></label>
-            </span>
-            <% end %>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="uk-width-medium-1-1 uk-grid-margin">
-        <div class="md-input-wrapper uk-text-right">
-          <button type="button" class="md-btn md-btn-warning  uk-modal-close md-btn-wave waves-effect waves-button">Close</button>
-          <%= f.submit 'Save',  class:"md-btn md-btn-primary waves-effect waves-effect waves-button waves-light" %>
-        </div>
-      </div>
-
-    </div>
-    <% end %>
-  </div>
-</div>
-
-<% @advertisements.each do |advertisement| %>
-<div class="uk-modal " id="city_list_<%= advertisement.id%>">
-  <div class="uk-modal-dialog ">
-    <table class="uk-table uk-table-striped">
-      <thead>
-        <tr>
-          <th>Advertisement appears on</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% advertisement.cities.order('name ASC').each do |city|%>
-        <tr>
-          <td><%= city.name %></td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-</div>
-<% end %>

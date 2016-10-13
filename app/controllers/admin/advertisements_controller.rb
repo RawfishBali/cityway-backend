@@ -29,7 +29,6 @@ class Admin::AdvertisementsController < Admin::BaseController
 
     respond_to do |format|
       if @advertisement.save
-        @advertisement.cities << City.where(id: params[:advertisement][:city_ids].reject { |c| c.empty? } )
         format.html { redirect_to admin_advertisements_path, notice: 'Advertisement was successfully created.' }
         format.json { render :show, status: :created, location: @advertisement }
       else
@@ -44,17 +43,7 @@ class Admin::AdvertisementsController < Admin::BaseController
   def update
     respond_to do |format|
       if @advertisement.update(admin_advertisement_params)
-        if params[:advertisement][:city_ids].reject { |c| c.empty? }.blank?
-          @advertisement.advertisements_cities.destroy_all
-        else
-          @advertisement.advertisements_cities.where('city_id NOT IN (?)', params[:advertisement][:city_ids].reject { |c| c.empty? }).destroy_all
-        end
 
-        params[:advertisement][:city_ids].reject { |c| c.empty? }.each do |city_id|
-          AdvertisementsCity.find_or_create_by(advertisement_id: @advertisement.id , city_id: city_id)
-        end
-
-        # @advertisement.cities << City.where(id: new_city_ids) unless new_city_ids.blank?
         format.html { redirect_to admin_advertisements_path, notice: 'Advertisement was successfully updated.' }
         format.json { render :show, status: :ok, location: @advertisement }
       else
@@ -82,6 +71,6 @@ class Admin::AdvertisementsController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_advertisement_params
-      params.require(:advertisement).permit(:photo, :start_date, :end_date, :second_start_date, :second_end_date, :position, :city_ids)
+      params.require(:advertisement).permit(:photo ,:start_date, :end_date, :second_start_date, :second_end_date, :position, city_ids:[])
     end
 end

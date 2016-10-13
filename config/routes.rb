@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   
   namespace :admin do
     resources :advertisements
+  end
+  namespace :admin do
+    resources :advertisements
     resources :categories
     resources :cities
     resources :commonplaces

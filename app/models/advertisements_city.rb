@@ -3,8 +3,8 @@
 # Table name: advertisements_cities
 #
 #  id               :integer          not null, primary key
-#  city_id          :integer          not null
-#  advertisement_id :integer          not null
+#  city_id          :integer
+#  advertisement_id :integer
 #
 
 class AdvertisementsCity < ActiveRecord::Base

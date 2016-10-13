@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161012071235) do
+ActiveRecord::Schema.define(version: 20161013093153) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,8 +67,8 @@ ActiveRecord::Schema.define(version: 20161012071235) do
   end
 
   create_table "advertisements_cities", force: :cascade do |t|
-    t.integer "city_id",          null: false
-    t.integer "advertisement_id", null: false
+    t.integer "city_id"
+    t.integer "advertisement_id"
   end
 
   add_index "advertisements_cities", ["advertisement_id"], name: "index_advertisements_cities_on_advertisement_id", using: :btree
