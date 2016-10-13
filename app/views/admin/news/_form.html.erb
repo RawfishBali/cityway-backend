@@ -42,7 +42,7 @@
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
               <label>Publish Date</label>
-              <%= f.text_field :published_at, class: 'md-input',  'data-uk-datepicker':"{format:'YYYY-MM-DD'}" %>
+              <%= f.text_field :published_at, class: 'md-input',  'data-uk-datepicker':"{format:'YYYY-MM-DD'}", value: (f.object.published_at.strftime('%Y-%m-%d') if f.object.published_at) %>
             </div>
           </div>
         </div>
