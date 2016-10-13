@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :splashes
     resources :stories
     resources :city_hall_stories
+    resources :news
   end
 
   get '/ping', to: proc { [200, {}, ['']] }

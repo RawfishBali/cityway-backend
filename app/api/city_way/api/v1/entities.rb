@@ -204,8 +204,12 @@ module CityWay
           expose :published_at, documentation: {:type => "Text", :desc => "News' Published Date"} do |news , options|
             news.published_at.strftime("%B %d %Y %H:%M")
           end
-          expose :photo, documentation: {:type => "Text", :desc => "News' Photo"}  do |news, options|
-            news.photo.url
+          expose :photos, documentation: {:type => "string", :desc => "Market photo"} do |object , options|
+            if options[:simple] == 'false'
+              CityWay::Api::V1::Entities::Photo.represent(object.photos) if object.photos.length > 0
+            else
+              CityWay::Api::V1::Entities::Photo.represent(object.primary_photo) if object.photos.length > 0
+            end
           end
         end
 
