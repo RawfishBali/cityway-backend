@@ -46,22 +46,18 @@
       <div class="uk-width-medium-1-5 uk-grid-margin">
         <div class="md-input-wrapper">
           <h3 class="heading_a uk-margin-small-bottom">City Photo</h3>
-
-
-          <div class="dropzone" data-url="" data-image="<%= f.object.photo.url%>" data-width="135" data-ghost="true" data-canvas="false" data-originalsize="false" data-height="240" data-editstart="true" data-ajax="false" data-save="false" data-canvas="false" data-ghost=true style="width: 100%;">
-            <%= f.file_field :photo, class: 'md-input'%>
+          <div class="dropzone" data-originalsize="false"  data-image="<%= f.object.photo.url%>" style="width: 200px; height: 400px;">
+            <%= f.file_field :photo%>
           </div>
-
-
         </div>
       </div>
       <div class="uk-width-medium-1-5 uk-grid-margin">
         <div class="md-input-wrapper">
           <h3 class="heading_a uk-margin-small-bottom">Scopri Photo</h3>
           <%= f.fields_for :discover do |ff| %>
-          <div class="dropzone" data-url="" data-image="<%= ff.object.photo.url%>" data-width="135" data-ghost="true" data-canvas="false" data-originalsize="false" data-height="240" data-editstart="true" data-ajax="false" data-save="false" data-canvas="false" data-ghost=true style="width: 100%;">
-            <%= ff.file_field :photo, class: 'md-input'%>
-          </div>
+          <div class="dropzone" data-ajax=false data-canvas="false" data-originalsize="false" data-editstart="false"  data-image="<%= ff.object.photo.url%>" style="width: 200px; height: 400px;">
+              <%= ff.file_field :photo%>
+            </div>
           <% end %>
         </div>
       </div>
@@ -69,8 +65,8 @@
         <div class="md-input-wrapper">
           <h3 class="heading_a uk-margin-small-bottom">Intorno Photo</h3>
           <%= f.fields_for :around do |fff| %>
-          <div class="dropzone" data-url="" data-image="<%= fff.object.photo.url%>" data-width="135" data-ghost="true" data-canvas="false" data-originalsize="false" data-height="240" data-editstart="true" data-ajax="false" data-save="false" data-canvas="false" style="width: 100%;">
-            <%= fff.file_field :photo, class: 'md-input'%>
+          <div class="dropzone" data-originalsize="false"  data-image="<%= fff.object.photo.url%>" style="width: 200px; height: 400px;">
+            <%= fff.file_field :photo%>
           </div>
           <% end %>
         </div>
@@ -79,8 +75,8 @@
         <div class="md-input-wrapper">
           <h3 class="heading_a uk-margin-small-bottom">Comune Photo</h3>
           <%= f.fields_for :commonplace do |ffff| %>
-          <div class="dropzone" data-url="" data-image="<%= ffff.object.photo.url%>" data-width="135" data-ghost="true" data-canvas="false" data-originalsize="false" data-height="240" data-editstart="true" data-ajax="false" data-save="false" data-canvas="false" style="width: 100%;">
-            <%= ffff.file_field :photo, class: 'md-input'%>
+          <div class="dropzone" data-originalsize="false"  data-image="<%= ffff.object.photo.url%>" style="width: 200px; height: 400px;">
+            <%= ffff.file_field :photo%>
           </div>
         </div>
         <% end %>
@@ -89,8 +85,8 @@
         <div class="md-input-wrapper">
           <h3 class="heading_a uk-margin-small-bottom">Utilita Photo</h3>
           <%= f.fields_for :utility do |fffff| %>
-          <div class="dropzone" data-url="" data-image="<%= fffff.object.photo.url%>" data-width="135" data-ghost="true" data-canvas="false" data-originalsize="false" data-height="240" data-ajax="false" data-editstart="true" data-ajax="false" data-save="false" data-canvas="false" style="width: 100%;">
-            <%= fffff.file_field :photo, class: 'md-input'%>
+          <div class="dropzone" data-originalsize="false"  data-image="<%= fffff.object.photo.url%>" style="width: 200px; height: 400px;">
+            <%= fffff.file_field :photo%>
           </div>
           <% end %>
         </div>

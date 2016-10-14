@@ -187,20 +187,33 @@
 				var tools			= $('<div class="preview tools"></div>');
 				var edit			= $('' + this.button.edit + '');
 				var del				= $('' + this.button.del + '');
-				/*$(edit).unbind('click').click(function(e) {
+				$(edit).bind('click').click(function(e) {
+
 					e.preventDefault();
-					$(element).children().show();
-					$(element).find('.final').remove();
-					$(input).data('valid',false);
-				})*/
+					_self._tools();
+					mgElement.css({left: left, top: top, width: useWidth, height: useHeight })
+
+    			_self.image			= $(imgElement).clone().data({ mime: mimeType, width: width, height: height, ratio: ratio, left: left, top: top, useWidth: useWidth, useHeight: useHeight}).addClass('main').bind('mousedown touchstart',function(event) { _self.imageHandle(event)});
+    			_self.imageGhost	= (options.ghost) ? $(imgElement).addClass('ghost') : null;
+
+
+					// _self.readImage(options.image, options.image, options.image,_self.imageMimes[options.image.split('.').pop()]);
+					$(element).append($('<div class="cropWrapper"></div>').append($(_self.image)));
+    			if (!empty(_self.imageGhost)) {
+    				$(element).append(_self.imageGhost);
+    			}
+					// $(element).children().show();
+					// $(element).find('.final').remove();
+					// $(input).data('valid',false);
+				})
 				$(del).unbind('click').click(function(e) {
 					e.preventDefault();
 					_self.reset();
 				})
 
-				/*if (options.buttonEdit != false) {
+				if (options.buttonEdit != false) {
 					$(tools).append(edit)
-				}*/
+				}
 
 				if (options.buttonDel != false) {
 					$(tools).append(del)
