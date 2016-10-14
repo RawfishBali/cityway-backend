@@ -55,7 +55,7 @@
         <div class="md-input-wrapper">
           <h3 class="heading_a uk-margin-small-bottom">Scopri Photo</h3>
           <%= f.fields_for :discover do |ff| %>
-          <div class="dropzone" data-ajax=false data-canvas="false" data-originalsize="false" data-editstart="false"  data-image="<%= ff.object.photo.url%>" style="width: 200px; height: 400px;">
+          <div class="dropzone" data-ajax=false data-canvas="false" data-originalsize="false" data-editstart="false"  data-image="<%= ff.object.photo.url%>" style="width: 200px; height: 400px;" >
               <%= ff.file_field :photo%>
             </div>
           <% end %>
