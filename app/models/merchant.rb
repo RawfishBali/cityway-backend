@@ -65,6 +65,6 @@ class Merchant < ActiveRecord::Base
     ((0..6).to_a  - mb.map(&:day)).each do |m|
       mb << BusinessHour.new(morning_open_time: '00:00', morning_close_time: '00:00', evening_open_time: nil, evening_close_time: nil, day: m, marketable_type: self.class.name, marketable_id: self.id)
     end
-    mb
+    mb.sort_by(&:day)
   end
 end
