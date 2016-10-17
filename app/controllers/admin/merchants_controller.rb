@@ -4,7 +4,13 @@ class Admin::MerchantsController < Admin::BaseController
   # GET /admin/merchants
   # GET /admin/merchants.json
   def index
-    @admin_merchants = City.find(session[:current_city_id]).merchants.page(params[:page]).per(10)
+    if params[:category_id]
+      @admin_merchants = Category.find(params[:category_id]).merchants.page(params[:page]).per(10)
+    else
+      @admin_merchants = City.find(session[:current_city_id]).merchants.page(params[:page]).per(10)
+    end
+
+    @categories =  City.find(session[:current_city_id]).parent_categories
   end
 
   # GET /admin/merchants/1

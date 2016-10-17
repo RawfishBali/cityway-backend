@@ -1,40 +1,48 @@
-<div class="md-card uk-margin-medium-bottom">
-    <div class="md-card-content">
-        <div class="uk-overflow-container">
-            <table class="uk-table uk-table-nowrap table_check">
-                <thead>
-                <tr>
-                    <th class="uk-width-1-10">Name</th>
-                    <th class="uk-width-1-10">Address</th>
-                    <th class="uk-width-1-10 uk-text-center">Icon</th>
-                    <th class="uk-width-1-10 uk-text-center">Photo</th>
-                    <th class="uk-width-1-10 uk-text-center">Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                    <% @admin_merchants.each do  |merchant|%>
-                    <tr>
-
-                        <td><%= merchant.name %></td>
-                        <td><%= merchant.address %></td>
-                        <td class="uk-text-center"><%= image_tag merchant.icon.url unless merchant.icon.blank? %></td>
-                        <td class="uk-text-center"><%= image_tag merchant.primary_photo.first.picture.url unless merchant.primary_photo.first.blank? %></td>
-                        <td class="uk-text-center">
-                            <%= link_to '<i class="md-icon material-icons">&#xE254;</i>'.html_safe , edit_admin_merchant_path(merchant)%>
-
-
-                        </td>
-                    </tr>
-                    <% end %>
-
-                </tbody>
-            </table>
-            <%= paginate @admin_merchants %>
-        </div>
+<div class="uk-button-dropdown float-right" data-uk-dropdown>
+  <button class="md-btn"> Select Category <i class="material-icons">&#xE313;</i></button>
+  <div class="uk-dropdown">
+    <ul class="uk-nav uk-nav-dropdown">
+      <% @categories.each do |category| %>
+      <li><a href="/admin/merchants?category_id=<%= category.id%>"><%= category.name%></a></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<br />
+<div class="clear"></div>
+<div class="md-card uk-margin-medium-bottom marginT30">
+  <div class="md-card-content">
+    <div class="uk-overflow-container">
+      <table class="uk-table uk-table-nowrap table_check">
+        <thead>
+          <tr>
+            <th class="uk-width-1-10">Name</th>
+            <th class="uk-width-1-10">Address</th>
+            <th class="uk-width-1-10 uk-text-center">Icon</th>
+            <th class="uk-width-1-10 uk-text-center">Photo</th>
+            <th class="uk-width-1-10 uk-text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @admin_merchants.each do  |merchant|%>
+          <tr>
+            <td><%= merchant.name %></td>
+            <td><%= merchant.address %></td>
+            <td class="uk-text-center"><%= image_tag merchant.icon.url unless merchant.icon.blank? %></td>
+            <td class="uk-text-center"><%= image_tag merchant.primary_photo.first.picture.url unless merchant.primary_photo.first.blank? %></td>
+            <td class="uk-text-center">
+              <%= link_to '<i class="md-icon material-icons">&#xE254;</i>'.html_safe , edit_admin_merchant_path(merchant)%>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= paginate @admin_merchants %>
     </div>
-    <div class="md-fab-wrapper">
-        <a class="md-fab md-fab-accent md-fab-wave-light waves-effect waves-button waves-light" href="/admin/merchants/new" id="invoice_add">
-            <i class="material-icons"></i>
-        </a>
-    </div>
+  </div>
+  <div class="md-fab-wrapper">
+    <a class="md-fab md-fab-accent md-fab-wave-light waves-effect waves-button waves-light" href="/admin/merchants/new" id="invoice_add">
+      <i class="material-icons"></i>
+    </a>
+  </div>
 </div>

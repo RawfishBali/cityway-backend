@@ -99,3 +99,15 @@
 .fa15{
   font-size: 1.5em;
 }
+
+.float-right{
+  float: right;
+}
+
+.clear{
+  float: none;
+}
+
+.marginT30{
+  margin-top: 30px;
+}
