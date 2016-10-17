@@ -50,7 +50,7 @@ class City < ActiveRecord::Base
   end
 
   def parent_categories
-    categories.where(parent_id: nil)
+    categories.where(parent_id: nil).order('Name ASC')
   end
 
 end
