@@ -6,6 +6,7 @@
       <%= select_tag "cities", options_from_collection_for_select(@cities, "id", "name", @selected_city.id), class: 'md-input city-selector green_selectize', 'data-md-selectize': true%>
     </div>
   </div>
+  <% if session[:current_city_id] %>
   <div class="menu_section">
     <ul>
       <li title="Home">
@@ -127,4 +128,5 @@
       </li>
     </ul>
   </div>
+  <% end %>
 </aside>
