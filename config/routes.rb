@@ -2,9 +2,6 @@ Rails.application.routes.draw do
   
   namespace :admin do
     resources :advertisements
-  end
-  namespace :admin do
-    resources :advertisements
     resources :categories
     resources :cities
     resources :commonplaces
@@ -23,6 +20,8 @@ Rails.application.routes.draw do
     resources :public_offices
     resources :securities
     resources :online_services
+    resources :politic_groups
+    resources :profiles
   end
 
   get '/ping', to: proc { [200, {}, ['']] }

@@ -81,11 +81,11 @@
           <li><a href="/admin/news/" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/news'%>">News</a></li>
           <li><a  href="/admin/city_hall_stories/" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/city_hall_stories'%>">Dati Comune</a></li>
           <li>
-            <a href="#">Administration</a>
+            <a href="#" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/profiles'%>">Administration</a>
             <ul>
-              <li><a>Sindaco</a></li>
-              <li><a>Giunta Comunale</a></li>
-              <li><a>Consiglio</a></li>
+              <li><a href="/admin/profiles?major=true" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/profiles' && params[:major] %>">Sindaco</a></li>
+              <li><a href="/admin/profiles/" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/profiles' && !params[:major]%>">Giunta Comunale</a></li>
+              <li><a href="/admin/politic_groups/" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/politic_groups'%>">Consiglio</a></li>
             </ul>
           </li>
           <li><a href="/admin/public_offices" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/public_offices'%>">Ufici publici</a></li>

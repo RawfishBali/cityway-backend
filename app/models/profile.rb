@@ -29,12 +29,18 @@
 class Profile < ActiveRecord::Base
   belongs_to :commonplace
   belongs_to :politic_group
+  validate :only_one_major
 
   validates_presence_of :name
-  validates_presence_of :commonplace
 
   mount_uploader :photo, PhotoUploader
 
   geocoded_by :address
   after_validation :geocode
+
+  def only_one_major
+    if self.commonplace.major
+      errors.add(:is_major, "only one major is allowed")
+    end
+  end
 end
