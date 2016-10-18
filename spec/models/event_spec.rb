@@ -4,7 +4,6 @@
 #
 #  id                   :integer          not null, primary key
 #  title                :string           not null
-#  photo                :string           not null
 #  address              :string           not null
 #  latitude             :float
 #  longitude            :float
