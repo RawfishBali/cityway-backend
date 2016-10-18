@@ -115,9 +115,9 @@
           <li>
             <a href="#">Sport e tempo libero</a>
             <ul>
-              <li><a href="#">Piscine comunali</a></li>
-              <li><a href="#">Campi da tennis</a></li>
-              <li><a href="#">Stadio</a></li>
+              <li><a href="/admin/utility_places?place_type=public_swimming_pool">Piscine comunali</a></li>
+              <li><a href="/admin/utility_places?place_type=tennis_court">Campi da tennis</a></li>
+              <li><a href="/admin/utility_places?place_type=stadium">Stadio</a></li>
             </ul>
           </li>
           <li>
@@ -134,17 +134,42 @@
           <li>
             <a href="#">Sociale</a>
             <ul>
-              <li><a href="#">Centri servizi sociali</a></li>
-              <li><a href="#">Associazioni di Volontariato</a></li>
-              <li><a href="#">Centridurni per anziani</a></li>
+              <li><a href="/admin/utility_places?place_type=social_services">Centri servizi sociali</a></li>
+              <li><a href="/admin/utility_places?place_type=voluntary_association">Associazioni di Volontariato</a></li>
+              <li><a href="/admin/utility_places?place_type=elder_home">Centridurni per anziani</a></li>
             </ul>
           </li>
           <li><a href="/admin/utility_places?place_type=young_people_place">Giovani</a></li>
           <li>
             <a href="#">Scuole</a>
             <ul>
-              <li><a href="#">Private School</a></li>
-              <li><a href="#">Public School</a></li>
+              <li>
+                <a href="#">Private School</a>
+                <ul>
+                  <li><a href="#">Kindergarten</a></li>
+                  <li><a href="#">Primary School</a></li>
+                  <li><a href="#">First Secondary School</a></li>
+                  <li><a href="#">Second Secondary School</a></li>
+                  <li><a href="#">Universities</a></li>
+                  <li><a href="#">Music</a></li>
+                  <li><a href="#">Institute</a></li>
+                  <li><a href="#">Professional Institute</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <a href="#">Public School</a>
+                <ul>
+                  <li><a href="#">Kindergarten</a></li>
+                  <li><a href="#">Primary School</a></li>
+                  <li><a href="#">First Secondary School</a></li>
+                  <li><a href="#">Second Secondary School</a></li>
+                  <li><a href="#">Universities</a></li>
+                  <li><a href="#">Music</a></li>
+                  <li><a href="#">Institute</a></li>
+                  <li><a href="#">Professional Institute</a></li>
+                </ul>
+              </li>
             </ul>
           </li>
           <li><a href="/admin/devices?device_type=wifi" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/devices' && params[:device_type] == 'wifi'%>">Wifi</a></li>
