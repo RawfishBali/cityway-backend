@@ -43,11 +43,11 @@
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-2">
               <label>Category</label>
-              <%= f.select :category_id, options_from_collection_for_select(Category.all, 'id', 'name'), {prompt: 'Select Category'}, {'data-md-selectize': true, required: true, class: 'md-input'}  %>
+              <%= f.select :category_id, options_from_collection_for_select(Category.parent_categories.order('name ASC'), 'id', 'name',, @admin_merchant.category_id), {prompt: 'Select Category'}, {'data-md-selectize': true, required: true, class: 'md-input'}  %>
             </div>
             <div class="uk-width-medium-1-2">
               <label>Subcategories</label>
-              <%= f.select :subcategory_ids, options_from_collection_for_select(Category.all, 'id', 'name', @admin_merchant.subcategory_ids), {prompt: 'Select Subcategory'}, {required: true, class: 'md-input', multiple: true}  %>
+              <%= f.select :subcategory_ids, options_from_collection_for_select(Category.subcategories.order('name ASC'), 'id', 'name', @admin_merchant.subcategory_ids), {prompt: 'Select Subcategory'}, {required: true, class: 'md-input', multiple: true}  %>
             </div>
           </div>
         </div>
