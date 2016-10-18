@@ -74,6 +74,7 @@ class Admin::ProfilesController < Admin::BaseController
     def set_admin_profile
       @admin_profile = Profile.find(params[:id])
       @commonplace_id = City.find(session[:current_city_id]).commonplace.id
+      @is_major = @admin_profile.is_major
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
