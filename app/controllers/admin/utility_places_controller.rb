@@ -4,7 +4,12 @@ class Admin::UtilityPlacesController < Admin::BaseController
   # GET /admin/utility_places
   # GET /admin/utility_places.json
   def index
-    @admin_utility_places = City.find(session[:current_city_id]).utility.utility_places.where(place_type: UtilityPlace.place_types[params[:place_type]]).page(params[:page]).per(10)
+    if params[:is_public]
+      @admin_utility_places = City.find(session[:current_city_id]).utility.utility_places.where(place_type: UtilityPlace.place_types[params[:place_type]], is_public: params[:is_public]).page(params[:page]).per(10)
+    else
+      @admin_utility_places = City.find(session[:current_city_id]).utility.utility_places.where(place_type: UtilityPlace.place_types[params[:place_type]]).page(params[:page]).per(10)
+    end
+
   end
 
   # GET /admin/utility_places/1
@@ -16,6 +21,7 @@ class Admin::UtilityPlacesController < Admin::BaseController
   def new
     utility = City.find(session[:current_city_id]).utility
     @place_type = params[:place_type]
+    @is_public = params[:is_public]
     @admin_utility_place = utility.utility_places.new
   end
 
@@ -29,6 +35,7 @@ class Admin::UtilityPlacesController < Admin::BaseController
     utility = City.find(session[:current_city_id]).utility
     @admin_utility_place = utility.utility_places.new(admin_utility_place_params)
     @place_type = @admin_utility_place.place_type
+    @is_public = @admin_utility_place.is_public
     respond_to do |format|
       if @admin_utility_place.save
         format.html { redirect_to admin_utility_places_url(place_type: @admin_utility_place.place_type), notice: 'Utility place was successfully created.' }
@@ -69,6 +76,7 @@ class Admin::UtilityPlacesController < Admin::BaseController
     def set_admin_utility_place
       @admin_utility_place = UtilityPlace.find(params[:id])
       @place_type = @admin_utility_place.place_type
+      @is_public =  @admin_utility_place.is_public
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
