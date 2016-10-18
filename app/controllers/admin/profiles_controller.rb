@@ -34,9 +34,10 @@ class Admin::ProfilesController < Admin::BaseController
     @admin_profile = Profile.new(admin_profile_params)
     @commonplace_id = City.find(session[:current_city_id]).commonplace.id
     @is_major = @admin_profile.is_major
+    redirect_path =  @admin_profile.is_major ? admin_profiles_url(major:true) : admin_profiles_url
     respond_to do |format|
       if @admin_profile.save
-        format.html { redirect_to admin_profiles_url, notice: 'Profile was successfully created.' }
+        format.html { redirect_to redirect_path, notice: 'Profile was successfully created.' }
         format.json { render :show, status: :created, location: @admin_profile }
       else
         format.html { render :new }
@@ -49,8 +50,9 @@ class Admin::ProfilesController < Admin::BaseController
   # PATCH/PUT /admin/profiles/1.json
   def update
     respond_to do |format|
+      redirect_path =  @admin_profile.is_major ? admin_profiles_url(major:true) : admin_profiles_url
       if @admin_profile.update(admin_profile_params)
-        format.html { redirect_to admin_profiles_url, notice: 'Profile was successfully updated.' }
+        format.html { redirect_to redirect_path, notice: 'Profile was successfully updated.' }
         format.json { render :show, status: :ok, location: @admin_profile }
       else
         format.html { render :edit }

@@ -39,7 +39,7 @@ class Profile < ActiveRecord::Base
   after_validation :geocode
 
   def only_one_major
-    if self.commonplace.major
+    if self.commonplace.major && self.is_major
       errors.add(:is_major, "only one major is allowed")
     end
   end
