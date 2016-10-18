@@ -102,12 +102,51 @@
         </a>
         <ul>
           <li><a href="/admin/utility_numbers" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/utility_numbers'%>">Numeri utili</a></li>
-          <li><a href="#">Muoversi in città</a></li>
-          <li><a href="#">Sport e tempo libero</a></li>
-          <li><a href="#">Ambiente</a></li>
-          <li><a href="#">Sociale</a></li>
+          <li>
+            <a href="#">Muoversi in città</a>
+            <ul>
+              <li><a href="#">ZTL</a></li>
+              <li><a href="#">Parcheggi</a></li>
+              <li><a href="#">Bici</a></li>
+              <li><a href="#">Mezzi publlici</a></li>
+              <li><a href="#">Taxi</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">Sport e tempo libero</a>
+            <ul>
+              <li><a href="#">Piscine comunali</a></li>
+              <li><a href="#">Campi da tennis</a></li>
+              <li><a href="#">Stadio</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">Ambiente</a>
+            <ul>
+              <li><a href="#">Raccolta differenziata</a></li>
+              <li><a href="#">Isole ecologiche</a></li>
+              <li><a href="#">Ritiro ingombranti</a></li>
+              <li><a href="#">Glossario</a></li>
+              <li><a href="#">Case dell’acqua</a></li>
+
+            </ul>
+          </li>
+          <li>
+            <a href="#">Sociale</a>
+            <ul>
+              <li><a href="#">Centri servizi sociali</a></li>
+              <li><a href="#">Associazioni di Volontariato</a></li>
+              <li><a href="#">Centridurni per anziani</a></li>
+            </ul>
+          </li>
           <li><a href="#">Giovani</a></li>
-          <li><a href="#">Scuole</a></li>
+          <li>
+            <a href="#">Scuole</a>
+            <ul>
+              <li><a href="#">Private School</a></li>
+              <li><a href="#">Public School</a></li>
+            </ul>
+          </li>
           <li><a href="/admin/devices?device_type=wifi" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/devices' && params[:device_type] == 'wifi'%>">Wifi</a></li>
           <li><a href="/admin/devices?device_type=webcam" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/devices' && params[:device_type] == 'webcam'%>">Webcam</a></li>
           <li><a href="/admin/utility_places?place_type=pharmacies" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/utility_places' && params[:place_type] == 'pharmacies'%>">Farmacie</a></li>
