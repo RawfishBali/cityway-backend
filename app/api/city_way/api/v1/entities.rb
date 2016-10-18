@@ -105,6 +105,12 @@ module CityWay
           expose :distance, if: lambda { |object, options| options[:latitude] && options[:longitude] } do |object , options|
             object.steps.order('position ASC').first.distance_from([options[:latitude], options[:longitude]])
           end
+          expose :latitude, if: lambda { |object, options| options[:latitude] && options[:longitude] } do |object , options|
+            object.steps.order('position ASC').first.latitude
+          end
+          expose :longitude, if: lambda { |object, options| options[:latitude] && options[:longitude] } do |object , options|
+            object.steps.order('position ASC').first.longitude
+          end
           expose :duration, if: lambda { |object, options| options[:latitude] && options[:longitude] && options[:with_distance] == 'true' } do |object , options|
             response = object.get_duration_from(options[:latitude], options[:longitude])
             if response["rows"][0]["elements"][0]["status"] == "OK"
