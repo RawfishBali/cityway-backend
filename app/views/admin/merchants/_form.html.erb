@@ -43,7 +43,7 @@
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-2">
               <label>Category</label>
-              <%= f.select :category_id, options_from_collection_for_select(Category.parent_categories.order('name ASC'), 'id', 'name',, @admin_merchant.category_id), {prompt: 'Select Category'}, {'data-md-selectize': true, required: true, class: 'md-input'}  %>
+              <%= f.select :category_id, options_from_collection_for_select(Category.parent_categories.order('name ASC'), 'id', 'name',@admin_merchant.category_id), {prompt: 'Select Category'}, {'data-md-selectize': true, required: true, class: 'md-input'}  %>
             </div>
             <div class="uk-width-medium-1-2">
               <label>Subcategories</label>
