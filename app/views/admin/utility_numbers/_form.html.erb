@@ -1,0 +1,81 @@
+<div class="md-card">
+  <div class="md-card-content">
+    <%= form_for(@admin_utility_number, url: (@admin_utility_number.new_record? ? admin_utility_numbers_path(@admin_utility_number) : admin_utility_number_path(@admin_utility_number)), multipart: true) do |f| %>
+    <% if @admin_utility_number.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@admin_utility_number.errors.count, "error") %> prohibited this admin_category from being saved:</h2>
+
+      <ul>
+        <% @admin_utility_number.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
+    <h3 class="heading_a">
+      <% if @admin_utility_number.new_record?%>
+      New <%= @admin_utility_number.class.name %>
+      <% else %>
+      Edit <%= @admin_utility_number.name %>
+      <% end %>
+    </h3>
+    <div class="uk-grid" data-uk-grid-margin>
+      <%= f.hidden_field :utility_id , value: @utility_id %>
+
+      <div class="uk-width-medium-1-2">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <label>name</label>
+              <%= f.text_field :name,class: 'md-input', required: true  %>
+            </div>
+          </div>
+        </div>
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <label>Local Number</label>
+              <%= f.text_field :local_number,class: 'md-input', required: true  %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="uk-width-medium-1-2">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <label>National Number</label>
+              <%= f.text_field :national_number,class: 'md-input', required: true  %>
+            </div>
+          </div>
+        </div>
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <label>Address</label>
+              <%= f.text_field :address,class: 'md-input', required: true  %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="uk-width-medium-1-2">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+
+          </div>
+        </div>
+      </div>
+      <div class="uk-width-medium-1-2">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <%= f.submit class: "md-btn default-submit" %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
