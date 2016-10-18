@@ -28,6 +28,7 @@ class Merchant < ActiveRecord::Base
   has_and_belongs_to_many :subcategories, class_name: 'Category'
   has_many :promos, dependent: :destroy
   has_many :business_hours, as: :marketable, dependent: :destroy
+  accepts_nested_attributes_for :business_hours, reject_if: :all_blank, allow_destroy: true
   has_many :photos, as: :imageable, dependent: :destroy
   accepts_nested_attributes_for :photos, reject_if: :all_blank, allow_destroy: true
   belongs_to :category
