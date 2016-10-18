@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   namespace :admin do
     resources :advertisements
     resources :categories
@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     resources :online_services
     resources :politic_groups
     resources :profiles
+    resources :devices
   end
 
   get '/ping', to: proc { [200, {}, ['']] }
