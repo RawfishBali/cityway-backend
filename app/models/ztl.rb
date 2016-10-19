@@ -16,4 +16,5 @@ class Ztl < ActiveRecord::Base
   belongs_to :utility
 
   has_many :coordinates
+  accepts_nested_attributes_for :coordinates, reject_if: :all_blank, allow_destroy: true
 end

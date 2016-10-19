@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     resources :utility_places
     resources :vehicles
     resources :public_transports
+    resources :ztls
   end
 
   get '/ping', to: proc { [200, {}, ['']] }

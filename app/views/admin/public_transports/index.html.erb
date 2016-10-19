@@ -14,7 +14,7 @@
           <% @admin_public_transports.each do  |public_transport|%>
           <tr>
             <td class=""><%= public_transport.name  %></td>
-            <td class="uk-text-center"><%= public_transport.paths.map(&:path).join(' , ') %></td>
+            <td class="uk-text-center"><%= truncate(public_transport.paths.map(&:path).join(' , '), length: 25, omission: '...') %></td>
             <td class="uk-text-center"><%= public_transport.transport_type %></td>
             <td class="uk-text-center">
               <%= link_to '<i class="md-icon material-icons">&#xE254;</i>'.html_safe , edit_admin_public_transport_path(public_transport)%>
