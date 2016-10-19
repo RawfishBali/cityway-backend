@@ -13,5 +13,4 @@ class Path < ActiveRecord::Base
   belongs_to :public_transport
 
   validates_presence_of :path
-  validates_presence_of :public_transport
 end
