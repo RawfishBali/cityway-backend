@@ -103,12 +103,12 @@
         <ul>
           <li><a href="/admin/utility_numbers" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/utility_numbers'%>">Numeri utili</a></li>
           <li>
-            <a href="#">Muoversi in città</a>
+            <a href="/admin/public_transports" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/public_transports'%>">Muoversi in città</a>
             <ul>
               <li><a href="#">ZTL</a></li>
               <li><a href="/admin/vehicles?vehicle_type=parking" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/vehicles' && params[:device_type] == 'parking'%>">Parcheggi</a></li>
               <li><a href="/admin/vehicles?vehicle_type=bike" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/vehicles' && params[:device_type] == 'bike'%>">Bici</a></li>
-              <li><a href="#">Mezzi publlici</a></li>
+              <li><a href="/admin/public_transports" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/public_transports'%>">Mezzi publlici</a></li>
               <li><a href="/admin/vehicles?vehicle_type=taxi" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/vehicles' && params[:device_type] == 'taxi'%>">Taxi</a></li>
             </ul>
           </li>
