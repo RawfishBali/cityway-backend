@@ -106,10 +106,10 @@
             <a href="#">Muoversi in città</a>
             <ul>
               <li><a href="#">ZTL</a></li>
-              <li><a href="#">Parcheggi</a></li>
-              <li><a href="#">Bici</a></li>
+              <li><a href="/admin/vehicles?vehicle_type=parking" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/vehicles' && params[:device_type] == 'parking'%>">Parcheggi</a></li>
+              <li><a href="/admin/vehicles?vehicle_type=bike" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/vehicles' && params[:device_type] == 'bike'%>">Bici</a></li>
               <li><a href="#">Mezzi publlici</a></li>
-              <li><a href="#">Taxi</a></li>
+              <li><a href="/admin/vehicles?vehicle_type=taxi" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/vehicles' && params[:device_type] == 'taxi'%>">Taxi</a></li>
             </ul>
           </li>
           <li>

@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     resources :devices
     resources :utility_numbers
     resources :utility_places
+    resources :vehicles
   end
 
   get '/ping', to: proc { [200, {}, ['']] }

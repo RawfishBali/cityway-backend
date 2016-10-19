@@ -1,0 +1,124 @@
+<div class="md-card">
+  <div class="md-card-content">
+    <%= form_for(@admin_vehicle, url: (@admin_vehicle.new_record? ? admin_vehicles_path(@admin_vehicle) : admin_vehicle_path(@admin_vehicle)), multipart: true) do |f| %>
+    <% if @admin_vehicle.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@admin_vehicle.errors.count, "error") %> prohibited this admin_category from being saved:</h2>
+
+      <ul>
+        <% @admin_vehicle.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
+    <h3 class="heading_a">
+      <% if @admin_vehicle.new_record?%>
+      New <%= @admin_vehicle.class.name %>
+      <% else %>
+      Edit <%= @admin_vehicle.name %>
+      <% end %>
+    </h3>
+    <div class="uk-grid" data-uk-grid-margin>
+      <%= f.hidden_field :utility_id , value: @utility_id %>
+      <%= f.hidden_field :vehicle_type , value: @vehicle_type %>
+
+      <div class="uk-width-medium-1-2">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <label>Name</label>
+              <%= f.text_field :name,class: 'md-input', required: true  %>
+            </div>
+          </div>
+        </div>
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <label>Address</label>
+              <%= f.text_field :address,class: 'md-input', required: true  %>
+            </div>
+          </div>
+        </div>
+        <% unless @vehicle_type == 'parking' %>
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <label>Email</label>
+              <%= f.text_field :email,class: 'md-input' %>
+            </div>
+          </div>
+        </div>
+        <% end %>
+        <% unless @vehicle_type == 'taxi' %>
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <label>Total Parking Lot</label>
+              <%= f.text_field :total_parking_lot,class: 'md-input', required: true  %>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </div>
+
+      <div class="uk-width-medium-1-2">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <label>Phone 1</label>
+              <%= f.text_field :phone_0,class: 'md-input', required: true  %>
+            </div>
+          </div>
+        </div>
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <label>Phone 2</label>
+              <%= f.text_field :phone_1,class: 'md-input', required: true  %>
+            </div>
+          </div>
+        </div>
+        <% unless @vehicle_type == 'parking' %>
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <label>Website</label>
+              <%= f.text_field :website,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+        <% end %>
+        <% unless @vehicle_type == 'taxi' %>
+          <div class="uk-form-row">
+            <div class="uk-grid" data-uk-grid-margin>
+              <div class="uk-width-medium-1-1">
+                <label>Available Parking Lot</label>
+                <%= f.text_field :available_parking_lot,class: 'md-input', required: true  %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+
+
+      <div class="uk-width-medium-1-2">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+
+          </div>
+        </div>
+      </div>
+      <div class="uk-width-medium-1-2">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <%= f.submit class: "md-btn default-submit"%>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
