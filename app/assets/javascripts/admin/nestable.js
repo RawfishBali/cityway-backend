@@ -79,7 +79,7 @@ altair_nestable = {
                 category_ids: serialized_data
             },
             success: function (json) {
-              console.log(json);
+              // console.log(json);
             }
         });
 

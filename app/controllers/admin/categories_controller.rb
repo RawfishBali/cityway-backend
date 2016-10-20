@@ -40,11 +40,13 @@ class Admin::CategoriesController < Admin::BaseController
   end
 
   def order
+    puts "LOL"
     category_ids = []
     params[:category_ids].each do |category|
       category_ids << category[1]['id'].to_i
     end
-    City.find(session[:current_city_id]).categories.where(id: category_ids).each_with_index do |c,i|
+
+    City.find(session[:current_city_id]).categories.order_by_ids(category_ids).each_with_index do |c,i|
       c.categories_cities.first.update(priority: i)
     end
     render json: 'ok'
