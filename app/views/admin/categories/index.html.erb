@@ -2,7 +2,8 @@
     <% @admin_categories.each do  |category|%>
     <li data-id="<%= category.id %>" class="uk-nestable-item">
         <div class="uk-nestable-panel">
-            <%= link_to category.name, edit_admin_category_path(category) %> <br/>
+            <%= link_to category.name, edit_admin_category_path(category) %>
+            <%= link_to '<i class="md-icon material-icons float-right">&#xE254;</i>'.html_safe, edit_admin_category_path(category) %>  <br/>
             <span class="uk-text-muted uk-text-small"><%= category.subcategories.map(&:name).join(', ')%></span>
         </div>
     </li>
