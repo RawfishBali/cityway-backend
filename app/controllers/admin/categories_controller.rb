@@ -5,7 +5,7 @@ class Admin::CategoriesController < Admin::BaseController
   # GET /admin/categories.json
   def index
     city = City.find(session[:current_city_id])
-    @admin_categories = city.categories.includes(:categories_cities).parent_categories.order('categories_cities.priority ASC')
+    @admin_categories = city.sorted_categories
   end
 
   # GET /admin/categories/1

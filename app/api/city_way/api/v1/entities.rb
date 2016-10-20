@@ -751,7 +751,7 @@ module CityWay
             CityWay::Api::V1::Entities::Advertisement.represent(options[:advertisements]["top"])
           end
           expose :categories, if: lambda { |object, options| options[:simple] == 'false'  }  do |home , options|
-            CityWay::Api::V1::Entities::Category.represent(home.categories.order('Name ASC'))
+            CityWay::Api::V1::Entities::Category.represent(home.sorted_categories)
           end
           expose :bottom_advertisements, if: lambda { |object, options| options[:simple] == 'false'  }  do |home , options|
             CityWay::Api::V1::Entities::Advertisement.represent(options[:advertisements]["bottom"])

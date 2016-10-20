@@ -53,4 +53,8 @@ class City < ActiveRecord::Base
     categories.where(parent_id: nil).order('Name ASC')
   end
 
+  def sorted_categories
+    categories.includes(:categories_cities).parent_categories.order('categories_cities.priority ASC')
+  end
+
 end
