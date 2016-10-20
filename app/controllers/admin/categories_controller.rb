@@ -5,7 +5,7 @@ class Admin::CategoriesController < Admin::BaseController
   # GET /admin/categories.json
   def index
     city = City.find(session[:current_city_id])
-    @admin_categories = city.categories.order('name ASC').page(params[:page]).per(10)
+    @admin_categories = city.categories.includes(:categories_cities).parent_categories.order('categories_cities.priority ASC')
   end
 
   # GET /admin/categories/1
@@ -37,6 +37,17 @@ class Admin::CategoriesController < Admin::BaseController
         format.json { render json: @admin_category.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def order
+    category_ids = []
+    params[:category_ids].each do |category|
+      category_ids << category[1]['id'].to_i
+    end
+    City.find(session[:current_city_id]).categories.where(id: category_ids).each_with_index do |c,i|
+      c.categories_cities.first.update(priority: i)
+    end
+    render json: 'ok'
   end
 
   # PATCH/PUT /admin/categories/1

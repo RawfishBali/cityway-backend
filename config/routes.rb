@@ -2,7 +2,11 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :advertisements
-    resources :categories
+    resources :categories do
+      collection do
+        post 'order'
+      end
+    end
     resources :cities
     resources :commonplaces
     resources :merchants

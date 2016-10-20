@@ -37,3 +37,4 @@
 //= require admin/custom
 //= require admin/bootstrap
 //= require admin/html5imageupload
+//= require admin/nestable

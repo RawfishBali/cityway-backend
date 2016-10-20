@@ -1,34 +1,21 @@
-<div class="md-card uk-margin-medium-bottom">
-    <div class="md-card-content">
-        <div class="uk-overflow-container">
-            <table class="uk-table uk-table-nowrap table_check">
-                <thead>
-                <tr>
-                    <th class="uk-width-1-10">Category Name</th>
-                    <th class="uk-width-2-10 uk-text-center">Photo</th>
-                    <th class="uk-width-1-10 uk-text-center">Icon</th>
-                    <th class="uk-width-2-10">Subcategories</th>
-                    <th class="uk-width-2-10">Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                    <% @admin_categories.each do  |category|%>
-                    <tr>
-                        <td class=""><%= category.name%></td>
-                        <td><%= image_tag category.photo.url%></td>
-                        <td class="uk-text-center"><%= image_tag category.icon.url%></td>
-                        <td class="uk-text-center"><%= truncate(category.subcategories.map(&:name).join(', '), length: 25, omission: '...') %></td>
-
-                        <td class="">
-                            <%= link_to '<i class="md-icon material-icons">&#xE254;</i>'.html_safe , edit_admin_category_path(category)%>
-                        </td>
-                    </tr>
-                    <% end %>
-                </tbody>
-            </table>
-            <%= paginate @admin_categories %>
+<ul class="uk-nestable" id="nestable">
+    <% @admin_categories.each do  |category|%>
+    <li data-id="<%= category.id %>" class="uk-nestable-item">
+        <div class="uk-nestable-panel">
+            <%= link_to category.name, edit_admin_category_path(category) %> <br/>
+            <span class="uk-text-muted uk-text-small"><%= category.subcategories.map(&:name).join(', ')%></span>
         </div>
-    </div>
+    </li>
+    <% end %>
+</ul>
+
+
+
+
+
+
+
+<div class="md-card uk-margin-medium-bottom">
     <div class="md-fab-wrapper">
         <a class="md-fab md-fab-accent md-fab-wave-light waves-effect waves-button waves-light" href="/admin/categories/new" id="invoice_add">
             <i class="material-icons"></i>
