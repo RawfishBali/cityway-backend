@@ -42,6 +42,7 @@ gem 'annotate'
 gem 'kaminari'
 
 gem 'carrierwave'
+gem 'carrierwave-base64'
 gem 'mini_magick'
 gem 'cloudinary'
 

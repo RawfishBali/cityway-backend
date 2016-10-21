@@ -41,7 +41,7 @@ class City < ActiveRecord::Base
     end
   end
 
-  mount_uploader :photo, PhotoUploader
+  mount_base64_uploader :photo, PhotoUploader
 
   accepts_nested_attributes_for :around, :commonplace, :discover, :utility,  allow_destroy: true
 
