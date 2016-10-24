@@ -7,11 +7,14 @@
 #  email              :string
 #  phone              :string
 #  website            :string
-#  note               :text
+#  description        :text
 #  delivered_together :boolean          default(FALSE)
 #  utility_id         :integer
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
+#  address            :string
+#  latitude           :float
+#  longitude          :float
 #
 
 require 'rails_helper'

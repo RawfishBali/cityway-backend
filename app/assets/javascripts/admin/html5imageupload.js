@@ -505,6 +505,7 @@ imageZoom :function(x){
 
 },
 imageCrop: function() {
+	console.log("imageCrop")
 	var _self				= this;
 	var element				= _self.element;
 	var image				= _self.image;

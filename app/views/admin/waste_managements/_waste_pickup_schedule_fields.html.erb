@@ -1,0 +1,39 @@
+<div class="nested-fields">
+  <div class="uk-grid" data-uk-grid-margin>
+    <div class="uk-width-large-1-1 uk-width-1-1">
+        <div class="uk-grid" data-uk-grid-margin="">
+          <div class="uk-width-medium-1-1 uk-row-first">
+            <div class="md-input-wrapper md-input-filled"><label>Day</label>
+              <%= f.select :day, options_for_select([["Sunday", 0],["Monday", 1], ["Tuesday", 2], ["Wednesday", 3], ["Thursday", 4], ["Friday", 5], ["Saturday", 6]], f.object.day), {prompt: 'Select Day'}, {'data-md-selectize': true, required: true, class: 'md-input'}  %>
+              <span class="md-input-bar "></span>
+            </div>
+          </div>
+        </div>
+        <div class="uk-grid" data-uk-grid-margin="">
+          <div class="uk-width-medium-1-2 uk-row-first">
+            <div class="md-input-wrapper md-input-filled">
+              <h4>Waste Type</h4>
+              <div class="uk-width-medium-1-1">
+
+              <%= f.collection_check_boxes(:waste_types, WasteType.all.order(:name), :id, :name) do |b|%>
+                <%= b.label(class: "inline-label") { b.check_box(class: "data-md-icheck ", 'data-md-icheck': true) + b.text } %>
+              <% end %>
+            </div>
+              <span class="md-input-bar "></span>
+            </div>
+          </div>
+        </div>
+        <div class="uk-grid" data-uk-grid-margin="">
+          <div class="uk-width-medium-1-2 uk-row-first">
+            <div class="md-input-wrapper">
+            </div>
+          </div>
+          <div class="uk-width-medium-1-2 uk-row-first">
+            <div class="md-input-wrapper text-align-right">
+              <%= link_to_remove_association '<i class="material-icons md-24 "></i>'.html_safe, f, {class: 'btnSectionRemove'} %>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>

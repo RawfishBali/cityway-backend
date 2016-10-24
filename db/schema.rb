@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161020024056) do
+ActiveRecord::Schema.define(version: 20161024065716) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -659,11 +659,29 @@ ActiveRecord::Schema.define(version: 20161020024056) do
     t.string   "email"
     t.string   "phone"
     t.string   "website"
-    t.text     "note"
+    t.text     "description"
     t.boolean  "delivered_together", default: false
     t.integer  "utility_id"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
+    t.string   "address"
+    t.float    "latitude"
+    t.float    "longitude"
+  end
+
+  create_table "waste_pickup_schedules", force: :cascade do |t|
+    t.integer  "day",                 null: false
+    t.integer  "waste_management_id"
+    t.integer  "waste_types",                      array: true
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  create_table "waste_types", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.string   "icon",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "wizards", force: :cascade do |t|

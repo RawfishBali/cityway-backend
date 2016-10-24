@@ -18,6 +18,7 @@ class Utility < ActiveRecord::Base
   has_many :public_transports, dependent: :destroy
   has_many :garbage_glossaries, dependent: :destroy
   has_many :ztls, dependent: :destroy
+  has_many :waste_managements, dependent: :destroy
 
   belongs_to :city
   mount_uploader :photo, PhotoUploader
