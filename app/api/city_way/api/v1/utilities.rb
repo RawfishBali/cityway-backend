@@ -128,6 +128,15 @@ module CityWay
             utility = Utility.find(params[:id])
             present utility, with: CityWay::Api::V1::Entities::UtilitySports, simple: 'false', latitude: params[:latitude], longitude: params[:longitude]
           end
+
+          desc "Waste Recycling"
+          params do
+          end
+          get '/:id/waste_recycling' do
+            utility = Utility.find(params[:id])
+            present utility.waste_managements, with: CityWay::Api::V1::Entities::WasteManagement, simple: 'false', latitude: params[:latitude], longitude: params[:longitude]
+          end
+
         end
       end
     end
