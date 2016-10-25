@@ -83,4 +83,5 @@ group :development do
   gem 'spring'
   gem 'quiet_assets'
   gem 'capistrano', '~> 3.6'
+  gem 'capistrano-rbenv', '~> 2.0'
 end
