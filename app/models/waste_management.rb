@@ -21,4 +21,8 @@ class WasteManagement < ActiveRecord::Base
   belongs_to :utility
   has_many :waste_pickup_schedules
   accepts_nested_attributes_for :waste_pickup_schedules, reject_if: :all_blank, allow_destroy: true
+
+  geocoded_by :address
+  after_validation :geocode
+
 end
