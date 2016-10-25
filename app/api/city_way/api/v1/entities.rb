@@ -1002,9 +1002,6 @@ module CityWay
         end
         expose :waste_types do |object , options|
           CityWay::Api::V1::Entities::WasteTypeEntity.represent(WasteType.find(object.waste_types))
-          # object.waste_types.compact.each do |waste_type|
-            # CityWay::Api::V1::Entities::WasteTypeEntity.represent(WasteType.find(waste_type))
-          # end
         end
       end
 
@@ -1014,12 +1011,21 @@ module CityWay
         expose :address, documentation: {:type => "String", :desc => "WasteManagemnet address"}
         expose :email, documentation: {:type => "String", :desc => "WasteManagemnet email"}
         expose :phone, documentation: {:type => "String", :desc => "WasteManagemnet phone"}
-        expose :website, documentation: {:type => "Integer", :desc => "WasteManagemnet website"}
+        expose :website, documentation: {:type => "Integer", :desc => "WasteManagemnet website"} do |object, options|
+          unless object.website[/\Ahttp:\/\//] || object.website[/\Ahttps:\/\//]
+            "https://#{object.website}"
+          else
+            object.website
+          end
+        end
         expose :description, documentation: {:type => "Integer", :desc => "WasteManagemnet description"}
         expose :address, documentation: {:type => "Integer", :desc => "WasteManagemnet address"}
         expose :latitude, documentation: {:type => "Integer", :desc => "WasteManagemnet latitude"}
         expose :longitude, documentation: {:type => "Integer", :desc => "WasteManagemnet longitude"}
-        expose :waste_pickup_schedules do |object, options|
+        expose :distance, if: lambda { |object, options| object.respond_to?(:distance) || options[:latitude] && options[:longitude] } do |object , options|
+          object.distance_from([options[:latitude], options[:longitude]])
+        end
+        expose :waste_pickup_schedules,if: lambda { |object, options| options[:simple] == 'false' } do |object, options|
           CityWay::Api::V1::Entities::WastePickupSchedule.represent(object.waste_pickup_schedules)
         end
       end

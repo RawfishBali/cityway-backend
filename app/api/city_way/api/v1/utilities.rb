@@ -129,12 +129,27 @@ module CityWay
             present utility, with: CityWay::Api::V1::Entities::UtilitySports, simple: 'false', latitude: params[:latitude], longitude: params[:longitude]
           end
 
-          desc "Waste Recycling"
+          desc "Waste Recycling List"
           params do
+            requires :id , type: Integer, values: -> { Utility.ids }
+            optional :latitude, type: Float
+            optional :longitude, type: Float
           end
           get '/:id/waste_recycling' do
             utility = Utility.find(params[:id])
-            present utility.waste_managements, with: CityWay::Api::V1::Entities::WasteManagement, simple: 'false', latitude: params[:latitude], longitude: params[:longitude]
+            present utility.waste_managements, with: CityWay::Api::V1::Entities::WasteManagement, simple: 'true', latitude: params[:latitude], longitude: params[:longitude]
+          end
+
+          desc "Waste Recycling Detail"
+          params do
+            requires :id , type: Integer, values: -> { Utility.ids }
+            requires :waste_recycling_id , type: Integer, values: -> { WasteManagement.ids }
+            optional :latitude, type: Float
+            optional :longitude, type: Float
+          end
+          get '/:id/waste_recycling/:waste_recycling_id' do
+            utility = Utility.find(params[:id])
+            present utility.waste_managements.find(params[:waste_recycling_id]), with: CityWay::Api::V1::Entities::WasteManagement, simple: 'false', latitude: params[:latitude], longitude: params[:longitude]
           end
 
         end
