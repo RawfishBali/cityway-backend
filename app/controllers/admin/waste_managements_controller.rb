@@ -69,6 +69,6 @@ class Admin::WasteManagementsController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_waste_management_params
-      params.require(:waste_management).permit(:name, :address, :email, :phone, :website, :description, waste_pickup_schedules_attributes: [:id, :day, waste_types: [] ])
+      params.require(:waste_management).permit(:name, :address, :email, :phone, :website, :description, :is_domestic, waste_pickup_schedules_attributes: [:id, :day, waste_types: [] ])
     end
 end

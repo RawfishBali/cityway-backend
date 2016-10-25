@@ -20,7 +20,15 @@
       <% end %>
     </h3>
 
+
+
+
+
     <div class="uk-grid" data-uk-grid-margin>
+
+
+
+
       <div class="uk-width-medium-1-2">
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
@@ -73,6 +81,14 @@
             <div class="uk-width-medium-1-1">
               <label>description</label>
               <%= f.text_area :description,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <label>Domestic</label>
+              <%= f.check_box :is_domestic,class: 'md-input'  %>
             </div>
           </div>
         </div>

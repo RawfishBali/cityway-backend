@@ -15,6 +15,7 @@
 #  address            :string
 #  latitude           :float
 #  longitude          :float
+#  is_domestic        :boolean          default(TRUE)
 #
 
 require 'rails_helper'

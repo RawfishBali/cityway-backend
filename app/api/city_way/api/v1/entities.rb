@@ -1028,7 +1028,7 @@ module CityWay
         expose :distance, if: lambda { |object, options| object.respond_to?(:distance) || options[:latitude] && options[:longitude] } do |object , options|
           object.distance_from([options[:latitude], options[:longitude]])
         end
-        expose :waste_pickup_schedules,if: lambda { |object, options| options[:simple] == 'false' } do |object, options|
+        expose :waste_pickup_schedules do |object, options|
           CityWay::Api::V1::Entities::WastePickupSchedule.represent(object.waste_pickup_schedules)
         end
       end

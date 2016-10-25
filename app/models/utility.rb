@@ -46,4 +46,9 @@ class Utility < ActiveRecord::Base
     return [] if (Vehicle.vehicle_types[vehicle_type]).blank?
     vehicles.where("vehicle_type = ?", Vehicle.vehicle_types[vehicle_type])
   end
+
+  def waste_management_by_type is_domestic=true
+    waste_managements.where(is_domestic: is_domestic).first
+  end
+
 end
