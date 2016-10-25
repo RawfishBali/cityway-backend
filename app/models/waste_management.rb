@@ -26,4 +26,10 @@ class WasteManagement < ActiveRecord::Base
   geocoded_by :address
   after_validation :geocode
 
+  validate :only_one_waste_management_per_city
+
+  def only_one_waste_management_per_city
+    errors.add(:is_domestic, "only one waste_management per city") if WasteManagement.find_by(utility_id: self.utility_id, is_domestic: self.is_domestic)
+  end
+
 end
