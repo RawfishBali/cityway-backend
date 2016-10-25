@@ -631,6 +631,9 @@ module CityWay
         end
         expose :is_public, documentation: {:type => "Boolean", :desc => "Utility Place Public"}
         expose :commercial, documentation: {:type => "Boolean", :desc => "Utility Place commercial"}
+        expose :is_open do |object , options|
+          object.is_open_now?
+        end
       end
 
       class UtilitySports < Grape::Entity
