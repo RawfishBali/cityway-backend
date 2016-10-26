@@ -188,20 +188,23 @@
 		var edit			= $('' + this.button.edit + '');
 		var del				= $('' + this.button.del + '');
 		$(edit).bind('click').click(function(e) {
-
+		//
 			e.preventDefault();
-			_self._tools();
-			mgElement.css({left: left, top: top, width: useWidth, height: useHeight })
-
-			_self.image			= $(imgElement).clone().data({ mime: mimeType, width: width, height: height, ratio: ratio, left: left, top: top, useWidth: useWidth, useHeight: useHeight}).addClass('main').bind('mousedown touchstart',function(event) { _self.imageHandle(event)});
-			_self.imageGhost	= (options.ghost) ? $(imgElement).addClass('ghost') : null;
-
-
-			// _self.readImage(options.image, options.image, options.image,_self.imageMimes[options.image.split('.').pop()]);
-			$(element).append($('<div class="cropWrapper"></div>').append($(_self.image)));
-			if (!empty(_self.imageGhost)) {
-				$(element).append(_self.imageGhost);
-			}
+			_self.readImage(options.image, options.image, options.image,_self.imageMimes[options.image.split('.').pop()]);
+			// alert('a')
+			// self._ghost();
+			// _self._tools();
+			// mgElement.css({left: left, top: top, width: useWidth, height: useHeight })
+			//
+			// _self.image			= $(imgElement).clone().data({ mime: mimeType, width: width, height: height, ratio: ratio, left: left, top: top, useWidth: useWidth, useHeight: useHeight}).addClass('main').bind('mousedown touchstart',function(event) { _self.imageHandle(event)});
+			// _self.imageGhost	= (options.ghost) ? $(imgElement).addClass('ghost') : null;
+			//
+			//
+			// // _self.readImage(options.image, options.image, options.image,_self.imageMimes[options.image.split('.').pop()]);
+			// $(element).append($('<div class="cropWrapper"></div>').append($(_self.image)));
+			// if (!empty(_self.imageGhost)) {
+			// 	$(element).append(_self.imageGhost);
+			// }
 			// $(element).children().show();
 			// $(element).find('.final').remove();
 			// $(input).data('valid',false);
@@ -300,7 +303,6 @@ handleFile: function(event, element) {
 },
 
 readImage: function(image, src, name, mimeType) {
-
 	var _self		= this;
 	var options		= this.options;
 	var element		= this.element;
@@ -354,6 +356,7 @@ readImage: function(image, src, name, mimeType) {
 		imgElement.css({left: left, top: top, width: useWidth, height: useHeight })
 
 		_self.image			= $(imgElement).clone().data({ mime: mimeType, width: width, height: height, ratio: ratio, left: left, top: top, useWidth: useWidth, useHeight: useHeight}).addClass('main').bind('mousedown touchstart',function(event) { _self.imageHandle(event)});
+		$(element).find('.preview').first().remove()
 		_self.imageGhost	= (options.ghost) ? $(imgElement).addClass('ghost') : null;
 
 		//place the images
@@ -651,6 +654,7 @@ imageCrop: function() {
 			_self.imageFinal();
 
 			var json		= JSON.stringify(obj);
+			console.log(json)
 			$(input).after($('<input type="text" name="' + $(input).attr('name') + '_values" class="final" />').val(json));
 		}
 	}
