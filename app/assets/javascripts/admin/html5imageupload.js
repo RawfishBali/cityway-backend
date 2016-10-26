@@ -191,9 +191,8 @@
 		//
 			e.preventDefault();
 			_self.readImage(options.image, options.image, options.image,_self.imageMimes[options.image.split('.').pop()]);
-			// alert('a')
 			// self._ghost();
-			// _self._tools();
+			_self._tools();
 			// mgElement.css({left: left, top: top, width: useWidth, height: useHeight })
 			//
 			// _self.image			= $(imgElement).clone().data({ mime: mimeType, width: width, height: height, ratio: ratio, left: left, top: top, useWidth: useWidth, useHeight: useHeight}).addClass('main').bind('mousedown touchstart',function(event) { _self.imageHandle(event)});
@@ -654,7 +653,6 @@ imageCrop: function() {
 			_self.imageFinal();
 
 			var json		= JSON.stringify(obj);
-			console.log(json)
 			$(input).after($('<input type="text" name="' + $(input).attr('name') + '_values" class="final" />').val(json));
 		}
 	}
@@ -727,7 +725,10 @@ imageFinal: function() {
 	//edit option after crop
 	if (options.buttonEdit != false) {
 		$(tools).append($(_self.button.edit).click(function() {
-			$(element).children().show();
+			// e.preventDefault();
+			_self.readImage(options.image, options.image, options.image,_self.imageMimes[options.image.split('.').pop()]);
+			_self._tools();
+			// $(element).children().show();
 			$(element).find('.final').remove();
 			$(input).data('valid',false);
 		}));
