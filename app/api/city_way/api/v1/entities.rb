@@ -618,7 +618,7 @@ module CityWay
           end
         end
         expose :phone, documentation: {:type => "String", :desc => "Utility Place Phone"},if: lambda { |object, options| options[:simple] == 'false' }
-        expose :business_hours,if: lambda { |object, options| options[:simple] == 'false' && object.business_hours.length > 0 } do |object , options|
+        expose :business_hours,if: lambda { object.business_hours.length > 0 } do |object , options|
           CityWay::Api::V1::Entities::BusinessHours.represent(object.all_business_hours)
         end
         expose :latitude, documentation: {:type => "float", :desc => "Utility Place Latitude"}
