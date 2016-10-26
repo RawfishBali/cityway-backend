@@ -34,7 +34,7 @@ module CityWay
           desc "Places list"
           params do
             requires :id , type: Integer, values: -> { Utility.ids }
-            optional :place_type, type: String, values: -> { ["post_office","pharmacies","water_house","waste_recycling","bikes","public_swimming_pool","tennis_court","stadium","structures","social_services","voluntary_association","elder_home","young_people_place","kindergarten","primary_school","first_secondary_school","second_secondary_school","universities","music"] }
+            optional :place_type, type: String, values: -> { UtilityPlace.place_types.keys }
             optional :public, type: Boolean
             optional :commercial, type: Boolean
             optional :place_group, type: String
