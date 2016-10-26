@@ -77,7 +77,9 @@ module CityWay
         class Step < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "Step ID"}
           expose :position, documentation: {:type => "Integer", :desc => "Step position"}
-          expose :name, documentation: {:type => "String", :desc => "Step name"}
+          expose :name, documentation: {:type => "String", :desc => "Step name"} do |object, options|
+            object.name || object.address
+          end
           expose :description, documentation: {:type => "String", :desc => "Step address"}
           expose :address, documentation: {:type => "String", :desc => "Step address"}
           expose :latitude, documentation: {:type => "Float", :desc => "Step latitude"}
