@@ -21,7 +21,7 @@ class Advertisement < ActiveRecord::Base
   validates :start_date, presence: true
   validates :end_date, presence: true
 
-  mount_uploader :photo, PhotoUploader
+  mount_base64_uploader :photo, PhotoUploader
 
   enum position: {
     'top': 0,
