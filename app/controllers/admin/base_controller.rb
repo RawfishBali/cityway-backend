@@ -165,6 +165,28 @@ class Admin::BaseController < ApplicationController
         end
       end
     end
+
+    if params["news"]
+      if params["news"]["photos_attributes"]
+        params["news"]["photos_attributes"].each do |photo_params|
+          if photo_params.last["picture"].class.to_s != 'ActionDispatch::Http::UploadedFile' && !photo_params.last["picture"].blank?
+            image_json =  JSON.parse(photo_params.last["picture"]["_values"].gsub("'",'"').gsub('=>',':'))
+            photo_params.last["picture"] = image_json["data"]
+          end
+        end
+      end
+    end
+
+    if params["city_hall_story"]
+      if params["city_hall_story"]["photos_attributes"]
+        params["city_hall_story"]["photos_attributes"].each do |photo_params|
+          if photo_params.last["picture"].class.to_s != 'ActionDispatch::Http::UploadedFile' && !photo_params.last["picture"].blank?
+            image_json =  JSON.parse(photo_params.last["picture"]["_values"].gsub("'",'"').gsub('=>',':'))
+            photo_params.last["picture"] = image_json["data"]
+          end
+        end
+      end
+    end
   end
 
 
