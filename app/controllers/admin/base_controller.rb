@@ -47,7 +47,6 @@ class Admin::BaseController < ApplicationController
       end
     end
 
-
     if params["category"]
       if params["category"]["photo"]
         unless params["category"]["photo"].class.to_s == 'ActionDispatch::Http::UploadedFile'
@@ -62,6 +61,26 @@ class Admin::BaseController < ApplicationController
         end
       end
     end
+
+    if params["merchant"]
+      if params["merchant"]["icon"]
+        unless params["merchant"]["icon"].class.to_s == 'ActionDispatch::Http::UploadedFile'
+          image_json =  JSON.parse(params["merchant"]["icon"]["_values"].gsub("'",'"').gsub('=>',':'))
+          params["merchant"]["icon"] = image_json["data"]
+        end
+      end
+
+
+      if params["merchant"]["photos_attributes"]
+        params["merchant"]["photos_attributes"].each do |photo_params|
+          if photo_params.last["picture"].class.to_s != 'ActionDispatch::Http::UploadedFile' && !photo_params.last["picture"].blank?
+            image_json =  JSON.parse(photo_params.last["picture"]["_values"].gsub("'",'"').gsub('=>',':'))
+            photo_params.last["picture"] = image_json["data"]
+          end
+        end
+      end
+    end
+
   end
 
 

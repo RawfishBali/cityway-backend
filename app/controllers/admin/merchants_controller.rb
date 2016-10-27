@@ -75,7 +75,8 @@ class Admin::MerchantsController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_merchant_params
-      params.require(:merchant).permit(:name, :address, :description, :photo, :icon, :email, :website, :instagram, :facebook, :city_id, :category_id, :subcategories, :phone, subcategory_ids: [], photos_attributes: [:id, :picture, :is_primary, :position,  :_destroy], business_hours_attributes: [:id, :morning_open_time, :morning_close_time, :evening_open_time,
-        :evening_close_time, :day, :_destroy])
+      params.require(:merchant).permit!
+      # params.require(:merchant).permit(:name, :address, :description, :photo, :icon, :email, :website, :instagram, :facebook, :city_id, :category_id, :subcategories, :phone, subcategory_ids: [], photos_attributes: [:id, :picture, :is_primary, :position,  :_destroy], business_hours_attributes: [:id, :morning_open_time, :morning_close_time, :evening_open_time,
+        # :evening_close_time, :day, :_destroy])
     end
 end

@@ -14,5 +14,5 @@
 
 class Photo < ActiveRecord::Base
   enum position: [:top, :middle, :bottom]
-  mount_uploader :picture, PhotoUploader
+  mount_base64_uploader :picture, PhotoUploader
 end

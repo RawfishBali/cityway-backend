@@ -15,7 +15,7 @@ class Admin::CategoriesController < Admin::BaseController
 
   # GET /admin/categories/new
   def new
-    @admin_category = Category.new
+    @admin_category = City.find(session[:current_city_id]).categories.new
   end
 
   # GET /admin/categories/1/edit
@@ -25,7 +25,7 @@ class Admin::CategoriesController < Admin::BaseController
   # POST /admin/categories
   # POST /admin/categories.json
   def create
-    @admin_category = Category.new(admin_category_params)
+    @admin_category = City.find(session[:current_city_id]).categories.new(admin_category_params)
 
     respond_to do |format|
       if @admin_category.save
@@ -40,7 +40,6 @@ class Admin::CategoriesController < Admin::BaseController
   end
 
   def order
-    puts "LOL"
     category_ids = []
     params[:category_ids].each do |category|
       category_ids << category[1]['id'].to_i
