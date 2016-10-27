@@ -14,7 +14,7 @@ class Around < ActiveRecord::Base
   has_many :events , dependent: :destroy
   has_many :markets , dependent: :destroy
   has_many :parks , dependent: :destroy
-  mount_uploader :photo, PhotoUploader
+  mount_base64_uploader :photo, PhotoUploader
 
   def active_events
     (events.joins(:event_dates).where('event_dates.event_date >= ?', Time.now)).uniq

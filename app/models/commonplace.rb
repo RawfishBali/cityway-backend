@@ -26,7 +26,7 @@ class Commonplace < ActiveRecord::Base
   has_one :city_hall_story, dependent: :destroy
 
   belongs_to :city
-  mount_uploader :photo, PhotoUploader
+  mount_base64_uploader :photo, PhotoUploader
   mount_uploader :icon, PhotoUploader
 
   def major

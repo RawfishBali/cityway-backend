@@ -37,13 +37,7 @@ class Admin::CitiesController < Admin::BaseController
 
   def update
     respond_to do |format|
-      # image_json =  JSON.parse(params["city"]["photo"]["_values"].gsub("'",'"').gsub('=>',':'))
-      # puts "-------------------------"
-      # puts image_json["data"]
-      # puts "-------------------------"
-      #
-      # puts "-------------------------"
-      # params["city"]["photo"] = image_json["data"]
+
       if @city.update(city_params)
         format.html { redirect_to edit_admin_city_path(@city), notice: 'City was successfully updated.' }
         format.json { render :show, status: :ok, location: @city }
@@ -72,6 +66,8 @@ class Admin::CitiesController < Admin::BaseController
       @commonplace = @city.commonplace
       @discover = @city.discover
     end
+
+
 
     def city_params
       params.require(:city).permit!

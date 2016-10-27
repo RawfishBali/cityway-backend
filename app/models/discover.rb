@@ -17,7 +17,7 @@ class Discover < ActiveRecord::Base
   has_many :itineraries
   has_one :story
 
-  mount_uploader :photo, PhotoUploader
+  mount_base64_uploader :photo, PhotoUploader
 
   def place_by_type place_type
     return [] if (Place.place_types[place_type]).blank?

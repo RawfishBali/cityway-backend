@@ -507,7 +507,6 @@ imageZoom :function(x){
 
 },
 imageCrop: function() {
-	console.log("imageCrop")
 	var _self				= this;
 	var element				= _self.element;
 	var image				= _self.image;
@@ -539,11 +538,9 @@ imageCrop: function() {
 	// $(element).find('.tools').append($(_self.button.saving));
 
 	if (options.canvas == true) {
-
 		var canvas          = $('<canvas class="final" id="canvas_' + $(input).attr('name') + '" width="' + finalWidth + '" height="' + finalHeight + '" style="position:absolute; top: 0; bottom: 0; left: 0; right: 0; z-index:100; width: 100%; height: 100%;"></canvas>');
 
 		$(element).append(canvas);
-
 		var canvasContext   = $(canvas)[0].getContext('2d');
 		var imageObj        = new Image();
 		imageObj.crossOrigin = "anonymous";
@@ -552,7 +549,6 @@ imageCrop: function() {
 		//canvasContext.clearRect(0,0,finalWidth,finalHeight);
 
 		imageObj.onload = function() {
-
 
 			var canvasTmp			= $('<canvas width="' + imageWidth + '" height="' + imageHeight + '"></canvas>');
 			var canvasTmpContext    = $(canvasTmp)[0].getContext('2d');
@@ -598,7 +594,6 @@ imageCrop: function() {
 
 
 				if (options.save == false) {
-
 					$(element).find('.tools .saving').remove();
 					$(element).find('.tools').children().toggle();
 
@@ -610,9 +605,10 @@ imageCrop: function() {
 					_self._ajax($.extend({data: dataUrl}, obj));
 
 				} else {
-
 					var json		= JSON.stringify($.extend({data: dataUrl},obj));
+
 					$(input).after($('<input type="text" name="' + $(input).attr('name') + '_values" class="final" />').val(json));
+
 
 					$(input).data('required',$(input).prop('required'));
 					$(input).prop('required',false);
@@ -626,9 +622,7 @@ imageCrop: function() {
 				}
 
 			}
-			console.log(image)
 
-			console.log(image)
 			tmpObj.src			= $(canvasTmp)[0].toDataURL(image.data('mime'));
 
 
@@ -636,7 +630,7 @@ imageCrop: function() {
 		imageObj.src = $(image).attr('src');
 
 		if (options.saveOriginal === true) {
-			//console.log($(image).attr('src'));
+
 			obj			= $.extend({original: $(image).attr('src')}, obj);
 		}
 

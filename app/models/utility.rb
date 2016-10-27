@@ -21,7 +21,7 @@ class Utility < ActiveRecord::Base
   has_many :waste_managements, dependent: :destroy
 
   belongs_to :city
-  mount_uploader :photo, PhotoUploader
+  mount_base64_uploader :photo, PhotoUploader
 
   def devices_by_type device_type
     return [] if (Device.device_types[device_type]).blank?

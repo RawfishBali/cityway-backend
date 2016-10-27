@@ -43,6 +43,10 @@ class PhotoUploader < CarrierWave::Uploader::Base
     %w(jpg jpeg png)
   end
 
+  def public_id
+    return Cloudinary::Utils.random_public_id
+  end
+
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
   # def filename
