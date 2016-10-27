@@ -620,6 +620,8 @@ module CityWay
           end
         end
         expose :phone, documentation: {:type => "String", :desc => "Utility Place Phone"},if: lambda { |object, options| options[:simple] == 'false' }
+        expose :email, documentation: {:type => "String", :desc => "Utility Place email"}
+        expose :website, documentation: {:type => "String", :desc => "Utility Place website"}
         expose :business_hours do |object , options|
           CityWay::Api::V1::Entities::BusinessHours.represent(object.all_business_hours)
         end
