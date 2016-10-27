@@ -25,11 +25,11 @@ class Admin::CulinariesController < Admin::BaseController
   # POST /admin/culinaries
   # POST /admin/culinaries.json
   def create
-    @admin_culinary = Culinary.new(admin_culinary_params)
+    @admin_culinary = City.find(session[:current_city_id]).discover.culinaries.new(admin_culinary_params)
 
     respond_to do |format|
       if @admin_culinary.save
-        format.html { redirect_to admin_culinaries_url, notice: 'Culinary was successfully created.' }
+        format.html { redirect_to admin_culinaries_url(culinary_type: @admin_culinary.culinary_type), notice: 'Culinary was successfully created.' }
         format.json { render :show, status: :created, location: @admin_culinary }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class Admin::CulinariesController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_culinary.update(admin_culinary_params)
-        format.html { redirect_to admin_culinaries_url, notice: 'Culinary was successfully updated.' }
+        format.html { redirect_to admin_culinaries_url(culinary_type: @admin_culinary.culinary_type), notice: 'Culinary was successfully updated.' }
         format.json { render :show, status: :ok, location: @admin_culinary }
       else
         format.html { render :edit }
@@ -71,6 +71,6 @@ class Admin::CulinariesController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_culinary_params
-      params.require(:culinary).permit(:name, :description, :discover_id, :culinary_type, photos_attributes: [:id, :picture, :position, :is_primary, :_destroy])
+      params.require(:culinary).permit(:name, :description, :culinary_type, photos_attributes: [:id, :picture, :position, :is_primary, :_destroy])
     end
 end
