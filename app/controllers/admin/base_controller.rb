@@ -208,6 +208,17 @@ class Admin::BaseController < ApplicationController
       end
     end
 
+    if params["utility_place"]
+      if params["utility_place"]["photos_attributes"]
+        params["utility_place"]["photos_attributes"].each do |photo_params|
+          if photo_params.last["picture"].class.to_s != 'ActionDispatch::Http::UploadedFile' && !photo_params.last["picture"].blank?
+            image_json =  JSON.parse(photo_params.last["picture"]["_values"].gsub("'",'"').gsub('=>',':'))
+            photo_params.last["picture"] = image_json["data"]
+          end
+        end
+      end
+    end
+
   end
 
 
