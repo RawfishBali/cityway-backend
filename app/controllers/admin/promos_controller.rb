@@ -70,7 +70,8 @@ class Admin::PromosController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_promo_params
-      params.require(:promo).permit(:title, :description, :terms_and_conditions, :photo, :discount, :original_price, :discount_price, :city_id, :merchant_id, :approval)
+      params.require(:promo).permit!
+      # params.require(:promo).permit(:title, :description, :terms_and_conditions, :photo, :discount, :original_price, :discount_price, :city_id, :merchant_id, :approval)
     end
 
     def set_merchants

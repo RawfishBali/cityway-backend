@@ -30,7 +30,12 @@ class Promo < ActiveRecord::Base
   validates_presence_of :merchant
   validates_presence_of :city
 
-  mount_uploader :photo, PhotoUploader
+  validates :discount, numericality: {greater_than_or_equal_to: 0}
+  validates :original_price, numericality: {greater_than_or_equal_to: 0}
+
+  mount_base64_uploader :photo, PhotoUploader
+
+  before_save :calculate_discounted_price
 
   def category
     merchant.category
@@ -38,5 +43,11 @@ class Promo < ActiveRecord::Base
 
   def subcategories
     merchant.subcategories
+  end
+
+  private
+
+  def calculate_discounted_price
+    self.discount_price =  self.original_price - (self.original_price * (self.discount/100))
   end
 end

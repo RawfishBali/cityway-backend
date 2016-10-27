@@ -70,13 +70,21 @@ class Admin::BaseController < ApplicationController
         end
       end
 
-
       if params["merchant"]["photos_attributes"]
         params["merchant"]["photos_attributes"].each do |photo_params|
           if photo_params.last["picture"].class.to_s != 'ActionDispatch::Http::UploadedFile' && !photo_params.last["picture"].blank?
             image_json =  JSON.parse(photo_params.last["picture"]["_values"].gsub("'",'"').gsub('=>',':'))
             photo_params.last["picture"] = image_json["data"]
           end
+        end
+      end
+    end
+
+    if params["promo"]
+      if params["promo"]["photo"]
+        unless params["promo"]["photo"].class.to_s == 'ActionDispatch::Http::UploadedFile'
+          image_json =  JSON.parse(params["promo"]["photo"]["_values"].gsub("'",'"').gsub('=>',':'))
+          params["promo"]["photo"] = image_json["data"]
         end
       end
     end
