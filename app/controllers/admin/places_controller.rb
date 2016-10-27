@@ -24,11 +24,11 @@ class Admin::PlacesController < Admin::BaseController
   # POST /admin/places
   # POST /admin/places.json
   def create
-    @admin_place = Admin::Place.new(admin_place_params)
+    @admin_place = City.find(session[:current_city_id]).discover.places.new(admin_place_params)
 
     respond_to do |format|
       if @admin_place.save
-        format.html { redirect_to admin_places_url, notice: 'Place was successfully created.' }
+        format.html { redirect_to admin_places_url(place_type:@admin_place.place_type), notice: 'Place was successfully created.' }
         format.json { render :show, status: :created, location: @admin_place }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class Admin::PlacesController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_place.update(admin_place_params)
-        format.html { redirect_to admin_places_url, notice: 'Place was successfully updated.' }
+        format.html { redirect_to admin_places_url(place_type:@admin_place.place_type), notice: 'Place was successfully updated.' }
         format.json { render :show, status: :ok, location: @admin_place }
       else
         format.html { render :edit }
@@ -64,12 +64,12 @@ class Admin::PlacesController < Admin::BaseController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_admin_place
-      @admin_place = Admin::Place.find(params[:id])
+      @admin_place = Place.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_place_params
-      params.require(:place).permit(:name, :address, :description, :discover_id,:website, business_hours_attributes: [:id, :morning_open_time, :morning_close_time, :evening_open_time,
+      params.require(:place).permit(:name, :address, :description, :website,:place_type, :email, :facebook, :instagram, :twitter, :google_plus, business_hours_attributes: [:id, :morning_open_time, :morning_close_time, :evening_open_time,
         :evening_close_time, :day, :_destroy] , photos_attributes: [:id, :picture,:is_primary,:position,:_destroy])
     end
 end
