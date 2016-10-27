@@ -27,8 +27,8 @@ class Category < ActiveRecord::Base
   scope :subcategories, -> { where("parent_id IS NOT NULL") }
   scope :parent_categories, -> { where("parent_id IS NULL") }
 
-  mount_uploader :photo, PhotoUploader
-  mount_uploader :icon, PhotoUploader
+  mount_base64_uploader :photo, PhotoUploader
+  mount_base64_uploader :icon, PhotoUploader
 
   def self.order_by_ids(ids)
     order_by = ["case"]

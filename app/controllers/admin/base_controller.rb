@@ -47,6 +47,21 @@ class Admin::BaseController < ApplicationController
       end
     end
 
+
+    if params["category"]
+      if params["category"]["photo"]
+        unless params["category"]["photo"].class.to_s == 'ActionDispatch::Http::UploadedFile'
+          image_json =  JSON.parse(params["category"]["photo"]["_values"].gsub("'",'"').gsub('=>',':'))
+          params["category"]["photo"] = image_json["data"]
+        end
+      end
+      if params["category"]["icon"]
+        unless params["category"]["icon"].class.to_s == 'ActionDispatch::Http::UploadedFile'
+          image_json =  JSON.parse(params["category"]["icon"]["_values"].gsub("'",'"').gsub('=>',':'))
+          params["category"]["icon"] = image_json["data"]
+        end
+      end
+    end
   end
 
 
