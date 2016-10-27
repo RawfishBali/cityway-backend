@@ -33,13 +33,13 @@ class Profile < ActiveRecord::Base
 
   validates_presence_of :name
 
-  mount_uploader :photo, PhotoUploader
+  mount_base64_uploader :photo, PhotoUploader
 
   geocoded_by :address
   after_validation :geocode
 
   def only_one_major
-    if self.commonplace.major && self.is_major
+    if self.commonplace.major && self.is_major && self.new_record?
       errors.add(:is_major, "only one major is allowed")
     end
   end

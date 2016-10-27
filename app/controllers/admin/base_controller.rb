@@ -187,6 +187,16 @@ class Admin::BaseController < ApplicationController
         end
       end
     end
+
+    if params["profile"]
+      if params["profile"]["photo"]
+        unless params["profile"]["photo"].class.to_s == 'ActionDispatch::Http::UploadedFile'
+          image_json =  JSON.parse(params["profile"]["photo"]["_values"].gsub("'",'"').gsub('=>',':'))
+          params["profile"]["photo"] = image_json["data"]
+        end
+      end
+    end
+
   end
 
 
