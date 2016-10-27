@@ -20,6 +20,7 @@ class Park < ActiveRecord::Base
   validates_presence_of :around
 
   has_many :photos, as: :imageable, dependent: :destroy
+  accepts_nested_attributes_for :photos, reject_if: :all_blank, allow_destroy: true
   has_many :business_hours, as: :marketable, dependent: :destroy
   accepts_nested_attributes_for :business_hours, reject_if: :all_blank, allow_destroy: true
 

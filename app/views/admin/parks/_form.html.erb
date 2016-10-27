@@ -65,9 +65,13 @@
 
       <div class="uk-width-medium-1-2">
         <div class="uk-form-row">
-          <div class="uk-grid" data-uk-grid-margin>
-            <div class="uk-width-medium-1-2">
-
+          <div id="photos">
+            <h2>Photos</h2>
+            <%= f.fields_for :photos do |photo| %>
+            <%= render 'photo_fields', f: photo %>
+            <% end %>
+            <div class="links">
+              <%= link_to_add_association '<i class="material-icons md-24"></i>'.html_safe, f, :photos %>
             </div>
           </div>
         </div>

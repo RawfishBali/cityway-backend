@@ -72,6 +72,6 @@ class Admin::ParksController < Admin::BaseController
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_park_params
       params.require(:park).permit(:name, :address, :description, :around_id, business_hours_attributes: [:id, :morning_open_time, :morning_close_time, :evening_open_time,
-        :evening_close_time, :day, :_destroy])
+        :evening_close_time, :day, :_destroy], photos_attributes: [:id, :picture,:is_primary,:position,:_destroy])
     end
 end
