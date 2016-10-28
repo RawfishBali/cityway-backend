@@ -20,7 +20,7 @@
       <% end %>
       <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, :back, class:'float-right' %>
     </h2>
-    
+
     <div class="uk-grid" data-uk-grid-margin>
       <div class="uk-width-medium-1-2">
         <div class="uk-form-row">
@@ -91,7 +91,7 @@
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
-              <div id="subcategories">
+              <div id="waste_pickup_schedules">
                 <h3>Waste Delivery</h3>
                 <%= f.fields_for :waste_pickup_schedules do |waste_pickup_schedule| %>
                 <%= render 'waste_pickup_schedule_fields', f: waste_pickup_schedule %>
