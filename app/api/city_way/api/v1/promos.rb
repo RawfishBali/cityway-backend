@@ -21,7 +21,6 @@ module CityWay
             present merchant, with: CityWay::Api::V1::Entities::Promo, simple: 'false', latitude: params[:latitude], longitude: params[:longitude]
           end
         end
-
       end
     end
   end

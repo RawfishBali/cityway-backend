@@ -947,6 +947,9 @@ module CityWay
         expose :has_promos, documentation: {:type => "Boolean", :desc => "Merchant Has Promos Or Not"} do |merchant , options|
           merchant.promos.any?
         end
+        expose :promos do |merchant , options|
+          CityWay::Api::V1::Entities::Promo.represent merchant.promos
+        end
         expose :business_hours,if: lambda { |object, options| options[:simple] == 'false' } do |merchant , options|
           CityWay::Api::V1::Entities::BusinessHours.represent(merchant.all_business_hours)
         end
@@ -981,7 +984,7 @@ module CityWay
         expose :distance, if: lambda { |object, options| options[:latitude] && options[:longitude] } do |promo , options|
           promo.merchant.distance_from([options[:latitude], options[:longitude]])
         end
-        expose :merchant do |promo, options|
+        expose :merchant,if: lambda { |object, options| options[:simple] == 'false' } do |promo, options|
           CityWay::Api::V1::Entities::Merchant.represent promo.merchant
         end
       end
