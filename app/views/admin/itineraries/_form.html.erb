@@ -4,7 +4,6 @@
     <% if @admin_itinerary.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@admin_itinerary.errors.count, "error") %> prohibited this admin_category from being saved:</h2>
-
       <ul>
         <% @admin_itinerary.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -12,13 +11,14 @@
       </ul>
     </div>
     <% end %>
-    <h3 class="heading_a">
+    <h2 class="heading_a">
       <% if @admin_itinerary.new_record?%>
       New <%= @admin_itinerary.class.name %>
       <% else %>
       Edit <%= @admin_itinerary.name %>
       <% end %>
-    </h3>
+      <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, :back, class:'float-right' %>
+    </h2>
     <div class="uk-grid" data-uk-grid-margin>
       <%= f.hidden_field :discover_id , value: @discover_id %>
       <div class="uk-width-medium-1-2">
@@ -42,7 +42,7 @@
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
               <div id="subcategories">
-                <h2>Steps</h2>
+                <h3>Steps</h3>
                 <%= f.fields_for :steps do |step| %>
                 <%= render 'step_fields', f: step %>
                 <% end %>
@@ -59,7 +59,7 @@
       <div class="uk-width-medium-1-2 ">
         <div class="uk-form-row">
           <div id="photos">
-            <h2>Photos</h2>
+            <h3>Photos</h3>
             <%= f.fields_for :photos do |photo| %>
             <%= render 'photo_fields', f: photo %>
             <% end %>

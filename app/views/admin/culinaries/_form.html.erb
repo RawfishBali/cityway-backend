@@ -12,13 +12,14 @@
       </ul>
     </div>
     <% end %>
-    <h3 class="heading_a">
+    <h2 class="heading_a">
       <% if @admin_culinary.new_record?%>
       New <%= @admin_culinary.class.name %>
       <% else %>
       Edit <%= @admin_culinary.name %>
       <% end %>
-    </h3>
+      <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, :back, class:'float-right' %>
+    </h2>
     <div class="uk-grid" data-uk-grid-margin>
       <%= f.hidden_field :discover_id , value: @discover_id %>
       <%= f.hidden_field :culinary_type , value: @admin_culinary.culinary_type || params[:culinary_type]%>
@@ -51,7 +52,7 @@
       <div class="uk-width-medium-1-2 ">
         <div class="uk-form-row">
           <div id="photos">
-            <h2>Photos</h2>
+            <h3>Photos</h3>
             <%= f.fields_for :photos do |photo| %>
             <%= render 'photo_fields', f: photo %>
             <% end %>

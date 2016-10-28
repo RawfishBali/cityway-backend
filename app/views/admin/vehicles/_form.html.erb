@@ -12,13 +12,14 @@
       </ul>
     </div>
     <% end %>
-    <h3 class="heading_a">
+    <h2 class="heading_a">
       <% if @admin_vehicle.new_record?%>
       New <%= @admin_vehicle.class.name %>
       <% else %>
       Edit <%= @admin_vehicle.name %>
       <% end %>
-    </h3>
+      <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, :back, class:'float-right' %>
+    </h2>
     <div class="uk-grid" data-uk-grid-margin>
       <%= f.hidden_field :utility_id , value: @utility_id %>
       <%= f.hidden_field :vehicle_type , value: @vehicle_type %>

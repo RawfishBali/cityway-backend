@@ -4,7 +4,6 @@
     <% if @city.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@city.errors.count, "error") %> prohibited this admin_category from being saved:</h2>
-
       <ul>
         <% @city.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -12,16 +11,14 @@
       </ul>
     </div>
     <% end %>
-    <h3 class="heading_a">
+    <h2 class="heading_a">
       <% if @city.new_record?%>
       New <%= @city.class.name %>
       <% else %>
       Edit <%= @city.name %>
       <% end %>
-    </h3>
+    </h2>
     <div class="uk-grid" data-uk-grid-margin>
-
-
       <div class="uk-width-medium-1-1">
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
@@ -56,8 +53,8 @@
           <h3 class="heading_a uk-margin-small-bottom">Scopri Photo</h3>
           <%= f.fields_for :discover do |ff| %>
           <div class="dropzone" data-ajax=false data-canvas="true" data-originalsize="false" data-editstart="false"  data-image="<%= ff.object.photo.url%>" style="width: 200px; height: 400px;" >
-              <%= ff.file_field :photo%>
-            </div>
+            <%= ff.file_field :photo%>
+          </div>
           <% end %>
         </div>
       </div>
@@ -92,26 +89,11 @@
         </div>
         <div class="md-fab-wrapper">
           <%= button_tag(type: 'submit' , class: 'md-fab md-fab-accent md-fab-wave waves-effect waves-button') do %>
-            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+          <i class="fa fa-floppy-o" aria-hidden="true"></i>
           <% end %>
-        </div>
-        <div class="md-input-wrapper">
-
-
-        </div>
-      </div>
-    </div>
-    <div class="uk-width-medium-1-1">
-      <div class="uk-form-row">
-        <div class="uk-grid" data-uk-grid-margin>
-          <div class="uk-width-medium-1-2">
-
-          </div>
         </div>
       </div>
     </div>
     <% end %>
   </div>
-
-
 </div>

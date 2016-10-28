@@ -12,17 +12,16 @@
     </div>
     <% end %>
 
-    <h3 class="heading_a">
+    <h2 class="heading_a">
       <% if @admin_category.new_record?%>
       New <%= @admin_category.class.name %>
       <% else %>
       Edit <%= @admin_category.name %>
       <% end %>
-      <%= link_to '<i class="fa fa-arrow-circle-left" aria-hidden="true"></i>'.html_safe, admin_categories_path, class:'float-right' %>
-    </h3>
+      <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, admin_categories_path, class:'float-right' %>
+    </h2>
 
     <div class="uk-grid" data-uk-grid-margin>
-
       <div class="uk-width-medium-1-2">
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
@@ -44,28 +43,21 @@
             </div>
           </div>
         </div>
-
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
               <label>Category Photo</label>
-
               <div class="dropzone" data-width="375"   data-image="<%= f.object.photo.url %>"  data-height="207" data-url="/" data-editstart="false" data-ajax="false" data-canvas="true" style="width: 100%;">
                 <%= f.file_field :photo%>
               </div>
-
             </div>
           </div>
         </div>
-
-
       </div>
-
-
       <div class="uk-width-medium-1-2">
         <div class="uk-form-row">
           <div id="subcategories">
-            <h2>Subcategories</h2>
+            <h3>Subcategories</h3>
             <%= f.fields_for :subcategories do |subcategory| %>
             <%= render 'subcategory_fields', f: subcategory %>
             <% end %>
@@ -76,11 +68,10 @@
         </div>
         <div class="md-fab-wrapper">
           <%= button_tag(type: 'submit' , class: 'md-fab md-fab-accent md-fab-wave waves-effect waves-button') do %>
-            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+          <i class="fa fa-floppy-o" aria-hidden="true"></i>
           <% end %>
         </div>
       </div>
-
     </div>
     <% end %>
   </div>

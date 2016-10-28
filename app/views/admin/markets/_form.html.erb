@@ -12,13 +12,14 @@
       </ul>
     </div>
     <% end %>
-    <h3 class="heading_a">
+    <h2 class="heading_a">
       <% if @admin_market.new_record?%>
       New <%= @admin_market.class.name %>
       <% else %>
       Edit <%= @admin_market.name %>
       <% end %>
-    </h3>
+      <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, :back, class:'float-right' %>
+    </h2>
     <div class="uk-grid" data-uk-grid-margin>
       <%= f.hidden_field :around_id , value: @around_id %>
 
@@ -51,7 +52,7 @@
       <div class="uk-width-medium-1-2">
         <div class="uk-form-row">
           <div id="subcategories">
-            <h2>Business Hours</h2>
+            <h3>Business Hours</h3>
             <%= f.fields_for :business_hours do |business_hour| %>
             <%= render 'business_hour_fields', f: business_hour %>
             <% end %>
@@ -65,7 +66,7 @@
       <div class="uk-width-medium-1-2">
         <div class="uk-form-row">
           <div id="photos">
-            <h2>Photos</h2>
+            <h3>Photos</h3>
             <%= f.fields_for :photos do |photo| %>
             <%= render 'photo_fields', f: photo %>
             <% end %>

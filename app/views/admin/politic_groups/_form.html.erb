@@ -4,7 +4,6 @@
     <% if @admin_politic_group.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@admin_politic_group.errors.count, "error") %> prohibited this admin_category from being saved:</h2>
-
       <ul>
         <% @admin_politic_group.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -12,13 +11,14 @@
       </ul>
     </div>
     <% end %>
-    <h3 class="heading_a">
+    <h2 class="heading_a">
       <% if @admin_politic_group.new_record?%>
       New <%= @admin_politic_group.class.name %>
       <% else %>
       Edit <%= @admin_politic_group.name %>
       <% end %>
-    </h3>
+      <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, :back, class:'float-right' %>
+    </h2>
     <div class="uk-grid" data-uk-grid-margin>
       <%= f.hidden_field :commonplace_id , value: @commonplace_id %>
 
@@ -36,28 +36,16 @@
         <div class="uk-form-row">
           <h3>Members</h3>
           <% @admin_politic_group.profiles.each do |profile| %>
-            <%= link_to (image_tag profile.photo.url, class: 'members-photo'), edit_admin_profile_path(profile) %>
+          <%= link_to (image_tag profile.photo.url, class: 'members-photo'), edit_admin_profile_path(profile) %>
           <% end %>
           <%= link_to "<i class='material-icons font100'></i>".html_safe, new_admin_profile_path(politic_group_id: @admin_politic_group.id )%>
         </div>
       </div>
-
-
-
-      <div class="uk-width-medium-1-2">
-        <div class="uk-form-row">
-          <div class="uk-grid" data-uk-grid-margin>
-
-          </div>
-        </div>
-      </div>
-
-      </div>
-      <div class="md-fab-wrapper">
-        <%= button_tag(type: 'submit' , class: 'md-fab md-fab-accent md-fab-wave waves-effect waves-button') do %>
-          <i class="fa fa-floppy-o" aria-hidden="true"></i>
-        <% end %>
-      </div>
+    </div>
+    <div class="md-fab-wrapper">
+      <%= button_tag(type: 'submit' , class: 'md-fab md-fab-accent md-fab-wave waves-effect waves-button') do %>
+      <i class="fa fa-floppy-o" aria-hidden="true"></i>
       <% end %>
-
+    </div>
+    <% end %>
   </div>

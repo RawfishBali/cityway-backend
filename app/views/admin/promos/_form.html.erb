@@ -12,13 +12,14 @@
       </ul>
     </div>
     <% end %>
-    <h3 class="heading_a">
+    <h2 class="heading_a">
       <% if @admin_promo.new_record?%>
       New <%= @admin_promo.class.name %>
       <% else %>
       Edit <%= @admin_promo.title %>
       <% end %>
-    </h3>
+      <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, admin_promos_path, class:'float-right' %>
+    </h2>
     <div class="uk-grid" data-uk-grid-margin>
       <%= f.hidden_field :city_id , value: session[:current_city_id]%>
       <div class="uk-width-medium-1-1">

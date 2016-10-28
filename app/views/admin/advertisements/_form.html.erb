@@ -12,13 +12,14 @@
       </ul>
     </div>
     <% end %>
-    <h3 class="heading_a">
+    <h2 class="heading_a">
       <% if @advertisement.new_record?%>
       New <%= @advertisement.class.name %>
       <% else %>
       Edit <%= @advertisement.class.name %>
       <% end %>
-    </h3>
+      <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, :back, class:'float-right' %>
+    </h2>
     <div class="uk-grid" data-uk-grid-margin>
 
       <div class="uk-width-medium-1-2">

@@ -12,23 +12,16 @@
       </ul>
     </div>
     <% end %>
-    <h3 class="heading_a">
+    <h2 class="heading_a">
       <% if @admin_waste_management.new_record?%>
       New <%= @admin_waste_management.class.name %>
       <% else %>
       Edit <%= @admin_waste_management.name %>
       <% end %>
-    </h3>
-
-
-
-
-
+      <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, :back, class:'float-right' %>
+    </h2>
+    
     <div class="uk-grid" data-uk-grid-margin>
-
-
-
-
       <div class="uk-width-medium-1-2">
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
@@ -115,13 +108,13 @@
 
 
     </div>
-    </div>
-    <div class="md-fab-wrapper">
-      <%= button_tag(type: 'submit' , class: 'md-fab md-fab-accent md-fab-wave waves-effect waves-button') do %>
-        <i class="fa fa-floppy-o" aria-hidden="true"></i>
-      <% end %>
-    </div>
-
+  </div>
+  <div class="md-fab-wrapper">
+    <%= button_tag(type: 'submit' , class: 'md-fab md-fab-accent md-fab-wave waves-effect waves-button') do %>
+    <i class="fa fa-floppy-o" aria-hidden="true"></i>
     <% end %>
+  </div>
+
+  <% end %>
 
 </div>
