@@ -46,7 +46,7 @@
             <div class="uk-width-medium-1-1">
               <div id="photos">
                 <h3>Photos</h3>
-                <%= f.fields_for :photos do |photo| %>
+                <%= f.fields_for :photos , f.object.photos.order(:position) do |photo| %>
                 <%= render 'photo_fields', f: photo %>
                 <% end %>
                 <div class="links">
