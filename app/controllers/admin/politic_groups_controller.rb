@@ -15,7 +15,7 @@ class Admin::PoliticGroupsController < Admin::BaseController
 
   # GET /admin/politic_groups/new
   def new
-    @admin_politic_group = Admin::PoliticGroup.new
+    @admin_politic_group = City.find(session[:current_city_id]).commonplace.politic_groups.new
   end
 
   # GET /admin/politic_groups/1/edit
@@ -25,11 +25,11 @@ class Admin::PoliticGroupsController < Admin::BaseController
   # POST /admin/politic_groups
   # POST /admin/politic_groups.json
   def create
-    @admin_politic_group = Admin::PoliticGroup.new(admin_politic_group_params)
+    @admin_politic_group = City.find(session[:current_city_id]).commonplace.politic_groups.new(admin_politic_group_params)
 
     respond_to do |format|
       if @admin_politic_group.save
-        format.html { redirect_to @admin_politic_group, notice: 'Politic group was successfully created.' }
+        format.html { redirect_to admin_politic_groups_url, notice: 'Politic group was successfully created.' }
         format.json { render :show, status: :created, location: @admin_politic_group }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class Admin::PoliticGroupsController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_politic_group.update(admin_politic_group_params)
-        format.html { redirect_to @admin_politic_group, notice: 'Politic group was successfully updated.' }
+        format.html { redirect_to admin_politic_groups_url, notice: 'Politic group was successfully updated.' }
         format.json { render :show, status: :ok, location: @admin_politic_group }
       else
         format.html { render :edit }
@@ -70,6 +70,6 @@ class Admin::PoliticGroupsController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_politic_group_params
-      params.fetch(:admin_politic_group, {})
+      params.require(:politic_group).permit(:name)
     end
 end

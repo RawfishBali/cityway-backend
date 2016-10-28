@@ -1,6 +1,6 @@
 <div class="md-card">
   <div class="md-card-content">
-    <%= form_for(@admin_politic_group, url: (@admin_politic_group.new_record? ? admin_public_offices_path(@admin_politic_group) : admin_public_office_path(@admin_politic_group)), multipart: true) do |f| %>
+    <%= form_for(@admin_politic_group, url: (@admin_politic_group.new_record? ? admin_politic_groups_path(@admin_politic_group) : admin_politic_group_path(@admin_politic_group)), multipart: true) do |f| %>
     <% if @admin_politic_group.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@admin_politic_group.errors.count, "error") %> prohibited this admin_category from being saved:</h2>
