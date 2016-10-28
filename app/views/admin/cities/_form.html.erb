@@ -46,14 +46,9 @@
       <div class="uk-width-medium-1-5 uk-grid-margin">
         <div class="md-input-wrapper">
           <h3 class="heading_a uk-margin-small-bottom">City Photo</h3>
-
           <div class="dropzone" data-ajax="false" data-originalsize="false" data-editstart="false" data-image="<%= f.object.photo.url%>" data-canvas="true" style="width: 200px; height: 400px;">
             <%= f.file_field :photo%>
           </div>
-
-
-
-
         </div>
       </div>
       <div class="uk-width-medium-1-5 uk-grid-margin">
@@ -95,8 +90,14 @@
           </div>
           <% end %>
         </div>
+        <div class="md-fab-wrapper">
+          <%= button_tag(type: 'submit' , class: 'md-fab md-fab-accent md-fab-wave waves-effect waves-button') do %>
+            <i class="material-icons">&#xE876;</i>
+          <% end %>
+        </div>
         <div class="md-input-wrapper">
-          <%= f.submit class: "md-btn default-submit"%>
+
+
         </div>
       </div>
     </div>
@@ -111,4 +112,6 @@
     </div>
     <% end %>
   </div>
+
+
 </div>
