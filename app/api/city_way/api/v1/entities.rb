@@ -851,7 +851,7 @@ module CityWay
 
       class BusinessHours < Grape::Entity
         expose :day do |business_hour , options|
-          I18n.t(:"date.day_names")[business_hour.day]
+          business_hour.day
         end
         expose :morning_open_time do |business_hour , options|
           business_hour.morning_open_time.strftime("%H:%M")

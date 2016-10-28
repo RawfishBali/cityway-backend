@@ -59,11 +59,12 @@ class Place < ActiveRecord::Base
 
   def all_business_hours
     mb = (self.business_hours).to_a
-    return mb.sort_by(&:day) if mb.size == 7
-    ((0..6).to_a  - mb.map(&:day)).each do |m|
-      mb << BusinessHour.new(morning_open_time: '00:00', morning_close_time: '00:00', evening_open_time: nil, evening_close_time: nil, day: m, marketable_type: self.class.name, marketable_id: self.id)
-    end
-    mb.sort_by(&:day)
+    return mb.sort_by(&:day) 
+    # if mb.size == 7
+    # ((0..6).to_a  - mb.map(&:day)).each do |m|
+    #   mb << BusinessHour.new(morning_open_time: '00:00', morning_close_time: '00:00', evening_open_time: nil, evening_close_time: nil, day: m, marketable_type: self.class.name, marketable_id: self.id)
+    # end
+    # mb.sort_by(&:day)
   end
 
 
