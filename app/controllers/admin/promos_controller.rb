@@ -5,7 +5,7 @@ class Admin::PromosController < Admin::BaseController
   # GET /admin/promos
   # GET /admin/promos.json
   def index
-    @admin_promos = City.find(session[:current_city_id]).promos.page(params[:page]).per(10)
+    @admin_promos = City.find(session[:current_city_id]).promos.order('created_at DESC').page(params[:page]).per(10)
   end
 
   # GET /admin/promos/1
