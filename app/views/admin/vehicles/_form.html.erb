@@ -63,6 +63,7 @@
         <% end %>
       </div>
 
+      <% unless @vehicle_type == 'parking' %>
       <div class="uk-width-medium-1-2">
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
@@ -80,7 +81,7 @@
             </div>
           </div>
         </div>
-        <% unless @vehicle_type == 'parking' %>
+
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
