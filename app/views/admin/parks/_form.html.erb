@@ -47,20 +47,17 @@
             </div>
           </div>
         </div>
-      </div>
-
-      <div class="uk-width-medium-1-2">
         <div class="uk-form-row">
-          <div id="subcategories">
-            <h3>Business Hours</h3>
-            <%= f.fields_for :business_hours do |business_hour| %>
-            <%= render 'business_hour_fields', f: business_hour %>
-            <% end %>
-            <div class="links">
-              <%= link_to_add_association '<i class="material-icons md-24"></i>'.html_safe, f, :business_hours %>
-            </div>
+        <div id="subcategories">
+          <h3>Business Hours</h3>
+          <%= f.fields_for :business_hours do |business_hour| %>
+          <%= render 'business_hour_fields', f: business_hour %>
+          <% end %>
+          <div class="links">
+            <%= link_to_add_association '<i class="material-icons md-24"></i>'.html_safe, f, :business_hours %>
           </div>
         </div>
+      </div>
       </div>
 
       <div class="uk-width-medium-1-2">
@@ -76,6 +73,7 @@
           </div>
         </div>
       </div>
+
     </div>
     <div class="md-fab-wrapper">
       <%= button_tag(type: 'submit' , class: 'md-fab md-fab-accent md-fab-wave waves-effect waves-button') do %>
