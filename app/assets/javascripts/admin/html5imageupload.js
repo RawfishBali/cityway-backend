@@ -321,7 +321,7 @@ readImage: function(image, src, name, mimeType) {
 		elementRatio		= $(element).outerWidth() / $(element).outerHeight();
 
 		//resize image
-		if (options.originalsize == false) {
+		if (options.originalsize == true) {
 
 			//need to add the option is smaller = true, dont resize
 			//also if the image == 100% the size of the element, dont add extra space
@@ -370,7 +370,10 @@ readImage: function(image, src, name, mimeType) {
 		//clean up
 		$(element).removeClass('loading');
 	}
+
 	img.src					= image;
+
+
 },
 
 handleDrag: function(event) {
