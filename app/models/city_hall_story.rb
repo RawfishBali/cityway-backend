@@ -18,4 +18,6 @@ class CityHallStory < ActiveRecord::Base
 
   validates_presence_of :top_text
   validates_presence_of :bottom_text
+  validates :photos, length: { minimum: 1 }
+
 end

@@ -16,6 +16,7 @@ class Admin::CityHallStoriesController < Admin::BaseController
   def new
     @commonplace_id = City.find(session[:current_city_id]).commonplace.id
     @admin_city_hall_story = CityHallStory.new
+    3.times{ @admin_city_hall_story.photos.build }
   end
 
   # GET /admin/city_hall_stories/1/edit
