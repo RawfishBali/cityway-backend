@@ -20,7 +20,7 @@
             <td class="uk-text-center"><%= vehicle.phone_0 %></td>
             <td class="uk-text-center"><%= vehicle.phone_1 %></td>
             <td class="uk-text-center">
-              <%= link_to '<i class="md-icon material-icons">&#xE254;</i>'.html_safe , edit_admin_vehicle_path(vehicle)%>
+              <%= link_to '<i class="md-icon material-icons">&#xE254;</i>'.html_safe , edit_admin_vehicle_path(vehicle, vehicle_type: vehicle.vehicle_type)%>
             </td>
           </tr>
           <% end %>

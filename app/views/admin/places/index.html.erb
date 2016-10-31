@@ -21,7 +21,7 @@
                         <td class="uk-text-center"><%= image_tag place.primary_photo.first.picture.url unless place.primary_photo.first.blank?  %></td>
 
                         <td class="uk-text-center">
-                            <%= link_to '<i class="md-icon material-icons">&#xE254;</i>'.html_safe , edit_admin_place_path(place)%>
+                            <%= link_to '<i class="md-icon material-icons">&#xE254;</i>'.html_safe , edit_admin_place_path(place , place_type: place.place_type)%>
 
 
                         </td>
