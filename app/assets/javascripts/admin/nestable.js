@@ -86,11 +86,11 @@ altair_nestable = {
 
 
         // check if localStorage is supported
-        if (lsTest()) {
-          if( (localStorage.length === 0) || (localStorage.getItem("nestable_items") != JSON.stringify(serialized_data)) ) {
-            localStorage.setItem("nestable_items", JSON.stringify(serialized_data));
-          }
-        }
+        // if (lsTest()) {
+        //   if( (localStorage.length === 0) || (localStorage.getItem("nestable_items") != JSON.stringify(serialized_data)) ) {
+        //     localStorage.setItem("nestable_items", JSON.stringify(serialized_data));
+        //   }
+        // }
       });
 
     }
