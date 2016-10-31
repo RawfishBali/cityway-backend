@@ -19,7 +19,13 @@ module CityWay
           expose :latitude, documentation: {:type => "Float", :desc => "Place latitude"}
           expose :longitude, documentation: {:type => "Float", :desc => "Place longitude"}
           expose :email, if: lambda { |object, options| options[:simple] == 'false' && object.email }, documentation: {:type => "String", :desc => "Place email"}
-          expose :website, if: lambda { |object, options| options[:simple] == 'false' && object.website }, documentation: {:type => "String", :desc => "Place website"}
+          expose :website, if: lambda { |object, options| options[:simple] == 'false' && object.website }, documentation: {:type => "String", :desc => "Place website"} do |object, options|
+            unless object.website[/\Ahttp:\/\//] || object.website[/\Ahttps:\/\//]
+              "https://#{object.website}" unless object.website.blank?
+            else
+              object.website
+            end
+          end
           expose :facebook, if: lambda { |object, options| options[:simple] == 'false' && object.facebook }, documentation: {:type => "String", :desc => "Place facebook"} do |place, options|
             matches = place.facebook.match(/(?:https?:\/\/)?(?:www\.)?facebook\.com\/(?:(?:\w)*#!\/)?(?:groups\/)?(?:pages\/)?(?:[\w\-]*\/)*?(\/)?([\w\-\.]*)/)
             if matches
@@ -165,7 +171,13 @@ module CityWay
         expose :address, documentation: {:type => "String", :desc => "Event Address"}
         expose :latitude, documentation: {:type => "Float", :desc => "Event Latitude"}
         expose :longitude, documentation: {:type => "Float", :desc => "Event Longitude"}
-        expose :website, if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "String", :desc => "Event Website"}
+        expose :website, if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "String", :desc => "Event Website"} do |object, options|
+          unless object.website[/\Ahttp:\/\//] || object.website[/\Ahttps:\/\//]
+            "https://#{object.website}" unless object.website.blank?
+          else
+            object.website
+          end
+        end
         expose :email, if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "String", :desc => "Event Email"}
         expose :facebook, if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "String", :desc => "Event Facebook"} do |event, options|
           matches = event.facebook.match(/(?:https?:\/\/)?(?:www\.)?facebook\.com\/(?:(?:\w)*#!\/)?(?:groups\/)?(?:pages\/)?(?:[\w\-]*\/)*?(\/)?([\w\-\.]*)/) if event.facebook
@@ -282,7 +294,13 @@ module CityWay
         expose :address, documentation: {:type => "String", :desc => "Public Office Address"}
         expose :phone,if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "String", :desc => "Public Office Phone"}
         expose :fax,if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "String", :desc => "Public Office fax"}
-        expose :website,if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "String", :desc => "Public Office website"}
+        expose :website,if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "String", :desc => "Public Office website"} do |object, options|
+          unless object.website[/\Ahttp:\/\//] || object.website[/\Ahttps:\/\//]
+            "https://#{object.website}" unless object.website.blank?
+          else
+            object.website
+          end
+        end
         expose :distance, if: lambda { |object, options| options[:latitude] && options[:longitude] } do |object , options|
           object.distance_from([options[:latitude], options[:longitude]])
         end
@@ -335,7 +353,13 @@ module CityWay
         expose :name, documentation: {:type => "String", :desc => "Profile Name"}
         expose :role, documentation: {:type => "String", :desc => "Profile Role"}
         expose :email, documentation: {:type => "String", :desc => "Profile Emails"}
-        expose :website, documentation: {:type => "String", :desc => "Profile Website"}
+        expose :website, documentation: {:type => "String", :desc => "Profile Website"} do |object, options|
+          unless object.website[/\Ahttp:\/\//] || object.website[/\Ahttps:\/\//]
+            "https://#{object.website}" unless object.website.blank?
+          else
+            object.website
+          end
+        end
         expose :city_hall_name, documentation: {:type => "String", :desc => "Profile City Hall Name"}
         expose :description, documentation: {:type => "Text", :desc => "Profile Description"}
         expose :fax, documentation: {:type => "String", :desc => "Profile Fax"}
@@ -576,7 +600,13 @@ module CityWay
         expose :address, documentation: {:type => "String", :desc => "Taxi Phone Address"}
         expose :latitude, documentation: {:type => "String", :desc => "Taxi Phone Latitude"}
         expose :longitude, documentation: {:type => "String", :desc => "Taxi Phone Longitude"}
-        expose :website, documentation: {:type => "String", :desc => "Taxi Website"}
+        expose :website, documentation: {:type => "String", :desc => "Taxi Website"} do |object, options|
+          unless object.website[/\Ahttp:\/\//] || object.website[/\Ahttps:\/\//]
+            "https://#{object.website}" unless object.website.blank?
+          else
+            object.website
+          end
+        end
       end
 
       class ParkingArea < Grape::Entity
@@ -621,7 +651,13 @@ module CityWay
         end
         expose :phone, documentation: {:type => "String", :desc => "Utility Place Phone"},if: lambda { |object, options| options[:simple] == 'false' }
         expose :email, documentation: {:type => "String", :desc => "Utility Place email"}
-        expose :website, documentation: {:type => "String", :desc => "Utility Place website"}
+        expose :website, documentation: {:type => "String", :desc => "Utility Place website"} do |object, options|
+          unless object.website[/\Ahttp:\/\//] || object.website[/\Ahttps:\/\//]
+            "https://#{object.website}" unless object.website.blank?
+          else
+            object.website
+          end
+        end
         expose :business_hours do |object , options|
           CityWay::Api::V1::Entities::BusinessHours.represent(object.all_business_hours)
         end
@@ -711,7 +747,13 @@ module CityWay
         expose :address, documentation: {:type => "String", :desc => "Vehicle Address"}
         expose :phone_0, documentation: {:type => "String", :desc => "Vehicle Phone 0"}
         expose :phone_1, documentation: {:type => "String", :desc => "Vehicle Phone 1"}, if: lambda { |object, options| object.phone_1 }
-        expose :website, documentation: {:type => "String", :desc => "Vehicle website"}
+        expose :website, documentation: {:type => "String", :desc => "Vehicle website"} do |object, options|
+          unless object.website[/\Ahttp:\/\//] || object.website[/\Ahttps:\/\//]
+            "https://#{object.website}" unless object.website.blank?
+          else
+            object.website
+          end
+        end
         expose :email, documentation: {:type => "String", :desc => "Vehicle email"}
         expose :latitude, documentation: {:type => "Float", :desc => "Vehicle latitude"}
         expose :longitude, documentation: {:type => "Float", :desc => "Vehicle longitude"}
