@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161031080409) do
+ActiveRecord::Schema.define(version: 20161031131009) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -463,6 +463,7 @@ ActiveRecord::Schema.define(version: 20161031080409) do
     t.text     "description"
     t.string   "email"
     t.string   "city_hall_name"
+    t.string   "major_icon"
   end
 
   add_index "profiles", ["commonplace_id"], name: "index_profiles_on_commonplace_id", using: :btree

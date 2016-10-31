@@ -454,6 +454,9 @@ module CityWay
           end
         end
         expose :history, documentation: {:type => "string", :desc => "Comune History"}
+        expose :major_icon, documentation: {:type => "String", :desc => "Profile major icon"}  do |object, options|
+          object.major.major_icon.url
+        end
       end
 
       class Discover < Grape::Entity

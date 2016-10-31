@@ -24,6 +24,7 @@
 #  description            :text
 #  email                  :string
 #  city_hall_name         :string
+#  major_icon             :string
 #
 
 require 'rails_helper'

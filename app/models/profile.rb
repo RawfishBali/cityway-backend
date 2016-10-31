@@ -24,6 +24,7 @@
 #  description            :text
 #  email                  :string
 #  city_hall_name         :string
+#  major_icon             :string
 #
 
 class Profile < ActiveRecord::Base
@@ -34,6 +35,7 @@ class Profile < ActiveRecord::Base
   validates_presence_of :name
 
   mount_base64_uploader :photo, PhotoUploader
+  mount_base64_uploader :major_icon, PhotoUploader
 
   geocoded_by :address
   after_validation :geocode
