@@ -43,7 +43,7 @@ module CityWay
             optional :simple, type: Boolean
           end
           get '/:id/places' do
-            simple = params[:simple] || true
+            simple = params[:simple].to_s || true
             utility = Utility.find(params[:id])
             if params[:place_group]
               if params[:place_group] == 'sports'
