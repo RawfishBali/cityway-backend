@@ -23,34 +23,34 @@
         </ul>
       </li>
 
-      <li title="Scopri">
+      <li title="Scopri" class="<%= 'submenu_trigger act_section current_section' if params[:controller] == 'admin/places' ||  params[:controller] == 'admin/culinaries' %> ">
         <a href="#">
           <span class="menu_icon"><i class="fa fa15 fa-eye" aria-hidden="true"></i></span>
           <span class="menu_title">Scopri</span>
         </a>
-        <ul>
+        <ul style="<%= 'display:block;' if params[:controller] == 'admin/places' ||  params[:controller] == 'admin/culinaries'  %>">
           <li title="Vicita la Citta">
-            <a href="#">Vicita la Citta</a>
+            <a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/places' && (params[:place_type] == 'monument') %>" href="#">Vicita la Citta</a>
             <ul>
-              <li><a href="/admin/places?place_type=monument">Monument</a></li>
+              <li><a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/places' && params[:place_type] == 'monument'%>" href="/admin/places?place_type=monument">Monument</a></li>
 
             </ul>
           </li>
           <li>
-            <a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/places'%>" href="#">Cultura</a>
+            <a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/places' && (params[:place_type] == 'library' || params[:place_type] == 'theater' || params[:place_type] == 'museum' || params[:place_type] == 'cinema') %>" href="#">Cultura</a>
             <ul>
 
-              <li><a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/places'%>" href="/admin/places?place_type=library">Libraries</a></li>
-              <li><a href="/admin/places?place_type=theater">Theaters</a></li>
-              <li><a href="/admin/places?place_type=museum">Mueseums</a></li>
-              <li><a href="/admin/places?place_type=cinema">Cinema</a></li>
+              <li><a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/places' && params[:place_type] == 'library'%>" href="/admin/places?place_type=library">Libraries</a></li>
+              <li><a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/places' && params[:place_type] == 'theater'%>" href="/admin/places?place_type=theater">Theaters</a></li>
+              <li><a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/places' && params[:place_type] == 'museum'%>" href="/admin/places?place_type=museum">Mueseums</a></li>
+              <li><a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/places' && params[:place_type] == 'cinema'%>" href="/admin/places?place_type=cinema">Cinema</a></li>
             </ul>
           </li>
           <li>
-            <a href="#">Piati tipici</a>
+            <a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/culinaries' %>" href="#">Piati tipici</a>
             <ul>
-              <li><a href="/admin/culinaries?culinary_type=gastronomy">Gastronomi</a></li>
-              <li><a href="/admin/culinaries?culinary_type=traditional">Traditional Culinary</a></li>
+              <li><a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/culinaries' && params[:culinary_type] == 'gastronomy'%>" href="/admin/culinaries?culinary_type=gastronomy">Gastronomi</a></li>
+              <li><a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/culinaries' && params[:culinary_type] == 'traditional'%>" href="/admin/culinaries?culinary_type=traditional">Traditional Culinary</a></li>
             </ul>
           </li>
           <li><a href="/admin/stories" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/stories'%>">Storia dela citta</a></li>
@@ -71,17 +71,17 @@
       </li>
 
 
-      <li title="Comune">
+      <li title="Comune" class="<%= 'submenu_trigger act_section current_section' if params[:controller] == 'admin/profiles' ||  params[:controller] == 'admin/politic_groups' %> ">
         <a href="#">
           <span class="menu_icon"><i class="fa fa15 fa-university" aria-hidden="true"></i></span>
           <span class="menu_title">Comune</span>
         </a>
-        <ul>
+        <ul style="<%= 'display:block;' if params[:controller] == 'admin/profiles' ||  params[:controller] == 'admin/politic_groups'  %>">
           <li><a href="/admin/commonplaces/<%= City.find(session[:current_city_id]).commonplace.id %>/edit" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/commonplaces'%>">Social Links</a></li>
           <li><a href="/admin/news/" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/news'%>">News</a></li>
           <li><a  href="/admin/city_hall_stories/" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/city_hall_stories'%>">Dati Comune</a></li>
           <li>
-            <a href="#" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/profiles'%>">Administration</a>
+            <a href="#" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/profiles' ||  params[:controller] == 'admin/politic_groups' %>">Administration</a>
             <ul>
               <li><a href="/admin/profiles?major=true" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/profiles' && params[:major] %>">Sindaco</a></li>
               <li><a href="/admin/profiles/" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/profiles' && !params[:major]%>">Giunta Comunale</a></li>
@@ -95,78 +95,78 @@
       </li>
 
 
-      <li title="Utilità e Servizi">
+      <li class="<%= 'submenu_trigger act_section current_section' if params[:controller] == 'admin/ztls' || params[:controller] == 'admin/vehicles' || params[:controller] == 'admin/public_transports' || params[:controller] == 'admin/utility_places' || params[:controller] == 'admin/waste_managements' %> " title="Utilità e Servizi">
         <a href="#">
           <span class="menu_icon"><i class="fa fa15 fa-flag" aria-hidden="true"></i></span>
           <span class="menu_title">Utilità e Servizi</span>
         </a>
-        <ul>
+        <ul style="<%= 'display:block;' if params[:controller] == 'admin/ztls' || params[:controller] == 'admin/vehicles' || params[:controller] == 'admin/public_transports' || params[:controller] == 'admin/utility_places' || params[:controller] == 'admin/waste_managements' %> ">
           <li><a href="/admin/utility_numbers" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/utility_numbers'%>">Numeri utili</a></li>
           <li>
-            <a href="/admin/public_transports" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/public_transports'%>">Muoversi in città</a>
+            <a href="/admin/public_transports" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/ztls' || params[:controller] == 'admin/vehicles' || params[:controller] == 'admin/public_transports' %>">Muoversi in città</a>
             <ul>
               <li><a href="/admin/ztls" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/ztls' %>">ZTL</a></li>
-              <li><a href="/admin/vehicles?vehicle_type=parking" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/vehicles' && params[:device_type] == 'parking'%>">Parcheggi</a></li>
-              <li><a href="/admin/vehicles?vehicle_type=bike" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/vehicles' && params[:device_type] == 'bike'%>">Bici</a></li>
+              <li><a href="/admin/vehicles?vehicle_type=parking" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/vehicles' && params[:vehicle_type] == 'parking'%>">Parcheggi</a></li>
+              <li><a href="/admin/vehicles?vehicle_type=bike" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/vehicles' && params[:vehicle_type] == 'bike'%>">Bici</a></li>
               <li><a href="/admin/public_transports" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/public_transports'%>">Mezzi publlici</a></li>
-              <li><a href="/admin/vehicles?vehicle_type=taxi" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/vehicles' && params[:device_type] == 'taxi'%>">Taxi</a></li>
+              <li><a href="/admin/vehicles?vehicle_type=taxi" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/vehicles' && params[:vehicle_type] == 'taxi'%>">Taxi</a></li>
+            </ul>
+          </li>
+          <li >
+            <a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/utility_places' && (params[:place_type] == 'public_swimming_pool' || params[:place_type] == 'tennis_court' || params[:place_type] == 'stadium') %> " href="#">Sport e tempo libero</a>
+            <ul>
+              <li><a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/utility_places' && params[:place_type] == 'public_swimming_pool'%>" href="/admin/utility_places?place_type=public_swimming_pool">Piscine comunali</a></li>
+              <li><a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/utility_places' && params[:place_type] == 'tennis_court'%>" href="/admin/utility_places?place_type=tennis_court">Campi da tennis</a></li>
+              <li><a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/utility_places' && params[:place_type] == 'stadium'%>" href="/admin/utility_places?place_type=stadium">Stadio</a></li>
             </ul>
           </li>
           <li>
-            <a href="#">Sport e tempo libero</a>
+            <a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/waste_managements' || ( params[:controller] == 'admin/utility_places' && (params[:place_type] == 'recycling_place' || params[:place_type] == 'large_garbage' || params[:place_type] == 'water_house') ) %> " href="#">Ambiente</a>
             <ul>
-              <li><a href="/admin/utility_places?place_type=public_swimming_pool">Piscine comunali</a></li>
-              <li><a href="/admin/utility_places?place_type=tennis_court">Campi da tennis</a></li>
-              <li><a href="/admin/utility_places?place_type=stadium">Stadio</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="#">Ambiente</a>
-            <ul>
-              <li><a href="/admin/waste_managements">Raccolta differenziata</a></li>
-              <li><a href="/admin/utility_places?place_type=recycling_place">Isole ecologiche</a></li>
-              <li><a href="/admin/utility_places?place_type=large_garbage">Ritiro ingombranti</a></li>
-              <li><a href="/admin/utility_places?place_type=water_house">Case dell’acqua</a></li>
+              <li><a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/waste_managements' %>" href="/admin/waste_managements">Raccolta differenziata</a></li>
+              <li><a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/utility_places' && params[:place_type] == 'recycling_place'%>" href="/admin/utility_places?place_type=recycling_place">Isole ecologiche</a></li>
+              <li><a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/utility_places' && params[:place_type] == 'large_garbage'%>" href="/admin/utility_places?place_type=large_garbage">Ritiro ingombranti</a></li>
+              <li><a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/utility_places' && params[:place_type] == 'water_house'%>" href="/admin/utility_places?place_type=water_house">Case dell’acqua</a></li>
 
             </ul>
           </li>
           <li>
-            <a href="#">Sociale</a>
+            <a class="<%= 'act_item current_section_submenu' if ( params[:controller] == 'admin/utility_places' && (params[:place_type] == 'voluntary_association' || params[:place_type] == 'social_services' || params[:place_type] == 'elder_home') ) %> " href="#">Sociale</a>
             <ul>
-              <li><a href="/admin/utility_places?place_type=social_services">Centri servizi sociali</a></li>
-              <li><a href="/admin/utility_places?place_type=voluntary_association">Associazioni di Volontariato</a></li>
-              <li><a href="/admin/utility_places?place_type=elder_home">Centridurni per anziani</a></li>
+              <li><a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/utility_places' && params[:place_type] == 'social_services'%>" href="/admin/utility_places?place_type=social_services">Centri servizi sociali</a></li>
+              <li><a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/utility_places' && params[:place_type] == 'voluntary_association'%>" href="/admin/utility_places?place_type=voluntary_association">Associazioni di Volontariato</a></li>
+              <li><a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/utility_places' && params[:place_type] == 'elder_home'%>" href="/admin/utility_places?place_type=elder_home">Centridurni per anziani</a></li>
             </ul>
           </li>
           <li><a href="/admin/utility_places?place_type=young_people_place">Giovani</a></li>
           <li>
-            <a href="#">Scuole</a>
+            <a class="<%= 'act_item current_section_submenu' if ( params[:controller] == 'admin/utility_places' && (params[:place_type] == 'primary_school' || params[:place_type] == 'kindergarten' || params[:place_type] == 'first_secondary_school' || params[:place_type] == 'first_secondary_school' || params[:place_type] == 'second_secondary_school'  || params[:place_type] == 'universities' || params[:place_type] == 'music' || params[:place_type] == 'institute' || params[:place_type] == 'professional_institute'  ) ) %> " href="#">Scuole</a>
             <ul>
               <li>
-                <a href="#">Private School</a>
+                <a class="<%= 'act_item current_section_submenu' if params[:is_public] == 'false' %> href="#">Private School</a>
                 <ul>
-                  <li><a href="/admin/utility_places?place_type=kindergarten&is_public=false">Kindergarten</a></li>
-                  <li><a href="/admin/utility_places?place_type=primary_school&is_public=false">Primary School</a></li>
-                  <li><a href="/admin/utility_places?place_type=first_secondary_school&is_public=false">First Secondary School</a></li>
-                  <li><a href="/admin/utility_places?place_type=second_secondary_school&is_public=false">Second Secondary School</a></li>
-                  <li><a href="/admin/utility_places?place_type=universities&is_public=false">Universities</a></li>
-                  <li><a href="/admin/utility_places?place_type=music&is_public=false">Music</a></li>
-                  <li><a href="/admin/utility_places?place_type=institute&is_public=false">Institute</a></li>
-                  <li><a href="/admin/utility_places?place_type=professional_institute&is_public=false">Professional Institute</a></li>
+                  <li><a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/utility_places' && params[:place_type] == 'kindergarten' && params[:is_public] == 'false' %>" href="/admin/utility_places?place_type=kindergarten&is_public=false">Kindergarten</a></li>
+                  <li><a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/utility_places' && params[:place_type] == 'primary_school' && params[:is_public] == 'false' %>" href="/admin/utility_places?place_type=primary_school&is_public=false">Primary School</a></li>
+                  <li><a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/utility_places' && params[:place_type] == 'first_secondary_school' && params[:is_public] == 'false' %>" href="/admin/utility_places?place_type=first_secondary_school&is_public=false">First Secondary School</a></li>
+                  <li><a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/utility_places' && params[:place_type] == 'second_secondary_school' && params[:is_public] == 'false' %>" href="/admin/utility_places?place_type=second_secondary_school&is_public=false">Second Secondary School</a></li>
+                  <li><a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/utility_places' && params[:place_type] == 'universities' && params[:is_public] == 'false' %>" href="/admin/utility_places?place_type=universities&is_public=false">Universities</a></li>
+                  <li><a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/utility_places' && params[:place_type] == 'music' && params[:is_public] == 'false' %>" href="/admin/utility_places?place_type=music&is_public=false">Music</a></li>
+                  <li><a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/utility_places' && params[:place_type] == 'institute' && params[:is_public] == 'false' %>" href="/admin/utility_places?place_type=institute&is_public=false">Institute</a></li>
+                  <li><a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/utility_places' && params[:place_type] == 'professional_institute' && params[:is_public] == 'false' %>" href="/admin/utility_places?place_type=professional_institute&is_public=false">Professional Institute</a></li>
                 </ul>
               </li>
 
               <li>
-                <a href="#">Public School</a>
+                <a class="<%= 'act_item current_section_submenu' if params[:is_public] == 'true' %> href="#">Public School</a>
                 <ul>
-                  <li><a href="/admin/utility_places?place_type=kindergarten&is_public=true">Kindergarten</a></li>
-                  <li><a href="/admin/utility_places?place_type=primary_school&is_public=true">Primary School</a></li>
-                  <li><a href="/admin/utility_places?place_type=first_secondary_school&is_public=true">First Secondary School</a></li>
-                  <li><a href="/admin/utility_places?place_type=second_secondary_school&is_public=true">Second Secondary School</a></li>
-                  <li><a href="/admin/utility_places?place_type=universities&is_public=true">Universities</a></li>
-                  <li><a href="/admin/utility_places?place_type=music&is_public=true">Music</a></li>
-                  <li><a href="/admin/utility_places?place_type=institute&is_public=true">Institute</a></li>
-                  <li><a href="/admin/utility_places?place_type=professional_institute&is_public=true">Professional Institute</a></li>
+                  <li><a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/utility_places' && params[:place_type] == 'kindergarten' && params[:is_public] == 'true' %>" href="/admin/utility_places?place_type=kindergarten&is_public=true">Kindergarten</a></li>
+                  <li><a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/utility_places' && params[:place_type] == 'primary_school' && params[:is_public] == 'true' %>" href="/admin/utility_places?place_type=primary_school&is_public=true">Primary School</a></li>
+                  <li><a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/utility_places' && params[:place_type] == 'first_secondary_school' && params[:is_public] == 'true' %>" href="/admin/utility_places?place_type=first_secondary_school&is_public=true">First Secondary School</a></li>
+                  <li><a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/utility_places' && params[:place_type] == 'second_secondary_school' && params[:is_public] == 'true' %>" href="/admin/utility_places?place_type=second_secondary_school&is_public=true">Second Secondary School</a></li>
+                  <li><a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/utility_places' && params[:place_type] == 'universities' && params[:is_public] == 'true' %>" href="/admin/utility_places?place_type=universities&is_public=true">Universities</a></li>
+                  <li><a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/utility_places' && params[:place_type] == 'music' && params[:is_public] == 'true' %>" href="/admin/utility_places?place_type=music&is_public=true">Music</a></li>
+                  <li><a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/utility_places' && params[:place_type] == 'institute' && params[:is_public] == 'true' %>" href="/admin/utility_places?place_type=institute&is_public=true">Institute</a></li>
+                  <li><a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/utility_places' && params[:place_type] == 'professional_institute' && params[:is_public] == 'true' %>" href="/admin/utility_places?place_type=professional_institute&is_public=true">Professional Institute</a></li>
                 </ul>
               </li>
             </ul>
