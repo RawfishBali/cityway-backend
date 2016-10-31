@@ -23,6 +23,7 @@ class Admin::CommonplacesController < Admin::BaseController
   end
 
     def commonplace_params
-      params.require(:commonplace).permit(:photo, :icon, :city_id, :facebook, :instagram, :twitter, :google_plus)
+      params.require(:commonplace).permit!
+      # (:photo, :city_id, :facebook, :instagram, :twitter, :google_plus,icon: {})
     end
 end

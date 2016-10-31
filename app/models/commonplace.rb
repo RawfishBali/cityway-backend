@@ -27,7 +27,7 @@ class Commonplace < ActiveRecord::Base
 
   belongs_to :city
   mount_base64_uploader :photo, PhotoUploader
-  mount_uploader :icon, PhotoUploader
+  mount_base64_uploader :icon, PhotoUploader
 
   def major
     profiles.find_by(is_major: true)

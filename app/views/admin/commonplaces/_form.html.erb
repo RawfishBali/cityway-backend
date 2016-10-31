@@ -56,6 +56,18 @@
           </div>
         </div>
       </div>
+      <div class="uk-width-medium-1-2 ">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <h3 class="  uk-margin-small-bottom">Comune Icon</h3>
+              <div class="dropzone" data-width="200"  data-image="<%= f.object.icon.url %>"  data-height="200"  data-editstart="false" data-ajax="false" data-canvas="true" >
+                <%= f.file_field :icon%>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="md-fab-wrapper">
       <%= button_tag(type: 'submit' , class: 'md-fab md-fab-accent md-fab-wave waves-effect waves-button') do %>
