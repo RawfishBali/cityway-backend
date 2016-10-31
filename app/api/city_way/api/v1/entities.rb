@@ -30,21 +30,21 @@ module CityWay
           end
           expose :instagram,if: lambda { |object, options| options[:simple] == 'false' && object.instagram }, documentation: {:type => "String", :desc => "Place instagram"} do |place, options|
             unless place.instagram[/\Ahttp:\/\//] || place.instagram[/\Ahttps:\/\//]
-              "https://#{place.instagram}"
+              "https://#{place.instagram}" unless place.instagram.blank?
             else
               place.instagram
             end
           end
           expose :twitter, if: lambda { |object, options| options[:simple] == 'false' && object.twitter }, documentation: {:type => "String", :desc => "Place twitter"} do |place, options|
             unless place.twitter[/\Ahttp:\/\//] || place.twitter[/\Ahttps:\/\//]
-              "https://#{place.twitter}"
+              "https://#{place.twitter}" unless place.twitter.blank?
             else
               place.twitter
             end
           end
           expose :google_plus,if: lambda { |object, options| options[:simple] == 'false' && object.google_plus }, documentation: {:type => "String", :desc => "Place google_plus"} do |place, options|
             unless place.google_plus[/\Ahttp:\/\//] || place.google_plus[/\Ahttps:\/\//]
-              "https://#{place.google_plus}"
+              "https://#{place.google_plus}" unless place.google_plus.blank?
             else
               place.google_plus
             end
@@ -177,7 +177,7 @@ module CityWay
         end
         expose :instagram,  if: lambda { |object, options| options[:simple] == 'false' && object.instagram },documentation: {:type => "String", :desc => "Event Instagram"} do |event, options|
           unless event.instagram[/\Ahttp:\/\//] || event.instagram[/\Ahttps:\/\//]
-            "https://#{event.instagram}"
+            "https://#{event.instagram}" unless event.instagram.blank?
           else
             event.instagram
           end
@@ -203,7 +203,7 @@ module CityWay
         expose :title, documentation: {:type => "String", :desc => "News' Title"}
         expose :url, if: lambda { |object, options| object.url }, documentation: {:type => "String", :desc => "News' URL"} do |object, options|
           unless object.url[/\Ahttp:\/\//] || object.url[/\Ahttps:\/\//]
-            "https://#{object.url}"
+            "https://#{object.url}"  unless object.url.blank?
           else
             object.url
           end
@@ -301,7 +301,7 @@ module CityWay
         expose :name, documentation: {:type => "String", :desc => "Certificate Name"}
         expose :url, if: lambda { |object, options| object.url }, documentation: {:type => "String", :desc => "Certificate Url"} do |object, options|
           unless object.url[/\Ahttp:\/\//] || object.url[/\Ahttps:\/\//]
-            "https://#{object.url}"
+            "https://#{object.url}" unless object.url.blank?
           else
             object.url
           end
@@ -382,7 +382,7 @@ module CityWay
         expose :name, documentation: {:type => "String", :desc => "Security name"}
         expose :url, if: lambda { |object, options| object.url }, documentation: {:type => "String", :desc => "Security url"} do |object, options|
           unless object.url[/\Ahttp:\/\//] || object.url[/\Ahttps:\/\//]
-            "https://#{object.url}"
+            "https://#{object.url}" unless object.url.blank?
           else
             object.url
           end
@@ -403,7 +403,7 @@ module CityWay
         expose :name, documentation: {:type => "String", :desc => "OnlineService name"}
         expose :url, if: lambda { |object, options| object.url }, documentation: {:type => "String", :desc => "OnlineService url"} do |object, options|
           unless object.url[/\Ahttp:\/\//] || object.url[/\Ahttps:\/\//]
-            "https://#{object.url}"
+            "https://#{object.url}" unless object.url.blank?
           else
             object.url
           end
@@ -434,21 +434,21 @@ module CityWay
         end
         expose :twitter, if: lambda { |object, options| options[:simple] == 'false' && object.twitter }, documentation: {:type => "string", :desc => "Comune Twitter"} do |common, options|
           unless common.instagram[/\Ahttp:\/\//] || common.instagram[/\Ahttps:\/\//]
-            "https://#{common.twitter}"
+            "https://#{common.twitter}" unless common.twitter.blank?
           else
             common.twitter
           end
         end
         expose :instagram, if: lambda { |object, options| options[:simple] == 'false' && object.instagram }, documentation: {:type => "string", :desc => "Comune Instagram"} do |common, options|
           unless common.instagram[/\Ahttp:\/\//] || common.instagram[/\Ahttps:\/\//]
-            "https://#{common.instagram}"
+            "https://#{common.instagram}" unless common.instagram.blank?
           else
             common.instagram
           end
         end
         expose :google_plus, if: lambda { |object, options| options[:simple] == 'false' && object.google_plus }, documentation: {:type => "string", :desc => "Comune G+"} do |common, options|
           unless common.google_plus[/\Ahttp:\/\//] || common.google_plus[/\Ahttps:\/\//]
-            "https://#{common.google_plus}"
+            "https://#{common.google_plus}" unless common.google_plus.blank?
           else
             common.google_plus
           end
@@ -524,7 +524,7 @@ module CityWay
         expose :bottom_text, documentation: {:type => "text", :desc => "Story Bottom Text"}
         expose :external_link, if: lambda { |object, options| object.external_link },  documentation: {:type => "string", :desc => "Story External Link"} do |object, options|
           unless object.external_link[/\Ahttp:\/\//] || object.external_link[/\Ahttps:\/\//]
-            "https://#{object.external_link}"
+            "https://#{object.external_link}" unless object.external_link.blank?
           else
             object.external_link
           end
@@ -559,7 +559,7 @@ module CityWay
         expose :longitude, documentation: {:type => "Float", :desc => "Device longitude"}
         expose :external_url,if: lambda { |object, options| object.external_url },  documentation: {:type => "Float", :desc => "Device External Url"} do |object, options|
           unless object.external_url[/\Ahttp:\/\//] || object.external_url[/\Ahttps:\/\//]
-            "https://#{object.external_url}"
+            "https://#{object.external_url}" unless object.external_url.blank?
           else
             object.external_url
           end
@@ -905,7 +905,7 @@ module CityWay
         expose :email,if: lambda { |object, options| options[:simple] == 'false' && object.email }, documentation: {:type => "string", :desc => "Merchant email"}
         expose :website, if: lambda { |object, options| options[:simple] == 'false' && object.website }, documentation: {:type => "string", :desc => "Merchant website"} do |merchant, options|
           unless merchant.website[/\Ahttp:\/\//] || merchant.website[/\Ahttps:\/\//]
-            "https://#{merchant.website}"
+            "https://#{merchant.website}" unless merchant.website.blank?
           else
             merchant.website
           end
@@ -928,14 +928,14 @@ module CityWay
         end
         expose :twitter, if: lambda { |object, options| options[:simple] == 'false' && object.twitter }, documentation: {:type => "string", :desc => "Merchant twitter"} do |merchant, options|
           unless merchant.twitter[/\Ahttp:\/\//] || merchant.twitter[/\Ahttps:\/\//]
-            "https://#{merchant.twitter}"
+            "https://#{merchant.twitter}" unless merchant.twitter.blank?
           else
             merchant.twitter
           end
         end
         expose :google_plus, if: lambda { |object, options| options[:simple] == 'false' && object.google_plus }, documentation: {:type => "string", :desc => "Merchant G+"} do |merchant, options|
           unless merchant.google_plus[/\Ahttp:\/\//] || merchant.google_plus[/\Ahttps:\/\//]
-            "https://#{merchant.google_plus}"
+            "https://#{merchant.google_plus}" unless merchant.google_plus.blank?
           else
             merchant.google_plus
           end
@@ -1026,7 +1026,7 @@ module CityWay
         expose :phone, documentation: {:type => "String", :desc => "WasteManagemnet phone"}
         expose :website, documentation: {:type => "Integer", :desc => "WasteManagemnet website"} do |object, options|
           unless object.website[/\Ahttp:\/\//] || object.website[/\Ahttps:\/\//]
-            "https://#{object.website}"
+            "https://#{object.website}" unless object.website.blank?
           else
             object.website
           end
