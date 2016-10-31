@@ -30,28 +30,28 @@ altair_nestable = {
       }
 
       // check if localStorage is supported
-      if (lsTest()) {
-        if (localStorage.getItem("nestable_items") !== null) {
-          // get values from localStorage
-          var nestable_array = localStorage.getItem("nestable_items");
-          // clone main nestable list
-          var $nestable_cloned = $nestable.clone().empty();
-          // loop through localStorage objects to sort list
-          loop_nestable(JSON.parse(nestable_array),$nestable_cloned);
-
-          // replace original nestable list items with sorted list items
-          $nestable
-          .html($nestable_cloned.html())
-          // .after('<a class="md-btn" href="#" id="restore_nestable">Restore</a>');
-
-          // restore original order on button click
-          $('#restore_nestable').click(function() {
-            localStorage.removeItem('nestable_items');
-            location.reload(true);
-          })
-
-        }
-      }
+      // if (lsTest()) {
+      //   if (localStorage.getItem("nestable_items") !== null) {
+      //     // get values from localStorage
+      //     var nestable_array = localStorage.getItem("nestable_items");
+      //     // clone main nestable list
+      //     var $nestable_cloned = $nestable.clone().empty();
+      //     // loop through localStorage objects to sort list
+      //     loop_nestable(JSON.parse(nestable_array),$nestable_cloned);
+      //
+      //     // replace original nestable list items with sorted list items
+      //     $nestable
+      //     .html($nestable_cloned.html())
+      //     // .after('<a class="md-btn" href="#" id="restore_nestable">Restore</a>');
+      //
+      //     // restore original order on button click
+      //     $('#restore_nestable').click(function() {
+      //       localStorage.removeItem('nestable_items');
+      //       location.reload(true);
+      //     })
+      //
+      //   }
+      // }
 
       // manually init nestable
       var nestable = UIkit.nestable($nestable, {});
