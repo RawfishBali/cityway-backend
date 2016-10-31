@@ -18,7 +18,7 @@
                 <td class=""><%= image_tag @admin_profiles.photo.url  %></td>
                 <td class=""><%= @admin_profiles.role  %></td>
                 <td class="uk-text-center">
-                  <%= link_to '<i class="md-icon material-icons">&#xE254;</i>'.html_safe , edit_admin_profile_path(@admin_profiles)%>
+                  <%= link_to '<i class="md-icon material-icons">&#xE254;</i>'.html_safe , edit_admin_profile_path(@admin_profiles, major: @admin_profiles.is_major)%>
                 </td>
               </tr>
             <% end %>

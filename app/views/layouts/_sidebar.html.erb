@@ -39,7 +39,7 @@
           <li>
             <a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/places' && (params[:place_type] == 'library' || params[:place_type] == 'theater' || params[:place_type] == 'museum' || params[:place_type] == 'cinema') %>" href="#">Cultura</a>
             <ul>
-              
+
               <li><a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/places' && params[:place_type] == 'library'%>" href="/admin/places?place_type=library">Libraries</a></li>
               <li><a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/places' && params[:place_type] == 'theater'%>" href="/admin/places?place_type=theater">Theaters</a></li>
               <li><a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/places' && params[:place_type] == 'museum'%>" href="/admin/places?place_type=museum">Mueseums</a></li>
@@ -83,8 +83,8 @@
           <li>
             <a href="#" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/profiles' ||  params[:controller] == 'admin/politic_groups' %>">Administration</a>
             <ul>
-              <li><a href="/admin/profiles?major=true" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/profiles' && params[:major] %>">Sindaco</a></li>
-              <li><a href="/admin/profiles/" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/profiles' && !params[:major]%>">Giunta Comunale</a></li>
+              <li><a href="/admin/profiles?major=true" class="<%= 'act_item current_section_submenu' if (params[:controller] == 'admin/profiles' && params[:major] == 'true')  %>">Sindaco</a></li>
+              <li><a href="/admin/profiles/" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/profiles' && params[:major] == 'false' %>">Giunta Comunale</a></li>
               <li><a href="/admin/politic_groups/" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/politic_groups'%>">Consiglio</a></li>
             </ul>
           </li>
