@@ -11,11 +11,11 @@ $(document).ready(function(){
     $('#profile_days_open').kendoMultiSelect();
   }
 
-
-
-  // $('.dropzone').html5imageupload();
-
-
+  var url = window.location.pathname.split("/");
+  if(url[2] == "city_hall_stories"){
+    $(".add_fields").click();
+  }
+    
   $('.dropzone').html5imageupload({
     onSave: function() {
     },
