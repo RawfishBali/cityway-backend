@@ -321,32 +321,45 @@ readImage: function(image, src, name, mimeType) {
 		elementRatio		= $(element).outerWidth() / $(element).outerHeight();
 
 		//resize image
-		if (options.originalsize == true) {
+		// if (options.originalsize == true) {
+		//
+		// 	//need to add the option is smaller = true, dont resize
+		// 	//also if the image == 100% the size of the element, dont add extra space
+		//
+		//
+		//
+		//
+		//
+		//
+		// 	// useWidth		= $(element).outerWidth() + 40;
+		// 	// useHeight		= useWidth / ratio;
+		// 	//
+		// 	// if (useHeight < $(element).outerHeight()) {
+		// 	// 	useHeight	= $(element).outerHeight() + 40;
+		// 	// 	useWidth	= useHeight * ratio;
+		// 	// }
+		// 	// alert('b')
+		// } else if (useWidth < $(element).outerWidth() || useHeight < $(element).outerHeight()) {
+		//
+		// 	if (options.smaller == true) {
+		// 		//do nothing
+		// 	} else {
+		// 		// alert('a')
+		// 		// if (ratio < elementRatio) {
+		// 		// 	useWidth	= $(element).outerWidth();
+		// 		// 	useHeight	= useWidth / ratio;
+		// 		// } else {
+		// 		// 	useHeight	= $(element).outerHeight();
+		// 		// 	useWidth	= useHeight * ratio;
+		// 		// }
+		// 	}
+		// }
 
-			//need to add the option is smaller = true, dont resize
-			//also if the image == 100% the size of the element, dont add extra space
+		_self.interval 		= window.setInterval(function(){
+			_self.imageZoom(-2);
+		},1);
 
-			useWidth		= $(element).outerWidth() + 40;
-			useHeight		= useWidth / ratio;
-
-			if (useHeight < $(element).outerHeight()) {
-				useHeight	= $(element).outerHeight() + 40;
-				useWidth	= useHeight * ratio;
-			}
-		} else if (useWidth < $(element).outerWidth() || useHeight < $(element).outerHeight()) {
-
-			if (options.smaller == true) {
-				//do nothing
-			} else {
-				if (ratio < elementRatio) {
-					useWidth	= $(element).outerWidth();
-					useHeight	= useWidth / ratio;
-				} else {
-					useHeight	= $(element).outerHeight();
-					useWidth	= useHeight * ratio;
-				}
-			}
-		}
+		setTimeout(function( ) { clearInterval( _self.interval ); }, 10);
 
 		var left			= parseFloat(($(element).outerWidth() - useWidth) / 2)// * -1;
 		var top				= parseFloat(($(element).outerHeight() - useHeight) / 2)// * -1;
@@ -369,6 +382,8 @@ readImage: function(image, src, name, mimeType) {
 
 		//clean up
 		$(element).removeClass('loading');
+		// window.clearInterval(_self.interval);
+		// if (_self.options.onAfterZoomImage) _self.options.onAfterZoomImage.call(_self,_self);
 	}
 
 	img.src					= image;
@@ -490,12 +505,14 @@ imageZoom :function(x){
 	var newLeft 			= image.css('left').replace(/[^-\d\.]/g, '') - (newWidth - image.outerWidth()) / 2;
 
 
+
 	if (options.smaller == false) {
 
 		if ($(element).offset().left - newLeft < $(element).offset().left) {
 			newLeft				= 0;
 		} else if ($(element).outerWidth() > newLeft + $(image).outerWidth() && x <= 0) {
-			newLeft				= $(element).outerWidth() - newWidth;
+			newLeft				= 0;
+			// newLeft				= $(element).outerWidth() - newWidth;
 		}
 
 		if ($(element).offset().top - newTop < $(element).offset().top) {
