@@ -976,6 +976,9 @@ module CityWay
         expose :photo, documentation: {:type => "String", :desc => "Promo's photo"} do |promo, options|
           promo.photo.url
         end
+        expose :address do |object, options|
+          object.merchant.address
+        end
         expose :description,if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "Text", :desc => "Promo's description"}
         expose :terms_and_conditions,if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "Text", :desc => "Promo's terms_and_conditions"}
         expose :discount, documentation: {:type => "Float", :desc => "Promo's discount"}
