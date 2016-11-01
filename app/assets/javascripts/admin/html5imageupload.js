@@ -331,35 +331,38 @@ readImage: function(image, src, name, mimeType) {
 		//
 		//
 		//
-		// 	// useWidth		= $(element).outerWidth() + 40;
-		// 	// useHeight		= useWidth / ratio;
-		// 	//
-		// 	// if (useHeight < $(element).outerHeight()) {
-		// 	// 	useHeight	= $(element).outerHeight() + 40;
-		// 	// 	useWidth	= useHeight * ratio;
-		// 	// }
-		// 	// alert('b')
+		// 	useWidth		= $(element).outerWidth() + 40;
+		// 	useHeight		= useWidth / ratio;
+		//
+		// 	if (useHeight < $(element).outerHeight()) {
+		// 		useHeight	= $(element).outerHeight() + 40;
+		// 		useWidth	= useHeight * ratio;
+		// 	}
+		// 	alert('b')
 		// } else if (useWidth < $(element).outerWidth() || useHeight < $(element).outerHeight()) {
 		//
 		// 	if (options.smaller == true) {
 		// 		//do nothing
 		// 	} else {
-		// 		// alert('a')
-		// 		// if (ratio < elementRatio) {
-		// 		// 	useWidth	= $(element).outerWidth();
-		// 		// 	useHeight	= useWidth / ratio;
-		// 		// } else {
-		// 		// 	useHeight	= $(element).outerHeight();
-		// 		// 	useWidth	= useHeight * ratio;
-		// 		// }
+		// 		alert('a')
+		// 		if (ratio < elementRatio) {
+		// 			useWidth	= $(element).outerWidth();
+		// 			useHeight	= useWidth / ratio;
+		// 		} else {
+		// 			useHeight	= $(element).outerHeight();
+		// 			useWidth	= useHeight * ratio;
+		// 		}
 		// 	}
 		// }
 
-		_self.interval 		= window.setInterval(function(){
-			_self.imageZoom(-2);
-		},1);
+		useWidth		= $(element).outerWidth() + 40;
+		useHeight		= useWidth / ratio;
 
-		setTimeout(function( ) { clearInterval( _self.interval ); }, 10);
+		if (useHeight < $(element).outerHeight()) {
+			useHeight	= $(element).outerHeight() + 40;
+			useWidth	= useHeight * ratio;
+		}
+		
 
 		var left			= parseFloat(($(element).outerWidth() - useWidth) / 2)// * -1;
 		var top				= parseFloat(($(element).outerHeight() - useHeight) / 2)// * -1;
