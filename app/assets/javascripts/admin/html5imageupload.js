@@ -56,7 +56,7 @@
 		canvasImageOnly:	false,
 		ajax:				true,
 		resize: 			false,
-		dimensionsonly:		false,
+		dimensionsonly:		true,
 		editstart:			false,
 		saveOriginal:		false,
 		save:				true,
@@ -362,7 +362,7 @@ readImage: function(image, src, name, mimeType) {
 			useHeight	= $(element).outerHeight() + 40;
 			useWidth	= useHeight * ratio;
 		}
-		
+
 
 		var left			= parseFloat(($(element).outerWidth() - useWidth) / 2)// * -1;
 		var top				= parseFloat(($(element).outerHeight() - useHeight) / 2)// * -1;
