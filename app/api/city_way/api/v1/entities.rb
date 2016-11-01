@@ -481,6 +481,9 @@ module CityWay
         expose :major_icon, documentation: {:type => "String", :desc => "Profile major icon"}  do |object, options|
           object.major.major_icon.url if object.major
         end
+        expose :major_email, documentation: {:type => "String", :desc => "Profile major email"}  do |object, options|
+          object.major.email if object.major
+        end
       end
 
       class Discover < Grape::Entity
