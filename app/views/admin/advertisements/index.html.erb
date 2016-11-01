@@ -16,7 +16,7 @@
         <tbody>
           <% @advertisements.each do |ad| %>
           <tr>
-            <td class="uk-width-1-10"><%= image_tag ad.photo.thumb.url %></td>
+            <td class="uk-width-1-10"><%= image_tag ad.photo.thumb.url, class: 'width100pixel' %></td>
             <td class="uk-width-1-10 uk-text-center"><%= ad.position %></td>
             <td class="uk-width-1-10 uk-text-center"><%= ad.start_date.strftime("%A %B %d %Y") %></td>
             <td class="uk-width-1-10 uk-text-center"><%= ad.end_date.strftime("%A %B %d %Y") %></td>

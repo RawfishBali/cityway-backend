@@ -17,7 +17,7 @@
                         <td class=""><%= public_offices.name  %></td>
                         <td class="uk-text-center"><%= public_offices.address %></td>
                         <td class="uk-text-center"><%= truncate(public_offices.description, length: 25, omission: '...') %></td>
-                        <td class="uk-text-center"><%= image_tag public_offices.primary_photo.first.picture.url unless public_offices.primary_photo.first.blank?  %></td>
+                        <td class="uk-text-center"><%= image_tag public_offices.primary_photo.first.picture.url, class: 'width100pixel' unless public_offices.primary_photo.first.blank?  %></td>
 
                         <td class="uk-text-center">
                             <%= link_to '<i class="md-icon material-icons">&#xE254;</i>'.html_safe , edit_admin_public_office_path(public_offices)%>

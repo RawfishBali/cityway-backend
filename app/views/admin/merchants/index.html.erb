@@ -28,8 +28,8 @@
           <tr>
             <td><%= merchant.name %></td>
             <td><%= merchant.address %></td>
-            <td class="uk-text-center"><%= image_tag merchant.icon.url unless merchant.icon.blank? %></td>
-            <td class="uk-text-center"><%= image_tag merchant.primary_photo.first.picture.url unless merchant.primary_photo.first.blank? %></td>
+            <td class="uk-text-center"><%= image_tag merchant.icon.url, class: 'width100pixel' unless merchant.icon.blank? %></td>
+            <td class="uk-text-center"><%= image_tag merchant.primary_photo.first.picture.url, class: 'width100pixel' unless merchant.primary_photo.first.blank? %></td>
             <td class="uk-text-center">
               <%= link_to '<i class="md-icon material-icons">&#xE254;</i>'.html_safe , edit_admin_merchant_path(merchant)%>
             </td>

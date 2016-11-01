@@ -125,3 +125,7 @@
 .width100p{
   width: 100% !important;
 }
+
+.width100pixel{
+  width: 100px !important;
+}

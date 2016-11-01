@@ -16,7 +16,7 @@
           <tr>
             <td class="uk-width-1-10"><%= city.name %></td>
             <td class="uk-width-1-10"><%= city.description %></td>
-            <td class="uk-width-1-10"><%= image_tag city.photo.thumb.url %></td>
+            <td class="uk-width-1-10"><%= image_tag city.photo.thumb.url, class: 'width100pixel' %></td>
             <td class="uk-width-1-10">
               <% if city.commonplace %>
                 <span class="uk-input-group-addon">

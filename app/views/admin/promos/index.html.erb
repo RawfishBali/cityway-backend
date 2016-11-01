@@ -21,7 +21,7 @@
                         <td class="uk-text-center"><%= promo.discount%></td>
                         <td class="uk-text-center"><%= promo.original_price%></td>
                         <td class="uk-text-center"><%= promo.discount_price%></td>
-                        <td class="uk-text-center"><%= image_tag promo.photo.url %></td>
+                        <td class="uk-text-center"><%= image_tag promo.photo.url, class: 'width100pixel' %></td>
                         <td class="uk-text-center"><%= promo.approval%></td>
                         <td class="uk-text-center">
                             <%= link_to '<i class="md-icon material-icons">&#xE254;</i>'.html_safe , edit_admin_promo_path(promo)%>

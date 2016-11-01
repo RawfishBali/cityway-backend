@@ -15,7 +15,7 @@
             <% if @admin_profiles %>
               <tr>
                 <td class=""><%= @admin_profiles.name  %></td>
-                <td class=""><%= image_tag @admin_profiles.photo.url  %></td>
+                <td class=""><%= image_tag @admin_profiles.photo.url, class: 'width100pixel'  %></td>
                 <td class=""><%= @admin_profiles.role  %></td>
                 <td class="uk-text-center">
                   <%= link_to '<i class="md-icon material-icons">&#xE254;</i>'.html_safe , edit_admin_profile_path(@admin_profiles, major: @admin_profiles.is_major)%>
@@ -26,7 +26,7 @@
             <% @admin_profiles.each do  |profile|%>
             <tr>
               <td class=""><%= profile.name  %></td>
-              <td class=""><%= image_tag profile.photo.url  %></td>
+              <td class=""><%= image_tag profile.photo.url , class: 'width100pixel' %></td>
               <td class=""><%= profile.role  %></td>
               <td class="uk-text-center">
                 <%= link_to '<i class="md-icon material-icons">&#xE254;</i>'.html_safe , edit_admin_profile_path(profile, major: profile.is_major)%>

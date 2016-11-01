@@ -13,7 +13,7 @@
           <% @admin_waste_types.each do  |waste_type|%>
           <tr>
             <td class=""><%= waste_type.name  %></td>
-            <td class="uk-text-center"><%= image_tag waste_type.icon.url %></td>
+            <td class="uk-text-center"><%= image_tag waste_type.icon.url, class: 'width100pixel' %></td>
             <td class="uk-text-center">
               <%= link_to '<i class="md-icon material-icons">&#xE254;</i>'.html_safe , edit_admin_waste_type_path(waste_type)%>
             </td>

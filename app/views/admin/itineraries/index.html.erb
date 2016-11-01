@@ -15,7 +15,7 @@
                     <tr>
                         <td ><%= itinerary.name %></td>
                         <td ><%= truncate(itinerary.description, length: 25, omission: '...') %></td>
-                        <td><%= image_tag itinerary.primary_photo.first.picture.url %></td>
+                        <td class="uk-text-center"><%= image_tag itinerary.primary_photo.first.picture.url, class: 'width100pixel' %></td>
 
 
                         <td class="">

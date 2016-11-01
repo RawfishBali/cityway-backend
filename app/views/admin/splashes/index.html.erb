@@ -14,7 +14,7 @@
 
                         <td class="">
                           <% splash.photos.each do |photo| %>
-                            <%= image_tag photo.picture.url %>
+                            <%= image_tag photo.picture.url, class: 'width100pixel' %>
                           <% end %>
                         </td>
                         <td class="uk-text-center">

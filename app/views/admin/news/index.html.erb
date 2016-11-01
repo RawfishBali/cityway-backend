@@ -20,7 +20,7 @@
               <%= truncate(news.description, length: 25, omission: '...') %>
             </td>
             <td >
-              <%= image_tag news.primary_photo.first.picture.url if news.primary_photo.first %>
+              <%= image_tag news.primary_photo.first.picture.url, class: 'width100pixel' if news.primary_photo.first %>
             </td>
             <td class="uk-text-center">
               <%= link_to '<i class="md-icon material-icons">&#xE254;</i>'.html_safe , edit_admin_news_path(news)%>
