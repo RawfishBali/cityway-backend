@@ -130,3 +130,7 @@
 .width100pixel{
   width: 100px !important;
 }
+
+.loadingoverlay_fontawesome{
+  color: #7fb1b6 !important;
+}
