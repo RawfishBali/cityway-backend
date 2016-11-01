@@ -38,3 +38,4 @@
 //= require admin/bootstrap
 //= require admin/html5imageupload
 //= require admin/nestable
+//= require admin/loadingoverlay

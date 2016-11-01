@@ -1,4 +1,12 @@
 $(document).ready(function(){
+  $.LoadingOverlaySetup({
+    color           : "rgba(255, 255, 255, 0.7)",
+    resizeInterval  : 0,
+    size            : "50%",
+    zIndex          : 9999,
+    image       : "",
+    fontawesome : "fa fa-spinner fa-spin"
+  });
   if($('#merchant_subcategory_ids').length > 0){
     $('#merchant_subcategory_ids').kendoMultiSelect();
 
@@ -15,7 +23,7 @@ $(document).ready(function(){
   if(url[2] == "city_hall_stories"){
     $(".add_fields").click();
   }
-    
+
   $('.dropzone').html5imageupload({
     onSave: function() {
     },
@@ -61,5 +69,12 @@ $(document).ready(function(){
       }
     });
   })
+
+  $("form").submit(function( event ) {
+    $.LoadingOverlay("show");
+    $(".waves-button").attr('disabled','disabled')
+    // event.preventDefault();
+  });
+
 
 })
