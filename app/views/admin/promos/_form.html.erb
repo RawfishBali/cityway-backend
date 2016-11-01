@@ -78,8 +78,10 @@
 
             </div>
             <div class="uk-width-medium-1-2">
-              <label>Approval</label>
-              <%= f.check_box :approval,class: 'md-input'  %>
+              <%= f.label :approval, class: 'inline-label'%>
+              <%= f.check_box :approval,class: 'md-input', 'data-switchery': true  %>
+
+
             </div>
           </div>
 
