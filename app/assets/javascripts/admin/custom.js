@@ -5,7 +5,7 @@ $(document).ready(function(){
     size            : "50%",
     zIndex          : 9999,
     image       : "",
-    fontawesome : "fa fa-spinner fa-spin"
+    fontawesome : "fa fa-refresh fa-spin"
   });
   if($('#merchant_subcategory_ids').length > 0){
     $('#merchant_subcategory_ids').kendoMultiSelect();

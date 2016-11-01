@@ -173,7 +173,7 @@
 }
 .uk-modal-dialog .uk-modal-header .uk-modal-title {
   margin: 0;
-  font: 500 18px / 28px "Roboto", sans-serif;
+  font: 500 18px / 28px "Poppins", sans-serif;
 }
 .uk-modal-dialog .uk-modal-header .uk-modal-title span {
   font-size: 16px;
@@ -1436,7 +1436,7 @@ div.uk-form-file {
   color: #fff;
 }
 .uk-datepicker-nav .uk-form-select {
-  font: 400 16px / 22px "Roboto", sans-serif;
+  font: 400 16px / 22px "Poppins", sans-serif;
   color: #fff;
   text-transform: uppercase;
 }
@@ -1469,7 +1469,7 @@ div.uk-form-file {
 .uk-datepicker-table th,
 .uk-datepicker-table td {
   padding: 2px;
-  font: 400 13px / 15px "Roboto", sans-serif;
+  font: 400 13px / 15px "Poppins", sans-serif;
 }
 .uk-datepicker-table th {
   color: #727272;
@@ -3185,7 +3185,7 @@ body > .content-preloader.preloader-active {
   -webkit-appearance: none;
   display: inline-block;
   vertical-align: middle;
-  font: 500 14px / 31px "Roboto", sans-serif !important;
+  font: 500 14px / 31px "Poppins", sans-serif !important;
 }
 .md-btn:hover,
 .md-btn:focus,
@@ -3903,7 +3903,7 @@ body > .content-preloader.preloader-active {
   opacity: 0;
   padding: 4px 16px;
   box-sizing: border-box;
-  font: 400 16px / 32px "Roboto", sans-serif;
+  font: 400 16px / 32px "Poppins", sans-serif;
   text-align: left;
 }
 .md-fab-sheet-actions > a,
@@ -5545,7 +5545,7 @@ body > .content-preloader.preloader-active {
   clear: both;
 }
 .md-card .md-card-toolbar-heading-text {
-  font: 500 14px / 50px "Roboto", sans-serif;
+  font: 500 14px / 50px "Poppins", sans-serif;
   color: #212121;
   margin: 0;
   float: left;
@@ -5594,7 +5594,7 @@ body > .content-preloader.preloader-active {
 }
 .md-card .md-card-toolbar-input {
   border: none;
-  font: 400 18px / 24px "Roboto", sans-serif;
+  font: 400 18px / 24px "Poppins", sans-serif;
   height: auto;
   background: none !important;
   padding: 12px 0;
@@ -5628,13 +5628,13 @@ body > .content-preloader.preloader-active {
 }
 .md-card .md-card-head-text {
   padding: 8px 16px 16px;
-  font: 500 16px / 22px "Roboto", sans-serif;
+  font: 500 16px / 22px "Poppins", sans-serif;
   color: #212121;
   margin: 0;
 }
 .md-card .md-card-head-text span {
   display: block;
-  font: 400 12px / 18px "Roboto", sans-serif;
+  font: 400 12px / 18px "Poppins", sans-serif;
   margin-top: -2px;
 }
 .md-card .md-card-head-text.text_dark {
@@ -5842,10 +5842,10 @@ body > .content-preloader.preloader-active {
   box-sizing: border-box;
 }
 .md-card.md-card-overlay .md-card-overlay-header h3 {
-  font: 400 16px / 30px "Roboto", sans-serif;
+  font: 400 16px / 30px "Poppins", sans-serif;
 }
 .md-card.md-card-overlay .md-card-overlay-header h4 {
-  font: 500 14px / 30px "Roboto", sans-serif;
+  font: 500 14px / 30px "Poppins", sans-serif;
 }
 .md-card.md-card-overlay .md-card-overlay-header .md-icon {
   position: absolute;
@@ -6148,7 +6148,7 @@ input[type="color"].md-input {
   border-width: 0 0 1px;
   border-style: solid;
   border-color: rgba(0, 0, 0, 0.12);
-  font: 400 15px / 18px "Roboto", sans-serif;
+  font: 400 15px / 18px "Poppins", sans-serif;
   box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0);
   box-sizing: border-box;
   padding: 12px 4px;
@@ -7560,7 +7560,7 @@ button.md-icon {
   right: 0;
   bottom: 0;
   text-align: center;
-  font: 400 20px / 110px "Roboto", sans-serif;
+  font: 400 20px / 110px "Poppins", sans-serif;
 }
 .epc_chart_icon {
   position: absolute;
@@ -7728,7 +7728,7 @@ code[class*="language-"],
 pre[class*="language-"] {
   color: black;
   background: none;
-  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  font-family: 'Poppins', sans-serif;
   text-align: left;
   white-space: pre;
   word-spacing: normal;
@@ -10432,7 +10432,7 @@ a.waves-effect .waves-ripple {
   cursor: pointer;
   margin: 0 auto;
   border-radius: 3px;
-  font: 500 20px / 46px "Roboto", sans-serif;
+  font: 500 20px / 46px "Poppins", sans-serif;
   text-align: center;
   text-overflow: clip;
   -webkit-transition: all 280ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -10588,7 +10588,7 @@ a.waves-effect .waves-ripple {
   position: absolute;
   color: #fff;
   z-index: 2020;
-  font: 400 22px / 32px "Roboto", sans-serif;
+  font: 400 22px / 32px "Poppins", sans-serif;
   -webkit-transition: opacity 400ms cubic-bezier(0.42, 0, 0.58, 1);
   transition: opacity 400ms cubic-bezier(0.42, 0, 0.58, 1);
 }
@@ -10651,7 +10651,7 @@ div.kineticjs-content {
   text-shadow: none;
   border: none;
   line-height: 44px;
-  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Poppins', sans-serif;
   box-sizing: border-box;
   height: 48px;
   z-index: auto;
@@ -10986,7 +10986,7 @@ div.kineticjs-content {
   }
 }
 #sidebar_main .menu_section .menu_heading {
-  font: 400 12px / 16px "Roboto", sans-serif;
+  font: 400 12px / 16px "Poppins", sans-serif;
   margin: 0 0 12px;
   padding: 6px 6px 12px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
@@ -11004,7 +11004,7 @@ div.kineticjs-content {
   list-style: none;
 }
 #sidebar_main .menu_section > ul > li > a {
-  font: 500 14px / 25px "Roboto", sans-serif;
+  font: 500 14px / 25px "Poppins", sans-serif;
   color: #212121;
   padding: 8px 20px;
   display: block;
@@ -11031,6 +11031,7 @@ div.kineticjs-content {
 }
 #sidebar_main .menu_section > ul > li > a .menu_title {
   display: inline-block;
+  font-family: 'Poppins', sans-serif;
 }
 #sidebar_main .menu_section > ul > li > a .uk-badge {
   padding: 1px 4px;
@@ -11067,7 +11068,7 @@ div.kineticjs-content {
 #sidebar_main .menu_section > ul > li ul a {
   padding: 8px 10px 8px 72px;
   display: block;
-  font: 400 13px / 18px "Roboto", sans-serif;
+  font: 400 13px / 18px;
   color: #212121;
 }
 @media only screen and (max-width: 767px) {
@@ -11665,7 +11666,7 @@ div.kineticjs-content {
   min-height: 81px;
 }
 #page_heading h1 {
-  font: 500 22px / 28px "Roboto", sans-serif;
+  font: 500 22px / 28px "Poppins", sans-serif;
   margin: 0;
 }
 #page_heading .heading_actions {
@@ -12352,7 +12353,7 @@ div.kineticjs-content {
   height: 200px;
 }
 .blog_list_teaser_title {
-  font: 400 18px / 24px "Roboto", sans-serif;
+  font: 400 18px / 24px "Poppins", sans-serif;
   margin: 0 0 8px;
 }
 .blog_list_teaser p {
@@ -12420,7 +12421,7 @@ div.kineticjs-content {
   background-color: #fff;
 }
 .gallery_grid_image_caption .gallery_image_title {
-  font: 500 14px / 20px "Roboto", sans-serif;
+  font: 500 14px / 20px "Poppins", sans-serif;
   margin: 0;
 }
 .gallery_grid_image_menu {
@@ -12678,7 +12679,7 @@ div.kineticjs-content {
   list-style: none;
 }
 .search_list_heading {
-  font: 400 18px / 22px "Roboto", sans-serif;
+  font: 400 18px / 22px "Poppins", sans-serif;
   margin: 0 0 2px;
 }
 .search_list_link {
@@ -12738,7 +12739,7 @@ html {
 }
 body {
   min-height: 100%;
-  font: 400 14px / 1.42857143 "Roboto", sans-serif;
+  font: 400 14px / 1.42857143;
   padding-top: 48px;
   box-sizing: border-box;
 }
@@ -12747,6 +12748,7 @@ button {
   outline: none !important;
 }
 a {
+  font-family: 'Poppins', sans-serif;
   color: #7FB1B6;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
@@ -12811,12 +12813,12 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-weight: 500;
 }
 .heading_a {
   margin: 0;
-  font: 400 24px / 18px "Roboto", sans-serif;
+  font: 400 24px / 18px "Poppins", sans-serif;
 }
 .heading_a .sub-heading {
   font-weight: 300;
@@ -12827,7 +12829,7 @@ h6 {
 }
 .heading_b {
   margin: 0;
-  font: 400 22px / 28px "Roboto", sans-serif;
+  font: 400 22px / 28px "Poppins", sans-serif;
 }
 .heading_b .sub-heading {
   font-weight: 300;
@@ -12838,7 +12840,7 @@ h6 {
 }
 .heading_c {
   margin: 0;
-  font: 400 16px / 20px "Roboto", sans-serif;
+  font: 400 16px / 20px "Poppins", sans-serif;
 }
 .heading_c .sub-heading {
   font-weight: 300;
@@ -12849,7 +12851,7 @@ h6 {
 }
 .heading_list {
   color: #727272;
-  font: 500 13px / 16px "Roboto", sans-serif;
+  font: 500 13px / 16px "Poppins", sans-serif;
   padding: 0 16px;
   margin: 0 0 16px;
 }
