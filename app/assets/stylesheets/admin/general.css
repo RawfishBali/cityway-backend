@@ -5,6 +5,7 @@
 .sidebar-header{
   width: 65% !important;
   padding: 10px;
+  margin-left: 10px;
 }
 
 .sidebar-header-link{
