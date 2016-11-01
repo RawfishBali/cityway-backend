@@ -121,3 +121,7 @@
 .font100{
   font-size: 100px;
 }
+
+.100p{
+  width: 100% !important;
+}
