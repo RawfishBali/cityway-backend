@@ -59,12 +59,27 @@
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-2">
-              <label>Discount</label>
-              <%= f.number_field :discount, required: true,class: 'md-input'  %>
+
+              <%#= f.number_field :discount, required: true,class: 'md-input'  %>
+
+              <div class="uk-input-group">
+                <span class="uk-input-group-addon">€</span>
+                <label>Original Price</label>
+                <%= f.number_field :original_price, required: true,class: 'md-input'  %>
+              </div>
+
+
+
+
+
             </div>
             <div class="uk-width-medium-1-2">
-              <label>Original Price</label>
-              <%= f.number_field :original_price, required: true,class: 'md-input'  %>
+              <div class="uk-input-group">
+
+                <label>Discount</label>
+                <%= f.number_field :discount, required: true,class: 'md-input', value: f.object.discount.to_i  %>
+                <span class="uk-input-group-addon">%</span>
+              </div>
             </div>
           </div>
         </div>
@@ -75,7 +90,11 @@
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-2">
-
+              <div class="uk-input-group">
+                <span class="uk-input-group-addon">€</span>
+                <label>Discounted Price</label>
+                <%= f.number_field :discount_price, required: true,class: 'md-input', disabled: true  %>
+              </div>
             </div>
             <div class="uk-width-medium-1-2">
               <%= f.label :approval, class: 'inline-label'%>

@@ -83,4 +83,11 @@ $(document).ready(function(){
   });
 
 
+  $('#promo_original_price , #promo_discount').change(function(){
+    $("#promo_discount_price").parent().addClass('md-input-filled')
+    $("#promo_discount_price").val($('#promo_original_price').val() - ($('#promo_original_price').val() * ($('#promo_discount').val()/100) ))
+  })
+
+
+
 })
