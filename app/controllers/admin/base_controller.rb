@@ -5,8 +5,18 @@ class Admin::BaseController < ApplicationController
   before_action :set_photo_parameters, only: [:create, :update]
 
   def set_cities
-    @selected_city = session[:current_city_id].blank? ? City.first :  City.find(session[:current_city_id])
-    @cities = City.all
+
+
+    begin
+      @selected_city = session[:current_city_id].blank? ? City.first :  City.find(session[:current_city_id])
+      @cities = City.all
+    rescue ActiveRecord::RecordNotFound => exception
+      @selected_city = nil
+      @cities = City.all
+    end
+
+
+
   end
 
   def set_photo_parameters

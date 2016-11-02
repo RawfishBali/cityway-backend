@@ -26,7 +26,7 @@ class City < ActiveRecord::Base
   has_many :promos, dependent: :destroy
 
   validates_presence_of :name
-  validates_presence_of :description
+  # validates_presence_of :description
   validates_presence_of :around
   validates_presence_of :commonplace
   validates_presence_of :discover
