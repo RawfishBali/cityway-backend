@@ -37,7 +37,7 @@ html, body						{ font-family: 'Poppins', sans-serif; }
 .dropzone img.ghost				{ opacity: .2; z-index: auto; float:left /* HACK for not scrolling*/; }
 .dropzone img.main				{ cursor: move; }
 .dropzone .final img.main 		{ cursor: auto; }
-.dropzone img.preview			{ height: 100%; margin-top: 0px !important }
+.dropzone img.preview			{ height: 100%; margin-top: 0px !important; max-width: 100%; }
 
 .dropzone .tools				{ position: absolute; top: 10px; right: 10px; z-index: 999; display: inline-block; }
 .dropzone .tools > *			{ margin: 0 0 0 5px; }

@@ -13,7 +13,7 @@
 <body class="header_sticky header_shadow">
   <%= devise_error_messages! %>
   <% flash.each do |type, message| %>
-    <% unless message == 'true' %>
+    <% unless message.to_s == 'true' %>
       <div class="uk-notify uk-notify-top-center" style="display: block;">
         <div class="uk-notify-message" style="opacity: 1; margin-top: -50px; margin-bottom: 10px;">
           <a class="uk-close"></a>
