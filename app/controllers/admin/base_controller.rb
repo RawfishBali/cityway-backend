@@ -11,7 +11,7 @@ class Admin::BaseController < ApplicationController
       @selected_city = session[:current_city_id].blank? ? City.first :  City.find(session[:current_city_id])
       @cities = City.all
     rescue ActiveRecord::RecordNotFound => exception
-      @selected_city = nil
+      @selected_city = City.first
       @cities = City.all
     end
 
