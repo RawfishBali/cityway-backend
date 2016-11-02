@@ -29,7 +29,7 @@ module CityWay
           end
           get '/:id/promos' do
             merchant = Merchant.find(params[:id])
-            promos = merchant.promos.page params[:page]
+            promos = merchant.active_promos.page params[:page]
             add_pagination_headers promos
             present promos, with: CityWay::Api::V1::Entities::Promo, latitude: params[:latitude], longitude: params[:longitude]
           end

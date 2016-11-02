@@ -101,7 +101,7 @@ module CityWay
           get '/:id/promos' do
             if params[:merchant_id]
               merchant = Merchant.find(params[:merchant_id])
-              promos = merchant.promos.page params[:page]
+              promos = merchant.active_promos.page params[:page]
               add_pagination_headers promos
             else
               if params[:category_id]
@@ -119,7 +119,7 @@ module CityWay
               # merchants = merchants.near([params[:latitude],params[:longitude]], 100, units: :km) if params[:latitude] && params[:longitude]
               temp_promos = []
               merchants.each do |m|
-                m.promos.each do |promo|
+                m.active_promos.each do |promo|
                   temp_promos << promo
                 end
               end
