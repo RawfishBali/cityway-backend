@@ -31,7 +31,7 @@
             </td>
             <td class="uk-width-1-10">
               <%= link_to '<i class="md-icon material-icons">&#xE254;</i>'.html_safe, edit_admin_city_path(city) %>
-              <%= link_to '<i class="material-icons"></i>'.html_safe, admin_city_path(city), method: :delete, data: { confirm: 'Are you sure?' } %>
+              <%= link_to '<i class="material-icons delete-town"></i>'.html_safe, admin_city_path(city), method: :delete, data: { confirm: 'Are you sure?' } %>
             </td>
           </tr>
           <% end %>

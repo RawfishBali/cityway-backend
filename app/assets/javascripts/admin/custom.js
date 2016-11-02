@@ -76,7 +76,7 @@ $(document).ready(function(){
     // event.preventDefault();
   });
 
-  $("a").click(function( event ) {
+  $(".delete-town").click(function( event ) {
     $.LoadingOverlay("show");
     $(".waves-button").attr('disabled','disabled')
     // event.preventDefault();
