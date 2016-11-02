@@ -996,7 +996,7 @@ module CityWay
           merchant.promos.any?
         end
         expose :promos do |merchant , options|
-          CityWay::Api::V1::Entities::Promo.represent merchant.promos
+          CityWay::Api::V1::Entities::Promo.represent merchant.active_promos
         end
         expose :business_hours,if: lambda { |object, options| options[:simple] == 'false' } do |merchant , options|
           CityWay::Api::V1::Entities::BusinessHours.represent(merchant.all_business_hours)
@@ -1029,9 +1029,15 @@ module CityWay
         end
         expose :description,if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "Text", :desc => "Promo's description"}
         expose :terms_and_conditions,if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "Text", :desc => "Promo's terms_and_conditions"}
-        expose :discount, documentation: {:type => "Float", :desc => "Promo's discount"}
-        expose :original_price, documentation: {:type => "Float", :desc => "Promo's original_price"}
-        expose :discount_price, documentation: {:type => "Float", :desc => "Promo's discount_price"}
+        expose :discount, documentation: {:type => "Float", :desc => "Promo's discount"} do |object, options|
+          sprintf "%.0f", object.discount
+        end
+        expose :original_price, documentation: {:type => "Float", :desc => "Promo's original_price"} do |object, options|
+          sprintf "%.2f", object.original_price
+        end
+        expose :discount_price, documentation: {:type => "Float", :desc => "Promo's discount_price"}  do |object, options|
+          sprintf "%.2f", object.discount_price
+        end
         expose :distance, if: lambda { |object, options| options[:latitude] && options[:longitude] } do |promo , options|
           promo.merchant.distance_from([options[:latitude], options[:longitude]])
         end
