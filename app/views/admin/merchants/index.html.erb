@@ -2,7 +2,8 @@
   <button class="md-btn"> Select Category <i class="material-icons">&#xE313;</i></button>
   <div class="uk-dropdown">
     <ul class="uk-nav uk-nav-dropdown">
-      <% @categories.each do |category| %>
+      <li><a href="/admin/merchants">Seleziona tutti</a></li>
+      <% @categories.order('name ASC').each do |category| %>
       <li><a href="/admin/merchants?category_id=<%= category.id%>"><%= category.name%></a></li>
       <% end %>
     </ul>
