@@ -84,7 +84,7 @@
             <a href="#" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/profiles' ||  params[:controller] == 'admin/politic_groups' %>">Administration</a>
             <ul>
               <li><a href="/admin/profiles?major=true" class="<%= 'act_item current_section_submenu' if (params[:controller] == 'admin/profiles' && params[:major] == 'true')  %>">Sindaco</a></li>
-              <li><a href="/admin/profiles/" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/profiles' && params[:major] == 'false' %>">Giunta Comunale</a></li>
+              <li><a href="/admin/profiles/" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/profiles' && (!params[:major]) %>">Giunta Comunale</a></li>
               <li><a href="/admin/politic_groups/" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/politic_groups'%>">Consiglio</a></li>
             </ul>
           </li>
@@ -95,12 +95,12 @@
       </li>
 
 
-      <li class="<%= 'submenu_trigger act_section current_section' if params[:controller] == 'admin/ztls' || params[:controller] == 'admin/vehicles' || params[:controller] == 'admin/public_transports' || params[:controller] == 'admin/utility_places' || params[:controller] == 'admin/waste_managements' %> " title="Utilità e Servizi">
+      <li class="<%= 'submenu_trigger current_section act_section' if params[:controller] == 'admin/ztls' || params[:controller] == 'admin/vehicles' || params[:controller] == 'admin/public_transports' || params[:controller] == 'admin/utility_places' || params[:controller] == 'admin/waste_managements' %> " title="Utilità e Servizi">
         <a href="#">
           <span class="menu_icon"><i class="fa fa15 fa-flag" aria-hidden="true"></i></span>
           <span class="menu_title">Utilità e Servizi</span>
         </a>
-        <ul style="<%= 'display:block;' if params[:controller] == 'admin/ztls' || params[:controller] == 'admin/vehicles' || params[:controller] == 'admin/public_transports' || params[:controller] == 'admin/utility_places' || params[:controller] == 'admin/waste_managements' %> ">
+        <ul style="<%= 'display:block !important;' 'display:block !important;' if params[:controller] == 'admin/ztls' || params[:controller] == 'admin/vehicles' || params[:controller] == 'admin/public_transports' || params[:controller] == 'admin/utility_places' || params[:controller] == 'admin/waste_managements' || params[:controller] == 'admin/utility_places' %> ">
           <li><a href="/admin/utility_numbers" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/utility_numbers'%>">Numeri utili</a></li>
           <li>
             <a href="/admin/public_transports" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/ztls' || params[:controller] == 'admin/vehicles' || params[:controller] == 'admin/public_transports' %>">Muoversi in città</a>
@@ -138,7 +138,7 @@
               <li><a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/utility_places' && params[:place_type] == 'elder_home'%>" href="/admin/utility_places?place_type=elder_home">Centridurni per anziani</a></li>
             </ul>
           </li>
-          <li><a href="/admin/utility_places?place_type=young_people_place">Giovani</a></li>
+          <li><a class="<%= 'act_item' if params[:controller] == 'admin/utility_places' && params[:place_type] == 'young_people_place' %>" href="/admin/utility_places?place_type=young_people_place">Giovani</a></li>
           <li>
             <a class="<%= 'act_item current_section_submenu' if ( params[:controller] == 'admin/utility_places' && (params[:place_type] == 'primary_school' || params[:place_type] == 'kindergarten' || params[:place_type] == 'first_secondary_school' || params[:place_type] == 'first_secondary_school' || params[:place_type] == 'second_secondary_school'  || params[:place_type] == 'universities' || params[:place_type] == 'music' || params[:place_type] == 'institute' || params[:place_type] == 'professional_institute'  ) ) %> " href="#">Scuole</a>
             <ul>
