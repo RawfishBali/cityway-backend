@@ -42,4 +42,9 @@ class PublicOffice < ActiveRecord::Base
       [photos.first]
     end
   end
+
+  def all_business_hours
+    mb = (self.business_hours).to_a
+    return mb.sort_by(&:day) 
+  end
 end
