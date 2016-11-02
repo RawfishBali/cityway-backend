@@ -26,7 +26,7 @@ class Admin::CitiesController < Admin::BaseController
 
     respond_to do |format|
       if @city.save
-        format.html { redirect_to admin_cities_path, notice: 'City was successfully created.' }
+        format.html { redirect_to root_path, notice: 'City was successfully created.' }
         format.json { render :show, status: :created, location: @city }
       else
         format.html { redirect_to :back, notice: @city.errors.full_messages }
