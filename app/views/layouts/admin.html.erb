@@ -52,15 +52,16 @@
 
 
   <% flash.each do |type, message| %>
-    <div class="uk-notify uk-notify-top-center" style="display: block;">
-      <div class="uk-notify-message" style="opacity: 1; margin-top: -50px; margin-bottom: 10px;">
-        <a class="uk-close"></a>
-        <div>
-          <%= message %>
+    <% unless message == 'true' %>
+      <div class="uk-notify uk-notify-top-center" style="display: block;">
+        <div class="uk-notify-message" style="opacity: 1; margin-top: -50px; margin-bottom: 10px;">
+          <a class="uk-close"></a>
+          <div>
+            <%= message %>
+          </div>
         </div>
-
       </div>
-    </div>
+    <% end %>%>
   <% end %>
 
   <!-- main content-->

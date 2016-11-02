@@ -355,13 +355,13 @@ readImage: function(image, src, name, mimeType) {
 		// 	}
 		// }
 
-		// useWidth		= $(element).outerWidth() + 40;
-		// useHeight		= useWidth / ratio;
-		//
-		// if (useHeight < $(element).outerHeight()) {
-		// 	useHeight	= $(element).outerHeight() + 40;
-		// 	useWidth	= useHeight * ratio;
-		// }
+		useWidth		= $(element).outerWidth() + 40;
+		useHeight		= useWidth / ratio;
+
+		if (useHeight < $(element).outerHeight()) {
+			useHeight	= $(element).outerHeight() + 40;
+			useWidth	= useHeight * ratio;
+		}
 
 
 		var left			= parseFloat(($(element).outerWidth() - useWidth) / 2)// * -1;
