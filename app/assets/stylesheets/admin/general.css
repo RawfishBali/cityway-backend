@@ -134,3 +134,7 @@
 .loadingoverlay_fontawesome{
   color: #7fb1b6 !important;
 }
+
+.block{
+  display: block !important;
+}
