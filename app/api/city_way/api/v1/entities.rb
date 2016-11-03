@@ -256,6 +256,9 @@ module CityWay
         expose :business_hours do |object, options|
           CityWay::Api::V1::Entities::BusinessHours.represent(object.all_business_hours)
         end
+        expose :is_open do |object, options|
+          object.is_open_now?
+        end
       end
 
       class Park < Grape::Entity
