@@ -20,6 +20,7 @@
 
                         <td class="">
                             <%= link_to '<i class="md-icon material-icons">&#xE254;</i>'.html_safe , edit_admin_itinerary_path(itinerary)%>
+                            <%= link_to '<i class="md-icon material-icons ">&#xE872;</i>'.html_safe, admin_itinerary_path(itinerary), method: :delete , :data => {:confirm => 'Sei sicuro?'} %>
                         </td>
                     </tr>
                     <% end %>

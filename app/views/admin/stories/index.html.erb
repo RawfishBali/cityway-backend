@@ -16,6 +16,7 @@
             <td><%= truncate(@admin_stories.bottom_text, length: 25, omission: '...') %></td>
             <td>
               <%= link_to '<i class="md-icon material-icons">&#xE254;</i>'.html_safe , edit_admin_story_path(@admin_stories)%>
+              <%= link_to '<i class="md-icon material-icons ">&#xE872;</i>'.html_safe, admin_story_path(@admin_stories), method: :delete , :data => {:confirm => 'Sei sicuro?'} %>
             </td>
           </tr>
           <% end %>

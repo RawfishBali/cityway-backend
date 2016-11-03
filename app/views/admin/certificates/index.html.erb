@@ -16,6 +16,7 @@
                         <td class="uk-text-center"><%= service.url %></td>
                         <td class="uk-text-center">
                             <%= link_to '<i class="md-icon material-icons">&#xE254;</i>'.html_safe , edit_admin_certificate_path(service)%>
+                            <%= link_to '<i class="md-icon material-icons ">&#xE872;</i>'.html_safe, admin_certificate_path(service), method: :delete , :data => {:confirm => 'Sei sicuro?'} %>
                         </td>
                     </tr>
                     <% end %>

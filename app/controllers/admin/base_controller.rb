@@ -3,7 +3,7 @@ class Admin::BaseController < ApplicationController
   before_action :authenticate_admin!
   before_action :set_cities
   before_action :set_photo_parameters, only: [:create, :update]
-  before_action :save_previous_url, only: [:new, :edit]
+  before_action :save_previous_url, only: [:new, :edit, :destroy]
 
   def set_cities
     begin

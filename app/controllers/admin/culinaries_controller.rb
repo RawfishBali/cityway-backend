@@ -57,7 +57,7 @@ class Admin::CulinariesController < Admin::BaseController
   def destroy
     @admin_culinary.destroy
     respond_to do |format|
-      format.html { redirect_to admin_culinaries_url, notice: 'Culinary was successfully destroyed.' }
+      format.html { redirect_to session['previous_url'] || admin_culinaries_url, notice: 'Culinary was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

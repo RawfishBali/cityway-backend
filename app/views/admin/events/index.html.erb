@@ -22,6 +22,7 @@
 
                         <td class="uk-text-center">
                             <%= link_to '<i class="md-icon material-icons">&#xE254;</i>'.html_safe , edit_admin_event_path(event)%>
+                            <%= link_to '<i class="md-icon material-icons ">&#xE872;</i>'.html_safe, admin_event_path(event), method: :delete , :data => {:confirm => 'Sei sicuro?'} %>
 
 
                         </td>

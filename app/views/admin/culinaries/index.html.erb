@@ -20,6 +20,7 @@
 
                         <td class="">
                             <%= link_to '<i class="md-icon material-icons">&#xE254;</i>'.html_safe , edit_admin_culinary_path(culinary, culinary_type: culinary.culinary_type)%>
+                            <%= link_to '<i class="md-icon material-icons ">&#xE872;</i>'.html_safe, admin_culinary_path(culinary), method: :delete , :data => {:confirm => 'Sei sicuro?'} %>
                         </td>
                     </tr>
                     <% end %>
