@@ -28,7 +28,7 @@ class Admin::SplashesController < Admin::BaseController
 
     respond_to do |format|
       if @admin_splash.save
-        format.html { redirect_to session['previous_url'] || admin_splashes_url, notice: 'Splash was successfully created.' }
+        format.html { redirect_to session['previous_url'] || admin_splashes_url, notice: 'Splash è stato creato con successo.' }
         format.json { render :show, status: :created, location: @admin_splash }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class Admin::SplashesController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_splash.update(admin_splash_params)
-        format.html { redirect_to session['previous_url'] || admin_splashes_url, notice: 'Splash was successfully updated.' }
+        format.html { redirect_to session['previous_url'] || admin_splashes_url, notice: 'Splash è stato aggiornato con successo.' }
         format.json { render :show, status: :ok, location: @admin_splash }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class Admin::SplashesController < Admin::BaseController
   def destroy
     @admin_splash.destroy
     respond_to do |format|
-      format.html { redirect_to session['previous_url'] || admin_splashes_url, notice: 'Splash was successfully destroyed.' }
+      format.html { redirect_to session['previous_url'] || admin_splashes_url, notice: 'Splash è stato distrutto con successo.' }
       format.json { head :no_content }
     end
   end

@@ -38,7 +38,7 @@ class Admin::UtilityPlacesController < Admin::BaseController
     @is_public = @admin_utility_place.is_public
     respond_to do |format|
       if @admin_utility_place.save
-        format.html { redirect_to session['previous_url'] || admin_utility_places_url(place_type: @admin_utility_place.place_type, is_public: @admin_utility_place.is_public), notice: 'Utility place was successfully created.' }
+        format.html { redirect_to session['previous_url'] || admin_utility_places_url(place_type: @admin_utility_place.place_type, is_public: @admin_utility_place.is_public), notice: 'Utility place è stato creato con successo.' }
         format.json { render :show, status: :created, location: @admin_utility_place }
       else
         format.html { render :new }
@@ -52,7 +52,7 @@ class Admin::UtilityPlacesController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_utility_place.update(admin_utility_place_params)
-        format.html { redirect_to session['previous_url'] || admin_utility_places_url(place_type: @admin_utility_place.place_type, is_public: @admin_utility_place.is_public), notice: 'Utility place was successfully updated.' }
+        format.html { redirect_to session['previous_url'] || admin_utility_places_url(place_type: @admin_utility_place.place_type, is_public: @admin_utility_place.is_public), notice: 'Utility place è stato aggiornato con successo.' }
         format.json { render :show, status: :ok, location: @admin_utility_place }
       else
         format.html { render :edit }
@@ -66,7 +66,7 @@ class Admin::UtilityPlacesController < Admin::BaseController
   def destroy
     @admin_utility_place.destroy
     respond_to do |format|
-      format.html { redirect_to session['previous_url'] || admin_utility_places_url, notice: 'Utility place was successfully destroyed.' }
+      format.html { redirect_to session['previous_url'] || admin_utility_places_url, notice: 'Utility place è stato distrutto con successo.' }
       format.json { head :no_content }
     end
   end

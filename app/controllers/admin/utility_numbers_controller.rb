@@ -29,7 +29,7 @@ class Admin::UtilityNumbersController < Admin::BaseController
     @utility_id = City.find(session[:current_city_id]).utility.id
     respond_to do |format|
       if @admin_utility_number.save
-        format.html { redirect_to session['previous_url'] || admin_utility_numbers_url, notice: 'Utility number was successfully created.' }
+        format.html { redirect_to session['previous_url'] || admin_utility_numbers_url, notice: 'Utility number è stato creato con successo.' }
         format.json { render :show, status: :created, location: @admin_utility_number }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class Admin::UtilityNumbersController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_utility_number.update(admin_utility_number_params)
-        format.html { redirect_to session['previous_url'] || admin_utility_numbers_url, notice: 'Utility number was successfully updated.' }
+        format.html { redirect_to session['previous_url'] || admin_utility_numbers_url, notice: 'Utility number è stato aggiornato con successo.' }
         format.json { render :show, status: :ok, location: @admin_utility_number }
       else
         format.html { render :edit }
@@ -57,7 +57,7 @@ class Admin::UtilityNumbersController < Admin::BaseController
   def destroy
     @admin_utility_number.destroy
     respond_to do |format|
-      format.html { redirect_to session['previous_url'] || admin_utility_numbers_url, notice: 'Utility number was successfully destroyed.' }
+      format.html { redirect_to session['previous_url'] || admin_utility_numbers_url, notice: 'Utility number è stato distrutto con successo.' }
       format.json { head :no_content }
     end
   end

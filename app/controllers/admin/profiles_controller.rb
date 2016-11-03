@@ -37,7 +37,7 @@ class Admin::ProfilesController < Admin::BaseController
     redirect_path = session['previous_url'] || (@admin_profile.is_major ? admin_profiles_url(major:true) : admin_profiles_url)
     respond_to do |format|
       if @admin_profile.save
-        format.html { redirect_to redirect_path, notice: 'Profile was successfully created.' }
+        format.html { redirect_to redirect_path, notice: 'Profile è stato creato con successo.' }
         format.json { render :show, status: :created, location: @admin_profile }
       else
         format.html { render :new }
@@ -52,7 +52,7 @@ class Admin::ProfilesController < Admin::BaseController
     respond_to do |format|
       redirect_path =  @admin_profile.is_major ? admin_profiles_url(major:true) : admin_profiles_url
       if @admin_profile.update(admin_profile_params)
-        format.html { redirect_to session['previous_url'] || redirect_path, notice: 'Profile was successfully updated.' }
+        format.html { redirect_to session['previous_url'] || redirect_path, notice: 'Profile è stato aggiornato con successo.' }
         format.json { render :show, status: :ok, location: @admin_profile }
       else
         format.html { render :edit }
@@ -66,7 +66,7 @@ class Admin::ProfilesController < Admin::BaseController
   def destroy
     @admin_profile.destroy
     respond_to do |format|
-      format.html { redirect_to admin_profiles_url, notice: 'Profile was successfully destroyed.' }
+      format.html { redirect_to admin_profiles_url, notice: 'Profile è stato distrutto con successo.' }
       format.json { head :no_content }
     end
   end

@@ -29,7 +29,7 @@ class Admin::StoriesController < Admin::BaseController
 
     respond_to do |format|
       if @admin_story.save
-        format.html { redirect_to session['previous_url'] || admin_stories_url, notice: 'Story was successfully created.' }
+        format.html { redirect_to session['previous_url'] || admin_stories_url, notice: 'Story è stato creato con successo.' }
         format.json { render :show, status: :created, location: @admin_story }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class Admin::StoriesController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_story.update(admin_story_params)
-        format.html { redirect_to session['previous_url'] || admin_stories_url, notice: 'Story was successfully updated.' }
+        format.html { redirect_to session['previous_url'] || admin_stories_url, notice: 'Story è stato aggiornato con successo.' }
         format.json { render :show, status: :ok, location: @admin_story }
       else
         format.html { render :edit }
@@ -57,7 +57,7 @@ class Admin::StoriesController < Admin::BaseController
   def destroy
     @admin_story.destroy
     respond_to do |format|
-      format.html { redirect_to session['previous_url'] || admin_stories_url, notice: 'Story was successfully destroyed.' }
+      format.html { redirect_to session['previous_url'] || admin_stories_url, notice: 'Story è stato distrutto con successo.' }
       format.json { head :no_content }
     end
   end

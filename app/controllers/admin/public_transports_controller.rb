@@ -28,7 +28,7 @@ class Admin::PublicTransportsController < Admin::BaseController
 
     respond_to do |format|
       if @admin_public_transport.save
-        format.html { redirect_to session['previous_url'] || admin_public_transports_url, notice: 'Public transport was successfully created.' }
+        format.html { redirect_to session['previous_url'] || admin_public_transports_url, notice: 'Public transport è stato creato con successo.' }
         format.json { render :show, status: :created, location: @admin_public_transport }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class Admin::PublicTransportsController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_public_transport.update(admin_public_transport_params)
-        format.html { redirect_to session['previous_url'] || admin_public_transports_url, notice: 'Public transport was successfully updated.' }
+        format.html { redirect_to session['previous_url'] || admin_public_transports_url, notice: 'Public transport è stato aggiornato con successo.' }
         format.json { render :show, status: :ok, location: @admin_public_transport }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class Admin::PublicTransportsController < Admin::BaseController
   def destroy
     @admin_public_transport.destroy
     respond_to do |format|
-      format.html { redirect_to session['previous_url'] || admin_public_transports_url, notice: 'Public transport was successfully destroyed.' }
+      format.html { redirect_to session['previous_url'] || admin_public_transports_url, notice: 'Public transport è stato distrutto con successo.' }
       format.json { head :no_content }
     end
   end

@@ -28,7 +28,7 @@ class Admin::CertificatesController < Admin::BaseController
 
     respond_to do |format|
       if @admin_certificate.save
-        format.html { redirect_to session['previous_url'] || admin_certificates_url, notice: 'Certificate was successfully created.' }
+        format.html { redirect_to session['previous_url'] || admin_certificates_url, notice: 'Certificate è stato creato con successo.' }
         format.json { render :show, status: :created, location: @admin_certificate }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class Admin::CertificatesController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_certificate.update(admin_certificate_params)
-        format.html { redirect_to session['previous_url'] || admin_certificates_url, notice: 'Certificate was successfully updated.' }
+        format.html { redirect_to session['previous_url'] || admin_certificates_url, notice: 'Certificate è stato aggiornato con successo.' }
         format.json { render :show, status: :ok, location: @admin_certificate }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class Admin::CertificatesController < Admin::BaseController
   def destroy
     @admin_certificate.destroy
     respond_to do |format|
-      format.html { redirect_to admin_certificates_url, notice: 'Certificate was successfully destroyed.' }
+      format.html { redirect_to admin_certificates_url, notice: 'Certificate è stato distrutto con successo.' }
       format.json { head :no_content }
     end
   end

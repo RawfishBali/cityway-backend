@@ -34,7 +34,7 @@ class Admin::MerchantsController < Admin::BaseController
 
     respond_to do |format|
       if @admin_merchant.save
-        format.html { redirect_to session['previous_url'] || admin_merchants_path, notice: 'Merchant was successfully created.' }
+        format.html { redirect_to session['previous_url'] || admin_merchants_path, notice: 'Merchant è stato creato con successo.' }
         format.json { render :show, status: :created, location: @admin_merchant }
       else
         format.html { render :new }
@@ -48,7 +48,7 @@ class Admin::MerchantsController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_merchant.update(admin_merchant_params)
-        format.html { redirect_to session['previous_url'] || admin_merchants_path, notice: 'Merchant was successfully updated.' }
+        format.html { redirect_to session['previous_url'] || admin_merchants_path, notice: 'Merchant è stato aggiornato con successo.' }
         format.json { render :show, status: :ok, location: admin_merchants_path }
       else
         format.html { render :edit }
@@ -62,7 +62,7 @@ class Admin::MerchantsController < Admin::BaseController
   def destroy
     @admin_merchant.destroy
     respond_to do |format|
-      format.html { redirect_to admin_merchants_url, notice: 'Merchant was successfully destroyed.' }
+      format.html { redirect_to admin_merchants_url, notice: 'Merchant è stato distrutto con successo.' }
       format.json { head :no_content }
     end
   end

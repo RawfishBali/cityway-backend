@@ -30,7 +30,7 @@ class Admin::CityHallStoriesController < Admin::BaseController
 
     respond_to do |format|
       if @admin_city_hall_story.save
-        format.html { redirect_to session['previous_url'] || admin_city_hall_stories_url, notice: 'City hall story was successfully created.' }
+        format.html { redirect_to session['previous_url'] || admin_city_hall_stories_url, notice: 'City hall story è stato creato con successo.' }
         format.json { render :show, status: :created, location: @admin_city_hall_story }
       else
         format.html { render :new }
@@ -44,7 +44,7 @@ class Admin::CityHallStoriesController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_city_hall_story.update(admin_city_hall_story_params)
-        format.html { redirect_to session['previous_url'] || admin_city_hall_stories_url, notice: 'City hall story was successfully updated.' }
+        format.html { redirect_to session['previous_url'] || admin_city_hall_stories_url, notice: 'City hall story è stato aggiornato con successo.' }
         format.json { render :show, status: :ok, location: @admin_city_hall_story }
       else
         format.html { render :edit }
@@ -58,7 +58,7 @@ class Admin::CityHallStoriesController < Admin::BaseController
   def destroy
     @admin_city_hall_story.destroy
     respond_to do |format|
-      format.html { redirect_to admin_city_hall_stories_url, notice: 'City hall story was successfully destroyed.' }
+      format.html { redirect_to admin_city_hall_stories_url, notice: 'City hall story è stato distrutto con successo.' }
       format.json { head :no_content }
     end
   end

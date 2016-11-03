@@ -7,7 +7,7 @@ class Admin::CommonplacesController < Admin::BaseController
   def update
     respond_to do |format|
       if @commonplace.update(commonplace_params)
-        format.html { redirect_to edit_admin_commonplace_path(@commonplace), notice: 'Commune was successfully updated.' }
+        format.html { redirect_to edit_admin_commonplace_path(@commonplace), notice: 'Commune è stato aggiornato con successo.' }
         format.json { render :show, status: :ok, location: @commonplace }
       else
         format.html { redirect_to admin_cities_path, notice: @commonplace.errors.full_messages }

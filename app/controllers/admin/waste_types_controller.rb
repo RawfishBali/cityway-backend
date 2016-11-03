@@ -28,7 +28,7 @@ class Admin::WasteTypesController < Admin::BaseController
 
     respond_to do |format|
       if @admin_waste_type.save
-        format.html { redirect_to session['previous_url'] || admin_waste_types_url, notice: 'Waste type was successfully created.' }
+        format.html { redirect_to session['previous_url'] || admin_waste_types_url, notice: 'Waste type è stato creato con successo.' }
         format.json { render :show, status: :created, location: @admin_waste_type }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class Admin::WasteTypesController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_waste_type.update(admin_waste_type_params)
-        format.html { redirect_to session['previous_url'] || admin_waste_types_url, notice: 'Waste type was successfully updated.' }
+        format.html { redirect_to session['previous_url'] || admin_waste_types_url, notice: 'Waste type è stato aggiornato con successo.' }
         format.json { render :show, status: :ok, location: @admin_waste_type }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class Admin::WasteTypesController < Admin::BaseController
   def destroy
     @admin_waste_type.destroy
     respond_to do |format|
-      format.html { redirect_to session['previous_url'] || admin_waste_types_url, notice: 'Waste type was successfully destroyed.' }
+      format.html { redirect_to session['previous_url'] || admin_waste_types_url, notice: 'Waste type è stato distrutto con successo.' }
       format.json { head :no_content }
     end
   end

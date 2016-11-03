@@ -28,7 +28,7 @@ class Admin::ZtlsController < Admin::BaseController
 
     respond_to do |format|
       if @admin_ztl.save
-        format.html { redirect_to session['previous_url'] || admin_ztls_url, notice: 'Ztl was successfully created.' }
+        format.html { redirect_to session['previous_url'] || admin_ztls_url, notice: 'Ztl è stato creato con successo.' }
         format.json { render :show, status: :created, location: @admin_ztl }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class Admin::ZtlsController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_ztl.update(admin_ztl_params)
-        format.html { redirect_to session['previous_url'] || admin_ztls_url, notice: 'Ztl was successfully updated.' }
+        format.html { redirect_to session['previous_url'] || admin_ztls_url, notice: 'Ztl è stato aggiornato con successo.' }
         format.json { render :show, status: :ok, location: @admin_ztl }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class Admin::ZtlsController < Admin::BaseController
   def destroy
     @admin_ztl.destroy
     respond_to do |format|
-      format.html { redirect_to session['previous_url'] || admin_ztls_url, notice: 'Ztl was successfully destroyed.' }
+      format.html { redirect_to session['previous_url'] || admin_ztls_url, notice: 'Ztl è stato distrutto con successo.' }
       format.json { head :no_content }
     end
   end

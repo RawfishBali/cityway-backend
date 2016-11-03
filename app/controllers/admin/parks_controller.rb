@@ -29,7 +29,7 @@ class Admin::ParksController < Admin::BaseController
 
     respond_to do |format|
       if @admin_park.save
-        format.html { redirect_to session['previous_url'] ||  admin_parks_path, notice: 'Park was successfully created.' }
+        format.html { redirect_to session['previous_url'] ||  admin_parks_path, notice: 'Park è stato creato con successo.' }
         format.json { render :show, status: :created, location: @admin_park }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class Admin::ParksController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_park.update(admin_park_params)
-        format.html { redirect_to session['previous_url'] ||  admin_parks_path, notice: 'Park was successfully updated.' }
+        format.html { redirect_to session['previous_url'] ||  admin_parks_path, notice: 'Park è stato aggiornato con successo.' }
         format.json { render :show, status: :ok, location: @admin_park }
       else
         format.html { render :edit }
@@ -57,7 +57,7 @@ class Admin::ParksController < Admin::BaseController
   def destroy
     @admin_park.destroy
     respond_to do |format|
-      format.html { redirect_to session['previous_url'] ||  admin_parks_path, notice: 'Park was successfully destroyed.' }
+      format.html { redirect_to session['previous_url'] ||  admin_parks_path, notice: 'Park è stato distrutto con successo.' }
       format.json { head :no_content }
     end
   end

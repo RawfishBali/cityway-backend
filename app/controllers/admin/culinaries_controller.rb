@@ -29,7 +29,7 @@ class Admin::CulinariesController < Admin::BaseController
 
     respond_to do |format|
       if @admin_culinary.save
-        format.html { redirect_to session['previous_url'] || admin_culinaries_url(culinary_type: @admin_culinary.culinary_type), notice: 'Culinary was successfully created.' }
+        format.html { redirect_to session['previous_url'] || admin_culinaries_url(culinary_type: @admin_culinary.culinary_type), notice: 'Culinary è stato creato con successo.' }
         format.json { render :show, status: :created, location: @admin_culinary }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class Admin::CulinariesController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_culinary.update(admin_culinary_params)
-        format.html { redirect_to session['previous_url'] || admin_culinaries_url(culinary_type: @admin_culinary.culinary_type), notice: 'Culinary was successfully updated.' }
+        format.html { redirect_to session['previous_url'] || admin_culinaries_url(culinary_type: @admin_culinary.culinary_type), notice: 'Culinary è stato aggiornato con successo.' }
         format.json { render :show, status: :ok, location: @admin_culinary }
       else
         format.html { render :edit }
@@ -57,7 +57,7 @@ class Admin::CulinariesController < Admin::BaseController
   def destroy
     @admin_culinary.destroy
     respond_to do |format|
-      format.html { redirect_to session['previous_url'] || admin_culinaries_url, notice: 'Culinary was successfully destroyed.' }
+      format.html { redirect_to session['previous_url'] || admin_culinaries_url, notice: 'Culinary è stato distrutto con successo.' }
       format.json { head :no_content }
     end
   end
