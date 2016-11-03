@@ -17,7 +17,7 @@
             <td class="uk-text-center"><%= device.external_url %></td>
             <td class="uk-text-center"><%= device.address %></td>
             <td class="uk-text-center">
-              <%= link_to '<i class="md-icon material-icons">&#xE254;</i>'.html_safe , edit_admin_device_path(device)%>
+              <%= link_to '<i class="md-icon material-icons">&#xE254;</i>'.html_safe , edit_admin_device_path(device, device_type: device.device_type)%>
             </td>
           </tr>
           <% end %>
