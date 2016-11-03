@@ -377,7 +377,7 @@ module CityWay
           profile.photo.url
         end
         expose :profile_icon, documentation: {:type => "String", :desc => "Profile  icon"}  do |object, options|
-          profile.major_icon.url if object.major_icon
+          object.major_icon.url if object.major_icon
         end
         expose :distance, if: lambda { |object, options| options[:latitude] && options[:longitude] } do |object , options|
           object.distance_from([options[:latitude], options[:longitude]])
