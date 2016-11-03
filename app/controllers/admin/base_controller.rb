@@ -3,10 +3,9 @@ class Admin::BaseController < ApplicationController
   before_action :authenticate_admin!
   before_action :set_cities
   before_action :set_photo_parameters, only: [:create, :update]
+  before_action :save_previous_url, only: [:new, :edit]
 
   def set_cities
-
-
     begin
       @selected_city = session[:current_city_id].blank? ? City.first :  City.find(session[:current_city_id])
       @cities = City.all
@@ -14,9 +13,6 @@ class Admin::BaseController < ApplicationController
       @selected_city = City.first
       @cities = City.all
     end
-
-
-
   end
 
   def set_photo_parameters
@@ -255,5 +251,7 @@ class Admin::BaseController < ApplicationController
 
   end
 
-
+  def save_previous_url
+    session['previous_url'] = request.referer
+  end
 end

@@ -28,7 +28,7 @@ class Admin::CertificatesController < Admin::BaseController
 
     respond_to do |format|
       if @admin_certificate.save
-        format.html { redirect_to admin_certificates_url, notice: 'Certificate was successfully created.' }
+        format.html { redirect_to session['previous_url'] || admin_certificates_url, notice: 'Certificate was successfully created.' }
         format.json { render :show, status: :created, location: @admin_certificate }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class Admin::CertificatesController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_certificate.update(admin_certificate_params)
-        format.html { redirect_to admin_certificates_url, notice: 'Certificate was successfully updated.' }
+        format.html { redirect_to session['previous_url'] || admin_certificates_url, notice: 'Certificate was successfully updated.' }
         format.json { render :show, status: :ok, location: @admin_certificate }
       else
         format.html { render :edit }

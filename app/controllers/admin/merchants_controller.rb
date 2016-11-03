@@ -5,9 +5,9 @@ class Admin::MerchantsController < Admin::BaseController
   # GET /admin/merchants.json
   def index
     if params[:category_id]
-      @admin_merchants = Category.find(params[:category_id]).merchants.page(params[:page]).per(10)
+      @admin_merchants = City.find(session[:current_city_id]).categories.find(params[:category_id]).merchants.order('name ASC').page(params[:page]).per(10)
     else
-      @admin_merchants = City.find(session[:current_city_id]).merchants.page(params[:page]).per(10)
+      @admin_merchants = City.find(session[:current_city_id]).merchants.order('name ASC').page(params[:page]).per(10)
     end
 
     @categories =  City.find(session[:current_city_id]).parent_categories
@@ -34,7 +34,7 @@ class Admin::MerchantsController < Admin::BaseController
 
     respond_to do |format|
       if @admin_merchant.save
-        format.html { redirect_to admin_merchants_path, notice: 'Merchant was successfully created.' }
+        format.html { redirect_to session['previous_url'] || admin_merchants_path, notice: 'Merchant was successfully created.' }
         format.json { render :show, status: :created, location: @admin_merchant }
       else
         format.html { render :new }
@@ -48,7 +48,7 @@ class Admin::MerchantsController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_merchant.update(admin_merchant_params)
-        format.html { redirect_to admin_merchants_path, notice: 'Merchant was successfully updated.' }
+        format.html { redirect_to session['previous_url'] || admin_merchants_path, notice: 'Merchant was successfully updated.' }
         format.json { render :show, status: :ok, location: admin_merchants_path }
       else
         format.html { render :edit }

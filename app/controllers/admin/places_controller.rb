@@ -14,7 +14,7 @@ class Admin::PlacesController < Admin::BaseController
 
   # GET /admin/places/new
   def new
-    @admin_place = Admin::Place.new
+    @admin_place = Place.new
   end
 
   # GET /admin/places/1/edit
@@ -28,7 +28,7 @@ class Admin::PlacesController < Admin::BaseController
 
     respond_to do |format|
       if @admin_place.save
-        format.html { redirect_to admin_places_url(place_type:@admin_place.place_type), notice: 'Place was successfully created.' }
+        format.html { redirect_to session['previous_url'] ||  admin_places_url(place_type:@admin_place.place_type), notice: 'Place was successfully created.' }
         format.json { render :show, status: :created, location: @admin_place }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class Admin::PlacesController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_place.update(admin_place_params)
-        format.html { redirect_to admin_places_url(place_type:@admin_place.place_type), notice: 'Place was successfully updated.' }
+        format.html { redirect_to session['previous_url'] ||  admin_places_url(place_type:@admin_place.place_type), notice: 'Place was successfully updated.' }
         format.json { render :show, status: :ok, location: @admin_place }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class Admin::PlacesController < Admin::BaseController
   def destroy
     @admin_place.destroy
     respond_to do |format|
-      format.html { redirect_to admin_places_url, notice: 'Place was successfully destroyed.' }
+      format.html { redirect_to session['previous_url'] ||  admin_places_url, notice: 'Place was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

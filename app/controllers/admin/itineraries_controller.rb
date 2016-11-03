@@ -29,7 +29,7 @@ class Admin::ItinerariesController < Admin::BaseController
 
     respond_to do |format|
       if @admin_itinerary.save
-        format.html { redirect_to admin_itineraries_url, notice: 'Itinerary was successfully created.' }
+        format.html { redirect_to session['previous_url'] || admin_itineraries_url, notice: 'Itinerary was successfully created.' }
         format.json { render :show, status: :created, location: @admin_itinerary }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class Admin::ItinerariesController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_itinerary.update(admin_itinerary_params)
-        format.html { redirect_to admin_itineraries_url, notice: 'Itinerary was successfully updated.' }
+        format.html { redirect_to session['previous_url'] || admin_itineraries_url, notice: 'Itinerary was successfully updated.' }
         format.json { render :show, status: :ok, location: @admin_itinerary }
       else
         format.html { render :edit }

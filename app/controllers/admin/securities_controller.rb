@@ -31,7 +31,7 @@ class Admin::SecuritiesController < Admin::BaseController
 
     respond_to do |format|
       if @admin_security.save
-        format.html { redirect_to admin_securities_url, notice: 'Security was successfully created.' }
+        format.html { redirect_to session['previous_url'] ||  admin_securities_url, notice: 'Security was successfully created.' }
         format.json { render :show, status: :created, location: @admin_security }
       else
         format.html { render :new }
@@ -45,7 +45,7 @@ class Admin::SecuritiesController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_security.update(admin_security_params)
-        format.html { redirect_to admin_securities_url, notice: 'Security was successfully updated.' }
+        format.html { redirect_to session['previous_url'] || admin_securities_url, notice: 'Security was successfully updated.' }
         format.json { render :show, status: :ok, location: @admin_security }
       else
         format.html { render :edit }

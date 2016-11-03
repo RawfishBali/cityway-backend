@@ -29,7 +29,7 @@ class Admin::AdvertisementsController < Admin::BaseController
 
     respond_to do |format|
       if @advertisement.save
-        format.html { redirect_to admin_advertisements_path, notice: 'Advertisement was successfully created.' }
+        format.html { redirect_to (session['previous_url'] || admin_advertisements_path), notice: 'Advertisement was successfully created.' }
         format.json { render :show, status: :created, location: @advertisement }
       else
         format.html { redirect_to admin_advertisements_path, notice: 'Advertisement was successfully created.' }
@@ -44,7 +44,7 @@ class Admin::AdvertisementsController < Admin::BaseController
     respond_to do |format|
       if @advertisement.update(admin_advertisement_params)
 
-        format.html { redirect_to admin_advertisements_path, notice: 'Advertisement was successfully updated.' }
+        format.html { redirect_to (session['previous_url'] || admin_advertisements_path), notice: 'Advertisement was successfully updated.' }
         format.json { render :show, status: :ok, location: @advertisement }
       else
         format.html { redirect_to edit_admin_advertisement_path(@advertisement), notice: 'Advertisement was successfully created.'}

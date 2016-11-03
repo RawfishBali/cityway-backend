@@ -25,11 +25,11 @@ class Admin::OnlineServicesController < Admin::BaseController
   # POST /admin/online_services
   # POST /admin/online_services.json
   def create
-    @admin_online_service = Admin::OnlineService.new(admin_online_service_params)
+    @admin_online_service = City.find(session[:current_city_id]).commonplace.online_services.new(admin_online_service_params)
     @commonplace_id = City.find(session[:current_city_id]).commonplace.id
     respond_to do |format|
       if @admin_online_service.save
-        format.html { redirect_to admin_online_services_url, notice: 'Online service was successfully created.' }
+        format.html { redirect_to session['previous_url'] || admin_online_services_url, notice: 'Online service was successfully created.' }
         format.json { render :show, status: :created, location: @admin_online_service }
       else
         format.html { render :new }
@@ -42,9 +42,8 @@ class Admin::OnlineServicesController < Admin::BaseController
   # PATCH/PUT /admin/online_services/1.json
   def update
     respond_to do |format|
-      @commonplace_id = City.find(session[:current_city_id]).commonplace.id
       if @admin_online_service.update(admin_online_service_params)
-        format.html { redirect_to admin_online_services_url, notice: 'Online service was successfully updated.' }
+        format.html { redirect_to session['previous_url'] ||  admin_online_services_url, notice: 'Online service was successfully updated.' }
         format.json { render :show, status: :ok, location: @admin_online_service }
       else
         format.html { render :edit }
@@ -72,6 +71,6 @@ class Admin::OnlineServicesController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_online_service_params
-      params.require(:online_service).permit(:name, :url, :commonplace_id)
+      params.require(:online_service).permit(:name, :url)
     end
 end

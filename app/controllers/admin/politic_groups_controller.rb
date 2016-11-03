@@ -29,7 +29,7 @@ class Admin::PoliticGroupsController < Admin::BaseController
 
     respond_to do |format|
       if @admin_politic_group.save
-        format.html { redirect_to admin_politic_groups_url, notice: 'Politic group was successfully created.' }
+        format.html { redirect_to session['previous_url'] ||  admin_politic_groups_url, notice: 'Politic group was successfully created.' }
         format.json { render :show, status: :created, location: @admin_politic_group }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class Admin::PoliticGroupsController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_politic_group.update(admin_politic_group_params)
-        format.html { redirect_to admin_politic_groups_url, notice: 'Politic group was successfully updated.' }
+        format.html { redirect_to session['previous_url'] ||  admin_politic_groups_url, notice: 'Politic group was successfully updated.' }
         format.json { render :show, status: :ok, location: @admin_politic_group }
       else
         format.html { render :edit }

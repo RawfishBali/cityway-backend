@@ -30,7 +30,7 @@ class Admin::CategoriesController < Admin::BaseController
     respond_to do |format|
       if @admin_category.save
         @admin_category.cities << City.find(session[:current_city_id])
-        format.html { redirect_to admin_categories_url, notice: 'Category was successfully created.' }
+        format.html { redirect_to session['previous_url'] || admin_categories_url, notice: 'Category was successfully created.' }
         format.json { render :show, status: :created, location: @admin_category }
       else
         format.html { render :new }
@@ -56,7 +56,7 @@ class Admin::CategoriesController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_category.update(admin_category_params)
-        format.html { redirect_to admin_categories_url, notice: 'Category was successfully updated.' }
+        format.html { redirect_to session['previous_url'] || admin_categories_url, notice: 'Category was successfully updated.' }
         format.json { render :show, status: :ok, location: @admin_category }
       else
         format.html { render :edit }

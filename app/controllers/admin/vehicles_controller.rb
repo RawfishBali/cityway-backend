@@ -29,7 +29,7 @@ class Admin::VehiclesController < Admin::BaseController
     @vehicle_type = Vehicle.vehicle_types[params[:vehicle_type]]
     respond_to do |format|
       if @admin_vehicle.save
-        format.html { redirect_to admin_vehicles_url(vehicle_type: @admin_vehicle.vehicle_type), notice: 'Vehicle was successfully created.' }
+        format.html { redirect_to session['previous_url'] || admin_vehicles_url(vehicle_type: @admin_vehicle.vehicle_type), notice: 'Vehicle was successfully created.' }
         format.json { render :show, status: :created, location: @admin_vehicle }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class Admin::VehiclesController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_vehicle.update(admin_vehicle_params)
-        format.html { redirect_to admin_vehicles_url(vehicle_type: @admin_vehicle.vehicle_type), notice: 'Vehicle was successfully updated.' }
+        format.html { redirect_to session['previous_url'] || admin_vehicles_url(vehicle_type: @admin_vehicle.vehicle_type), notice: 'Vehicle was successfully updated.' }
         format.json { render :show, status: :ok, location: @admin_vehicle }
       else
         format.html { render :edit }
@@ -57,7 +57,7 @@ class Admin::VehiclesController < Admin::BaseController
   def destroy
     @admin_vehicle.destroy
     respond_to do |format|
-      format.html { redirect_to admin_vehicles_url, notice: 'Vehicle was successfully destroyed.' }
+      format.html { redirect_to session['previous_url'] || admin_vehicles_url, notice: 'Vehicle was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

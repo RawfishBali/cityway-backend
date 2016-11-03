@@ -29,7 +29,7 @@ class Admin::EventsController < Admin::BaseController
 
     respond_to do |format|
       if @admin_event.save
-        format.html { redirect_to admin_events_url, notice: 'Event was successfully created.' }
+        format.html { redirect_to session['previous_url'] || admin_events_url, notice: 'Event was successfully created.' }
         format.json { render :show, status: :created, location: @admin_event }
       else
         @around_id = City.find(session[:current_city_id]).around.id
@@ -44,7 +44,7 @@ class Admin::EventsController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_event.update(admin_event_params)
-        format.html { redirect_to admin_events_url, notice: 'Event was successfully updated.' }
+        format.html { redirect_to session['previous_url'] || admin_events_url, notice: 'Event was successfully updated.' }
         format.json { render :show, status: :ok, location: @admin_event }
       else
         @around_id = City.find(session[:current_city_id]).around.id
@@ -59,7 +59,7 @@ class Admin::EventsController < Admin::BaseController
   def destroy
     @admin_event.destroy
     respond_to do |format|
-      format.html { redirect_to admin_events_url, notice: 'Event was successfully destroyed.' }
+      format.html { redirect_to session['previous_url'] || admin_events_url, notice: 'Event was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
