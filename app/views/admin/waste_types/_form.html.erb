@@ -3,7 +3,7 @@
     <%= form_for(@admin_waste_type, url: (@admin_waste_type.new_record? ? admin_waste_types_path(@admin_waste_type) : admin_waste_type_path(@admin_waste_type)), multipart: true) do |f| %>
     <% if @admin_waste_type.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@admin_waste_type.errors.count, "error") %> prohibited this admin_category from being saved:</h2>
+      <h2><%= pluralize(@admin_waste_type.errors.count, "Errore") %> Questa categoria non può essere salvata:</h2>
 
       <ul>
         <% @admin_waste_type.errors.full_messages.each do |message| %>
@@ -14,9 +14,9 @@
     <% end %>
     <h3 class=" ">
       <% if @admin_waste_type.new_record?%>
-      New <%= @admin_waste_type.class.name %>
+      Aggiungi <%= @admin_waste_type.class.name %>
       <% else %>
-      Edit <%= @admin_waste_type.name %>
+      Gestisci <%= @admin_waste_type.name %>
       <% end %>
     </h3>
     <div class="uk-grid" data-uk-grid-margin>
@@ -24,7 +24,7 @@
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
-              <label>name</label>
+              <label>Nome</label>
               <%= f.text_field :name,class: 'md-input', required: true  %>
             </div>
           </div>
@@ -42,7 +42,7 @@
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
-              <h4>Icon</h4>
+              <h4>Icone</h4>
               <div class="dropzone" data-width="750" data-ghost="false" data-canvas="false" data-image="<%= f.object.icon.url %>" data-originalsize="false" data-height="410" data-url="/" data-editstart="false" data-ajax="false", data-save="false" data-canvas="false" style="width: 100%">
                 <%= f.file_field :icon%>
               </div>

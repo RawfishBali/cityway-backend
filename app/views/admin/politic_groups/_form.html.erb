@@ -3,7 +3,7 @@
     <%= form_for(@admin_politic_group, url: (@admin_politic_group.new_record? ? admin_politic_groups_path(@admin_politic_group) : admin_politic_group_path(@admin_politic_group)), multipart: true) do |f| %>
     <% if @admin_politic_group.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@admin_politic_group.errors.count, "error") %> prohibited this admin_category from being saved:</h2>
+      <h2><%= pluralize(@admin_politic_group.errors.count, "error") %> Questa categoria non può essere salvata:</h2>
       <ul>
         <% @admin_politic_group.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -13,9 +13,9 @@
     <% end %>
     <h2 class=" ">
       <% if @admin_politic_group.new_record?%>
-      New <%= @admin_politic_group.class.name %>
+      Aggiungi Consiglio
       <% else %>
-      Edit <%= @admin_politic_group.name %>
+      Gestisci <%= @admin_politic_group.name %>
       <% end %>
       <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, :back, class:'float-right' %>
     </h2>
@@ -26,7 +26,7 @@
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
-              <label>name</label>
+              <label>Nome</label>
               <%= f.text_field :name,class: 'md-input'  %>
             </div>
           </div>
@@ -35,7 +35,7 @@
       <% unless action_name == 'new' %>
       <div class="uk-width-medium-1-1">
         <div class="uk-form-row">
-          <h3>Members</h3>
+          <h3>Membri</h3>
           <% @admin_politic_group.profiles.each do |profile| %>
           <%= link_to (image_tag profile.photo.url, class: 'members-photo'), edit_admin_profile_path(profile) %>
           <% end %>

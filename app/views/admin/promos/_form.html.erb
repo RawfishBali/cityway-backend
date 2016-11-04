@@ -14,9 +14,9 @@
     <% end %>
     <h2 class=" ">
       <% if @admin_promo.new_record?%>
-      New <%= @admin_promo.class.name %>
+      Aggiungi <%= @admin_promo.class.name %>
       <% else %>
-      Edit <%= @admin_promo.title %>
+      Gestisci <%= @admin_promo.title %>
       <% end %>
       <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, admin_promos_path, class:'float-right' %>
     </h2>
@@ -26,12 +26,12 @@
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-2">
-              <label>Title</label>
+              <label>Titolo</label>
               <%= f.text_field :title, required: true,class: 'md-input'  %>
             </div>
             <div class="uk-width-medium-1-2">
-              <label>Merchant</label>
-              <%= f.select :merchant_id, options_from_collection_for_select(@merchants, 'id', 'name', (f.object.merchant.present? ? f.object.merchant.id : nil)), {prompt: 'Select Merchant'}, {'data-md-selectize': true, required: true, class: 'md-input'}  %>
+              <label>Attività</label>
+              <%= f.select :merchant_id, options_from_collection_for_select(@merchants, 'id', 'name', (f.object.merchant.present? ? f.object.merchant.id : nil)), {prompt: 'Seleziona attività'}, {'data-md-selectize': true, required: true, class: 'md-input'}  %>
             </div>
           </div>
         </div>
@@ -43,11 +43,11 @@
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-2">
-              <label>Description</label>
+              <label>Descrizione</label>
               <%= f.text_area :description, required: true,class: 'md-input'  %>
             </div>
             <div class="uk-width-medium-1-2">
-              <label>Term & Condition</label>
+              <label>Termini & Condizioni</label>
               <%= f.text_area :terms_and_conditions, required: true,class: 'md-input'  %>
             </div>
           </div>
@@ -64,7 +64,7 @@
 
               <div class="uk-input-group">
                 <span class="uk-input-group-addon">€</span>
-                <label>Original Price</label>
+                <label>Prezzo Originale</label>
                 <%= f.number_field :original_price, required: true,class: 'md-input'  %>
               </div>
 
@@ -76,7 +76,7 @@
             <div class="uk-width-medium-1-2">
               <div class="uk-input-group">
 
-                <label>Discount</label>
+                <label>Sconto</label>
                 <%= f.number_field :discount, required: true,class: 'md-input', value: f.object.discount.to_i  %>
                 <span class="uk-input-group-addon">%</span>
               </div>
@@ -92,12 +92,12 @@
             <div class="uk-width-medium-1-2">
               <div class="uk-input-group">
                 <span class="uk-input-group-addon">€</span>
-                <label>Discounted Price</label>
+                <label>Prezzo Scontato</label>
                 <%= f.number_field :discount_price, required: true,class: 'md-input', disabled: true  %>
               </div>
             </div>
             <div class="uk-width-medium-1-2">
-              <%= f.label :approval, class: 'inline-label'%>
+              <%= f.label :approval, 'Approvazione', class: 'inline-label'%>
               <%= f.check_box :approval,class: 'md-input', 'data-switchery': true  %>
 
 
@@ -114,7 +114,7 @@
 
             </div>
             <div class="uk-width-medium-1-2">
-              <label>Category Photo</label>
+              <label>Foto categoria</label>
               <br />
               <div class="dropzone" data-width="750"  data-image="<%= f.object.photo.url %>"  data-height="410"  data-editstart="false" data-ajax="false" data-canvas="true" style="width: 100%">
                 <%= f.file_field :photo%>

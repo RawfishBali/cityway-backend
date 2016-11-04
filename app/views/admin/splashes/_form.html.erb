@@ -3,7 +3,7 @@
     <%= form_for(@admin_splash, url: (@admin_splash.new_record? ? admin_splashes_path(@admin_splash) : admin_splash_path(@admin_splash)), multipart: true) do |f| %>
     <% if @admin_splash.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@admin_splash.errors.count, "error") %> prohibited this admin_category from being saved:</h2>
+      <h2><%= pluralize(@admin_splash.errors.count, "error") %> Questa categoria non può essere salvata:</h2>
 
       <ul>
         <% @admin_splash.errors.full_messages.each do |message| %>
@@ -14,9 +14,9 @@
     <% end %>
     <h3 class=" ">
       <% if @admin_splash.new_record?%>
-      New <%= @admin_splash.class.name %>
+      Aggiungi <%= @admin_splash.class.name %>
       <% else %>
-      Edit <%= @admin_splash.name %>
+      Gestisci <%= @admin_splash.name %>
       <% end %>
     </h3>
     <div class="uk-grid" data-uk-grid-margin>
@@ -27,7 +27,7 @@
             <div class="uk-width-medium-1-1">
               <div class="uk-form-row">
                 <div id="photos">
-                  <h2>Photos</h2>
+                  <h2>Foto</h2>
                   <%= f.fields_for :photos do |photo| %>
                   <%= render 'photo_fields', f: photo %>
                   <% end %>

@@ -4,11 +4,11 @@
       <table class="uk-table uk-table-nowrap table_check">
         <thead>
           <tr>
-            <th class="uk-width-1-10 ">City Name</th>
-            <th class="uk-width-1-10 ">Description</th>
-            <th class="uk-width-1-10 ">Photo</th>
+            <th class="uk-width-1-10 ">Nome Città</th>
+            <th class="uk-width-1-10 ">Descrizione</th>
+            <th class="uk-width-1-10 ">Foto</th>
             <th class="uk-width-1-10 ">Stemma</th>
-            <th class="uk-width-1-10 ">Actions</th>
+            <th class="uk-width-1-10 ">Azioni</th>
           </tr>
         </thead>
         <tbody>
@@ -23,12 +23,12 @@
                   <a href="#commune_<%= city.commonplace.id %>" class="btnSectionClone" data-uk-modal="{ center:true }"><i class="material-icons md-24"></i></a>
                 </span>
               <% else %>
-                "City Hall is not available"
+                "Comune non disponibile"
               <% end %>
             </td>
             <td class="uk-width-1-10">
               <%= link_to '<i class="md-icon material-icons">&#xE254;</i>'.html_safe, edit_admin_city_path(city) %>
-              <%= link_to '<i class="material-icons"></i>'.html_safe, admin_city_path(city), method: :delete, data: { confirm: 'Are you sure?' } %>
+              <%= link_to '<i class="material-icons"></i>'.html_safe, admin_city_path(city), method: :delete, data: { confirm: 'Sei sicuro di voler cancellare?' } %>
             </td>
           </tr>
           <% end %>
@@ -49,7 +49,7 @@
   <div class="uk-modal" id="new_task">
     <div class="uk-modal-dialog">
       <div class="uk-modal-header">
-        <h3 class="uk-modal-title">New City</h3>
+        <h3 class="uk-modal-title">Nuova Città</h3>
       </div>
       <%= form_for(@city, url: admin_cities_path(@city) ) do |f| %>
       <div class="uk-grid">
@@ -63,19 +63,19 @@
         <div class="uk-width-medium-1-1 uk-grid-margin">
           <div class="md-input-wrapper <%= @city.description.blank? ? '' : 'md-input-filled'%>">
             <%= f.label :description, 'City Description, Maximum 50 Characters *' %>
-            <%= f.text_area :description , class: 'md-input uk-form-width-large', cols: 6, rows: 2, 'data-parsley-trigger':"keyup" ,'data-parsley-maxlength':"50", 'data-parsley-maxlength-message': "Maximum Characters is 50", required: true %>
+            <%= f.text_area :description , class: 'md-input uk-form-width-large', cols: 6, rows: 2, 'data-parsley-trigger':"keyup" ,'data-parsley-maxlength':"50", 'data-parsley-maxlength-message': "Massimo 50 caratteri", required: true %>
           </div>
         </div>
 
         <div class="uk-width-medium-1-5 uk-grid-margin">
           <div class="md-input-wrapper">
-            <h3 class="  uk-margin-small-bottom">City Photo</h3>
+            <h3 class="  uk-margin-small-bottom">Comune</h3>
             <%= f.file_field :photo, class: 'dropify ', 'data-default-file' => @city.photo, 'data-errors-position':"overlay",  'data-allowed-formats':"portrait", 'data-max-height':"10"%>
           </div>
         </div>
         <div class="uk-width-medium-1-5 uk-grid-margin">
           <div class="md-input-wrapper">
-            <h3 class="  uk-margin-small-bottom">Intorno Photo</h3>
+            <h3 class="  uk-margin-small-bottom">Intorno</h3>
             <%= f.fields_for :discover do |ff| %>
             <%= ff.file_field :photo, class: 'dropify ', 'data-default-file' => @discover.photo, 'data-errors-position':"overlay",  'data-allowed-formats':"portrait" %>
             <% end %>
@@ -83,7 +83,7 @@
         </div>
         <div class="uk-width-medium-1-5 uk-grid-margin">
           <div class="md-input-wrapper">
-            <h3 class="  uk-margin-small-bottom">Scopri Photo</h3>
+            <h3 class="  uk-margin-small-bottom">Scopri</h3>
             <%= f.fields_for :around do |fff| %>
             <%= fff.file_field :photo, class: 'dropify ', 'data-default-file' => @around.photo, 'data-errors-position':"overlay",  'data-allowed-formats':"portrait" %>
             <% end %>
@@ -91,7 +91,7 @@
         </div>
         <div class="uk-width-medium-1-5 uk-grid-margin">
           <div class="md-input-wrapper">
-            <h3 class="  uk-margin-small-bottom">Comune Photo</h3>
+            <h3 class="  uk-margin-small-bottom">Comune</h3>
             <%= f.fields_for :commonplace do |ffff| %>
             <%= ffff.file_field :photo, class: 'dropify ', 'data-default-file' => @commonplace.photo, 'data-errors-position':"overlay",  'data-allowed-formats':"portrait" %>
           </div>
@@ -99,7 +99,7 @@
         </div>
         <div class="uk-width-medium-1-5 uk-grid-margin">
           <div class="md-input-wrapper">
-            <h3 class="  uk-margin-small-bottom">Utilita Photo</h3>
+            <h3 class="  uk-margin-small-bottom">Utilità</h3>
             <%= f.fields_for :utility do |fffff| %>
             <%= fffff.file_field :photo, class: 'dropify ', 'data-default-file' => @utility.photo, 'data-errors-position':"overlay",  'data-allowed-formats':"portrait"  %>
             <% end %>
@@ -107,7 +107,7 @@
         </div>
         <div class="uk-width-medium-1-1 uk-grid-margin">
           <div class="md-input-wrapper uk-text-right">
-            <button type="button" class="md-btn md-btn-warning  uk-modal-close md-btn-wave waves-effect waves-button">Close</button>
+            <button type="button" class="md-btn md-btn-warning  uk-modal-close md-btn-wave waves-effect waves-button">Chiudi</button>
             <%= f.submit 'Save',  class:"md-btn md-btn-primary waves-effect waves-effect waves-button waves-light" %>
           </div>
         </div>
@@ -125,7 +125,7 @@
         <%= form_for(commune, url: admin_commonplaces_path(commune)) do |f| %>
           <div class="uk-grid">
             <div class="md-input-wrapper">
-              <h3 class="  uk-margin-small-bottom">Stemma Photo</h3>
+              <h3 class="  uk-margin-small-bottom">Stemma</h3>
 
               <%= f.file_field :photo, class: 'dropify ', 'data-default-file' => commune.photo %>
 
@@ -133,7 +133,7 @@
 
             <div class="uk-width-medium-1-1 uk-grid-margin">
               <div class="md-input-wrapper uk-text-right">
-                <button type="button" class="md-btn md-btn-warning  uk-modal-close md-btn-wave waves-effect waves-button">Close</button>
+                <button type="button" class="md-btn md-btn-warning  uk-modal-close md-btn-wave waves-effect waves-button">Chiudi</button>
                 <%= f.submit 'Save',  class:"md-btn md-btn-primary waves-effect waves-effect waves-button waves-light" %>
               </div>
             </div>

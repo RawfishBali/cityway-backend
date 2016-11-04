@@ -3,7 +3,7 @@
     <%= form_for(@admin_waste_management, url: (@admin_waste_management.new_record? ? admin_waste_managements_path(@admin_waste_management) : admin_waste_management_path(@admin_waste_management)), multipart: true) do |f| %>
     <% if @admin_waste_management.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@admin_waste_management.errors.count, "error") %> prohibited this admin_category from being saved:</h2>
+      <h2><%= pluralize(@admin_waste_management.errors.count, "error") %> Questa categoria non può essere salvata:</h2>
 
       <ul>
         <% @admin_waste_management.errors.full_messages.each do |message| %>
@@ -14,9 +14,9 @@
     <% end %>
     <h2 class=" ">
       <% if @admin_waste_management.new_record?%>
-      New <%= @admin_waste_management.class.name %>
+      Aggiungi Raccolta differenziata
       <% else %>
-      Edit <%= @admin_waste_management.name %>
+      Gestisci <%= @admin_waste_management.name %>
       <% end %>
       <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, :back, class:'float-right' %>
     </h2>
@@ -26,7 +26,7 @@
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
-              <label>name</label>
+              <label>Nome</label>
               <%= f.text_field :name,class: 'md-input', required: true  %>
             </div>
           </div>
@@ -34,7 +34,7 @@
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
-              <label>address</label>
+              <label>Indirizzo</label>
               <%= f.text_field :address,class: 'md-input', required: true  %>
             </div>
           </div>
@@ -45,15 +45,15 @@
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
-              <label>email</label>
-              <%= f.email_field :email,class: 'md-input' %>
+              <label>Email</label>
+              <%= f.text_field :email,class: 'md-input' %>
             </div>
           </div>
         </div>
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
-              <label>phone</label>
+              <label>Telefono</label>
               <%= f.text_field :phone,class: 'md-input'  %>
             </div>
           </div>
@@ -64,7 +64,7 @@
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
-              <label>website</label>
+              <label>Website</label>
               <%= f.text_field :website,class: 'md-input' %>
             </div>
           </div>
@@ -72,7 +72,7 @@
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
-              <label>description</label>
+              <label>Descrizioni</label>
               <%= f.text_area :description,class: 'md-input'  %>
             </div>
           </div>
@@ -80,7 +80,7 @@
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
-              <label>Domestic</label>
+              <label>Domestico</label>
               <%= f.check_box :is_domestic,class: 'md-input data-md-icheck'  %>
             </div>
           </div>
@@ -92,7 +92,7 @@
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
               <div id="waste_pickup_schedules">
-                <h3>Waste Delivery</h3>
+                <h3>Orario Ritiro</h3>
                 <%= f.fields_for :waste_pickup_schedules do |waste_pickup_schedule| %>
                 <%= render 'waste_pickup_schedule_fields', f: waste_pickup_schedule %>
                 <% end %>

@@ -3,7 +3,7 @@
     <%= form_for(@commonplace, url: (@commonplace.new_record? ? admin_commonplaces_path(@commonplace) : admin_commonplace_path(@commonplace)), multipart: true) do |f| %>
     <% if @commonplace.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@commonplace.errors.count, "error") %> prohibited this admin_category from being saved:</h2>
+      <h2><%= pluralize(@commonplace.errors.count, "error") %> Questa categoria non può essere salvata:</h2>
 
       <ul>
         <% @commonplace.errors.full_messages.each do |message| %>
@@ -14,9 +14,9 @@
     <% end %>
     <h2 class=" ">
       <% if @commonplace.new_record?%>
-      New Social Links
+      Aggiungi Social Links
       <% else %>
-      Edit Social Links
+      Gestisci Social Links
       <% end %>
     </h2>
     <div class="uk-grid" data-uk-grid-margin>
@@ -60,7 +60,7 @@
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
-              <h3 class="  uk-margin-small-bottom">Comune Icon</h3>
+              <h3 class="  uk-margin-small-bottom">Icona Comune</h3>
               <div class="dropzone" data-width="222"  data-image="<%= f.object.icon.url %>"  data-height="300"  data-editstart="false" data-ajax="false" data-canvas="true" >
                 <%= f.file_field :icon%>
               </div>
