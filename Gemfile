@@ -61,6 +61,8 @@ gem 'ruby-duration'
 
 gem 'cocoon'
 
+gem 'phony_rails'
+
 group :production do
   gem 'rails_12factor'
 end

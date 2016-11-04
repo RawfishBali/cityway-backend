@@ -40,6 +40,9 @@ class Profile < ActiveRecord::Base
   geocoded_by :address
   after_validation :geocode
 
+  phony_normalize :phone, default_country_code: 'IT'
+  validates :phone, phony_plausible: true
+
   def only_one_major
     if self.commonplace.major && self.is_major && self.new_record?
       errors.add(:is_major, "only one major is allowed")

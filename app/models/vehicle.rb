@@ -30,4 +30,10 @@ class Vehicle < ActiveRecord::Base
 
   geocoded_by :address
   after_validation :geocode
+
+  phony_normalize :phone_0, default_country_code: 'IT'
+  validates :phone_0, phony_plausible: true
+
+  phony_normalize :phone_1, default_country_code: 'IT'
+  validates :phone_1, phony_plausible: true
 end

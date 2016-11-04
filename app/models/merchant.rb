@@ -44,6 +44,9 @@ class Merchant < ActiveRecord::Base
   geocoded_by :address
   after_validation :geocode
 
+  phony_normalize :phone, default_country_code: 'IT'
+  validates :phone, phony_plausible: true
+
   def primary_photo
     primary_photo = photos.where(is_primary: true)
     if primary_photo.length > 0

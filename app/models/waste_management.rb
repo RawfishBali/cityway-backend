@@ -28,6 +28,9 @@ class WasteManagement < ActiveRecord::Base
 
   validate :only_one_waste_management_per_city
 
+  phony_normalize :phone, default_country_code: 'IT'
+  validates :phone, phony_plausible: true
+
   def only_one_waste_management_per_city
     existed = WasteManagement.find_by(utility_id: self.utility_id, is_domestic: self.is_domestic)
     errors.add(:is_domestic, "only one waste_management per city") if existed && existed.id != self.id

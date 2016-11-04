@@ -47,7 +47,7 @@
             </div>
             <div class="uk-width-medium-1-2">
               <label>Subcategories</label>
-              <%= f.select :subcategory_ids, options_from_collection_for_select(Category.subcategories.order('name ASC'), 'id', 'name', @admin_merchant.subcategory_ids), {prompt: 'Select Subcategory'}, {required: true, class: 'md-input', multiple: true}  %>
+              <%= f.select :subcategory_ids, options_from_collection_for_select(Category.subcategories.order('name ASC'), 'id', 'name', @admin_merchant.subcategory_ids), {prompt: 'Select Subcategory'}, {class: 'md-input', multiple: true}  %>
             </div>
           </div>
         </div>
@@ -108,7 +108,7 @@
           <div class="uk-grid" data-uk-grid-margin>
 
             <div class="uk-width-medium-1-2">
-              <%= f.label :support_disabilities, class: 'inline-label'%>
+              <%= f.label :support_disabilities class: 'inline-label'%>
               <%= f.check_box :support_disabilities,class: 'md-input', 'data-switchery': true  %>
             </div>
             <div class="uk-width-medium-1-2">

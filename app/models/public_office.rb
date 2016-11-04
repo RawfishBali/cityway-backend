@@ -34,6 +34,9 @@ class PublicOffice < ActiveRecord::Base
 
   mount_uploader :photo, PhotoUploader
 
+  phony_normalize :phone, default_country_code: 'IT'
+  validates :phone, phony_plausible: true
+
   def primary_photo
     primary_photo = photos.where(is_primary: true).limit(1)
     if primary_photo.length > 0
@@ -45,6 +48,6 @@ class PublicOffice < ActiveRecord::Base
 
   def all_business_hours
     mb = (self.business_hours).to_a
-    return mb.sort_by(&:day) 
+    return mb.sort_by(&:day)
   end
 end
