@@ -194,7 +194,7 @@ module CityWay
             event.instagram
           end
         end
-        expose :twitter, documentation: {:type => "String", :desc => "Event twitter"} do |object, options|
+        expose :twitter,  if: lambda { |object, options| options[:simple] == 'false' && object.twitter }, documentation: {:type => "String", :desc => "Event twitter"} do |object, options|
           unless object.twitter[/\Ahttp:\/\//] || object.twitter[/\Ahttps:\/\//]
             "https://#{object.twitter}" unless object.twitter.blank?
           else
