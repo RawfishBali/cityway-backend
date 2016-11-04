@@ -4,10 +4,10 @@
       <table class="uk-table uk-table-nowrap table_check">
         <thead>
           <tr>
-            <th class="uk-width-1-10">Name</th>
-            <th class="uk-width-1-10">Photo</th>
-            <th class="uk-width-1-10">Role</th>
-            <th class="uk-width-1-10 uk-text-center">Actions</th>
+            <th class="uk-width-1-10">Nome</th>
+            <th class="uk-width-1-10">Foto</th>
+            <th class="uk-width-1-10">Ruolo</th>
+            <th class="uk-width-1-10 uk-text-center">Azioni</th>
           </tr>
         </thead>
         <tbody>
@@ -30,7 +30,7 @@
               <td class=""><%= profile.role  %></td>
               <td class="uk-text-center">
                 <%= link_to '<i class="md-icon material-icons">&#xE254;</i>'.html_safe , edit_admin_profile_path(profile, major: profile.is_major)%>
-                <%= link_to '<i class="md-icon material-icons ">&#xE872;</i>'.html_safe, admin_profile_path(profile), method: :delete , :data => {:confirm => 'Sei sicuro?'} %>
+                <%= link_to '<i class="md-icon material-icons ">&#xE872;</i>'.html_safe, admin_profile_path(profile), method: :delete , :data => {:confirm => 'Sei sicuro di voler cancellare?'} %>
               </td>
             </tr>
             <% end %>

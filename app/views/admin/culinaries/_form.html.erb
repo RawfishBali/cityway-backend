@@ -27,7 +27,7 @@
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
-              <label>Name</label>
+              <label>Nome</label>
               <%= f.text_field :name, required: true,class: 'md-input'  %>
             </div>
           </div>
@@ -35,7 +35,7 @@
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
-              <label>Description</label>
+              <label>Descrizione</label>
               <%= f.text_area :description, required: true,class: 'md-input'  %>
             </div>
           </div>
@@ -52,7 +52,7 @@
       <div class="uk-width-medium-1-2 ">
         <div class="uk-form-row">
           <div id="photos">
-            <h3>Photos</h3>
+            <h3>Foto</h3>
             <%= f.fields_for :photos do |photo| %>
             <%= render 'photo_fields', f: photo %>
             <% end %>

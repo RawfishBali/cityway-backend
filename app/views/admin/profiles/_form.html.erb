@@ -28,11 +28,11 @@
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-2">
-              <label>Name</label>
+              <label>Nome</label>
               <%= f.text_field :name, required: true,class: 'md-input'  %>
             </div>
             <div class="uk-width-medium-1-2">
-              <label>Role</label>
+              <label>Ruolo</label>
               <%= f.text_field :role,class: 'md-input'  %>
             </div>
           </div>
@@ -42,11 +42,11 @@
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-2">
-              <label>Address</label>
+              <label>Indirizzo</label>
               <%= f.text_field :address, required: true,class: 'md-input'  %>
             </div>
             <div class="uk-width-medium-1-2">
-              <label>email</label>
+              <label>Email</label>
               <%= f.text_field :email, required: true,class: 'md-input'  %>
             </div>
           </div>
@@ -60,7 +60,7 @@
               <%= f.text_field :fax,class: 'md-input'  %>
             </div>
             <div class="uk-width-medium-1-2">
-              <label>Phone</label>
+              <label>Telefono</label>
               <%= f.text_field :phone, required: true,class: 'md-input'  %>
             </div>
           </div>
@@ -74,8 +74,8 @@
               <%= f.text_field :website,class: 'md-input'  %>
             </div>
             <div class="uk-width-medium-1-2">
-              <label>Days Open</label>
-              <%= f.select :days_open, options_for_select([["Sunday", 0],["Monday", 1], ["Tuesday", 2], ["Wednesday", 3], ["Thursday", 4], ["Friday", 5], ["Saturday", 6]], f.object.days_open), {prompt: 'Select Days'}, {class: 'md-input', multiple: true}  %>
+              <label>Orari Apertura</label>
+              <%= f.select :days_open, options_for_select([["Domenica", 0],["Lunedì", 1], ["Martedì", 2], ["Mercoledì", 3], ["Giovedì", 4], ["Venerdì", 5], ["Sabato", 6]], f.object.days_open), {prompt: 'Seleziona Giorno'}, {class: 'md-input', multiple: true}  %>
             </div>
           </div>
         </div>
@@ -84,11 +84,11 @@
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-2">
-              <label>Appointment Start</label>
+              <label>Inizio appuntamento</label>
               <%= f.text_field :appointment_start, class: 'md-input', 'data-uk-timepicker': true, value: (f.object.appointment_start.strftime('%H:%M') if f.object.appointment_start) %>
             </div>
             <div class="uk-width-medium-1-2">
-              <label>Appointment End</label>
+              <label>Termino appuntamento</label>
               <%= f.text_field :appointment_end, class: 'md-input', 'data-uk-timepicker': true, value: (f.object.appointment_end.strftime('%H:%M') if f.object.appointment_end) %>
             </div>
           </div>
@@ -98,7 +98,7 @@
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-2">
-              <label>Photo</label>
+              <label>Foto</label>
               <br />
               <div class="dropzone" data-height="414" data-width="750"   data-image="<%= f.object.photo.url %>"  data-editstart="false" data-ajax="false" data-canvas="true" style="width: 100%">
                 <%= f.file_field :photo%>
@@ -106,7 +106,7 @@
             </div>
 
             <div class="uk-width-medium-1-2">
-              <label>Icon</label>
+              <label>Icona</label>
               <br />
               <div class="dropzone" data-width="200" data-height="200"  data-image="<%= f.object.major_icon.url %>"  data-editstart="false" data-ajax="false" data-canvas="true">
                 <%= f.file_field :major_icon%>
@@ -120,7 +120,7 @@
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-2">
-              <label>Description</label>
+              <label>Descrizione</label>
               <%= f.text_area :description, required: true,class: 'md-input'  %>
             </div>
           </div>

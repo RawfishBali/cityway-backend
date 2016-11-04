@@ -25,7 +25,7 @@
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
-              <label>name</label>
+              <label>Nome</label>
               <%= f.text_field :name,class: 'md-input', required: true  %>
             </div>
           </div>
@@ -33,7 +33,7 @@
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
-              <label>Attachment </label>
+              <label>Allegato </label>
               <br />
               <div class="uk-form-file md-btn md-btn-primary">
                 Select
@@ -47,7 +47,7 @@
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
-              <label>Transport Type</label>
+              <label>Tipologia Trasporto</label>
               <%= f.select :transport_type, options_for_select([["Bus", "bus"],["Regional Bus", "regional_bus"], ["Autobus", "autobus"], ["Tram", "tram"], ["Underground", "underground"]], f.object.transport_type), {prompt: 'Select Transport Type'}, {'data-md-selectize': true, required: true, class: 'md-input'}  %>
             </div>
           </div>
@@ -59,7 +59,7 @@
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
               <div id="photos">
-                <h4>Paths</h4>
+                <h4>Tappe</h4>
                 <%= f.fields_for :paths do |path| %>
                 <%= render 'path_fields', f: path %>
                 <% end %>

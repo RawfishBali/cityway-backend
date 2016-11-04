@@ -26,7 +26,7 @@
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
-              <label>Bottom Text</label>
+              <label>Testo Sotto</label>
               <%= f.text_area :bottom_text, required: true,class: 'md-input'  %>
             </div>
           </div>
@@ -34,7 +34,7 @@
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
-              <label>Top Text</label>
+              <label>Testo Sopra</label>
               <%= f.text_area :top_text, required: true,class: 'md-input'  %>
             </div>
           </div>
@@ -45,7 +45,7 @@
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
               <div id="photos">
-                <h3>Photos</h3>
+                <h3>Foto</h3>
                 <%= f.fields_for :photos do |photo| %>
                 <%= render 'photo_fields', f: photo %>
                 <% end %>

@@ -26,7 +26,7 @@
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
-              <label>Category Name</label>
+              <label>Nome categoria</label>
               <%= f.text_field :name, required: true,class: 'md-input'  %>
             </div>
           </div>
@@ -35,7 +35,7 @@
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
-              <label>Category Icon</label>
+              <label>Icona Categoria</label>
               <br />
               <div class="dropzone" data-width="200"  data-image="<%= f.object.icon.url %>"  data-height="200" data-url="/" data-editstart="false" data-ajax="false"  data-canvas="true" >
                 <%= f.file_field :icon%>
@@ -46,7 +46,7 @@
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
-              <label>Category Photo</label>
+              <label>Foto Categoria</label>
               <div class="dropzone" data-width="750"   data-image="<%= f.object.photo.url %>"  data-height="410" data-url="/" data-editstart="false" data-ajax="false" data-canvas="true" style="width: 100%" >
                 <%= f.file_field :photo%>
               </div>
@@ -57,7 +57,7 @@
       <div class="uk-width-medium-1-2">
         <div class="uk-form-row">
           <div id="subcategories">
-            <h3>Subcategories</h3>
+            <h3>Sottocategoria</h3>
             <%= f.fields_for :subcategories do |subcategory| %>
             <%= render 'subcategory_fields', f: subcategory %>
             <% end %>
