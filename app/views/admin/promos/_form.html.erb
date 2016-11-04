@@ -14,9 +14,9 @@
     <% end %>
     <h2 class=" ">
       <% if @admin_promo.new_record?%>
-      New <%= @admin_promo.class.name %>
+      Nuovo <%= @admin_promo.class.name %>
       <% else %>
-      Edit <%= @admin_promo.title %>
+      Gestisci <%= @admin_promo.title %>
       <% end %>
       <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, admin_promos_path, class:'float-right' %>
     </h2>

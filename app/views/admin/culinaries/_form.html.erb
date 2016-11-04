@@ -14,9 +14,9 @@
     <% end %>
     <h2 class=" ">
       <% if @admin_culinary.new_record?%>
-      New <%= @admin_culinary.class.name %>
+      Nuovo <%= @admin_culinary.class.name %>
       <% else %>
-      Edit <%= @admin_culinary.name %>
+      Gestisci <%= @admin_culinary.name %>
       <% end %>
       <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, :back, class:'float-right' %>
     </h2>

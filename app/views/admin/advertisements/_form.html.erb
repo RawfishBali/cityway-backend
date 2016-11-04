@@ -14,9 +14,9 @@
     <% end %>
     <h2 class=" ">
       <% if @advertisement.new_record?%>
-      New <%= @advertisement.class.name %>
+      Nuovo <%= @advertisement.class.name %>
       <% else %>
-      Edit <%= @advertisement.class.name %>
+      Gestisci <%= @advertisement.class.name %>
       <% end %>
       <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, :back, class:'float-right' %>
     </h2>

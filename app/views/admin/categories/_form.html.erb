@@ -14,9 +14,9 @@
 
     <h2 class=" ">
       <% if @admin_category.new_record?%>
-      New <%= @admin_category.class.name %>
+      Nuovo <%= @admin_category.class.name %>
       <% else %>
-      Edit <%= @admin_category.name %>
+      Gestisci <%= @admin_category.name %>
       <% end %>
       <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, admin_categories_path, class:'float-right' %>
     </h2>
