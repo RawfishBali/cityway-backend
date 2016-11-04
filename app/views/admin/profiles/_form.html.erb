@@ -3,7 +3,7 @@
     <%= form_for(@admin_profile, url: (@admin_profile.new_record? ? admin_profiles_path(@admin_profile) : admin_profile_path(@admin_profile)), multipart: true) do |f| %>
     <% if @admin_profile.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@admin_profile.errors.count, "error") %> prohibited this admin_category from being saved:</h2>
+      <h2><%= pluralize(@admin_profile.errors.count, "error") %> Questa categoria non può essere salvata:</h2>
       <ul>
         <% @admin_profile.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -13,7 +13,7 @@
     <% end %>
     <h2 class=" ">
       <% if @admin_profile.new_record?%>
-      Nuovo <%= @admin_profile.class.name %>
+      Aggiungi <%= @admin_profile.class.name %>
       <% else %>
       Gestisci <%= @admin_profile.name %>
       <% end %>
@@ -74,7 +74,7 @@
               <%= f.text_field :website,class: 'md-input'  %>
             </div>
             <div class="uk-width-medium-1-2">
-              <label>Orari Apertura</label>
+              <label>Orari</label>
               <%= f.select :days_open, options_for_select([["Domenica", 0],["Lunedì", 1], ["Martedì", 2], ["Mercoledì", 3], ["Giovedì", 4], ["Venerdì", 5], ["Sabato", 6]], f.object.days_open), {prompt: 'Seleziona Giorno'}, {class: 'md-input', multiple: true}  %>
             </div>
           </div>

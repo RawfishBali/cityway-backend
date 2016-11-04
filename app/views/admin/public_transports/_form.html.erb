@@ -3,7 +3,7 @@
     <%= form_for(@admin_public_transport, url: (@admin_public_transport.new_record? ? admin_public_transports_path(@admin_public_transport) : admin_public_transport_path(@admin_public_transport)), multipart: true) do |f| %>
     <% if @admin_public_transport.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@admin_public_transport.errors.count, "error") %> prohibited this admin_category from being saved:</h2>
+      <h2><%= pluralize(@admin_public_transport.errors.count, "error") %> Questa categoria non può essere salvata:</h2>
 
       <ul>
         <% @admin_public_transport.errors.full_messages.each do |message| %>
@@ -14,7 +14,7 @@
     <% end %>
     <h2 class=" ">
       <% if @admin_public_transport.new_record?%>
-      Nuovo <%= @admin_public_transport.class.name %>
+      Aggiungi <%= @admin_public_transport.class.name %>
       <% else %>
       Gestisci <%= @admin_public_transport.name %>
       <% end %>
@@ -36,7 +36,7 @@
               <label>Allegato </label>
               <br />
               <div class="uk-form-file md-btn md-btn-primary">
-                Select
+                Seleziona
                 <%= f.file_field :attachment %>
               </div>
               <br />
@@ -48,7 +48,7 @@
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
               <label>Tipologia Trasporto</label>
-              <%= f.select :transport_type, options_for_select([["Bus", "bus"],["Regional Bus", "regional_bus"], ["Autobus", "autobus"], ["Tram", "tram"], ["Underground", "underground"]], f.object.transport_type), {prompt: 'Select Transport Type'}, {'data-md-selectize': true, required: true, class: 'md-input'}  %>
+              <%= f.select :transport_type, options_for_select([["Bus", "bus"],["Regional Bus", "regional_bus"], ["Autobus", "autobus"], ["Tram", "tram"], ["Metro", "underground"]], f.object.transport_type), {prompt: 'Seleziona Tipologia Trasporto'}, {'data-md-selectize': true, required: true, class: 'md-input'}  %>
             </div>
           </div>
         </div>

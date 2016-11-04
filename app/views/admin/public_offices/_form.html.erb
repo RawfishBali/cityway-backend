@@ -13,7 +13,7 @@
     <% end %>
     <h2 class=" ">
       <% if @admin_public_office.new_record?%>
-      Nuovo <%= @admin_public_office.class.name %>
+      Aggiungi <%= @admin_public_office.class.name %>
       <% else %>
       Gestisci <%= @admin_public_office.name %>
       <% end %>
@@ -83,7 +83,7 @@
       <div class="uk-width-medium-1-2 marginTM50">
         <div class="uk-form-row">
           <div id="subcategories">
-            <h3>Aperture</h3>
+            <h3>Orari</h3>
             <%= f.fields_for :business_hours do |business_hour| %>
             <%= render 'business_hour_fields', f: business_hour %>
             <% end %>

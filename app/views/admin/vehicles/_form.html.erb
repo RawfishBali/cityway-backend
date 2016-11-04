@@ -3,7 +3,7 @@
     <%= form_for(@admin_vehicle, url: (@admin_vehicle.new_record? ? admin_vehicles_path(@admin_vehicle) : admin_vehicle_path(@admin_vehicle)), multipart: true) do |f| %>
     <% if @admin_vehicle.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@admin_vehicle.errors.count, "error") %> prohibited this admin_category from being saved:</h2>
+      <h2><%= pluralize(@admin_vehicle.errors.count, "error") %> Questa categoria non può essere salvata:</h2>
 
       <ul>
         <% @admin_vehicle.errors.full_messages.each do |message| %>
@@ -14,7 +14,7 @@
     <% end %>
     <h2 class=" ">
       <% if @admin_vehicle.new_record?%>
-      Nuovo <%= @admin_vehicle.class.name %>
+      Aggiungi <%= @admin_vehicle.class.name %>
       <% else %>
       Gestisci <%= @admin_vehicle.name %>
       <% end %>

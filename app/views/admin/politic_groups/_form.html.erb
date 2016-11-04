@@ -3,7 +3,7 @@
     <%= form_for(@admin_politic_group, url: (@admin_politic_group.new_record? ? admin_politic_groups_path(@admin_politic_group) : admin_politic_group_path(@admin_politic_group)), multipart: true) do |f| %>
     <% if @admin_politic_group.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@admin_politic_group.errors.count, "error") %> prohibited this admin_category from being saved:</h2>
+      <h2><%= pluralize(@admin_politic_group.errors.count, "error") %> Questa categoria non può essere salvata:</h2>
       <ul>
         <% @admin_politic_group.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -13,7 +13,7 @@
     <% end %>
     <h2 class=" ">
       <% if @admin_politic_group.new_record?%>
-      Nuovo <%= @admin_politic_group.class.name %>
+      Aggiungi <%= @admin_politic_group.class.name %>
       <% else %>
       Gestisci <%= @admin_politic_group.name %>
       <% end %>

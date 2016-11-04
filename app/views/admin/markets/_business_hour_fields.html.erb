@@ -4,7 +4,7 @@
       <div class="uk-input-group subcategory-container">
         <div class="uk-grid" data-uk-grid-margin="">
           <div class="uk-width-medium-1-2 uk-row-first">
-            <div class="md-input-wrapper md-input-filled"><label>Day</label>
+            <div class="md-input-wrapper md-input-filled"><label>Giorno</label>
               <%= f.select :day, options_for_select([["Domenica", 0],["Lunedì", 1], ["Martedì", 2], ["Mercoledì", 3], ["Giovedì", 4], ["Venerdì", 5], ["Sabato", 6]], f.object.day), {prompt: 'Seleziona Giorno'}, {'data-md-selectize': true, required: true, class: 'md-input'}  %>
               <span class="md-input-bar "></span>
             </div>

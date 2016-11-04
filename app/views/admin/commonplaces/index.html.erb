@@ -63,7 +63,7 @@
         <div class="uk-width-medium-1-1 uk-grid-margin">
           <div class="md-input-wrapper <%= @city.description.blank? ? '' : 'md-input-filled'%>">
             <%= f.label :description, 'City Description, Maximum 50 Characters *' %>
-            <%= f.text_area :description , class: 'md-input uk-form-width-large', cols: 6, rows: 2, 'data-parsley-trigger':"keyup" ,'data-parsley-maxlength':"50", 'data-parsley-maxlength-message': "Maximum Characters is 50", required: true %>
+            <%= f.text_area :description , class: 'md-input uk-form-width-large', cols: 6, rows: 2, 'data-parsley-trigger':"keyup" ,'data-parsley-maxlength':"50", 'data-parsley-maxlength-message': "Massimo 50 caratteri", required: true %>
           </div>
         </div>
 
