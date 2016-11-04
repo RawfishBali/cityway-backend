@@ -81,14 +81,14 @@
           <li><a href="/admin/news/" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/news'%>">News</a></li>
           <li><a  href="/admin/city_hall_stories/" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/city_hall_stories'%>">Dati Comune</a></li>
           <li>
-            <a href="#" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/profiles' ||  params[:controller] == 'admin/politic_groups' %>">Amministration</a>
+            <a href="#" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/profiles' ||  params[:controller] == 'admin/politic_groups' %>">Amministrazione</a>
             <ul>
               <li><a href="/admin/profiles?major=true" class="<%= 'act_item current_section_submenu' if (params[:controller] == 'admin/profiles' && params[:major] == 'true')  %>">Sindaco</a></li>
               <li><a href="/admin/profiles/" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/profiles' && (!params[:major]) %>">Giunta Comunale</a></li>
               <li><a href="/admin/politic_groups/" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/politic_groups'%>">Consiglio</a></li>
             </ul>
           </li>
-          <li><a href="/admin/public_offices" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/public_offices'%>">Uffici publici</a></li>
+          <li><a href="/admin/public_offices" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/public_offices'%>">Uffici pubblici</a></li>
           <li><a href="/admin/online_services" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/online_services'%>">Servizi Online</a></li>
           <li><a href="/admin/certificates" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/certificates'%>">Certificati</a></li>
           <li><a href="/admin/securities" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/securities'%>">Sicurezza</a></li>

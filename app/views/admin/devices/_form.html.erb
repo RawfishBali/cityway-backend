@@ -13,8 +13,9 @@
     </div>
     <% end %>
     <h2 class=" ">
+
       <% if @admin_device.new_record?%>
-      Aggiungi <%= @admin_device.class.name %>
+      Aggiungi <%= params[:device_type].titleize%>
       <% else %>
       Gestisci <%= @admin_device.name %>
       <% end %>
