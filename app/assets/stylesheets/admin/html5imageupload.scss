@@ -3,7 +3,7 @@
 html, body						{ font-family: 'Poppins', sans-serif; }
 
 .dropzone						{background-color: #eeeeee; text-align: center; position: relative; border: 1px solid #dddddd; display: inline-block;  }
-.dropzone:after					{ content: 'Drop your image here or click to add one!'; font-size: 18px; color: #bbbbbb; position: absolute; bottom: 60%; left: 0; width: 100%; text-align: center; z-index:0;}
+.dropzone:after					{ content: "Eliminare l'immagine qui o fare clic per aggiungere uno!"; font-size: 18px; color: #bbbbbb; position: absolute; bottom: 60%; left: 0; width: 100%; text-align: center; z-index:0;}
 .dropzone:before				{ content: ''; font-family:"Glyphicons Halflings"; font-size: 60px; color: #dbdbdb; position: absolute; top: 40%; left: 0; width: 100%; text-align: center; z-index:0;}
 
 .dropzone.loading:after			{ content: 'Please wait, image is loading'; }

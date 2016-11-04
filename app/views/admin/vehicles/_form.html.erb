@@ -51,7 +51,7 @@
           </div>
         </div>
         <% end %>
-        <% unless @vehicle_type == 'taxi' %>
+        <% unless @vehicle_type == 'taxi' || @vehicle_type == 'bike' %>
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
@@ -91,7 +91,7 @@
           </div>
         </div>
         <% end %>
-        <% unless @vehicle_type == 'taxi' %>
+        <% unless @vehicle_type == 'taxi'  || @vehicle_type == 'bike' %>
           <div class="uk-form-row">
             <div class="uk-grid" data-uk-grid-margin>
               <div class="uk-width-medium-1-1">
