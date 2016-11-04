@@ -194,6 +194,13 @@ module CityWay
             event.instagram
           end
         end
+        expose :twitter, documentation: {:type => "String", :desc => "Event twitter"} do |object, options|
+          unless object.twitter[/\Ahttp:\/\//] || object.twitter[/\Ahttps:\/\//]
+            "https://#{object.twitter}" unless object.twitter.blank?
+          else
+            object.twitter
+          end
+        end
         expose :support_disabilities, documentation: {:type => "Boolean", :desc => "Event Disabilities Support"}
         expose :distance, if: lambda { |object, options| options[:latitude] && options[:longitude] } do |event , options|
           event.distance_from([options[:latitude], options[:longitude]])
