@@ -13,7 +13,7 @@
     </div>
     <% end %>
     <h2 class=" ">
-      <% italian_type = { monument: 'Monumenti', library: 'Bibblioteche', theatre: 'Teatri', museum: 'Musei', cinema: 'cinema' }%>
+      <% italian_type = { monument: 'Monumenti', library: 'Bibblioteche', theater: 'Teatri', museum: 'Musei', cinema: 'cinema' }%>
       <% if @admin_place.new_record?%>
       Aggiungi <%= italian_type[params[:place_type].to_sym] %>
       <% else %>
