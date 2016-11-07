@@ -23,13 +23,13 @@ class BusinessHour < ActiveRecord::Base
   validates :day, uniqueness: {scope: [:marketable_id, :marketable_type]}, on: :create
   validates :morning_open_time , presence: true
   validates :morning_close_time , presence: true
-  # validates :marketable_id , presence: true
-  # validates :marketable_type , presence: true
   validate :close_time_cannot_be_sooner_than_open_time
 
   def close_time_cannot_be_sooner_than_open_time
-    if morning_close_time < morning_open_time
-      errors.add(:morning_close_time, "must be greater than open_time")
+    if (morning_close_time && morning_open_time)
+      if morning_close_time < morning_open_time
+        errors.add(:morning_close_time, "must be greater than open_time")
+      end
     end
 
     if (evening_open_time && evening_close_time)
