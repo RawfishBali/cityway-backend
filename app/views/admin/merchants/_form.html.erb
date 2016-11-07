@@ -72,11 +72,25 @@
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-2">
               <label>Facebook</label>
-              <%= f.text_field :facebook, required: true,class: 'md-input'  %>
+              <%= f.text_field :facebook,class: 'md-input'  %>
             </div>
             <div class="uk-width-medium-1-2">
               <label>Instagram</label>
-              <%= f.text_field :instagram, required: true,class: 'md-input'  %>
+              <%= f.text_field :instagram,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+              <label>Website</label>
+              <%= f.text_field :website,class: 'md-input'  %>
+            </div>
+            <div class="uk-width-medium-1-2">
+              <%= f.label :support_disabilities, class: 'inline-label'%>
+              <%= f.check_box :support_disabilities,class: 'md-input', 'data-switchery': true  %>
             </div>
           </div>
         </div>
@@ -108,8 +122,7 @@
           <div class="uk-grid" data-uk-grid-margin>
 
             <div class="uk-width-medium-1-2">
-              <%= f.label :support_disabilities, class: 'inline-label'%>
-              <%= f.check_box :support_disabilities,class: 'md-input', 'data-switchery': true  %>
+
             </div>
             <div class="uk-width-medium-1-2">
 
