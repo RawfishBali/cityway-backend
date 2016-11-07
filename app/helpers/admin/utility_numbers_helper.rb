@@ -1,0 +1,2 @@
+module Admin::UtilityNumbersHelper
+end

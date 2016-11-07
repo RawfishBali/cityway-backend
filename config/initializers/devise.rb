@@ -10,7 +10,7 @@ module Devise
       if env["warden.options"] && scope = env["warden.options"][:scope]  && Devise.mappings[env["warden.options"][:scope] .to_sym]
         app = (Devise.mappings[env["warden.options"][:scope]]).failure_app
       end
-      app || CityView::Api::V1::FailureApp
+      app || CityWay::Api::V1::FailureApp
     end
   end
 end
@@ -31,7 +31,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+  config.mailer_sender = 'no-reply@cityway.com'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -108,7 +108,7 @@ Devise.setup do |config|
     manager.strategies.add :bearer, Warden::OAuth2::Strategies::Bearer
     manager.strategies.add :client, Warden::OAuth2::Strategies::Client
 
-    manager.scope_defaults :offline_access, strategies: [:bearer, :client], failure_app: CityView::Api::V1::FailureApp
+    manager.scope_defaults :offline_access, strategies: [:bearer, :client], failure_app: CityWay::Api::V1::FailureApp
   end
   # By default, Devise cleans up the CSRF token on authentication to
   # avoid CSRF token fixation attacks. This means that, when using AJAX
@@ -190,7 +190,7 @@ Devise.setup do |config|
   # ==> Configuration for :timeoutable
   # The time you want to timeout the user session without activity. After this
   # time the user will be asked for credentials again. Default is 30 minutes.
-  # config.timeout_in = 30.minutes
+  config.timeout_in = 15.minutes
 
   # ==> Configuration for :lockable
   # Defines which strategy will be used to lock an account.

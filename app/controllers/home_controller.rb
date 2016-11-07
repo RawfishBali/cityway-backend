@@ -1,8 +1,5 @@
 class HomeController < Admin::BaseController
   def index
-  end
-
-  def attivita
-    check_role [:super_admin, :city_admin]
+    @cities = City.all.order('name ASC')
   end
 end

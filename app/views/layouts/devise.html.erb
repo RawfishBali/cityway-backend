@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>CityView</title>
-  <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500' rel='stylesheet' type='text/css'>
+  <title>CityWay</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-  <%= stylesheet_link_tag    'admin', media: 'all', 'data-turbolinks-track' => true %>
+  <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+  <%= stylesheet_link_tag 'login_admin', media: 'all', 'data-turbolinks-track' => true %>
 
 
 
@@ -12,15 +12,17 @@
 </head>
 <body class="login_page">
   <% flash.each do |type, message| %>
-    <div class="uk-notify uk-notify-top-center" style="display: block;">
-      <div class="uk-notify-message" style="opacity: 1; margin-top: -50px; margin-bottom: 10px;">
-        <a class="uk-close"></a>
-        <div>
-          <%= message %>
-        </div>
+    <% unless message.to_s == 'true' %>
+      <div class="uk-notify uk-notify-top-center" style="display: block;">
+        <div class="uk-notify-message" style="opacity: 1; margin-top: -50px; margin-bottom: 10px;">
+          <a class="uk-close"></a>
+          <div>
+            <%= message %>
+          </div>
 
+        </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
 
 

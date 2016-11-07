@@ -1,0 +1,18 @@
+<div class="nested-fields">
+  <div class="uk-grid" data-uk-grid-margin>
+    <div class="uk-width-medium-1-1 uk-row-first">
+      <div class="uk-input-group subcategory-container">
+        <div class="md-input-wrapper md-input-filled"><label>Nome sottocategoria</label>
+
+          <%= f.text_field :name, required: true,class: 'md-input md-input-filled' %><span class="md-input-bar "></span>
+
+        </div>
+
+        <span class="uk-input-group-addon">
+          <%= link_to_remove_association '<i class="material-icons md-24"></i>'.html_safe, f, {class: 'btnSectionRemove'} %>
+
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

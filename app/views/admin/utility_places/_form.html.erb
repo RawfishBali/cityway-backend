@@ -1,0 +1,129 @@
+<div class="md-card">
+  <div class="md-card-content">
+    <%= form_for(@admin_utility_place, url: (@admin_utility_place.new_record? ? admin_utility_places_path(@admin_utility_place) : admin_utility_place_path(@admin_utility_place)), multipart: true) do |f| %>
+    <% if @admin_utility_place.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@admin_utility_place.errors.count, "error") %> prohibited this admin_category from being saved:</h2>
+      <ul>
+        <% @admin_utility_place.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
+    <h2 class=" ">
+      <% place_type = {post_office: 'Uffici Postali' , pharmacies: 'Farmacie', water_house: 'Case dell’acqua', waste_recycling: 'Isole ecologiche', bikes: 'Bici', public_swimming_pool: 'Piscine comunali', tennis_court: 'Campi da tennis', stadium: 'Stadio', structures: '', social_services: 'Centri servizi sociali', voluntary_association: 'Associazioni di Volontariato', elder_home: 'Centridurni per anziani', young_people_place: 'Giovani', kindergarten: 'Scuole Materne', primary_school: 'Scuole Primarie', first_secondary_school: 'Scuole Medie', second_secondary_school: 'Scuole Secondarie', universities: 'Università', music: 'Scuole di Musica', large_garbage: 'Ritiro ingombranti' ,institute: 'Istituti', professional_institute: 'Istituti Professionali', recycling_place: 'Isole ecologiche'} %>
+      <% if @admin_utility_place.new_record?%>
+      Aggiungi <%= place_type[params[:place_type].to_sym]%>
+      <% else %>
+      Gestisci <%= @admin_utility_place.name %>
+      <% end %>
+      <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, :back, class:'float-right' %>
+    </h2>
+    <div class="uk-grid" data-uk-grid-margin>
+      <%= f.hidden_field :place_type , value: @place_type %>
+      <%= f.hidden_field :is_public , value: @is_public %>
+
+
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+              <label>Nome</label>
+              <%= f.text_field :name, required: true,class: 'md-input'  %>
+            </div>
+            <div class="uk-width-medium-1-2">
+              <label>Denominazione</label>
+              <%= f.text_field :denomination, required: true,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+              <label>Website</label>
+              <%= f.text_field :website,class: 'md-input'  %>
+            </div>
+            <div class="uk-width-medium-1-2">
+              <label>Address</label>
+              <%= f.text_field :address, required: true,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+              <label>Email</label>
+              <%= f.email_field :email,class: 'md-input'  %>
+            </div>
+            <div class="uk-width-medium-1-2">
+              <label>Telefono</label>
+              <%= f.text_field :phone,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+
+            <div class="uk-width-medium-1-2">
+              <label>Descrizione</label>
+              <%= f.text_area :description, required: true,class: 'md-input'  %>
+            </div>
+            <div class="uk-width-medium-1-2">
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+              <div id="subcategories">
+                <h3>Orari</h3>
+                <%= f.fields_for :business_hours do |business_hour| %>
+                <%= render 'business_hour_fields', f: business_hour %>
+                <% end %>
+                <div class="links">
+                  <%= link_to_add_association '<i class="material-icons md-24"></i>'.html_safe, f, :business_hours %>
+                </div>
+              </div>
+            </div>
+            <div class="uk-width-medium-1-2">
+              <div class="uk-form-row">
+                <div id="photos">
+                  <h3>Foto</h3>
+                  <%= f.fields_for :photos do |photo| %>
+                  <%= render 'photo_fields', f: photo %>
+                  <% end %>
+                  <div class="links">
+                    <%= link_to_add_association '<i class="material-icons md-24"></i>'.html_safe, f, :photos %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="md-fab-wrapper">
+    <%= button_tag(type: 'submit' , class: 'md-fab md-fab-accent md-fab-wave waves-effect waves-button') do %>
+    <i class="fa fa-floppy-o" aria-hidden="true"></i>
+    <% end %>
+  </div>
+  <% end %>
+
+</div>

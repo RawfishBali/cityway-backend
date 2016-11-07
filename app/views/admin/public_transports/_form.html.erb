@@ -1,0 +1,81 @@
+<div class="md-card">
+  <div class="md-card-content">
+    <%= form_for(@admin_public_transport, url: (@admin_public_transport.new_record? ? admin_public_transports_path(@admin_public_transport) : admin_public_transport_path(@admin_public_transport)), multipart: true) do |f| %>
+    <% if @admin_public_transport.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@admin_public_transport.errors.count, "error") %> Questa categoria non può essere salvata:</h2>
+
+      <ul>
+        <% @admin_public_transport.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
+    <h2 class=" ">
+      <% if @admin_public_transport.new_record?%>
+      Aggiungi Mezzi pubblici
+      <% else %>
+      Gestisci <%= @admin_public_transport.name %>
+      <% end %>
+      <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, :back, class:'float-right' %>
+    </h2>
+    <div class="uk-grid" data-uk-grid-margin>
+      <div class="uk-width-medium-1-2">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <label>Nome</label>
+              <%= f.text_field :name,class: 'md-input', required: true  %>
+            </div>
+          </div>
+        </div>
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <label>Allegato </label>
+              <br />
+              <div class="uk-form-file md-btn md-btn-primary">
+                Seleziona
+                <%= f.file_field :attachment %>
+              </div>
+              <br />
+              <%= link_to(@admin_public_transport.attachment.url , @admin_public_transport.attachment.url) if @admin_public_transport.attachment %>
+            </div>
+          </div>
+        </div>
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <label>Tipologia Trasporto</label>
+              <%= f.select :transport_type, options_for_select([["Bus", "bus"],["Regional Bus", "regional_bus"], ["Autobus", "autobus"], ["Tram", "tram"], ["Metro", "underground"]], f.object.transport_type), {prompt: 'Seleziona Tipologia Trasporto'}, {'data-md-selectize': true, required: true, class: 'md-input'}  %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="uk-width-medium-1-2">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <div id="photos">
+                <h4>Tappe</h4>
+                <%= f.fields_for :paths do |path| %>
+                <%= render 'path_fields', f: path %>
+                <% end %>
+                <div class="links">
+                  <%= link_to_add_association '<i class="material-icons md-24"></i>'.html_safe, f, :paths %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="md-fab-wrapper">
+      <%= button_tag(type: 'submit' , class: 'md-fab md-fab-accent md-fab-wave waves-effect waves-button') do %>
+      <i class="fa fa-floppy-o" aria-hidden="true"></i>
+      <% end %>
+    </div>
+    <% end %>
+  </div>

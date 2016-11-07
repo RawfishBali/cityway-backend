@@ -1,0 +1,32 @@
+<div class="md-card uk-margin-medium-bottom">
+  <div class="md-card-content">
+    <div class="uk-overflow-container">
+      <table class="uk-table uk-table-nowrap table_check">
+        <thead>
+          <tr>
+            <th class="uk-width-1-10">Testo Iniziale</th>
+            <th class="uk-width-1-10">Testo Inferiore</th>
+            <th class="uk-width-2-10">Azioni</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @admin_stories %>
+          <tr>
+            <td><%= truncate(@admin_stories.top_text, length: 25, omission: '...') %></td>
+            <td><%= truncate(@admin_stories.bottom_text, length: 25, omission: '...') %></td>
+            <td>
+              <%= link_to '<i class="md-icon material-icons">&#xE254;</i>'.html_safe , edit_admin_story_path(@admin_stories)%>
+              <%= link_to '<i class="md-icon material-icons ">&#xE872;</i>'.html_safe, admin_story_path(@admin_stories), method: :delete , :data => {:confirm => 'Sei sicuro di voler cancellare?'} %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="md-fab-wrapper">
+    <a class="md-fab md-fab-accent md-fab-wave-light waves-effect waves-button waves-light" href="/admin/stories/new" id="invoice_add">
+      <i class="material-icons"></i>
+    </a>
+  </div>
+</div>

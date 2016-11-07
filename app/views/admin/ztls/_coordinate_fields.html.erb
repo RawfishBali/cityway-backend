@@ -1,0 +1,20 @@
+<div class="nested-fields">
+  <div class="uk-grid" data-uk-grid-margin>
+    <div class="uk-width-large-1-1 uk-width-1-1">
+      <div class="uk-width-medium-1-1 uk-row-first">
+          <label>Latitudine</label>
+          <%= f.text_field :latitude, class: 'md-input'%>
+      </div>
+      <br />
+      <div class="uk-width-medium-1-1 ">
+          <label>Longitudine</label>
+          <%= f.text_field :longitude, class: 'md-input'%>
+      </div>
+      <div class="uk-width-medium-1-1 uk-row-first">
+        <div class="md-input-wrapper text-align-right">
+          <%= link_to_remove_association '<i class="material-icons md-24 "></i>'.html_safe, f, {class: 'btnSectionRemove'} %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

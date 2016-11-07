@@ -1,0 +1,82 @@
+<div class="md-card">
+  <div class="md-card-content">
+    <%= form_for(@admin_ztl, url: (@admin_ztl.new_record? ? admin_ztls_path(@admin_ztl) : admin_ztl_path(@admin_ztl)), multipart: true) do |f| %>
+    <% if @admin_ztl.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@admin_ztl.errors.count, "error") %> Questa categoria non può essere salvata:</h2>
+
+      <ul>
+        <% @admin_ztl.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
+    <h2 class=" ">
+      <% if @admin_ztl.new_record?%>
+      Aggiungi <%= @admin_ztl.class.name %>
+      <% else %>
+      Gestisci <%= @admin_ztl.name %>
+      <% end %>
+      <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, :back, class:'float-right' %>
+    </h2>
+    <div class="uk-grid" data-uk-grid-margin>
+      <div class="uk-width-medium-1-2">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <label>Nome</label>
+              <%= f.text_field :name,class: 'md-input', required: true  %>
+            </div>
+          </div>
+        </div>
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <label>Descrizione</label>
+              <%= f.text_area :description,class: 'md-input', required: true  %>
+            </div>
+          </div>
+        </div>
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="uk-width-medium-1-2">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <div id="photos">
+                <h4>Coordinate</h4>
+                <%= f.fields_for :coordinates do |coordinate| %>
+                <%= render 'coordinate_fields', f: coordinate %>
+                <% end %>
+                <div class="links">
+                  <%= link_to_add_association '<i class="material-icons md-24"></i>'.html_safe, f, :coordinates %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <%= f.submit class: "md-btn default-submit"%>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="md-fab-wrapper">
+      <%= button_tag(type: 'submit' , class: 'md-fab md-fab-accent md-fab-wave waves-effect waves-button') do %>
+      <i class="fa fa-floppy-o" aria-hidden="true"></i>
+      <% end %>
+    </div>
+    <% end %>
+  </div>

@@ -10,6 +10,7 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *= require_self
+ *= require admin/bootstrap
  *= require admin/uikit.rtl
  *= require admin/uikit.almost-flat
  *= require admin/style_switcher
@@ -18,6 +19,9 @@
  *= require admin/chartist
  *= require admin/metricsgraphics
  *= require admin/weather-icons
- *= require admin/login_page
  *= require admin/general
+ *= require admin/dropify
+ *= require admin/kendo.common-material.min
+ *= require admin/kendo.material.min
+ *= require admin/html5imageupload
  */

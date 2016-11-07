@@ -1,0 +1,139 @@
+<div class="md-card">
+  <div class="md-card-content">
+    <%= form_for(@admin_promo, url: (@admin_promo.new_record? ? admin_promos_path(@admin_promo) : admin_promo_path(@admin_promo)), multipart: true) do |f| %>
+    <% if @admin_promo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@admin_promo.errors.count, "error") %> prohibited this admin_category from being saved:</h2>
+
+      <ul>
+        <% @admin_promo.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
+    <h2 class=" ">
+      <% if @admin_promo.new_record?%>
+      Aggiungi Promozioni
+      <% else %>
+      Gestisci <%= @admin_promo.title %>
+      <% end %>
+      <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, admin_promos_path, class:'float-right' %>
+    </h2>
+    <div class="uk-grid" data-uk-grid-margin>
+      <%= f.hidden_field :city_id , value: session[:current_city_id]%>
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+              <label>Titolo</label>
+              <%= f.text_field :title, required: true,class: 'md-input'  %>
+            </div>
+            <div class="uk-width-medium-1-2">
+              <label>Attività</label>
+              <%= f.select :merchant_id, options_from_collection_for_select(@merchants, 'id', 'name', (f.object.merchant.present? ? f.object.merchant.id : nil)), {prompt: 'Seleziona attività'}, {'data-md-selectize': true, required: true, class: 'md-input'}  %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+              <label>Descrizione</label>
+              <%= f.text_area :description, required: true,class: 'md-input'  %>
+            </div>
+            <div class="uk-width-medium-1-2">
+              <label>Termini & Condizioni</label>
+              <%= f.text_area :terms_and_conditions, required: true,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+
+              <%#= f.number_field :discount, required: true,class: 'md-input'  %>
+
+              <div class="uk-input-group">
+                <span class="uk-input-group-addon">€</span>
+                <label>Prezzo Originale</label>
+                <%= f.number_field :original_price, required: true,class: 'md-input'  %>
+              </div>
+
+
+
+
+
+            </div>
+            <div class="uk-width-medium-1-2">
+              <div class="uk-input-group">
+
+                <label>Sconto</label>
+                <%= f.number_field :discount, required: true,class: 'md-input', value: f.object.discount.to_i  %>
+                <span class="uk-input-group-addon">%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+              <div class="uk-input-group">
+                <span class="uk-input-group-addon">€</span>
+                <label>Prezzo Scontato</label>
+                <%= f.number_field :discount_price, required: true,class: 'md-input', disabled: true  %>
+              </div>
+            </div>
+            <div class="uk-width-medium-1-2">
+              <%= f.label :approval, 'Approvazione', class: 'inline-label'%>
+              <%= f.check_box :approval,class: 'md-input', 'data-switchery': true  %>
+
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+
+            </div>
+            <div class="uk-width-medium-1-2">
+              <label>Foto categoria</label>
+              <br />
+              <div class="dropzone" data-width="750"  data-image="<%= f.object.photo.url %>"  data-height="410"  data-editstart="false" data-ajax="false" data-canvas="true" style="width: 100%">
+                <%= f.file_field :photo%>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+    </div>
+
+    <div class="md-fab-wrapper">
+      <%= button_tag(type: 'submit' , class: 'md-fab md-fab-accent md-fab-wave waves-effect waves-button') do %>
+        <i class="fa fa-floppy-o" aria-hidden="true"></i>
+      <% end %>
+    </div>
+
+    <% end %>
+
+</div>

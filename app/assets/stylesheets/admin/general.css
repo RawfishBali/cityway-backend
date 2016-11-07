@@ -5,6 +5,7 @@
 .sidebar-header{
   width: 65% !important;
   padding: 10px;
+  margin-left: 10px;
 }
 
 .sidebar-header-link{
@@ -26,4 +27,114 @@
 
 .half{
   width: 50% !important;
+}
+
+.w500i{
+  width: 500px !important;
+}
+
+.advertisement-photo-container:parent{
+  width: 200px !important;
+}
+
+.center{
+  text-align: center !important;
+}
+.current_section_submenu{
+  color: #7FB1B6 !important;
+}
+
+.city-selector{
+  margin-top: -2px;
+  background: #fff !important;
+  width: 200px !important;
+}
+
+.subcategory-container{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.default-submit{
+  float: right;
+}
+
+.marginB25{
+  margin-bottom: 25px !important;
+}
+
+.text-align-right{
+  text-align: right !important;
+}
+
+.green_selectize{
+  background: #7FB1B6 !important;
+  color: #fff !important;
+}
+
+.sidebar_actions .md-input-wrapper .selectize-input{
+  background: #7FB1B6 !important;
+  color: #fff !important;
+}
+
+.sidebar_actions .md-input-wrapper .selectize-input::after{
+  color: #fff !important
+}
+
+.white_icon{
+  color: #fff !important;
+}
+
+.md-content-margin{
+  margin: 15px 0px !important;
+}
+
+.marginTM3{
+  margin-top: -3px !important;
+}
+
+.marginTM50{
+  margin-top: -50px !important;
+}
+
+.fa15{
+  font-size: 1.5em;
+}
+
+.float-right{
+  float: right;
+}
+
+.clear{
+  float: none;
+}
+
+.marginT30{
+  margin-top: 30px;
+}
+
+.members-photo{
+  width: 100px;
+  margin-top: -86px;
+  margin-right: 10px;
+}
+
+.font100{
+  font-size: 100px;
+}
+
+.width100p{
+  width: 100% !important;
+}
+
+.width100pixel{
+  width: 100px !important;
+}
+
+.loadingoverlay_fontawesome{
+  color: #7fb1b6 !important;
+}
+
+.block{
+  display: block !important;
 }

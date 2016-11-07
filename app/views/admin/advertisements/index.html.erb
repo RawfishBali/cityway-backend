@@ -1,0 +1,44 @@
+<div class="md-card uk-margin-medium-bottom">
+  <div class="md-card-content">
+    <div class="uk-overflow-container">
+      <table class="uk-table uk-table-nowrap table_check">
+        <thead>
+          <tr>
+            <th class="uk-width-1-10 ">Foto</th>
+            <th class="uk-width-1-10 uk-text-center">Posizione</th>
+            <th class="uk-width-1-10 uk-text-center">Inizio</th>
+            <th class="uk-width-1-10 uk-text-center">Fino à</th>
+            <th class="uk-width-1-10 uk-text-center">Seconda data inizio</th>
+            <th class="uk-width-1-10 uk-text-center">Seconda data finale</th>
+            <th class="uk-width-1-10 ">Azioni</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @advertisements.each do |ad| %>
+          <tr>
+            <td class="uk-width-1-10"><%= image_tag ad.photo.thumb.url, class: 'width100pixel' %></td>
+            <td class="uk-width-1-10 uk-text-center"><%= ad.position %></td>
+            <td class="uk-width-1-10 uk-text-center"><%= ad.start_date.strftime("%A %B %d %Y") %></td>
+            <td class="uk-width-1-10 uk-text-center"><%= ad.end_date.strftime("%A %B %d %Y") %></td>
+            <td class="uk-width-1-10 uk-text-center"><%= ad.second_start_date.strftime("%A %B %d %Y") if ad.second_start_date %></td>
+            <td class="uk-width-1-10 uk-text-center"><%= ad.second_end_date.strftime("%A %B %d %Y") if ad.second_end_date %></td>
+
+
+            <td class="uk-width-1-10">
+              <%= link_to '<i class="md-icon material-icons">&#xE254;</i>'.html_safe, edit_admin_advertisement_path(ad) %>
+            </td>
+          </tr>
+          <%end %>
+        </tbody>
+      </table>
+    </div>
+    <ul class="uk-pagination uk-margin-medium-top">
+      <%= paginate @advertisements %>
+    </ul>
+    <div class="md-fab-wrapper">
+        <a class="md-fab md-fab-accent md-fab-wave-light waves-effect waves-button waves-light" href="/admin/advertisements/new" id="invoice_add">
+            <i class="material-icons"></i>
+        </a>
+    </div>
+  </div>
+</div>

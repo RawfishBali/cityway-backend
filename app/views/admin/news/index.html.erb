@@ -1,0 +1,40 @@
+<div class="md-card uk-margin-medium-bottom">
+  <div class="md-card-content">
+    <div class="uk-overflow-container">
+      <table class="uk-table uk-table-nowrap table_check">
+        <thead>
+          <tr>
+            <th class="uk-width-1-10">Foto</th>
+            <th class="uk-width-1-10">Descrizione</th>
+            <th class="uk-width-1-10">Foto</th>
+            <th class="uk-width-1-10 uk-text-center">Azioni</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @admin_news.each do  |news|%>
+          <tr>
+            <td >
+              <%= news.title %>
+            </td>
+            <td >
+              <%= truncate(news.description, length: 25, omission: '...') %>
+            </td>
+            <td >
+              <%= image_tag news.primary_photo.first.picture.url, class: 'width100pixel' if news.primary_photo.first %>
+            </td>
+            <td class="uk-text-center">
+              <%= link_to '<i class="md-icon material-icons">&#xE254;</i>'.html_safe , edit_admin_news_path(news)%>
+              <%= link_to '<i class="md-icon material-icons ">&#xE872;</i>'.html_safe, admin_news_path(news), method: :delete , :data => {:confirm => 'Sei sicuro di voler cancellare?'} %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="md-fab-wrapper">
+    <a class="md-fab md-fab-accent md-fab-wave-light waves-effect waves-button waves-light" href="/admin/news/new" id="invoice_add">
+      <i class="material-icons"></i>
+    </a>
+  </div>
+</div>

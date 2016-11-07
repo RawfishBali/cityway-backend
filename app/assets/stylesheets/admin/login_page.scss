@@ -23,7 +23,7 @@
   background: #e53935 !important;
 }
 .uk-alert-warning {
-  background: #ffa000 !important;
+  background: #D8E903 !important;
 }
 .uk-alert-info {
   background: #0097a7 !important;
@@ -53,13 +53,13 @@
   font-weight: 400;
 }
 .uk-badge-primary {
-  background: #2196f3;
+  background: #0288D1;
 }
 .uk-badge-danger {
   background: #e53935;
 }
 .uk-badge-warning {
-  background: #ffa000;
+  background: #D8E903;
 }
 .uk-badge-success {
   background: #7FB1B6;
@@ -155,7 +155,7 @@
 }
 .uk-modal-dialog .uk-modal-header .uk-modal-title {
   margin: 0;
-  font: 500 18px / 28px "Roboto", sans-serif;
+  font: 500 18px / 28px;
 }
 .uk-modal-dialog .uk-modal-header .uk-modal-title span {
   font-size: 16px;
@@ -384,7 +384,7 @@
 .uk-form select:focus,
 .uk-form textarea:focus {
   background: none;
-  border-color: #2196f3;
+  border-color: #0288D1;
 }
 .uk-form textarea {
   -webkit-transition: border-color 200ms ease-in, height 280ms ease-in;
@@ -617,7 +617,7 @@
   color: #757575 !important;
 }
 .uk-text-primary {
-  color: #2196f3 !important;
+  color: #0288D1 !important;
 }
 .uk-text-danger {
   color: #e53935 !important;
@@ -626,7 +626,7 @@
   color: #7FB1B6 !important;
 }
 .uk-text-warning {
-  color: #ffa000 !important;
+  color: #D8E903 !important;
 }
 .uk-margin-bottom {
   margin-bottom: 16px !important;
@@ -730,7 +730,7 @@
   transform: rotate(-180deg);
 }
 .uk-accordion-title-primary {
-  background: #2196f3;
+  background: #0288D1;
   color: #fff;
 }
 .uk-accordion-title-primary:after {
@@ -751,7 +751,7 @@
   color: #fff;
 }
 .uk-accordion-title-warning {
-  background: #ffa000;
+  background: #D8E903;
   color: #fff;
 }
 .uk-accordion-title-warning:after {
@@ -770,7 +770,7 @@
   border-top: none;
 }
 .uk-accordion-alt .uk-accordion-title:after {
-  color: #2196f3;
+  color: #0288D1;
   content: '\e145';
   right: auto;
   left: 16px;
@@ -1029,7 +1029,7 @@
   background-color: #e53935;
 }
 .uk-progress-warning .uk-progress-bar {
-  background-color: #ffa000;
+  background-color: #D8E903;
 }
 /* htmleditor */
 /*! UIkit 2.26.3 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
@@ -1418,7 +1418,7 @@ div.uk-form-file {
   color: #fff;
 }
 .uk-datepicker-nav .uk-form-select {
-  font: 400 16px / 22px "Roboto", sans-serif;
+  font: 400 16px / 22px;
   color: #fff;
   text-transform: uppercase;
 }
@@ -1451,7 +1451,7 @@ div.uk-form-file {
 .uk-datepicker-table th,
 .uk-datepicker-table td {
   padding: 2px;
-  font: 400 13px / 15px "Roboto", sans-serif;
+  font: 400 13px / 15px;
 }
 .uk-datepicker-table th {
   color: #727272;
@@ -1831,7 +1831,7 @@ a.uk-datepicker-table-muted {
   bottom: 8px;
 }
 .uk-notify-message {
-  background: #323232;
+  background: #0288D1;
   border-radius: 4px;
   padding: 12px 16px;
   font-size: 14px;
@@ -1861,7 +1861,7 @@ a.uk-datepicker-table-muted {
   background: #7FB1B6;
 }
 .uk-notify-message-warning {
-  background: #ffa000;
+  background: #D8E903;
 }
 .uk-notify-message-danger {
   background: #e53935;
@@ -2476,7 +2476,7 @@ a.uk-datepicker-table-muted {
 }
 .uk-tab > li.uk-active > a {
   background: transparent !important;
-  border-bottom-color: #2196f3;
+  border-bottom-color: #0288D1;
 }
 .uk-tab > li.uk-disabled > a,
 .uk-tab > li.uk-disabled > a:hover,
@@ -2497,7 +2497,7 @@ a.uk-datepicker-table-muted {
   border-top-color: #b2dbfb;
 }
 .uk-tab-bottom li.uk-active > a {
-  border-top-color: #2196f3;
+  border-top-color: #0288D1;
 }
 .uk-tab-left {
   border-bottom: none;
@@ -2514,7 +2514,7 @@ a.uk-datepicker-table-muted {
   border-right-color: #b2dbfb;
 }
 .uk-tab-left li.uk-active > a {
-  border-right-color: #2196f3;
+  border-right-color: #0288D1;
 }
 .uk-tab-right {
   border-bottom: none;
@@ -2531,7 +2531,7 @@ a.uk-datepicker-table-muted {
   border-left-color: #b2dbfb;
 }
 .uk-tab-right li.uk-active > a {
-  border-left-color: #2196f3;
+  border-left-color: #0288D1;
 }
 .uk-tab-responsive li a {
   border: none !important;
@@ -2790,7 +2790,7 @@ a.uk-datepicker-table-muted {
 }
 /* buttons */
 .md-btn {
-  background: #fff;
+  background: #0288D1;
   border: none;
   border-radius: 2px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
@@ -2802,13 +2802,13 @@ a.uk-datepicker-table-muted {
   text-transform: uppercase;
   -webkit-transition: all 280ms ease;
   transition: all 280ms ease;
-  color: #212121;
+  color: #fff;
   box-sizing: border-box;
   cursor: pointer;
   -webkit-appearance: none;
   display: inline-block;
   vertical-align: middle;
-  font: 500 14px / 31px "Roboto", sans-serif !important;
+  font: 500 14px / 31px;
 }
 .md-btn:hover,
 .md-btn:focus,
@@ -2890,7 +2890,7 @@ a.uk-datepicker-table-muted {
 .md-btn-flat-warning:focus,
 .md-btn-flat-warning:active,
 .md-btn-flat-warning.uk-active {
-  color: #ffa000;
+  color: #D8E903;
 }
 .md-btn-flat-warning:hover,
 .md-btn-flat-warning:focus,
@@ -2916,7 +2916,7 @@ a.uk-datepicker-table-muted {
 .md-btn-primary:focus,
 .md-btn-primary:active,
 .md-btn-primary.uk-active {
-  background: #2196f3;
+  background: #0288D1;
 }
 .md-btn-success,
 .md-btn-success:hover,
@@ -2930,7 +2930,7 @@ a.uk-datepicker-table-muted {
 .md-btn-warning:focus,
 .md-btn-warning:active,
 .md-btn-warning.uk-active {
-  background: #ffa000;
+  background: #D8E903;
 }
 .md-btn-danger,
 .md-btn-primary,
@@ -3116,13 +3116,13 @@ a.uk-datepicker-table-muted {
   color: #fff;
 }
 .md-fab.md-fab-primary {
-  background: #2196f3;
+  background: #0288D1;
 }
 .md-fab.md-fab-primary > i {
   color: #fff;
 }
 .md-fab.md-fab-warning {
-  background: #ffa000;
+  background: #D8E903;
 }
 .md-fab.md-fab-warning > i {
   color: #fff;
@@ -3526,7 +3526,7 @@ a.uk-datepicker-table-muted {
   opacity: 0;
   padding: 4px 16px;
   box-sizing: border-box;
-  font: 400 16px / 32px "Roboto", sans-serif;
+  font: 400 16px / 32px;
   text-align: left;
 }
 .md-fab-sheet-actions > a,
@@ -3641,7 +3641,7 @@ a.uk-datepicker-table-muted {
   clear: both;
 }
 .md-card .md-card-toolbar-heading-text {
-  font: 500 14px / 50px "Roboto", sans-serif;
+  font: 500 14px / 50px;
   color: #212121;
   margin: 0;
   float: left;
@@ -3690,7 +3690,7 @@ a.uk-datepicker-table-muted {
 }
 .md-card .md-card-toolbar-input {
   border: none;
-  font: 400 18px / 24px "Roboto", sans-serif;
+  font: 400 18px / 24px;
   height: auto;
   background: none !important;
   padding: 12px 0;
@@ -3724,13 +3724,13 @@ a.uk-datepicker-table-muted {
 }
 .md-card .md-card-head-text {
   padding: 8px 16px 16px;
-  font: 500 16px / 22px "Roboto", sans-serif;
+  font: 500 16px / 22px;
   color: #212121;
   margin: 0;
 }
 .md-card .md-card-head-text span {
   display: block;
-  font: 400 12px / 18px "Roboto", sans-serif;
+  font: 400 12px / 18px;
   margin-top: -2px;
 }
 .md-card .md-card-head-text.text_dark {
@@ -3938,10 +3938,10 @@ a.uk-datepicker-table-muted {
   box-sizing: border-box;
 }
 .md-card.md-card-overlay .md-card-overlay-header h3 {
-  font: 400 16px / 30px "Roboto", sans-serif;
+  font: 400 16px / 30px;
 }
 .md-card.md-card-overlay .md-card-overlay-header h4 {
-  font: 500 14px / 30px "Roboto", sans-serif;
+  font: 500 14px / 30px;
 }
 .md-card.md-card-overlay .md-card-overlay-header .md-icon {
   position: absolute;
@@ -3977,7 +3977,7 @@ a.uk-datepicker-table-muted {
   border-left: 4px solid transparent;
 }
 .md-card-primary {
-  border-left-color: #2196f3;
+  border-left-color: #0288D1;
 }
 .md-card-success {
   border-left-color: #7FB1B6;
@@ -3986,7 +3986,7 @@ a.uk-datepicker-table-muted {
   border-left-color: #e53935;
 }
 .md-card-warning {
-  border-left-color: #ffa000;
+  border-left-color: #D8E903;
 }
 .md-expand,
 .md-expand-group > * {
@@ -4244,7 +4244,7 @@ input[type="color"].md-input {
   border-width: 0 0 1px;
   border-style: solid;
   border-color: rgba(0, 0, 0, 0.12);
-  font: 400 15px / 18px "Roboto", sans-serif;
+  font: 400 15px / 18px;
   box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0);
   box-sizing: border-box;
   padding: 12px 4px;
@@ -4346,7 +4346,7 @@ input[type="search"].md-input:focus,
 input[type="tel"].md-input:focus,
 input[type="color"].md-input:focus {
   background: transparent;
-  border-color: rgba(0, 0, 0, 0.12);
+  border-color: #D8E903;
 }
 select.md-input-small,
 textarea.md-input-small,
@@ -4472,7 +4472,7 @@ textarea.no_autosize {
 }
 .md-input-wrapper {
   position: relative;
-  padding-top: 4px;
+  padding-top: 18px;
   width: 100%;
   display: block;
 }
@@ -4491,7 +4491,7 @@ textarea.no_autosize {
   bottom: 0;
   width: 0;
   height: 2px;
-  background: #7FB1B6;
+  background: #fff;
   -webkit-transition: width 400ms cubic-bezier(0.4, 0, 0.2, 1);
   transition: width 400ms cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -4956,7 +4956,7 @@ button.md-icon {
   stroke: #e53935;
 }
 .md-preloader-warning svg circle {
-  stroke: #ffa000;
+  stroke: #D8E903;
 }
 /* content preloader */
 .content-preloader {
@@ -5161,7 +5161,7 @@ html {
 }
 body {
   min-height: 100%;
-  font: 400 14px / 1.42857143 "Roboto", sans-serif;
+  font: 400 14px / 1.42857143;
   padding-top: 48px;
   box-sizing: border-box;
 }
@@ -5170,12 +5170,12 @@ button {
   outline: none !important;
 }
 a {
-  color: #1e88e5;
+  color: #7FB1B6;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 a:hover,
 a:active {
-  color: #0d47a1;
+  color: #D8E903;
   text-decoration: none;
 }
 pre,
@@ -5234,12 +5234,12 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-weight: 500;
 }
 .heading_a {
   margin: 0;
-  font: 400 18px / 24px "Roboto", sans-serif;
+  font: 400 18px / 24px;
 }
 .heading_a .sub-heading {
   font-weight: 300;
@@ -5250,7 +5250,7 @@ h6 {
 }
 .heading_b {
   margin: 0;
-  font: 400 22px / 28px "Roboto", sans-serif;
+  font: 400 22px / 28px;
 }
 .heading_b .sub-heading {
   font-weight: 300;
@@ -5261,7 +5261,7 @@ h6 {
 }
 .heading_c {
   margin: 0;
-  font: 400 16px / 20px "Roboto", sans-serif;
+  font: 400 16px / 20px;
 }
 .heading_c .sub-heading {
   font-weight: 300;
@@ -5272,7 +5272,7 @@ h6 {
 }
 .heading_list {
   color: #727272;
-  font: 500 13px / 16px "Roboto", sans-serif;
+  font: 500 13px / 16px;
   padding: 0 16px;
   margin: 0 0 16px;
 }
@@ -5436,6 +5436,7 @@ address p + p {
   }
 }
 body {
+  font-family: 'Poppins', sans-serif;
   font-size: 15px;
   padding: 64px 24px;
   overflow-y: auto;
