@@ -22,7 +22,6 @@
 //= require admin/maplace
 //= require admin/jquery.peity
 //= require admin/jquery.easypiechart
-//= require admin/clndr.min
 //= require admin/jquery.fitvids
 //= require admin/login.min
 //= require admin/dashboard

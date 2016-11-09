@@ -47,7 +47,7 @@
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
               <label>Posizione</label>
-              <%= f.select(:position, (Advertisement.positions.keys.map {|position| [position.titleize,position]}) , {prompt: 'Seleziona posizione'}, {'data-md-selectize': true, required: true, class: 'md-input'}  ) %>
+              <%= f.select(:position, ([["la cima", "top"], ["il disotto", "bottom"]]) , {prompt: 'Seleziona posizione'}, {'data-md-selectize': true, required: true, class: 'md-input'}  ) %>
             </div>
           </div>
         </div>
@@ -62,26 +62,12 @@
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
+            <label>Fino a</label>
             <%= f.text_field :end_date, class: 'md-input',  'data-uk-datepicker':"{format:'YYYY-MM-DD'}" , value: (f.object.end_date.strftime('%Y-%m-%d') if f.object.end_date) %>
           </div>
           </div>
         </div>
-        <div class="uk-form-row">
-          <div class="uk-grid" data-uk-grid-margin>
-            <div class="uk-width-medium-1-1">
-            <label>Seconda Data</label>
-            <%= f.text_field :second_start_date, class: 'md-input',  'data-uk-datepicker':"{format:'YYYY-MM-DD'}" , value: (f.object.second_start_date.strftime('%Y-%m-%d') if f.object.second_start_date) %>
-          </div>
-          </div>
-        </div>
-        <div class="uk-form-row">
-          <div class="uk-grid" data-uk-grid-margin>
-            <div class="uk-width-medium-1-1">
-            <label>Seconda Data</label>
-            <%= f.text_field :second_end_date, class: 'md-input',  'data-uk-datepicker':"{format:'YYYY-MM-DD'}" , value: (f.object.second_end_date.strftime('%Y-%m-%d') if f.object.second_end_date) %>
-          </div>
-          </div>
-        </div>
+
 
 
       </div>

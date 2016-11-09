@@ -7,9 +7,8 @@
             <th class="uk-width-1-10 ">Foto</th>
             <th class="uk-width-1-10 uk-text-center">Posizione</th>
             <th class="uk-width-1-10 uk-text-center">Inizio</th>
-            <th class="uk-width-1-10 uk-text-center">Fino à</th>
-            <th class="uk-width-1-10 uk-text-center">Seconda data inizio</th>
-            <th class="uk-width-1-10 uk-text-center">Seconda data finale</th>
+            <th class="uk-width-1-10 uk-text-center">Fino a</th>
+            <th class="uk-width-1-10 uk-text-center">Stato</th>
             <th class="uk-width-1-10 ">Azioni</th>
           </tr>
         </thead>
@@ -17,11 +16,17 @@
           <% @advertisements.each do |ad| %>
           <tr>
             <td class="uk-width-1-10"><%= image_tag ad.photo.thumb.url, class: 'width100pixel' %></td>
-            <td class="uk-width-1-10 uk-text-center"><%= ad.position %></td>
+            <td class="uk-width-1-10 uk-text-center"><%= ad.position == 'top' ? '
+superiore' : 'inferiore' %></td>
             <td class="uk-width-1-10 uk-text-center"><%= ad.start_date.strftime("%A %B %d %Y") %></td>
             <td class="uk-width-1-10 uk-text-center"><%= ad.end_date.strftime("%A %B %d %Y") %></td>
-            <td class="uk-width-1-10 uk-text-center"><%= ad.second_start_date.strftime("%A %B %d %Y") if ad.second_start_date %></td>
-            <td class="uk-width-1-10 uk-text-center"><%= ad.second_end_date.strftime("%A %B %d %Y") if ad.second_end_date %></td>
+            <td class="uk-text-center">
+              <% if ad.active? %>
+                <span class="uk-badge uk-badge-success">Attivo</span>
+              <% else %>
+                <span class="uk-badge uk-badge-danger">Inattivo</span>
+              <% end %>
+            </td>
 
 
             <td class="uk-width-1-10">

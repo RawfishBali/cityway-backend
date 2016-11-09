@@ -4352,8 +4352,8 @@
             mobile: false,
             weekstart: 1,
             i18n: {
-                months        : ['January','February','March','April','May','June','July','August','September','October','November','December'],
-                weekdays      : ['Sun','Mon','Tue','Wed','Thu','Fri','Sat']
+                months        : ["Gennaio", "Febbraio", "Marzo", "Aprile", "Può", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "December" ],
+                weekdays      : ['Do','Lun','Mar','Mer','Gio','Ven','Sab']
             },
             format: "DD.MM.YYYY",
             offsettop: 5,
@@ -4498,7 +4498,7 @@
             if (!dropdown) {
 
                 dropdown = UI.$('<div class="uk-dropdown uk-datepicker '+$this.options.addClass+'"></div>');
-                
+
                 dropdown.on("click", ".uk-datepicker-next, .uk-datepicker-previous, [data-date]", function(e){
 
                     e.stopPropagation();
