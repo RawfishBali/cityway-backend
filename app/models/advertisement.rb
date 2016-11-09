@@ -27,4 +27,8 @@ class Advertisement < ActiveRecord::Base
     'top': 0,
     'bottom': 1
   }
+
+  def active?
+    start_date <= Time.now && end_date >= Time.now
+  end
 end
