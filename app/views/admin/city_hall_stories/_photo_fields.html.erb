@@ -11,7 +11,7 @@
       <br />
       <div class="uk-width-medium-1-1 uk-row-first">
         <label>Posizione</label>
-        <%= f.select(:position, ([["la cima", "top"], ["in mezzo", "middle"], ["il disotto", "bottom"]]) , {prompt: 'Seleziona posizione'}, {'data-md-selectize': true, required: true, class: 'md-input'}  ) %>
+        <%= f.select(:position, ([["Sopra", "top"], ["Sotto", "middle"], ["il disotto", "bottom"]]) , {prompt: 'Seleziona posizione'}, {'data-md-selectize': true, required: true, class: 'md-input'}  ) %>
         <span class="md-input-bar "></span>
       </div>
     </div>
