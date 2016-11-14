@@ -47,7 +47,7 @@
 		width:				null,
 		height: 			null,
 		image:				null,
-		ghost:				true,
+		ghost:				false,
 		originalsize:		true,
 		url:				false,
 		removeurl:			null,
@@ -543,8 +543,8 @@ imageCrop: function() {
 	finalWidth				= options.width;
 	finalHeight				= options.height;
 
-	finalTop				= parseInt(Math.round(parseInt($(image).css('top')) * factor * 0.995))
-	finalLeft				= parseInt(Math.round(parseInt($(image).css('left')) * factor * 0.988   ))
+	finalTop				= parseInt(parseInt($(image).css('top')) * factor * 0.995)
+	finalLeft				= parseInt(parseInt($(image).css('left')) * factor * 0.988)
 	imageWidth				= parseInt($(image).width() *  (factor * 1.001) );
 	imageHeight				= parseInt($(image).height() * (factor*1.001 )    );
 	imageOriginalWidth		= $(image).data('width');
