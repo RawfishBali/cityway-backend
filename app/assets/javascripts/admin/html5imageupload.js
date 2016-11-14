@@ -543,10 +543,10 @@ imageCrop: function() {
 	finalWidth				= options.width;
 	finalHeight				= options.height;
 
-	finalTop				= parseInt(Math.round(parseInt($(image).css('top')) * factor))
-	finalLeft				= parseInt(Math.round(parseInt($(image).css('left')) * factor   ))
-	imageWidth				= parseInt(Math.round($(image).width() *  (factor *1.01) ));
-	imageHeight				= parseInt(Math.round($(image).height() * factor));
+	finalTop				= parseInt(Math.round(parseInt($(image).css('top')) * factor * 0.995))
+	finalLeft				= parseInt(Math.round(parseInt($(image).css('left')) * factor * 0.988   ))
+	imageWidth				= parseInt($(image).width() *  (factor * 1.001) );
+	imageHeight				= parseInt($(image).height() * (factor*1.001 )    );
 	imageOriginalWidth		= $(image).data('width');
 	imageOriginalHeight		= $(image).data('height');
 
