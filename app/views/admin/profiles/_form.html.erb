@@ -16,11 +16,15 @@
         <% if params[:major] == 'true'%>
           Aggiungi Sindaco
         <% else %>
-          Aggiungi Profilo
+          Aggiungi Giunta Comunale
+        <% end %>
+      <% else %>
+        <% if params[:major] == 'true'%>
+          Gestisci Sindaco
+        <% else %>
+          Gestisci Giunta Comunale
         <% end %>
 
-      <% else %>
-      Gestisci <%= @admin_profile.name %>
       <% end %>
       <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, :back, class:'float-right' %>
     </h2>

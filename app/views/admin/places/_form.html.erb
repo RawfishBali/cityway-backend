@@ -17,7 +17,7 @@
       <% if @admin_place.new_record?%>
       Aggiungi <%= italian_type[params[:place_type].to_sym] %>
       <% else %>
-      Gestisci <%= @admin_place.name %>
+      Gestisci <%= italian_type[params[:place_type].to_sym] %>
       <% end %>
       <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, :back, class:'float-right' %>
     </h2>

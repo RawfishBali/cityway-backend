@@ -16,7 +16,7 @@
       <% if @admin_ztl.new_record?%>
       Aggiungi <%= @admin_ztl.class.name %>
       <% else %>
-      Gestisci <%= @admin_ztl.name %>
+      Gestisci <%= @admin_ztl.class.name %>
       <% end %>
       <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, :back, class:'float-right' %>
     </h2>
