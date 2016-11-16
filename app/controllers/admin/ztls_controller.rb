@@ -4,7 +4,9 @@ class Admin::ZtlsController < Admin::BaseController
   # GET /admin/ztls
   # GET /admin/ztls.json
   def index
-    @admin_ztls = City.find(session[:current_city_id]).utility.ztls.page(params[:page]).per(10)
+    city = City.find(session[:current_city_id])
+    @admin_ztls = city.utility.ztls.page(params[:page]).per(10)
+    @allowed_new_ztl = city.utility.ztls.count <= 0
   end
 
   # GET /admin/ztls/1
@@ -14,7 +16,9 @@ class Admin::ZtlsController < Admin::BaseController
 
   # GET /admin/ztls/new
   def new
-    @admin_ztl = City.find(session[:current_city_id]).utility.ztls.new
+    city = City.find(session[:current_city_id])
+    return redirect_to admin_ztls_url, notice: 'Solo uno è permesso ztl' if city.utility.ztls.count > 0
+    @admin_ztl = city.utility.ztls.new
   end
 
   # GET /admin/ztls/1/edit
@@ -24,6 +28,9 @@ class Admin::ZtlsController < Admin::BaseController
   # POST /admin/ztls
   # POST /admin/ztls.json
   def create
+    city = City.find(session[:current_city_id])
+    return redirect_to admin_ztls_url, notice: 'Solo uno è permesso ztl' if city.utility.ztls.count > 0
+
     @admin_ztl = City.find(session[:current_city_id]).utility.ztls.new(admin_ztl_params)
 
     respond_to do |format|

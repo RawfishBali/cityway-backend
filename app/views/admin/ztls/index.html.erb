@@ -26,9 +26,11 @@
       <%= paginate @admin_ztls %>
     </div>
   </div>
+  <% if @allowed_new_ztl %>
   <div class="md-fab-wrapper">
     <a class="md-fab md-fab-accent md-fab-wave-light waves-effect waves-button waves-light" href="/admin/ztls/new" id="invoice_add">
       <i class="material-icons"></i>
     </a>
   </div>
+  <% end %>
 </div>
