@@ -1,16 +1,18 @@
-<div class="uk-button-dropdown float-right" data-uk-dropdown>
-  <button class="md-btn"> Seleziona Categoria <i class="material-icons">&#xE313;</i></button>
-  <div class="uk-dropdown">
-    <ul class="uk-nav uk-nav-dropdown">
-      <li><a href="/admin/merchants">Seleziona tutti</a></li>
-      <% @categories.order('name ASC').each do |category| %>
-      <li><a href="/admin/merchants?category_id=<%= category.id%>"><%= category.name%></a></li>
-      <% end %>
-    </ul>
+<h1>
+  Gestisci Attività
+  <div class="uk-button-dropdown float-right" data-uk-dropdown>
+    <button class="md-btn"> Seleziona Categoria <i class="material-icons">&#xE313;</i></button>
+    <div class="uk-dropdown">
+      <ul class="uk-nav uk-nav-dropdown">
+        <li><a href="/admin/merchants">Seleziona tutti</a></li>
+        <% @categories.order('name ASC').each do |category| %>
+        <li><a href="/admin/merchants?category_id=<%= category.id%>"><%= category.name%></a></li>
+        <% end %>
+      </ul>
+    </div>
   </div>
-</div>
-<br />
-<div class="clear"></div>
+</h1>
+
 <div class="md-card uk-margin-medium-bottom marginT30">
   <div class="md-card-content">
     <div class="uk-overflow-container">
