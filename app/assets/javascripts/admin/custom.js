@@ -84,8 +84,13 @@ $(document).ready(function(){
 
 
   $('#promo_original_price , #promo_discount').change(function(){
-    $("#promo_discount_price").parent().addClass('md-input-filled')
-    $("#promo_discount_price").val($('#promo_original_price').val() - ($('#promo_original_price').val() * ($('#promo_discount').val()/100) ))
+    $('#promo_original_price').val(parseFloat($('#promo_original_price').val()).toFixed(2))
+    $("#promo_discount_price").parent().addClass('md-input-filled');
+    $("#promo_discount_price").val(
+      parseFloat($('#promo_original_price').val() - (
+        $('#promo_original_price').val() * ($('#promo_discount').val()/100)
+      )).toFixed(2)
+    )
   })
 
 
