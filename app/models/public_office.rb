@@ -50,4 +50,11 @@ class PublicOffice < ActiveRecord::Base
     mb = (self.business_hours).to_a
     return mb.sort_by(&:day)
   end
+
+  def is_open_now?
+    business_hours.each do |business_hour|
+      return true if business_hour.is_open? Time.now
+    end
+    return false
+  end
 end

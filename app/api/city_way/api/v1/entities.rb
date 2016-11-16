@@ -333,6 +333,9 @@ module CityWay
         expose :business_hours,if: lambda { |object, options| options[:simple] == 'false' && object.business_hours.length > 0 } do |object , options|
           CityWay::Api::V1::Entities::BusinessHours.represent(object.all_business_hours)
         end
+        expose :is_open do |object , options|
+          object.is_open_now?
+        end
         expose :latitude, documentation: {:type => "String", :desc => "Public Office latitude"}
         expose :longitude, documentation: {:type => "String", :desc => "Public Office longitude"}
         expose :simple do |object, options|
