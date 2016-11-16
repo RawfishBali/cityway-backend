@@ -29,7 +29,7 @@ module CityWay
           expose :facebook, if: lambda { |object, options| options[:simple] == 'false' && !object.facebook.blank? }, documentation: {:type => "String", :desc => "Place facebook"} do |place, options|
             matches = place.facebook.match(/(?:https?:\/\/)?(?:www\.)?facebook\.com\/(?:(?:\w)*#!\/)?(?:groups\/)?(?:pages\/)?(?:[\w\-]*\/)*?(\/)?([\w\-\.]*)/)
             if matches
-              matches[2]
+              matches[2].blank? ? "https://#{place.facebook}" : matches[2]
             else
               place.facebook
             end
@@ -182,7 +182,7 @@ module CityWay
         expose :facebook, if: lambda { |object, options| options[:simple] == 'false' && !object.facebook.blank? }, documentation: {:type => "String", :desc => "Event Facebook"} do |event, options|
           matches = event.facebook.match(/(?:https?:\/\/)?(?:www\.)?facebook\.com\/(?:(?:\w)*#!\/)?(?:groups\/)?(?:pages\/)?(?:[\w\-]*\/)*?(\/)?([\w\-\.]*)/) if event.facebook
           if matches
-            matches[2]
+            matches[2].blank? ? "https://#{place.facebook}" : matches[2]
           else
             event.facebook
           end
@@ -464,7 +464,7 @@ module CityWay
         expose :facebook, if: lambda { |object, options| options[:simple] == 'false' && !object.facebook.blank? }, documentation: {:type => "string", :desc => "Comune Facebook"} do |around, options|
           matches = around.facebook.match(/(?:https?:\/\/)?(?:www\.)?facebook\.com\/(?:(?:\w)*#!\/)?(?:groups\/)?(?:pages\/)?(?:[\w\-]*\/)*?(\/)?([\w\-\.]*)/)
           if matches
-            matches[2]
+            matches[2].blank? ? "https://#{place.facebook}" : matches[2]
           else
             around.facebook
           end
@@ -975,7 +975,7 @@ module CityWay
         documentation: {:type => "string", :desc => "Merchant facebook"} do |merchant, options|
           matches = merchant.facebook.match(/(?:https?:\/\/)?(?:www\.)?facebook\.com\/(?:(?:\w)*#!\/)?(?:groups\/)?(?:pages\/)?(?:[\w\-]*\/)*?(\/)?([\w\-\.]*)/)
           if matches
-            matches[2]
+            matches[2].blank? ? "https://#{place.facebook}" : matches[2]
           else
             merchant.facebook
           end
