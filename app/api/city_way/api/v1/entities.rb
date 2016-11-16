@@ -1092,6 +1092,9 @@ module CityWay
         expose :merchant,if: lambda { |object, options| options[:simple] == 'false' } do |promo, options|
           CityWay::Api::V1::Entities::Merchant.represent promo.merchant
         end
+        expose :merchant_name do |promo, options|
+          promo.merchant.name if promo.merchant
+        end
       end
 
       class Message < Grape::Entity
