@@ -260,6 +260,10 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rainbow (2.1.0)
     rake (11.2.2)
+    raygun4ruby (1.1.9)
+      httparty (~> 0.11)
+      json
+      rack
     rdoc (4.2.2)
       json (~> 1.4)
     require_all (1.3.3)
@@ -402,6 +406,7 @@ DEPENDENCIES
   rails (= 4.2.7.1)
   rails_12factor
   rails_best_practices
+  raygun4ruby
   rolify
   rspec-rails
   rubocop

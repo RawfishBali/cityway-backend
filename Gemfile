@@ -63,6 +63,8 @@ gem 'cocoon'
 
 gem 'phony_rails'
 
+gem 'raygun4ruby'
+
 group :production do
   gem 'rails_12factor'
 end
