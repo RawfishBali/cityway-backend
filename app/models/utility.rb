@@ -48,8 +48,17 @@ class Utility < ActiveRecord::Base
   end
 
   def waste_management_by_type is_domestic
-    is_domestic = is_domestic.blank? ? false : true
-    waste_managements.where(is_domestic: is_domestic).first
+    if is_domestic.blank?
+      is_domestic_value = false
+    else
+      if is_domestic == 'true'
+        is_domestic_value = true
+      else
+        is_domestic_value = false
+      end
+    end
+
+    waste_managements.where(is_domestic: is_domestic_value).first
   end
 
 end
