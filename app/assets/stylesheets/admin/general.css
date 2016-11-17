@@ -138,3 +138,6 @@
 .block{
   display: block !important;
 }
+.kendo-timer-input{
+  margin-top: 10px;
+}

@@ -1,47 +1,47 @@
-<div class="nested-fields">
+<div class="nested-fields nested-business-hours">
   <div class="uk-grid" data-uk-grid-margin>
     <div class="uk-width-large-1-1 uk-width-1-1">
       <div class="uk-input-group subcategory-container">
-
         <div class="uk-grid" data-uk-grid-margin="">
           <div class="uk-width-medium-1-2 uk-row-first">
-
             <div class="md-input-wrapper md-input-filled"><label>Giorno</label>
               <%= f.select :day, options_for_select([["Domenica", 0],["Lunedì", 1], ["Martedì", 2], ["Mercoledì", 3], ["Giovedì", 4], ["Venerdì", 5], ["Sabato", 6]], f.object.day), {prompt: 'Seleziona Giorno'}, {'data-md-selectize': true, required: true, class: 'md-input'}  %>
-              <span class="md-input-bar "></span></div>
+              <span class="md-input-bar "></span>
             </div>
           </div>
-          <div class="uk-grid" data-uk-grid-margin="">
-            <div class="uk-width-medium-1-2 uk-row-first">
-              <div class="md-input-wrapper md-input-filled"><label>Apertura Mattutina</label><%= f.text_field :morning_open_time, required: true, class: 'md-input', 'data-uk-timepicker': true, value: (f.object.morning_open_time.strftime('%H:%M') if f.object.morning_open_time) %><span class="md-input-bar "></span></div>
-            </div>
-            <div class="uk-width-medium-1-2">
-              <div class="md-input-wrapper md-input-filled"><label>Chiusura Mattutina</label><%= f.text_field :morning_close_time, class: 'md-input', 'data-uk-timepicker': true, value: (f.object.morning_close_time.strftime('%H:%M') if f.object.morning_close_time) %><span class="md-input-bar "></span></div>
-            </div>
-          </div>
-          <div class="uk-grid" data-uk-grid-margin="">
-            <div class="uk-width-medium-1-2 uk-row-first">
-              <div class="md-input-wrapper md-input-filled"><label>Apertura Serale</label><%= f.text_field :evening_open_time, class: 'md-input', 'data-uk-timepicker': true, value: (f.object.evening_open_time.strftime('%H:%M') if f.object.evening_open_time) %><span class="md-input-bar "></span></div>
-            </div>
-            <div class="uk-width-medium-1-2">
-              <div class="md-input-wrapper md-input-filled"><label>Chiusura Serale</label><%= f.text_field :evening_close_time, required: true, class: 'md-input', 'data-uk-timepicker': true, value: (f.object.evening_close_time.strftime('%H:%M') if f.object.evening_close_time) %><span class="md-input-bar "></span></div>
-            </div>
-          </div>
-          <div class="uk-grid" data-uk-grid-margin="">
-            <div class="uk-width-medium-1-2 uk-row-first">
-              <div class="md-input-wrapper">
-              </div>
-            </div>
-            <div class="uk-width-medium-1-2 uk-row-first">
-              <div class="md-input-wrapper text-align-right">
-                <%= link_to_remove_association '<i class="material-icons md-24 "></i>'.html_safe, f, {class: 'btnSectionRemove'} %>
-              </div>
-            </div>
-          </div>
-
-
         </div>
-
+        <div class="uk-grid" data-uk-grid-margin="">
+          <div class="uk-width-medium-1-2 uk-row-first">
+            <div class="md-input-wrapper md-input-filled"><label>Apertura Mattutina</label><%= f.text_field :morning_open_time, class: 'kendo-timer-input', required: true,  value: (f.object.morning_open_time.strftime('%H:%M') if f.object.morning_open_time) %><span class="md-input-bar "></span>
+            </div>
+          </div>
+          <div class="uk-width-medium-1-2">
+            <div class="md-input-wrapper md-input-filled"><label>Chiusura Mattutina</label><%= f.text_field :morning_close_time, class: 'kendo-timer-input', value: (f.object.morning_close_time.strftime('%H:%M') if f.object.morning_close_time) %><span class="md-input-bar "></span>
+            </div>
+          </div>
+        </div>
+        <div class="uk-grid" data-uk-grid-margin="">
+          <div class="uk-width-medium-1-2 uk-row-first">
+            <div class="md-input-wrapper md-input-filled"><label>Apertura Serale</label><%= f.text_field :evening_open_time, class: 'kendo-timer-input',  value: (f.object.evening_open_time.strftime('%H:%M') if f.object.evening_open_time) %><span class="md-input-bar "></span>
+            </div>
+          </div>
+          <div class="uk-width-medium-1-2">
+            <div class="md-input-wrapper md-input-filled"><label>Chiusura Serale</label><%= f.text_field :evening_close_time,  required: true, class: 'kendo-timer-input', value: (f.object.evening_close_time.strftime('%H:%M') if f.object.evening_close_time) %><span class="md-input-bar "></span>
+            </div>
+          </div>
+        </div>
+        <div class="uk-grid" data-uk-grid-margin="">
+          <div class="uk-width-medium-1-2 uk-row-first">
+            <div class="md-input-wrapper">
+            </div>
+          </div>
+          <div class="uk-width-medium-1-2 uk-row-first">
+            <div class="md-input-wrapper text-align-right">
+              <%= link_to_remove_association '<i class="material-icons md-24 "></i>'.html_safe, f, {class: 'btnSectionRemove'} %>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+</div>

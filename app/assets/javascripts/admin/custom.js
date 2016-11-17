@@ -29,9 +29,12 @@ $(document).ready(function(){
     }
   });
 
+  $("#subcategories .kendo-timer-input").kendoTimePicker();
+
   $('#subcategories')
   .on('cocoon:after-insert', function(e, added_task) {
-    // $('select').selectize()
+    $('#subcategories select').selectize()
+    $(".nested-business-hours:last .kendo-timer-input").kendoTimePicker();
     $('.dropzone').html5imageupload({
       onSave: function() {
       }
