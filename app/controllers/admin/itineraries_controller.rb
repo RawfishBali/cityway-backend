@@ -71,6 +71,6 @@ class Admin::ItinerariesController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_itinerary_params
-      params.require(:itinerary).permit(:name, :description, :discover_id,photos_attributes: [:id, :picture, :position, :is_primary, :_destroy], steps_attributes: [:id, :address, :_destroy])
+      params.require(:itinerary).permit(:name, :description, :visiting_time, :discover_id,photos_attributes: [:id, :picture, :position, :is_primary, :_destroy], steps_attributes: [:id, :address, :_destroy])
     end
 end

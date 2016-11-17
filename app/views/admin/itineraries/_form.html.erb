@@ -33,6 +33,17 @@
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
+              <label>Durata</label>
+              <% durations = [["15 minuti", "15 minuti"], ["30 minuti", "30 minuti"], ["45 minuti", "45 minuti"], ["1 ora", "1 ora"], ["1 ora e 15 minuti", "1 ora e 15 minuti"], ["1 ora e 30 minuti", "1 ora e 30 minuti"], ["1 ora e 45 minuti", "1 ora e 45 minuti"], ["2 ore", "2 ore"], ["2 ore e 15 minuti", "2 ore e 15 minuti"], ["2 ore e 30 minuti", "2 ore e 30 minuti"], ["2 ore e 45 minuti", "2 ora e 45 minuti"], ["3 ore", "3 ore"], ["3 ore e 15 minuti", "3 ore e 15 minuti"], ["3 ore e 30 minuti", "3 ore e 30 minuti"], ["3 ore e 45 minuti", "3 ora e 45 minuti"], ["4 ore", "4 ore"], ["4 ore e 15 minuti", "4 ore e 15 minuti"], ["4 ore e 30 minuti", "4 ore e 30 minuti"], ["4 ore e 45 minuti", "4 ora e 45 minuti"], ["5 ore", "5 ore"], ["5 ore e 15 minuti", "5 ore e 15 minuti"], ["5 ore e 30 minuti", "5 ore e 30 minuti"], ["5 ore e 45 minuti", "5 ora e 45 minuti"], ["6 ore", "6 ore"], ["6 ore e 15 minuti", "6 ore e 15 minuti"], ["6 ore e 30 minuti", "6 ore e 30 minuti"], ["6 ore e 45 minuti", "6 ora e 45 minuti"],["7 ore", "7 ore"]]%>
+
+              <%= f.select :visiting_time, options_for_select(durations, @admin_itinerary.visiting_time), {}, {class: 'md-input '} %>
+              
+            </div>
+          </div>
+        </div>
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
               <label>Descrizione</label>
               <%= f.text_area :description, required: true,class: 'md-input'  %>
             </div>
