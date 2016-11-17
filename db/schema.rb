@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161104073727) do
+ActiveRecord::Schema.define(version: 20161117073402) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,8 +85,8 @@ ActiveRecord::Schema.define(version: 20161104073727) do
 
   create_table "business_hours", force: :cascade do |t|
     t.integer  "day",                                null: false
-    t.time     "morning_open_time",                  null: false
-    t.time     "morning_close_time",                 null: false
+    t.time     "morning_open_time"
+    t.time     "morning_close_time"
     t.time     "evening_open_time"
     t.time     "evening_close_time"
     t.boolean  "open_all_day",       default: false
