@@ -27,14 +27,15 @@ class BusinessHour < ActiveRecord::Base
 
   def close_time_cannot_be_sooner_than_open_time
     if (morning_close_time && evening_close_time)
-      if morning_close_time < evening_close_time
-        errors.add(:morning_close_time, "must be greater than open_time")
+      if morning_close_time > evening_close_time
+        errors.add(:morning_close_time, "must be smaller than open_time")
       end
     end
 
-    if (evening_open_time && evening_close_time)
+    if (evening_open_time && morning_close_time)
       errors.add(:evening_close_time, "must be greater than open_time") if evening_close_time <  evening_open_time
-      errors.add(:evening_open_time, "must be greater than morning_open_time") if evening_open_time <  morning_close_time || evening_open_time <  morning_open_time
+      errors.add(:evening_close_time, "must be greater than evening_open_time") if evening_open_time >  evening_close_time
+      errors.add(:morning_close_time, "must be greater than morning_open_time") if morning_close_time <  morning_open_time
     end
 
   end

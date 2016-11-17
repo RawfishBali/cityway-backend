@@ -29,14 +29,20 @@ $(document).ready(function(){
     }
   });
 
-  $('.kendo-timer-input-profile').kendoTimePicker();
+  $('.kendo-timer-input-profile').kendoTimePicker({
+    format: "HH:mm"
+  });
 
-  $("#subcategories .kendo-timer-input").kendoTimePicker();
+  $("#subcategories .kendo-timer-input").kendoTimePicker({
+    format: "HH:mm"
+  });
 
   $('#subcategories')
   .on('cocoon:after-insert', function(e, added_task) {
     $('#subcategories select').selectize()
-    $(".nested-business-hours:last .kendo-timer-input").kendoTimePicker();
+    $(".nested-business-hours:last .kendo-timer-input").kendoTimePicker({
+      format: "HH:mm"
+    });
     $('.dropzone').html5imageupload({
       onSave: function() {
       }
