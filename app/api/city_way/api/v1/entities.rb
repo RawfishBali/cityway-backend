@@ -403,10 +403,10 @@ module CityWay
           profile.days_open.compact.collect { |x| I18n.t(:"date.day_names")[x] }.join(" , ") if profile.days_open
         end
         expose :appointment_start, documentation: {:type => "String", :desc => "Profile appointment start"}  do |profile , options|
-          profile.appointment_start.strftime("%H:%M")
+          profile.appointment_start.strftime("%H:%M") if profile.appointment_start
         end
         expose :appointment_end, documentation: {:type => "String", :desc => "Profile appointment end"} do |profile , options|
-          profile.appointment_end.strftime("%H:%M")
+          profile.appointment_end.strftime("%H:%M") if profile.appointment_end
         end
         expose :photo, documentation: {:type => "String", :desc => "Profile photo"}  do |profile, options|
           profile.photo.url
