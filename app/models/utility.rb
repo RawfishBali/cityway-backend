@@ -51,7 +51,7 @@ class Utility < ActiveRecord::Base
     if is_domestic.blank?
       is_domestic_value = false
     else
-      if is_domestic == 'true'
+      if is_domestic == true
         is_domestic_value = true
       else
         is_domestic_value = false
