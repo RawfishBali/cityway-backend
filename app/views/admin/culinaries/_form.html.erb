@@ -15,9 +15,9 @@
     <h2 class=" ">
       <% italian_type = { gastronomy: 'Gastronomia', traditional: 'Piatti della Tradizione' }%>
       <% if @admin_culinary.new_record?%>
-      Aggiungi <%= italian_type[params[:culinary_type].to_sym] %>
+      Aggiungi <%= italian_type[@culinary_type.to_sym] %>
       <% else %>
-      Gestisci <%= italian_type[params[:culinary_type].to_sym] %>
+      Gestisci <%= italian_type[@culinary_type.to_sym] %>
       <% end %>
       <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, :back, class:'float-right' %>
     </h2>

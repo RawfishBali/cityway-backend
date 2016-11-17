@@ -1,5 +1,6 @@
 class Admin::MerchantsController < Admin::BaseController
   before_action :set_admin_merchant, only: [:show, :edit, :update, :destroy]
+  before_action :prepare_categories, only: [:new, :edit, :create, :update]
 
   # GET /admin/merchants
   # GET /admin/merchants.json
@@ -71,6 +72,18 @@ class Admin::MerchantsController < Admin::BaseController
     # Use callbacks to share common setup or constraints between actions.
     def set_admin_merchant
       @admin_merchant = Merchant.find(params[:id])
+      city = City.find(session[:current_city_id])
+
+    end
+
+    def prepare_categories
+      city = City.find(session[:current_city_id])
+      @categories = city.sorted_categories
+      @categories.each do |category|
+        category.subcategories do |subcategory|
+          @subcategories << subcategory
+        end
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

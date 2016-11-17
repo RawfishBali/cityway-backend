@@ -15,7 +15,7 @@ class Admin::VehiclesController < Admin::BaseController
   # GET /admin/vehicles/new
   def new
     @admin_vehicle = City.find(session[:current_city_id]).utility.vehicles.new
-    @vehicle_type = params[:vehicle][:vehicle_type]
+    @vehicle_type = params[:vehicle_type]
   end
 
   # GET /admin/vehicles/1/edit

@@ -695,9 +695,9 @@ module CityWay
             CityWay::Api::V1::Entities::Photo.represent(object.primary_photo) if object.photos.length > 0
           end
         end
-        expose :phone, documentation: {:type => "String", :desc => "Utility Place Phone"},if: lambda { |object, options| options[:simple] == 'false' }
+        expose :phone, documentation: {:type => "String", :desc => "Utility Place Phone"}
         expose :email, documentation: {:type => "String", :desc => "Utility Place email"}
-        expose :website,if: lambda { |object, options| options[:simple] == 'false' && object.website }, documentation: {:type => "String", :desc => "Utility Place website"} do |object, options|
+        expose :website,if: lambda { |object, options| !object.website.blank? }, documentation: {:type => "String", :desc => "Utility Place website"} do |object, options|
           unless object.website[/\Ahttp:\/\//] || object.website[/\Ahttps:\/\//]
             "https://#{object.website}" unless object.website.blank?
           else

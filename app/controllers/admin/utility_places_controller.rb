@@ -34,7 +34,7 @@ class Admin::UtilityPlacesController < Admin::BaseController
   def create
     utility = City.find(session[:current_city_id]).utility
     @admin_utility_place = utility.utility_places.new(admin_utility_place_params)
-    @place_type = @admin_utility_place.place_type
+    @place_type = params[:utility_place][:place_type]
     @is_public = @admin_utility_place.is_public
     respond_to do |format|
       if @admin_utility_place.save

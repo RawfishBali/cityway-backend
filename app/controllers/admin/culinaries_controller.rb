@@ -16,6 +16,7 @@ class Admin::CulinariesController < Admin::BaseController
   def new
     @discover_id = City.find(session[:current_city_id]).discover.id
     @admin_culinary = Culinary.new
+    @culinary_type = params[:culinary_type]
   end
 
   # GET /admin/culinaries/1/edit
@@ -26,7 +27,7 @@ class Admin::CulinariesController < Admin::BaseController
   # POST /admin/culinaries.json
   def create
     @admin_culinary = City.find(session[:current_city_id]).discover.culinaries.new(admin_culinary_params)
-
+    @culinary_type = params[:culinary][:culinary_type]
     respond_to do |format|
       if @admin_culinary.save
         format.html { redirect_to session['previous_url'] || admin_culinaries_url(culinary_type: @admin_culinary.culinary_type), notice: 'Culinary è stato creato con successo.' }
@@ -67,6 +68,7 @@ class Admin::CulinariesController < Admin::BaseController
     def set_admin_culinary
       @admin_culinary = Culinary.find(params[:id])
       @discover_id = @admin_culinary.discover.id
+      @culinary_type = @admin_culinary.culinary_type
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

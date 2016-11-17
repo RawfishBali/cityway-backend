@@ -15,9 +15,9 @@
     <h2 class=" ">
       <% italian_type = { monument: 'Monumenti', library: 'Bibblioteche', theater: 'Teatri', museum: 'Musei', cinema: 'cinema' }%>
       <% if @admin_place.new_record?%>
-      Aggiungi <%= italian_type[params[:place_type].to_sym] %>
+      Aggiungi <%= italian_type[@place_type.to_sym] %>
       <% else %>
-      Gestisci <%= italian_type[params[:place_type].to_sym] %>
+      Gestisci <%= italian_type[@place_type.to_sym] %>
       <% end %>
       <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, :back, class:'float-right' %>
     </h2>

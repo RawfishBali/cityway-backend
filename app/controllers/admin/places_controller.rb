@@ -15,6 +15,7 @@ class Admin::PlacesController < Admin::BaseController
   # GET /admin/places/new
   def new
     @admin_place = Place.new
+    @place_type = params[:place_type]
   end
 
   # GET /admin/places/1/edit
@@ -25,7 +26,7 @@ class Admin::PlacesController < Admin::BaseController
   # POST /admin/places.json
   def create
     @admin_place = City.find(session[:current_city_id]).discover.places.new(admin_place_params)
-
+    @place_type = params[:place][:place_type]
     respond_to do |format|
       if @admin_place.save
         format.html { redirect_to session['previous_url'] ||  admin_places_url(place_type:@admin_place.place_type), notice: 'Place è stato creato con successo.' }
@@ -65,6 +66,7 @@ class Admin::PlacesController < Admin::BaseController
     # Use callbacks to share common setup or constraints between actions.
     def set_admin_place
       @admin_place = Place.find(params[:id])
+      @place_type = @admin_place.place_type
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

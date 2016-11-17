@@ -14,9 +14,9 @@
     <h2 class=" ">
       <% place_type = {post_office: 'Uffici Postali' , pharmacies: 'Farmacie', water_house: 'Case dell’acqua', waste_recycling: 'Isole ecologiche', bikes: 'Bici', public_swimming_pool: 'Piscine comunali', tennis_court: 'Campi da tennis', stadium: 'Stadio', structures: '', social_services: 'Centri servizi sociali', voluntary_association: 'Associazioni di Volontariato', elder_home: 'Centri diurni per anziani', young_people_place: 'Giovani', kindergarten: 'Scuole Materne', primary_school: 'Scuole Primarie', first_secondary_school: 'Scuole Medie', second_secondary_school: 'Scuole Secondarie', universities: 'Università', music: 'Scuole di Musica', large_garbage: 'Ritiro ingombranti' ,institute: 'Istituti', professional_institute: 'Istituti Professionali', recycling_place: 'Isole ecologiche'} %>
       <% if @admin_utility_place.new_record?%>
-      Aggiungi <%= place_type[params[:place_type].to_sym]%>
+      Aggiungi <%= place_type[@place_type.to_sym]%>
       <% else %>
-      Gestisci <%= place_type[params[:place_type].to_sym]%>
+      Gestisci <%= place_type[@place_type.to_sym]%>
       <% end %>
       <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, :back, class:'float-right' %>
     </h2>
