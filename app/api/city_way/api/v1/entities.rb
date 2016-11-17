@@ -941,10 +941,10 @@ module CityWay
         expose :day do |business_hour , options|
           business_hour.day
         end
-        expose :morning_open_time do |business_hour , options|
+        expose :morning_open_time, if: lambda{ |object, options| !object.morning_open_time.blank? } do |business_hour , options|
           business_hour.morning_open_time.strftime("%H:%M")
         end
-        expose :morning_close_time do |business_hour , options|
+        expose :morning_close_time, if: lambda{ |object, options| !object.morning_close_time.blank? } do |business_hour , options|
           business_hour.morning_close_time.strftime("%H:%M")
         end
         expose :evening_open_time, if: lambda{ |object, options| !object.evening_open_time.blank? } do |business_hour , options|
