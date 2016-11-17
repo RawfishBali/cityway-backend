@@ -42,8 +42,10 @@ class BusinessHour < ActiveRecord::Base
   def is_open? now
     return true if (morning_open_time == morning_close_time) || (evening_open_time == evening_close_time) || (morning_open_time == evening_close_time)
     if evening_open_time && morning_close_time
+      puts "there"
       (parsed_time(morning_open_time) <= now && parsed_time(morning_close_time) >= now  && now.wday == day) || (parsed_time(evening_open_time) <= now && parsed_time(evening_close_time) >= now  && now.wday == day)
     else
+      puts "here"
       (parsed_time(morning_open_time) <= now && parsed_time(evening_close_time) >= now  && now.wday == day)
     end
 

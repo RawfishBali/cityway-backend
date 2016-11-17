@@ -29,10 +29,10 @@ class Admin::AdvertisementsController < Admin::BaseController
 
     respond_to do |format|
       if @advertisement.save
-        format.html { redirect_to (session['previous_url'] || admin_advertisements_path), notice: 'Advertisement è stato creato con successo.' }
+        format.html { redirect_to (session['previous_url'] || admin_advertisements_path), notice: 'Banner pubblicitari è stato creato con successo.' }
         format.json { render :show, status: :created, location: @advertisement }
       else
-        format.html { redirect_to admin_advertisements_path, notice: 'Advertisement è stato creato con successo.' }
+        format.html { redirect_to admin_advertisements_path, notice: 'Banner pubblicitari è stato creato con successo.' }
         format.json { render json: @advertisement.errors, status: :unprocessable_entity }
       end
     end
@@ -44,10 +44,10 @@ class Admin::AdvertisementsController < Admin::BaseController
     respond_to do |format|
       if @advertisement.update(admin_advertisement_params)
 
-        format.html { redirect_to (session['previous_url'] || admin_advertisements_path), notice: 'Advertisement è stato aggiornato con successo.' }
+        format.html { redirect_to (session['previous_url'] || admin_advertisements_path), notice: 'Banner pubblicitari è stato aggiornato con successo.' }
         format.json { render :show, status: :ok, location: @advertisement }
       else
-        format.html { redirect_to edit_admin_advertisement_path(@advertisement), notice: 'Advertisement è stato creato con successo.'}
+        format.html { redirect_to edit_admin_advertisement_path(@advertisement), notice: 'Banner pubblicitari è stato creato con successo.'}
         format.json { render json: @advertisement.errors, status: :unprocessable_entity }
       end
     end
@@ -58,7 +58,7 @@ class Admin::AdvertisementsController < Admin::BaseController
   def destroy
     @advertisement.destroy
     respond_to do |format|
-      format.html { redirect_to admin_advertisements_url, notice: 'Advertisement è stato distrutto con successo.' }
+      format.html { redirect_to admin_advertisements_url, notice: 'Banner pubblicitari è stato distrutto con successo.' }
       format.json { head :no_content }
     end
   end
