@@ -400,7 +400,7 @@ module CityWay
         expose :fax, documentation: {:type => "String", :desc => "Profile Fax"}
         expose :phone, documentation: {:type => "String", :desc => "Profile Phone"}
         expose :days_open, documentation: {:type => "String", :desc => "Profile Days Open"} do |profile, options|
-          profile.days_open.compact.collect { |x| Date::DAYNAMES[x] }.join(" , ") if profile.days_open
+          profile.days_open.compact.collect { |x| I18n.t(:"date.day_names")[x] }.join(" , ") if profile.days_open
         end
         expose :appointment_start, documentation: {:type => "String", :desc => "Profile appointment start"}  do |profile , options|
           profile.appointment_start.strftime("%H:%M")
