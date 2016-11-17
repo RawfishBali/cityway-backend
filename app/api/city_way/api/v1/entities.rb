@@ -146,6 +146,13 @@ module CityWay
           end
           expose :name, documentation: {:type => "String", :desc => "Culinary Name"}
           expose :description, documentation: {:type => "Text", :desc => "Culinary description"}
+          expose :external_link, if: lambda { |object, options| !object.external_link.blank? },  documentation: {:type => "string", :desc => "Story External Link"} do |object, options|
+            unless object.external_link[/\Ahttp:\/\//] || object.external_link[/\Ahttps:\/\//]
+              "https://#{object.external_link}" unless object.external_link.blank?
+            else
+              object.external_link
+            end
+          end
           expose :photos, documentation: {:type => "string", :desc => "Culinary photo"} do |culinary , options|
             if options[:simple] == 'false'
               CityWay::Api::V1::Entities::Photo.represent(culinary.photos) if culinary.photos.length > 0
@@ -592,7 +599,7 @@ module CityWay
         expose :id, documentation: {:type => "integer", :desc => "Story ID"}
         expose :top_text, documentation: {:type => "text", :desc => "Story Top Text"}
         expose :bottom_text, documentation: {:type => "text", :desc => "Story Bottom Text"}
-        expose :external_link, if: lambda { |object, options| object.external_link },  documentation: {:type => "string", :desc => "Story External Link"} do |object, options|
+        expose :external_link, if: lambda { |object, options| !object.external_link.blank? },  documentation: {:type => "string", :desc => "Story External Link"} do |object, options|
           unless object.external_link[/\Ahttp:\/\//] || object.external_link[/\Ahttps:\/\//]
             "https://#{object.external_link}" unless object.external_link.blank?
           else

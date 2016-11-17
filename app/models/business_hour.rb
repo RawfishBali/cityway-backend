@@ -4,8 +4,8 @@
 #
 #  id                 :integer          not null, primary key
 #  day                :integer          not null
-#  morning_open_time  :time             not null
-#  morning_close_time :time             not null
+#  morning_open_time  :time
+#  morning_close_time :time
 #  evening_open_time  :time
 #  evening_close_time :time
 #  open_all_day       :boolean          default(FALSE)

@@ -9,6 +9,7 @@
 #  culinary_type :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  external_link :string
 #
 
 require 'rails_helper'
