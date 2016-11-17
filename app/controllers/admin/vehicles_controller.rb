@@ -15,7 +15,7 @@ class Admin::VehiclesController < Admin::BaseController
   # GET /admin/vehicles/new
   def new
     @admin_vehicle = City.find(session[:current_city_id]).utility.vehicles.new
-    @vehicle_type = params[:vehicle_type]
+    @vehicle_type = params[:vehicle][:vehicle_type]
   end
 
   # GET /admin/vehicles/1/edit
@@ -26,7 +26,8 @@ class Admin::VehiclesController < Admin::BaseController
   # POST /admin/vehicles.json
   def create
     @admin_vehicle = City.find(session[:current_city_id]).utility.vehicles.new(admin_vehicle_params)
-    @vehicle_type = Vehicle.vehicle_types[params[:vehicle_type]]
+    @vehicle_type = params[:vehicle][:vehicle_type]
+
     respond_to do |format|
       if @admin_vehicle.save
         format.html { redirect_to session['previous_url'] || admin_vehicles_url(vehicle_type: @admin_vehicle.vehicle_type), notice: 'Vehicle è stato creato con successo.' }
@@ -71,6 +72,6 @@ class Admin::VehiclesController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_vehicle_params
-      params.require(:vehicle).permit(:name, :address, :utility_id,:phone_0, :phone_1, :total_parking_lot, :available_parking_lot, :vehicle_type, :web, :email)
+      params.require(:vehicle).permit(:name, :address, :utility_id,:phone_0, :phone_1, :total_parking_lot, :available_parking_lot, :vehicle_type, :web, :email, :website)
     end
 end
