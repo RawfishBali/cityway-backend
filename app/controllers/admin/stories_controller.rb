@@ -71,6 +71,6 @@ class Admin::StoriesController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_story_params
-      params.require(:story).permit(:top_text, :bottom_text, :discover_id, photos_attributes: [:id, :picture,:is_primary,:position,:_destroy])
+      params.require(:story).permit(:top_text, :bottom_text, :discover_id,:external_link, photos_attributes: [:id, :picture,:is_primary,:position,:_destroy])
     end
 end
