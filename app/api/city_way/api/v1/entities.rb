@@ -250,7 +250,6 @@ module CityWay
             object.url
           end
         end
-        expose :description, documentation: {:type => "Text", :desc => "News' Description"}
         expose :published_at, documentation: {:type => "Text", :desc => "News' Published Date"} do |news , options|
           news.published_at.strftime("%B %d %Y %H:%M")
         end

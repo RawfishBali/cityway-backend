@@ -6,7 +6,6 @@
 #  title          :string           not null
 #  photo          :string
 #  published_at   :datetime         not null
-#  description    :text             not null
 #  commonplace_id :integer          not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
@@ -15,7 +14,6 @@
 
 class News < ActiveRecord::Base
   validates_presence_of :title
-  validates_presence_of :description
   validates_presence_of :published_at
 
   has_many :photos, as: :imageable, dependent: :destroy
