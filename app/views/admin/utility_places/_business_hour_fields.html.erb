@@ -16,7 +16,7 @@
             </div>
           </div>
           <div class="uk-width-medium-1-2">
-            <div class="md-input-wrapper md-input-filled"><label>Chiusura Mattutina</label><%= f.text_field :morning_close_time, required: true, class: 'md-input', 'data-uk-timepicker': true, value: (f.object.morning_close_time.strftime('%H:%M') if f.object.morning_close_time) %><span class="md-input-bar "></span>
+            <div class="md-input-wrapper md-input-filled"><label>Chiusura Mattutina</label><%= f.text_field :morning_close_time, class: 'md-input', 'data-uk-timepicker': true, value: (f.object.morning_close_time.strftime('%H:%M') if f.object.morning_close_time) %><span class="md-input-bar "></span>
             </div>
           </div>
         </div>
@@ -26,7 +26,7 @@
             </div>
           </div>
           <div class="uk-width-medium-1-2">
-            <div class="md-input-wrapper md-input-filled"><label>Chiusura Serale</label><%= f.text_field :evening_close_time, class: 'md-input', 'data-uk-timepicker': true, value: (f.object.evening_close_time.strftime('%H:%M') if f.object.evening_close_time) %><span class="md-input-bar "></span>
+            <div class="md-input-wrapper md-input-filled"><label>Chiusura Serale</label><%= f.text_field :evening_close_time, required: true, class: 'md-input', 'data-uk-timepicker': true, value: (f.object.evening_close_time.strftime('%H:%M') if f.object.evening_close_time) %><span class="md-input-bar "></span>
             </div>
           </div>
         </div>
