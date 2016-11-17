@@ -29,6 +29,8 @@ $(document).ready(function(){
     }
   });
 
+  $('.kendo-timer-input-profile').kendoTimePicker();
+
   $("#subcategories .kendo-timer-input").kendoTimePicker();
 
   $('#subcategories')
