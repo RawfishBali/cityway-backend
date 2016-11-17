@@ -116,7 +116,7 @@ module CityWay
                 merchants = Merchant.where(city_id: params[:id])
               end
 
-              merchants = merchants.near([params[:latitude],params[:longitude]], 21000, units: :km) if params[:latitude] && params[:longitude]
+              # merchants = merchants.near([params[:latitude],params[:longitude]], 21000, units: :km) if params[:latitude] && params[:longitude]
 
               temp_promos = []
               merchants.each do |m|
