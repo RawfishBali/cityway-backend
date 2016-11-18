@@ -3,7 +3,7 @@
     <%= form_for(@admin_public_office, url: (@admin_public_office.new_record? ? admin_public_offices_path(@admin_public_office) : admin_public_office_path(@admin_public_office)), multipart: true) do |f| %>
     <% if @admin_public_office.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@admin_public_office.errors.count, "error") %> prohibited this admin_category from being saved:</h2>
+      <h2>Qualcosa è andato storto durante il salvataggio dei dati</h2>
       <ul>
         <% @admin_public_office.errors.full_messages.each do |message| %>
         <li><%= message %></li>

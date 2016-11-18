@@ -3,8 +3,9 @@
     <%= form_for(@admin_merchant, url: (@admin_merchant.new_record? ? admin_merchants_path(@admin_merchant) : admin_merchant_path(@admin_merchant)), multipart: true) do |f| %>
     <% if @admin_merchant.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@admin_merchant.errors.count, "error") %> Questa categoria non può essere salvata:</h2>
+      <h2>Qualcosa è andato storto durante il salvataggio dei dati</h2>
 
+      <h2><%= t('errors.messages.not_saved', count: @admin_merchant.errors.count) %></h2>
       <ul>
         <% @admin_merchant.errors.full_messages.each do |message| %>
         <li><%= message %></li>

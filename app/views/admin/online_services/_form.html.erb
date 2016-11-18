@@ -3,7 +3,7 @@
     <%= form_for(@admin_online_service, url: (@admin_online_service.new_record? ? admin_online_services_path(@admin_online_service) : admin_online_service_path(@admin_online_service)), multipart: true) do |f| %>
     <% if @admin_online_service.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@admin_online_service.errors.count, "error") %> Questa categoria non può essere salvata:</h2>
+      <h2>Qualcosa è andato storto durante il salvataggio dei dati</h2>
 
       <ul>
         <% @admin_online_service.errors.full_messages.each do |message| %>

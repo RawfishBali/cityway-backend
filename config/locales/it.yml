@@ -5,8 +5,8 @@ it:
       already_confirmed: "è stato già confermato"
       not_locked: "non era bloccato"
       not_saved:
-        one: "Non posso salvare questo %{resource}: 1 errore"
-        other: "Non posso salvare questo %{resource}: %{count} errori."
+        one: "Non posso salvare questo : 1 errore"
+        other: "Non posso salvare questo : %{count} errori."
 
   devise:
     shared:
@@ -79,6 +79,552 @@ it:
         restrict_dependent_destroy:
           has_one: Il record non può essere cancellato perchè esiste un %{record} dipendente
           has_many: Il record non può essere cancellato perchè esistono %{record} dipendenti
+      models:
+        access_token: Token di accesso  #g
+        admin: Admin  #g
+        advertisement: Annuncio pubblicitario  #g
+        advertisements_city: città Pubblicità  #g
+        around: In giro  #g
+        business_hour: ora Affari  #g
+        categories_city: categorie città  #g
+        category: Categoria  #g
+        certificate: Certificato  #g
+        city: Città  #g
+        city_hall_story: sala Story City  #g
+        client_application: applicazione client  #g
+        commonplace: luogo comune  #g
+        coordinate: Coordinata  #g
+        culinary: culinario  #g
+        device: Dispositivo  #g
+        discover: Scoprire  #g
+        event: Evento  #g
+        event_date: Data dell'evento  #g
+        garbage_glossary: garbage Glossario  #g
+        habtm_admins: amministratori HABTM  #g
+        habtm_advertisements: annunci HABTM  #g
+        habtm_cities: città HABTM  #g
+        habtm_roles: ruoli HABTM  #g
+        habtm_subcategories: sottocategorie HABTM  #g
+        identity: Identità  #g
+        itinerary: Itinerario  #g
+        market: Mercato  #g
+        merchant: Mercante  #g
+        message: Messaggio  #g
+        news: notizia  #g
+        online_service: Servizio Online  #g
+        park: Parco  #g
+        path: Il percorso  #g
+        photo: Foto  #g
+        place: Posto  #g
+        politic_group: gruppo politico  #g
+        profile: Profilo  #g
+        promo: Promo  #g
+        public_office: Ufficio pubblico  #g
+        public_transport: Trasporto pubblico  #g
+        role: Ruolo  #g
+        security: Sicurezza  #g
+        step: Passo  #g
+        story: Storia  #g
+        user: Utente  #g
+        utility: Utilità  #g
+        utility_number: numero Utility  #g
+        utility_place: posto Utility  #g
+        vehicle: Veicolo  #g
+        waste_management: Gestione dei rifiuti  #g
+        waste_pickup_schedule: programma di pick-up rifiuti  #g
+        waste_type: tipo di rifiuti  #g
+        wizard: procedura guidata  #g
+        ztl: Ztl  #g
+
+      attributes:
+        access_token:
+          client_application: :activerecord.models.client_application  #g
+          expired_at: scaduto a  #g
+          refresh_token: Token Refresh  #g
+          token: Gettone  #g
+          user: :activerecord.models.user  #g
+
+        admin:
+          current_sign_in_at: segno di corrente in a  #g
+          current_sign_in_ip: segno di corrente in ip  #g
+          email: E-mail  #g
+          encrypted_password: password crittografata  #g
+          last_sign_in_at: Ultimo segno in a  #g
+          last_sign_in_ip: Ultimo segno in ip  #g
+          remember_created_at: Ricorda creato il  #g
+          reset_password_sent_at: Reimpostare la password inviata a  #g
+          reset_password_token: Token reimpostazione della password  #g
+          roles: ruoli  #g
+
+        advertisement:
+          active: Attivo  #g
+          advertisements_cities: pubblicità città  #g
+          cities: Le città  #g
+          end_date: Data di fine  #g
+          photo: Foto  #g
+          position: Posizione  #g
+          second_end_date: Seconda data di fine  #g
+          second_start_date: Seconda data di inizio  #g
+          start_date: Data d'inizio  #g
+
+        advertisements_city:
+          advertisement: :activerecord.models.advertisement  #g
+          city: :activerecord.models.city  #g
+
+        around:
+          city: :activerecord.models.city  #g
+          events: eventi  #g
+          markets: mercati  #g
+          parks: parchi  #g
+          photo: Foto  #g
+
+        business_hour:
+          day: Giorno  #g
+          evening_close_time: Sera stretta tempo  #g
+          evening_open_time: Sera tempo aperto  #g
+          is_open_today: "È aperto oggi"  #g
+          marketable: :activerecord.models.marketable  #g
+          marketable_type: tipo commerciabile  #g
+          morning_close_time: Mattina Ora di chiusura  #g
+          morning_open_time: Mattina tempo aperto  #g
+          open_all_day: Aperto tutto il giorno  #g
+
+        categories_city:
+          category: :activerecord.models.category  #g
+          city: :activerecord.models.city  #g
+          priority: Priorità  #g
+
+        category:
+          categories_cities: Categorie città  #g
+          cities: Le città  #g
+          icon: Icona  #g
+          merchants: Merchants  #g
+          name: Nome  #g
+          parent_category: :activerecord.models.parent_category  #g
+          photo: Foto  #g
+          subcategories: Sotto-categorie  #g
+
+        certificate:
+          commonplace: :activerecord.models.commonplace  #g
+          name: Nome  #g
+          url: url  #g
+
+        city:
+          advertisements: Annunci  #g
+          advertisements_cities: pubblicità città  #g
+          around: :activerecord.models.around  #g
+          categories: Categorie  #g
+          categories_cities: Categorie città  #g
+          commonplace: :activerecord.models.commonplace  #g
+          description: Descrizione  #g
+          discover: :activerecord.models.discover  #g
+          latitude: Latitudine  #g
+          longitude: Longitudine  #g
+          merchants: Merchants  #g
+          name: Nome  #g
+          photo: Foto  #g
+          promos: Promos  #g
+          utility: :activerecord.models.utility  #g
+
+        city_hall_story:
+          bottom_text: Testo in basso  #g
+          commonplace: :activerecord.models.commonplace  #g
+          photos: Fotografie  #g
+          top_text: Testo in alto  #g
+
+        client_application:
+          access_tokens: token di accesso  #g
+          key: Chiave  #g
+          name: Nome  #g
+          secret: Segreto  #g
+
+        commonplace:
+          certificates: certificati  #g
+          city: :activerecord.models.city  #g
+          city_hall_story: :activerecord.models.city_hall_story  #g
+          facebook: Facebook  #g
+          google_plus: Google Plus  #g
+          history: Storia  #g
+          icon: Icona  #g
+          instagram: Instagram  #g
+          news: notizia  #g
+          online_services: Servizi online  #g
+          photo: Foto  #g
+          politic_groups: gruppi politici  #g
+          profiles: Profili  #g
+          public_offices: uffici pubblici  #g
+          securities: valori  #g
+          twitter: Twitter  #g
+
+        coordinate:
+          latitude: Latitudine  #g
+          longitude: Longitudine  #g
+          ztl: :activerecord.models.ztl  #g
+
+        culinary:
+          culinary_type: tipo Culinary  #g
+          description: Descrizione  #g
+          discover: :activerecord.models.discover  #g
+          external_link: Link esterno  #g
+          name: Nome  #g
+          photos: Fotografie  #g
+
+        device:
+          address: Indirizzo  #g
+          device_type: Tipo di dispositivo  #g
+          external_url: URL esterno  #g
+          latitude: Latitudine  #g
+          longitude: Longitudine  #g
+          name: Nome  #g
+          utility: :activerecord.models.utility  #g
+
+        discover:
+          city: :activerecord.models.city  #g
+          culinaries: Culinaries  #g
+          itineraries: Itinerari  #g
+          photo: Foto  #g
+          places: posti  #g
+          story: :activerecord.models.story  #g
+
+        event:
+          address: Indirizzo  #g
+          around: :activerecord.models.around  #g
+          description: Descrizione  #g
+          email: E-mail  #g
+          event_dates: date degli eventi  #g
+          facebook: Facebook  #g
+          instagram: Instagram  #g
+          latitude: Latitudine  #g
+          longitude: Longitudine  #g
+          photos: Fotografie  #g
+          support_disabilities: disabilità di supporto  #g
+          title: Titolo  #g
+          twitter: Twitter  #g
+          website: Sito web  #g
+
+        event_date:
+          close_time: Chiudi tempo  #g
+          day_name: nome giorno  #g
+          event: :activerecord.models.event  #g
+          event_date: Data dell'evento  #g
+          open_time: tempo aperto  #g
+
+        garbage_glossary:
+          description: Descrizione  #g
+          name: Nome  #g
+          utility: :activerecord.models.utility  #g
+
+        habtm_admins:
+          admin: :activerecord.models.admin  #g
+          left_side: :activerecord.models.left_side  #g
+
+        habtm_advertisements:
+          advertisement: :activerecord.models.advertisement  #g
+          left_side: :activerecord.models.left_side  #g
+
+        habtm_cities:
+          city: :activerecord.models.city  #g
+          left_side: :activerecord.models.left_side  #g
+
+        habtm_roles:
+          left_side: :activerecord.models.left_side  #g
+          role: :activerecord.models.role  #g
+
+        habtm_subcategories:
+          left_side: :activerecord.models.left_side  #g
+          subcategory: :activerecord.models.subcategory  #g
+
+        identity:
+          provider: Provider  #g
+          uid: uid  #g
+          user: :activerecord.models.user  #g
+
+        itinerary:
+          description: Descrizione  #g
+          discover: :activerecord.models.discover  #g
+          name: Nome  #g
+          photos: Fotografie  #g
+          steps: passi  #g
+          visiting_time: Visitando tempo  #g
+
+        market:
+          address: Indirizzo  #g
+          around: :activerecord.models.around  #g
+          business_hours: Ore di lavoro  #g
+          description: Descrizione  #g
+          latitude: Latitudine  #g
+          longitude: Longitudine  #g
+          name: Nome  #g
+          photos: Fotografie  #g
+
+        merchant:
+          address: Indirizzo  #g
+          business_hours: Ore di lavoro  #g
+          category: :activerecord.models.category  #g
+          city: :activerecord.models.city  #g
+          description: Descrizione  #g
+          email: E-mail  #g
+          facebook: Facebook  #g
+          google_plus: Google Plus  #g
+          icon: Icona  #g
+          instagram: Instagram  #g
+          latitude: Latitudine  #g
+          longitude: Longitudine  #g
+          name: Nome  #g
+          phone: Telefono  #g
+          photo: Foto  #g
+          photos: Fotografie  #g
+          promos: Promos  #g
+          subcategories: Sotto-categorie  #g
+          support_disabilities: disabilità di supporto  #g
+          twitter: Twitter  #g
+          website: Sito web  #g
+
+        message:
+          commonplace: :activerecord.models.commonplace  #g
+          email: E-mail  #g
+          firstname: Nome  #g
+          lastname: Cognome  #g
+          message: Messaggio  #g
+          message_type: tipo di messaggio  #g
+
+        news:
+          commonplace: :activerecord.models.commonplace  #g
+          photo: Foto  #g
+          photos: Fotografie  #g
+          published_at: pubblicato il  #g
+          title: Titolo  #g
+          url: url  #g
+
+        online_service:
+          commonplace: :activerecord.models.commonplace  #g
+          name: Nome  #g
+          url: url  #g
+
+        park:
+          address: Indirizzo  #g
+          around: :activerecord.models.around  #g
+          business_hours: Ore di lavoro  #g
+          description: Descrizione  #g
+          latitude: Latitudine  #g
+          longitude: Longitudine  #g
+          name: Nome  #g
+          photos: Fotografie  #g
+          support_disabilities: disabilità di supporto  #g
+
+        path:
+          path: Il percorso  #g
+          public_transport: :activerecord.models.public_transport  #g
+
+        photo:
+          imageable_type: tipo stampabile  #g
+          is_primary: "è primario"  #g
+          picture: Immagine  #g
+          position: Posizione  #g
+
+        place:
+          address: Indirizzo  #g
+          business_hours: Ore di lavoro  #g
+          description: Descrizione  #g
+          discover: :activerecord.models.discover  #g
+          email: E-mail  #g
+          facebook: Facebook  #g
+          google_plus: Google Plus  #g
+          instagram: Instagram  #g
+          latitude: Latitudine  #g
+          longitude: Longitudine  #g
+          name: Nome  #g
+          photos: Fotografie  #g
+          place_type: tipo di posto  #g
+          twitter: Twitter  #g
+          website: Sito web  #g
+
+        politic_group:
+          commonplace: :activerecord.models.commonplace  #g
+          name: Nome  #g
+          profiles: Profili  #g
+
+        profile:
+          address: Indirizzo  #g
+          appointment_end: end appuntamento  #g
+          appointment_start: inizio appuntamento  #g
+          city_hall_name: Città Nome sala  #g
+          commonplace: :activerecord.models.commonplace  #g
+          days_open: OPEN DAYS  #g
+          description: Descrizione  #g
+          email: E-mail  #g
+          fax: Fax  #g
+          is_city_council_member: "È membro del consiglio comunale"  #g
+          is_major: "è importante"  #g
+          latitude: Latitudine  #g
+          longitude: Longitudine  #g
+          major_icon: icona Maggiore  #g
+          name: Nome  #g
+          phone: Telefono  #g
+          photo: Foto  #g
+          politic_group: :activerecord.models.politic_group  #g
+          role: Ruolo  #g
+          website: Sito web  #g
+
+        promo:
+          approval: Approvazione  #g
+          city: :activerecord.models.city  #g
+          description: Descrizione  #g
+          discount: Sconto  #g
+          discount_price: Prezzo scontato  #g
+          merchant: :activerecord.models.merchant  #g
+          original_price: Prezzo originale  #g
+          photo: Foto  #g
+          terms_and_conditions: Termini e condizioni  #g
+          title: Titolo  #g
+
+        public_office:
+          address: Indirizzo  #g
+          business_hours: Ore di lavoro  #g
+          commonplace: :activerecord.models.commonplace  #g
+          description: Descrizione  #g
+          email: E-mail  #g
+          fax: Fax  #g
+          latitude: Latitudine  #g
+          longitude: Longitudine  #g
+          name: Nome  #g
+          phone: Telefono  #g
+          photo: Foto  #g
+          photos: Fotografie  #g
+          website: Sito web  #g
+
+        public_transport:
+          attachment: Allegati  #g
+          name: Nome  #g
+          paths: percorsi  #g
+          transport_type: tipo di trasporto  #g
+          utility: :activerecord.models.utility  #g
+
+        role:
+          admins: amministratori  #g
+          name: Nome  #g
+          resource: :activerecord.models.resource  #g
+          resource_type: tipo di risorsa  #g
+
+        security:
+          commonplace: :activerecord.models.commonplace  #g
+          name: Nome  #g
+          url: url  #g
+
+        step:
+          address: Indirizzo  #g
+          description: Descrizione  #g
+          itinerary: :activerecord.models.itinerary  #g
+          latitude: Latitudine  #g
+          longitude: Longitudine  #g
+          name: Nome  #g
+          position: Posizione  #g
+
+        story:
+          bottom_text: Testo in basso  #g
+          discover: :activerecord.models.discover  #g
+          external_link: Link esterno  #g
+          photos: Fotografie  #g
+          top_text: Testo in alto  #g
+
+        user:
+          access_tokens: token di accesso  #g
+          current_sign_in_at: segno di corrente in a  #g
+          current_sign_in_ip: segno di corrente in ip  #g
+          email: E-mail  #g
+          encrypted_password: password crittografata  #g
+          firstname: Nome  #g
+          last_sign_in_at: Ultimo segno in a  #g
+          last_sign_in_ip: Ultimo segno in ip  #g
+          lastname: Cognome  #g
+          newsletter: notiziario  #g
+          remember_created_at: Ricorda creato il  #g
+          reset_password_sent_at: Reimpostare la password inviata a  #g
+          reset_password_token: Token reimpostazione della password  #g
+          roles: ruoli  #g
+
+        utility:
+          city: :activerecord.models.city  #g
+          devices: dispositivi  #g
+          garbage_glossaries: glossari Garbage  #g
+          photo: Foto  #g
+          public_transports: mezzi pubblici  #g
+          utility_numbers: numeri Utility  #g
+          utility_places: luoghi Utility  #g
+          vehicles: veicoli  #g
+          waste_managements: gestioni dei rifiuti  #g
+          ztls: Ztls  #g
+
+        utility_number:
+          address: Indirizzo  #g
+          local_number: Numero locale  #g
+          name: Nome  #g
+          national_number: numero nazionale  #g
+          utility: :activerecord.models.utility  #g
+
+        utility_place:
+          address: Indirizzo  #g
+          business_hours: Ore di lavoro  #g
+          commercial: Commerciale  #g
+          denomination: Denominazione  #g
+          description: Descrizione  #g
+          email: E-mail  #g
+          is_public: "è pubblico"  #g
+          latitude: Latitudine  #g
+          longitude: Longitudine  #g
+          name: Nome  #g
+          phone: Telefono  #g
+          photos: Fotografie  #g
+          place_type: tipo di posto  #g
+          visitable_type: tipo visitabile  #g
+          website: Sito web  #g
+
+        vehicle:
+          address: Indirizzo  #g
+          available_parking_lot: parcheggio a disposizione sacco  #g
+          email: E-mail  #g
+          latitude: Latitudine  #g
+          longitude: Longitudine  #g
+          name: Nome  #g
+          phone_0: Telefono 0  #g
+          phone_1: Telefono 1  #g
+          total_parking_lot: Totale parcheggio  #g
+          utility: :activerecord.models.utility  #g
+          vehicle_type: Tipo di veicolo  #g
+          website: Sito web  #g
+
+        waste_management:
+          address: Indirizzo  #g
+          delivered_together: consegnato insieme  #g
+          description: Descrizione  #g
+          email: E-mail  #g
+          is_domestic: "è domestico"  #g
+          latitude: Latitudine  #g
+          longitude: Longitudine  #g
+          name: Nome  #g
+          phone: Telefono  #g
+          utility: :activerecord.models.utility  #g
+          waste_pickup_schedules: orari di prelievo dei rifiuti  #g
+          website: Sito web  #g
+
+        waste_pickup_schedule:
+          day: Giorno  #g
+          waste_management: :activerecord.models.waste_management  #g
+          waste_types: tipi di rifiuti  #g
+
+        waste_type:
+          icon: Icona  #g
+          name: Nome  #g
+
+        wizard:
+          name: Nome  #g
+          photos: Fotografie  #g
+
+        ztl:
+          coordinates: coordinate  #g
+          description: Descrizione  #g
+          name: Nome  #g
+          utility: :activerecord.models.utility  #g
   date:
     abbr_day_names:
     - dom

@@ -3,7 +3,7 @@
     <%= form_for(@admin_place, url: (@admin_place.new_record? ? admin_places_path(@admin_place) : admin_place_path(@admin_place)), multipart: true) do |f| %>
     <% if @admin_place.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@admin_place.errors.count, "error") %> prohibited this admin_category from being saved:</h2>
+      <h2>Qualcosa è andato storto durante il salvataggio dei dati</h2>
 
       <ul>
         <% @admin_place.errors.full_messages.each do |message| %>

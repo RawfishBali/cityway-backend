@@ -3,7 +3,7 @@
     <%= form_for(@admin_certificate, url: (@admin_certificate.new_record? ? admin_certificates_path(@admin_certificate) : admin_certificate_path(@admin_certificate)), multipart: true) do |f| %>
     <% if @admin_certificate.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@admin_certificate.errors.count, "error") %> Questa categoria non può essere salvata.</h2>
+      <h2>Qualcosa è andato storto durante il salvataggio dei dati</h2>
 
       <ul>
         <% @admin_certificate.errors.full_messages.each do |message| %>

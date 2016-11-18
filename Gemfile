@@ -65,6 +65,9 @@ gem 'phony_rails'
 
 gem 'raygun4ruby'
 
+gem 'i18n_generators'
+gem 'globalize', '~> 5.0.0'
+
 group :production do
   gem 'rails_12factor'
 end

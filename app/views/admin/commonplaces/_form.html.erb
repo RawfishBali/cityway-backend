@@ -3,7 +3,7 @@
     <%= form_for(@commonplace, url: (@commonplace.new_record? ? admin_commonplaces_path(@commonplace) : admin_commonplace_path(@commonplace)), multipart: true) do |f| %>
     <% if @commonplace.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@commonplace.errors.count, "error") %> Questa categoria non può essere salvata:</h2>
+      <h2>Qualcosa è andato storto durante il salvataggio dei dati</h2>
 
       <ul>
         <% @commonplace.errors.full_messages.each do |message| %>
