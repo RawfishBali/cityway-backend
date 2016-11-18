@@ -6,7 +6,7 @@
         <thead>
           <tr>
             <th class="uk-width-1-10">Foto</th>
-            <th class="uk-width-1-10">Descrizione</th>
+
             <th class="uk-width-1-10">Foto</th>
             <th class="uk-width-1-10 uk-text-center">Azioni</th>
           </tr>
@@ -16,9 +16,6 @@
           <tr>
             <td >
               <%= news.title %>
-            </td>
-            <td >
-              <%= truncate(news.description, length: 25, omission: '...') %>
             </td>
             <td >
               <%= image_tag news.primary_photo.first.picture.url, class: 'width100pixel' if news.primary_photo.first %>
