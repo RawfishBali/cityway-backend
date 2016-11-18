@@ -4,7 +4,6 @@
     <% if @admin_waste_type.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@admin_waste_type.errors.count, "Errore") %> Questa categoria non può essere salvata:</h2>
-
       <ul>
         <% @admin_waste_type.errors.full_messages.each do |message| %>
         <li><%= message %></li>

@@ -29,7 +29,7 @@ class Admin::ItinerariesController < Admin::BaseController
 
     respond_to do |format|
       if @admin_itinerary.save
-        format.html { redirect_to session['previous_url'] || admin_itineraries_url, notice: 'Itinerary è stato creato con successo.' }
+        format.html { redirect_to session['previous_url'] || admin_itineraries_url, notice: 'Itinerari è stato creato con successo.' }
         format.json { render :show, status: :created, location: @admin_itinerary }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class Admin::ItinerariesController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_itinerary.update(admin_itinerary_params)
-        format.html { redirect_to session['previous_url'] || admin_itineraries_url, notice: 'Itinerary è stato aggiornato con successo.' }
+        format.html { redirect_to session['previous_url'] || admin_itineraries_url, notice: 'Itinerari è stato aggiornato con successo.' }
         format.json { render :show, status: :ok, location: @admin_itinerary }
       else
         format.html { render :edit }
@@ -57,7 +57,7 @@ class Admin::ItinerariesController < Admin::BaseController
   def destroy
     @admin_itinerary.destroy
     respond_to do |format|
-      format.html { redirect_to admin_itineraries_url, notice: 'Itinerary è stato distrutto con successo.' }
+      format.html { redirect_to admin_itineraries_url, notice: 'Itinerari è stato distrutto con successo.' }
       format.json { head :no_content }
     end
   end

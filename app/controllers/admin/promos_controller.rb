@@ -29,7 +29,7 @@ class Admin::PromosController < Admin::BaseController
 
     respond_to do |format|
       if @admin_promo.save
-        format.html { redirect_to session['previous_url'] || admin_promos_path, notice: 'Promo è stato creato con successo.' }
+        format.html { redirect_to session['previous_url'] || admin_promos_path, notice: 'Promozioni è stato creato con successo.' }
         format.json { render :show, status: :created, location: @admin_promo }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class Admin::PromosController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_promo.update(admin_promo_params)
-        format.html { redirect_to session['previous_url'] || admin_promos_path, notice: 'Promo è stato aggiornato con successo.' }
+        format.html { redirect_to session['previous_url'] || admin_promos_path, notice: 'Promozioni è stato aggiornato con successo.' }
         format.json { render :show, status: :ok, location: @admin_promo }
       else
         format.html { render :edit }
@@ -57,7 +57,7 @@ class Admin::PromosController < Admin::BaseController
   def destroy
     @admin_promo.destroy
     respond_to do |format|
-      format.html { redirect_to session['previous_url'] || admin_promos_url, notice: 'Promo è stato distrutto con successo.' }
+      format.html { redirect_to session['previous_url'] || admin_promos_url, notice: 'Promozioni è stato distrutto con successo.' }
       format.json { head :no_content }
     end
   end

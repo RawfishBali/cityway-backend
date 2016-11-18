@@ -29,7 +29,7 @@ class Admin::PoliticGroupsController < Admin::BaseController
 
     respond_to do |format|
       if @admin_politic_group.save
-        format.html { redirect_to session['previous_url'] ||  admin_politic_groups_url, notice: 'Politic group è stato creato con successo.' }
+        format.html { redirect_to session['previous_url'] ||  admin_politic_groups_url, notice: 'Consiglio è stato creato con successo.' }
         format.json { render :show, status: :created, location: @admin_politic_group }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class Admin::PoliticGroupsController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_politic_group.update(admin_politic_group_params)
-        format.html { redirect_to session['previous_url'] ||  admin_politic_groups_url, notice: 'Politic group è stato aggiornato con successo.' }
+        format.html { redirect_to session['previous_url'] ||  admin_politic_groups_url, notice: 'Consiglio è stato aggiornato con successo.' }
         format.json { render :show, status: :ok, location: @admin_politic_group }
       else
         format.html { render :edit }
@@ -57,7 +57,7 @@ class Admin::PoliticGroupsController < Admin::BaseController
   def destroy
     @admin_politic_group.destroy
     respond_to do |format|
-      format.html { redirect_to admin_politic_groups_url, notice: 'Politic group è stato distrutto con successo.' }
+      format.html { redirect_to admin_politic_groups_url, notice: 'Consiglio è stato distrutto con successo.' }
       format.json { head :no_content }
     end
   end

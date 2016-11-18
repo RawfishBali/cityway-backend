@@ -29,7 +29,7 @@ class Admin::MarketsController < Admin::BaseController
 
     respond_to do |format|
       if @admin_market.save
-        format.html { redirect_to session['previous_url'] || admin_markets_url, notice: 'Market è stato creato con successo.' }
+        format.html { redirect_to session['previous_url'] || admin_markets_url, notice: 'Mercati è stato creato con successo.' }
         format.json { render :show, status: :created, location: @admin_market }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class Admin::MarketsController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_market.update(admin_market_params)
-        format.html { redirect_to session['previous_url'] || admin_markets_url, notice: 'Market è stato aggiornato con successo.' }
+        format.html { redirect_to session['previous_url'] || admin_markets_url, notice: 'Mercati è stato aggiornato con successo.' }
         format.json { render :show, status: :ok, location: @admin_market }
       else
         format.html { render :edit }
@@ -57,7 +57,7 @@ class Admin::MarketsController < Admin::BaseController
   def destroy
     @admin_market.destroy
     respond_to do |format|
-      format.html { redirect_to admin_markets_url, notice: 'Market è stato distrutto con successo.' }
+      format.html { redirect_to admin_markets_url, notice: 'Mercati è stato distrutto con successo.' }
       format.json { head :no_content }
     end
   end

@@ -35,9 +35,10 @@ class Admin::ProfilesController < Admin::BaseController
     @commonplace_id = City.find(session[:current_city_id]).commonplace.id
     @is_major = @admin_profile.is_major
     redirect_path = session['previous_url'] || (@admin_profile.is_major ? admin_profiles_url(major:true) : admin_profiles_url)
+    name_alias = @is_major ? 'Sindaco' : 'Giunta Comunale'
     respond_to do |format|
       if @admin_profile.save
-        format.html { redirect_to redirect_path, notice: 'Profile è stato creato con successo.' }
+        format.html { redirect_to redirect_path, notice: "#{name_alias} è stato creato con successo." }
         format.json { render :show, status: :created, location: @admin_profile }
       else
         format.html { render :new }
@@ -52,7 +53,7 @@ class Admin::ProfilesController < Admin::BaseController
     respond_to do |format|
       redirect_path =  @admin_profile.is_major ? admin_profiles_url(major:true) : admin_profiles_url
       if @admin_profile.update(admin_profile_params)
-        format.html { redirect_to session['previous_url'] || redirect_path, notice: 'Profile è stato aggiornato con successo.' }
+        format.html { redirect_to session['previous_url'] || redirect_path, notice: "#{@name_alias} è stato aggiornato con successo." }
         format.json { render :show, status: :ok, location: @admin_profile }
       else
         format.html { render :edit }
@@ -66,7 +67,7 @@ class Admin::ProfilesController < Admin::BaseController
   def destroy
     @admin_profile.destroy
     respond_to do |format|
-      format.html { redirect_to admin_profiles_url, notice: 'Profile è stato distrutto con successo.' }
+      format.html { redirect_to admin_profiles_url, notice: "#{@name_alias} è stato distrutto con successo." }
       format.json { head :no_content }
     end
   end
@@ -77,6 +78,7 @@ class Admin::ProfilesController < Admin::BaseController
       @admin_profile = Profile.find(params[:id])
       @commonplace_id = City.find(session[:current_city_id]).commonplace.id
       @is_major = @admin_profile.is_major
+      @name_alias = @is_major ? 'Sindaco' : 'Giunta Comunale'
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

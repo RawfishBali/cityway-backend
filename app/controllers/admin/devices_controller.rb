@@ -31,7 +31,7 @@ class Admin::DevicesController < Admin::BaseController
     @device_type = Device.device_types[params[:device_type]]
     respond_to do |format|
       if @admin_device.save
-        format.html { redirect_to session['previous_url'] || admin_devices_url(device_type: @admin_device.device_type), notice: 'Device è stato creato con successo.' }
+        format.html { redirect_to session['previous_url'] || admin_devices_url(device_type: @admin_device.device_type), notice: "#{@device_type.titleize} è stato creato con successo." }
         format.json { render :show, status: :created, location: @admin_device }
       else
         format.html { render :new }
@@ -45,7 +45,7 @@ class Admin::DevicesController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_device.update(admin_device_params)
-        format.html { redirect_to session['previous_url'] || admin_devices_url(device_type: @admin_device.device_type), notice: 'Device è stato aggiornato con successo.' }
+        format.html { redirect_to session['previous_url'] || admin_devices_url(device_type: @admin_device.device_type), notice: "#{@device_type.titleize} è stato aggiornato con successo." }
         format.json { render :show, status: :ok, location: @admin_device }
       else
         format.html { render :edit }
@@ -59,7 +59,7 @@ class Admin::DevicesController < Admin::BaseController
   def destroy
     @admin_device.destroy
     respond_to do |format|
-      format.html { redirect_to session['previous_url'] || admin_devices_url, notice: 'Device è stato distrutto con successo.' }
+      format.html { redirect_to session['previous_url'] || admin_devices_url, notice: "#{@device_type.titleize} è stato distrutto con successo." }
       format.json { head :no_content }
     end
   end
