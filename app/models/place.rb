@@ -2,22 +2,24 @@
 #
 # Table name: places
 #
-#  id          :integer          not null, primary key
-#  name        :string
-#  description :text
-#  address     :string
-#  latitude    :float
-#  longitude   :float
-#  email       :string
-#  website     :string
-#  facebook    :string
-#  instagram   :string
-#  twitter     :string
-#  google_plus :string
-#  discover_id :integer
-#  place_type  :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id            :integer          not null, primary key
+#  name          :string
+#  description   :text
+#  address       :string
+#  latitude      :float
+#  longitude     :float
+#  email         :string
+#  website       :string
+#  facebook      :string
+#  instagram     :string
+#  twitter       :string
+#  google_plus   :string
+#  discover_id   :integer
+#  place_type    :integer
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  phone         :string
+#  external_link :string
 #
 
 class Place < ActiveRecord::Base
@@ -40,6 +42,9 @@ class Place < ActiveRecord::Base
 
   validate :validate_number_of_photos
 
+  phony_normalize :phone, default_country_code: 'IT'
+  validates :phone, phony_plausible: true
+
   def validate_number_of_photos
     errors.add(:photos, "Maximum photos is 3") if photos.size > 2
   end
@@ -59,12 +64,19 @@ class Place < ActiveRecord::Base
 
   def all_business_hours
     mb = (self.business_hours).to_a
-    return mb.sort_by(&:day) 
+    return mb.sort_by(&:day)
     # if mb.size == 7
     # ((0..6).to_a  - mb.map(&:day)).each do |m|
     #   mb << BusinessHour.new(morning_open_time: '00:00', morning_close_time: '00:00', evening_open_time: nil, evening_close_time: nil, day: m, marketable_type: self.class.name, marketable_id: self.id)
     # end
     # mb.sort_by(&:day)
+  end
+
+  def is_open_now?
+    business_hours.each do |business_hour|
+      return true if business_hour.is_open? Time.now
+    end
+    return false
   end
 
 

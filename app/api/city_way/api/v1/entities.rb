@@ -12,6 +12,14 @@ module CityWay
           expose :id, documentation: {:type => "Integer", :desc => "Place ID"}
           expose :name, documentation: {:type => "String", :desc => "Place Name"}
           expose :description, documentation: {:type => "String", :desc => "Place description"}
+          expose :external_link,if: lambda { |object, options| object.place_type == 'cinema' && object.external_link }, documentation: {:type => "String", :desc => "Place external_link"} do |place, options|
+            unless place.external_link[/\Ahttp:\/\//] || place.external_link[/\Ahttps:\/\//]
+              "https://#{place.external_link}" unless place.external_link.blank?
+            else
+              place.external_link
+            end
+          end
+          expose :phone,if: lambda { |object, options| object.place_type == 'cinema' }, documentation: {:type => "String", :desc => "Place phone"}
           expose :type ,documentation: {:type => "String", :desc => "Place Type"}, if: lambda { |object, options| object.place_type} do |place, options|
             object.place_type
           end
@@ -85,6 +93,9 @@ module CityWay
             else
               response["rows"][0]["elements"][0]["status"]
             end
+          end
+          expose :is_open do |object , options|
+            object.is_open_now?
           end
         end
 
