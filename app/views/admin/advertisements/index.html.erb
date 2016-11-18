@@ -19,8 +19,8 @@
             <td class="uk-width-1-10"><%= image_tag ad.photo.thumb.url, class: 'width100pixel' %></td>
             <td class="uk-width-1-10 uk-text-center"><%= ad.position == 'top' ? '
 superiore' : 'inferiore' %></td>
-            <td class="uk-width-1-10 uk-text-center"><%= ad.start_date.strftime("%A %B %d %Y") %></td>
-            <td class="uk-width-1-10 uk-text-center"><%= ad.end_date.strftime("%A %B %d %Y") %></td>
+            <td class="uk-width-1-10 uk-text-center"><%=  l(ad.start_date, format: "%A %B %d %Y") %></td>
+            <td class="uk-width-1-10 uk-text-center"><%= l(ad.end_date, format: "%A %B %d %Y") %></td>
             <td class="uk-text-center">
               <% if ad.active? %>
                 <span class="uk-badge uk-badge-success">Attivo</span>

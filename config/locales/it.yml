@@ -664,18 +664,18 @@ it:
       short: "%d %b"
     month_names:
     -
-    - gennaio
-    - febbraio
-    - marzo
-    - aprile
-    - maggio
-    - giugno
-    - luglio
-    - agosto
-    - settembre
-    - ottobre
-    - novembre
-    - dicembre
+    - Gennaio
+    - Febbraio
+    - Marzo
+    - Aprile
+    - Maggio
+    - Giugno
+    - Luglio
+    - Agosto
+    - Settembre
+    - Ottobre
+    - Novembre
+    - Dicembre
     order:
     - :day
     - :month
