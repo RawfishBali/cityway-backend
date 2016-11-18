@@ -44,7 +44,7 @@ class Admin::VehiclesController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_vehicle.update(admin_vehicle_params)
-        format.html { redirect_to session['previous_url'] || admin_vehicles_url(vehicle_type: @admin_vehicle.vehicle_type), notice: "#{italian_type[@vehicle_type.to_sym]} è stato aggiornato con successo." }
+        format.html { redirect_to session['previous_url'] || admin_vehicles_url(vehicle_type: @admin_vehicle.vehicle_type), notice: "#{@italian_type[@vehicle_type.to_sym]} è stato aggiornato con successo." }
         format.json { render :show, status: :ok, location: @admin_vehicle }
       else
         format.html { render :edit }
@@ -68,7 +68,8 @@ class Admin::VehiclesController < Admin::BaseController
     def set_admin_vehicle
       @admin_vehicle = Vehicle.find(params[:id])
       @vehicle_type = @admin_vehicle.vehicle_type
-      italian_type = {parking:'Parcheggi', bike:'Bici', taxi:'Taxi'}
+      @utility_id = @admin_vehicle.utility_id
+      @italian_type = {parking:'Parcheggi', bike:'Bici', taxi:'Taxi'}
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
