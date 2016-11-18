@@ -70,7 +70,7 @@ module CityWay
               CityWay::Api::V1::Entities::Photo.represent(place.primary_photo) if place.photos.length > 0
             end
           end
-          expose :business_hours,if: lambda { |object, options| options[:simple] == 'false' && (object.place_type == 'monument' || object.place_type == 'library' || object.place_type == 'theater') } do |place , options|
+          expose :business_hours,if: lambda { |object, options| options[:simple] == 'false' && (object.place_type == 'monument' || object.place_type == 'library' || object.place_type == 'theater' || object.place_type == 'museum') } do |place , options|
             CityWay::Api::V1::Entities::BusinessHours.represent(place.all_business_hours)
           end
           expose :distance, if: lambda { |object, options| options[:latitude] && options[:longitude] } do |object , options|
