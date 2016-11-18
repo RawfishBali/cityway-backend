@@ -4,6 +4,7 @@ it:
       not_found: "non trovato"
       already_confirmed: "è stato già confermato"
       not_locked: "non era bloccato"
+      extension_white_list_error: "Non il tipo di file corretto"
       not_saved:
         one: "Non posso salvare questo : 1 errore"
         other: "Non posso salvare questo : %{count} errori."
@@ -75,6 +76,7 @@ it:
   activerecord:
     errors:
       messages:
+        extension_white_list_error: "Non il tipo di file corretto"
         record_invalid: 'Validazione fallita: %{errors}'
         restrict_dependent_destroy:
           has_one: Il record non può essere cancellato perchè esiste un %{record} dipendente
@@ -725,6 +727,7 @@ it:
     format: "%{attribute} %{message}"
     messages:
       accepted: deve essere accettata
+      extension_white_list_error: Non il tipo di file corretto
       blank: non può essere lasciato in bianco
       present: deve essere lasciato in bianco
       confirmation: non coincide con %{attribute}
