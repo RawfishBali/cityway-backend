@@ -43,7 +43,7 @@ $(document).ready(function(){
     $(".nested-business-hours:last .kendo-timer-input").kendoTimePicker({
       format: "HH:mm"
     });
-    $('.dropzone').html5imageupload({
+    $('#subcategories .dropzone').html5imageupload({
       onSave: function() {
       }
     });
