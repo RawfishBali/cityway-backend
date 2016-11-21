@@ -399,6 +399,7 @@ module CityWay
         expose :name, documentation: {:type => "String", :desc => "Profile Name"}
         expose :role, documentation: {:type => "String", :desc => "Profile Role"}
         expose :email, documentation: {:type => "String", :desc => "Profile Emails"}
+        expose :address, documentation: {:type => "String", :desc => "Profile Address"}
         expose :website,if: lambda { |object, options| object.website }, documentation: {:type => "String", :desc => "Profile website"} do |object, options|
           unless object.website[/\Ahttp:\/\//] || object.website[/\Ahttps:\/\//]
             "https://#{object.website}" unless object.website.blank?
