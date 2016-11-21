@@ -26,7 +26,7 @@ module CityWay
           end
           get '/:id' do
             subcategories = Category.find(params[:id]).subcategories
-            present subcategories, with: CityWay::Api::V1::Entities::Category
+            present subcategories, with: CityWay::Api::V1::Entities::Category, capital: true
           end
         end
 
