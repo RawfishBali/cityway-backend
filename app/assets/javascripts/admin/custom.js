@@ -102,6 +102,6 @@ $(document).ready(function(){
     )
   })
 
-
+  $(".addressable").geocomplete(); 
 
 })
