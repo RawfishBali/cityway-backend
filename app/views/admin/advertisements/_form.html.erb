@@ -26,6 +26,7 @@
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
+                <label>Seleziona una o più Città dove le promo saranno visibili:</label>
                 <%= f.select :city_ids, options_from_collection_for_select(City.all, 'id', 'name', @advertisement.city_ids), {prompt: 'Seleziona Città'}, {required: true, class: 'md-input', multiple: true}  %>
             </div>
           </div>
