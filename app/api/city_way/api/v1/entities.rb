@@ -139,14 +139,15 @@ module CityWay
             object.steps.order('position ASC').first.longitude
           end
           expose :duration, if: lambda { |object, options| options[:latitude] && options[:longitude] && options[:with_distance] == 'true' } do |object , options|
-            response = object.get_duration_from(options[:latitude], options[:longitude])
-            if response["rows"][0]["elements"][0]["status"] == "OK"
-              response["rows"][0]["elements"][0]["duration"]["text"]
-              # if we need customs value text later
-              # response["rows"][0]["elements"][0]["duration"]["value"]
-            else
-              response["rows"][0]["elements"][0]["status"]
-            end
+            # response = object.get_duration_from(options[:latitude], options[:longitude])
+            # if response["rows"][0]["elements"][0]["status"] == "OK"
+            #   response["rows"][0]["elements"][0]["duration"]["text"]
+            #   # if we need customs value text later
+            #   # response["rows"][0]["elements"][0]["duration"]["value"]
+            # else
+            #   response["rows"][0]["elements"][0]["status"]
+            # end
+            object.visiting_time
           end
         end
 

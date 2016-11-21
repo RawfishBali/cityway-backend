@@ -51,7 +51,7 @@ class BusinessHour < ActiveRecord::Base
   end
 
   def parsed_time field_time
-    Time.parse "#{field_time.hour}:#{field_time.min}"
+    Time.zone.parse "#{field_time.hour}:#{field_time.min}"
   end
 
 end
