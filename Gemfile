@@ -91,4 +91,5 @@ group :development do
   gem 'quiet_assets'
   gem 'capistrano', '~> 3.6'
   gem 'capistrano-rbenv', '~> 2.0'
+  gem 'rails_real_favicon'
 end

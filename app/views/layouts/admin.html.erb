@@ -8,6 +8,7 @@
   <%= javascript_include_tag 'admin'%>
 
 
+  <%= render 'application/favicon' %>
   <%= csrf_meta_tags %>
 </head>
 <body class="<%= 'sidebar_main_open' if params[:controller] != 'home'%>">
