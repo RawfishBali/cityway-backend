@@ -53,7 +53,7 @@ class PublicOffice < ActiveRecord::Base
 
   def is_open_now?
     business_hours.each do |business_hour|
-      return true if business_hour.is_open? Time.now
+      return true if business_hour.is_open? Time.zone.now
     end
     return false
   end
