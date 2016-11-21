@@ -27,7 +27,7 @@ class Admin::PlacesController < Admin::BaseController
   def create
     @admin_place = City.find(session[:current_city_id]).discover.places.new(admin_place_params)
     @place_type = params[:place][:place_type]
-    italian_type = { monument: 'Monumenti', library: 'Bibblioteche', theater: 'Teatri', museum: 'Musei', cinema: 'cinema' }
+    italian_type = { monument: 'Monumenti', library: 'Bibblioteche', theater: 'Teatri', museum: 'Musei', cinema: 'Cinema' }
     respond_to do |format|
       if @admin_place.save
         format.html { redirect_to session['previous_url'] ||  admin_places_url(place_type:@admin_place.place_type), notice: "#{italian_type[@place_type.to_sym]} è stato creato con successo." }
@@ -43,7 +43,7 @@ class Admin::PlacesController < Admin::BaseController
   # PATCH/PUT /admin/places/1.json
   def update
     respond_to do |format|
-      italian_type = { monument: 'Monumenti', library: 'Bibblioteche', theater: 'Teatri', museum: 'Musei', cinema: 'cinema' }
+      italian_type = { monument: 'Monumenti', library: 'Bibblioteche', theater: 'Teatri', museum: 'Musei', cinema: 'Cinema' }
       if @admin_place.update(admin_place_params)
         format.html { redirect_to session['previous_url'] ||  admin_places_url(place_type:@admin_place.place_type), notice: "#{italian_type[@place_type.to_sym]} è stato aggiornato con successo." }
         format.json { render :show, status: :ok, location: @admin_place }
@@ -58,7 +58,7 @@ class Admin::PlacesController < Admin::BaseController
   # DELETE /admin/places/1.json
   def destroy
     @admin_place.destroy
-    italian_type = { monument: 'Monumenti', library: 'Bibblioteche', theater: 'Teatri', museum: 'Musei', cinema: 'cinema' }
+    italian_type = { monument: 'Monumenti', library: 'Bibblioteche', theater: 'Teatri', museum: 'Musei', cinema: 'Cinema' }
     respond_to do |format|
       format.html { redirect_to session['previous_url'] ||  admin_places_url, notice: "#{italian_type[@place_type.to_sym]} è stato distrutto con successo." }
       format.json { head :no_content }
