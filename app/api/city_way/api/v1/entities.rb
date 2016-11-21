@@ -412,6 +412,8 @@ module CityWay
         expose :description, documentation: {:type => "Text", :desc => "Profile Description"}
         expose :fax, documentation: {:type => "String", :desc => "Profile Fax"}
         expose :phone, documentation: {:type => "String", :desc => "Profile Phone"}
+        expose :latitude, documentation: {:type => "String", :desc => "Profile latitude"}
+        expose :longitude, documentation: {:type => "String", :desc => "Profile longitude"}
         expose :days_open, documentation: {:type => "String", :desc => "Profile Days Open"} do |profile, options|
           profile.days_open.compact.collect { |x| I18n.t(:"date.day_names")[x] }.join(" , ") if profile.days_open
         end
