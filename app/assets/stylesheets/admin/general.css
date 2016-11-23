@@ -141,3 +141,7 @@
 .kendo-timer-input{
   margin-top: 10px;
 }
+
+.left{
+  float: left !important;
+}

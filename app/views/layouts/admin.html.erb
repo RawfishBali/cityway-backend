@@ -30,6 +30,7 @@
 
         <div class="uk-navbar-flip marginTM3">
           <ul class="uk-navbar-nav user_actions">
+            <%= link_to ('<span class="new-city-label white-label">Aggiungere nuova città </span> <i class="material-icons md-36 white_icon">&#xE148;</i>'.html_safe), new_admin_city_path , class: 'white-label user_action_image left'%>
             <li data-uk-dropdown="{mode:'click',pos:'bottom-right'}">
               <%= link_to ('<i class="material-icons md-36 white_icon">&#xE8B8;</i>'.html_safe), '#', class: 'user_action_image'%>
               <div class="uk-dropdown uk-dropdown-small">
@@ -38,6 +39,8 @@
                 </ul>
               </div>
             </li>
+
+
           </ul>
         </div>
       </nav>
