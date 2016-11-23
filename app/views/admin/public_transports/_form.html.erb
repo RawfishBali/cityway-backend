@@ -40,7 +40,8 @@
                 <%= f.file_field :attachment %>
               </div>
               <br />
-
+              <br />
+              
               <%= link_to(truncate(@admin_public_transport.attachment.url, :length => 50, :omission => '...') , @admin_public_transport.attachment.url) if @admin_public_transport.attachment && !@admin_public_transport.new_record? %>
             </div>
           </div>
