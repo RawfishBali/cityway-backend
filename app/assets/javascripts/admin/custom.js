@@ -115,6 +115,22 @@ $(document).ready(function(){
 
   })
 
+  $('#promo_merchant_id').selectize({
+      plugins: {
+          'remove_button': {
+              label     : ''
+          }
+      },
+      persist: false,
+      maxItems: null,
+      valueField: 'email',
+      labelField: 'name',
+      searchField: ['name', 'email']
+    })
+
+
+
+
   // $(".addressable").geocomplete();
 
 })
