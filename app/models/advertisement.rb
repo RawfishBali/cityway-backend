@@ -25,7 +25,8 @@ class Advertisement < ActiveRecord::Base
 
   enum position: {
     'top': 0,
-    'bottom': 1
+    'bottom': 1,
+    'both': 2
   }
 
   def active?
