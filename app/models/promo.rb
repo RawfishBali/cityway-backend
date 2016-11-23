@@ -14,7 +14,7 @@
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  city_id              :integer
-#  approval             :boolean          default(FALSE)
+#  approval             :boolean          default(TRUE)
 #
 
 class Promo < ActiveRecord::Base

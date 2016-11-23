@@ -93,7 +93,7 @@
               <div class="uk-input-group">
                 <span class="uk-input-group-addon">€</span>
                 <label>Prezzo Scontato</label>
-                <%= f.number_field :discount_price, value: number_with_precision(f.object.discount_price, precision: 2, separator: '.', delimiter: ','), step: 0.01, required: true,class: 'md-input', disabled: true  %>
+                <%= f.number_field :discount_price, value: number_with_precision(f.object.discount_price, precision: 2, separator: '.', delimiter: ','), step: 0.01, required: true,class: 'md-input' %>
               </div>
             </div>
             <div class="uk-width-medium-1-2">
@@ -123,17 +123,15 @@
           </div>
         </div>
       </div>
-
-
     </div>
-    </div>
+  </div>
 
-    <div class="md-fab-wrapper">
-      <%= button_tag(type: 'submit' , class: 'md-fab md-fab-accent md-fab-wave waves-effect waves-button') do %>
-        <i class="fa fa-floppy-o" aria-hidden="true"></i>
-      <% end %>
-    </div>
-
+  <div class="md-fab-wrapper">
+    <%= button_tag(type: 'submit' , class: 'md-fab md-fab-accent md-fab-wave waves-effect waves-button') do %>
+    <i class="fa fa-floppy-o" aria-hidden="true"></i>
     <% end %>
+  </div>
+
+  <% end %>
 
 </div>
