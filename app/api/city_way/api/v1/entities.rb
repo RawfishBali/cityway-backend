@@ -784,7 +784,18 @@ module CityWay
       end
 
       class Path < Grape::Entity
-        expose :path, documentation: {:type => "Text", :desc => "Path's path"}
+        expose :path, documentation: {:type => "Text", :desc => "Path's path"} do |object, options|
+          the_path = ""
+          if object.path.match(/\AInizio tratta |/)[0].blank?
+            the_path = "Inizio tratta | #{object.path}"
+            if the_path.match(/\A| Fine/)[0].blank?
+              the_path = "#{the_path} | Fine"
+            end
+          else
+            the_path = object.path
+          end
+          the_path
+        end
       end
 
       class PublicTransport < Grape::Entity
