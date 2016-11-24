@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161123033233) do
+ActiveRecord::Schema.define(version: 20161124021257) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -529,6 +529,24 @@ ActiveRecord::Schema.define(version: 20161123033233) do
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
+  create_table "schools", force: :cascade do |t|
+    t.string   "name"
+    t.string   "denomination"
+    t.text     "description"
+    t.string   "address"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "school_type"
+    t.boolean  "is_public"
+    t.string   "website"
+    t.boolean  "commercial"
+    t.integer  "utility_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "securities", force: :cascade do |t|
     t.string   "name",           null: false
     t.string   "url",            null: false
@@ -538,6 +556,24 @@ ActiveRecord::Schema.define(version: 20161123033233) do
   end
 
   add_index "securities", ["commonplace_id"], name: "index_securities_on_commonplace_id", using: :btree
+
+  create_table "sports", force: :cascade do |t|
+    t.string   "name"
+    t.string   "denomination"
+    t.text     "description"
+    t.string   "address"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "sport_type"
+    t.boolean  "is_public"
+    t.string   "website"
+    t.boolean  "commercial"
+    t.integer  "utility_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
 
   create_table "steps", force: :cascade do |t|
     t.string   "address",      null: false

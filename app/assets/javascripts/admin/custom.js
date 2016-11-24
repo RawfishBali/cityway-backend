@@ -116,17 +116,95 @@ $(document).ready(function(){
   })
 
   $('#promo_merchant_id').selectize({
-      plugins: {
-          'remove_button': {
-              label     : ''
+    plugins: {
+      'remove_button': {
+        label     : ''
+      }
+    },
+    persist: false,
+    maxItems: null,
+    valueField: 'email',
+    labelField: 'name',
+    searchField: ['name', 'email']
+  })
+
+
+  if($("#school_types").length > 0){
+    var school_types = $("#school_types").val().split(',')
+
+    var school_typesDS = new kendo.data.DataSource({
+      data: school_types
+    });
+
+    var getFilters = function (filter) {
+      var filters = [];
+      filters.push(filter);
+      values = autoComplete.value().split(", ");
+      values.pop();
+      $.each(values, function (index, item) {
+        filters.push({field: "", ignoreCase: true, operator: "neq", value: item});
+      });
+      return filters;
+    };
+
+    var autoComplete = $("#school_school_type").kendoAutoComplete({
+      filter: "startswith",
+      placeholder: "Tipo di scuola",
+      separator: "  ",
+      dataSource: {
+        transport: {
+          read: function (options, operation) {
+            school_typesDS.read();
+            school_typesDS.filter({logic: "and", filters: getFilters(options.data.filter.filters[0])});
+            options.success(school_typesDS.view());
           }
-      },
-      persist: false,
-      maxItems: null,
-      valueField: 'email',
-      labelField: 'name',
-      searchField: ['name', 'email']
-    })
+        },
+        serverFiltering: true
+      }
+    }).data("kendoAutoComplete");
+  }
+
+
+  if($("#sport_types").length > 0){
+    var sport_types = $("#sport_types").val().split(',')
+
+    var sport_typesDS = new kendo.data.DataSource({
+      data: sport_types
+    });
+
+    var getFilters = function (filter) {
+      var filters = [];
+      filters.push(filter);
+      values = autoComplete.value().split(", ");
+      values.pop();
+      $.each(values, function (index, item) {
+        filters.push({field: "", ignoreCase: true, operator: "neq", value: item});
+      });
+      return filters;
+    };
+
+    var autoComplete = $("#sport_sport_type").kendoAutoComplete({
+      filter: "startswith",
+      placeholder: "Sport e tempo libero",
+      separator: "  ",
+      dataSource: {
+        transport: {
+          read: function (options, operation) {
+            sport_typesDS.read();
+            sport_typesDS.filter({logic: "and", filters: getFilters(options.data.filter.filters[0])});
+            options.success(sport_typesDS.view());
+          }
+        },
+        serverFiltering: true
+      }
+    }).data("kendoAutoComplete");
+  }
+
+
+
+
+
+
 
 
 

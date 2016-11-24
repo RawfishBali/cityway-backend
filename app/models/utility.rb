@@ -19,6 +19,8 @@ class Utility < ActiveRecord::Base
   has_many :garbage_glossaries, dependent: :destroy
   has_many :ztls, dependent: :destroy
   has_many :waste_managements, dependent: :destroy
+  has_many :schools, dependent: :destroy
+  has_many :sports, dependent: :destroy
 
   belongs_to :city
   mount_base64_uploader :photo, PhotoUploader

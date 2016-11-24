@@ -46,17 +46,63 @@ module CityWay
             simple = params[:simple].to_s || true
             utility = Utility.find(params[:id])
             if params[:place_group]
-              if params[:place_group] == 'sports'
-                present utility, with: CityWay::Api::V1::Entities::UtilitySports, simple: simple, latitude: params[:latitude], longitude: params[:longitude]
-              elsif params[:place_group] == 'schools'
-                present utility, with: CityWay::Api::V1::Entities::UtilitySchools, simple: simple, latitude: params[:latitude], longitude: params[:longitude]
-              elsif params[:place_group] == 'socials'
+              if params[:place_group] == 'socials'
                 present utility, with: CityWay::Api::V1::Entities::UtilitySocials, simple: simple, latitude: params[:latitude], longitude: params[:longitude]
               end
             else
               present utility.places_by_type(params[:place_type], params[:public], params[:commercial]), with: CityWay::Api::V1::Entities::UtilityPlaceEntitiy, simple: simple, latitude: params[:latitude], longitude: params[:longitude]
             end
+          end
 
+
+          desc "School List"
+          params do
+            requires :id , type: Integer, values: -> { Utility.ids }
+            optional :school_type, type: String
+            optional :public, type: Boolean
+            optional :latitude, type: Float
+            optional :longitude, type: Float
+            optional :simple, type: Boolean
+          end
+          get '/:id/schools' do
+            simple = params[:simple].to_s || true
+            utility = Utility.find(params[:id])
+            if params[:school_type]
+              schools = utility.schools.where(school_type: params[:school_type])
+              if params.has_key?(:public)
+                schools = schools.where(is_public: params[:public])
+              end
+            elsif params[:public]
+              schools = utility.schools.where(is_public: params[:public])
+            else
+              schools = utility.schools
+            end
+            present schools, with: CityWay::Api::V1::Entities::UtilitySchool, simple: simple, latitude: params[:latitude], longitude: params[:longitude]
+          end
+
+          desc "Sports List"
+          params do
+            requires :id , type: Integer, values: -> { Utility.ids }
+            optional :sport_type, type: String
+            optional :public, type: Boolean
+            optional :latitude, type: Float
+            optional :longitude, type: Float
+            optional :simple, type: Boolean
+          end
+          get '/:id/sports' do
+            simple = params[:simple].to_s || true
+            utility = Utility.find(params[:id])
+            if params[:sport_type]
+              sports = utility.sports.where(sport_type: params[:sport_type])
+              if params.has_key?(:public)
+                sports = sports.where(is_public: params[:public])
+              end
+            elsif params[:public]
+              sports = utility.sports.where(is_public: params[:public])
+            else
+              sports = utility.sports
+            end
+            present sports, with: CityWay::Api::V1::Entities::UtilitySport, simple: simple, latitude: params[:latitude], longitude: params[:longitude]
           end
 
           desc "Place Detail"
@@ -67,6 +113,26 @@ module CityWay
           get '/:id/places/:place_id' do
             utility = Utility.find(params[:id])
             present utility.utility_places.find_by(id: params[:place_id]), with: CityWay::Api::V1::Entities::UtilityPlaceEntitiy, simple: 'false', latitude: params[:latitude], longitude: params[:longitude], private: params[:private]
+          end
+
+          desc "School Detail"
+          params do
+            requires :id , type: Integer, values: -> { Utility.ids }
+            requires :school_id , type: Integer, values: -> { School.ids }
+          end
+          get '/:id/schools/:place_id' do
+            utility = Utility.find(params[:id])
+            present utility.schools.find_by(id: params[:school_id]), with: CityWay::Api::V1::Entities::UtilitySchool, simple: 'false', latitude: params[:latitude], longitude: params[:longitude], private: params[:private]
+          end
+
+          desc "Sports Detail"
+          params do
+            requires :id , type: Integer, values: -> { Utility.ids }
+            requires :sport_id , type: Integer, values: -> { Sport.ids }
+          end
+          get '/:id/schools/:place_id' do
+            utility = Utility.find(params[:id])
+            present utility.sports.find_by(id: params[:sport_id]), with: CityWay::Api::V1::Entities::UtilitySport, simple: 'false', latitude: params[:latitude], longitude: params[:longitude], private: params[:private]
           end
 
           desc "Transportation list"
@@ -118,17 +184,6 @@ module CityWay
             present utility.ztls, with: CityWay::Api::V1::Entities::Ztl
           end
 
-          desc "Sports list"
-          params do
-            requires :id , type: Integer, values: -> { Utility.ids }
-            optional :latitude, type: Float
-            optional :longitude, type: Float
-          end
-          get '/:id/sports' do
-            utility = Utility.find(params[:id])
-            present utility, with: CityWay::Api::V1::Entities::UtilitySports, simple: 'false', latitude: params[:latitude], longitude: params[:longitude]
-          end
-
           desc "Waste Recycling List"
           params do
             requires :id , type: Integer, values: -> { Utility.ids }
@@ -140,9 +195,6 @@ module CityWay
             utility = Utility.find(params[:id])
             present utility.waste_management_by_type(params[:is_domestic]), with: CityWay::Api::V1::Entities::WasteManagement, simple: 'true', latitude: params[:latitude], longitude: params[:longitude]
           end
-
-
-
         end
       end
     end

@@ -22,7 +22,7 @@
 #
 
 class UtilityPlace < ActiveRecord::Base
-  enum place_type: [:post_office , :pharmacies, :water_house, :waste_recycling, :bikes, :public_swimming_pool, :tennis_court, :stadium, :structures, :social_services, :voluntary_association, :elder_home, :young_people_place, :kindergarten, :primary_school, :first_secondary_school, :second_secondary_school, :universities, :music, :large_garbage ,:institute, :professional_institute, :recycling_place ]
+  enum place_type: [:post_office, :pharmacies, :water_house, :waste_recycling, :structures, :social_services, :voluntary_association, :elder_home, :young_people_place,  :large_garbage, :recycling_place ]
 
   HAS_BUSINESSHOUR = ['voluntary_association', 'social_services', 'structures', 'tennis_court','public_swimming_pool', 'post_office', 'pharmacies', 'large_garbage']
 

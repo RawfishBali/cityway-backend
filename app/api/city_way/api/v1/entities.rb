@@ -790,6 +790,87 @@ module CityWay
         end
       end
 
+      class UtilitySchool < Grape::Entity
+        expose :id, documentation: {:type => "Integer", :desc => "Utility Place ID"}
+        expose :name, documentation: {:type => "String", :desc => "Utility Place Name"}
+        expose :address, documentation: {:type => "String", :desc => "Utility Place Address"}
+        expose :description, documentation: {:type => "String", :desc => "Utility Place description"}
+        expose :photos, documentation: {:type => "string", :desc => "Merchant photo"} do |object , options|
+          if options[:simple] == 'false'
+            CityWay::Api::V1::Entities::Photo.represent(object.photos) if object.photos.length > 0
+          else
+            CityWay::Api::V1::Entities::Photo.represent(object.primary_photo) if object.photos.length > 0
+          end
+        end
+        expose :phone, documentation: {:type => "String", :desc => "Utility Place Phone"}
+        expose :email, documentation: {:type => "String", :desc => "Utility Place email"}
+        expose :website,if: lambda { |object, options| !object.website.blank? }, documentation: {:type => "String", :desc => "Utility Place website"} do |object, options|
+          unless object.website[/\Ahttp:\/\//] || object.website[/\Ahttps:\/\//]
+            "https://#{object.website}" unless object.website.blank?
+          else
+            object.website
+          end
+        end
+        expose :business_hours do |object , options|
+          CityWay::Api::V1::Entities::BusinessHours.represent(object.all_business_hours)
+        end
+        expose :latitude, documentation: {:type => "float", :desc => "Utility Place Latitude"}
+        expose :longitude, documentation: {:type => "float", :desc => "Utility Place Longitude"}
+        expose :type, documentation: {:type => "string", :desc => "Utility Place place_type"} do |object, options|
+          object.school_type
+        end
+        expose :distance, if: lambda { |object, options| options[:latitude] && options[:longitude] } do |object , options|
+          object.distance_from([options[:latitude], options[:longitude]])
+        end
+        expose :is_public, documentation: {:type => "Boolean", :desc => "Utility Place Public"}
+        expose :is_open do |object , options|
+          object.is_open_now?
+        end
+      end
+
+
+
+      class UtilitySport < Grape::Entity
+        expose :id, documentation: {:type => "Integer", :desc => "Utility Place ID"}
+        expose :name, documentation: {:type => "String", :desc => "Utility Place Name"}
+        expose :address, documentation: {:type => "String", :desc => "Utility Place Address"}
+        expose :description, documentation: {:type => "String", :desc => "Utility Place description"}
+        expose :photos, documentation: {:type => "string", :desc => "Merchant photo"} do |object , options|
+          if options[:simple] == 'false'
+            CityWay::Api::V1::Entities::Photo.represent(object.photos) if object.photos.length > 0
+          else
+            CityWay::Api::V1::Entities::Photo.represent(object.primary_photo) if object.photos.length > 0
+          end
+        end
+        expose :phone, documentation: {:type => "String", :desc => "Utility Place Phone"}
+        expose :email, documentation: {:type => "String", :desc => "Utility Place email"}
+        expose :website,if: lambda { |object, options| !object.website.blank? }, documentation: {:type => "String", :desc => "Utility Place website"} do |object, options|
+          unless object.website[/\Ahttp:\/\//] || object.website[/\Ahttps:\/\//]
+            "https://#{object.website}" unless object.website.blank?
+          else
+            object.website
+          end
+        end
+        expose :business_hours do |object , options|
+          CityWay::Api::V1::Entities::BusinessHours.represent(object.all_business_hours)
+        end
+        expose :latitude, documentation: {:type => "float", :desc => "Utility Place Latitude"}
+        expose :longitude, documentation: {:type => "float", :desc => "Utility Place Longitude"}
+        expose :type, documentation: {:type => "string", :desc => "Utility Place place_type"} do |object, options|
+          object.sport_type
+        end
+        expose :distance, if: lambda { |object, options| options[:latitude] && options[:longitude] } do |object , options|
+          object.distance_from([options[:latitude], options[:longitude]])
+        end
+        expose :is_public, documentation: {:type => "Boolean", :desc => "Utility Place Public"}
+        expose :is_open do |object , options|
+          object.is_open_now?
+        end
+      end
+
+
+
+
       class UtilitySports < Grape::Entity
         expose :public_swimming_pool do |object , options|
           CityWay::Api::V1::Entities::UtilityPlaceEntitiy.represent(object.utility_places.where(place_type: UtilityPlace.place_types['public_swimming_pool']), simple: options[:simple], latitude: options[:latitude], longitude: options[:longitude])
@@ -918,6 +999,18 @@ module CityWay
           end
 
           CityWay::Api::V1::Entities::Advertisement.represent(all_ads)
+        end
+        expose :school_types do |object, options|
+          school_types = []
+          school_types += object.schools.map(&:school_type)
+          school_types += SCHOOL_DEFAULTS
+          (school_types.uniq).sort!
+        end
+        expose :sport_types do |object, options|
+          sport_types = []
+          sport_types += object.sports.map(&:sport_type)
+          sport_types += SPORT_DEFAULTS
+          (sport_types.uniq).sort!
         end
       end
 
