@@ -693,6 +693,7 @@ module CityWay
           object.device_type
         end
         expose :name, documentation: {:type => "String", :desc => "Device Name"}
+        expose :address, documentation: {:type => "Float", :desc => "Device Address"}
         expose :latitude, documentation: {:type => "Float", :desc => "Device latitude"}
         expose :longitude, documentation: {:type => "Float", :desc => "Device longitude"}
         # expose :external_url,if: lambda { |object, options| object.external_url },  documentation: {:type => "Float", :desc => "Device External Url"} do |object, options|
