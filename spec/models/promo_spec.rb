@@ -15,6 +15,8 @@
 #  updated_at           :datetime         not null
 #  city_id              :integer
 #  approval             :boolean          default(TRUE)
+#  activated_at         :datetime
+#  deactivated_at       :datetime
 #
 
 require 'rails_helper'

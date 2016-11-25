@@ -15,6 +15,8 @@
 #  updated_at           :datetime         not null
 #  city_id              :integer
 #  approval             :boolean          default(TRUE)
+#  activated_at         :datetime
+#  deactivated_at       :datetime
 #
 
 class Promo < ActiveRecord::Base
@@ -36,6 +38,7 @@ class Promo < ActiveRecord::Base
   mount_base64_uploader :photo, PhotoUploader
 
   before_save :calculate_discounted_price
+  before_save :set_activation, if: :approval_changed?
 
   def category
     merchant.category
@@ -45,9 +48,36 @@ class Promo < ActiveRecord::Base
     merchant.subcategories
   end
 
+  def is_active
+    return false unless approval
+    return false if self.activated_at.blank? && self.deactivated_at.blank?
+    return true if self.activated_at <= Time.zone.now && self.deactivated_at >= Time.zone.now
+    return false
+  end
+
+  def is_active_for_tommorow
+    return true if self.activated_at == Time.zone.parse("08:00 am") + 1.day
+    return false
+  end
+
   private
 
   def calculate_discounted_price
     self.discount_price =  self.original_price - (self.original_price * (self.discount/100))
+  end
+
+  def set_activation
+    if approval
+      if Time.zone.now > Time.zone.parse("08:00 am")
+        self.activated_at = Time.zone.parse("08:00 am") + 1.day
+        self.deactivated_at = Time.zone.parse("08:00 pm") + 14.day
+      else
+        self.activated_at = Time.zone.parse("08:00 am")
+        self.deactivated_at = Time.zone.parse("08:00 pm") + 14.day
+      end
+    else
+      self.activated_at = nil
+      self.activated_at = nil
+    end
   end
 end
