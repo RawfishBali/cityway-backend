@@ -1,5 +1,19 @@
 
-<h1>Gestisci Sport e tempo libero</h1>
+<h1>
+  Gestisci Sport e tempo libero
+  <div class="uk-button-dropdown float-right" data-uk-dropdown>
+    <button class="md-btn"> Seleziona Categoria <i class="material-icons">&#xE313;</i></button>
+    <div class="uk-dropdown">
+      <ul class="uk-nav uk-nav-dropdown">
+        <li><a href="/admin/sports">Seleziona tutti</a></li>
+        <% (@sport_types).each do |category| %>
+        <li><a href="/admin/sports?sport_type=<%= category %>"><%= category.humanize.titleize%></a></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+</h1>
 <div class="md-card uk-margin-medium-bottom marginT30">
   <div class="md-card-content">
     <div class="uk-overflow-container">

@@ -33,7 +33,7 @@
               <%= f.text_field :name, required: true,class: 'md-input'  %>
             </div>
             <div class="uk-width-medium-1-2">
-              <%= f.text_field :school_type, required: true, class: 'md-input', value: (@admin_school.school_type ? @admin_school.school_type.humanize.titleize : "") %>
+              <%= f.text_field :school_type, required: true, class: '', value: (@admin_school.school_type ? @admin_school.school_type.humanize.titleize : "") %>
               <!-- <label>Denominazione</label> -->
               <%#= f.text_field :denomination, required: false,class: 'md-input'  %>
             </div>

@@ -4,6 +4,7 @@ class Admin::SportsController < Admin::BaseController
   # GET /admin/sports
   # GET /admin/sports.json
   def index
+    @sport_types = ((SPORT_DEFAULTS + City.find(session[:current_city_id]).utility.sports.map(&:sport_type)).uniq.sort!)
     if params[:sport_type]
       @admin_sports = City.find(session[:current_city_id]).utility.sports.where(sport_type: params[:sport_type]).page(params[:page]).per(10)
     else
@@ -25,12 +26,13 @@ class Admin::SportsController < Admin::BaseController
 
   # GET /admin/sports/1/edit
   def edit
+    @sport_types = ((SPORT_DEFAULTS + City.find(session[:current_city_id]).utility.sports.map(&:sport_type)).uniq.sort!).join(",").humanize.titleize
   end
 
   # POST /admin/sports
   # POST /admin/sports.json
   def create
-    params[:sport][:sport_type] = params[:sport][:sport_type].strip.downcase.gsub!(" ","_")
+    params[:sport][:sport_type] = params[:sport][:sport_type].strip.downcase.gsub(" ","_")
     @admin_sport = City.find(session[:current_city_id]).utility.sports.new(admin_sport_params)
 
     respond_to do |format|
@@ -47,7 +49,7 @@ class Admin::SportsController < Admin::BaseController
   # PATCH/PUT /admin/sports/1
   # PATCH/PUT /admin/sports/1.json
   def update
-    params[:sport][:sport_type] = params[:sport][:sport_type].strip.downcase.gsub!(" ","_")
+    params[:sport][:sport_type] = params[:sport][:sport_type].strip.downcase.gsub(" ","_")
     respond_to do |format|
       if @admin_sport.update(admin_sport_params)
         format.html { redirect_to admin_sports_url, notice: 'Sport è stato aggiornato con successo.' }
@@ -73,7 +75,6 @@ class Admin::SportsController < Admin::BaseController
     # Use callbacks to share common setup or constraints between actions.
     def set_admin_sport
       @admin_sport = Sport.find(params[:id])
-      @sport_types = ((SPORT_DEFAULTS + City.find(session[:current_city_id]).utility.sports.map(&:sport_type)).uniq.sort!).join(",").humanize.titleize
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

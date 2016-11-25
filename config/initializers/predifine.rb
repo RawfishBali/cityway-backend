@@ -1,2 +1,2 @@
-SPORT_DEFAULTS = ['Piscine comunali', 'Campi da tennis', 'Stadio']
-SCHOOL_DEFAULTS = ['Scuole Materne', 'Scuole Primarie', 'Scuole Medie', 'Scuole Secondarie', 'Università', 'Scuole di Musica', 'Istituti', 'Istituti Professionali']
+SPORT_DEFAULTS = ['piscine_comunali', 'campi_da_tennis', 'stadio']
+SCHOOL_DEFAULTS = ['scuole_materne', 'scuole_primarie', 'scuole_medie', 'scuole_secondarie', 'università', 'scuole_di_musica', 'istituti', 'istituti_professionali']

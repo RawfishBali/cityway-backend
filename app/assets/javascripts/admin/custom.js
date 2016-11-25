@@ -165,7 +165,7 @@ $(document).ready(function(){
   }
 
 
-  if($("#sport_types").length > 0){
+  if($("#sport_sport_type").length > 0){
     var sport_types = $("#sport_types").val().split(',')
 
     var sport_typesDS = new kendo.data.DataSource({
