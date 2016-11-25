@@ -6,9 +6,9 @@ class Admin::SportsController < Admin::BaseController
   def index
     @sport_types = ((SPORT_DEFAULTS + City.find(session[:current_city_id]).utility.sports.map(&:sport_type)).uniq.sort!)
     if params[:sport_type]
-      @admin_sports = City.find(session[:current_city_id]).utility.sports.where(sport_type: params[:sport_type]).page(params[:page]).per(10)
+      @admin_sports = City.find(session[:current_city_id]).utility.sports.where(sport_type: params[:sport_type]).order('created_at DESC').page(params[:page]).per(10)
     else
-      @admin_sports = City.find(session[:current_city_id]).utility.sports.page(params[:page]).per(10)
+      @admin_sports = City.find(session[:current_city_id]).utility.sports.order('created_at DESC').page(params[:page]).per(10)
     end
 
   end

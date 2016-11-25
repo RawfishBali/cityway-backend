@@ -6,12 +6,12 @@ class Admin::SchoolsController < Admin::BaseController
   def index
     @school_types = ((SCHOOL_DEFAULTS + City.find(session[:current_city_id]).utility.schools.map(&:school_type)).uniq.sort!)
     if params[:school_type] && params.has_key?(:public)
-      @admin_schools = City.find(session[:current_city_id]).utility.schools.where("school_type = ? and is_public = ?", params[:school_type], params[:public]).page(params[:page]).per(10)
+      @admin_schools = City.find(session[:current_city_id]).utility.schools.where("school_type = ? and is_public = ?", params[:school_type], params[:public]).order('created_at DESC').page(params[:page]).per(10)
     else
       if params.has_key?(:public)
-        @admin_schools = City.find(session[:current_city_id]).utility.schools.where(is_public: params[:public]).page(params[:page]).per(10)
+        @admin_schools = City.find(session[:current_city_id]).utility.schools.where(is_public: params[:public]).order('created_at DESC').page(params[:page]).per(10)
       else
-        @admin_schools = City.find(session[:current_city_id]).utility.schools.page(params[:page]).per(10)
+        @admin_schools = City.find(session[:current_city_id]).utility.schools.order('created_at DESC').page(params[:page]).per(10)
       end
 
     end
