@@ -43,9 +43,17 @@ class Event < ActiveRecord::Base
 
   def is_open_today
     event_dates.each do |event_date|
-      return true if event_date.event_date == Date.today
+      if event_date.event_date == Date.today
+        return true if parsed_time(event_date.open_time) <= Time.zone.now && parsed_time(event_date.close_time) >= Time.zone.now
+      else
+        next
+      end
     end
     return false
+  end
+
+  def parsed_time field_time
+    Time.zone.parse "#{field_time.hour}:#{field_time.min}"
   end
 
   def primary_photo
