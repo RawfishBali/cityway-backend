@@ -39,6 +39,7 @@ class Promo < ActiveRecord::Base
 
   before_save :calculate_discounted_price
   before_save :set_activation, if: :approval_changed?
+  before_create :set_activation
 
   def category
     merchant.category
