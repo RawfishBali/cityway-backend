@@ -149,7 +149,7 @@ $(document).ready(function(){
 
     var autoComplete = $("#school_school_type").kendoAutoComplete({
       filter: "startswith",
-      placeholder: "Tipo di scuola",
+      placeholder: "Seleziona o crea una nuova sottocategoria",
       separator: "  ",
       dataSource: {
         transport: {
@@ -185,7 +185,7 @@ $(document).ready(function(){
 
     var autoComplete = $("#sport_sport_type").kendoAutoComplete({
       filter: "startswith",
-      placeholder: "Sport e tempo libero",
+      placeholder: "Seleziona o crea una nuova sottocategoria",
       separator: "  ",
       dataSource: {
         transport: {
