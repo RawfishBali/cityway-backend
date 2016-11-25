@@ -130,7 +130,7 @@ module CityWay
             requires :id , type: Integer, values: -> { Utility.ids }
             requires :sport_id , type: Integer, values: -> { Sport.ids }
           end
-          get '/:id/schools/:sport_id' do
+          get '/:id/sports/:sport_id' do
             utility = Utility.find(params[:id])
             present utility.sports.find_by(id: params[:sport_id]), with: CityWay::Api::V1::Entities::UtilitySport, simple: 'false', latitude: params[:latitude], longitude: params[:longitude], private: params[:private]
           end
