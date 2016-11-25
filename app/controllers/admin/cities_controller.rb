@@ -26,7 +26,13 @@ class Admin::CitiesController < Admin::BaseController
 
     respond_to do |format|
       if @city.save
-        format.html { redirect_to root_path, notice: 'City è stato creato con successo.' }
+        session[:current_city_id] = @city.id
+        @selected_city = @city
+        @around = @city.around
+        @utility = @city.utility
+        @commonplace = @city.commonplace
+        @discover = @city.discover
+        format.html { redirect_to edit_admin_city_path(@city), notice: 'City è stato creato con successo.' }
         format.json { render :show, status: :created, location: @city }
       else
         format.html { redirect_to :back, notice: @city.errors.full_messages }
