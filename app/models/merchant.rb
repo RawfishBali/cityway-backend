@@ -74,6 +74,6 @@ class Merchant < ActiveRecord::Base
   end
 
   def active_promos
-    promos.where(approval: true)
+    promos.where("activated_at <= ? and deactivated_at >= ?", Time.zone.now, Time.zone.now)
   end
 end
