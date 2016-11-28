@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161125065912) do
+ActiveRecord::Schema.define(version: 20161128020453) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -100,12 +100,13 @@ ActiveRecord::Schema.define(version: 20161125065912) do
   add_index "business_hours", ["marketable_type", "marketable_id"], name: "index_business_hours_on_marketable_type_and_marketable_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
-    t.string   "name",       null: false
+    t.string   "name",                       null: false
     t.integer  "parent_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.string   "photo"
     t.string   "icon"
+    t.boolean  "predifined", default: false
   end
 
   add_index "categories", ["parent_id"], name: "index_categories_on_parent_id", using: :btree

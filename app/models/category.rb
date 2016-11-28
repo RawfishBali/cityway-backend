@@ -20,7 +20,7 @@ class Category < ActiveRecord::Base
   has_many :cities, through: :categories_cities
   has_many :categories_cities, dependent: :destroy
 
-  validates :name, uniqueness: {scope: :parent_id, allow_blank: false}
+  # validates :name, uniqueness: {scope: :parent_id, allow_blank: false}
   # validates :photo, presence: true, if: :parent_id?
   # validates :icon, presence: true, if: :parent_id?
 

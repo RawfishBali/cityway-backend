@@ -43,7 +43,7 @@
       <div class="uk-width-medium-1-5 uk-grid-margin">
         <div class="md-input-wrapper">
           <h3 class="  uk-margin-small-bottom">Home</h3>
-          <div class="dropzone" data-ajax="false" data-originalsize="true" data-editstart="false" data-image="<%= f.object.photo.url%>" data-canvas="true" style="width: 200px; height: 400px;" >
+          <div class="dropzone" data-width="720" data-height="1440" data-ajax="false" data-originalsize="true" data-editstart="true" data-image="<%= f.object.photo.url%>" data-canvas="true" style="width: 200px; height: 400px;" >
             <%= f.file_field :photo, required: f.object.photo.blank? %>
           </div>
         </div>
@@ -52,7 +52,7 @@
         <div class="md-input-wrapper">
           <h3 class="  uk-margin-small-bottom">Scopri</h3>
           <%= f.fields_for :discover do |ff| %>
-          <div class="dropzone" data-ajax=false data-canvas="true" data-originalsize="true" data-editstart="false"  data-image="<%= ff.object.photo.url%>" style="width: 200px; height: 400px;" >
+          <div class="dropzone" data-width="720" data-height="1440" data-ajax=false data-canvas="true" data-originalsize="true" data-editstart="true"  data-image="<%= ff.object.photo.url%>" style="width: 200px; height: 400px;" >
             <%= ff.file_field :photo, required: ff.object.photo.blank? %>
           </div>
           <% end %>
@@ -62,7 +62,7 @@
         <div class="md-input-wrapper">
           <h3 class="  uk-margin-small-bottom">Intorno</h3>
           <%= f.fields_for :around do |fff| %>
-          <div class="dropzone" data-originalsize="false" data-canvas="false" data-ajax="false"  data-image="<%= fff.object.photo.url%>" style="width: 200px; height: 400px;">
+          <div class="dropzone" data-width="720" data-height="1440" data-originalsize="false" data-canvas="true" data-ajax="false"  data-image="<%= fff.object.photo.url%>" style="width: 200px; height: 400px;">
             <%= fff.file_field :photo, required: fff.object.photo.blank? %>
           </div>
           <% end %>
@@ -72,7 +72,7 @@
         <div class="md-input-wrapper">
           <h3 class="  uk-margin-small-bottom">Comune</h3>
           <%= f.fields_for :commonplace do |ffff| %>
-          <div class="dropzone" data-originalsize="true"  data-image="<%= ffff.object.photo.url%>" style="width: 200px; height: 400px;" data-canvas="false" data-ajax="false">
+          <div class="dropzone" data-height="1440" data-width="720" data-originalsize="true"  data-image="<%= ffff.object.photo.url%>" style="width: 201px;" data-canvas="true" data-ajax="false">
             <%= ffff.file_field :photo, required: ffff.object.photo.blank? %>
           </div>
         </div>
@@ -82,7 +82,7 @@
         <div class="md-input-wrapper">
           <h3 class="  uk-margin-small-bottom">Utilità</h3>
           <%= f.fields_for :utility do |fffff| %>
-          <div class="dropzone" data-originalsize="true"  data-image="<%= fffff.object.photo.url%>" style="width: 200px; height: 400px;" data-canvas="false" data-ajax="false">
+          <div class="dropzone" data-width="720" data-height="1440" data-originalsize="true"  data-image="<%= fffff.object.photo.url%>" style="width: 200px;" data-canvas="true" data-ajax="false">
             <%= fffff.file_field :photo, required: fffff.object.photo.blank? %>
           </div>
           <% end %>
