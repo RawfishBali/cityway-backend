@@ -72,7 +72,7 @@ module CityWay
               if params.has_key?(:public)
                 schools = schools.where(is_public: params[:public])
               end
-            elsif params[:public]
+            elsif params.has_key?(:public)
               schools = utility.schools.where(is_public: params[:public])
             else
               schools = utility.schools
@@ -97,7 +97,7 @@ module CityWay
               if params.has_key?(:public)
                 sports = sports.where(is_public: params[:public])
               end
-            elsif params[:public]
+            elsif .has_key?(:public)
               sports = utility.sports.where(is_public: params[:public])
             else
               sports = utility.sports
