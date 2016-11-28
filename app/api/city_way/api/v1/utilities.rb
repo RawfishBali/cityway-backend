@@ -97,7 +97,7 @@ module CityWay
               if params.has_key?(:public)
                 sports = sports.where(is_public: params[:public])
               end
-            elsif .has_key?(:public)
+            elsif params.has_key?(:public)
               sports = utility.sports.where(is_public: params[:public])
             else
               sports = utility.sports
