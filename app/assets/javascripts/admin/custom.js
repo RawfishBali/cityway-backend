@@ -200,7 +200,13 @@ $(document).ready(function(){
     }).data("kendoAutoComplete");
   }
 
-  
+  $("#ztl_color").spectrum({
+    flat: false,
+    showInitial: true,
+    showAlpha: false,
+    showPalette: false,
+    preferredFormat: "hex"
+  });
 
 
 

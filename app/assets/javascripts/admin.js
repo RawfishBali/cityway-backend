@@ -39,3 +39,4 @@
 //= require admin/nestable
 //= require admin/loadingoverlay
 //= require admin/jquery.geocomplete
+//= require admin/spectrum

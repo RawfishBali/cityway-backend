@@ -942,6 +942,7 @@ module CityWay
       class Ztl < Grape::Entity
         expose :id, documentation: {:type => "Integer", :desc => "ZTL ID"}
         expose :name, documentation: {:type => "Integer", :desc => "ZTL Name"}
+        expose :color, documentation: {:type => "Integer", :desc => "ZTL Color"}
         expose :description, documentation: {:type => "Integer", :desc => "ZTL Description"}
         expose :coordinates, documentation: {:type => "Integer", :desc => "ZTL coordinates"} do |object, options|
           CityWay::Api::V1::Entities::Coordinate.represent(object.coordinates)

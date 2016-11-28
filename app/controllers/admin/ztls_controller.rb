@@ -73,6 +73,6 @@ class Admin::ZtlsController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_ztl_params
-      params.require(:ztl).permit(:name, :description, coordinates_attributes: [:id, :latitude, :longitude, :_destroy])
+      params.require(:ztl).permit(:name, :description, :color, coordinates_attributes: [:id, :latitude, :longitude, :_destroy])
     end
 end
