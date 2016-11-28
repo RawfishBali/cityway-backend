@@ -145,3 +145,20 @@
 .left{
   float: left !important;
 }
+
+.marginTM40{
+  margin-top: -40px;
+}
+
+.marginL170{
+  margin-left: 170px !important;
+}
+
+.marginL155{
+  margin-left: 155px !important;
+}
+
+#switchery_active_text{
+  font-size: 15px !important;
+  font-weight: lighter !important;
+}

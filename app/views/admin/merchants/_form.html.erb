@@ -15,12 +15,29 @@
     <% end %>
     <h2 class=" ">
       <% if @admin_merchant.new_record?%>
-      Aggiungi Attività
+      <div class="uk-width-medium-1-2 uk-row-first">
+        Aggiungi Attività
+        <span class="marginL155">
+          <%= f.check_box :active,class: 'float-right ', 'data-switchery': true, 'data-switchery-size':"large"  %>
+          <span id="switchery_active_text">Visibilità</span>
+        </span>
+      </div>
+
+
       <% else %>
-      Gestisci Attività
+      <div class="uk-width-medium-1-2 uk-row-first">
+        Gestisci Attività
+        <%#= f.label :support_disabilities, 'Città Accessibile', class: 'inline-label'%>
+        <span class="marginL170">
+          <%= f.check_box :active,class: 'float-right ', 'data-switchery': true, 'data-switchery-size':"large"  %>
+          <span id="switchery_active_text">Visibilità</span>
+        </span>
+      </div>
+
       <% end %>
-      <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, admin_merchants_path, class:'float-right' %>
+      <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, admin_merchants_path, class:'float-right marginTM40' %>
     </h2>
+    <div class="clear"></div>
 
     <div class="uk-grid" data-uk-grid-margin>
       <%= f.hidden_field :city_id , value: session[:current_city_id]%>

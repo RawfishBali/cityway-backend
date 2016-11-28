@@ -50,7 +50,7 @@ class Merchant < ActiveRecord::Base
   phony_normalize :phone, default_country_code: 'IT'
   validates :phone, phony_plausible: true
 
-  before_save :set_activation, if: :approval_changed?
+  before_save :set_activation, if: :active_changed?
   before_create :set_activation
 
   scope :active_merchants, -> { where("deactivated_at >= ?", Time.zone.now) }

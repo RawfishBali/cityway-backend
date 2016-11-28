@@ -73,7 +73,7 @@ class Admin::MerchantsController < Admin::BaseController
     def set_admin_merchant
       @admin_merchant = Merchant.find(params[:id])
       city = City.find(session[:current_city_id])
-
+      @admin_merchant.update(active: false) unless @admin_merchant.is_active
     end
 
     def prepare_categories
