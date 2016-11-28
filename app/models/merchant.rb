@@ -22,6 +22,9 @@
 #  icon                 :string
 #  twitter              :string
 #  google_plus          :string
+#  active               :boolean          default(TRUE)
+#  activated_at         :datetime
+#  deactivated_at       :datetime
 #
 
 class Merchant < ActiveRecord::Base
@@ -47,6 +50,11 @@ class Merchant < ActiveRecord::Base
   phony_normalize :phone, default_country_code: 'IT'
   validates :phone, phony_plausible: true
 
+  before_save :set_activation, if: :approval_changed?
+  before_create :set_activation
+
+  scope :active_merchants, -> { where("deactivated_at >= ?", Time.zone.now) }
+
   def primary_photo
     primary_photo = photos.where(is_primary: true)
     if primary_photo.length > 0
@@ -66,14 +74,26 @@ class Merchant < ActiveRecord::Base
   def all_business_hours
     mb = (self.business_hours).to_a
     return mb.sort_by(&:day)
-    # if mb.size == 7
-    # ((0..6).to_a  - mb.map(&:day)).each do |m|
-    #   mb << BusinessHour.new(morning_open_time: '00:00', morning_close_time: '00:00', evening_open_time: nil, evening_close_time: nil, day: m, marketable_type: self.class.name, marketable_id: self.id)
-    # end
-    # mb.sort_by(&:day)
   end
 
   def active_promos
     promos.where("activated_at <= ? and deactivated_at >= ?", Time.zone.now, Time.zone.now)
+  end
+
+  def is_active
+    return false unless active
+    return false if self.activated_at.blank? && self.deactivated_at.blank?
+    return true if self.activated_at <= Time.zone.now && self.deactivated_at >= Time.zone.now
+    return false
+  end
+
+  def set_activation
+    if active
+      self.activated_at = Time.zone.now
+      self.deactivated_at = Time.zone.now + 1.year
+    else
+      self.activated_at = nil
+      self.activated_at = nil
+    end
   end
 end

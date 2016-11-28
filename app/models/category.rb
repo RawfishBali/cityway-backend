@@ -9,6 +9,7 @@
 #  updated_at :datetime         not null
 #  photo      :string
 #  icon       :string
+#  predifined :boolean          default(FALSE)
 #
 
 class Category < ActiveRecord::Base

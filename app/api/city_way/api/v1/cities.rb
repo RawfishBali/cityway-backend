@@ -78,9 +78,9 @@ module CityWay
             category = Category.find(params[:category_id])
             if params[:subcategory_id].blank?
               subcategories = category.subcategories
-              merchants = Merchant.where(city_id: params[:id] , category_id: params[:category_id]).page params[:page]
+              merchants = Merchant.active_merchants.where(city_id: params[:id] , category_id: params[:category_id]).page params[:page]
             else
-              merchants = Merchant.joins(:subcategories).where('merchants.city_id = ? AND categories_merchants.category_id = ?' ,params[:id], params[:subcategory_id]).page params[:page]
+              merchants = Merchant.active_merchants.joins(:subcategories).where('merchants.city_id = ? AND categories_merchants.category_id = ?' ,params[:id], params[:subcategory_id]).page params[:page]
             end
             add_pagination_headers merchants
 

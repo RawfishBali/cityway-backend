@@ -22,6 +22,9 @@
 #  icon                 :string
 #  twitter              :string
 #  google_plus          :string
+#  active               :boolean          default(TRUE)
+#  activated_at         :datetime
+#  deactivated_at       :datetime
 #
 
 require 'rails_helper'
