@@ -57,7 +57,7 @@ class Admin::OnlineServicesController < Admin::BaseController
   def destroy
     @admin_online_service.destroy
     respond_to do |format|
-      format.html { redirect_to admin_online_services_url, notice: 'Servizi Online è stato distrutto con successo.' }
+      format.html { redirect_to admin_online_services_url, notice: 'Servizi Online cancellata con successo!.' }
       format.json { head :no_content }
     end
   end

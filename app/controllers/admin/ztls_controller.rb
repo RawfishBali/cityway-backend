@@ -60,7 +60,7 @@ class Admin::ZtlsController < Admin::BaseController
   def destroy
     @admin_ztl.destroy
     respond_to do |format|
-      format.html { redirect_to session['previous_url'] || admin_ztls_url, notice: 'Ztl è stato distrutto con successo.' }
+      format.html { redirect_to session['previous_url'] || admin_ztls_url, notice: 'Ztl cancellata con successo!.' }
       format.json { head :no_content }
     end
   end

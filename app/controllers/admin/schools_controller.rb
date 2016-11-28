@@ -72,7 +72,7 @@ class Admin::SchoolsController < Admin::BaseController
   def destroy
     @admin_school.destroy
     respond_to do |format|
-      format.html { redirect_to admin_schools_url(public: @admin_school.is_public), notice: 'Scuola è stato distrutto con successo.' }
+      format.html { redirect_to admin_schools_url(public: @admin_school.is_public), notice: 'Scuola cancellata con successo!.' }
       format.json { head :no_content }
     end
   end

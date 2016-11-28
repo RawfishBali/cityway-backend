@@ -57,7 +57,7 @@ class Admin::MarketsController < Admin::BaseController
   def destroy
     @admin_market.destroy
     respond_to do |format|
-      format.html { redirect_to admin_markets_url, notice: 'Mercati è stato distrutto con successo.' }
+      format.html { redirect_to admin_markets_url, notice: 'Mercati cancellata con successo!.' }
       format.json { head :no_content }
     end
   end

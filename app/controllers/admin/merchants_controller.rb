@@ -63,7 +63,7 @@ class Admin::MerchantsController < Admin::BaseController
   def destroy
     @admin_merchant.destroy
     respond_to do |format|
-      format.html { redirect_to admin_merchants_url, notice: 'Attività è stato distrutto con successo.' }
+      format.html { redirect_to admin_merchants_url, notice: 'Attività cancellata con successo!.' }
       format.json { head :no_content }
     end
   end

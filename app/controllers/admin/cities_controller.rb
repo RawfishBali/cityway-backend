@@ -57,7 +57,7 @@ class Admin::CitiesController < Admin::BaseController
   def destroy
     @city.destroy
     respond_to do |format|
-      format.html { redirect_to root_path, notice: 'City è stato distrutto con successo.' }
+      format.html { redirect_to root_path, notice: 'City cancellata con successo!.' }
       format.json { head :no_content }
     end
   end

@@ -56,7 +56,7 @@ class Admin::WasteManagementsController < Admin::BaseController
   def destroy
     @admin_waste_management.destroy
     respond_to do |format|
-      format.html { redirect_to session['previous_url'] || admin_waste_managements_url, notice: 'Raccolta differenziata è stato distrutto con successo.' }
+      format.html { redirect_to session['previous_url'] || admin_waste_managements_url, notice: 'Raccolta differenziata cancellata con successo!.' }
       format.json { head :no_content }
     end
   end

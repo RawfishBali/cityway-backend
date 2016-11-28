@@ -56,7 +56,7 @@ class Admin::WasteTypesController < Admin::BaseController
   def destroy
     @admin_waste_type.destroy
     respond_to do |format|
-      format.html { redirect_to session['previous_url'] || admin_waste_types_url, notice: 'Waste type è stato distrutto con successo.' }
+      format.html { redirect_to session['previous_url'] || admin_waste_types_url, notice: 'Waste type cancellata con successo!.' }
       format.json { head :no_content }
     end
   end

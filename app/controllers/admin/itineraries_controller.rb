@@ -57,7 +57,7 @@ class Admin::ItinerariesController < Admin::BaseController
   def destroy
     @admin_itinerary.destroy
     respond_to do |format|
-      format.html { redirect_to admin_itineraries_url, notice: 'Itinerari è stato distrutto con successo.' }
+      format.html { redirect_to admin_itineraries_url, notice: 'Itinerari cancellata con successo!.' }
       format.json { head :no_content }
     end
   end

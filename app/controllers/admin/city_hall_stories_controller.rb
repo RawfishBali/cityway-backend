@@ -58,7 +58,7 @@ class Admin::CityHallStoriesController < Admin::BaseController
   def destroy
     @admin_city_hall_story.destroy
     respond_to do |format|
-      format.html { redirect_to admin_city_hall_stories_url, notice: 'Dati Comune è stato distrutto con successo.' }
+      format.html { redirect_to admin_city_hall_stories_url, notice: 'Dati Comune cancellata con successo!.' }
       format.json { head :no_content }
     end
   end

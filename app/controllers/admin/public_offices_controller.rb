@@ -57,7 +57,7 @@ class Admin::PublicOfficesController < Admin::BaseController
   def destroy
     @admin_public_office.destroy
     respond_to do |format|
-      format.html { redirect_to session['previous_url'] || admin_public_offices_url, notice: 'Uffici Pubblici è stato distrutto con successo.' }
+      format.html { redirect_to session['previous_url'] || admin_public_offices_url, notice: 'Uffici Pubblici cancellata con successo!.' }
       format.json { head :no_content }
     end
   end

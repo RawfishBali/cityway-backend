@@ -56,7 +56,7 @@ class Admin::PublicTransportsController < Admin::BaseController
   def destroy
     @admin_public_transport.destroy
     respond_to do |format|
-      format.html { redirect_to session['previous_url'] || admin_public_transports_url, notice: 'Mezzi pubblici è stato distrutto con successo.' }
+      format.html { redirect_to session['previous_url'] || admin_public_transports_url, notice: 'Mezzi pubblici cancellata con successo!.' }
       format.json { head :no_content }
     end
   end

@@ -57,7 +57,7 @@ class Admin::NewsController < Admin::BaseController
   def destroy
     @admin_news.destroy
     respond_to do |format|
-      format.html { redirect_to admin_news_index_url, notice: 'News è stato distrutto con successo.' }
+      format.html { redirect_to admin_news_index_url, notice: 'News cancellata con successo!.' }
       format.json { head :no_content }
     end
   end

@@ -62,7 +62,7 @@ class Admin::CulinariesController < Admin::BaseController
     @admin_culinary.destroy
     respond_to do |format|
       italian_type = { gastronomy: 'Gastronomia', traditional: 'Piatti della Tradizione' }
-      format.html { redirect_to session['previous_url'] || admin_culinaries_url, notice: "#{italian_type[@culinary_type.to_sym]} è stato distrutto con successo." }
+      format.html { redirect_to session['previous_url'] || admin_culinaries_url, notice: "#{italian_type[@culinary_type.to_sym]} cancellata con successo!." }
       format.json { head :no_content }
     end
   end

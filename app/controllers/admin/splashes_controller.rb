@@ -56,7 +56,7 @@ class Admin::SplashesController < Admin::BaseController
   def destroy
     @admin_splash.destroy
     respond_to do |format|
-      format.html { redirect_to session['previous_url'] || admin_splashes_url, notice: 'Splash è stato distrutto con successo.' }
+      format.html { redirect_to session['previous_url'] || admin_splashes_url, notice: 'Splash cancellata con successo!.' }
       format.json { head :no_content }
     end
   end

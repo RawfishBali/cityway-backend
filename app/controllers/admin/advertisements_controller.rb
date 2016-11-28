@@ -58,7 +58,7 @@ class Admin::AdvertisementsController < Admin::BaseController
   def destroy
     @advertisement.destroy
     respond_to do |format|
-      format.html { redirect_to admin_advertisements_url, notice: 'Banner pubblicitari è stato distrutto con successo.' }
+      format.html { redirect_to admin_advertisements_url, notice: 'Banner pubblicitari cancellata con successo!.' }
       format.json { head :no_content }
     end
   end

@@ -66,7 +66,7 @@ class Admin::SportsController < Admin::BaseController
   def destroy
     @admin_sport.destroy
     respond_to do |format|
-      format.html { redirect_to admin_sports_url, notice: 'Sport was successfully destroyed.è stato distrutto con successo.' }
+      format.html { redirect_to admin_sports_url, notice: 'Sport was successfully destroyed.cancellata con successo!.' }
       format.json { head :no_content }
     end
   end

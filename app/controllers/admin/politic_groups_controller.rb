@@ -57,7 +57,7 @@ class Admin::PoliticGroupsController < Admin::BaseController
   def destroy
     @admin_politic_group.destroy
     respond_to do |format|
-      format.html { redirect_to admin_politic_groups_url, notice: 'Consiglio è stato distrutto con successo.' }
+      format.html { redirect_to admin_politic_groups_url, notice: 'Consiglio cancellata con successo!.' }
       format.json { head :no_content }
     end
   end

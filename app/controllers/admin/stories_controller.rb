@@ -57,7 +57,7 @@ class Admin::StoriesController < Admin::BaseController
   def destroy
     @admin_story.destroy
     respond_to do |format|
-      format.html { redirect_to session['previous_url'] || admin_stories_url, notice: 'Storia dela citta è stato distrutto con successo.' }
+      format.html { redirect_to session['previous_url'] || admin_stories_url, notice: 'Storia dela citta cancellata con successo!.' }
       format.json { head :no_content }
     end
   end

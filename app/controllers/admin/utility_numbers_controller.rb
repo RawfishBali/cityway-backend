@@ -57,7 +57,7 @@ class Admin::UtilityNumbersController < Admin::BaseController
   def destroy
     @admin_utility_number.destroy
     respond_to do |format|
-      format.html { redirect_to session['previous_url'] || admin_utility_numbers_url, notice: 'Numeri utili è stato distrutto con successo.' }
+      format.html { redirect_to session['previous_url'] || admin_utility_numbers_url, notice: 'Numeri utili cancellata con successo!.' }
       format.json { head :no_content }
     end
   end

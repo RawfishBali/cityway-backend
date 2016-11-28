@@ -59,7 +59,7 @@ class Admin::SecuritiesController < Admin::BaseController
   def destroy
     @admin_security.destroy
     respond_to do |format|
-      format.html { redirect_to admin_securities_url, notice: 'Sicurezza è stato distrutto con successo.' }
+      format.html { redirect_to admin_securities_url, notice: 'Sicurezza cancellata con successo!.' }
       format.json { head :no_content }
     end
   end

@@ -67,7 +67,7 @@ class Admin::ProfilesController < Admin::BaseController
   def destroy
     @admin_profile.destroy
     respond_to do |format|
-      format.html { redirect_to admin_profiles_url, notice: "#{@name_alias} è stato distrutto con successo." }
+      format.html { redirect_to admin_profiles_url, notice: "#{@name_alias} cancellata con successo!." }
       format.json { head :no_content }
     end
   end

@@ -60,7 +60,7 @@ class Admin::PlacesController < Admin::BaseController
     @admin_place.destroy
     italian_type = { monument: 'Monumenti', library: 'Bibblioteche', theater: 'Teatri', museum: 'Musei', cinema: 'Cinema' }
     respond_to do |format|
-      format.html { redirect_to session['previous_url'] ||  admin_places_url, notice: "#{italian_type[@place_type.to_sym]} è stato distrutto con successo." }
+      format.html { redirect_to session['previous_url'] ||  admin_places_url, notice: "#{italian_type[@place_type.to_sym]} cancellata con successo!." }
       format.json { head :no_content }
     end
   end

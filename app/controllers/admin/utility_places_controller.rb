@@ -67,7 +67,7 @@ class Admin::UtilityPlacesController < Admin::BaseController
   def destroy
     @admin_utility_place.destroy
     respond_to do |format|
-      format.html { redirect_to session['previous_url'] || admin_utility_places_url, notice: "#{@place_types[@place_type.to_sym]} è stato distrutto con successo." }
+      format.html { redirect_to session['previous_url'] || admin_utility_places_url, notice: "#{@place_types[@place_type.to_sym]} cancellata con successo!." }
       format.json { head :no_content }
     end
   end

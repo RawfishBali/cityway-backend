@@ -56,7 +56,7 @@ class Admin::CertificatesController < Admin::BaseController
   def destroy
     @admin_certificate.destroy
     respond_to do |format|
-      format.html { redirect_to admin_certificates_url, notice: 'Certificate è stato distrutto con successo.' }
+      format.html { redirect_to admin_certificates_url, notice: 'Certificate cancellata con successo!.' }
       format.json { head :no_content }
     end
   end

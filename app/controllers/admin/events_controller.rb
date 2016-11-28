@@ -59,7 +59,7 @@ class Admin::EventsController < Admin::BaseController
   def destroy
     @admin_event.destroy
     respond_to do |format|
-      format.html { redirect_to session['previous_url'] || admin_events_url, notice: 'Eventi è stato distrutto con successo.' }
+      format.html { redirect_to session['previous_url'] || admin_events_url, notice: 'Eventi cancellata con successo!.' }
       format.json { head :no_content }
     end
   end

@@ -57,7 +57,7 @@ class Admin::PromosController < Admin::BaseController
   def destroy
     @admin_promo.destroy
     respond_to do |format|
-      format.html { redirect_to session['previous_url'] || admin_promos_url, notice: 'Promozioni è stato distrutto con successo.' }
+      format.html { redirect_to session['previous_url'] || admin_promos_url, notice: 'Promozioni cancellata con successo!.' }
       format.json { head :no_content }
     end
   end

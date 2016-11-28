@@ -57,7 +57,7 @@ class Admin::ParksController < Admin::BaseController
   def destroy
     @admin_park.destroy
     respond_to do |format|
-      format.html { redirect_to session['previous_url'] ||  admin_parks_path, notice: 'Parchi è stato distrutto con successo.' }
+      format.html { redirect_to session['previous_url'] ||  admin_parks_path, notice: 'Parchi cancellata con successo!.' }
       format.json { head :no_content }
     end
   end
