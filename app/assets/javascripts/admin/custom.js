@@ -1,4 +1,12 @@
 $(document).ready(function(){
+  var delay = (function(){
+    var timer = 0;
+    return function(callback, ms){
+      clearTimeout (timer);
+      timer = setTimeout(callback, ms);
+    };
+  })();
+
   $.LoadingOverlaySetup({
     color           : "rgba(255, 255, 255, 0.7)",
     resizeInterval  : 0,
@@ -209,6 +217,121 @@ $(document).ready(function(){
   $("#ztl_color").kendoColorPicker({
     buttons: false
   });
-  // $(".addressable").geocomplete();
+
+  if($("#map").length > 0){
+    if($("#merchant_latitude").val() == "" && $("#merchant_longitude").val() == ""){
+      var lat = 45.5454787
+      var long = 11.535421400000018
+    }else{
+      var lat = $("#merchant_latitude").val()
+      var long = $("#merchant_longitude").val()
+    }
+    map = new GMaps({
+      div: '#map',
+      lat: lat,
+      lng: long
+    });
+
+    map.addMarker({
+      lat: $("#merchant_latitude").val(),
+      lng: $("#merchant_longitude").val(),
+    });
+
+    $('#merchant_address').keyup(function() {
+      delay(function(){
+        GMaps.geocode({
+          address: $('#merchant_address').val(),
+          callback: function(results, status) {
+            if (status == 'OK') {
+              map.removeMarkers();
+              var latlng = results[0].geometry.location;
+              map.setCenter(latlng.lat(), latlng.lng());
+              map.addMarker({
+                lat: latlng.lat(),
+                lng: latlng.lng()
+              });
+              $("#merchant_latitude").parent().addClass('md-input-filled')
+              $("#merchant_longitude").parent().addClass('md-input-filled')
+              $("#merchant_latitude").val(latlng.lat())
+              $("#merchant_longitude").val(latlng.lng())
+            }
+          }
+        });
+      }, 500 );
+    });
+
+    $("#merchant_latitude, #merchant_longitude").keyup(function() {
+      delay(function(){
+        if($("#merchant_latitude").val() != "" && $("#merchant_longitude").val() != "" && $.isNumeric($("#merchant_latitude").val()) && $.isNumeric($("#merchant_longitude").val()) ){
+          map.removeMarkers();
+          var index = map.markers.length;
+          var lat = $("#merchant_latitude").val()
+          var lng = $("#merchant_longitude").val()
+
+          geocode_url = "http://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lng+"&sensor=true"
+
+          $.ajax({
+            url: geocode_url,
+            context: document.body
+          }).done(function(data) {
+            if(data["status"] =="OK"){
+              $("#merchant_address").val(data["results"][0]["formatted_address"])
+              $("#merchant_address").parent().addClass('md-input-filled')
+            }
+
+          });
+
+          map.addMarker({
+            lat: lat,
+            lng: lng,
+            title: 'Marker #' + index
+          });
+
+          map.setCenter(lat, lng);
+          $("#merchant_latitude").parent().addClass('md-input-filled')
+          $("#merchant_longitude").parent().addClass('md-input-filled')
+          $("#merchant_latitude").val(lat);
+          $("#merchant_longitude").val(lng);
+
+        }
+
+
+      }, 500 );
+    });
+
+    GMaps.on('click', map.map, function(event) {
+      map.removeMarkers();
+      var index = map.markers.length;
+      var lat = event.latLng.lat();
+      var lng = event.latLng.lng();
+
+      geocode_url = "http://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lng+"&sensor=true"
+
+      $.ajax({
+        url: geocode_url,
+        context: document.body
+      }).done(function(data) {
+        if(data["status"] =="OK"){
+          $("#merchant_address").val(data["results"][0]["formatted_address"])
+          $("#merchant_address").parent().addClass('md-input-filled')
+        }
+      });
+
+      map.addMarker({
+        lat: lat,
+        lng: lng,
+        title: 'Marker #' + index
+      });
+
+      map.setCenter(lat, lng);
+      $("#merchant_latitude").parent().addClass('md-input-filled')
+      $("#merchant_longitude").parent().addClass('md-input-filled')
+      $("#merchant_latitude").val(lat);
+      $("#merchant_longitude").val(lng);
+    });
+  }
+
+
+
 
 })

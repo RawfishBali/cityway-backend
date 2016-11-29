@@ -178,3 +178,7 @@
 .marginT15{
   margin-top: 15px;
 }
+
+#map{
+  height: 300px;
+}

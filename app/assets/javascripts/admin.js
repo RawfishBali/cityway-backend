@@ -40,3 +40,4 @@
 //= require admin/loadingoverlay
 //= require admin/jquery.geocomplete
 //= require admin/spectrum
+//= require admin/gmaps

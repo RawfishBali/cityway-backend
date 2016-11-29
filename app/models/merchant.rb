@@ -44,8 +44,8 @@ class Merchant < ActiveRecord::Base
 
   mount_base64_uploader :icon, PhotoUploader
 
-  geocoded_by :address
-  after_validation :geocode
+  # geocoded_by :address
+  # after_validation :geocode
 
   phony_normalize :phone, default_country_code: 'IT'
   validates :phone, phony_plausible: true
