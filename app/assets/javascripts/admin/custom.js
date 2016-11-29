@@ -305,7 +305,7 @@ $(document).ready(function(){
       var lat = event.latLng.lat();
       var lng = event.latLng.lng();
 
-      geocode_url = "http://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lng+"&sensor=true"
+      geocode_url = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lng+"&sensor=true"
 
       $.ajax({
         url: geocode_url,
