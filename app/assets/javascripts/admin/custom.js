@@ -116,16 +116,22 @@ $(document).ready(function(){
   })
 
   $('#promo_merchant_id').selectize({
-    plugins: {
-      'remove_button': {
-        label     : ''
-      }
-    },
     persist: false,
-    maxItems: null,
-    valueField: 'email',
+    maxItems: 1,
+    valueField: 'id',
     labelField: 'name',
-    searchField: ['name', 'email']
+    searchField: ['name', 'id'],
+    onDropdownOpen: function($dropdown) {
+      $dropdown
+      .hide()
+      .velocity('slideDown', {
+        begin: function() {
+          $dropdown.css({'margin-top':'0'})
+        },
+        duration: 200,
+        easing: easing_swiftOut
+      })
+    }
   })
 
 
@@ -203,15 +209,6 @@ $(document).ready(function(){
   $("#ztl_color").kendoColorPicker({
     buttons: false
   });
-
-
-
-
-
-
-
-
-
   // $(".addressable").geocomplete();
 
 })

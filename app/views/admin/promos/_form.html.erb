@@ -29,9 +29,9 @@
               <label>Titolo</label>
               <%= f.text_field :title, required: true,class: 'md-input'  %>
             </div>
-            <div class="uk-width-medium-1-2">
+            <div class="uk-width-medium-1-2 md-input-filled">
               <label>Attività</label>
-              <%= f.select :merchant_id, options_from_collection_for_select(@merchants, 'id', 'name', (f.object.merchant.present? ? f.object.merchant.id : nil)), {prompt: 'Seleziona attività'}, {'data-md-selectize': true, required: true, class: ''}  %>
+              <%= f.select :merchant_id, options_from_collection_for_select(@merchants, 'id', 'name', (f.object.merchant.present? ? f.object.merchant.id : nil)), {prompt: 'Seleziona attività'}, {required: true, class: 'md-input'}  %>
             </div>
           </div>
         </div>
