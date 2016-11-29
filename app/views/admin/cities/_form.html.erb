@@ -44,7 +44,7 @@
 
           <h3 class="marginB0">Home</h3>
           <span class="font-size-11">(Suggerimento immagine 720 x 1440px)</span>
-          <div class="dropzone marginT15" data-width="720" data-height="1440" data-ajax="false" data-originalsize="true" data-editstart="true" data-image="<%= f.object.photo.url%>" data-canvas="true" style="width: 200px; height: 400px;" >
+          <div class="dropzone marginT15" data-width="720" data-height="1440" data-ajax="false" data-originalsize="true" data-editstart="false" data-image="<%= f.object.photo.url%>" data-canvas="true" style="width: 200px; height: 400px;" >
             <%= f.file_field :photo, required: f.object.photo.blank? %>
           </div>
 
@@ -54,7 +54,7 @@
           <h3 class="marginB0 ">Scopri</h3>
           <span class="font-size-11">(Suggerimento immagine 720 x 1440px)</span>
           <%= f.fields_for :discover do |ff| %>
-          <div class="dropzone marginT10" data-width="720" data-height="1440" data-ajax=false data-canvas="true" data-originalsize="true" data-editstart="true"  data-image="<%= ff.object.photo.url%>" style="width: 200px; height: 400px;" >
+          <div class="dropzone marginT10" data-width="720" data-height="1440" data-ajax=false data-canvas="true" data-originalsize="true" data-editstart="false"  data-image="<%= ff.object.photo.url%>" style="width: 200px; height: 400px;" >
             <%= ff.file_field :photo, required: ff.object.photo.blank? %>
           </div>
           <% end %>
@@ -65,7 +65,7 @@
           <h3 class="marginB0">Intorno</h3>
           <span class="font-size-11">(Suggerimento immagine 720 x 1440px)</span>
           <%= f.fields_for :around do |fff| %>
-          <div class="dropzone marginT10" data-width="720" data-height="1440" data-originalsize="false" data-canvas="true" data-ajax="false"  data-image="<%= fff.object.photo.url%>" style="width: 200px; height: 400px;">
+          <div class="dropzone marginT10" data-width="720" data-height="1440" data-originalsize="false" data-canvas="true" data-ajax="false"  data-editstart="false" data-image="<%= fff.object.photo.url%>" style="width: 200px; height: 400px;">
             <%= fff.file_field :photo, required: fff.object.photo.blank? %>
           </div>
           <% end %>
@@ -76,7 +76,7 @@
           <h3 class="marginB0">Comune</h3>
           <span class="font-size-11">(Suggerimento immagine 720 x 1440px)</span>
           <%= f.fields_for :commonplace do |ffff| %>
-          <div class="dropzone marginT10" data-height="1440" data-width="720" data-originalsize="true"  data-image="<%= ffff.object.photo.url%>" style="width: 201px;" data-canvas="true" data-ajax="false">
+          <div class="dropzone marginT10" data-height="1440" data-width="720" data-originalsize="true" data-editstart="false"  data-image="<%= ffff.object.photo.url%>" style="width: 201px;" data-canvas="true" data-ajax="false">
             <%= ffff.file_field :photo, required: ffff.object.photo.blank? %>
           </div>
         </div>
@@ -87,7 +87,7 @@
           <h3 class="marginB0">Utilità</h3>
           <span class="font-size-11">(Suggerimento immagine 720 x 1440px)</span>
           <%= f.fields_for :utility do |fffff| %>
-          <div class="dropzone marginT10" data-width="720" data-height="1440" data-originalsize="true"  data-image="<%= fffff.object.photo.url%>" style="width: 200px;" data-canvas="true" data-ajax="false">
+          <div class="dropzone marginT10" data-width="720" data-height="1440" data-originalsize="true" data-editstart="false" data-image="<%= fffff.object.photo.url%>" style="width: 200px;" data-canvas="true" data-ajax="false">
             <%= fffff.file_field :photo, required: fffff.object.photo.blank? %>
           </div>
           <% end %>
