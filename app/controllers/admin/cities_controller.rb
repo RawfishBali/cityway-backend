@@ -32,7 +32,7 @@ class Admin::CitiesController < Admin::BaseController
         @utility = @city.utility
         @commonplace = @city.commonplace
         @discover = @city.discover
-        format.html { redirect_to edit_admin_city_path(@city), notice: 'City è stato creato con successo.' }
+        format.html { redirect_to edit_admin_city_path(@city), notice: 'Città è stato creato con successo.' }
         format.json { render :show, status: :created, location: @city }
       else
         format.html { redirect_to :back, notice: @city.errors.full_messages }
@@ -45,7 +45,7 @@ class Admin::CitiesController < Admin::BaseController
     respond_to do |format|
 
       if @city.update(city_params)
-        format.html { redirect_to edit_admin_city_path(@city), notice: 'City è stato aggiornato con successo.' }
+        format.html { redirect_to edit_admin_city_path(@city), notice: 'Città è stato aggiornato con successo.' }
         format.json { render :show, status: :ok, location: @city }
       else
         format.html { redirect_to edit_admin_city_path(@city), notice: @city.errors.full_messages }
@@ -57,7 +57,7 @@ class Admin::CitiesController < Admin::BaseController
   def destroy
     @city.destroy
     respond_to do |format|
-      format.html { redirect_to root_path, notice: 'City cancellata con successo!.' }
+      format.html { redirect_to root_path, notice: 'Città cancellata con successo!.' }
       format.json { head :no_content }
     end
   end
