@@ -31,7 +31,7 @@
             </div>
             <div class="uk-width-medium-1-2">
               <label>Attività</label>
-              <%= f.select :merchant_id, options_from_collection_for_select(@merchants, 'id', 'name', (f.object.merchant.present? ? f.object.merchant.id : nil)), {prompt: 'Seleziona attività'}, {'data-md-selectize': true, required: true, class: 'md-input'}  %>
+              <%= f.select :merchant_id, options_from_collection_for_select(@merchants, 'id', 'name', (f.object.merchant.present? ? f.object.merchant.id : nil)), {prompt: 'Seleziona attività'}, {'data-md-selectize': true, required: true, class: ''}  %>
             </div>
           </div>
         </div>
@@ -114,7 +114,8 @@
 
             </div>
             <div class="uk-width-medium-1-2">
-              <label>Foto categoria</label>
+              <label>Foto</label>
+              <span class="font-size-11">(Suggerimento immagine 750 x 410px)</span>
               <br />
               <div class="dropzone" data-width="750"  data-image="<%= f.object.photo.url %>"  data-height="410"  data-editstart="false" data-ajax="false" data-canvas="true" style="width: 100%">
                 <%= f.file_field :photo%>

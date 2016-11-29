@@ -162,3 +162,19 @@
   font-size: 15px !important;
   font-weight: lighter !important;
 }
+
+.font-size-11{
+  font-size: 11px;
+}
+
+.marginB0{
+  margin-bottom: 0px;
+}
+
+.marginT10{
+  margin-top: 10px;
+}
+
+.marginT15{
+  margin-top: 15px;
+}
