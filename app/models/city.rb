@@ -120,7 +120,7 @@ class City < ActiveRecord::Base
 
 
 
-    category_3 = Category.create(name: 'RICETTIVITA', predifined: true)
+    category_3 = Category.create(name: 'RICETTIVITÀ', predifined: true)
     category_3.subcategories << Category.create(name: 'AGRITURISMI', predifined: true, parent_id: category_3.id)
     category_3.subcategories << Category.create(name: 'BED & BREAKFAST', predifined: true, parent_id: category_3.id)
     category_3.subcategories << Category.create(name: 'CAMPEGGI, OSTELLI', predifined: true, parent_id: category_3.id)
@@ -153,10 +153,7 @@ class City < ActiveRecord::Base
     category_5.subcategories << Category.create(name: 'RICOSTRUZIONE UNGHIE', predifined: true, parent_id: category_5.id)
 
 
-
-
-
-    category_6 = Category.create(name: 'SUPERMERCATI, ALIMENTARI, SPECIALITA', predifined: true)
+    category_6 = Category.create(name: 'SUPERMERCATI, ALIMENTARI, SPECIALITÀ', predifined: true)
     category_6.subcategories << Category.create(name: 'ALIMENTARI, SALUMERIE', predifined: true, parent_id: category_6.id)
     category_6.subcategories << Category.create(name: 'ALIMENTAZIONE DIETETICA, BIOLOGICA, MACROBIOTICA', predifined: true, parent_id: category_6.id)
     category_6.subcategories << Category.create(name: 'CAFFE', predifined: true, parent_id: category_6.id)
@@ -235,9 +232,7 @@ class City < ActiveRecord::Base
     category_11.subcategories << Category.create(name: 'TRASLOCHI E FACCHINAGGIO', predifined: true, parent_id: category_11.id)
 
 
-
-
-    category_12 = Category.create(name: 'ARREDAMENTO , MOBILIFICI, PAVIMENTI', predifined: true)
+    category_12 = Category.create(name: 'ARREDAMENTO E MOBILIFICI', predifined: true)
     category_12.subcategories << Category.create(name: 'ANTIQUARI', predifined: true, parent_id: category_12.id)
     category_12.subcategories << Category.create(name: 'ARREDAMENTO IN GENERE, MOBILIFICI', predifined: true, parent_id: category_12.id)
     category_12.subcategories << Category.create(name: 'ARREDAMENTO IN STILE', predifined: true, parent_id: category_12.id)
@@ -251,16 +246,6 @@ class City < ActiveRecord::Base
     category_12.subcategories << Category.create(name: 'POLTRONE E DIVANI', predifined: true, parent_id: category_12.id)
     category_12.subcategories << Category.create(name: 'TAPPETI', predifined: true, parent_id: category_12.id)
     category_12.subcategories << Category.create(name: 'TENDAGGI, TENDE SOLE', predifined: true, parent_id: category_12.id)
-
-
-
-
-
-
-
-
-
-
 
 
     category_13 = Category.create(name: 'CASA, EDILIZIA E IMPIANTI', predifined: true)
@@ -297,11 +282,17 @@ class City < ActiveRecord::Base
     category_14.subcategories << Category.create(name: 'SICUREZZA SUL LAVORO(CORSI, VERIFICARE)', predifined: true, parent_id: category_14.id)
 
 
-    category_15 = Category.create(name: "ATTIVITA' E INDUSTRIE STORICHE", predifined: true)
+    category_15 = Category.create(name: "ATTIVITÀ STORICHE, INDUSTRIE STORICHE", predifined: true)
     category_15.subcategories << Category.create(name: "ATTIVITA' STORICHE", predifined: true, parent_id: category_15.id)
     category_15.subcategories << Category.create(name: 'INDUSTRIE STORICHE', predifined: true, parent_id: category_15.id)
 
     self.categories << [category_1 , category_2 , category_3 , category_4 ,category_5 ,category_6 ,category_7 ,category_8 ,category_9 ,category_10 ,category_11 ,category_12 ,category_13 ,category_14 ,category_15]
+
+    arr_categories = self.categories.map(&:name)
+
+    self.categories.where(name: arr_categories).each_with_index do |c,i|
+      c.categories_cities.last.update(priority: i)
+    end
   end
 
 end
