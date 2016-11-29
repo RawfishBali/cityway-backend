@@ -77,7 +77,7 @@
           <span class="menu_title">Comune</span>
         </a>
         <ul style="<%= 'display:block;' if params[:controller] == 'admin/profiles' ||  params[:controller] == 'admin/politic_groups'  %>">
-          <li><a href="/admin/commonplaces/<%= City.find(session[:current_city_id]).commonplace.id %>/edit" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/commonplaces'%>">Social Links & Icon</a></li>
+          <li><a href="/admin/commonplaces/<%= City.find(session[:current_city_id]).commonplace.id %>/edit" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/commonplaces'%>">Social Links & Stemma</a></li>
           <li><a href="/admin/news/" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/news'%>">News</a></li>
           <li><a  href="/admin/city_hall_stories/" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/city_hall_stories'%>">Dati Comune</a></li>
           <li>
