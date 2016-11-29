@@ -182,3 +182,8 @@
 #map{
   height: 300px;
 }
+
+.new-city-label{
+  margin-top: 3px;
+  float: left;
+}

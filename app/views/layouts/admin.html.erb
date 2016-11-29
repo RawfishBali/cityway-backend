@@ -33,7 +33,7 @@
             <% if (params[:controller] == 'admin/cities' && params[:action] == 'new') %>
               <%= link_to ('<span class="new-city-label white-label"></span> <i class="material-icons md-36 white_icon">&#xE5C4;</i>'.html_safe), :back , class: 'white-label user_action_image left'%>
             <% else %>
-              <%= link_to ('<span class="new-city-label white-label">Aggiungere nuova città </span> <i class="material-icons md-36 white_icon">&#xE148;</i>'.html_safe), new_admin_city_path , class: 'white-label user_action_image left'%>
+              <%= link_to ('<span class="new-city-label white-label">Aggiungi nuova città </span> <i class="material-icons md-36 white_icon">&#xE148;</i>'.html_safe), new_admin_city_path , class: 'white-label user_action_image left'%>
             <% end %>
 
             <li data-uk-dropdown="{mode:'click',pos:'bottom-right'}">
