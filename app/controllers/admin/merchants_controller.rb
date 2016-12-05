@@ -79,11 +79,13 @@ class Admin::MerchantsController < Admin::BaseController
     def prepare_categories
       city = City.find(session[:current_city_id])
       @categories = city.sorted_categories
+      @subcategories = []
       @categories.each do |category|
-        category.subcategories do |subcategory|
+        category.subcategories.each do |subcategory|
           @subcategories << subcategory
         end
       end
+      @subcategories.sort_by(&:name)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -83,7 +83,7 @@
             </div>
             <div class="uk-width-medium-1-2">
               <label>Sottocategoria</label>
-              <%= f.select :subcategory_ids, options_from_collection_for_select(Category.subcategories.order('name ASC').uniq, 'id', 'name', @admin_merchant.subcategory_ids), {prompt: 'Selezionare Sottocategoria'}, {class: 'md-input', multiple: true}  %>
+              <%= f.select :subcategory_ids, options_from_collection_for_select(@subcategories, 'id', 'name', @admin_merchant.subcategory_ids), {prompt: 'Selezionare Sottocategoria'}, {class: 'md-input', multiple: true}  %>
             </div>
           </div>
         </div>
