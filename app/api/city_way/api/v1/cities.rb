@@ -37,11 +37,12 @@ module CityWay
               alpha_cities = City.where.not(name: city.name).near([params[:latitude],params[:longitude]], 20000, units: :km, order: 'name ASC').page params[:page]
 
               add_pagination_headers alpha_cities
-              present city, with: CityWay::Api::V1::Entities::CityStructure, cities: alpha_cities, message: message, list: params[:list], actual_city: city_name, simple: 'true'
+              present city, with: CityWay::Api::V1::Entities::CityStructure, cities: alpha_cities, message: message, list: params[:list], actual_city: city_name, simple: 'true', with_nearest_city: true
             else
               alpha_cities = City.all.order('name ASC').page params[:page]
               add_pagination_headers alpha_cities
-              present alpha_cities, with: CityWay::Api::V1::Entities::CityWithoutSection, simple: 'true'
+
+              present alpha_cities.first, with: CityWay::Api::V1::Entities::CityStructureWithoutActualCity, simple: 'true',cities: alpha_cities, list: true
             end
           end
 

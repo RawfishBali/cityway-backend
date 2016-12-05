@@ -1105,6 +1105,12 @@ module CityWay
         end
       end
 
+      class CityStructureWithoutActualCity < Grape::Entity
+        expose :nearby_cities, if: lambda { |instance, options| options[:cities] && options[:list] } do |cities, options|
+          CityWay::Api::V1::Entities::CityWithoutSection.represent options[:cities], simple: options[:simple]
+        end
+      end
+
       class AccessToken < Grape::Entity
         expose :access_token, :documentation => {:type => "string", :desc => "Access Token"} do |access_token, options|
           access_token.token
