@@ -53,7 +53,14 @@ module CityWay
           get '/:id' do
             city = City.find(params[:id])
             advertisements = city.active_advertisements
-            present city, with: CityWay::Api::V1::Entities::City, sections: params[:sections], simple: 'false', advertisements: advertisements
+            home_active_advertisements = city.home_active_advertisements
+            around_active_advertisements = city.around_active_advertisements
+            commonplace_active_advertisements = city.commonplace_active_advertisements
+            discover_active_advertisements = city.discover_active_advertisements
+            utility_active_advertisements = city.utility_active_advertisements
+
+            present city, with: CityWay::Api::V1::Entities::City, sections: params[:sections], simple: 'false', home_active_advertisements: home_active_advertisements, around_active_advertisements: around_active_advertisements, commonplace_active_advertisements: commonplace_active_advertisements, discover_active_advertisements: discover_active_advertisements, 
+            utility_active_advertisements: utility_active_advertisements
           end
 
           desc "City Weather"

@@ -71,6 +71,7 @@ class Admin::AdvertisementsController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_advertisement_params
-      params.require(:advertisement).permit(:photo ,:start_date, :end_date, :second_start_date, :second_end_date, :position, city_ids:[])
+      params[:advertisement][:sections] = params[:advertisement][:sections].reject(&:empty?) 
+      params.require(:advertisement).permit(:photo ,:start_date, :end_date, :second_start_date, :second_end_date, :position, city_ids:[], sections:[])
     end
 end

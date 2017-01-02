@@ -21,6 +21,9 @@ $(document).ready(function(){
   if($('#advertisement_city_ids').length > 0){
     $('#advertisement_city_ids').kendoMultiSelect();
   }
+  if($('#advertisement_sections').length > 0){
+    $('#advertisement_sections').kendoMultiSelect();
+  }
   if($('#profile_days_open').length > 0){
     $('#profile_days_open').kendoMultiSelect();
   }

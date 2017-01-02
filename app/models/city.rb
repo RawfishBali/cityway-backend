@@ -50,6 +50,26 @@ class City < ActiveRecord::Base
     advertisements.where('( (start_date <= ? and end_date >= ?) )', Time.now, Time.now).group_by(&:position)
   end
 
+  def home_active_advertisements
+    advertisements.where('( (start_date <= ? and end_date >= ? and sections @> ? ) )', Time.now, Time.now, '{Home}').group_by(&:position)
+  end
+
+  def around_active_advertisements
+    advertisements.where('( (start_date <= ? and end_date >= ? and sections @> ?) )', Time.now, Time.now, '{Intorno a te}').group_by(&:position)
+  end
+
+  def commonplace_active_advertisements
+    advertisements.where('( (start_date <= ? and end_date >= ? and sections @> ?) )', Time.now, Time.now, '{Comune}').group_by(&:position)
+  end
+
+  def discover_active_advertisements
+    advertisements.where('( (start_date <= ? and end_date >= ? and sections @> ?) )', Time.now, Time.now, '{Scopri}').group_by(&:position)
+  end
+
+  def utility_active_advertisements
+    advertisements.where('( (start_date <= ? and end_date >= ? and sections @> ?) )', Time.now, Time.now, '{Utilità e Servizi}').group_by(&:position)
+  end
+
   def parent_categories
     categories.where(parent_id: nil).order('Name ASC')
   end

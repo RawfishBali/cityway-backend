@@ -379,12 +379,12 @@ module CityWay
           around.photo.url
         end
         expose :top_advertisements do |around, options|
-          if options[:advertisements]["top"] && options[:advertisements]["both"]
-            all_ads = options[:advertisements]["top"] + options[:advertisements]["both"]
-          elsif options[:advertisements]["top"] && !options[:advertisements]["both"]
+          if options[:around_active_advertisements]["top"] && options[:around_active_advertisements]["both"]
+            all_ads = options[:advertisements]["top"] + options[:around_active_advertisements]["both"]
+          elsif options[:around_active_advertisements]["top"] && !options[:around_active_advertisements]["both"]
             all_ads = options[:advertisements]["top"]
-          elsif !options[:advertisements]["top"] && options[:advertisements]["both"]
-            all_ads = options[:advertisements]["both"]
+          elsif !options[:around_active_advertisements]["top"] && options[:around_active_advertisements]["both"]
+            all_ads = options[:around_active_advertisements]["both"]
           end
 
           CityWay::Api::V1::Entities::Advertisement.represent(all_ads)
@@ -399,12 +399,12 @@ module CityWay
           CityWay::Api::V1::Entities::Market.represent(around.markets)
         end
         expose :bottom_advertisements do |around, options|
-          if options[:advertisements]["bottom"] && options[:advertisements]["both"]
-            all_ads = options[:advertisements]["bottom"] + options[:advertisements]["both"]
-          elsif options[:advertisements]["bottom"] && !options[:advertisements]["both"]
-            all_ads = options[:advertisements]["bottom"]
-          elsif !options[:advertisements]["bottom"] && options[:advertisements]["both"]
-            all_ads = options[:advertisements]["both"]
+          if options[:around_active_advertisements]["bottom"] && options[:around_active_advertisements]["both"]
+            all_ads = options[:advertisements]["bottom"] + options[:around_active_advertisements]["both"]
+          elsif options[:around_active_advertisements]["bottom"] && !options[:around_active_advertisements]["both"]
+            all_ads = options[:around_active_advertisements]["bottom"]
+          elsif !options[:around_active_advertisements]["bottom"] && options[:around_active_advertisements]["both"]
+            all_ads = options[:around_active_advertisements]["both"]
           end
 
           CityWay::Api::V1::Entities::Advertisement.represent(all_ads)
@@ -515,12 +515,12 @@ module CityWay
           common.icon.url
         end
         expose :top_advertisements, if: lambda { |object, options| options[:simple] == 'false' }  do |around, options|
-          if options[:advertisements]["top"] && options[:advertisements]["both"]
-            all_ads = options[:advertisements]["top"] + options[:advertisements]["both"]
-          elsif options[:advertisements]["top"] && !options[:advertisements]["both"]
-            all_ads = options[:advertisements]["top"]
-          elsif !options[:advertisements]["top"] && options[:advertisements]["both"]
-            all_ads = options[:advertisements]["both"]
+          if options[:commonplace_active_advertisements]["top"] && options[:commonplace_active_advertisements]["both"]
+            all_ads = options[:commonplace_active_advertisements]["top"] + options[:commonplace_active_advertisements]["both"]
+          elsif options[:commonplace_active_advertisements]["top"] && !options[:commonplace_active_advertisements]["both"]
+            all_ads = options[:commonplace_active_advertisements]["top"]
+          elsif !options[:commonplace_active_advertisements]["top"] && options[:commonplace_active_advertisements]["both"]
+            all_ads = options[:commonplace_active_advertisements]["both"]
           end
 
           CityWay::Api::V1::Entities::Advertisement.represent(all_ads)
@@ -574,12 +574,12 @@ module CityWay
       class Discover < Grape::Entity
         expose :id, documentation: {:type => "Integer", :desc => "Discover ID"}
         expose :top_advertisements, if: lambda { |object, options| options[:simple] == 'false' }  do |discover, options|
-          if options[:advertisements]["top"] && options[:advertisements]["both"]
-            all_ads = options[:advertisements]["top"] + options[:advertisements]["both"]
-          elsif options[:advertisements]["top"] && !options[:advertisements]["both"]
-            all_ads = options[:advertisements]["top"]
-          elsif !options[:advertisements]["top"] && options[:advertisements]["both"]
-            all_ads = options[:advertisements]["both"]
+          if options[:discover_active_advertisements]["top"] && options[:discover_active_advertisements]["both"]
+            all_ads = options[:discover_active_advertisements]["top"] + options[:discover_active_advertisements]["both"]
+          elsif options[:discover_active_advertisements]["top"] && !options[:discover_active_advertisements]["both"]
+            all_ads = options[:discover_active_advertisements]["top"]
+          elsif !options[:discover_active_advertisements]["top"] && options[:discover_active_advertisements]["both"]
+            all_ads = options[:discover_active_advertisements]["both"]
           end
 
           CityWay::Api::V1::Entities::Advertisement.represent(all_ads)
@@ -588,12 +588,12 @@ module CityWay
           discover.photo.url
         end
         expose :bottom_advertisements, if: lambda { |object, options| options[:simple] == 'false' }  do |discover, options|
-          if options[:advertisements]["bottom"] && options[:advertisements]["both"]
-            all_ads = options[:advertisements]["bottom"] + options[:advertisements]["both"]
-          elsif options[:advertisements]["bottom"] && !options[:advertisements]["both"]
-            all_ads = options[:advertisements]["bottom"]
-          elsif !options[:advertisements]["bottom"] && options[:advertisements]["both"]
-            all_ads = options[:advertisements]["both"]
+          if options[:discover_active_advertisements]["bottom"] && options[:discover_active_advertisements]["both"]
+            all_ads = options[:discover_active_advertisements]["bottom"] + options[:discover_active_advertisements]["both"]
+          elsif options[:discover_active_advertisements]["bottom"] && !options[:discover_active_advertisements]["both"]
+            all_ads = options[:discover_active_advertisements]["bottom"]
+          elsif !options[:discover_active_advertisements]["bottom"] && options[:discover_active_advertisements]["both"]
+            all_ads = options[:discover_active_advertisements]["both"]
           end
 
           CityWay::Api::V1::Entities::Advertisement.represent(all_ads)
@@ -978,12 +978,12 @@ module CityWay
       class Utility < Grape::Entity
         expose :id, documentation: {:type => "Integer", :desc => "Utility ID"}
         expose :top_advertisements, if: lambda { |object, options| options[:simple] == 'false' }  do |discover, options|
-          if options[:advertisements]["top"] && options[:advertisements]["both"]
-            all_ads = options[:advertisements]["top"] + options[:advertisements]["both"]
-          elsif options[:advertisements]["top"] && !options[:advertisements]["both"]
-            all_ads = options[:advertisements]["top"]
-          elsif !options[:advertisements]["top"] && options[:advertisements]["both"]
-            all_ads = options[:advertisements]["both"]
+          if options[:utility_active_advertisements]["top"] && options[:utility_active_advertisements]["both"]
+            all_ads = options[:utility_active_advertisements]["top"] + options[:utility_active_advertisements]["both"]
+          elsif options[:utility_active_advertisements]["top"] && !options[:utility_active_advertisements]["both"]
+            all_ads = options[:utility_active_advertisements]["top"]
+          elsif !options[:utility_active_advertisements]["top"] && options[:utility_active_advertisements]["both"]
+            all_ads = options[:utility_active_advertisements]["both"]
           end
 
           CityWay::Api::V1::Entities::Advertisement.represent(all_ads)
@@ -992,12 +992,12 @@ module CityWay
           disc.photo.url
         end
         expose :bottom_advertisements, if: lambda { |object, options| options[:simple] == 'false' }  do |discover, options|
-          if options[:advertisements]["bottom"] && options[:advertisements]["both"]
-            all_ads = options[:advertisements]["bottom"] + options[:advertisements]["both"]
-          elsif options[:advertisements]["bottom"] && !options[:advertisements]["both"]
-            all_ads = options[:advertisements]["bottom"]
-          elsif !options[:advertisements]["bottom"] && options[:advertisements]["both"]
-            all_ads = options[:advertisements]["both"]
+          if options[:utility_active_advertisements]["bottom"] && options[:utility_active_advertisements]["both"]
+            all_ads = options[:utility_active_advertisements]["bottom"] + options[:utility_active_advertisements]["both"]
+          elsif options[:utility_active_advertisements]["bottom"] && !options[:utility_active_advertisements]["both"]
+            all_ads = options[:utility_active_advertisements]["bottom"]
+          elsif !options[:utility_active_advertisements]["bottom"] && options[:utility_active_advertisements]["both"]
+            all_ads = options[:utility_active_advertisements]["both"]
           end
 
           CityWay::Api::V1::Entities::Advertisement.represent(all_ads)
@@ -1033,12 +1033,12 @@ module CityWay
           home.photo.url
         end
         expose :top_advertisements, if: lambda { |object, options| options[:simple] == 'false'  }  do |home , options|
-          if options[:advertisements]["top"] && options[:advertisements]["both"]
-            all_ads = options[:advertisements]["top"] + options[:advertisements]["both"]
-          elsif options[:advertisements]["top"] && !options[:advertisements]["both"]
-            all_ads = options[:advertisements]["top"]
-          elsif !options[:advertisements]["top"] && options[:advertisements]["both"]
-            all_ads = options[:advertisements]["both"]
+          if options[:home_active_advertisements]["top"] && options[:home_active_advertisements]["both"]
+            all_ads = options[:home_active_advertisements]["top"] + options[:home_active_advertisements]["both"]
+          elsif options[:home_active_advertisements]["top"] && !options[:home_active_advertisements]["both"]
+            all_ads = options[:home_active_advertisements]["top"]
+          elsif !options[:home_active_advertisements]["top"] && options[:home_active_advertisements]["both"]
+            all_ads = options[:home_active_advertisements]["both"]
           end
 
           CityWay::Api::V1::Entities::Advertisement.represent(all_ads)
@@ -1047,12 +1047,12 @@ module CityWay
           CityWay::Api::V1::Entities::Category.represent(home.sorted_categories)
         end
         expose :bottom_advertisements, if: lambda { |object, options| options[:simple] == 'false'  }  do |home , options|
-          if options[:advertisements]["bottom"] && options[:advertisements]["both"]
-            all_ads = options[:advertisements]["bottom"] + options[:advertisements]["both"]
-          elsif options[:advertisements]["bottom"] && !options[:advertisements]["both"]
+          if options[:home_active_advertisements]["bottom"] && options[:home_active_advertisements]["both"]
+            all_ads = options[:advertisements]["bottom"] + options[:home_active_advertisements]["both"]
+          elsif options[:home_active_advertisements]["bottom"] && !options[:home_active_advertisements]["both"]
             all_ads = options[:advertisements]["bottom"]
-          elsif !options[:advertisements]["bottom"] && options[:advertisements]["both"]
-            all_ads = options[:advertisements]["both"]
+          elsif !options[:home_active_advertisements]["bottom"] && options[:home_active_advertisements]["both"]
+            all_ads = options[:home_active_advertisements]["both"]
           end
 
           CityWay::Api::V1::Entities::Advertisement.represent(all_ads)
