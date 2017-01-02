@@ -1260,7 +1260,7 @@ module CityWay
           merchant.distance_from([options[:latitude], options[:longitude]])
         end
         expose :has_promos, documentation: {:type => "Boolean", :desc => "Merchant Has Promos Or Not"} do |merchant , options|
-          merchant.promos.any?
+          merchant.active_promos.any?
         end
         expose :promos do |merchant , options|
           CityWay::Api::V1::Entities::Promo.represent merchant.active_promos
