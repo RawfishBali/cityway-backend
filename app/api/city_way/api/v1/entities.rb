@@ -1193,7 +1193,7 @@ module CityWay
           object.class.name.downcase
         end
         expose :name, documentation: {:type => "string", :desc => "Merchant Name"}
-        expose :description,if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "string", :desc => "Merchant description"}
+        expose :description,if: lambda { |object, options| options[:simple] == 'false' && object.description}, documentation: {:type => "string", :desc => "Merchant description"}
         expose :address, documentation: {:type => "string", :desc => "Merchant address"}
         expose :photos, documentation: {:type => "string", :desc => "Merchant photo"} do |merchant , options|
           if options[:simple] == 'false'
@@ -1202,13 +1202,13 @@ module CityWay
             CityWay::Api::V1::Entities::Photo.represent(merchant.primary_photo) if merchant.photos.length > 0
           end
         end
-        expose :icon, documentation: {:type => "string", :desc => "Merchant icon"} do |merchant , options|
+        expose :icon,if: lambda { |object, options| object.icon }, documentation: {:type => "string", :desc => "Merchant icon"} do |merchant , options|
           merchant.icon.url
         end
         expose :latitude, documentation: {:type => "float", :desc => "Merchant Latitude"}
         expose :longitude, documentation: {:type => "float", :desc => "Merchant Longitude"}
-        expose :phone,if: lambda { |object, options| options[:simple] == 'false'  && object.phone }, documentation: {:type => "string", :desc => "Merchant phone"}
-        expose :secondary_phone,if: lambda { |object, options| options[:simple] == 'false'  && object.secondary_phone }, documentation: {:type => "string", :desc => "Merchant phone"}
+        expose :phone,if: lambda { |object, options| object.phone }, documentation: {:type => "string", :desc => "Merchant phone"}
+        expose :secondary_phone,if: lambda { |object, options| object.secondary_phone }, documentation: {:type => "string", :desc => "Merchant phone"}
         expose :email,if: lambda { |object, options| options[:simple] == 'false' && object.email }, documentation: {:type => "string", :desc => "Merchant email"}
         expose :website, if: lambda { |object, options| options[:simple] == 'false' && object.website }, documentation: {:type => "string", :desc => "Merchant website"} do |merchant, options|
           unless merchant.website[/\Ahttp:\/\//] || merchant.website[/\Ahttps:\/\//]
