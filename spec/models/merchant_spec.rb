@@ -25,6 +25,7 @@
 #  active               :boolean          default(TRUE)
 #  activated_at         :datetime
 #  deactivated_at       :datetime
+#  secondary_phone      :string
 #
 
 require 'rails_helper'

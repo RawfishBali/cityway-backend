@@ -88,21 +88,22 @@
           </div>
         </div>
       </div>
-
       <div class="uk-width-medium-1-1">
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-2">
-              <label>Telefono</label>
+              <label>Telefono 1</label>
               <%= f.text_field :phone, required: true,class: 'md-input'  %>
             </div>
             <div class="uk-width-medium-1-2">
-              <label>Email</label>
-              <%= f.text_field :email, required: true,class: 'md-input'  %>
+              <label>Telefono 2</label>
+              <%= f.text_field :secondary_phone, required: true,class: 'md-input'  %>
             </div>
           </div>
         </div>
       </div>
+
+
       <div class="uk-width-medium-1-1">
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
@@ -117,16 +118,29 @@
           </div>
         </div>
       </div>
+
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+              <label>Email</label>
+              <%= f.text_field :email, required: true,class: 'md-input'  %>
+            </div>
+            <div class="uk-width-medium-1-2">
+              <%= f.label :support_disabilities, 'Città Accessibile', class: 'inline-label'%>
+              <%= f.check_box :support_disabilities,class: 'md-input', 'data-switchery': true  %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
       <div class="uk-width-medium-1-1">
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-2">
               <label>Website</label>
               <%= f.text_field :website,class: 'md-input'  %>
-            </div>
-            <div class="uk-width-medium-1-2">
-              <%= f.label :support_disabilities, 'Città Accessibile', class: 'inline-label'%>
-              <%= f.check_box :support_disabilities,class: 'md-input', 'data-switchery': true  %>
             </div>
           </div>
         </div>

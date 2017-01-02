@@ -1208,6 +1208,7 @@ module CityWay
         expose :latitude, documentation: {:type => "float", :desc => "Merchant Latitude"}
         expose :longitude, documentation: {:type => "float", :desc => "Merchant Longitude"}
         expose :phone,if: lambda { |object, options| options[:simple] == 'false'  && object.phone }, documentation: {:type => "string", :desc => "Merchant phone"}
+        expose :secondary_phone,if: lambda { |object, options| options[:simple] == 'false'  && object.secondary_phone }, documentation: {:type => "string", :desc => "Merchant phone"}
         expose :email,if: lambda { |object, options| options[:simple] == 'false' && object.email }, documentation: {:type => "string", :desc => "Merchant email"}
         expose :website, if: lambda { |object, options| options[:simple] == 'false' && object.website }, documentation: {:type => "string", :desc => "Merchant website"} do |merchant, options|
           unless merchant.website[/\Ahttp:\/\//] || merchant.website[/\Ahttps:\/\//]

@@ -25,6 +25,7 @@
 #  active               :boolean          default(TRUE)
 #  activated_at         :datetime
 #  deactivated_at       :datetime
+#  secondary_phone      :string
 #
 
 class Merchant < ActiveRecord::Base
@@ -48,7 +49,9 @@ class Merchant < ActiveRecord::Base
   # after_validation :geocode
 
   phony_normalize :phone, default_country_code: 'IT'
+  phony_normalize :secondary_phone, default_country_code: 'IT'
   validates :phone, phony_plausible: true
+  validates :secondary_phone, phony_plausible: true
 
   before_save :set_activation, if: :active_changed?
   before_create :set_activation
