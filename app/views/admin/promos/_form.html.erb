@@ -54,23 +54,32 @@
         </div>
       </div>
 
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+              <label>Durata</label>
+              <%= f.number_field :duration, step: 1, min: 1, max: 15, required: true,class: 'md-input' %>
+            </div>
+            <div class="uk-width-medium-1-2">
+              <%= f.label :approval, 'Approvazione', class: 'inline-label'%>
+              <%= f.check_box :approval,class: 'md-input', 'data-switchery': true  %>
+            </div>
+          </div>
+        </div>
+      </div>
+
 
       <div class="uk-width-medium-1-1">
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-2">
 
-              <%#= f.number_field :discount, required: true,class: 'md-input'  %>
-
               <div class="uk-input-group">
                 <span class="uk-input-group-addon">€</span>
                 <label>Prezzo Originale</label>
                 <%= f.number_field :original_price, value: number_with_precision(f.object.original_price, precision: 2, separator: '.', delimiter: ','), step: 0.01, required: true,class: 'md-input'  %>
               </div>
-
-
-
-
 
             </div>
             <div class="uk-width-medium-1-2">
@@ -97,15 +106,14 @@
               </div>
             </div>
             <div class="uk-width-medium-1-2">
-              <%= f.label :approval, 'Approvazione', class: 'inline-label'%>
-              <%= f.check_box :approval,class: 'md-input', 'data-switchery': true  %>
-
 
             </div>
           </div>
 
         </div>
       </div>
+
+
 
       <div class="uk-width-medium-1-1">
         <div class="uk-form-row">

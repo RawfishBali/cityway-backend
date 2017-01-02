@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170102034033) do
+ActiveRecord::Schema.define(version: 20170102042940) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -493,6 +493,7 @@ ActiveRecord::Schema.define(version: 20170102034033) do
     t.boolean  "approval",             default: true
     t.datetime "activated_at"
     t.datetime "deactivated_at"
+    t.integer  "duration",             default: 1
   end
 
   add_index "promos", ["city_id"], name: "index_promos_on_city_id", using: :btree

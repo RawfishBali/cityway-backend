@@ -17,6 +17,7 @@
 #  approval             :boolean          default(TRUE)
 #  activated_at         :datetime
 #  deactivated_at       :datetime
+#  duration             :integer          default(1)
 #
 
 class Promo < ActiveRecord::Base
@@ -38,7 +39,7 @@ class Promo < ActiveRecord::Base
   mount_base64_uploader :photo, PhotoUploader
 
   before_save :calculate_discounted_price
-  before_save :set_activation, if: :approval_changed?
+  before_save :set_activation, if: :activation_need_update?
   before_create :set_activation
 
   def category
@@ -56,12 +57,22 @@ class Promo < ActiveRecord::Base
     return false
   end
 
+  def is_expired
+    return true if self.activated_at.blank? && self.deactivated_at.blank?
+    return true if self.deactivated_at > Time.zone.now
+    return false
+  end
+
   def is_active_for_tommorow
     return true if self.activated_at == Time.zone.parse("08:00 am") + 1.day
     return false
   end
 
   private
+
+  def activation_need_update?
+    approval_changed? || duration_changed?
+  end
 
   def calculate_discounted_price
     self.discount_price =  self.original_price - (self.original_price * (self.discount/100))
@@ -71,10 +82,10 @@ class Promo < ActiveRecord::Base
     if approval
       if Time.zone.now > Time.zone.parse("08:00 am")
         self.activated_at = Time.zone.parse("08:00 am") + 1.day
-        self.deactivated_at = Time.zone.parse("08:00 pm") + 14.day
+        self.deactivated_at = Time.zone.parse("08:00 pm") + (self.duration + 1).day
       else
         self.activated_at = Time.zone.parse("08:00 am")
-        self.deactivated_at = Time.zone.parse("08:00 pm") + 14.day
+        self.deactivated_at = Time.zone.parse("08:00 pm") + self.duration.day
       end
     else
       self.activated_at = nil

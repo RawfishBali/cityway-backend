@@ -66,7 +66,7 @@ class Admin::PromosController < Admin::BaseController
     # Use callbacks to share common setup or constraints between actions.
     def set_admin_promo
       @admin_promo = Admin::Promo.find(params[:id])
-      @admin_promo.update(approval: false) unless @admin_promo.is_active
+      @admin_promo.update(approval: false) unless @admin_promo.is_expired
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

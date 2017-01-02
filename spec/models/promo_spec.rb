@@ -17,6 +17,7 @@
 #  approval             :boolean          default(TRUE)
 #  activated_at         :datetime
 #  deactivated_at       :datetime
+#  duration             :integer          default(1)
 #
 
 require 'rails_helper'
