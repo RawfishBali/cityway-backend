@@ -12,6 +12,7 @@
 #  updated_at        :datetime         not null
 #  second_start_date :datetime
 #  second_end_date   :datetime
+#  sections          :string           is an Array
 #
 
 class Advertisement < ActiveRecord::Base

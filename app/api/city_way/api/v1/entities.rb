@@ -1050,7 +1050,7 @@ module CityWay
           if options[:home_active_advertisements]["bottom"] && options[:home_active_advertisements]["both"]
             all_ads = options[:advertisements]["bottom"] + options[:home_active_advertisements]["both"]
           elsif options[:home_active_advertisements]["bottom"] && !options[:home_active_advertisements]["both"]
-            all_ads = options[:advertisements]["bottom"]
+            all_ads = options[:home_active_advertisements]["bottom"]
           elsif !options[:home_active_advertisements]["bottom"] && options[:home_active_advertisements]["both"]
             all_ads = options[:home_active_advertisements]["both"]
           end
@@ -1193,7 +1193,7 @@ module CityWay
           object.class.name.downcase
         end
         expose :name, documentation: {:type => "string", :desc => "Merchant Name"}
-        expose :description,if: lambda { |object, options| options[:simple] == 'false' && object.description}, documentation: {:type => "string", :desc => "Merchant description"}
+        expose :description,if: lambda { |object, options| options[:simple] == 'false' && object.description && !object.is_basic}, documentation: {:type => "string", :desc => "Merchant description"}
         expose :address, documentation: {:type => "string", :desc => "Merchant address"}
         expose :photos, documentation: {:type => "string", :desc => "Merchant photo"} do |merchant , options|
           if options[:simple] == 'false'
@@ -1205,8 +1205,8 @@ module CityWay
         expose :icon,if: lambda { |object, options| object.icon }, documentation: {:type => "string", :desc => "Merchant icon"} do |merchant , options|
           merchant.icon.url
         end
-        expose :latitude, documentation: {:type => "float", :desc => "Merchant Latitude"}
-        expose :longitude, documentation: {:type => "float", :desc => "Merchant Longitude"}
+        expose :latitude,if: lambda { |object, options| !object.is_basic }, documentation: {:type => "float", :desc => "Merchant Latitude"}
+        expose :longitude,if: lambda { |object, options| !object.is_basic }, documentation: {:type => "float", :desc => "Merchant Longitude"}
         expose :phone,if: lambda { |object, options| object.phone }, documentation: {:type => "string", :desc => "Merchant phone"}
         expose :secondary_phone,if: lambda { |object, options| object.secondary_phone }, documentation: {:type => "string", :desc => "Merchant phone"}
         expose :email,if: lambda { |object, options| options[:simple] == 'false' && object.email }, documentation: {:type => "string", :desc => "Merchant email"}
@@ -1255,22 +1255,23 @@ module CityWay
             merchant.google_plus
           end
         end
-        expose :support_disabilities, documentation: {:type => "boolean", :desc => "Merchant support_disabilities"}
+        expose :support_disabilities,if: lambda { |object, options| !object.is_basic }, documentation: {:type => "boolean", :desc => "Merchant support_disabilities"}
         expose :distance, if: lambda { |object, options| object.respond_to?(:distance) || options[:latitude] && options[:longitude] } do |merchant , options|
           merchant.distance_from([options[:latitude], options[:longitude]])
         end
-        expose :has_promos, documentation: {:type => "Boolean", :desc => "Merchant Has Promos Or Not"} do |merchant , options|
+        expose :has_promos,if: lambda { |object, options| !object.is_basic }, documentation: {:type => "Boolean", :desc => "Merchant Has Promos Or Not"} do |merchant , options|
           merchant.active_promos.any?
         end
-        expose :promos do |merchant , options|
+        expose :promos,if: lambda { |object, options| !object.is_basic } do |merchant , options|
           CityWay::Api::V1::Entities::Promo.represent merchant.active_promos
         end
-        expose :business_hours,if: lambda { |object, options| options[:simple] == 'false' } do |merchant , options|
+        expose :business_hours,if: lambda { |object, options| options[:simple] == 'false' && !object.is_basic } do |merchant , options|
           CityWay::Api::V1::Entities::BusinessHours.represent(merchant.all_business_hours)
         end
         expose :is_open do |merchant , options|
           merchant.is_open_now?
         end
+        expose :is_basic
       end
 
       class User < Grape::Entity
