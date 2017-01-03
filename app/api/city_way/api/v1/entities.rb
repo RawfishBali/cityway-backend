@@ -382,7 +382,7 @@ module CityWay
           if options[:around_active_advertisements]["top"] && options[:around_active_advertisements]["both"]
             all_ads = options[:advertisements]["top"] + options[:around_active_advertisements]["both"]
           elsif options[:around_active_advertisements]["top"] && !options[:around_active_advertisements]["both"]
-            all_ads = options[:advertisements]["top"]
+            all_ads = options[:around_active_advertisements]["top"]
           elsif !options[:around_active_advertisements]["top"] && options[:around_active_advertisements]["both"]
             all_ads = options[:around_active_advertisements]["both"]
           end
