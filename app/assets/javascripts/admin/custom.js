@@ -27,6 +27,9 @@ $(document).ready(function(){
   if($('#profile_days_open').length > 0){
     $('#profile_days_open').kendoMultiSelect();
   }
+  if($('#merchant_city_ids').length > 0){
+    $('#merchant_city_ids').kendoMultiSelect();
+  }
 
   var url = window.location.pathname.split("/");
   if(url[2] == "city_hall_stories"){
