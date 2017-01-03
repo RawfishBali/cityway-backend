@@ -30,6 +30,9 @@ $(document).ready(function(){
   if($('#merchant_city_ids').length > 0){
     $('#merchant_city_ids').kendoMultiSelect();
   }
+  if($('#event_city_ids').length > 0){
+    $('#event_city_ids').kendoMultiSelect();
+  }
 
   var url = window.location.pathname.split("/");
   if(url[2] == "city_hall_stories"){
