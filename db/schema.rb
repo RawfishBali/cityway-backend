@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170103023037) do
+ActiveRecord::Schema.define(version: 20170103044820) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -158,6 +158,26 @@ ActiveRecord::Schema.define(version: 20170103023037) do
   end
 
   add_index "cities", ["latitude", "longitude"], name: "index_cities_on_latitude_and_longitude", using: :btree
+
+  create_table "cities_events", force: :cascade do |t|
+    t.integer  "city_id"
+    t.integer  "event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "cities_events", ["city_id"], name: "index_cities_events_on_city_id", using: :btree
+  add_index "cities_events", ["event_id"], name: "index_cities_events_on_event_id", using: :btree
+
+  create_table "cities_merchants", force: :cascade do |t|
+    t.integer  "city_id",     null: false
+    t.integer  "merchant_id", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "cities_merchants", ["city_id"], name: "index_cities_merchants_on_city_id", using: :btree
+  add_index "cities_merchants", ["merchant_id"], name: "index_cities_merchants_on_merchant_id", using: :btree
 
   create_table "city_hall_stories", force: :cascade do |t|
     t.text     "top_text",       null: false

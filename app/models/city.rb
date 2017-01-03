@@ -14,7 +14,12 @@
 
 class City < ActiveRecord::Base
 
-  has_many :merchants, dependent: :destroy
+  has_many :merchants, through: :cities_merchants
+  has_many :cities_merchants, dependent: :destroy
+
+  has_many :events, through: :cities_events
+  has_many :cities_events, dependent: :destroy
+
   has_and_belongs_to_many :advertisements, through: :advertisements_cities
   has_many :advertisements_cities, dependent: :destroy
   has_many :categories, through: :categories_cities

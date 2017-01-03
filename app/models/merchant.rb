@@ -37,7 +37,8 @@ class Merchant < ActiveRecord::Base
   has_many :photos, as: :imageable, dependent: :destroy
   accepts_nested_attributes_for :photos, reject_if: :all_blank, allow_destroy: true
   belongs_to :category
-  belongs_to :city
+  has_many :cities, through: :cities_merchants
+  has_many :cities_merchants, dependent: :destroy
 
   validates_presence_of :name
   validates_presence_of :address

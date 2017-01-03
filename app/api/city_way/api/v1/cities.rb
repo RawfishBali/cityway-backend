@@ -59,7 +59,7 @@ module CityWay
             discover_active_advertisements = city.discover_active_advertisements
             utility_active_advertisements = city.utility_active_advertisements
 
-            present city, with: CityWay::Api::V1::Entities::City, sections: params[:sections], simple: 'false', home_active_advertisements: home_active_advertisements, around_active_advertisements: around_active_advertisements, commonplace_active_advertisements: commonplace_active_advertisements, discover_active_advertisements: discover_active_advertisements, 
+            present city, with: CityWay::Api::V1::Entities::City, sections: params[:sections], simple: 'false', home_active_advertisements: home_active_advertisements, around_active_advertisements: around_active_advertisements, commonplace_active_advertisements: commonplace_active_advertisements, discover_active_advertisements: discover_active_advertisements,
             utility_active_advertisements: utility_active_advertisements
           end
 
@@ -86,9 +86,15 @@ module CityWay
             category = Category.find(params[:category_id])
             if params[:subcategory_id].blank?
               subcategories = category.subcategories
-              merchants = Merchant.active_merchants.where(city_id: params[:id] , category_id: params[:category_id]).page params[:page]
+
+              merchants = Merchant.active_merchants.joins(:cities_merchants).where('cities_merchants.city_id = ? AND merchants.category_id = ?',params[:id], params[:category_id]).page params[:page]
+
+              # merchants = Merchant.active_merchants.where(city_id: params[:id] , category_id: params[:category_id]).page params[:page]
             else
-              merchants = Merchant.active_merchants.joins(:subcategories).where('merchants.city_id = ? AND categories_merchants.category_id = ?' ,params[:id], params[:subcategory_id]).page params[:page]
+              merchants = Merchant.active_merchants.joins(:cities_merchants).joins(:subcategories).where('cities_merchants.city_id = ? AND categories_merchants.category_id = ?',params[:id], params[:subcategory_id]).page params[:page]
+
+
+              # merchants = Merchant.active_merchants.joins(:subcategories).where('merchants.city_id = ? AND categories_merchants.category_id = ?' ,params[:id], params[:subcategory_id]).page params[:page]
             end
             add_pagination_headers merchants
 

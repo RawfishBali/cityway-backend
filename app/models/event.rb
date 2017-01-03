@@ -37,6 +37,9 @@ class Event < ActiveRecord::Base
   has_many :event_dates, dependent: :destroy
   accepts_nested_attributes_for :event_dates, reject_if: :all_blank, allow_destroy: true
 
+  has_many :cities , through: :cities_events
+  has_many :cities_events, dependent: :destroy
+
   def self.events_open_on day
     Event.joins(:event_dates).where('event_dates.event_date = ?', Date.parse(day))
   end
