@@ -1197,7 +1197,12 @@ module CityWay
         expose :address, documentation: {:type => "string", :desc => "Merchant address"}
         expose :photos, documentation: {:type => "string", :desc => "Merchant photo"} do |merchant , options|
           if options[:simple] == 'false'
-            CityWay::Api::V1::Entities::Photo.represent(merchant.photos) if merchant.photos.length > 0
+            if merchant.is_basic
+              CityWay::Api::V1::Entities::Photo.represent(merchant.photos.limit(3)) if merchant.photos.length > 0
+            else
+              CityWay::Api::V1::Entities::Photo.represent(merchant.photos.limit(5)) if merchant.photos.length > 0
+            end
+
           else
             CityWay::Api::V1::Entities::Photo.represent(merchant.primary_photo) if merchant.photos.length > 0
           end
