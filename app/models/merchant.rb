@@ -28,6 +28,7 @@
 #  secondary_phone      :string
 #  is_basic             :boolean          default(FALSE)
 #  open_all_day         :boolean          default(FALSE)
+#  phone_extra          :string
 #
 
 class Merchant < ActiveRecord::Base
