@@ -1184,7 +1184,7 @@ module CityWay
             photo.url
           end
         end
-        expose :position ,if: lambda { |object, options| object.respond_to?(:position) && object.class.name == 'Photo' }
+        expose :position ,if: lambda { |object, options| object.respond_to?(:position) && object.class.name == 'Photo'}
       end
 
       class Merchant < Grape::Entity
@@ -1261,7 +1261,7 @@ module CityWay
           end
         end
         expose :support_disabilities,if: lambda { |object, options| !object.is_basic }, documentation: {:type => "boolean", :desc => "Merchant support_disabilities"}
-        expose :distance, if: lambda { |object, options| object.respond_to?(:distance) || options[:latitude] && options[:longitude] } do |merchant , options|
+        expose :distance, if: lambda { |object, options| object.respond_to?(:distance) || options[:latitude] && options[:longitude] && !merchant.is_basic } do |merchant , options|
           merchant.distance_from([options[:latitude], options[:longitude]])
         end
         expose :has_promos,if: lambda { |object, options| !object.is_basic }, documentation: {:type => "Boolean", :desc => "Merchant Has Promos Or Not"} do |merchant , options|
