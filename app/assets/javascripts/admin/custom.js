@@ -34,6 +34,14 @@ $(document).ready(function(){
     $('#event_city_ids').kendoMultiSelect();
   }
 
+  $("#merchant_is_basic").change(function(){
+	   if($("#merchant_is_basic").is(':checked')){
+       $(".not-basic").slideUp();
+     }else{
+       $(".not-basic").slideDown();
+     }
+  })
+
   var url = window.location.pathname.split("/");
   if(url[2] == "city_hall_stories"){
     $(".add_fields").click();
