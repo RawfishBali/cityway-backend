@@ -1274,7 +1274,7 @@ module CityWay
           CityWay::Api::V1::Entities::BusinessHours.represent(merchant.all_business_hours)
         end
         expose :is_open do |merchant , options|
-          merchant.is_open_now?
+          merchant.is_open_now? || merchant.open_all_day
         end
         expose :is_basic
         expose :open_all_day
