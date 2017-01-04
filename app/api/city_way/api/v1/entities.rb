@@ -1277,6 +1277,7 @@ module CityWay
           merchant.is_open_now?
         end
         expose :is_basic
+        expose :open_all_day
       end
 
       class User < Grape::Entity

@@ -27,6 +27,7 @@
 #  deactivated_at       :datetime
 #  secondary_phone      :string
 #  is_basic             :boolean          default(FALSE)
+#  open_all_day         :boolean          default(FALSE)
 #
 
 class Merchant < ActiveRecord::Base
@@ -57,6 +58,8 @@ class Merchant < ActiveRecord::Base
 
   before_save :set_activation, if: :active_changed?
   before_create :set_activation
+
+  after_save :update_business_hours, if: :open_all_day_changed?
 
   scope :active_merchants, -> { where("deactivated_at >= ?", Time.zone.now) }
 
@@ -99,6 +102,12 @@ class Merchant < ActiveRecord::Base
     else
       self.activated_at = nil
       self.activated_at = nil
+    end
+  end
+
+  def update_business_hours
+    if open_all_day
+      business_hours.destroy_all
     end
   end
 end

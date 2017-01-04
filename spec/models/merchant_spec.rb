@@ -27,6 +27,7 @@
 #  deactivated_at       :datetime
 #  secondary_phone      :string
 #  is_basic             :boolean          default(FALSE)
+#  open_all_day         :boolean          default(FALSE)
 #
 
 require 'rails_helper'
