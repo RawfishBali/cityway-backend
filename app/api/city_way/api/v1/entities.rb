@@ -1212,9 +1212,6 @@ module CityWay
         end
         expose :latitude,if: lambda { |object, options| !object.is_basic }, documentation: {:type => "float", :desc => "Merchant Latitude"}
         expose :longitude,if: lambda { |object, options| !object.is_basic }, documentation: {:type => "float", :desc => "Merchant Longitude"}
-        expose :phone,if: lambda { |object, options| object.phone }, documentation: {:type => "string", :desc => "Merchant phone"}
-        expose :secondary_phone,if: lambda { |object, options| object.secondary_phone }, documentation: {:type => "string", :desc => "Merchant phone 2"}
-        expose :phone_extra,if: lambda { |object, options| object.secondary_phone }, documentation: {:type => "string", :desc => "Merchant phone 3"}
         expose :email,if: lambda { |object, options| options[:simple] == 'false' && object.email }, documentation: {:type => "string", :desc => "Merchant email"}
         expose :website, if: lambda { |object, options| options[:simple] == 'false' && object.website }, documentation: {:type => "string", :desc => "Merchant website"} do |merchant, options|
           unless merchant.website[/\Ahttp:\/\//] || merchant.website[/\Ahttps:\/\//]
