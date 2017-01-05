@@ -21,7 +21,7 @@
           <tr>
             <th class="uk-width-1-10">Nome</th>
             <th class="uk-width-1-10">Indirizzo</th>
-
+            <th class="uk-width-1-10">Tipo</th>
             <th class="uk-width-1-10 uk-text-center">Foto</th>
             <th class="uk-width-1-10 uk-text-center">Azioni</th>
           </tr>
@@ -31,6 +31,13 @@
           <tr>
             <td><%= utility_place.name %></td>
             <td><%= utility_place.address %></td>
+            <td>
+              <% if utility_place.is_public %>
+                <span class="uk-badge uk-badge-success">Pubblica</span>
+              <% else %>
+                <span class="uk-badge uk-badge-danger">Privata</span>
+              <% end %>
+            </td>
             <td class="uk-text-center"><%= image_tag utility_place.primary_photo.first.picture.url, class: 'width100pixel' unless utility_place.primary_photo.first.blank? %></td>
             <td class="uk-text-center">
               <%= link_to '<i class="md-icon material-icons">&#xE254;</i>'.html_safe , edit_admin_school_path(utility_place,public: utility_place.is_public.to_s, school_type: utility_place.school_type)%>

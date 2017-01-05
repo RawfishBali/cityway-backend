@@ -136,16 +136,7 @@
           </li>
           <li><a class="<%= 'act_item' if params[:controller] == 'admin/utility_places' && params[:place_type] == 'young_people_place' %>" href="/admin/utility_places?place_type=young_people_place">Giovani</a></li>
           <li>
-            <a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/schools' %>" href="#">Scuole</a>
-            <ul class="<%= 'block' if params[:controller] == 'admin/schools' %>">
-              <li>
-                <a class="<%= 'act_item current_section_submenu' if params[:public] == 'false' %>" href="/admin/schools?public=false">Scuola Privata</a>
-              </li>
-
-              <li>
-                <a class="<%= 'act_item current_section_submenu' if params[:public] == 'true' %>" href="/admin/schools?public=true">Scuola Pubblica</a>
-              </li>
-            </ul>
+            <a class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/schools' %>" href="/admin/schools">Istituzione</a>
           </li>
           <li><a href="/admin/devices?device_type=wifi" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/devices' && params[:device_type] == 'wifi'%>">Wifi</a></li>
           <li><a href="/admin/devices?device_type=webcam" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/devices' && params[:device_type] == 'webcam'%>">Webcam</a></li>

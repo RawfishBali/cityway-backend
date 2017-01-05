@@ -5,14 +5,15 @@ class Admin::SchoolsController < Admin::BaseController
   # GET /admin/schools.json
   def index
     @school_types = ((SCHOOL_DEFAULTS + City.find(session[:current_city_id]).utility.schools.map(&:school_type)).uniq.sort!)
-    if params[:school_type] && params.has_key?(:public)
-      @admin_schools = City.find(session[:current_city_id]).utility.schools.where("school_type = ? and is_public = ?", params[:school_type], params[:public]).order('created_at DESC').page(params[:page]).per(10)
+    if params[:school_type]
+      @admin_schools = City.find(session[:current_city_id]).utility.schools.where("school_type = ?", params[:school_type]).order('created_at DESC').page(params[:page]).per(10)
     else
-      if params.has_key?(:public)
-        @admin_schools = City.find(session[:current_city_id]).utility.schools.where(is_public: params[:public]).order('created_at DESC').page(params[:page]).per(10)
-      else
-        @admin_schools = City.find(session[:current_city_id]).utility.schools.order('created_at DESC').page(params[:page]).per(10)
-      end
+      @admin_schools = City.find(session[:current_city_id]).utility.schools.order('created_at DESC').page(params[:page]).per(10)
+      # if params.has_key?(:public)
+      #   @admin_schools = City.find(session[:current_city_id]).utility.schools.order('created_at DESC').page(params[:page]).per(10)
+      # else
+      #
+      # end
 
     end
 
@@ -88,6 +89,5 @@ class Admin::SchoolsController < Admin::BaseController
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_school_params
       params.require(:school).permit!
-
     end
 end
