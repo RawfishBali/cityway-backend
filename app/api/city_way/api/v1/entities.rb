@@ -1277,7 +1277,7 @@ module CityWay
         expose :is_basic
         expose :open_all_day
         expose :phones do |merchant, options|
-          [merchant.phone, merchant.secondary_phone, merchant.phone_extra].reject!(&:blank?)
+          [merchant.phone, merchant.secondary_phone, merchant.phone_extra].reject(&:blank?)
         end
       end
 
