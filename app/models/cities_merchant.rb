@@ -3,8 +3,8 @@
 # Table name: cities_merchants
 #
 #  id          :integer          not null, primary key
-#  city_id     :integer          not null
-#  merchant_id :integer          not null
+#  city_id     :integer
+#  merchant_id :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
