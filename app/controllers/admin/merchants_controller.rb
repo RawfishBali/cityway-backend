@@ -6,9 +6,18 @@ class Admin::MerchantsController < Admin::BaseController
   # GET /admin/merchants.json
   def index
     if params[:category_id]
-      @admin_merchants = City.find(session[:current_city_id]).categories.find(params[:category_id]).merchants.order('name ASC').page(params[:page]).per(10)
+      if params[:name]
+        @admin_merchants = City.find(session[:current_city_id]).categories.find(params[:category_id]).merchants.where('lower(name) like ?', "%#{params[:name].downcase}%").order('name ASC').page(params[:page]).per(10)
+      else
+        @admin_merchants = City.find(session[:current_city_id]).categories.find(params[:category_id]).merchants.order('name ASC').page(params[:page]).per(10)
+      end
     else
-      @admin_merchants = City.find(session[:current_city_id]).merchants.order('name ASC').page(params[:page]).per(10)
+      if params[:name]
+        @admin_merchants = City.find(session[:current_city_id]).merchants.where('lower(name) like ?', "%#{params[:name].downcase}%").order('name ASC').page(params[:page]).per(10)
+      else
+        @admin_merchants = City.find(session[:current_city_id]).merchants.order('name ASC').page(params[:page]).per(10)
+      end
+
     end
 
     @categories =  City.find(session[:current_city_id]).parent_categories
