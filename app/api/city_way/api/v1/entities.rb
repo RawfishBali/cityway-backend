@@ -1258,7 +1258,7 @@ module CityWay
             merchant.google_plus
           end
         end
-        expose :support_disabilities,if: lambda { |object, options| !object.is_basic }, documentation: {:type => "boolean", :desc => "Merchant support_disabilities"}
+        expose :support_disabilities, documentation: {:type => "boolean", :desc => "Merchant support_disabilities"}
         expose :distance, if: lambda { |object, options| object.respond_to?(:distance) || options[:latitude] && options[:longitude] && !object.is_basic } do |merchant , options|
           merchant.distance_from([options[:latitude], options[:longitude]])
         end
