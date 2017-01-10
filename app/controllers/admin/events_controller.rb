@@ -4,7 +4,12 @@ class Admin::EventsController < Admin::BaseController
   # GET /admin/events
   # GET /admin/events.json
   def index
-    @admin_events = City.find(session[:current_city_id]).around.events.page(params[:page]).per(10)
+    if params[:name]
+      @admin_events = City.find(session[:current_city_id]).around.events.where('lower(title) like ?', "%#{params[:name].downcase}%").page(params[:page]).per(10)
+    else
+      @admin_events = City.find(session[:current_city_id]).around.events.page(params[:page]).per(10)
+    end
+
   end
 
   # GET /admin/events/1
