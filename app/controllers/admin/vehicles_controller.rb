@@ -74,6 +74,6 @@ class Admin::VehiclesController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_vehicle_params
-      params.require(:vehicle).permit(:name, :address, :utility_id,:phone_0, :phone_1, :total_parking_lot, :available_parking_lot, :vehicle_type, :web, :email, :website)
+      params.require(:vehicle).permit(:name, :address, :utility_id,:phone_0, :phone_1, :total_parking_lot, :available_parking_lot, :vehicle_type, :web, :email, :website, :support_disabilities)
     end
 end

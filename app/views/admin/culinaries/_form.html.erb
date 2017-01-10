@@ -50,6 +50,15 @@
           </div>
         </div>
 
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <%= f.label :support_disabilities, 'Città Accessibile', class: 'inline-label'%>
+              <%= f.check_box :support_disabilities,class: 'md-input', 'data-switchery': true  %>
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <div class="uk-width-medium-1-2 ">
@@ -68,7 +77,7 @@
     </div>
     <div class="md-fab-wrapper">
       <%= button_tag(type: 'submit' , class: 'md-fab md-fab-accent md-fab-wave waves-effect waves-button') do %>
-        <i class="fa fa-floppy-o" aria-hidden="true"></i>
+      <i class="fa fa-floppy-o" aria-hidden="true"></i>
       <% end %>
     </div>
 

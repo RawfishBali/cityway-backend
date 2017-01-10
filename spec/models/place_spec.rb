@@ -2,24 +2,25 @@
 #
 # Table name: places
 #
-#  id            :integer          not null, primary key
-#  name          :string
-#  description   :text
-#  address       :string
-#  latitude      :float
-#  longitude     :float
-#  email         :string
-#  website       :string
-#  facebook      :string
-#  instagram     :string
-#  twitter       :string
-#  google_plus   :string
-#  discover_id   :integer
-#  place_type    :integer
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  phone         :string
-#  external_link :string
+#  id                   :integer          not null, primary key
+#  name                 :string
+#  description          :text
+#  address              :string
+#  latitude             :float
+#  longitude            :float
+#  email                :string
+#  website              :string
+#  facebook             :string
+#  instagram            :string
+#  twitter              :string
+#  google_plus          :string
+#  discover_id          :integer
+#  place_type           :integer
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  phone                :string
+#  external_link        :string
+#  support_disabilities :boolean          default(TRUE)
 #
 
 require 'rails_helper'

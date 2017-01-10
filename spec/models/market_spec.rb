@@ -2,15 +2,16 @@
 #
 # Table name: markets
 #
-#  id          :integer          not null, primary key
-#  name        :string           not null
-#  address     :string           not null
-#  latitude    :float
-#  longitude   :float
-#  description :text
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  around_id   :integer
+#  id                   :integer          not null, primary key
+#  name                 :string           not null
+#  address              :string           not null
+#  latitude             :float
+#  longitude            :float
+#  description          :text
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  around_id            :integer
+#  support_disabilities :boolean          default(TRUE)
 #
 
 require 'rails_helper'

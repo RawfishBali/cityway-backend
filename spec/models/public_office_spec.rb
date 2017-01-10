@@ -2,20 +2,21 @@
 #
 # Table name: public_offices
 #
-#  id             :integer          not null, primary key
-#  name           :string           not null
-#  photo          :string
-#  description    :text
-#  email          :string
-#  address        :string
-#  phone          :string
-#  fax            :string
-#  commonplace_id :integer
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#  website        :string
-#  latitude       :float
-#  longitude      :float
+#  id                   :integer          not null, primary key
+#  name                 :string           not null
+#  photo                :string
+#  description          :text
+#  email                :string
+#  address              :string
+#  phone                :string
+#  fax                  :string
+#  commonplace_id       :integer
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  website              :string
+#  latitude             :float
+#  longitude            :float
+#  support_disabilities :boolean          default(TRUE)
 #
 
 require 'rails_helper'

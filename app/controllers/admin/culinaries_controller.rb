@@ -77,6 +77,6 @@ class Admin::CulinariesController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_culinary_params
-      params.require(:culinary).permit(:name, :description, :culinary_type, :external_link, photos_attributes: [:id, :picture, :position, :is_primary, :_destroy])
+      params.require(:culinary).permit(:name, :description, :culinary_type, :external_link, :support_disabilities, photos_attributes: [:id, :picture, :position, :is_primary, :_destroy])
     end
 end

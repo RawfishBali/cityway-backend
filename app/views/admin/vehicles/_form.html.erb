@@ -91,16 +91,17 @@
             </div>
           </div>
         </div>
+
         <% end %>
         <% unless @vehicle_type == 'taxi'  || @vehicle_type == 'bike' %>
-          <div class="uk-form-row">
-            <div class="uk-grid" data-uk-grid-margin>
-              <div class="uk-width-medium-1-1">
-                <label>Parcheggi disponibili</label>
-                <%= f.text_field :available_parking_lot,class: 'md-input', required: true  %>
-              </div>
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <label>Parcheggi disponibili</label>
+              <%= f.text_field :available_parking_lot,class: 'md-input', required: true  %>
             </div>
           </div>
+        </div>
         <% end %>
       </div>
 
@@ -109,16 +110,19 @@
       <div class="uk-width-medium-1-2">
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
-
+            <div class="uk-width-medium-1-1">
+            <%= f.label :support_disabilities, 'Città Accessibile', class: 'inline-label'%>
+            <%= f.check_box :support_disabilities,class: 'md-input', 'data-switchery': true  %>
+          </div>
           </div>
         </div>
       </div>
-      </div>
-      <div class="md-fab-wrapper">
-        <%= button_tag(type: 'submit' , class: 'md-fab md-fab-accent md-fab-wave waves-effect waves-button') do %>
-          <i class="fa fa-floppy-o" aria-hidden="true"></i>
-        <% end %>
-      </div>
+    </div>
+    <div class="md-fab-wrapper">
+      <%= button_tag(type: 'submit' , class: 'md-fab md-fab-accent md-fab-wave waves-effect waves-button') do %>
+      <i class="fa fa-floppy-o" aria-hidden="true"></i>
       <% end %>
+    </div>
+    <% end %>
 
   </div>

@@ -97,6 +97,7 @@ module CityWay
           expose :is_open do |object , options|
             object.is_open_now?
           end
+          expose :support_disabilities, documentation: {:type => "Boolean", :desc => "Place Disabilities Support"}
         end
 
         class Step < Grape::Entity
@@ -172,6 +173,7 @@ module CityWay
               CityWay::Api::V1::Entities::Photo.represent(culinary.primary_photo) if culinary.photos.length > 0
             end
           end
+          expose :support_disabilities, documentation: {:type => "Boolean", :desc => "Culinary Disabilities Support"}
         end
 
         class EventDate < Grape::Entity
@@ -300,6 +302,7 @@ module CityWay
         expose :is_open do |object, options|
           object.is_open_now?
         end
+        expose :support_disabilities, documentation: {:type => "Boolean", :desc => "Market Disabilities Support"}
       end
 
       class Park < Grape::Entity
@@ -325,6 +328,7 @@ module CityWay
         expose :type do |park, options|
           park.class.name.downcase
         end
+        expose :support_disabilities, documentation: {:type => "Boolean", :desc => "Park Disabilities Support"}
       end
 
       class PublicOffice < Grape::Entity
@@ -359,6 +363,7 @@ module CityWay
         expose :simple do |object, options|
           options[:simple]
         end
+        expose :support_disabilities, documentation: {:type => "Boolean", :desc => "Public Office Disabilities Support"}
       end
 
       class Certificate < Grape::Entity
@@ -789,6 +794,7 @@ module CityWay
         expose :is_open do |object , options|
           object.is_open_now?
         end
+        expose :support_disabilities, documentation: {:type => "Boolean", :desc => "Utility Place Disabilities Support"}
       end
 
       class UtilitySchool < Grape::Entity
@@ -827,9 +833,8 @@ module CityWay
         expose :is_open do |object , options|
           object.is_open_now?
         end
+        expose :support_disabilities, documentation: {:type => "Boolean", :desc => "School Disabilities Support"}
       end
-
-
 
       class UtilitySport < Grape::Entity
         expose :id, documentation: {:type => "Integer", :desc => "Utility Place ID"}
@@ -932,6 +937,7 @@ module CityWay
         expose :attachment, documentation: {:type => "Text", :desc => "Taxi attachment"} do |object, options|
           object.attachment.url
         end
+        expose :support_disabilities, documentation: {:type => "Boolean", :desc => "Public Transport Disabilities Support"}
       end
 
       class Coordinate < Grape::Entity
@@ -973,6 +979,7 @@ module CityWay
         expose :distance, if: lambda { |object, options| options[:latitude] && options[:longitude] } do |object , options|
           object.distance_from([options[:latitude], options[:longitude]])
         end
+        expose :support_disabilities, documentation: {:type => "Boolean", :desc => "Place Disabilities Support"}
       end
 
       class Utility < Grape::Entity

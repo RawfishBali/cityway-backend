@@ -48,16 +48,24 @@
           </div>
         </div>
         <div class="uk-form-row">
-        <div id="subcategories">
-          <h3>Orari</h3>
-          <%= f.fields_for :business_hours do |business_hour| %>
-          <%= render 'business_hour_fields', f: business_hour %>
-          <% end %>
-          <div class="links">
-            <%= link_to_add_association '<i class="material-icons md-24"></i>'.html_safe, f, :business_hours %>
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <%= f.label :support_disabilities, 'Città Accessibile', class: 'inline-label'%>
+              <%= f.check_box :support_disabilities,class: 'md-input', 'data-switchery': true  %>
+            </div>
           </div>
         </div>
-      </div>
+        <div class="uk-form-row">
+          <div id="subcategories">
+            <h3>Orari</h3>
+            <%= f.fields_for :business_hours do |business_hour| %>
+            <%= render 'business_hour_fields', f: business_hour %>
+            <% end %>
+            <div class="links">
+              <%= link_to_add_association '<i class="material-icons md-24"></i>'.html_safe, f, :business_hours %>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="uk-width-medium-1-2">

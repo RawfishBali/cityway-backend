@@ -71,7 +71,7 @@ class Admin::MarketsController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_market_params
-      params.require(:market).permit(:name, :address, :description, :around_id, business_hours_attributes: [:id, :morning_open_time, :morning_close_time, :evening_open_time,
+      params.require(:market).permit(:name, :address, :description, :around_id, :support_disabilities, business_hours_attributes: [:id, :morning_open_time, :morning_close_time, :evening_open_time,
         :evening_close_time, :day, :_destroy], photos_attributes: [:id, :picture,:is_primary,:position,:_destroy])
     end
 end

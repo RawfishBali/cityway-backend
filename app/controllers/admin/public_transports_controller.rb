@@ -69,6 +69,6 @@ class Admin::PublicTransportsController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_public_transport_params
-      params.require(:public_transport).permit(:name, :attachment, :transport_type, paths_attributes: [:id, :path, :_destroy])
+      params.require(:public_transport).permit(:name, :attachment, :transport_type, :support_disabilities, paths_attributes: [:id, :path, :_destroy])
     end
 end
