@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170130075651) do
+ActiveRecord::Schema.define(version: 20170130082953) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -614,6 +614,10 @@ ActiveRecord::Schema.define(version: 20170130075651) do
     t.string   "phone_1"
     t.string   "phone_2"
     t.string   "icon"
+    t.string   "facebook"
+    t.string   "instagram"
+    t.string   "twitter"
+    t.string   "google_plus"
   end
 
   create_table "steps", force: :cascade do |t|

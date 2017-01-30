@@ -21,6 +21,10 @@
 #  phone_1      :string
 #  phone_2      :string
 #  icon         :string
+#  facebook     :string
+#  instagram    :string
+#  twitter      :string
+#  google_plus  :string
 #
 
 class Sport < ActiveRecord::Base

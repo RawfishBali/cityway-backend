@@ -877,6 +877,44 @@ module CityWay
         expose :is_open do |object , options|
           object.is_open_now?
         end
+        expose :facebook, if: lambda { |object, options| options[:simple] == 'false' && !object.facebook.blank? },
+        documentation: {:type => "string", :desc => "Merchant facebook"} do |object, options|
+          matches = object.facebook.match(/(?:https?:\/\/)?(?:www\.)?facebook\.com\/(?:(?:\w)*#!\/)?(?:groups\/)?(?:pages\/)?(?:[\w\-]*\/)*?(\/)?([\w\-\.]*)/)
+          if matches
+            if matches[2].blank?
+              unless place.facebook[/\Ahttp:\/\//] || place.facebook[/\Ahttps:\/\//]
+                "https://#{place.facebook}"
+              else
+                place.facebook
+              end
+            else
+              matches[2]
+            end
+          else
+            object.facebook
+          end
+        end
+        expose :instagram, if: lambda { |object, options| options[:simple] == 'false' && !object.instagram.blank? }, documentation: {:type => "string", :desc => "Merchant instagram"} do |object, options|
+          unless object.instagram[/\Ahttp:\/\//] || object.instagram[/\Ahttps:\/\//]
+            "https://#{object.instagram}"
+          else
+            object.instagram
+          end
+        end
+        expose :twitter, if: lambda { |object, options| options[:simple] == 'false' && !object.twitter.blank? }, documentation: {:type => "string", :desc => "Merchant twitter"} do |object, options|
+          unless object.twitter[/\Ahttp:\/\//] || object.twitter[/\Ahttps:\/\//]
+            "https://#{object.twitter}" unless object.twitter.blank?
+          else
+            object.twitter
+          end
+        end
+        expose :google_plus, if: lambda { |object, options| options[:simple] == 'false' && !object.google_plus.blank? }, documentation: {:type => "string", :desc => "Merchant G+"} do |object, options|
+          unless object.google_plus[/\Ahttp:\/\//] || object.google_plus[/\Ahttps:\/\//]
+            "https://#{object.google_plus}" unless object.google_plus.blank?
+          else
+            object.google_plus
+          end
+        end
       end
 
 
