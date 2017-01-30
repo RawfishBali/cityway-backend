@@ -848,6 +848,9 @@ module CityWay
             CityWay::Api::V1::Entities::Photo.represent(object.primary_photo) if object.photos.length > 0
           end
         end
+        expose :icon,if: lambda { |object, options| object.icon.present? }, documentation: {:type => "string", :desc => "Sport icon"} do |object , options|
+          object.icon.url
+        end
         expose :phone, documentation: {:type => "String", :desc => "Utility Place Phone"}
         expose :phone_1, documentation: {:type => "String", :desc => "Utility Place Phone 1"}
         expose :phone_2, documentation: {:type => "String", :desc => "Utility Place Phone 2"}

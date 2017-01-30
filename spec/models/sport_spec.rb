@@ -20,6 +20,7 @@
 #  updated_at   :datetime         not null
 #  phone_1      :string
 #  phone_2      :string
+#  icon         :string
 #
 
 require 'rails_helper'

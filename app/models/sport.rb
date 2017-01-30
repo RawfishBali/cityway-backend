@@ -20,6 +20,7 @@
 #  updated_at   :datetime         not null
 #  phone_1      :string
 #  phone_2      :string
+#  icon         :string
 #
 
 class Sport < ActiveRecord::Base
@@ -36,6 +37,8 @@ class Sport < ActiveRecord::Base
 
   phony_normalize :phone, default_country_code: 'IT'
   validates :phone, phony_plausible: true
+
+  mount_base64_uploader :icon, PhotoUploader
 
   def primary_photo
     primary_photo = photos.where(is_primary: true).limit(1)
