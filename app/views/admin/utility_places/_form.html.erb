@@ -32,10 +32,12 @@
               <label>Nome</label>
               <%= f.text_field :name, required: true,class: 'md-input'  %>
             </div>
+            <% unless @place_type == 'post_office' %>
             <div class="uk-width-medium-1-2">
               <label>Denominazione</label>
               <%= f.text_field :denomination, required: true,class: 'md-input'  %>
             </div>
+            <% end %>
           </div>
         </div>
       </div>
