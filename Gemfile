@@ -70,6 +70,8 @@ gem 'globalize', '~> 5.0.0'
 
 gem 'faker'
 
+gem 'rubycritic', require: false
+
 
 group :production do
   gem 'rails_12factor'
