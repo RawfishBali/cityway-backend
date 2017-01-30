@@ -810,12 +810,52 @@ module CityWay
           end
         end
         expose :phone, documentation: {:type => "String", :desc => "Utility Place Phone"}
+        expose :phone_1, documentation: {:type => "String", :desc => "Utility Place Phone 1"}
+        expose :phone_2, documentation: {:type => "String", :desc => "Utility Place Phone 2"}
         expose :email, documentation: {:type => "String", :desc => "Utility Place email"}
         expose :website,if: lambda { |object, options| !object.website.blank? }, documentation: {:type => "String", :desc => "Utility Place website"} do |object, options|
           unless object.website[/\Ahttp:\/\//] || object.website[/\Ahttps:\/\//]
             "https://#{object.website}" unless object.website.blank?
           else
             object.website
+          end
+        end
+        expose :facebook, if: lambda { |object, options| options[:simple] == 'false' && !object.facebook.blank? },
+        documentation: {:type => "string", :desc => "Merchant facebook"} do |object, options|
+          matches = object.facebook.match(/(?:https?:\/\/)?(?:www\.)?facebook\.com\/(?:(?:\w)*#!\/)?(?:groups\/)?(?:pages\/)?(?:[\w\-]*\/)*?(\/)?([\w\-\.]*)/)
+          if matches
+            if matches[2].blank?
+              unless place.facebook[/\Ahttp:\/\//] || place.facebook[/\Ahttps:\/\//]
+                "https://#{place.facebook}"
+              else
+                place.facebook
+              end
+            else
+              matches[2]
+            end
+          else
+            object.facebook
+          end
+        end
+        expose :instagram, if: lambda { |object, options| options[:simple] == 'false' && !object.instagram.blank? }, documentation: {:type => "string", :desc => "Merchant instagram"} do |object, options|
+          unless object.instagram[/\Ahttp:\/\//] || object.instagram[/\Ahttps:\/\//]
+            "https://#{object.instagram}"
+          else
+            object.instagram
+          end
+        end
+        expose :twitter, if: lambda { |object, options| options[:simple] == 'false' && !object.twitter.blank? }, documentation: {:type => "string", :desc => "Merchant twitter"} do |object, options|
+          unless object.twitter[/\Ahttp:\/\//] || object.twitter[/\Ahttps:\/\//]
+            "https://#{object.twitter}" unless object.twitter.blank?
+          else
+            object.twitter
+          end
+        end
+        expose :google_plus, if: lambda { |object, options| options[:simple] == 'false' && !object.google_plus.blank? }, documentation: {:type => "string", :desc => "Merchant G+"} do |object, options|
+          unless object.google_plus[/\Ahttp:\/\//] || object.google_plus[/\Ahttps:\/\//]
+            "https://#{object.google_plus}" unless object.google_plus.blank?
+          else
+            object.google_plus
           end
         end
         expose :business_hours do |object , options|
