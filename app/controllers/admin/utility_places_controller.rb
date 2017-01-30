@@ -83,7 +83,7 @@ class Admin::UtilityPlacesController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_utility_place_params
-      params.require(:utility_place).permit(:name, :denomination, :description, :visitable_id, :visitable_type, :address, :email,:phone, :place_type, :is_public, :website, :commercial, :support_disabilities,  photos_attributes: [:id, :picture, :is_primary, :position,  :_destroy], business_hours_attributes: [:id, :morning_open_time, :morning_close_time, :evening_open_time,
+      params.require(:utility_place).permit(:name, :denomination, :description, :visitable_id, :visitable_type, :address, :email,:phone, :phone_1, :phone_2, :place_type, :is_public, :website, :commercial, :support_disabilities, :facebook,:twitter,:instagram,:google_plus,  photos_attributes: [:id, :picture, :is_primary, :position,  :_destroy], business_hours_attributes: [:id, :morning_open_time, :morning_close_time, :evening_open_time,
         :evening_close_time, :day, :_destroy])
     end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170130063107) do
+ActiveRecord::Schema.define(version: 20170130075651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -716,6 +716,12 @@ ActiveRecord::Schema.define(version: 20170130063107) do
     t.string   "website"
     t.boolean  "commercial"
     t.boolean  "support_disabilities", default: true
+    t.string   "facebook"
+    t.string   "instagram"
+    t.string   "twitter"
+    t.string   "google_plus"
+    t.string   "phone_1"
+    t.string   "phone_2"
   end
 
   add_index "utility_places", ["visitable_type", "visitable_id"], name: "index_utility_places_on_visitable_type_and_visitable_id", using: :btree

@@ -20,6 +20,12 @@
 #  website              :string
 #  commercial           :boolean
 #  support_disabilities :boolean          default(TRUE)
+#  facebook             :string
+#  instagram            :string
+#  twitter              :string
+#  google_plus          :string
+#  phone_1              :string
+#  phone_2              :string
 #
 
 require 'rails_helper'
