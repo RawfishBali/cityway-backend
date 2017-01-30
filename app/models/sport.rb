@@ -18,6 +18,8 @@
 #  utility_id   :integer
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  phone_1      :string
+#  phone_2      :string
 #
 
 class Sport < ActiveRecord::Base
