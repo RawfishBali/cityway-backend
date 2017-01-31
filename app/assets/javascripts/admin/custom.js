@@ -349,6 +349,134 @@ $(document).ready(function(){
   }
 
 
+  if($("#utility_map").length > 0){
+    if($("#utility_place_latitude").val() == "" && $("#utility_place_longitude").val() == ""){
+      var lat = 45.5454787
+      var long = 11.535421400000018
+    }else{
+      var lat = $("#utility_place_latitude").val()
+      var long = $("#utility_place_longitude").val()
+    }
+    map = new GMaps({
+      div: '#utility_map',
+      lat: lat,
+      lng: long
+    });
+
+    map.addMarker({
+      lat: $("#utility_place_latitude").val(),
+      lng: $("#utility_place_longitude").val(),
+    });
+
+    $('#utility_place_address').keyup(function() {
+      delay(function(){
+        GMaps.geocode({
+          address: $('#utility_place_address').val(),
+          callback: function(results, status) {
+            if (status == 'OK') {
+              map.removeMarkers();
+              var latlng = results[0].geometry.location;
+              map.setCenter(latlng.lat(), latlng.lng());
+              map.addMarker({
+                lat: latlng.lat(),
+                lng: latlng.lng()
+              });
+              $("#utility_place_latitude").parent().addClass('md-input-filled')
+              $("#utility_place_longitude").parent().addClass('md-input-filled')
+              $("#utility_place_latitude").val(latlng.lat())
+              $("#utility_place_longitude").val(latlng.lng())
+            }
+          }
+        });
+      }, 500 );
+    });
+
+    $("#utility_place_latitude, #utility_place_longitude").keyup(function() {
+      delay(function(){
+        if($("#utility_place_latitude").val() != "" && $("#utility_place_longitude").val() != "" && $.isNumeric($("#utility_place_latitude").val()) && $.isNumeric($("#utility_place_longitude").val()) ){
+          map.removeMarkers();
+          var index = map.markers.length;
+          var lat = $("#utility_place_latitude").val()
+          var lng = $("#utility_place_longitude").val()
+
+          geocode_url = "http://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lng+"&sensor=true"
+
+          $.ajax({
+            url: geocode_url,
+            context: document.body
+          }).done(function(data) {
+            if(data["status"] =="OK"){
+              $("#utility_place_address").val(data["results"][0]["formatted_address"])
+              $("#utility_place_address").parent().addClass('md-input-filled')
+            }
+
+          });
+
+          map.addMarker({
+            lat: lat,
+            lng: lng,
+            title: 'Marker #' + index
+          });
+
+          map.setCenter(lat, lng);
+          $("#utility_place_latitude").parent().addClass('md-input-filled')
+          $("#utility_place_longitude").parent().addClass('md-input-filled')
+          $("#utility_place_latitude").val(lat);
+          $("#utility_place_longitude").val(lng);
+
+        }
+
+
+      }, 500 );
+    });
+
+    GMaps.on('click', map.map, function(event) {
+      map.removeMarkers();
+      var index = map.markers.length;
+      var lat = event.latLng.lat();
+      var lng = event.latLng.lng();
+
+      geocode_url = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lng+"&sensor=true"
+
+      $.ajax({
+        url: geocode_url,
+        context: document.body
+      }).done(function(data) {
+        if(data["status"] =="OK"){
+          $("#utility_place_address").val(data["results"][0]["formatted_address"])
+          $("#utility_place_address").parent().addClass('md-input-filled')
+        }
+      });
+
+      map.addMarker({
+        lat: lat,
+        lng: lng,
+        title: 'Marker #' + index
+      });
+
+      map.setCenter(lat, lng);
+      $("#utility_place_latitude").parent().addClass('md-input-filled')
+      $("#utility_place_longitude").parent().addClass('md-input-filled')
+      $("#utility_place_latitude").val(lat);
+      $("#utility_place_longitude").val(lng);
+    });
+  }
+
+
+  if($("#map_trigger").is(':checked')){
+    $("#utility_map_container").slideDown();
+  }else{
+    $("#utility_map_container").slideUp();
+  }
+
+
+  $("#map_trigger").change(function(){
+    if($("#map_trigger").is(':checked')){
+      $("#utility_map_container").slideDown();
+    }else{
+      $("#utility_map_container").slideUp();
+    }
+  })
 
 
 })

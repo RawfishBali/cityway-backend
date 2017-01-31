@@ -18,6 +18,10 @@
       <% else %>
       Gestisci <%= place_type[@place_type.to_sym]%>
       <% end %>
+      <span class="marginL155">
+        <%= check_box_tag :map_trigger,:value,true,{class: 'float-right ', 'data-switchery': true, 'data-switchery-size':"large"}  %>
+        <span id="switchery_active_text">Map</span>
+      </span>
       <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, :back, class:'float-right' %>
     </h2>
     <div class="uk-grid" data-uk-grid-margin>
@@ -38,6 +42,23 @@
               <%= f.text_field :denomination, required: true,class: 'md-input'  %>
             </div>
             <% end %>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="uk-width-medium-1-1" id="utility_map_container">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+              <div id="utility_map" class="not-basic"></div>
+            </div>
+            <div class="uk-width-medium-1-2">
+              <label class='not-basic'>Latitude</label>
+              <%= f.text_field :latitude, required: true,class: 'md-input not-basic'  %>
+              <label class='not-basic'>Longitude</label>
+              <%= f.text_field :longitude, required: true,class: 'md-input not-basic'  %>
+            </div>
           </div>
         </div>
       </div>
