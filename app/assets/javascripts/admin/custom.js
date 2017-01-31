@@ -116,27 +116,82 @@ $(document).ready(function(){
     // event.preventDefault();
   });
 
-
-  $('#promo_original_price , #promo_discount, #promo_discount_price').change(function(){
+  $('#promo_original_price').change(function(){
     $('#promo_original_price').val(parseFloat($('#promo_original_price').val()).toFixed(2))
     $('#promo_discount_price').val(parseFloat($('#promo_discount_price').val()).toFixed(2))
     $("#promo_discount_price").parent().addClass('md-input-filled');
     $("#promo_original_price").parent().addClass('md-input-filled');
+    $('#promo_discount').parent().addClass('md-input-filled');
 
-    if( $('#promo_original_price').val()  && $('#promo_discount').val()  ){
+    if($('#promo_discount').val()){
+
       $("#promo_discount_price").val(
         parseFloat($('#promo_original_price').val() - (
           $('#promo_original_price').val() * ($('#promo_discount').val()/100)
         )).toFixed(2)
       )
-    }else if( $('#promo_discount_price').val()  && $('#promo_discount').val()  ){
-      $("#promo_original_price").val(
-        parseFloat((
-          $('#promo_discount_price').val() * (100/$('#promo_discount').val())
-        )).toFixed(2)
-      )
+      return
     }
 
+    if($('#promo_discount_price').val()){
+      $("#promo_discount").val(
+        ($('#promo_discount_price').val() / $('#promo_original_price').val()) * 100
+      )
+      return
+    }
+  })
+
+  $('#promo_discount').change(function(){
+    $('#promo_original_price').val(parseFloat($('#promo_original_price').val()).toFixed(2))
+    $('#promo_discount_price').val(parseFloat($('#promo_discount_price').val()).toFixed(2))
+    $("#promo_discount_price").parent().addClass('md-input-filled');
+    $("#promo_original_price").parent().addClass('md-input-filled');
+    $('#promo_discount').parent().addClass('md-input-filled');
+
+    if($('#promo_original_price').val()){
+      $("#promo_discount_price").val(
+        parseFloat($('#promo_original_price').val() - (
+          $('#promo_original_price').val() * ($('#promo_discount').val()/100)
+        )).toFixed(2)
+      )
+      return
+    }
+
+    if($('#promo_discount_price').val()){
+      $("#promo_original_price").val(
+        parseFloat(
+          (100 / (100 - $('#promo_discount').val()) * $("#promo_discount_price").val())
+        ).toFixed(2)
+      )
+      return
+    }
+
+  })
+
+  $('#promo_discount_price').change(function(){
+    $('#promo_original_price').val(parseFloat($('#promo_original_price').val()).toFixed(2))
+    $('#promo_discount_price').val(parseFloat($('#promo_discount_price').val()).toFixed(2))
+    $("#promo_discount_price").parent().addClass('md-input-filled');
+    $("#promo_original_price").parent().addClass('md-input-filled');
+    $('#promo_discount').parent().addClass('md-input-filled');
+
+    if($('#promo_original_price').val()){
+      $("#promo_discount").val(
+        parseFloat(100 - (
+          $("#promo_discount_price").val() / $("#promo_original_price").val()
+        ) * 100).toFixed(1)
+      )
+      return
+    }
+
+    if($('#promo_discount').val()){
+      $("#promo_original_price").val(
+        parseFloat(
+          (100 / (100 - $('#promo_discount').val()) * $("#promo_discount_price").val())
+        ).toFixed(2)
+      )
+      return
+    }
 
   })
 
