@@ -1,9 +1,39 @@
 class Admin::BaseController < ApplicationController
   # layout "admin"
   before_action :authenticate_admin!
+  # before_action :check_roles
   before_action :set_cities
   before_action :set_photo_parameters, only: [:create, :update]
   before_action :save_previous_url, only: [:new, :edit, :destroy]
+
+  # def check_roles
+  #   valid = true
+  #   unless controller_name == 'home'
+  #     unless current_admin.has_role?(:merchant_admin)
+  #       if controller_name ==  "merchants" && action_name == 'edit'
+  #         puts "------------------------"
+  #         puts current_admin.merchant.id == params[:id]
+  #         puts current_admin.merchant.id
+  #         puts params[:id]
+  #         puts "------------------------"
+  #         unless current_admin.merchant.id == params[:id].to_i
+  #           valid = false
+  #         end
+  #       elsif controller_name ==  "promos" && action_name == 'edit'
+  #         unless current_admin.merchant.promos.map(&:id).include? params[:id].to_i
+  #           valid = false
+  #         end
+  #       else
+  #         valid = false
+  #       end
+  #       unless valid
+  #         flash[:notice] = 'Accesso Vietato'
+  #         return redirect_to root_path
+  #       end
+  #     end
+  #   end
+  #
+  # end
 
   def set_cities
     begin

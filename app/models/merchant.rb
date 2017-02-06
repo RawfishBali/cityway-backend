@@ -29,6 +29,7 @@
 #  is_basic             :boolean          default(FALSE)
 #  open_all_day         :boolean          default(FALSE)
 #  phone_extra          :string
+#  admin_id             :integer
 #
 
 class Merchant < ActiveRecord::Base
@@ -41,9 +42,11 @@ class Merchant < ActiveRecord::Base
   belongs_to :category
   has_many :cities, through: :cities_merchants
   has_many :cities_merchants, dependent: :destroy
+  belongs_to :admin
 
   validates_presence_of :name
   validates_presence_of :address
+  validates_presence_of :email
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :save }
 
   mount_base64_uploader :icon, PhotoUploader
@@ -59,6 +62,7 @@ class Merchant < ActiveRecord::Base
   before_save :set_activation, if: :active_changed?
   before_create :set_activation
 
+  after_create :create_admin_merchant
   after_save :update_business_hours, if: :open_all_day_changed?
 
   scope :active_merchants, -> { where("deactivated_at >= ?", Time.zone.now) }
@@ -109,5 +113,10 @@ class Merchant < ActiveRecord::Base
     if open_all_day
       business_hours.destroy_all
     end
+  end
+
+  def create_admin_merchant
+    admin = self.admin.find_or_create_by(email: self.email)
+    admin.add_role :merchant_admin
   end
 end

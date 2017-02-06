@@ -23,4 +23,10 @@ class Admin < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :timeoutable
   rolify strict: true
+  has_one :merchant
+
+  after_create :send_email_notification
+
+  def send_email_notification
+  end
 end

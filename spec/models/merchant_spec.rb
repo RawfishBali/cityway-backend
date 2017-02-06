@@ -29,6 +29,7 @@
 #  is_basic             :boolean          default(FALSE)
 #  open_all_day         :boolean          default(FALSE)
 #  phone_extra          :string
+#  admin_id             :integer
 #
 
 require 'rails_helper'
