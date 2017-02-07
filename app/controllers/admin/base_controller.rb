@@ -302,6 +302,15 @@ class Admin::BaseController < ApplicationController
       end
     end
 
+    if params["sport"]
+      if params["sport"]["icon"]
+        unless params["sport"]["icon"].class.to_s == 'ActionDispatch::Http::UploadedFile'
+          image_json =  JSON.parse(params["sport"]["icon"]["_values"].gsub("'",'"').gsub('=>',':'))
+          params["sport"]["icon"] = image_json["data"]
+        end
+      end
+    end
+
   end
 
   def save_previous_url
