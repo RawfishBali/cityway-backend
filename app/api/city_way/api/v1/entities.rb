@@ -892,8 +892,6 @@ module CityWay
           object.icon.url
         end
         expose :phone, documentation: {:type => "String", :desc => "Utility Place Phone"}
-        expose :phone_1, documentation: {:type => "String", :desc => "Utility Place Phone 1"}
-        expose :phone_2, documentation: {:type => "String", :desc => "Utility Place Phone 2"}
         expose :email, documentation: {:type => "String", :desc => "Utility Place email"}
         expose :website,if: lambda { |object, options| !object.website.blank? }, documentation: {:type => "String", :desc => "Utility Place website"} do |object, options|
           unless object.website[/\Ahttp:\/\//] || object.website[/\Ahttps:\/\//]
