@@ -71,7 +71,7 @@ class Admin::PublicOfficesController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_public_office_params
-      params.require(:public_office).permit(:name, :address, :description, :commonplace_id, :website, :fax, :phone, :support_disabilities, business_hours_attributes: [:id, :morning_open_time, :morning_close_time, :evening_open_time,
+      params.require(:public_office).permit(:name, :address, :description, :commonplace_id, :website, :fax, :phone, :phone_1, :phone_2, :support_disabilities, business_hours_attributes: [:id, :morning_open_time, :morning_close_time, :evening_open_time,
         :evening_close_time, :day, :_destroy] , photos_attributes: [:id, :picture,:is_primary,:position,:_destroy])
     end
 end

@@ -19,7 +19,9 @@ module CityWay
               place.external_link
             end
           end
-          expose :phone,if: lambda { |object, options| object.place_type == 'cinema' }, documentation: {:type => "String", :desc => "Place phone"}
+          expose :phone, documentation: {:type => "String", :desc => "Place phone"}
+          expose :phone_1, documentation: {:type => "String", :desc => "Place phone 1"}
+          expose :phone_2, documentation: {:type => "String", :desc => "Place phone 2"}
           expose :type ,documentation: {:type => "String", :desc => "Place Type"}, if: lambda { |object, options| object.place_type} do |place, options|
             object.place_type
           end
@@ -341,6 +343,8 @@ module CityWay
         expose :email,if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "String", :desc => "Public Office Email"}
         expose :address, documentation: {:type => "String", :desc => "Public Office Address"}
         expose :phone,if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "String", :desc => "Public Office Phone"}
+        expose :phone_1,if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "String", :desc => "Public Office Phone"}
+        expose :phone_2,if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "String", :desc => "Public Office Phone"}
         expose :fax,if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "String", :desc => "Public Office fax"}
         expose :website,if: lambda { |object, options| options[:simple] == 'false' && object.website }, documentation: {:type => "String", :desc => "Public Office website"} do |object, options|
           unless object.website[/\Ahttp:\/\//] || object.website[/\Ahttps:\/\//]
@@ -433,6 +437,8 @@ module CityWay
         expose :description, documentation: {:type => "Text", :desc => "Profile Description"}
         expose :fax, documentation: {:type => "String", :desc => "Profile Fax"}
         expose :phone, documentation: {:type => "String", :desc => "Profile Phone"}
+        expose :phone_1, documentation: {:type => "String", :desc => "Profile Phone 1"}
+        expose :phone_2, documentation: {:type => "String", :desc => "Profile Phone 2"}
         expose :latitude, documentation: {:type => "String", :desc => "Profile latitude"}
         expose :longitude, documentation: {:type => "String", :desc => "Profile longitude"}
         expose :days_open, documentation: {:type => "String", :desc => "Profile Days Open"} do |profile, options|

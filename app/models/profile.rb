@@ -25,6 +25,8 @@
 #  email                  :string
 #  city_hall_name         :string
 #  major_icon             :string
+#  phone_1                :string
+#  phone_2                :string
 #
 
 class Profile < ActiveRecord::Base

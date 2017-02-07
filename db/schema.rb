@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170203072506) do
+ActiveRecord::Schema.define(version: 20170207021355) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -467,6 +467,8 @@ ActiveRecord::Schema.define(version: 20170203072506) do
     t.string   "phone"
     t.string   "external_link"
     t.boolean  "support_disabilities", default: true
+    t.string   "phone_1"
+    t.string   "phone_2"
   end
 
   create_table "politic_groups", force: :cascade do |t|
@@ -501,6 +503,8 @@ ActiveRecord::Schema.define(version: 20170203072506) do
     t.string   "email"
     t.string   "city_hall_name"
     t.string   "major_icon"
+    t.string   "phone_1"
+    t.string   "phone_2"
   end
 
   add_index "profiles", ["commonplace_id"], name: "index_profiles_on_commonplace_id", using: :btree
@@ -542,6 +546,8 @@ ActiveRecord::Schema.define(version: 20170203072506) do
     t.float    "latitude"
     t.float    "longitude"
     t.boolean  "support_disabilities", default: true
+    t.string   "phone_1"
+    t.string   "phone_2"
   end
 
   add_index "public_offices", ["commonplace_id"], name: "index_public_offices_on_commonplace_id", using: :btree

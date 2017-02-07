@@ -17,6 +17,8 @@
 #  latitude             :float
 #  longitude            :float
 #  support_disabilities :boolean          default(TRUE)
+#  phone_1              :string
+#  phone_2              :string
 #
 
 require 'rails_helper'

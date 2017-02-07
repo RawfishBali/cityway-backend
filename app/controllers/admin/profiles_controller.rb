@@ -83,6 +83,6 @@ class Admin::ProfilesController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_profile_params
-      params.require(:profile).permit(:commonplace_id, :is_city_council_member, :name, :role, :address, :email, :fax, :phone, :website, :appointment_start, :appointment_end, :description, :politic_group_id, :photo, :is_major, :major_icon, days_open: [])
+      params.require(:profile).permit(:commonplace_id, :is_city_council_member, :name, :role, :address, :email, :fax, :phone, :phone_1, :phone_2, :website, :appointment_start, :appointment_end, :description, :politic_group_id, :photo, :is_major, :major_icon, days_open: [])
     end
 end

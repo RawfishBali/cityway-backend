@@ -21,6 +21,8 @@
 #  phone                :string
 #  external_link        :string
 #  support_disabilities :boolean          default(TRUE)
+#  phone_1              :string
+#  phone_2              :string
 #
 
 class Place < ActiveRecord::Base

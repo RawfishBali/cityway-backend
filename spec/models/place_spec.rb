@@ -21,6 +21,8 @@
 #  phone                :string
 #  external_link        :string
 #  support_disabilities :boolean          default(TRUE)
+#  phone_1              :string
+#  phone_2              :string
 #
 
 require 'rails_helper'
