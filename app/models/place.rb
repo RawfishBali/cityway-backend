@@ -20,7 +20,7 @@
 #  updated_at           :datetime         not null
 #  phone                :string
 #  external_link        :string
-#  support_disabilities :boolean          default(TRUE)
+#  support_disabilities :boolean          default(FALSE)
 #  phone_1              :string
 #  phone_2              :string
 #

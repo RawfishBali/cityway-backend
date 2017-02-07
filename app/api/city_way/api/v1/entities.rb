@@ -959,6 +959,7 @@ module CityWay
             object.google_plus
           end
         end
+        expose :support_disabilities, documentation: {:type => "Boolean", :desc => "Utility Sport Disabilities Support"}
       end
 
 

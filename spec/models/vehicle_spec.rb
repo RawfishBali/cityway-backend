@@ -17,7 +17,7 @@
 #  utility_id            :integer
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
-#  support_disabilities  :boolean          default(TRUE)
+#  support_disabilities  :boolean          default(FALSE)
 #
 
 require 'rails_helper'

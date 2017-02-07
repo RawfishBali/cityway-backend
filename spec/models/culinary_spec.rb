@@ -10,7 +10,7 @@
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  external_link        :string
-#  support_disabilities :boolean          default(TRUE)
+#  support_disabilities :boolean          default(FALSE)
 #
 
 require 'rails_helper'

@@ -7,7 +7,7 @@
 #  address              :string
 #  latitude             :float
 #  longitude            :float
-#  support_disabilities :boolean
+#  support_disabilities :boolean          default(FALSE)
 #  description          :text
 #  around_id            :integer          not null
 #  created_at           :datetime         not null

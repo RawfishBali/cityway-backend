@@ -19,7 +19,7 @@
 #  updated_at           :datetime         not null
 #  website              :string
 #  commercial           :boolean
-#  support_disabilities :boolean          default(TRUE)
+#  support_disabilities :boolean          default(FALSE)
 #  facebook             :string
 #  instagram            :string
 #  twitter              :string
