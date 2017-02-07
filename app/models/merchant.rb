@@ -77,6 +77,7 @@ class Merchant < ActiveRecord::Base
   end
 
   def is_open_now?
+    return true if open_all_day
     business_hours.each do |business_hour|
       return true if business_hour.is_open? Time.zone.now
     end

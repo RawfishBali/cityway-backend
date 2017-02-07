@@ -26,6 +26,7 @@
 #  google_plus          :string
 #  phone_1              :string
 #  phone_2              :string
+#  open_all_day         :boolean          default(FALSE)
 #
 
 require 'rails_helper'

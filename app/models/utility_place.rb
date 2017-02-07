@@ -26,6 +26,7 @@
 #  google_plus          :string
 #  phone_1              :string
 #  phone_2              :string
+#  open_all_day         :boolean          default(FALSE)
 #
 
 class UtilityPlace < ActiveRecord::Base
@@ -44,6 +45,8 @@ class UtilityPlace < ActiveRecord::Base
   phony_normalize :phone, default_country_code: 'IT'
   validates :phone, phony_plausible: true
 
+  after_save :update_business_hours, if: :open_all_day_changed?
+
   def primary_photo
     primary_photo = photos.where(is_primary: true).limit(1)
     if primary_photo.length > 0
@@ -56,18 +59,20 @@ class UtilityPlace < ActiveRecord::Base
   def all_business_hours
     mb = (self.business_hours).to_a
     return mb.sort_by(&:day)
-    # if mb.size == 7
-    # ((0..6).to_a  - mb.map(&:day)).each do |m|
-    #   mb << BusinessHour.new(morning_open_time: '00:00', morning_close_time: '00:00', evening_open_time: nil, evening_close_time: nil, day: m, marketable_type: self.class.name, marketable_id: self.id)
-    # end
-    # mb.sort_by(&:day)
   end
 
   def is_open_now?
+    return true if open_all_day
     business_hours.each do |business_hour|
       return true if business_hour.is_open? Time.zone.now
     end
     return false
+  end
+
+  def update_business_hours
+    if open_all_day
+      business_hours.destroy_all
+    end
   end
 
 end

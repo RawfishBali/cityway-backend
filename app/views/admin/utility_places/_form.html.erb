@@ -160,6 +160,12 @@
             <div class="uk-width-medium-1-2">
               <div id="subcategories">
                 <h3>Orari</h3>
+                
+                <% if @place_type == 'pharmacies' %>
+                  <%= f.label :open_all_day, 'Sempre Aperto', class: 'inline-label'%>
+                  <%= f.check_box :open_all_day,class: 'md-input', 'data-switchery': true  %>
+                <% end %>
+
                 <%= f.fields_for :business_hours do |business_hour| %>
                 <%= render 'business_hour_fields', f: business_hour %>
                 <% end %>

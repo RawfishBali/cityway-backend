@@ -801,6 +801,7 @@ module CityWay
           object.is_open_now?
         end
         expose :support_disabilities, documentation: {:type => "Boolean", :desc => "Utility Place Disabilities Support"}
+        expose :open_all_day
       end
 
       class UtilitySchool < Grape::Entity
@@ -961,9 +962,6 @@ module CityWay
         end
         expose :support_disabilities, documentation: {:type => "Boolean", :desc => "Utility Sport Disabilities Support"}
       end
-
-
-
 
       class UtilitySports < Grape::Entity
         expose :public_swimming_pool do |object , options|

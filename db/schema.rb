@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170207031127) do
+ActiveRecord::Schema.define(version: 20170207035755) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -740,6 +740,7 @@ ActiveRecord::Schema.define(version: 20170207031127) do
     t.string   "google_plus"
     t.string   "phone_1"
     t.string   "phone_2"
+    t.boolean  "open_all_day",         default: false
   end
 
   add_index "utility_places", ["visitable_type", "visitable_id"], name: "index_utility_places_on_visitable_type_and_visitable_id", using: :btree
