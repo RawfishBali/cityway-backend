@@ -13,7 +13,7 @@
 #
 
 class Category < ActiveRecord::Base
-  has_many :subcategories, :class_name => "Category", :foreign_key => "parent_id", :dependent => :destroy
+  has_many :subcategories , -> { order 'name asc' }, :class_name => "Category", :foreign_key => "parent_id", :dependent => :destroy
   accepts_nested_attributes_for :subcategories, reject_if: :all_blank, allow_destroy: true
   belongs_to :parent_category, :class_name => "Category", :foreign_key => "parent_id"
   has_many :merchants, dependent: :nullify
