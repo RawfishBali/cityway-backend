@@ -1467,6 +1467,103 @@ module CityWay
           CityWay::Api::V1::Entities::WastePickupSchedule.represent(object.waste_pickup_schedules)
         end
       end
+
+
+
+      class ParkingLot < Grape::Entity
+        expose :id, documentation: {:type => "integer", :desc => "Merchant ID"}
+        expose :type , documentation: {:type => "integer", :desc => "Merchant Type"} do |object, options|
+          object.class.name.downcase
+        end
+        expose :name, documentation: {:type => "string", :desc => "Merchant Name"}
+        expose :description,if: lambda { |object, options| options[:simple] == 'false' && object.description && !object.is_basic}, documentation: {:type => "string", :desc => "Merchant description"}
+        expose :address, documentation: {:type => "string", :desc => "Merchant address"}
+        expose :photos, documentation: {:type => "string", :desc => "Merchant photo"} do |merchant , options|
+          if options[:simple] == 'false'
+            if merchant.is_basic
+              CityWay::Api::V1::Entities::Photo.represent(merchant.photos.limit(3)) if merchant.photos.length > 0
+            else
+              CityWay::Api::V1::Entities::Photo.represent(merchant.photos.limit(5)) if merchant.photos.length > 0
+            end
+
+          else
+            CityWay::Api::V1::Entities::Photo.represent(merchant.primary_photo) if merchant.photos.length > 0
+          end
+        end
+        expose :icon,if: lambda { |object, options| object.icon }, documentation: {:type => "string", :desc => "Merchant icon"} do |merchant , options|
+          merchant.icon.url
+        end
+        expose :latitude,if: lambda { |object, options| !object.is_basic }, documentation: {:type => "float", :desc => "Merchant Latitude"}
+        expose :longitude,if: lambda { |object, options| !object.is_basic }, documentation: {:type => "float", :desc => "Merchant Longitude"}
+        expose :email,if: lambda { |object, options| options[:simple] == 'false' && object.email }, documentation: {:type => "string", :desc => "Merchant email"}
+        expose :website, if: lambda { |object, options| options[:simple] == 'false' && object.website }, documentation: {:type => "string", :desc => "Merchant website"} do |merchant, options|
+          unless merchant.website[/\Ahttp:\/\//] || merchant.website[/\Ahttps:\/\//]
+            "https://#{merchant.website}" unless merchant.website.blank?
+          else
+            merchant.website
+          end
+        end
+        expose :facebook, if: lambda { |object, options| options[:simple] == 'false' && !object.facebook.blank? },
+        documentation: {:type => "string", :desc => "Merchant facebook"} do |merchant, options|
+          matches = merchant.facebook.match(/(?:https?:\/\/)?(?:www\.)?facebook\.com\/(?:(?:\w)*#!\/)?(?:groups\/)?(?:pages\/)?(?:[\w\-]*\/)*?(\/)?([\w\-\.]*)/)
+          if matches
+            if matches[2].blank?
+              unless place.facebook[/\Ahttp:\/\//] || place.facebook[/\Ahttps:\/\//]
+                "https://#{place.facebook}"
+              else
+                place.facebook
+              end
+            else
+              matches[2]
+            end
+          else
+            merchant.facebook
+          end
+        end
+        expose :instagram, if: lambda { |object, options| options[:simple] == 'false' && !object.instagram.blank? }, documentation: {:type => "string", :desc => "Merchant instagram"} do |merchant, options|
+          unless merchant.instagram[/\Ahttp:\/\//] || merchant.instagram[/\Ahttps:\/\//]
+            "https://#{merchant.instagram}"
+          else
+            merchant.instagram
+          end
+        end
+        expose :twitter, if: lambda { |object, options| options[:simple] == 'false' && !object.twitter.blank? }, documentation: {:type => "string", :desc => "Merchant twitter"} do |merchant, options|
+          unless merchant.twitter[/\Ahttp:\/\//] || merchant.twitter[/\Ahttps:\/\//]
+            "https://#{merchant.twitter}" unless merchant.twitter.blank?
+          else
+            merchant.twitter
+          end
+        end
+        expose :google_plus, if: lambda { |object, options| options[:simple] == 'false' && !object.google_plus.blank? }, documentation: {:type => "string", :desc => "Merchant G+"} do |merchant, options|
+          unless merchant.google_plus[/\Ahttp:\/\//] || merchant.google_plus[/\Ahttps:\/\//]
+            "https://#{merchant.google_plus}" unless merchant.google_plus.blank?
+          else
+            merchant.google_plus
+          end
+        end
+        expose :support_disabilities, documentation: {:type => "boolean", :desc => "Merchant support_disabilities"}
+        expose :distance, if: lambda { |object, options| object.respond_to?(:distance) || options[:latitude] && options[:longitude] && !object.is_basic } do |merchant , options|
+          merchant.distance_from([options[:latitude], options[:longitude]])
+        end
+        expose :business_hours,if: lambda { |object, options| options[:simple] == 'false' && !object.is_basic } do |merchant , options|
+          CityWay::Api::V1::Entities::BusinessHours.represent(merchant.all_business_hours)
+        end
+        expose :is_open do |merchant , options|
+          merchant.is_open_now? || merchant.open_all_day
+        end
+        expose :is_basic
+        expose :open_all_day
+        expose :phones do |object, options|
+          [object.phone, object.phone_1, object.phone_2].reject(&:blank?)
+        end
+        expose :available_parking_lot, documentation: {:type => "Integer", :desc => "Vehicle available_parking_lot"}, if: lambda { |object, options| object.available_parking_lot }
+        expose :total_parking_lot, documentation: {:type => "Integer", :desc => "Vehicle total_parking_lot"}, if: lambda { |object, options| object.total_parking_lot }
+      end
+
+
+
+
+
     end
   end
 end

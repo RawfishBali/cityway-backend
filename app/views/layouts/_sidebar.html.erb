@@ -101,13 +101,13 @@
           <span class="menu_icon"><i class="fa fa15 fa-flag" aria-hidden="true"></i></span>
           <span class="menu_title">Utilità e Servizi</span>
         </a>
-        <ul class="<%= 'block' if params[:controller] == 'admin/ztls' || params[:controller] == 'admin/vehicles' || params[:controller] == 'admin/public_transports' || params[:controller] == 'admin/utility_places' || params[:controller] == 'admin/waste_managements' || params[:controller] == 'admin/utility_places' || params[:controller] == 'admin/schools' %> ">
-          <li><a href="/admin/utility_numbers" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/utility_numbers'%>">Numeri utili</a></li>
+        <ul class="<%= 'block' if params[:controller] == 'admin/ztls' || params[:controller] == 'admin/vehicles' || params[:controller] == 'admin/public_transports' || params[:controller] == 'admin/utility_places' || params[:controller] == 'admin/waste_managements' || params[:controller] == 'admin/utility_places' || params[:controller] == 'admin/schools' || params[:controller] == 'admin/parking_lots' %> ">
+          <li><a href="/admin/utility_numbers" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/utility_numbers' %>">Numeri utili</a></li>
           <li>
-            <a href="/admin/public_transports" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/ztls' || params[:controller] == 'admin/vehicles' || params[:controller] == 'admin/public_transports' %>">Muoversi in città</a>
+            <a href="/admin/public_transports" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/ztls' || params[:controller] == 'admin/vehicles' || params[:controller] == 'admin/public_transports' || params[:controller] == 'admin/parking_lots'  %>">Muoversi in città</a>
             <ul>
               <li><a href="/admin/ztls" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/ztls' %>">ZTL</a></li>
-              <li><a href="/admin/vehicles?vehicle_type=parking" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/vehicles' && params[:vehicle_type] == 'parking'%>">Parcheggi</a></li>
+              <li><a href="/admin/parking_lots" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/parking_lots' %> ">Parcheggi</a></li>
               <li><a href="/admin/vehicles?vehicle_type=bike" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/vehicles' && params[:vehicle_type] == 'bike'%>">Bici</a></li>
               <li><a href="/admin/public_transports" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/public_transports'%>">Mezzi pubblici</a></li>
               <li><a href="/admin/vehicles?vehicle_type=taxi" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/vehicles' && params[:vehicle_type] == 'taxi'%>">Taxi</a></li>

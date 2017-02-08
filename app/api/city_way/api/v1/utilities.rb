@@ -148,7 +148,7 @@ module CityWay
           desc 'Moving Within City'
           params do
             requires :id , type: Integer, values: -> { Utility.ids }
-            optional :type , type: String, values: -> { ['taxi','bike','parking'] }
+            optional :type , type: String, values: -> { ['taxi','bike'] }
             optional :latitude, type: Float
             optional :longitude, type: Float
           end
@@ -194,6 +194,30 @@ module CityWay
           get '/:id/waste_recycling' do
             utility = Utility.find(params[:id])
             present utility.waste_management_by_type(params[:is_domestic]), with: CityWay::Api::V1::Entities::WasteManagement, simple: 'true', latitude: params[:latitude], longitude: params[:longitude]
+          end
+
+
+          desc "Parking Lot List"
+          params do
+            requires :id , type: Integer, values: -> { Utility.ids }
+            optional :latitude, type: Float
+            optional :longitude, type: Float
+          end
+          get '/:id/parking_lots' do
+            utility = Utility.find(params[:id])
+            present utility.parking_lots, with: CityWay::Api::V1::Entities::ParkingLot, simple: 'true', latitude: params[:latitude], longitude: params[:longitude]
+          end
+
+          desc "Parking Lot Show"
+          params do
+            requires :id , type: Integer, values: -> { Utility.ids }
+            requires :parking_lot_id , type: Integer, values: -> { ParkingLot.ids }
+            optional :latitude, type: Float
+            optional :longitude, type: Float
+          end
+          get '/:id/parking_lots/:parking_lot_id' do
+            utility = Utility.find(params[:id])
+            present utility.parking_lots.find_by(id: params[:parking_lot_id]), with: CityWay::Api::V1::Entities::ParkingLot, simple: 'false', latitude: params[:latitude], longitude: params[:longitude]
           end
         end
       end

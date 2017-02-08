@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170207035755) do
+ActiveRecord::Schema.define(version: 20170207045043) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -413,6 +413,33 @@ ActiveRecord::Schema.define(version: 20170207035755) do
     t.integer  "utility_id"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
+  end
+
+  create_table "parking_lots", force: :cascade do |t|
+    t.string   "name",                                  null: false
+    t.string   "address",                               null: false
+    t.string   "phone"
+    t.string   "phone_1"
+    t.string   "phone_2"
+    t.string   "email"
+    t.string   "website"
+    t.string   "facebook"
+    t.string   "instagram"
+    t.string   "twitter"
+    t.string   "google_plus"
+    t.text     "description"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.boolean  "support_disabilities",  default: false
+    t.string   "photo"
+    t.string   "icon"
+    t.boolean  "is_basic",              default: false
+    t.boolean  "open_all_day"
+    t.integer  "total_parking_lot",     default: 0
+    t.integer  "available_parking_lot", default: 0
+    t.integer  "utility_id"
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
   end
 
   create_table "parks", force: :cascade do |t|
