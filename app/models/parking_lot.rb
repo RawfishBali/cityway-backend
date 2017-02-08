@@ -38,6 +38,8 @@ class ParkingLot < ActiveRecord::Base
   has_many :photos, as: :imageable, dependent: :destroy
   accepts_nested_attributes_for :photos, reject_if: :all_blank, allow_destroy: true
 
+  geocoded_by :address
+
   def primary_photo
     primary_photo = photos.where(is_primary: true)
     if primary_photo.length > 0
