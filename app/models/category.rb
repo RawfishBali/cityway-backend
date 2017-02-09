@@ -39,4 +39,8 @@ class Category < ActiveRecord::Base
     order_by << "end"
     order(order_by.join(" "))
   end
+
+  def self.find_in_order(ids)
+    self.where(id: ids).order("FIELD(id, #{ids.join(',')})")
+  end
 end

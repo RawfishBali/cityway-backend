@@ -84,7 +84,9 @@ class City < ActiveRecord::Base
   end
 
   def categories_with_merhcant
-    categories.joins(:merchants).includes(:categories_cities).parent_categories.where('categories_cities.city_id = ? ',self.id).order('categories_cities.priority ASC')
+    city_category_id = City.find(self.id).merchants.map(&:category_id)
+    ids = CategoriesCity.where('category_id in (?)', city_category_id).order('priority asc').map(&:category_id).uniq
+    Category.where(id: ids).order("position(id::text in '#{ids.join(',')}')")
   end
 
   def execute_predifined_category
