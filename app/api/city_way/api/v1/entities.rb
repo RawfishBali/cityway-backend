@@ -1137,7 +1137,7 @@ module CityWay
           CityWay::Api::V1::Entities::Advertisement.represent(all_ads)
         end
         expose :categories, if: lambda { |object, options| options[:simple] == 'false'  }  do |home , options|
-          CityWay::Api::V1::Entities::Category.represent(home.categories_with_merhcant)
+          CityWay::Api::V1::Entities::Category.represent(home.sorted_categories)
         end
         expose :bottom_advertisements, if: lambda { |object, options| options[:simple] == 'false'  }  do |home , options|
           if options[:home_active_advertisements]["bottom"] && options[:home_active_advertisements]["both"]
