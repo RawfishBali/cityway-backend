@@ -270,7 +270,7 @@ $(document).ready(function(){
       return filters;
     };
 
-    var autoComplete = $("#course_course_types").kendoAutoComplete({
+    var autoComplete = $("#course_course_type").kendoAutoComplete({
       filter: "startswith",
       placeholder: "Seleziona o crea una nuova sottocategoria",
       separator: "  ",
