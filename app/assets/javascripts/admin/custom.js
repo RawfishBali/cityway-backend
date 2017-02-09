@@ -251,6 +251,43 @@ $(document).ready(function(){
   }
 
 
+  if($("#course_types").length > 0){
+
+    var course_types = $("#course_types").val().split(',')
+
+    var course_typesDS = new kendo.data.DataSource({
+      data: course_types
+    });
+
+    var getFilters = function (filter) {
+      var filters = [];
+      filters.push(filter);
+      values = autoComplete.value().split(", ");
+      values.pop();
+      $.each(values, function (index, item) {
+        filters.push({field: "", ignoreCase: true, operator: "neq", value: item});
+      });
+      return filters;
+    };
+
+    var autoComplete = $("#course_course_types").kendoAutoComplete({
+      filter: "startswith",
+      placeholder: "Seleziona o crea una nuova sottocategoria",
+      separator: "  ",
+      dataSource: {
+        transport: {
+          read: function (options, operation) {
+            course_typesDS.read();
+            course_typesDS.filter({logic: "and", filters: getFilters(options.data.filter.filters[0])});
+            options.success(course_typesDS.view());
+          }
+        },
+        serverFiltering: true
+      }
+    }).data("kendoAutoComplete");
+  }
+
+
   if($("#sport_sport_type").length > 0){
     var sport_types = $("#sport_types").val().split(',')
 

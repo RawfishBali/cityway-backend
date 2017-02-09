@@ -1561,6 +1561,85 @@ module CityWay
       end
 
 
+      class UtilityCourse < Grape::Entity
+        expose :id, documentation: {:type => "Integer", :desc => "Utility Place ID"}
+        expose :name, documentation: {:type => "String", :desc => "Utility Place Name"}
+        expose :address, documentation: {:type => "String", :desc => "Utility Place Address"}
+        expose :description, documentation: {:type => "String", :desc => "Utility Place description"}
+        expose :photos, documentation: {:type => "string", :desc => "Merchant photo"} do |object , options|
+          if options[:simple] == 'false'
+            CityWay::Api::V1::Entities::Photo.represent(object.photos) if object.photos.length > 0
+          else
+            CityWay::Api::V1::Entities::Photo.represent(object.primary_photo) if object.photos.length > 0
+          end
+        end
+        expose :phones do |object, options|
+          [object.phone, object.phone_1, object.phone_2].reject(&:blank?)
+        end
+        expose :email, documentation: {:type => "String", :desc => "Utility Place email"}
+        expose :website,if: lambda { |object, options| !object.website.blank? }, documentation: {:type => "String", :desc => "Utility Place website"} do |object, options|
+          unless object.website[/\Ahttp:\/\//] || object.website[/\Ahttps:\/\//]
+            "https://#{object.website}" unless object.website.blank?
+          else
+            object.website
+          end
+        end
+        expose :facebook, if: lambda { |object, options| options[:simple] == 'false' && !object.facebook.blank? },
+        documentation: {:type => "string", :desc => "Merchant facebook"} do |object, options|
+          matches = object.facebook.match(/(?:https?:\/\/)?(?:www\.)?facebook\.com\/(?:(?:\w)*#!\/)?(?:groups\/)?(?:pages\/)?(?:[\w\-]*\/)*?(\/)?([\w\-\.]*)/)
+          if matches
+            if matches[2].blank?
+              unless place.facebook[/\Ahttp:\/\//] || place.facebook[/\Ahttps:\/\//]
+                "https://#{place.facebook}"
+              else
+                place.facebook
+              end
+            else
+              matches[2]
+            end
+          else
+            object.facebook
+          end
+        end
+        expose :instagram, if: lambda { |object, options| options[:simple] == 'false' && !object.instagram.blank? }, documentation: {:type => "string", :desc => "Merchant instagram"} do |object, options|
+          unless object.instagram[/\Ahttp:\/\//] || object.instagram[/\Ahttps:\/\//]
+            "https://#{object.instagram}"
+          else
+            object.instagram
+          end
+        end
+        expose :twitter, if: lambda { |object, options| options[:simple] == 'false' && !object.twitter.blank? }, documentation: {:type => "string", :desc => "Merchant twitter"} do |object, options|
+          unless object.twitter[/\Ahttp:\/\//] || object.twitter[/\Ahttps:\/\//]
+            "https://#{object.twitter}" unless object.twitter.blank?
+          else
+            object.twitter
+          end
+        end
+        expose :google_plus, if: lambda { |object, options| options[:simple] == 'false' && !object.google_plus.blank? }, documentation: {:type => "string", :desc => "Merchant G+"} do |object, options|
+          unless object.google_plus[/\Ahttp:\/\//] || object.google_plus[/\Ahttps:\/\//]
+            "https://#{object.google_plus}" unless object.google_plus.blank?
+          else
+            object.google_plus
+          end
+        end
+        expose :business_hours do |object , options|
+          CityWay::Api::V1::Entities::BusinessHours.represent(object.all_business_hours)
+        end
+        expose :latitude, documentation: {:type => "float", :desc => "Utility Place Latitude"}
+        expose :longitude, documentation: {:type => "float", :desc => "Utility Place Longitude"}
+        expose :type, documentation: {:type => "string", :desc => "Utility Place place_type"} do |object, options|
+          object.course_type
+        end
+        expose :distance, if: lambda { |object, options| options[:latitude] && options[:longitude] } do |object , options|
+          object.distance_from([options[:latitude], options[:longitude]])
+        end
+        expose :is_open do |object , options|
+          object.is_open_now?
+        end
+        expose :support_disabilities, documentation: {:type => "Boolean", :desc => "School Disabilities Support"}
+      end
+
+
 
 
 

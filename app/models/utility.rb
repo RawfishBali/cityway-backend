@@ -22,6 +22,7 @@ class Utility < ActiveRecord::Base
   has_many :schools, dependent: :destroy
   has_many :sports, dependent: :destroy
   has_many :parking_lots, dependent: :destroy
+  has_many :courses, dependent: :destroy
 
   belongs_to :city
   mount_base64_uploader :photo, PhotoUploader

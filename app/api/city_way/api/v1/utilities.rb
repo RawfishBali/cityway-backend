@@ -219,6 +219,31 @@ module CityWay
             utility = Utility.find(params[:id])
             present utility.parking_lots.find_by(id: params[:parking_lot_id]), with: CityWay::Api::V1::Entities::ParkingLot, simple: 'false', latitude: params[:latitude], longitude: params[:longitude]
           end
+
+
+          desc "Course List"
+          params do
+            requires :id , type: Integer, values: -> { Utility.ids }
+            optional :latitude, type: Float
+            optional :longitude, type: Float
+          end
+          get '/:id/courses' do
+            utility = Utility.find(params[:id])
+            present utility.courses, with: CityWay::Api::V1::Entities::UtilityCourse, simple: 'true', latitude: params[:latitude], longitude: params[:longitude]
+          end
+
+
+          desc "Course Show"
+          params do
+            requires :id , type: Integer, values: -> { Utility.ids }
+            requires :course_id , type: Integer, values: -> { ParkingLot.ids }
+            optional :latitude, type: Float
+            optional :longitude, type: Float
+          end
+          get '/:id/courses/:course_id' do
+            utility = Utility.find(params[:id])
+            present utility.courses.find_by(id: params[:course_id]), with: CityWay::Api::V1::Entities::UtilityCourse, simple: 'false', latitude: params[:latitude], longitude: params[:longitude]
+          end
         end
       end
     end

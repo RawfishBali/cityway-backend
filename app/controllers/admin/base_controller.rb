@@ -322,6 +322,17 @@ class Admin::BaseController < ApplicationController
       end
     end
 
+    if params["course"]
+      if params["course"]["photos_attributes"]
+        params["course"]["photos_attributes"].each do |photo_params|
+          if photo_params.last["picture"].class.to_s != 'ActionDispatch::Http::UploadedFile' && !photo_params.last["picture"].blank?
+            image_json =  JSON.parse(photo_params.last["picture"]["_values"].gsub("'",'"').gsub('=>',':'))
+            photo_params.last["picture"] = image_json["data"]
+          end
+        end
+      end
+    end
+
   end
 
   def save_previous_url
