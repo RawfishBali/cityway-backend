@@ -226,10 +226,16 @@ module CityWay
             requires :id , type: Integer, values: -> { Utility.ids }
             optional :latitude, type: Float
             optional :longitude, type: Float
+            optional :course_type, type: String, values: -> {Course.all.map(&:course_type)}
           end
           get '/:id/courses' do
             utility = Utility.find(params[:id])
-            present utility.courses, with: CityWay::Api::V1::Entities::UtilityCourse, simple: 'true', latitude: params[:latitude], longitude: params[:longitude]
+            if params[:course_type]
+              present utility.courses.where("course_type = ?", params[:course_type]), with: CityWay::Api::V1::Entities::UtilityCourse, simple: 'true', latitude: params[:latitude], longitude: params[:longitude]
+            else
+              present utility.courses, with: CityWay::Api::V1::Entities::UtilityCourse, simple: 'true', latitude: params[:latitude], longitude: params[:longitude]
+            end
+
           end
 
 
@@ -243,6 +249,17 @@ module CityWay
           get '/:id/courses/:course_id' do
             utility = Utility.find(params[:id])
             present utility.courses.find_by(id: params[:course_id]), with: CityWay::Api::V1::Entities::UtilityCourse, simple: 'false', latitude: params[:latitude], longitude: params[:longitude]
+          end
+
+          desc "Course Category"
+          params do
+            requires :id , type: Integer, values: -> { Utility.ids }
+            optional :latitude, type: Float
+            optional :longitude, type: Float
+          end
+          get '/:id/course_categories' do
+            utility = Utility.find(params[:id])
+            utility.courses.map(&:course_type)
           end
         end
       end

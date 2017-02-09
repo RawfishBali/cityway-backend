@@ -1640,7 +1640,9 @@ module CityWay
       end
 
 
-
+      class CourseCategory < Grape::Entity
+        expose :course_type
+      end
 
 
     end
