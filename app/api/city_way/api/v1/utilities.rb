@@ -257,7 +257,7 @@ module CityWay
             optional :latitude, type: Float
             optional :longitude, type: Float
           end
-          get '/:id/course_categories' do
+          get '/:id/course_types' do
             utility = Utility.find(params[:id])
             utility.courses.map(&:course_type)
           end
