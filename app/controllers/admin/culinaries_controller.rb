@@ -1,5 +1,6 @@
 class Admin::CulinariesController < Admin::BaseController
   before_action :set_admin_culinary, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /admin/culinaries
   # GET /admin/culinaries.json

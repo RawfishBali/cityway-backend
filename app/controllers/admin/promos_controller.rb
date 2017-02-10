@@ -1,11 +1,17 @@
 class Admin::PromosController < Admin::BaseController
   before_action :set_admin_promo, only: [:show, :edit, :update, :destroy]
   before_action :set_merchants
+  load_and_authorize_resource
 
   # GET /admin/promos
   # GET /admin/promos.json
   def index
-    @admin_promos = City.find(session[:current_city_id]).promos.order('created_at DESC').page(params[:page]).per(10)
+    if current_admin.has_role? :merchant_admin
+      @admin_promos = Promo.where('merchant_id in (?)', Merchant.where(admin_id: current_admin.id).map(&:id)).page(params[:page]).per(10)
+    else
+      @admin_promos = City.find(session[:current_city_id]).promos.order('created_at DESC').page(params[:page]).per(10)
+    end
+
   end
 
   # GET /admin/promos/1

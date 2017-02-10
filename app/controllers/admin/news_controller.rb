@@ -1,5 +1,6 @@
 class Admin::NewsController < Admin::BaseController
   before_action :set_admin_news, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /admin/news
   # GET /admin/news.json

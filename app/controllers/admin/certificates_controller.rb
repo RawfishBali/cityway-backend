@@ -1,5 +1,6 @@
 class Admin::CertificatesController < Admin::BaseController
   before_action :set_admin_certificate, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /admin/certificates
   # GET /admin/certificates.json

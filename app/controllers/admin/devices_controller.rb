@@ -1,5 +1,6 @@
 class Admin::DevicesController < Admin::BaseController
   before_action :set_admin_device, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /admin/devices
   # GET /admin/devices.json

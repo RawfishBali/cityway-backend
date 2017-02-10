@@ -1,26 +1,28 @@
 class Admin::MerchantsController < Admin::BaseController
   before_action :set_admin_merchant, only: [:show, :edit, :update, :destroy]
   before_action :prepare_categories, only: [:new, :edit, :create, :update]
+  load_and_authorize_resource
 
   # GET /admin/merchants
   # GET /admin/merchants.json
   def index
     if params[:category_id]
       if params[:name]
-        @admin_merchants = City.find(session[:current_city_id]).categories.find(params[:category_id]).merchants.where('lower(name) like ?', "%#{params[:name].downcase}%").order('name ASC').page(params[:page]).per(10)
+        @admin_merchants = City.find(session[:current_city_id]).categories.find(params[:category_id]).merchants.where('lower(name) like ?', "%#{params[:name].downcase}%").order('name ASC')
       else
-        @admin_merchants = City.find(session[:current_city_id]).categories.find(params[:category_id]).merchants.order('name ASC').page(params[:page]).per(10)
+        @admin_merchants = City.find(session[:current_city_id]).categories.find(params[:category_id]).merchants.order('name ASC')
       end
     else
       if params[:name]
-        @admin_merchants = City.find(session[:current_city_id]).merchants.where('lower(name) like ?', "%#{params[:name].downcase}%").order('name ASC').page(params[:page]).per(10)
+        @admin_merchants = City.find(session[:current_city_id]).merchants.where('lower(name) like ?', "%#{params[:name].downcase}%").order('name ASC')
       else
-        @admin_merchants = City.find(session[:current_city_id]).merchants.order('name ASC').page(params[:page]).per(10)
+        @admin_merchants = City.find(session[:current_city_id]).merchants.order('name ASC')
       end
-
     end
 
-    @categories =  City.find(session[:current_city_id]).parent_categories
+    @admin_merchants =  @admin_merchants.where(admin_id: current_admin.id) if current_admin.has_role? :merchant_admin
+    @admin_merchants = @admin_merchants.page(params[:page]).per(10)
+    @categories =  City.find(session[:current_city_id]).parent_categories.uniq
   end
 
   # GET /admin/merchants/1

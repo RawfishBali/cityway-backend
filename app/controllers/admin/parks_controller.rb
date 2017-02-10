@@ -1,5 +1,6 @@
 class Admin::ParksController < Admin::BaseController
   before_action :set_admin_park, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /admin/parks
   # GET /admin/parks.json

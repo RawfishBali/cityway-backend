@@ -1,5 +1,6 @@
 class Admin::PublicOfficesController < Admin::BaseController
   before_action :set_admin_public_office, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /admin/public_offices
   # GET /admin/public_offices.json

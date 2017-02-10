@@ -1,5 +1,6 @@
 class Admin::AdvertisementsController < Admin::BaseController
   before_action :set_advertisement, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /admin/advertisements
   # GET /admin/advertisements.json
@@ -71,7 +72,7 @@ class Admin::AdvertisementsController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_advertisement_params
-      params[:advertisement][:sections] = params[:advertisement][:sections].reject(&:empty?) 
+      params[:advertisement][:sections] = params[:advertisement][:sections].reject(&:empty?)
       params.require(:advertisement).permit(:photo ,:start_date, :end_date, :second_start_date, :second_end_date, :position, city_ids:[], sections:[])
     end
 end

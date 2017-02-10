@@ -1,5 +1,6 @@
 class Admin::VehiclesController < Admin::BaseController
   before_action :set_admin_vehicle, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /admin/vehicles
   # GET /admin/vehicles.json

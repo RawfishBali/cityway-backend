@@ -1,5 +1,6 @@
 class Admin::ParkingLotsController < Admin::BaseController
   before_action :set_admin_parking_lot, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /admin/parking_lots
   # GET /admin/parking_lots.json

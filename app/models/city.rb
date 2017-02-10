@@ -80,7 +80,7 @@ class City < ActiveRecord::Base
   end
 
   def sorted_categories
-     categories.includes(:categories_cities).parent_categories.where('categories_cities.city_id = ? ',self.id).order('categories_cities.priority ASC')
+    categories.includes(:categories_cities).parent_categories.where('categories_cities.city_id = ? ',self.id).order('categories_cities.priority ASC')
   end
 
   def categories_with_merhcant

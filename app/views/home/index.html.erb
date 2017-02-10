@@ -10,8 +10,15 @@
         <div class="uk-clearfix md-card-overlay-header">
 
           <h3>
-            <%= link_to city.name, edit_admin_city_path(city)  %>
-            <%= link_to '<i class="md-icon material-icons float-right">&#xE872;</i>'.html_safe, admin_city_path(city), method: :delete , :data => {:confirm => 'Sei sicuro?'} %>
+
+            <% if current_admin.has_role? :merchant_admin %>
+              <%= link_to city.name, edit_admin_city_path(city)  %>
+            <% else %>
+              <%= link_to city.name, edit_admin_city_path(city)  %>
+            <% end %>
+            <% if can? :manage, City %>
+              <%= link_to '<i class="md-icon material-icons float-right">&#xE872;</i>'.html_safe, admin_city_path(city), method: :delete , :data => {:confirm => 'Sei sicuro?'}  %>
+            <% end %>
           </h3>
         </div>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -21,8 +28,10 @@
   <% end %>
 </div>
 
-<div class="md-fab-wrapper">
-  <a class="md-fab md-fab-accent md-fab-wave-light waves-effect waves-button waves-light" href="/admin/cities/new" id="invoice_add">
-    <i class="material-icons"></i>
-  </a>
-</div>
+<% if can? :manage, City %>
+  <div class="md-fab-wrapper">
+    <a class="md-fab md-fab-accent md-fab-wave-light waves-effect waves-button waves-light" href="/admin/cities/new" id="invoice_add">
+      <i class="material-icons"></i>
+    </a>
+  </div>
+<% end %>

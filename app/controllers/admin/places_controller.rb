@@ -1,5 +1,6 @@
 class Admin::PlacesController < Admin::BaseController
   before_action :set_admin_place, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /admin/places
   # GET /admin/places.json

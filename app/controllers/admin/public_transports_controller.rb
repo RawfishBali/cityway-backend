@@ -1,5 +1,6 @@
 class Admin::PublicTransportsController < Admin::BaseController
   before_action :set_admin_public_transport, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /admin/public_transports
   # GET /admin/public_transports.json

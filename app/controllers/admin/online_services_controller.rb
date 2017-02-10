@@ -1,5 +1,6 @@
 class Admin::OnlineServicesController < Admin::BaseController
   before_action :set_admin_online_service, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /admin/online_services
   # GET /admin/online_services.json

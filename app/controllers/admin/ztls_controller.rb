@@ -1,5 +1,6 @@
 class Admin::ZtlsController < Admin::BaseController
   before_action :set_admin_ztl, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /admin/ztls
   # GET /admin/ztls.json

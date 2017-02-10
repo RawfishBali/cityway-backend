@@ -1,8 +1,14 @@
 class Admin::CitiesController < Admin::BaseController
   before_action :set_city, except: [:index, :new, :create]
+  load_and_authorize_resource
+  skip_authorize_resource :only => :edit
 
   def index
-    @cities = City.all.order('Name ASC').page(20).page params[:page]
+    if current_admin.has_role? :admin_merchant
+      @cities = City.where('id in (?)', current_admin.merchants.map(&:city_id)).order('Name ASC').page(20).page params[:page]
+    else
+      @cities = City.all.order('Name ASC').page(20).page params[:page]
+    end
   end
 
 
@@ -19,6 +25,7 @@ class Admin::CitiesController < Admin::BaseController
 
   def edit
     set_city
+    return redirect_to admin_merchants_path if current_admin.has_role? :merchant_admin
   end
 
   def create

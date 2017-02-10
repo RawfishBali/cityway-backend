@@ -1,5 +1,6 @@
 class Admin::UtilityNumbersController < Admin::BaseController
   before_action :set_admin_utility_number, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /admin/utility_numbers
   # GET /admin/utility_numbers.json

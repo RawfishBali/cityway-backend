@@ -1,5 +1,6 @@
 class Admin::SecuritiesController < Admin::BaseController
   before_action :set_admin_security, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /admin/securities
   # GET /admin/securities.json

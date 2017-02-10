@@ -1,6 +1,7 @@
 class Admin::CoursesController < Admin::BaseController
   before_action :set_admin_course, only: [:show, :edit, :update, :destroy]
   before_action :set_course_types, only: [:new, :edit, :show, :index]
+  load_and_authorize_resource
 
   # GET /admin/courses
   # GET /admin/courses.json

@@ -1,5 +1,6 @@
 class Admin::EventsController < Admin::BaseController
   before_action :set_admin_event, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /admin/events
   # GET /admin/events.json
