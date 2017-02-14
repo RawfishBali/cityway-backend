@@ -49,7 +49,7 @@ class Place < ActiveRecord::Base
   validates :phone, phony_plausible: true
 
   def validate_number_of_photos
-    errors.add(:photos, "Maximum photos is 3") if photos.size > 2
+    errors.add(:photos, "Maximum photos is 3") if photos.size > 3
   end
 
   def primary_photo

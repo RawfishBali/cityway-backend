@@ -76,12 +76,35 @@ $(document).ready(function(){
 
   $('#photos')
   .on('cocoon:after-insert', function(e, added_task) {
+    if(location.href.indexOf("/admin/places/") > 0){
+      if ($('#photos .nested-fields:visible').length == 3) {
+       $('#photos .links a').hide();
+       } else {
+         $('#photos .links a').show();
+       }
+    }
     $('select').selectize()
     $('.dropzone').html5imageupload({
       onSave: function() {
       }
     });
   })
+  .on('cocoon:after-remove', function(e, added_task) {
+    if(location.href.indexOf("/admin/places/") > 0){
+      if ($('#photos .nested-fields:visible').length < 3) {
+       $('#photos .links a').show();
+       } else {
+         $('#photos .links a').hide();
+       }
+    }
+  })
+  if(location.href.indexOf("/admin/places/") > 0){
+    if ($('#photos .nested-fields:visible').length == 3) {
+     $('#photos .links a').hide();
+     } else {
+       $('#photos .links a').show();
+     }
+  }
 
   $('#waste_pickup_schedules')
   .on('cocoon:after-insert', function(e, added_task) {
