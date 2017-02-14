@@ -31,7 +31,7 @@
     <div class="uk-grid" data-uk-grid-margin>
       <%= f.hidden_field :commonplace_id , value: @commonplace_id %>
       <%= f.hidden_field :is_city_council_member , value: true %>
-      <%= f.hidden_field :is_major , value: @is_major %>
+      <%#= f.hidden_field :is_major , value: @is_major %>
       <%= f.hidden_field :politic_group_id , value: (params[:politic_group_id].blank? ? @admin_profile.politic_group_id : params[:politic_group_id]) %>
       <div class="uk-width-medium-1-1">
         <div class="uk-form-row">
@@ -120,6 +120,31 @@
           </div>
         </div>
       </div>
+
+
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+
+              <span class="">
+                <%= f.check_box :is_major,class: 'float-right ', 'data-switchery': true, 'data-switchery-size':"large"  %>
+                <span id="switchery_active_text">Sindaco</span>
+              </span>
+            </div>
+            <div class="uk-width-medium-1-2">
+              <span class="">
+                <%= f.check_box :is_vice_major,class: 'float-right ', 'data-switchery': true, 'data-switchery-size':"large"  %>
+                <span id="switchery_active_text">Vicesindaco</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
       <div class="uk-width-medium-1-1">
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>

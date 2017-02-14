@@ -473,6 +473,9 @@ module CityWay
         expose :major do |commonplace, options|
           CityWay::Api::V1::Entities::Profile.represent commonplace.major,latitude: options[:latitude], longitude: options[:longitude]
         end
+        expose :major do |commonplace, options|
+          CityWay::Api::V1::Entities::Profile.represent commonplace.vice_major,latitude: options[:latitude], longitude: options[:longitude]
+        end
         expose :city_council do |commonplace, options|
           CityWay::Api::V1::Entities::Profile.represent commonplace.city_councils,latitude: options[:latitude], longitude: options[:longitude]
         end

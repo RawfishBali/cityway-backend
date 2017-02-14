@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170208033932) do
+ActiveRecord::Schema.define(version: 20170214071807) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -555,6 +555,7 @@ ActiveRecord::Schema.define(version: 20170208033932) do
     t.string   "major_icon"
     t.string   "phone_1"
     t.string   "phone_2"
+    t.boolean  "is_vice_major",          default: false
   end
 
   add_index "profiles", ["commonplace_id"], name: "index_profiles_on_commonplace_id", using: :btree
