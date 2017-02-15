@@ -9,4 +9,10 @@ class MessageMailer < ApplicationMailer
     @password = password
     mail(to: admin.email, :subject => "Admin #{admin.email} has created")
   end
+
+  def activated_promos_notification(admin, promo)
+    @admin =  admin
+    @promo = promo
+    mail(to: admin.email, :subject => "Admin #{admin.email} has created")
+  end
 end

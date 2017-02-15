@@ -40,6 +40,7 @@ class Promo < ActiveRecord::Base
 
   before_save :calculate_discounted_price
   before_save :set_activation, if: :activation_need_update?
+  after_save :send_email_notification, if: Proc.new {|model| model.approval }
   before_create :set_activation
 
   def category
@@ -91,5 +92,9 @@ class Promo < ActiveRecord::Base
       self.activated_at = nil
       self.activated_at = nil
     end
+  end
+
+  def send_email_notification
+    MessageMailer.activated_promos_notification(self.merchant.admin, self).deliver_now if self.merchant.admin
   end
 end
