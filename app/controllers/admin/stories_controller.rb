@@ -1,6 +1,6 @@
 class Admin::StoriesController < Admin::BaseController
   before_action :set_admin_story, only: [:show, :edit, :update, :destroy]
-  load_and_authorize_resource
+  load_and_authorize_resource param_method: :admin_story_params
 
   # GET /admin/stories
   # GET /admin/stories.json

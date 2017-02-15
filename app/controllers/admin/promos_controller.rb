@@ -1,7 +1,7 @@
 class Admin::PromosController < Admin::BaseController
   before_action :set_admin_promo, only: [:show, :edit, :update, :destroy]
   before_action :set_merchants
-  load_and_authorize_resource
+  load_and_authorize_resource param_method: :admin_promo_params
 
   # GET /admin/promos
   # GET /admin/promos.json

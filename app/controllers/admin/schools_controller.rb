@@ -1,6 +1,6 @@
 class Admin::SchoolsController < Admin::BaseController
   before_action :set_admin_school, only: [:show, :edit, :update, :destroy]
-  load_and_authorize_resource
+  load_and_authorize_resource param_method: :admin_school_params
 
   # GET /admin/schools
   # GET /admin/schools.json

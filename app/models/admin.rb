@@ -25,8 +25,4 @@ class Admin < ActiveRecord::Base
   rolify strict: true
   has_many :merchants
 
-  after_create :send_email_notification
-
-  def send_email_notification
-  end
 end

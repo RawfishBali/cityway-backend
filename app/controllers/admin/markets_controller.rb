@@ -1,6 +1,6 @@
 class Admin::MarketsController < Admin::BaseController
   before_action :set_admin_market, only: [:show, :edit, :update, :destroy]
-  load_and_authorize_resource
+  load_and_authorize_resource param_method: :admin_market_params
 
   # GET /admin/markets
   # GET /admin/markets.json

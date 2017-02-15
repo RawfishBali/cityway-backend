@@ -10,19 +10,6 @@ module CityWay
             authenticate!
           end
 
-          desc "CityHall Detail"
-          params do
-            requires :id , type: Integer, values: -> { Commonplace.ids }
-            optional :latitude, type: Float
-            optional :longitude, type: Float
-          end
-          get '/:id' do
-            commonplace = Commonplace.find(params[:id])
-            advertisements = commonplace.city.active_advertisements
-            present commonplace, with: CityWay::Api::V1::Entities::Commonplace, simple: 'false', latitude: params[:latitude], longitude: params[:longitude], advertisements: advertisements
-          end
-
-
           desc "CityHall Public Offices"
           params do
             requires :id , type: Integer, values: -> { Commonplace.ids }

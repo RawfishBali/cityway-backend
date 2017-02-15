@@ -1,6 +1,6 @@
 class Admin::SplashesController < Admin::BaseController
   before_action :set_admin_splash, only: [:show, :edit, :update, :destroy]
-  load_and_authorize_resource
+  load_and_authorize_resource param_method: :admin_splash_params
 
   # GET /admin/splashes
   # GET /admin/splashes.json

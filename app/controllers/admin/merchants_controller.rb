@@ -1,7 +1,7 @@
 class Admin::MerchantsController < Admin::BaseController
   before_action :set_admin_merchant, only: [:show, :edit, :update, :destroy]
   before_action :prepare_categories, only: [:new, :edit, :create, :update]
-  load_and_authorize_resource
+  load_and_authorize_resource param_method: :admin_merchant_params
 
   # GET /admin/merchants
   # GET /admin/merchants.json

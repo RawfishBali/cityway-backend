@@ -1,6 +1,6 @@
 class Admin::CategoriesController < Admin::BaseController
   before_action :set_admin_category, only: [:show, :edit, :update, :destroy]
-  load_and_authorize_resource
+  load_and_authorize_resource param_method: :admin_category_params
 
   # GET /admin/categories
   # GET /admin/categories.json

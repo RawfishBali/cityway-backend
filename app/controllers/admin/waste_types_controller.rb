@@ -1,6 +1,6 @@
 class Admin::WasteTypesController < Admin::BaseController
   before_action :set_admin_waste_type, only: [:show, :edit, :update, :destroy]
-  load_and_authorize_resource
+  load_and_authorize_resource param_method: :admin_waste_type_params
 
   # GET /admin/waste_types
   # GET /admin/waste_types.json

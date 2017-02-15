@@ -1,6 +1,6 @@
 class Admin::SportsController < Admin::BaseController
   before_action :set_admin_sport, only: [:show, :edit, :update, :destroy]
-  load_and_authorize_resource
+  load_and_authorize_resource param_method: :admin_sport_params
 
   # GET /admin/sports
   # GET /admin/sports.json

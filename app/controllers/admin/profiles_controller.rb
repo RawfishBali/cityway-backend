@@ -1,6 +1,6 @@
 class Admin::ProfilesController < Admin::BaseController
   before_action :set_admin_profile, only: [:show, :edit, :update, :destroy]
-  load_and_authorize_resource
+  load_and_authorize_resource param_method: :admin_profile_params
 
   # GET /admin/profiles
   # GET /admin/profiles.json

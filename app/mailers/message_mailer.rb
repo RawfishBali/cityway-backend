@@ -4,8 +4,9 @@ class MessageMailer < ApplicationMailer
     mail(to: message.email, :subject => "CityWay Message from #{message.firstname} #{message.lastname}")
   end
 
-  def admin_created_notification(admin)
+  def admin_created_notification(admin, password)
     @admin =  admin
+    @password = password
     mail(to: admin.email, :subject => "Admin #{admin.email} has created")
   end
 end

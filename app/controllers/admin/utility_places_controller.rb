@@ -1,6 +1,6 @@
 class Admin::UtilityPlacesController < Admin::BaseController
   before_action :set_admin_utility_place, only: [:show, :edit, :update, :destroy]
-  load_and_authorize_resource
+  load_and_authorize_resource param_method: :admin_utility_place_params
 
   # GET /admin/utility_places
   # GET /admin/utility_places.json

@@ -1,6 +1,6 @@
 class Admin::CitiesController < Admin::BaseController
   before_action :set_city, except: [:index, :new, :create]
-  load_and_authorize_resource
+  load_and_authorize_resource param_method: :city_params
   skip_authorize_resource :only => :edit
 
   def index

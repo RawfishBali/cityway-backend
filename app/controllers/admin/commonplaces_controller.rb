@@ -1,6 +1,6 @@
 class Admin::CommonplacesController < Admin::BaseController
   before_action :set_commonplace, except: [:index, :new, :create]
-  load_and_authorize_resource
+  load_and_authorize_resource param_method: :commonplace_params
 
   def edit
   end

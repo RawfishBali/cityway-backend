@@ -1,6 +1,6 @@
 class Admin::ItinerariesController < Admin::BaseController
   before_action :set_admin_itinerary, only: [:show, :edit, :update, :destroy]
-  load_and_authorize_resource
+  load_and_authorize_resource param_method: :admin_itinerary_params
 
   # GET /admin/itineraries
   # GET /admin/itineraries.json

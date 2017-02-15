@@ -117,7 +117,16 @@ class Merchant < ActiveRecord::Base
   end
 
   def create_admin_merchant
-    admin = self.admin.find_or_create_by(email: self.email)
+    admin = Admin.find_or_initialize_by(email: self.email)
+    password = (0...8).map { (65 + rand(26)).chr }.join
+    if admin.new_record?
+      admin.password = password
+    else
+      admin.update(password: password)
+    end
+    self.admin = admin
+    save
     admin.add_role :merchant_admin
+    MessageMailer.admin_created_notification(admin, password).deliver_now
   end
 end
