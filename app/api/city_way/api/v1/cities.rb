@@ -85,9 +85,18 @@ module CityWay
           get '/:id/merchants' do
             category = Category.find(params[:category_id])
             if params[:subcategory_id].blank?
-              subcategories = category.subcategories
+              # subcategories = category.subcategories
 
               merchants = Merchant.active_merchants.joins(:cities_merchants).where('cities_merchants.city_id = ? AND merchants.category_id = ?',params[:id], params[:category_id]).page params[:page]
+
+              subcategories = []
+              merchants.each do |merchant|
+                merchant.subcategories.each do |subcategory|
+                  subcategories << subcategory
+                end
+
+              end
+              subcategories = subcategories.uniq
 
               # merchants = Merchant.active_merchants.where(city_id: params[:id] , category_id: params[:category_id]).page params[:page]
             else
