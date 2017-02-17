@@ -242,7 +242,7 @@ module CityWay
           desc "Course Show"
           params do
             requires :id , type: Integer, values: -> { Utility.ids }
-            requires :course_id , type: Integer, values: -> { ParkingLot.ids }
+            requires :course_id , type: Integer, values: -> { Course.ids }
             optional :latitude, type: Float
             optional :longitude, type: Float
           end
