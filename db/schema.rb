@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170214071807) do
+ActiveRecord::Schema.define(version: 20170222083431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -108,6 +108,7 @@ ActiveRecord::Schema.define(version: 20170214071807) do
     t.string   "photo"
     t.string   "icon"
     t.boolean  "predifined", default: false
+    t.integer  "priority",   default: 0
   end
 
   add_index "categories", ["parent_id"], name: "index_categories_on_parent_id", using: :btree
@@ -765,6 +766,7 @@ ActiveRecord::Schema.define(version: 20170214071807) do
     t.integer  "utility_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.string   "mobile_number"
   end
 
   create_table "utility_places", force: :cascade do |t|

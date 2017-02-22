@@ -760,8 +760,9 @@ module CityWay
       class UtilityNumber < Grape::Entity
         expose :id, documentation: {:type => "Integer", :desc => "Utility Number ID"}
         expose :name, documentation: {:type => "String", :desc => "Utility Number Name"}
-        expose :local_number, documentation: {:type => "String", :desc => "Utility Number Local Number"}
-        expose :national_number, documentation: {:type => "String", :desc => "Utility Number National Number"}
+        expose :phones do |object, options|
+          [object.local_number, object.national_number, object.mobile_number].reject(&:blank?)
+        end
         expose :address, documentation: {:type => "String", :desc => "Utility Number Address"}
       end
 

@@ -72,6 +72,6 @@ class Admin::UtilityNumbersController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_utility_number_params
-      params.require(:utility_number).permit(:name, :national_number, :local_number, :utility_id,:address)
+      params.require(:utility_number).permit(:name, :national_number, :local_number, :utility_id,:address, :mobile_number)
     end
 end
