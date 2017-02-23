@@ -199,6 +199,10 @@
   height: 300px;
 }
 
+#parking_lot_map{
+  height: 300px;
+}
+
 .new-city-label{
   margin-top: 2px;
   float: left;

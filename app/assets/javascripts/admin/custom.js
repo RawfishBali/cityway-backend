@@ -948,4 +948,119 @@ $(document).ready(function(){
     });
   }
 
+
+  if($("#parking_lot_map").length > 0){
+    if($("#parking_lot_latitude").val() == "" && $("#parking_lot_longitude").val() == ""){
+      var lat = 45.5454787
+      var long = 11.535421400000018
+    }else{
+      var lat = $("#parking_lot_latitude").val()
+      var long = $("#parking_lot_longitude").val()
+    }
+    map = new GMaps({
+      div: '#parking_lot_map',
+      lat: lat,
+      lng: long
+    });
+
+    map.addMarker({
+      lat: $("#parking_lot_latitude").val(),
+      lng: $("#parking_lot_longitude").val(),
+    });
+
+    $('#parking_lot_address').keyup(function() {
+      delay(function(){
+        GMaps.geocode({
+          address: $('#parking_lot_address').val(),
+          callback: function(results, status) {
+            if (status == 'OK') {
+              map.removeMarkers();
+              var latlng = results[0].geometry.location;
+              map.setCenter(latlng.lat(), latlng.lng());
+              map.addMarker({
+                lat: latlng.lat(),
+                lng: latlng.lng()
+              });
+              $("#parking_lot_latitude").parent().addClass('md-input-filled')
+              $("#parking_lot_longitude").parent().addClass('md-input-filled')
+              $("#parking_lot_latitude").val(latlng.lat())
+              $("#parking_lot_longitude").val(latlng.lng())
+            }
+          }
+        });
+      }, 500 );
+    });
+
+    $("#parking_lot_latitude, #parking_lot_longitude").keyup(function() {
+      delay(function(){
+        if($("#parking_lot_latitude").val() != "" && $("#parking_lot_longitude").val() != "" && $.isNumeric($("#parking_lot_latitude").val()) && $.isNumeric($("#parking_lot_longitude").val()) ){
+          map.removeMarkers();
+          var index = map.markers.length;
+          var lat = $("#parking_lot_latitude").val()
+          var lng = $("#parking_lot_longitude").val()
+
+          geocode_url = "http://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lng+"&sensor=true"
+
+          $.ajax({
+            url: geocode_url,
+            context: document.body
+          }).done(function(data) {
+            if(data["status"] =="OK"){
+              $("#parking_lot_address").val(data["results"][0]["formatted_address"])
+              $("#parking_lot_address").parent().addClass('md-input-filled')
+            }
+
+          });
+
+          map.addMarker({
+            lat: lat,
+            lng: lng,
+            title: 'Marker #' + index
+          });
+
+          map.setCenter(lat, lng);
+          $("#parking_lot_latitude").parent().addClass('md-input-filled')
+          $("#parking_lot_longitude").parent().addClass('md-input-filled')
+          $("#parking_lot_latitude").val(lat);
+          $("#parking_lot_longitude").val(lng);
+
+        }
+
+
+      }, 500 );
+    });
+
+    GMaps.on('click', map.map, function(event) {
+      map.removeMarkers();
+      var index = map.markers.length;
+      var lat = event.latLng.lat();
+      var lng = event.latLng.lng();
+
+      geocode_url = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lng+"&sensor=true"
+
+      $.ajax({
+        url: geocode_url,
+        context: document.body
+      }).done(function(data) {
+        if(data["status"] =="OK"){
+          $("#parking_lot_address").val(data["results"][0]["formatted_address"])
+          $("#parking_lot_address").parent().addClass('md-input-filled')
+        }
+      });
+
+      map.addMarker({
+        lat: lat,
+        lng: lng,
+        title: 'Marker #' + index
+      });
+
+      map.setCenter(lat, lng);
+      $("#parking_lot_latitude").parent().addClass('md-input-filled')
+      $("#parking_lot_longitude").parent().addClass('md-input-filled')
+      $("#parking_lot_latitude").val(lat);
+      $("#parking_lot_longitude").val(lng);
+    });
+  }
+
+
 })

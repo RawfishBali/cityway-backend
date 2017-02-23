@@ -16,10 +16,15 @@
     <h2 class=" ">
       <div class="uk-width-medium-1-2 uk-row-first">
         Gestisci Parcheggi
+        <span class="marginL170">
+          <%= check_box_tag :sport_map_toggle, false,{},{class: 'float-right ', 'data-switchery': true, 'data-switchery-size':"large"}  %>
+          <span id="switchery_active_text">Map</span>
+        </span>
       </div>
+
       <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, admin_parking_lots_path, class:'float-right marginTM40' %>
     </h2>
-    <div class="clear"></div>
+
 
     <div class="uk-grid" data-uk-grid-margin>
       <div class="uk-width-medium-1-1">
@@ -36,7 +41,6 @@
           </div>
         </div>
       </div>
-
       <div class="uk-width-medium-1-1">
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
@@ -52,6 +56,8 @@
           </div>
         </div>
       </div>
+
+
 
       <div class="uk-width-medium-1-1">
         <div class="uk-form-row">
@@ -150,7 +156,7 @@
               <%= f.text_field :website,class: 'md-input'  %>
             </div>
             <div class="uk-width-medium-1-2">
-              
+
             </div>
 
           </div>
