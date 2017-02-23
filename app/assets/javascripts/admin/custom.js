@@ -42,6 +42,14 @@ $(document).ready(function(){
      }
   })
 
+  $("#sport_map_toggle").change(function(){
+     if($("#sport_map_toggle").is(':checked')){
+       $(".not-basic").slideDown();
+     }else{
+       $(".not-basic").slideUp();
+     }
+  })
+
   var url = window.location.pathname.split("/");
   if(url[2] == "city_hall_stories"){
     $(".add_fields").click();
@@ -707,6 +715,124 @@ $(document).ready(function(){
       $("#parking_lot_longitude").val(lng);
     });
   }
+
+
+
+
+
+  if($("#sport_map").length > 0){
+    if($("#sport_latitude").val() == "" && $("#sport_longitude").val() == ""){
+      var lat = 45.5454787
+      var long = 11.535421400000018
+    }else{
+      var lat = $("#sport_latitude").val()
+      var long = $("#sport_longitude").val()
+    }
+    map = new GMaps({
+      div: '#sport_map',
+      lat: lat,
+      lng: long
+    });
+
+    map.addMarker({
+      lat: $("#sport_latitude").val(),
+      lng: $("#sport_longitude").val(),
+    });
+
+    $('#sport_address').keyup(function() {
+      delay(function(){
+        GMaps.geocode({
+          address: $('#sport_address').val(),
+          callback: function(results, status) {
+            if (status == 'OK') {
+              map.removeMarkers();
+              var latlng = results[0].geometry.location;
+              map.setCenter(latlng.lat(), latlng.lng());
+              map.addMarker({
+                lat: latlng.lat(),
+                lng: latlng.lng()
+              });
+              $("#sport_latitude").parent().addClass('md-input-filled')
+              $("#sport_longitude").parent().addClass('md-input-filled')
+              $("#sport_latitude").val(latlng.lat())
+              $("#sport_longitude").val(latlng.lng())
+            }
+          }
+        });
+      }, 500 );
+    });
+
+    $("#sport_latitude, #sport_longitude").keyup(function() {
+      delay(function(){
+        if($("#sport_latitude").val() != "" && $("#sport_longitude").val() != "" && $.isNumeric($("#sport_latitude").val()) && $.isNumeric($("#sport_longitude").val()) ){
+          map.removeMarkers();
+          var index = map.markers.length;
+          var lat = $("#sport_latitude").val()
+          var lng = $("#sport_longitude").val()
+
+          geocode_url = "http://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lng+"&sensor=true"
+
+          $.ajax({
+            url: geocode_url,
+            context: document.body
+          }).done(function(data) {
+            if(data["status"] =="OK"){
+              $("#sport_address").val(data["results"][0]["formatted_address"])
+              $("#sport_address").parent().addClass('md-input-filled')
+            }
+
+          });
+
+          map.addMarker({
+            lat: lat,
+            lng: lng,
+            title: 'Marker #' + index
+          });
+
+          map.setCenter(lat, lng);
+          $("#sport_latitude").parent().addClass('md-input-filled')
+          $("#sport_longitude").parent().addClass('md-input-filled')
+          $("#sport_latitude").val(lat);
+          $("#sport_longitude").val(lng);
+
+        }
+
+
+      }, 500 );
+    });
+
+    GMaps.on('click', map.map, function(event) {
+      map.removeMarkers();
+      var index = map.markers.length;
+      var lat = event.latLng.lat();
+      var lng = event.latLng.lng();
+
+      geocode_url = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lng+"&sensor=true"
+
+      $.ajax({
+        url: geocode_url,
+        context: document.body
+      }).done(function(data) {
+        if(data["status"] =="OK"){
+          $("#sport_address").val(data["results"][0]["formatted_address"])
+          $("#sport_address").parent().addClass('md-input-filled')
+        }
+      });
+
+      map.addMarker({
+        lat: lat,
+        lng: lng,
+        title: 'Marker #' + index
+      });
+
+      map.setCenter(lat, lng);
+      $("#sport_latitude").parent().addClass('md-input-filled')
+      $("#sport_longitude").parent().addClass('md-input-filled')
+      $("#sport_latitude").val(lat);
+      $("#sport_longitude").val(lng);
+    });
+  }
+
 
 
 })

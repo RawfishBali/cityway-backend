@@ -17,6 +17,10 @@
       <% else %>
       Gestisci Strutture Sportive
       <% end %>
+      <span class="marginL170">
+        <%= check_box_tag :sport_map_toggle, false,{},{class: 'float-right ', 'data-switchery': true, 'data-switchery-size':"large"}  %>
+        <span id="switchery_active_text">Map</span>
+      </span>
       <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, :back, class:'float-right' %>
     </h2>
     <%= hidden_field_tag :sport_types, @sport_types %>
@@ -53,6 +57,21 @@
             <div class="uk-width-medium-1-2">
               <label>Indirizzo</label>
               <%= f.text_field :address, required: true,class: 'md-input addressable'  %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+              <div id="sport_map" class="not-basic"></div>
+            </div>
+            <div class="uk-width-medium-1-2">
+              <label class='not-basic'>Latitude</label>
+              <%= f.text_field :latitude, required: true,class: 'md-input not-basic'  %>
+              <label class='not-basic'>Longitude</label>
+              <%= f.text_field :longitude, required: true,class: 'md-input not-basic'  %>
             </div>
           </div>
         </div>
