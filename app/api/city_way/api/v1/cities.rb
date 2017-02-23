@@ -89,10 +89,6 @@ module CityWay
 
               merchants = Merchant.active_merchants.joins(:cities_merchants).uniq.where('cities_merchants.city_id = ? AND merchants.category_id = ?',params[:id], params[:category_id]).order('id ASC').page params[:page]
 
-              puts "-----------------------------"
-              puts merchants.map(&:id)
-              puts "-----------------------------"
-
               subcategories = []
               merchants.each do |merchant|
                 merchant.subcategories.each do |subcategory|
@@ -107,9 +103,6 @@ module CityWay
             else
               merchants = Merchant.active_merchants.joins(:cities_merchants).joins(:subcategories).uniq.where('cities_merchants.city_id = ? AND categories_merchants.category_id = ?',params[:id], params[:subcategory_id]).order('id ASC').page params[:page]
 
-              puts "-----------------------------"
-              puts merchants.map(&:id)
-              puts "-----------------------------"
             end
             add_pagination_headers merchants
 
