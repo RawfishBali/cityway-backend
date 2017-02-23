@@ -580,8 +580,11 @@ module CityWay
         expose :major_icon, documentation: {:type => "String", :desc => "Profile major icon"}  do |object, options|
           object.major.major_icon.url if object.major
         end
-        expose :major_email, documentation: {:type => "String", :desc => "Profile major email"}  do |object, options|
+        expose :major_email, if: lambda { |object, options| object.override_major == false }, documentation: {:type => "String", :desc => "Profile major email"}  do |object, options|
           object.major.email if object.major
+        end
+        expose :phone, if: lambda { |object, options| object.override_major == true }, documentation: {:type => "String", :desc => "Comune Phone"}  do |object, options|
+          object.phone
         end
       end
 

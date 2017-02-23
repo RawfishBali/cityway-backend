@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170222083431) do
+ActiveRecord::Schema.define(version: 20170223031206) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -201,13 +201,15 @@ ActiveRecord::Schema.define(version: 20170222083431) do
     t.string   "photo"
     t.string   "icon"
     t.integer  "city_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.text     "history"
     t.string   "facebook"
     t.string   "instagram"
     t.string   "twitter"
     t.string   "google_plus"
+    t.string   "phone"
+    t.boolean  "override_major", default: false
   end
 
   add_index "commonplaces", ["city_id"], name: "index_commonplaces_on_city_id", using: :btree

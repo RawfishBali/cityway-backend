@@ -2,17 +2,19 @@
 #
 # Table name: commonplaces
 #
-#  id          :integer          not null, primary key
-#  photo       :string
-#  icon        :string
-#  city_id     :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  history     :text
-#  facebook    :string
-#  instagram   :string
-#  twitter     :string
-#  google_plus :string
+#  id             :integer          not null, primary key
+#  photo          :string
+#  icon           :string
+#  city_id        :integer
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  history        :text
+#  facebook       :string
+#  instagram      :string
+#  twitter        :string
+#  google_plus    :string
+#  phone          :string
+#  override_major :boolean          default(FALSE)
 #
 
 class Commonplace < ActiveRecord::Base

@@ -10,6 +10,7 @@
 #  photo      :string
 #  icon       :string
 #  predifined :boolean          default(FALSE)
+#  priority   :integer          default(0)
 #
 
 class Category < ActiveRecord::Base

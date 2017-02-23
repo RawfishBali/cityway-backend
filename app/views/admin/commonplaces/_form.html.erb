@@ -14,9 +14,9 @@
     <% end %>
     <h2 class=" ">
       <% if @commonplace.new_record?%>
-      Aggiungi Social Links
+      Aggiungi Social Links & Contatti
       <% else %>
-      Gestisci Social Links
+      Gestisci Social Links & Contatti
       <% end %>
     </h2>
     <div class="uk-grid" data-uk-grid-margin>
@@ -52,6 +52,24 @@
             <div class="uk-width-medium-1-1">
               <label>Google Plus</label>
               <%= f.text_field :google_plus,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="uk-width-medium-1-2 ">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <label>Telefono</label>
+              <%= f.text_field :phone,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+                <%= f.check_box :override_major,class: 'float-right ', 'data-switchery': true, 'data-switchery-size':"large"  %>
+                <span id="switchery_active_text">Sostituire il contatto del maggiore</span>
             </div>
           </div>
         </div>
