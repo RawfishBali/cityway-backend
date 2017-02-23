@@ -195,6 +195,10 @@
   height: 300px;
 }
 
+#school_map{
+  height: 300px;
+}
+
 .new-city-label{
   margin-top: 2px;
   float: left;

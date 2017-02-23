@@ -835,4 +835,117 @@ $(document).ready(function(){
 
 
 
+  if($("#school_map").length > 0){
+    if($("#school_latitude").val() == "" && $("#school_longitude").val() == ""){
+      var lat = 45.5454787
+      var long = 11.535421400000018
+    }else{
+      var lat = $("#school_latitude").val()
+      var long = $("#school_longitude").val()
+    }
+    map = new GMaps({
+      div: '#school_map',
+      lat: lat,
+      lng: long
+    });
+
+    map.addMarker({
+      lat: $("#school_latitude").val(),
+      lng: $("#school_longitude").val(),
+    });
+
+    $('#school_address').keyup(function() {
+      delay(function(){
+        GMaps.geocode({
+          address: $('#school_address').val(),
+          callback: function(results, status) {
+            if (status == 'OK') {
+              map.removeMarkers();
+              var latlng = results[0].geometry.location;
+              map.setCenter(latlng.lat(), latlng.lng());
+              map.addMarker({
+                lat: latlng.lat(),
+                lng: latlng.lng()
+              });
+              $("#school_latitude").parent().addClass('md-input-filled')
+              $("#school_longitude").parent().addClass('md-input-filled')
+              $("#school_latitude").val(latlng.lat())
+              $("#school_longitude").val(latlng.lng())
+            }
+          }
+        });
+      }, 500 );
+    });
+
+    $("#school_latitude, #school_longitude").keyup(function() {
+      delay(function(){
+        if($("#school_latitude").val() != "" && $("#school_longitude").val() != "" && $.isNumeric($("#school_latitude").val()) && $.isNumeric($("#school_longitude").val()) ){
+          map.removeMarkers();
+          var index = map.markers.length;
+          var lat = $("#school_latitude").val()
+          var lng = $("#school_longitude").val()
+
+          geocode_url = "http://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lng+"&sensor=true"
+
+          $.ajax({
+            url: geocode_url,
+            context: document.body
+          }).done(function(data) {
+            if(data["status"] =="OK"){
+              $("#school_address").val(data["results"][0]["formatted_address"])
+              $("#school_address").parent().addClass('md-input-filled')
+            }
+
+          });
+
+          map.addMarker({
+            lat: lat,
+            lng: lng,
+            title: 'Marker #' + index
+          });
+
+          map.setCenter(lat, lng);
+          $("#school_latitude").parent().addClass('md-input-filled')
+          $("#school_longitude").parent().addClass('md-input-filled')
+          $("#school_latitude").val(lat);
+          $("#school_longitude").val(lng);
+
+        }
+
+
+      }, 500 );
+    });
+
+    GMaps.on('click', map.map, function(event) {
+      map.removeMarkers();
+      var index = map.markers.length;
+      var lat = event.latLng.lat();
+      var lng = event.latLng.lng();
+
+      geocode_url = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lng+"&sensor=true"
+
+      $.ajax({
+        url: geocode_url,
+        context: document.body
+      }).done(function(data) {
+        if(data["status"] =="OK"){
+          $("#school_address").val(data["results"][0]["formatted_address"])
+          $("#school_address").parent().addClass('md-input-filled')
+        }
+      });
+
+      map.addMarker({
+        lat: lat,
+        lng: lng,
+        title: 'Marker #' + index
+      });
+
+      map.setCenter(lat, lng);
+      $("#school_latitude").parent().addClass('md-input-filled')
+      $("#school_longitude").parent().addClass('md-input-filled')
+      $("#school_latitude").val(lat);
+      $("#school_longitude").val(lng);
+    });
+  }
+
 })
