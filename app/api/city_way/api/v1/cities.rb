@@ -89,6 +89,10 @@ module CityWay
 
               merchants = Merchant.active_merchants.joins(:cities_merchants).where('cities_merchants.city_id = ? AND merchants.category_id = ?',params[:id], params[:category_id]).page params[:page]
 
+              puts "-----------------------------"
+              puts merchants.map(&:id)
+              puts "-----------------------------"
+
               subcategories = []
               merchants.each do |merchant|
                 merchant.subcategories.each do |subcategory|
@@ -103,6 +107,9 @@ module CityWay
             else
               merchants = Merchant.active_merchants.joins(:cities_merchants).joins(:subcategories).where('cities_merchants.city_id = ? AND categories_merchants.category_id = ?',params[:id], params[:subcategory_id]).page params[:page]
 
+              puts "-----------------------------"
+              puts merchants.map(&:id)
+              puts "-----------------------------"
 
               # merchants = Merchant.active_merchants.joins(:subcategories).where('merchants.city_id = ? AND categories_merchants.category_id = ?' ,params[:id], params[:subcategory_id]).page params[:page]
             end
