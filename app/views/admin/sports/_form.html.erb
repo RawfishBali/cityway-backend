@@ -75,6 +75,20 @@
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-2">
+              <label>Fisso</label>
+              <%= f.email_field :phone_1,class: 'md-input'  %>
+            </div>
+            <div class="uk-width-medium-1-2">
+              <label>Telefono Verde</label>
+              <%= f.text_field :phone_2,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
               <label>Facebook</label>
               <%= f.text_field :facebook,class: 'md-input'  %>
             </div>
@@ -108,7 +122,7 @@
               <%= f.check_box :support_disabilities,class: 'md-input', 'data-switchery': true  %>
             </div>
             <div class="uk-width-medium-1-2">
-              
+
             </div>
           </div>
         </div>

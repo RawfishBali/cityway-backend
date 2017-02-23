@@ -905,7 +905,9 @@ module CityWay
         expose :icon,if: lambda { |object, options| object.icon.present? }, documentation: {:type => "string", :desc => "Sport icon"} do |object , options|
           object.icon.url
         end
-        expose :phone, documentation: {:type => "String", :desc => "Utility Place Phone"}
+        expose :phones do |object, options|
+          [object.phone, object.phone_1, object.phone_2].reject(&:blank?)
+        end
         expose :email, documentation: {:type => "String", :desc => "Utility Place email"}
         expose :website,if: lambda { |object, options| !object.website.blank? }, documentation: {:type => "String", :desc => "Utility Place website"} do |object, options|
           unless object.website[/\Ahttp:\/\//] || object.website[/\Ahttps:\/\//]
