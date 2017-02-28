@@ -1319,7 +1319,7 @@ module CityWay
         expose :email,if: lambda { |object, options| options[:simple] == 'false' && object.email }, documentation: {:type => "string", :desc => "Merchant email"}
         expose :website, if: lambda { |object, options| options[:simple] == 'false' && object.website }, documentation: {:type => "string", :desc => "Merchant website"} do |merchant, options|
           unless merchant.website[/\Ahttp:\/\//] || merchant.website[/\Ahttps:\/\//]
-            "https://#{merchant.website}" unless merchant.website.blank?
+            merchant.website.blank? ? "" : "https://#{merchant.website}"
           else
             merchant.website
           end
