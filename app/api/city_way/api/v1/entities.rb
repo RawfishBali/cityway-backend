@@ -556,7 +556,7 @@ module CityWay
           end
         end
         expose :twitter, if: lambda { |object, options| options[:simple] == 'false' && !object.twitter.blank? }, documentation: {:type => "string", :desc => "Comune Twitter"} do |common, options|
-          unless common.instagram[/\Ahttp:\/\//] || common.instagram[/\Ahttps:\/\//]
+          unless common.twitter[/\Ahttp:\/\//] || common.twitter[/\Ahttps:\/\//]
             "https://#{common.twitter}" unless common.twitter.blank?
           else
             common.twitter
