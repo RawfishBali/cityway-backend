@@ -520,6 +520,58 @@ module CityWay
         end
       end
 
+      class CityHallContact < Grape::Entity
+        expose :facebook, if: lambda { |object, options| !object.facebook.blank? }, documentation: {:type => "string", :desc => "Comune Facebook"} do |around, options|
+          matches = around.facebook.match(/(?:https?:\/\/)?(?:www\.)?facebook\.com\/(?:(?:\w)*#!\/)?(?:groups\/)?(?:pages\/)?(?:[\w\-]*\/)*?(\/)?([\w\-\.]*)/)
+          if matches
+            if matches[2].blank?
+              unless place.facebook[/\Ahttp:\/\//] || place.facebook[/\Ahttps:\/\//]
+                "https://#{place.facebook}"
+              else
+                place.facebook
+              end
+            else
+              matches[2]
+            end
+          else
+            around.facebook
+          end
+        end
+        expose :twitter, if: lambda { |object, options|  !object.twitter.blank? }, documentation: {:type => "string", :desc => "Comune Twitter"} do |common, options|
+          unless common.twitter[/\Ahttp:\/\//] || common.twitter[/\Ahttps:\/\//]
+            "https://#{common.twitter}" unless common.twitter.blank?
+          else
+            common.twitter
+          end
+        end
+        expose :instagram, if: lambda { |object, options|  !object.instagram.blank? }, documentation: {:type => "string", :desc => "Comune Instagram"} do |common, options|
+          unless common.instagram[/\Ahttp:\/\//] || common.instagram[/\Ahttps:\/\//]
+            "https://#{common.instagram}" unless common.instagram.blank?
+          else
+            common.instagram
+          end
+        end
+        expose :google_plus, if: lambda { |object, options|  !object.google_plus.blank? }, documentation: {:type => "string", :desc => "Comune G+"} do |common, options|
+          unless common.google_plus[/\Ahttp:\/\//] || common.google_plus[/\Ahttps:\/\//]
+            "https://#{common.google_plus}" unless common.google_plus.blank?
+          else
+            common.google_plus
+          end
+        end
+        expose :major_icon, documentation: {:type => "String", :desc => "Profile major icon"}  do |object, options|
+          object.major.major_icon.url if object.major
+        end
+        expose :major_email, if: lambda { |object, options| object.override_major == false }, documentation: {:type => "String", :desc => "Profile major email"}  do |object, options|
+          object.major.email if object.major
+        end
+        expose :phone, if: lambda { |object, options| object.override_major == true }, documentation: {:type => "String", :desc => "Comune Phone"}  do |object, options|
+          object.phone
+        end
+        expose :contact_major_wording do |object, options|
+          object.contact_major_wording
+        end
+      end
+
       class Commonplace < Grape::Entity
         expose :id, documentation: {:type => "Integer", :desc => "Comune ID"}
         expose :photo, documentation: {:type => "String", :desc => "Comune Photo"} do |common, options|

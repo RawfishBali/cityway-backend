@@ -121,6 +121,15 @@ module CityWay
             present story, with: CityWay::Api::V1::Entities::CityHallStory
           end
 
+          desc "CityHall Contacts"
+          params do
+            requires :id , type: Integer, values: -> { Commonplace.ids }
+          end
+          get '/:id/contacts' do
+            city_hall = Commonplace.find(params[:id])
+            present city_hall, with: CityWay::Api::V1::Entities::CityHallContact
+          end
+
 
         end
       end

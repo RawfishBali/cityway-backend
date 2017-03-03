@@ -69,12 +69,20 @@
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
                 <%= f.check_box :override_major,class: 'float-right ', 'data-switchery': true, 'data-switchery-size':"large"  %>
-                <span id="switchery_active_text">Sostituire il contatto del maggiore</span>
+                <span id="switchery_active_text">Sostituire il contatto del sindaco</span>
             </div>
           </div>
         </div>
       </div>
       <div class="uk-width-medium-1-2 ">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <label>Contatto del sindaco</label>
+              <%= f.text_field :contact_major_wording,class: 'md-input', 'data-parsley-maxlength': 25  %>
+            </div>
+          </div>
+        </div>
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
