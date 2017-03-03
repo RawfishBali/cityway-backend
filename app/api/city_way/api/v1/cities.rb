@@ -87,7 +87,7 @@ module CityWay
             if params[:subcategory_id].blank?
               # subcategories = category.subcategories
 
-              merchants = Merchant.active_merchants.joins(:cities_merchants).uniq.where('cities_merchants.city_id = ? AND merchants.category_id = ?',params[:id], params[:category_id]).order('id ASC').page params[:page]
+              merchants = Merchant.active_merchants.joins(:cities_merchants).uniq.where('cities_merchants.city_id = ? AND merchants.category_id = ? AND merchants.active = ?',params[:id], params[:category_id], true).order('id ASC').page params[:page]
 
               subcategories = []
               merchants.each do |merchant|
@@ -101,7 +101,7 @@ module CityWay
 
 
             else
-              merchants = Merchant.active_merchants.joins(:cities_merchants).joins(:subcategories).uniq.where('cities_merchants.city_id = ? AND categories_merchants.category_id = ?',params[:id], params[:subcategory_id]).order('id ASC').page params[:page]
+              merchants = Merchant.active_merchants.joins(:cities_merchants).joins(:subcategories).uniq.where('cities_merchants.city_id = ? AND categories_merchants.category_id = ? AND merchants.active = ? ',params[:id], params[:subcategory_i],true).order('id ASC').page params[:page]
 
             end
             add_pagination_headers merchants
