@@ -17,7 +17,7 @@ class Admin::CommonplacesController < Admin::BaseController
     end
   end
 
-
+ 
   private
   def set_commonplace
     @commonplace = Commonplace.find(params[:id])
