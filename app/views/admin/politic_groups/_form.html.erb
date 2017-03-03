@@ -37,8 +37,15 @@
         <div class="uk-form-row">
           <h3>Membri</h3>
           <% @admin_politic_group.profiles.each do |profile| %>
-          <%= link_to (image_tag profile.photo.url, class: 'members-photo'), edit_admin_profile_path(profile) %>
+          <% if profile.photo.url %>
+            <%= link_to (image_tag profile.photo.url, class: 'members-photo'), edit_admin_profile_path(id: profile.id, politic_group_id: profile.politic_group_id) %>
+          <% else %>
+            <%= link_to "<i class='material-icons font100'>&#xE7FD;</i>".html_safe, edit_admin_profile_path(id: profile.id, politic_group_id: profile.politic_group_id) %>
           <% end %>
+
+          <%= link_to '<i class="md-icon material-icons ">&#xE872;</i>'.html_safe, admin_profile_path(profile), method: :delete , :data => {:confirm => 'Sei sicuro di voler cancellare?'} %>
+          <% end %>
+
           <%= link_to "<i class='material-icons font100'></i>".html_safe, new_admin_profile_path(politic_group_id: @admin_politic_group.id )%>
         </div>
       </div>

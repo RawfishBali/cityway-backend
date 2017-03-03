@@ -51,14 +51,15 @@ class Admin::ProfilesController < Admin::BaseController
   # PATCH/PUT /admin/profiles/1
   # PATCH/PUT /admin/profiles/1.json
   def update
-    respond_to do |format|
-      redirect_path =  @admin_profile.is_major ? admin_profiles_url(major:true) : admin_profiles_url
-      if @admin_profile.update(admin_profile_params)
-        format.html { redirect_to session['previous_url'] || redirect_path, notice: "#{@name_alias} è stato aggiornato con successo." }
-        format.json { render :show, status: :ok, location: @admin_profile }
+    redirect_path =  @admin_profile.is_major ? admin_profiles_url(major:true) : admin_profiles_url
+    if @admin_profile.update(admin_profile_params)
+      redirect_to session['previous_url'] || redirect_path, notice: "#{@name_alias} è stato aggiornato con successo." 
+    else
+      if @admin_profile.politic_group_id
+        params[:politic_group_id] = @admin_profile.politic_group_id
+        render :edit
       else
-        format.html { render :edit }
-        format.json { render json: @admin_profile.errors, status: :unprocessable_entity }
+        render :edit
       end
     end
   end

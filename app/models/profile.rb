@@ -48,7 +48,7 @@ class Profile < ActiveRecord::Base
   phony_normalize :phone, default_country_code: 'IT'
   validates :phone, phony_plausible: true
 
-  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, allow_blank: true
 
   def only_one_major
     if self.new_record?

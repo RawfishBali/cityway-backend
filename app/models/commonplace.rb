@@ -45,6 +45,6 @@ class Commonplace < ActiveRecord::Base
   end
 
   def city_councils_with_vice_major
-    profiles.where(is_city_council_member: true)
+    profiles.where(is_city_council_member: true, politic_group_id: nil)
   end
 end
