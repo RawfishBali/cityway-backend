@@ -16,13 +16,23 @@
         <% if params[:major] == 'true'%>
           Aggiungi Sindaco
         <% else %>
-          Aggiungi Giunta Comunale
+          <% if params[:politic_group_id] %>
+            Aggiungi Consiglio
+          <% else %>
+            Aggiungi Giunta Comunale
+          <% end %>
+
         <% end %>
       <% else %>
         <% if params[:major] == 'true'%>
           Gestisci Sindaco
         <% else %>
+        <% if params[:politic_group_id] %>
+          Gestisci Consiglio
+        <% else %>
           Gestisci Giunta Comunale
+        <% end %>
+
         <% end %>
 
       <% end %>
@@ -208,7 +218,7 @@
               </div>
             </div>
 
-            
+
           </div>
         </div>
       </div>
