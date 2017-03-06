@@ -454,7 +454,7 @@ module CityWay
           profile.photo.url
         end
         expose :profile_icon, documentation: {:type => "String", :desc => "Profile  icon"}  do |object, options|
-          object.major_icon.url if object.major_icon
+          object.photo.medium_resolution_thumb.url
         end
         expose :distance, if: lambda { |object, options| options[:latitude] && options[:longitude] } do |object , options|
           object.distance_from([options[:latitude], options[:longitude]])
@@ -630,7 +630,7 @@ module CityWay
         end
         expose :history, documentation: {:type => "string", :desc => "Comune History"}
         expose :major_icon, documentation: {:type => "String", :desc => "Profile major icon"}  do |object, options|
-          object.major.major_icon.url if object.major
+          object.major.photo.medium_resolution_thumb.url if object.major
         end
         expose :major_email, if: lambda { |object, options| object.override_major == false }, documentation: {:type => "String", :desc => "Profile major email"}  do |object, options|
           object.major.email if object.major
