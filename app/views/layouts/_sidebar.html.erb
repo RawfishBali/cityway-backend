@@ -111,8 +111,8 @@
               <a href="#" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/profiles' ||  params[:controller] == 'admin/politic_groups' %>">Amministrazione</a>
               <ul>
                 <li><a href="/admin/profiles?major=true" class="<%= 'act_item current_section_submenu' if (params[:controller] == 'admin/profiles' && params[:major] == 'true')  %>">Sindaco</a></li>
-                <li><a href="/admin/profiles/" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/profiles' && (!params[:major]) %>">Giunta Comunale</a></li>
-                <li><a href="/admin/politic_groups/" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/politic_groups'%>">Consiglio</a></li>
+                <li><a href="/admin/profiles/" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/profiles' && ((!params[:major] || params[:major] == "false") &&  !params[:politic_group_id]) %>">Giunta Comunale</a></li>
+                <li><a href="/admin/politic_groups/" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/politic_groups' || (params[:controller] == 'admin/profiles' && params[:politic_group_id]) %>">Consiglio</a></li>
               </ul>
             </li>
             <li><a href="/admin/public_offices" class="<%= 'act_item current_section_submenu' if params[:controller] == 'admin/public_offices'%>">Uffici pubblici</a></li>
