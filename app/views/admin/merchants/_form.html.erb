@@ -193,7 +193,7 @@
               <span class="font-size-11">(Suggerimento immagine 100 x 100px)</span>
               <br />
 
-              <div class="dropzone" data-width="200" data-originalsize="true" data-height="200"    data-image="<%= f.object.icon.url %>"  data-editstart="false" data-ajax="false",  data-canvas="true">
+              <div class="dropzone" data-width="200" data-originalsize="true" data-height="200"    data-image="<%= f.object.icon.url %>"  data-editstart="false" data-ajax="false",  data-canvas="true", data-removeurl="/admin/merchants/<%= f.object.id %>/remove_icon" >
                 <%= f.file_field :icon%>
               </div>
             </div>

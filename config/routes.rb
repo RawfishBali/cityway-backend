@@ -8,7 +8,11 @@ Rails.application.routes.draw do
     end
     resources :cities
     resources :commonplaces
-    resources :merchants
+    resources :merchants do
+      member do
+        post 'remove_icon'
+      end
+    end
     resources :promos
     resources :parks
     resources :markets

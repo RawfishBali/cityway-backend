@@ -2,6 +2,7 @@ class Admin::MerchantsController < Admin::BaseController
   before_action :set_admin_merchant, only: [:show, :edit, :update, :destroy]
   before_action :prepare_categories, only: [:new, :edit, :create, :update]
   load_and_authorize_resource param_method: :admin_merchant_params
+  skip_before_action :verify_authenticity_token, only: [:remove_icon]
 
   # GET /admin/merchants
   # GET /admin/merchants.json
@@ -75,6 +76,16 @@ class Admin::MerchantsController < Admin::BaseController
     @admin_merchant.destroy
     respond_to do |format|
       format.html { redirect_to admin_merchants_url, notice: 'Attività cancellata con successo!.' }
+      format.json { head :no_content }
+    end
+  end
+
+  def remove_icon
+
+    @admin_merchant = Merchant.find(params[:id])
+    @admin_merchant.remove_icon!
+    @admin_merchant.save
+    respond_to do |format|
       format.json { head :no_content }
     end
   end
