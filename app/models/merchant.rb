@@ -37,7 +37,7 @@ class Merchant < ActiveRecord::Base
   has_many :promos, dependent: :destroy
   has_many :business_hours, as: :marketable, dependent: :destroy
   accepts_nested_attributes_for :business_hours, reject_if: :all_blank, allow_destroy: true
-  has_many :photos, -> { order 'created_at desc' }, as: :imageable, dependent: :destroy
+  has_many :photos, -> { order 'created_at asc' }, as: :imageable, dependent: :destroy
   accepts_nested_attributes_for :photos, reject_if: :all_blank, allow_destroy: true
   belongs_to :category
   has_many :cities, through: :cities_merchants
