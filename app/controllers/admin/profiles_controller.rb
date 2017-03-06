@@ -53,7 +53,7 @@ class Admin::ProfilesController < Admin::BaseController
   def update
     redirect_path =  @admin_profile.is_major ? admin_profiles_url(major:true) : admin_profiles_url
     if @admin_profile.update(admin_profile_params)
-      redirect_to session['previous_url'] || redirect_path, notice: "#{@name_alias} è stato aggiornato con successo." 
+      redirect_to session['previous_url'] || redirect_path, notice: "#{@name_alias} è stato aggiornato con successo."
     else
       if @admin_profile.politic_group_id
         params[:politic_group_id] = @admin_profile.politic_group_id
@@ -68,10 +68,7 @@ class Admin::ProfilesController < Admin::BaseController
   # DELETE /admin/profiles/1.json
   def destroy
     @admin_profile.destroy
-    respond_to do |format|
-      format.html { redirect_to admin_profiles_url, notice: "#{@name_alias} cancellata con successo!." }
-      format.json { head :no_content }
-    end
+    redirect_to request.referrer, notice: "#{@name_alias} cancellata con successo!."
   end
 
   private
