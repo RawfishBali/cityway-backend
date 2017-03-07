@@ -559,16 +559,27 @@ module CityWay
           end
         end
         expose :major_icon, documentation: {:type => "String", :desc => "Profile major icon"}  do |object, options|
-          object.major.major_icon.url if object.major
+          if object.override_major == true
+            object.replaceable_icon.url 
+          else
+            object.major.major_icon.url if object.major
+          end
         end
-        expose :major_email, if: lambda { |object, options| object.override_major == false }, documentation: {:type => "String", :desc => "Profile major email"}  do |object, options|
-          object.major.email if object.major
+        expose :major_email, documentation: {:type => "String", :desc => "Profile major email"}  do |object, options|
+          if object.override_major == false
+            object.major.email if object.major
+          else
+            object.replaceable_email
+          end
+
         end
-        expose :phone, if: lambda { |object, options| object.override_major == true }, documentation: {:type => "String", :desc => "Comune Phone"}  do |object, options|
-          object.phone
-        end
-        expose :contact_major_wording do |object, options|
-          object.contact_major_wording
+        expose :phone, if: lambda { |object, options|  }, documentation: {:type => "String", :desc => "Comune Phone"}  do |object, options|
+          if object.override_major == true
+            object.replaceable_phone
+          else
+            object.major.phone if object.major
+          end
+
         end
       end
 

@@ -34,6 +34,23 @@ $(document).ready(function(){
     $('#event_city_ids').kendoMultiSelect();
   }
 
+  if($("#commonplace_override_major").is(':checked')){
+    $(".replaceable_div").slideDown();
+  }else{
+    $(".replaceable_div").slideUp();
+  }
+
+  $("#commonplace_override_major").change(function(){
+	   if($("#commonplace_override_major").is(':checked')){
+       $(".replaceable_div").slideDown();
+     }else{
+       $(".replaceable_div").slideUp();
+     }
+  })
+
+
+
+
   $("#merchant_is_basic").change(function(){
 	   if($("#merchant_is_basic").is(':checked')){
        $(".not-basic").slideUp();

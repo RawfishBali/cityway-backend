@@ -278,6 +278,12 @@ class Admin::BaseController < ApplicationController
           params["commonplace"]["icon"] = image_json["data"]
         end
       end
+      if params["commonplace"]["replaceable_icon"]
+        unless params["commonplace"]["replaceable_icon"].class.to_s == 'ActionDispatch::Http::UploadedFile'
+          image_json =  JSON.parse(params["commonplace"]["replaceable_icon"]["_values"].gsub("'",'"').gsub('=>',':'))
+          params["commonplace"]["replaceable_icon"] = image_json["data"]
+        end
+      end
     end
 
     if params["sport"]
