@@ -41,7 +41,7 @@ class Market < ActiveRecord::Base
   end
 
   def self.markets_open_on day
-    Market.joins(:business_hours).where('business_hours.is_open_today = true AND business_hours.day = ?', Date::DAYNAMES.index(Date.parse(day).strftime("%A")))
+    Market.joins(:business_hours).where('business_hours.day = ?', Date::DAYNAMES.index(Date.parse(day).strftime("%A")))
   end
 
   def is_open_now?
