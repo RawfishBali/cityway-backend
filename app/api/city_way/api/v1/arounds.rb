@@ -59,9 +59,10 @@ module CityWay
           get '/:id/markets' do
             around = Around.find(params[:id])
             if params[:day]
-              markets = (Market.markets_open_on params[:day]).page params[:page]
+              markets = Kaminari.paginate_array(Market.markets_open_on).page(params[:page])
+
             else
-              markets = around.markets.page params[:page]
+              markets = around.markets.page(params[:page])
             end
 
             add_pagination_headers markets
