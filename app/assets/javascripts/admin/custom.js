@@ -48,7 +48,25 @@ $(document).ready(function(){
      }
   })
 
+  if($("#profile_unavailable").length > 0){
+    if($("#profile_unavailable").is(':checked')){
+      $(".unavailable-container").slideUp();
+      $("#profile_appointment_start").val("");
+      $("#profile_appointment_end").val("");
+    }else{
+      $(".unavailable-container").slideDown();
+    }
+  }
 
+  $("#profile_unavailable").change(function(){
+	   if($("#profile_unavailable").is(':checked')){
+       $(".unavailable-container").slideUp();
+       $("#profile_appointment_start").val("");
+       $("#profile_appointment_end").val("");
+     }else{
+       $(".unavailable-container").slideDown();
+     }
+  })
 
 
   $("#merchant_is_basic").change(function(){

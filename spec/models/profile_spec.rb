@@ -28,6 +28,7 @@
 #  phone_1                :string
 #  phone_2                :string
 #  is_vice_major          :boolean          default(FALSE)
+#  unavailable            :boolean          default(FALSE)
 #
 
 require 'rails_helper'

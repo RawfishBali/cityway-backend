@@ -441,13 +441,14 @@ module CityWay
         end
         expose :latitude, documentation: {:type => "String", :desc => "Profile latitude"}
         expose :longitude, documentation: {:type => "String", :desc => "Profile longitude"}
-        expose :days_open, documentation: {:type => "String", :desc => "Profile Days Open"} do |profile, options|
+        expose :unavailable, documentation: {:type => "Boolean", :desc => "Profile Timetable Availability"}
+        expose :days_open,if: lambda { |object, options| !object.unavailable == true }, documentation: {:type => "String", :desc => "Profile Days Open"} do |profile, options|
           profile.days_open.compact.collect { |x| I18n.t(:"date.day_names")[x] }.join(" , ") if profile.days_open
         end
-        expose :appointment_start, documentation: {:type => "String", :desc => "Profile appointment start"}  do |profile , options|
+        expose :appointment_start,if: lambda { |object, options| !object.unavailable  == true }, documentation: {:type => "String", :desc => "Profile appointment start"}  do |profile , options|
           profile.appointment_start.strftime("%H:%M") if profile.appointment_start
         end
-        expose :appointment_end, documentation: {:type => "String", :desc => "Profile appointment end"} do |profile , options|
+        expose :appointment_end,if: lambda { |object, options| !object.unavailable  == true }, documentation: {:type => "String", :desc => "Profile appointment end"} do |profile , options|
           profile.appointment_end.strftime("%H:%M") if profile.appointment_end
         end
         expose :photo, documentation: {:type => "String", :desc => "Profile photo"}  do |profile, options|
