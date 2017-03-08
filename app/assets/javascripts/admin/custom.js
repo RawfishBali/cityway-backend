@@ -637,6 +637,23 @@ $(document).ready(function(){
   })
 
 
+  if($("#map_trigger_course"),length > 0){
+    if($("#map_trigger_course").is(':checked')){
+      $(".map-container-corsi").slideDown();
+    }else{
+      $(".map-container-corsi").slideUp();
+    }
+  }
+
+  $("#map_trigger_course").change(function(){
+    if($("#map_trigger_course").is(':checked')){
+      $(".map-container-corsi").slideDown();
+    }else{
+      $(".map-container-corsi").slideUp();
+    }
+  })
+
+
 
   if($("#parking_lot_map").length > 0){
     if($("#merchant_latitude").val() == "" && $("#parking_lot_longitude").val() == ""){
@@ -1097,5 +1114,118 @@ $(document).ready(function(){
     });
   }
 
+
+  if($("#course_map").length > 0){
+    if($("#course_latitude").val() == "" && $("#course_longitude").val() == ""){
+      var lat = 45.5454787
+      var long = 11.535421400000018
+    }else{
+      var lat = $("#course_latitude").val()
+      var long = $("#course_longitude").val()
+    }
+    map = new GMaps({
+      div: '#course_map',
+      lat: lat,
+      lng: long
+    });
+
+    map.addMarker({
+      lat: $("#course_latitude").val(),
+      lng: $("#course_longitude").val(),
+    });
+
+    $('#course_address').keyup(function() {
+      delay(function(){
+        GMaps.geocode({
+          address: $('#course_address').val(),
+          callback: function(results, status) {
+            if (status == 'OK') {
+              map.removeMarkers();
+              var latlng = results[0].geometry.location;
+              map.setCenter(latlng.lat(), latlng.lng());
+              map.addMarker({
+                lat: latlng.lat(),
+                lng: latlng.lng()
+              });
+              $("#course_latitude").parent().addClass('md-input-filled')
+              $("#course_longitude").parent().addClass('md-input-filled')
+              $("#course_latitude").val(latlng.lat())
+              $("#course_longitude").val(latlng.lng())
+            }
+          }
+        });
+      }, 500 );
+    });
+
+    $("#course_latitude, #course_longitude").keyup(function() {
+      delay(function(){
+        if($("#course_latitude").val() != "" && $("#course_longitude").val() != "" && $.isNumeric($("#course_latitude").val()) && $.isNumeric($("#course_longitude").val()) ){
+          map.removeMarkers();
+          var index = map.markers.length;
+          var lat = $("#course_latitude").val()
+          var lng = $("#course_longitude").val()
+
+          geocode_url = "http://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lng+"&sensor=true"
+
+          $.ajax({
+            url: geocode_url,
+            context: document.body
+          }).done(function(data) {
+            if(data["status"] =="OK"){
+              $("#course_address").val(data["results"][0]["formatted_address"])
+              $("#course_address").parent().addClass('md-input-filled')
+            }
+
+          });
+
+          map.addMarker({
+            lat: lat,
+            lng: lng,
+            title: 'Marker #' + index
+          });
+
+          map.setCenter(lat, lng);
+          $("#course_latitude").parent().addClass('md-input-filled')
+          $("#course_longitude").parent().addClass('md-input-filled')
+          $("#course_latitude").val(lat);
+          $("#course_longitude").val(lng);
+
+        }
+
+
+      }, 500 );
+    });
+
+    GMaps.on('click', map.map, function(event) {
+      map.removeMarkers();
+      var index = map.markers.length;
+      var lat = event.latLng.lat();
+      var lng = event.latLng.lng();
+
+      geocode_url = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lng+"&sensor=true"
+
+      $.ajax({
+        url: geocode_url,
+        context: document.body
+      }).done(function(data) {
+        if(data["status"] =="OK"){
+          $("#course_address").val(data["results"][0]["formatted_address"])
+          $("#course_address").parent().addClass('md-input-filled')
+        }
+      });
+
+      map.addMarker({
+        lat: lat,
+        lng: lng,
+        title: 'Marker #' + index
+      });
+
+      map.setCenter(lat, lng);
+      $("#course_latitude").parent().addClass('md-input-filled')
+      $("#course_longitude").parent().addClass('md-input-filled')
+      $("#course_latitude").val(lat);
+      $("#course_longitude").val(lng);
+    });
+  }
 
 })
