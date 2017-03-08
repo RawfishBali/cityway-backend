@@ -1458,6 +1458,8 @@ module CityWay
         expose :photo, documentation: {:type => "String", :desc => "Advertisement's photo"} do |advertisement, options|
           advertisement.photo.url
         end
+        expose :name, documentation: {:type => "String", :desc => "Client's name"}
+        expose :url, documentation: {:type => "String", :desc => "Ad's URL"}
       end
 
       class Promo < Grape::Entity

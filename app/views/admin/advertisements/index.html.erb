@@ -6,9 +6,9 @@
         <thead>
           <tr>
             <th class="uk-width-1-10 ">Foto</th>
+            <th class="uk-width-1-10 uk-text-center">Nome del cliente</th>
+            <th class="uk-width-1-10 uk-text-center">URL</th>
             <th class="uk-width-1-10 uk-text-center">Posizione</th>
-            <th class="uk-width-1-10 uk-text-center">Inizio</th>
-            <th class="uk-width-1-10 uk-text-center">Fino a</th>
             <th class="uk-width-1-10 uk-text-center">Stato</th>
             <th class="uk-width-1-10 ">Azioni</th>
           </tr>
@@ -17,10 +17,10 @@
           <% @advertisements.each do |ad| %>
           <tr>
             <td class="uk-width-1-10"><%= image_tag ad.photo.thumb.url, class: 'width100pixel' %></td>
+            <td class="uk-width-1-10 uk-text-center"><%= truncate(ad.name) %></td>
+            <td class="uk-width-1-10 uk-text-center"><%= link_to truncate(ad.url), ad.url, target: "_blank" if ad.url %></td>
             <% italian_position = {'top':'Sopra','bottom':'Sotto','both':'Ambo'} %>
             <td class="uk-width-1-10 uk-text-center"><%= italian_position[ad.position.to_sym] %></td>
-            <td class="uk-width-1-10 uk-text-center"><%=  l(ad.start_date, format: "%A %B %d %Y") %></td>
-            <td class="uk-width-1-10 uk-text-center"><%= l(ad.end_date, format: "%A %B %d %Y") %></td>
             <td class="uk-text-center">
               <% if ad.active? %>
                 <span class="uk-badge uk-badge-success">Attivo</span>

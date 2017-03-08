@@ -52,27 +52,42 @@ class City < ActiveRecord::Base
   accepts_nested_attributes_for :around, :commonplace, :discover, :utility,  allow_destroy: true
 
   def active_advertisements
-    advertisements.where('( (start_date <= ? and end_date >= ?) )', Time.now, Time.now).group_by(&:position)
+    advertisements.group_by(&:position)
   end
 
   def home_active_advertisements
-    advertisements.where('( (start_date <= ? and end_date >= ? and sections @> ? ) )', Time.now, Time.now, '{Home}').group_by(&:position)
+    all_advertisements =   advertisements.where('( (sections @> ?) )', '{Home}')
+    advertisements_ids = all_advertisements.map(&:id)
+    active_ads = AdvertisementDuration.where('advertisement_id in (?) and start_date <= ? and end_date >= ?', advertisements_ids, Date.today, Date.today).map(&:advertisement_id)
+    all_advertisements.where('advertisements.id in (?)', active_ads).group_by(&:position)
   end
 
   def around_active_advertisements
-    advertisements.where('( (start_date <= ? and end_date >= ? and sections @> ?) )', Time.now, Time.now, '{Intorno a te}').group_by(&:position)
+    all_advertisements =   advertisements.where('( (sections @> ?) )', '{Intorno a te}')
+    advertisements_ids = all_advertisements.map(&:id)
+    active_ads = AdvertisementDuration.where('advertisement_id in (?) and start_date <= ? and end_date >= ?', advertisements_ids, Date.today, Date.today).map(&:advertisement_id)
+    all_advertisements.where('advertisements.id in (?)', active_ads).group_by(&:position)
   end
 
   def commonplace_active_advertisements
-    advertisements.where('( (start_date <= ? and end_date >= ? and sections @> ?) )', Time.now, Time.now, '{Comune}').group_by(&:position)
+    all_advertisements =   advertisements.where('( (sections @> ?) )', '{Comune}')
+    advertisements_ids = all_advertisements.map(&:id)
+    active_ads = AdvertisementDuration.where('advertisement_id in (?) and start_date <= ? and end_date >= ?', advertisements_ids, Date.today, Date.today).map(&:advertisement_id)
+    all_advertisements.where('advertisements.id in (?)', active_ads).group_by(&:position)
   end
 
   def discover_active_advertisements
-    advertisements.where('( (start_date <= ? and end_date >= ? and sections @> ?) )', Time.now, Time.now, '{Scopri}').group_by(&:position)
+    all_advertisements =   advertisements.where('( (sections @> ?) )', '{Scopri}')
+    advertisements_ids = all_advertisements.map(&:id)
+    active_ads = AdvertisementDuration.where('advertisement_id in (?) and start_date <= ? and end_date >= ?', advertisements_ids, Date.today, Date.today).map(&:advertisement_id)
+    all_advertisements.where('advertisements.id in (?)', active_ads).group_by(&:position)
   end
 
   def utility_active_advertisements
-    advertisements.where('( (start_date <= ? and end_date >= ? and sections @> ?) )', Time.now, Time.now, '{Utilità e Servizi}').group_by(&:position)
+    all_advertisements =   advertisements.where('( (sections @> ?) )', '{Utilità e Servizi}')
+    advertisements_ids = all_advertisements.map(&:id)
+    active_ads = AdvertisementDuration.where('advertisement_id in (?) and start_date <= ? and end_date >= ?', advertisements_ids, Date.today, Date.today).map(&:advertisement_id)
+    all_advertisements.where('advertisements.id in (?)', active_ads).group_by(&:position)
   end
 
   def parent_categories
