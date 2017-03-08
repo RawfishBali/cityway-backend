@@ -560,7 +560,7 @@ module CityWay
         end
         expose :major_icon, documentation: {:type => "String", :desc => "Profile major icon"}  do |object, options|
           if object.override_major == true
-            object.replaceable_icon.url 
+            object.replaceable_icon.url
           else
             object.major.major_icon.url if object.major
           end
@@ -573,7 +573,7 @@ module CityWay
           end
 
         end
-        expose :phone, if: lambda { |object, options|  }, documentation: {:type => "String", :desc => "Comune Phone"}  do |object, options|
+        expose :phone, documentation: {:type => "String", :desc => "Comune Phone"}  do |object, options|
           if object.override_major == true
             object.replaceable_phone
           else
