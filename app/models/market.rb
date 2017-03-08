@@ -44,7 +44,7 @@ class Market < ActiveRecord::Base
     markets = []
     open_markets = Market.joins(:business_hours).where('business_hours.day = ?', Date::DAYNAMES.index(Date.parse(day).strftime("%A")))
     open_markets.each do |open_market|
-      markets << open_market if open_market.is_open_now?
+      markets << open_market if open_market.is_open_at_certain_time(Date.parse(day))
     end
     return markets
   end
@@ -52,6 +52,13 @@ class Market < ActiveRecord::Base
   def is_open_now?
     business_hours.each do |business_hour|
       return true if business_hour.is_open? Time.zone.now
+    end
+    return false
+  end
+
+  def is_open_at_certain_time time
+    business_hours.each do |business_hour|
+      return true if business_hour.is_open? time
     end
     return false
   end
