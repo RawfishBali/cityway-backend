@@ -47,7 +47,15 @@ class BusinessHour < ActiveRecord::Base
     else
       (parsed_time(morning_open_time) <= now && parsed_time(evening_close_time) >= now  && now.wday == day)
     end
+  end
 
+  def is_open_at_certain_time now
+    return true if (morning_open_time == morning_close_time) || (evening_open_time == evening_close_time) || (morning_open_time == evening_close_time)
+    if evening_open_time && morning_close_time
+      (parsed_time(morning_open_time) <= now && parsed_time(morning_close_time) >= now) || (parsed_time(evening_open_time) <= now && parsed_time(evening_close_time) >= now)
+    else
+      (parsed_time(morning_open_time) <= now && parsed_time(evening_close_time) >= now)
+    end
   end
 
   def parsed_time field_time

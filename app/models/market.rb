@@ -58,7 +58,7 @@ class Market < ActiveRecord::Base
 
   def is_open_at_certain_time time
     business_hours.each do |business_hour|
-      return true if business_hour.is_open? time
+      return true if business_hour.is_open_at_certain_time Time.zone.now
     end
     return false
   end
