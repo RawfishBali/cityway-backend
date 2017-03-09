@@ -441,7 +441,9 @@ module CityWay
           end
           expose :latitude, documentation: {:type => "String", :desc => "Profile latitude"}
           expose :longitude, documentation: {:type => "String", :desc => "Profile longitude"}
-          expose :unavailable, documentation: {:type => "Boolean", :desc => "Profile Timetable Availability"}
+          expose :unavailable, documentation: {:type => "Boolean", :desc => "Profile Timetable Availability"} do |profile,options|
+            profile.unavailable && profile.days_open && profile.appointment_start && profile.appointment_end
+          end
           expose :days_open,if: lambda { |object, options| !object.unavailable == true }, documentation: {:type => "String", :desc => "Profile Days Open"} do |profile, options|
             profile.days_open.compact.collect { |x| I18n.t(:"date.day_names")[x] }.join(" , ") if profile.days_open
           end
