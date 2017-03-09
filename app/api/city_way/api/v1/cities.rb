@@ -52,7 +52,6 @@ module CityWay
           end
           get '/:id' do
             city = City.find(params[:id])
-            advertisements = city.active_advertisements
             home_active_advertisements = city.home_active_advertisements
             around_active_advertisements = city.around_active_advertisements
             commonplace_active_advertisements = city.commonplace_active_advertisements
@@ -103,8 +102,6 @@ module CityWay
               end
               subcategories = subcategories.uniq
               subcategories = subcategories.sort_by &:name
-
-
             else
               if params[:latitude] && params[:longitude]
                 merchants = Merchant.near([params[:latitude], params[:longitude]], 20000).active_merchants.joins(:cities_merchants).joins(:subcategories).uniq.where('cities_merchants.city_id = ? AND categories_merchants.category_id = ? AND merchants.active = ? ',params[:id], params[:subcategory_i],true).page params[:page]
@@ -147,9 +144,6 @@ module CityWay
               else
                 merchants = Merchant.where(city_id: params[:id])
               end
-
-              # merchants = merchants.near([params[:latitude],params[:longitude]], 21000, units: :km) if params[:latitude] && params[:longitude]
-
               temp_promos = []
               merchants.each do |m|
                 m.active_promos.each do |promo|

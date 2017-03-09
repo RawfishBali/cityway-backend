@@ -398,15 +398,15 @@ module CityWay
 
             CityWay::Api::V1::Entities::Advertisement.represent(all_ads)
           end
-          expose :events do |around, options|
-            CityWay::Api::V1::Entities::Event.represent(around.active_events)
-          end
-          expose :parks do |around, options|
-            CityWay::Api::V1::Entities::Park.represent(around.parks)
-          end
-          expose :markets do |around, options|
-            CityWay::Api::V1::Entities::Market.represent(around.markets)
-          end
+          # expose :events do |around, options|
+          #   CityWay::Api::V1::Entities::Event.represent(around.active_events)
+          # end
+          # expose :parks do |around, options|
+          #   CityWay::Api::V1::Entities::Park.represent(around.parks)
+          # end
+          # expose :markets do |around, options|
+          #   CityWay::Api::V1::Entities::Market.represent(around.markets)
+          # end
           expose :bottom_advertisements do |around, options|
             if options[:around_active_advertisements]["bottom"] && options[:around_active_advertisements]["both"]
               all_ads = options[:advertisements]["bottom"] + options[:around_active_advertisements]["both"]
