@@ -340,7 +340,7 @@ module CityWay
             CityWay::Api::V1::Entities::Photo.represent(object.photos.order('position ASC'))
           end
           expose :description,if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "Text", :desc => "Public Office Description"}
-          expose :email,if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "String", :desc => "Public Office Email"}
+          expose :email,if: lambda { |object, options| options[:simple] == 'false' && !object.email.blank? }, documentation: {:type => "String", :desc => "Public Office Email"}
           expose :address, documentation: {:type => "String", :desc => "Public Office Address"}
           expose :phones do |object, options|
             [object.phone, object.phone_1, object.phone_2].reject(&:blank?)
