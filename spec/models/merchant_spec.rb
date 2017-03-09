@@ -30,6 +30,7 @@
 #  open_all_day         :boolean          default(FALSE)
 #  phone_extra          :string
 #  admin_id             :integer
+#  hide_email           :boolean          default(FALSE)
 #
 
 require 'rails_helper'

@@ -153,10 +153,27 @@
             <div class="uk-width-medium-1-2">
               <label>Email</label>
               <%= f.text_field :email,required: true,class: 'md-input'  %>
+
             </div>
             <div class="uk-width-medium-1-2">
+              
               <%= f.label :support_disabilities, 'Città Accessibile', class: 'inline-label'%>
               <%= f.check_box :support_disabilities,class: 'md-input', 'data-switchery': true  %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+              <%= f.label :hide_email, 'Nascondere e-mail', class: 'inline-label'%>
+              <%= f.check_box :hide_email,class: 'md-input', 'data-switchery': true, 'data-switchery-size':"large"  %>
+            </div>
+            <div class="uk-width-medium-1-2">
+              <%= f.label :is_basic, 'Basic', class: 'inline-label'%>
+              <%= f.check_box :is_basic,class: 'md-input', 'data-switchery': true, 'data-switchery-size':"large"  %>
             </div>
           </div>
         </div>
@@ -171,8 +188,7 @@
               <%= f.text_field :website,class: 'md-input'  %>
             </div>
             <div class="uk-width-medium-1-2">
-              <%= f.label :is_basic, 'Basic', class: 'inline-label'%>
-              <%= f.check_box :is_basic,class: 'md-input', 'data-switchery': true, 'data-switchery-size':"large"  %>
+              
             </div>
 
           </div>
