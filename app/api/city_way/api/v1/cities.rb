@@ -10,7 +10,7 @@ module CityWay
             authenticate!
           end
 
-          desc "List Cities"
+          desc 'List Cities'
           params do
             optional :page , type: Integer
             optional :sort, type: Hash do
@@ -46,7 +46,7 @@ module CityWay
             end
           end
 
-          desc "City Detail"
+          desc 'City Detail'
           params do
             requires :id , type: Integer, values: -> { City.ids }
           end
@@ -62,7 +62,7 @@ module CityWay
             utility_active_advertisements: utility_active_advertisements
           end
 
-          desc "City Weather"
+          desc 'City Weather'
           params do
             requires :id , type: Integer, values: -> { City.ids }
           end
@@ -101,7 +101,7 @@ module CityWay
 
               end
               subcategories = subcategories.uniq
-              subcategories = subcategories.sort_by &:name
+              subcategories = subcategories.sort_by(&:name)
             else
               if params[:latitude] && params[:longitude]
                 merchants = Merchant.near([params[:latitude], params[:longitude]], 20000).active_merchants.joins(:cities_merchants).joins(:subcategories).uniq.where('cities_merchants.city_id = ? AND categories_merchants.category_id = ? AND merchants.active = ? ',params[:id], params[:subcategory_i],true).page params[:page]
@@ -136,7 +136,6 @@ module CityWay
               if params[:category_id]
                 category = Category.find(params[:category_id])
                 if params[:subcategory_id].blank?
-                  subcategories = category.subcategories
                   merchants = Merchant.where(city_id: params[:id] , category_id: params[:category_id])
                 else
                   merchants = Merchant.joins(:subcategories).where('merchants.city_id = ? AND categories_merchants.category_id = ?' ,params[:id], params[:subcategory_id])
@@ -157,7 +156,6 @@ module CityWay
             present promos, with: CityWay::Api::V1::Entities::Promo, latitude: params[:latitude], longitude: params[:longitude]
           end
         end
-
       end
     end
   end
