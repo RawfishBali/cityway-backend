@@ -1380,8 +1380,8 @@ module CityWay
           end
           expose :latitude,if: lambda { |object, options| !object.is_basic }, documentation: {:type => "float", :desc => "Merchant Latitude"}
           expose :longitude,if: lambda { |object, options| !object.is_basic }, documentation: {:type => "float", :desc => "Merchant Longitude"}
-          expose :email,if: lambda { |object, options| options[:simple] == 'false'}, documentation: {:type => "string", :desc => "Merchant email"} do
-            merchant.hide_email ? "" : merchantgi.email
+          expose :email,if: lambda { |object, options| options[:simple] == 'false'}, documentation: {:type => "string", :desc => "Merchant email"} do do |merchant, options|
+            merchant.hide_email ? "" : merchant.email
           end
           expose :website, if: lambda { |object, options| options[:simple] == 'false' && object.website }, documentation: {:type => "string", :desc => "Merchant website"} do |merchant, options|
             unless merchant.website[/\Ahttp:\/\//] || merchant.website[/\Ahttps:\/\//]
