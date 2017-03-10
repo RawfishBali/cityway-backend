@@ -1506,6 +1506,15 @@ module CityWay
           end
         end
 
+        class PromoWithSubcategories < Grape::Entity
+          expose :promos do |object, options|
+            CityWay::Api::V1::Entities::Promo.represent(options[:promos])
+          end
+          expose :subcategories, if: lambda { |object, options| !options[:subcategories].blank? } do |object , options|
+            CityWay::Api::V1::Entities::Category.represent(options[:subcategories])
+          end
+        end
+
         class Message < Grape::Entity
           expose :id, documentation: {:type => "Integer", :desc => "Message id"}
           expose :firstname, documentation: {:type => "String", :desc => "Message firstname"}

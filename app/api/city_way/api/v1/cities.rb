@@ -128,6 +128,7 @@ module CityWay
           end
 
           get '/:id/promos' do
+            city = City.find(params[:id])
             if params[:merchant_id]
               merchant = Merchant.find(params[:merchant_id])
               promos = merchant.active_promos.page params[:page]
@@ -153,7 +154,15 @@ module CityWay
             end
 
             add_pagination_headers promos
-            present promos, with: CityWay::Api::V1::Entities::Promo, latitude: params[:latitude], longitude: params[:longitude]
+            subcategories = []
+            promos.each do |promo|
+              promo.merchant.subcategories.each do |subcategory|
+                subcategories << subcategory
+              end
+            end
+            subcategories = subcategories.uniq
+            subcategories = subcategories.sort_by(&:name)
+            present city, with: CityWay::Api::V1::Entities::PromoWithSubcategories, latitude: params[:latitude], longitude: params[:longitude], subcategories: subcategories, promos: promos
           end
         end
       end
