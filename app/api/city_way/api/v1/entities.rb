@@ -1222,7 +1222,7 @@ module CityWay
             CityWay::Api::V1::Entities::Advertisement.represent(all_ads)
           end
           expose :categories, if: lambda { |object, options| options[:simple] == 'false'  }  do |home , options|
-            CityWay::Api::V1::Entities::Category.represent(home.categories_with_merhcant)
+            CityWay::Api::V1::Entities::CategoryParentOnly.represent(home.categories_with_merhcant)
           end
           expose :bottom_advertisements, if: lambda { |object, options| options[:simple] == 'false'  }  do |home , options|
             if options[:home_active_advertisements]["bottom"] && options[:home_active_advertisements]["both"]
@@ -1312,6 +1312,23 @@ module CityWay
           end
           expose :subcategories,if: lambda { |object, options| !object.parent_id && object.subcategories.length > 0 } do |category, options|
             CityWay::Api::V1::Entities::Category.represent(category.subcategories.order('Name ASC'))
+          end
+        end
+
+        class CategoryParentOnly < Grape::Entity
+          expose :id, documentation: {:type => "Integer", :desc => "Category ID"}
+          expose :name, documentation: {:type => "String", :desc => "Category Name"} do |category, options|
+            if options[:capital]
+              category.name.upcase
+            else
+              category.name
+            end
+          end
+          expose :photo,if: lambda { |object, options| !object.parent_id }, documentation: {:type => "String", :desc => "Category Photo"} do |category, options|
+            category.photo.url
+          end
+          expose :icon,if: lambda { |object, options| !object.parent_id }, documentation: {:type => "String", :desc => "Category Icon"} do |category, options|
+            category.icon.url
           end
         end
 
