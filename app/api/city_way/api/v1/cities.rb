@@ -107,7 +107,7 @@ module CityWay
                 merchants = Merchant.near([params[:latitude], params[:longitude]], 20000).active_merchants.joins(:cities_merchants).joins(:subcategories).uniq.where('cities_merchants.city_id = ? AND categories_merchants.category_id = ? AND merchants.active = ? ',params[:id], params[:subcategory_i],true).page params[:page]
               else
                 merchants = Merchant.active_merchants.joins(:cities_merchants).joins(:subcategories).uniq.where('cities_merchants.city_id = ? 
-                  AND categories_merchants.category_id = ? AND merchants.active = ? ',params[:id], params[:subcategory],true).order('id ASC').page params[:page]
+                  AND categories_merchants.category_id = ? AND merchants.active = ? ',params[:id], params[:subcategory_id],true).order('id ASC').page params[:page]
               end
 
 
