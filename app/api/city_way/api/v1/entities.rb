@@ -446,7 +446,7 @@ module CityWay
               profile.unavailable
             else
               if profile.days_open
-                profile.days_open.all? &:blank? && !profile.appointment_start && !profile.appointment_end
+                (profile.days_open.all? &:blank?) && !profile.appointment_start && !profile.appointment_end
               else
                 !profile.appointment_start && !profile.appointment_end
               end
