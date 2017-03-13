@@ -30,7 +30,9 @@ module CityWay
           end
           get '/:id/useful_numbers' do
             utility = Utility.find(params[:id])
-            present utility.utility_numbers, with: CityWay::Api::V1::Entities::UtilityNumber
+            utility_numbers = utility.utility_numbers.page(params[:page])
+            add_pagination_headers utility_numbers
+            present utility_numbers, with: CityWay::Api::V1::Entities::UtilityNumber
           end
 
           desc "Places list"
@@ -45,7 +47,6 @@ module CityWay
             optional :simple, type: Boolean
           end
           get '/:id/places' do
-            simple = params[:simple].to_s || true
             utility = Utility.find(params[:id])
             if params[:place_group]
               if params[:place_group] == 'socials'
