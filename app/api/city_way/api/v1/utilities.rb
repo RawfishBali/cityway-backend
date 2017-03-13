@@ -249,7 +249,7 @@ module CityWay
               courses = utility.courses.page(params[:page])
             end
             add_pagination_headers courses
-            present utility.courses.where("course_type = ?", params[:course_type]), with: CityWay::Api::V1::Entities::UtilityCourse, simple: 'true', 
+            present courses, with: CityWay::Api::V1::Entities::UtilityCourse, simple: 'true', 
               latitude: params[:latitude], longitude: params[:longitude]
           end
 
