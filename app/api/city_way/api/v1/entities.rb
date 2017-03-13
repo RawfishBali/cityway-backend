@@ -899,11 +899,11 @@ module CityWay
               CityWay::Api::V1::Entities::Photo.represent(object.primary_photo) if object.photos.length > 0
             end
           end
-          expose :phones do |object, options|
+          expose :phones,if: lambda { |object, options| options[:simple] == 'false' } do |object, options|
             [object.phone, object.phone_1, object.phone_2].reject(&:blank?)
           end
-          expose :email, documentation: {:type => "String", :desc => "Utility Place email"}
-          expose :website,if: lambda { |object, options| !object.website.blank? }, documentation: {:type => "String", :desc => "Utility Place website"} do |object, options|
+          expose :email,if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "String", :desc => "Utility Place email"}
+          expose :website,if: lambda { |object, options| !object.website.blank? && options[:simple] == 'false' }, documentation: {:type => "String", :desc => "Utility Place website"} do |object, options|
             unless object.website[/\Ahttp:\/\//] || object.website[/\Ahttps:\/\//]
               "https://#{object.website}" unless object.website.blank?
             else
@@ -948,7 +948,7 @@ module CityWay
               object.google_plus
             end
           end
-          expose :business_hours do |object , options|
+          expose :business_hours,if: lambda { |object, options| options[:simple] == 'false' } do |object , options|
             CityWay::Api::V1::Entities::BusinessHours.represent(object.all_business_hours)
           end
           expose :latitude, documentation: {:type => "float", :desc => "Utility Place Latitude"}
