@@ -19,7 +19,9 @@ module CityWay
           end
           get '/:id/devices' do
             utility = Utility.find(params[:id])
-            present utility.devices_by_type(params[:device_type]), with: CityWay::Api::V1::Entities::Device, simple: 'false', latitude: params[:latitude], longitude: params[:longitude]
+            devices = utility.devices_by_type(params[:device_type]).page(params[:page])
+            add_pagination_headers devices
+            present devices, with: CityWay::Api::V1::Entities::Device, simple: 'false', latitude: params[:latitude], longitude: params[:longitude]
           end
 
           desc "Useful Number list"
