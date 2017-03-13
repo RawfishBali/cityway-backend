@@ -145,7 +145,9 @@ module CityWay
           end
           get '/:id/transportations' do
             utility = Utility.find(params[:id])
-            present utility.transportation_by_type(params[:transportation_type]), with: CityWay::Api::V1::Entities::PublicTransport, simple: 'false', latitude: params[:latitude], longitude: params[:longitude]
+            transportations = utility.transportation_by_type(params[:transportation_type]).page(params[:page])
+            add_pagination_headers transportations
+            present transportations, with: CityWay::Api::V1::Entities::PublicTransport, simple: 'false', latitude: params[:latitude], longitude: params[:longitude]
           end
 
           desc 'Moving Within City'
