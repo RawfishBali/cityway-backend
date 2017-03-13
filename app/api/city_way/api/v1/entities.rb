@@ -848,7 +848,7 @@ module CityWay
           expose :name, documentation: {:type => "String", :desc => "Utility Place Name"}
           expose :denomination, documentation: {:type => "String", :desc => "Utility Place denomination"},if: lambda { |object, options| options[:simple] == 'false' && object.denomination }
           expose :address, documentation: {:type => "String", :desc => "Utility Place Address"}
-          expose :description, documentation: {:type => "String", :desc => "Utility Place description"}
+          expose :description,if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "String", :desc => "Utility Place description"}
           expose :photos, documentation: {:type => "string", :desc => "Merchant photo"} do |object , options|
             if options[:simple] == 'false'
               CityWay::Api::V1::Entities::Photo.represent(object.photos) if object.photos.length > 0
@@ -867,7 +867,7 @@ module CityWay
               object.website
             end
           end
-          expose :business_hours do |object , options|
+          expose :business_hours,if: lambda { |object, options| options[:simple] == 'false' } do |object , options|
             CityWay::Api::V1::Entities::BusinessHours.represent(object.all_business_hours)
           end
           expose :latitude, documentation: {:type => "float", :desc => "Utility Place Latitude"}
