@@ -178,8 +178,8 @@ module CityWay
           get '/:id/glossaries' do
             utility = Utility.find(params[:id])
             glossaries = utility.garbage_glossaries.page(params[:page])
-            add_pagination_headers vehicles
-            present utility.garbage_glossaries, with: CityWay::Api::V1::Entities::GarbageGlossary
+            add_pagination_headers glossaries
+            present glossaries, with: CityWay::Api::V1::Entities::GarbageGlossary
           end
 
           desc "ZTL list"
