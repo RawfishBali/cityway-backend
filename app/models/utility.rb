@@ -34,10 +34,10 @@ class Utility < ActiveRecord::Base
 
   def places_by_type place_type, is_public=nil, commercial=nil, page
     return [] if (UtilityPlace.place_types[place_type]).blank?
-    return utility_places.where("place_type = ?", UtilityPlace.place_types[place_type]).page(params[:page]) if is_public.nil? && commercial.nil?
-    return utility_places.where("place_type = ? and commercial = ?", UtilityPlace.place_types[place_type], commercial).page(params[:page]) if is_public.nil? && !commercial.nil?
-    return utility_places.where("place_type = ? and is_public = ?", UtilityPlace.place_types[place_type], is_public).page(params[:page]) if !is_public.nil? && commercial.nil?
-    return utility_places.where("place_type = ? and is_public = ? and commercial = ?", UtilityPlace.place_types[place_type], is_public, commercial).page(params[:page]) if !is_public.nil? && !commercial.nil?
+    return utility_places.where("place_type = ?", UtilityPlace.place_types[place_type]).page(page) if is_public.nil? && commercial.nil?
+    return utility_places.where("place_type = ? and commercial = ?", UtilityPlace.place_types[place_type], commercial).page(page) if is_public.nil? && !commercial.nil?
+    return utility_places.where("place_type = ? and is_public = ?", UtilityPlace.place_types[place_type], is_public).page(page) if !is_public.nil? && commercial.nil?
+    return utility_places.where("place_type = ? and is_public = ? and commercial = ?", UtilityPlace.place_types[place_type], is_public, commercial).page(page) if !is_public.nil? && !commercial.nil?
 
   end
 
