@@ -48,15 +48,10 @@ module CityWay
           end
           get '/:id/places' do
             utility = Utility.find(params[:id])
-            if params[:place_group]
-              if params[:place_group] == 'socials'
-                present utility, with: CityWay::Api::V1::Entities::UtilitySocials, simple: false, latitude: params[:latitude], longitude: params[:longitude]
-              end
-            else
-              places = utility.places_by_type(params[:place_type], params[:public], params[:commercial], params[:page])
-              add_pagination_headers places
-              present places , with: CityWay::Api::V1::Entities::UtilityPlaceEntitiy, simple: false, latitude: params[:latitude], longitude: params[:longitude]
-            end
+            places = utility.places_by_type(params[:place_type], params[:public], params[:commercial], params[:page])
+            add_pagination_headers places
+            present places , with: CityWay::Api::V1::Entities::UtilityPlaceEntitiy, simple: false, 
+              latitude: params[:latitude], longitude: params[:longitude]
           end
 
 
