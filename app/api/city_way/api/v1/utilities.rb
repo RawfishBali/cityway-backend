@@ -77,7 +77,9 @@ module CityWay
             else
               schools = utility.schools
             end
-            present schools, with: CityWay::Api::V1::Entities::UtilitySchool, simple: simple, latitude: params[:latitude], longitude: params[:longitude]
+            add_pagination_headers schools
+            present schools, with: CityWay::Api::V1::Entities::UtilitySchool, simple: false, 
+            latitude: params[:latitude], longitude: params[:longitude]
           end
 
           desc "Sports List"
