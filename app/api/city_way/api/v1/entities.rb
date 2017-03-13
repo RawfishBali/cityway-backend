@@ -1677,7 +1677,7 @@ module CityWay
           expose :id, documentation: {:type => "Integer", :desc => "Utility Place ID"}
           expose :name, documentation: {:type => "String", :desc => "Utility Place Name"}
           expose :address, documentation: {:type => "String", :desc => "Utility Place Address"}
-          expose :description, documentation: {:type => "String", :desc => "Utility Place description"}
+          expose :description,if: lambda { |object, options| options[:simple] == 'false' }, documentation: {:type => "String", :desc => "Utility Place description"}
           expose :photos, documentation: {:type => "string", :desc => "Merchant photo"} do |object , options|
             if options[:simple] == 'false'
               CityWay::Api::V1::Entities::Photo.represent(object.photos) if object.photos.length > 0
@@ -1734,7 +1734,7 @@ module CityWay
               object.google_plus
             end
           end
-          expose :business_hours do |object , options|
+          expose :business_hours,if: lambda { |object, options| options[:simple] == 'false' } do |object , options|
             CityWay::Api::V1::Entities::BusinessHours.represent(object.all_business_hours)
           end
           expose :latitude, documentation: {:type => "float", :desc => "Utility Place Latitude"}
