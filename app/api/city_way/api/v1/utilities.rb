@@ -160,11 +160,13 @@ module CityWay
           get '/:id/vehicles' do
             utility = Utility.find(params[:id])
             if params[:type]
-              vehicles = utility.vehicles_by_type params[:type]
+              vehicles = utility.vehicles_by_type(params[:type]).page(params[:page])
             else
-              vehicles = utility.vehicles
+              vehicles = utility.vehicles.page(params[:page])
             end
-            present vehicles, with: CityWay::Api::V1::Entities::Vehicle, simple: 'false', latitude: params[:latitude], longitude: params[:longitude]
+            add_pagination_headers vehicles
+            present vehicles, with: CityWay::Api::V1::Entities::Vehicle, simple: 'false', latitude: params[:latitude], 
+            longitude: params[:longitude]
           end
 
           desc "GarbageGlossary list"
