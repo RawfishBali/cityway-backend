@@ -72,6 +72,8 @@ gem 'faker'
 
 gem 'rubycritic', require: false
 
+gem 'sidekiq'
+
 
 group :production do
   gem 'rails_12factor'
