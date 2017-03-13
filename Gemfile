@@ -49,7 +49,6 @@ gem 'cloudinary'
 gem 'forecast_io'
 
 gem 'puma'
-gem 'newrelic_rpm'
 
 gem 'browser'
 
