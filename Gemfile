@@ -53,8 +53,6 @@ gem 'newrelic_rpm'
 
 gem 'browser'
 
-gem 'skylight'
-
 gem 'httparty'
 
 gem 'ruby-duration'
