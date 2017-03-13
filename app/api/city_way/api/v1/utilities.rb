@@ -190,7 +190,9 @@ module CityWay
           end
           get '/:id/ztls' do
             utility = Utility.find(params[:id])
-            present utility.ztls, with: CityWay::Api::V1::Entities::Ztl
+            ztls = utility.ztls.page(params[:page])
+            add_pagination_headers ztls
+            present ztls, with: CityWay::Api::V1::Entities::Ztl
           end
 
           desc "Waste Recycling List"
@@ -214,7 +216,9 @@ module CityWay
           end
           get '/:id/parking_lots' do
             utility = Utility.find(params[:id])
-            present utility.parking_lots, with: CityWay::Api::V1::Entities::ParkingLot, simple: 'true', latitude: params[:latitude], longitude: params[:longitude]
+            parking_lots = utility.parking_lots.page(params[:page])
+            add_pagination_headers parking_lots
+            present parking_lots, with: CityWay::Api::V1::Entities::ParkingLot, simple: 'true', latitude: params[:latitude], longitude: params[:longitude]
           end
 
           desc "Parking Lot Show"
@@ -240,11 +244,13 @@ module CityWay
           get '/:id/courses' do
             utility = Utility.find(params[:id])
             if params[:course_type]
-              present utility.courses.where("course_type = ?", params[:course_type]), with: CityWay::Api::V1::Entities::UtilityCourse, simple: 'true', latitude: params[:latitude], longitude: params[:longitude]
+              courses =  utility.courses.where("course_type = ?", params[:course_type])
             else
-              present utility.courses, with: CityWay::Api::V1::Entities::UtilityCourse, simple: 'true', latitude: params[:latitude], longitude: params[:longitude]
+              courses = utility.courses.page(params[:page])
             end
-
+            add_pagination_headers courses
+            present utility.courses.where("course_type = ?", params[:course_type]), with: CityWay::Api::V1::Entities::UtilityCourse, simple: 'true', 
+              latitude: params[:latitude], longitude: params[:longitude]
           end
 
 
