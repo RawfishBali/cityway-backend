@@ -244,7 +244,7 @@ module CityWay
           get '/:id/courses' do
             utility = Utility.find(params[:id])
             if params[:course_type]
-              courses =  utility.courses.where("course_type = ?", params[:course_type])
+              courses =  utility.courses.where("course_type = ?", params[:course_type]).page(params[:page])
             else
               courses = utility.courses.page(params[:page])
             end
