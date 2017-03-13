@@ -68,14 +68,14 @@ module CityWay
             simple = params[:simple].to_s || true
             utility = Utility.find(params[:id])
             if params[:school_type]
-              schools = utility.schools.where(school_type: params[:school_type])
+              schools = utility.schools.where(school_type: params[:school_type]).page(params[:page])
               if params.has_key?(:public)
                 schools = schools.where(is_public: params[:public])
               end
             elsif params.has_key?(:public)
-              schools = utility.schools.where(is_public: params[:public])
+              schools = utility.schools.where(is_public: params[:public]).page(params[:page])
             else
-              schools = utility.schools
+              schools = utility.schools.page(params[:page])
             end
             add_pagination_headers schools
             present schools, with: CityWay::Api::V1::Entities::UtilitySchool, simple: false, 
