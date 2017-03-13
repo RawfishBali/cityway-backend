@@ -70,7 +70,6 @@ module CityWay
             optional :simple, type: Boolean
           end
           get '/:id/schools' do
-            simple = params[:simple].to_s || true
             utility = Utility.find(params[:id])
             if params[:school_type]
               schools = utility.schools.where(school_type: params[:school_type]).page(params[:page])
@@ -109,6 +108,8 @@ module CityWay
             else
               sports = utility.sports
             end
+            sports = sports.page(params[:page])
+            add_pagination_headers sports
             present sports, with: CityWay::Api::V1::Entities::UtilitySport, simple: simple, latitude: params[:latitude], longitude: params[:longitude]
           end
 
