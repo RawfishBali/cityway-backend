@@ -2291,7 +2291,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     max: "Tale valore deve essere minore o uguale a %s.",
     range: "Tale valore deve essere compreso tra %s e %s.",
     minlength: "This value is too short. It should have %s characters or more.",
-    maxlength: "This value is too long. It should have %s characters or fewer.",
+    maxlength: "Questo valore è troppo lungo. Esso dovrebbe avere %s caratteri o meno.",
     length: "Questa lunghezza valore non è valido. Dovrebbe essere tra i caratteri %s e %s lungo.",
     mincheck: "You must select at least %s choices.",
     maxcheck: "È necessario selezionare scelte %s o meno.",
@@ -2373,4 +2373,3 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
   return parsley;
 });
-//# sourceMappingURL=parsley.js.map

@@ -1,0 +1,17 @@
+<div class="nested-fieldsxxx">
+  <div class="uk-grid" data-uk-grid-margin>
+    <div class="uk-width-large-1-1 uk-width-1-1">
+      <div class="uk-width-medium-1-1 uk-row-first">
+        <span class="font-size-11">(Suggerimento immagine 750 x 410px)</span>
+        <div class="dropzone"   data-image="<%= f.object.picture.url %>"  data-height="410" data-width="750"  data-editstart="false" data-ajax="false" data-canvas="true" style="width: 100%" >
+          <%= f.file_field :picture%>
+        </div>
+      </div>
+      <div class="uk-width-medium-1-1 uk-row-first">
+        <div class="md-input-wrapper text-align-right">
+          <%= link_to_remove_association '<i class="material-icons md-24 "></i>'.html_safe, f, {class: 'btnSectionRemove'} %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

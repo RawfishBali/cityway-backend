@@ -36,6 +36,8 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    addressable (2.5.0)
+      public_suffix (~> 2.0, >= 2.0.2)
     airbrussh (1.1.1)
       sshkit (>= 1.6.1, != 1.7.0)
     annotate (2.7.1)
@@ -79,6 +81,8 @@ GEM
     cocoon (1.2.9)
     code_analyzer (0.4.6)
       sexp_processor
+    codeclimate-engine-rb (0.4.0)
+      virtus (~> 1.0)
     coderay (1.1.1)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
@@ -90,6 +94,7 @@ GEM
       execjs
     coffee-script-source (1.10.0)
     concurrent-ruby (1.0.2)
+    connection_pool (2.2.0)
     debug_inspector (0.0.2)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
@@ -107,8 +112,19 @@ GEM
     equalizer (0.0.11)
     erubis (2.7.0)
     execjs (2.7.0)
+    faker (1.7.1)
+      i18n (~> 0.5)
     faraday (0.9.2)
       multipart-post (>= 1.2, < 3)
+    flay (2.8.1)
+      erubis (~> 2.7.0)
+      path_expander (~> 1.0)
+      ruby_parser (~> 3.0)
+      sexp_processor (~> 4.0)
+    flog (4.5.0)
+      path_expander (~> 1.0)
+      ruby_parser (~> 3.1, > 3.1.0)
+      sexp_processor (~> 4.4)
     forecast_io (2.0.0)
       faraday
       hashie
@@ -116,6 +132,9 @@ GEM
     geocoder (1.3.7)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
+    globalize (5.0.1)
+      activemodel (>= 4.2.0, < 4.3)
+      activerecord (>= 4.2.0, < 4.3)
     grape (0.17.0)
       activesupport
       builder
@@ -140,6 +159,8 @@ GEM
     httparty (0.14.0)
       multi_xml (>= 0.5.2)
     i18n (0.7.0)
+    i18n_generators (2.1.1)
+      rails (>= 3.0.0)
     ice_nine (0.11.2)
     iso8601 (0.9.1)
     jbuilder (2.6.0)
@@ -154,6 +175,8 @@ GEM
     kaminari (0.17.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
+    launchy (2.4.3)
+      addressable (~> 2.3)
     lol_dba (2.0.3)
       actionpack (>= 3.0, < 5.0)
       activerecord (>= 3.0, < 5.0)
@@ -179,7 +202,6 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (3.2.0)
     netrc (0.11.0)
-    newrelic_rpm (3.16.0.318)
     nokogiri (1.6.8)
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
@@ -200,6 +222,7 @@ GEM
     orm_adapter (0.5.0)
     parser (2.3.1.2)
       ast (~> 2.2)
+    path_expander (1.0.1)
     pg (0.18.4)
     phony (2.15.33)
     phony_rails (0.14.4)
@@ -213,6 +236,7 @@ GEM
       slop (~> 3.4)
     pry-rails (0.3.4)
       pry (>= 0.9.10)
+    public_suffix (2.0.5)
     puma (3.4.0)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
@@ -251,6 +275,11 @@ GEM
       json
       require_all
       ruby-progressbar
+    rails_real_favicon (0.0.6)
+      json (>= 1.7, < 3)
+      rails (>= 3.1)
+      rest-client (~> 2.0)
+      rubyzip (~> 1)
     rails_serve_static_assets (0.0.5)
     rails_stdout_logging (0.0.5)
     railties (4.2.7.1)
@@ -260,8 +289,17 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rainbow (2.1.0)
     rake (11.2.2)
+    raygun4ruby (1.1.9)
+      httparty (~> 0.11)
+      json
+      rack
     rdoc (4.2.2)
       json (~> 1.4)
+    redis (3.2.2)
+    reek (4.5.4)
+      codeclimate-engine-rb (~> 0.4.0)
+      parser (~> 2.3.1, >= 2.3.1.2)
+      rainbow (~> 2.0)
     require_all (1.3.3)
     responders (2.2.0)
       railties (>= 4.2.0, < 5.1)
@@ -298,6 +336,18 @@ GEM
       i18n
       iso8601
     ruby-progressbar (1.8.1)
+    ruby_parser (3.8.4)
+      sexp_processor (~> 4.1)
+    rubycritic (3.0.0)
+      flay (~> 2.8)
+      flog (~> 4.4)
+      launchy (= 2.4.3)
+      parser (= 2.3.1.2)
+      rainbow
+      reek (~> 4.4)
+      ruby_parser (~> 3.8)
+      virtus (~> 1.0)
+    rubyzip (1.2.0)
     sass (3.4.22)
     sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
@@ -314,13 +364,15 @@ GEM
     sexp_processor (4.7.0)
     shoulda-matchers (3.1.1)
       activesupport (>= 4.0.0)
+    sidekiq (4.1.1)
+      concurrent-ruby (~> 1.0)
+      connection_pool (~> 2.2, >= 2.2.0)
+      redis (~> 3.2, >= 3.2.1)
     simplecov (0.12.0)
       docile (~> 1.1.0)
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.0)
-    skylight (0.10.6)
-      activesupport (>= 3.0.0)
     slop (3.6.0)
     spring (1.7.2)
     sprockets (3.7.0)
@@ -378,20 +430,22 @@ DEPENDENCIES
   cocoon
   coffee-rails (~> 4.1.0)
   devise
+  faker
   forecast_io
   geocoder
+  globalize (~> 5.0.0)
   grape
   grape-entity
   grape_on_rails_routes
   hashie-forbidden_attributes
   hirb
   httparty
+  i18n_generators
   jbuilder (~> 2.0)
   jquery-rails
   kaminari
   lol_dba
   mini_magick
-  newrelic_rpm
   omniauth
   omniauth-facebook
   pg
@@ -402,16 +456,19 @@ DEPENDENCIES
   rails (= 4.2.7.1)
   rails_12factor
   rails_best_practices
+  rails_real_favicon
+  raygun4ruby
   rolify
   rspec-rails
   rubocop
   ruby-duration
+  rubycritic
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   seed_dump
   shoulda-matchers
+  sidekiq
   simplecov
-  skylight
   spring
   turbolinks
   uglifier (>= 1.3.0)

@@ -2,15 +2,16 @@
 #
 # Table name: markets
 #
-#  id          :integer          not null, primary key
-#  name        :string           not null
-#  address     :string           not null
-#  latitude    :float
-#  longitude   :float
-#  description :text
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  around_id   :integer
+#  id                   :integer          not null, primary key
+#  name                 :string           not null
+#  address              :string           not null
+#  latitude             :float
+#  longitude            :float
+#  description          :text
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  around_id            :integer
+#  support_disabilities :boolean          default(FALSE)
 #
 
 class Market < ActiveRecord::Base
@@ -40,12 +41,24 @@ class Market < ActiveRecord::Base
   end
 
   def self.markets_open_on day
-    Market.joins(:business_hours).where('business_hours.is_open_today = true AND business_hours.day = ?', Date::DAYNAMES.index(day.titleize))
+    markets = []
+    open_markets = Market.joins(:business_hours).where('business_hours.day = ?', Date::DAYNAMES.index(Date.parse(day).strftime("%A")))
+    open_markets.each do |open_market|
+      markets << open_market if open_market.is_open_at_certain_time(Date.parse(day))
+    end
+    return markets
   end
 
   def is_open_now?
     business_hours.each do |business_hour|
-      return true if business_hour.is_open? Time.now
+      return true if business_hour.is_open? Time.zone.now
+    end
+    return false
+  end
+
+  def is_open_at_certain_time time
+    business_hours.each do |business_hour|
+      return true if business_hour.is_open_at_certain_time Time.zone.now
     end
     return false
   end

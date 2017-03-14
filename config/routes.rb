@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-
-
   namespace :admin do
     resources :advertisements
     resources :categories do
@@ -10,7 +8,11 @@ Rails.application.routes.draw do
     end
     resources :cities
     resources :commonplaces
-    resources :merchants
+    resources :merchants do
+      member do
+        post 'remove_icon'
+      end
+    end
     resources :promos
     resources :parks
     resources :markets
@@ -36,6 +38,10 @@ Rails.application.routes.draw do
     resources :waste_types
     resources :waste_managements
     resources :certificates
+    resources :sports
+    resources :schools
+    resources :parking_lots
+    resources :courses
   end
 
   get '/ping', to: proc { [200, {}, ['']] }

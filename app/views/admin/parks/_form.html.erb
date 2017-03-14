@@ -3,7 +3,7 @@
     <%= form_for(@admin_park, url: (@admin_park.new_record? ? admin_parks_path(@admin_park) : admin_park_path(@admin_park)), multipart: true) do |f| %>
     <% if @admin_park.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@admin_park.errors.count, "error") %> prohibited this admin_category from being saved:</h2>
+      <h2>Qualcosa è andato storto durante il salvataggio dei dati</h2>
       <ul>
         <% @admin_park.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -15,7 +15,7 @@
       <% if @admin_park.new_record?%>
       Aggiungi Parchi
       <% else %>
-      Gestisci <%= @admin_park.name %>
+      Gestisci Parchi
       <% end %>
       <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, :back, class:'float-right' %>
     </h2>
@@ -35,7 +35,7 @@
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
               <label>Indirizzo</label>
-              <%= f.text_field :address, required: true,class: 'md-input'  %>
+              <%= f.text_field :address, required: true,class: 'md-input addressable'  %>
             </div>
           </div>
         </div>
@@ -48,16 +48,24 @@
           </div>
         </div>
         <div class="uk-form-row">
-        <div id="subcategories">
-          <h3>Orari</h3>
-          <%= f.fields_for :business_hours do |business_hour| %>
-          <%= render 'business_hour_fields', f: business_hour %>
-          <% end %>
-          <div class="links">
-            <%= link_to_add_association '<i class="material-icons md-24"></i>'.html_safe, f, :business_hours %>
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <%= f.label :support_disabilities, 'Città Accessibile', class: 'inline-label'%>
+              <%= f.check_box :support_disabilities,class: 'md-input', 'data-switchery': true  %>
+            </div>
           </div>
         </div>
-      </div>
+        <div class="uk-form-row">
+          <div id="subcategories">
+            <h3>Orari</h3>
+            <%= f.fields_for :business_hours do |business_hour| %>
+            <%= render 'business_hour_fields', f: business_hour %>
+            <% end %>
+            <div class="links">
+              <%= link_to_add_association '<i class="material-icons md-24"></i>'.html_safe, f, :business_hours %>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="uk-width-medium-1-2">

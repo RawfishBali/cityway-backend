@@ -1,5 +1,6 @@
 class Admin::StoriesController < Admin::BaseController
   before_action :set_admin_story, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource param_method: :admin_story_params
 
   # GET /admin/stories
   # GET /admin/stories.json
@@ -29,7 +30,7 @@ class Admin::StoriesController < Admin::BaseController
 
     respond_to do |format|
       if @admin_story.save
-        format.html { redirect_to session['previous_url'] || admin_stories_url, notice: 'Story è stato creato con successo.' }
+        format.html { redirect_to session['previous_url'] || admin_stories_url, notice: 'Storia dela citta è stato creato con successo.' }
         format.json { render :show, status: :created, location: @admin_story }
       else
         format.html { render :new }
@@ -43,7 +44,7 @@ class Admin::StoriesController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_story.update(admin_story_params)
-        format.html { redirect_to session['previous_url'] || admin_stories_url, notice: 'Story è stato aggiornato con successo.' }
+        format.html { redirect_to session['previous_url'] || admin_stories_url, notice: 'Storia dela citta è stato aggiornato con successo.' }
         format.json { render :show, status: :ok, location: @admin_story }
       else
         format.html { render :edit }
@@ -57,7 +58,7 @@ class Admin::StoriesController < Admin::BaseController
   def destroy
     @admin_story.destroy
     respond_to do |format|
-      format.html { redirect_to session['previous_url'] || admin_stories_url, notice: 'Story è stato distrutto con successo.' }
+      format.html { redirect_to session['previous_url'] || admin_stories_url, notice: 'Storia dela citta cancellata con successo!.' }
       format.json { head :no_content }
     end
   end
@@ -71,6 +72,6 @@ class Admin::StoriesController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_story_params
-      params.require(:story).permit(:top_text, :bottom_text, :discover_id, photos_attributes: [:id, :picture,:is_primary,:position,:_destroy])
+      params.require(:story).permit(:top_text, :bottom_text, :discover_id,:external_link, photos_attributes: [:id, :picture,:is_primary,:position,:_destroy])
     end
 end

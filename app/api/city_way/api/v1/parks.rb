@@ -12,7 +12,7 @@ module CityWay
 
           desc "Park Detail"
           params do
-            requires :id , type: Integer, values: -> { Market.ids }
+            requires :id , type: Integer, values: -> { Park.ids }
             optional :latitude, type: Float
             optional :longitude, type: Float
           end

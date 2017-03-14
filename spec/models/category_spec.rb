@@ -9,6 +9,8 @@
 #  updated_at :datetime         not null
 #  photo      :string
 #  icon       :string
+#  predifined :boolean          default(FALSE)
+#  priority   :integer          default(0)
 #
 
 require 'rails_helper'

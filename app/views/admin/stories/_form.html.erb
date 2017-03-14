@@ -3,7 +3,7 @@
     <%= form_for(@admin_story, url: (@admin_story.new_record? ? admin_stories_path(@admin_story) : admin_story_path(@admin_story)), multipart: true) do |f| %>
     <% if @admin_story.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@admin_story.errors.count, "error") %> prohibited this admin_category from being saved:</h2>
+      <h2>Qualcosa è andato storto durante il salvataggio dei dati</h2>
 
       <ul>
         <% @admin_story.errors.full_messages.each do |message| %>
@@ -16,7 +16,7 @@
       <% if @admin_story.new_record?%>
       Aggiungi Storia dela citta
       <% else %>
-      Gestisci <%= @admin_story.class.name %>
+      Gestisci Storia dela citta
       <% end %>
       <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, :back, class:'float-right' %>
     </h2>
@@ -39,6 +39,15 @@
             </div>
           </div>
         </div>
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <label>Link Esterno</label>
+              <%= f.text_field :external_link, class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+
       </div>
       <div class="uk-width-medium-1-2 ">
         <div class="uk-form-row">

@@ -1,5 +1,6 @@
 class Admin::CategoriesController < Admin::BaseController
   before_action :set_admin_category, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource param_method: :admin_category_params
 
   # GET /admin/categories
   # GET /admin/categories.json
@@ -30,7 +31,7 @@ class Admin::CategoriesController < Admin::BaseController
     respond_to do |format|
       if @admin_category.save
         @admin_category.cities << City.find(session[:current_city_id])
-        format.html { redirect_to session['previous_url'] || admin_categories_url, notice: 'Category è stato creato con successo.' }
+        format.html { redirect_to session['previous_url'] || admin_categories_url, notice: 'Categorie è stato creato con successo.' }
         format.json { render :show, status: :created, location: @admin_category }
       else
         format.html { render :new }
@@ -56,7 +57,7 @@ class Admin::CategoriesController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_category.update(admin_category_params)
-        format.html { redirect_to session['previous_url'] || admin_categories_url, notice: 'Category è stato aggiornato con successo.' }
+        format.html { redirect_to session['previous_url'] || admin_categories_url, notice: 'Categorie è stato aggiornato con successo.' }
         format.json { render :show, status: :ok, location: @admin_category }
       else
         format.html { render :edit }
@@ -70,7 +71,7 @@ class Admin::CategoriesController < Admin::BaseController
   def destroy
     @admin_category.destroy
     respond_to do |format|
-      format.html { redirect_to admin_categories_url, notice: 'Category è stato distrutto con successo.' }
+      format.html { redirect_to admin_categories_url, notice: 'Categorie cancellata con successo!.' }
       format.json { head :no_content }
     end
   end

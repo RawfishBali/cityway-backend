@@ -2,13 +2,15 @@
 #
 # Table name: culinaries
 #
-#  id            :integer          not null, primary key
-#  name          :string           not null
-#  description   :text
-#  discover_id   :integer
-#  culinary_type :integer
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
+#  id                   :integer          not null, primary key
+#  name                 :string           not null
+#  description          :text
+#  discover_id          :integer
+#  culinary_type        :integer
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  external_link        :string
+#  support_disabilities :boolean          default(FALSE)
 #
 
 require 'rails_helper'

@@ -25,12 +25,18 @@
 #  email                  :string
 #  city_hall_name         :string
 #  major_icon             :string
+#  phone_1                :string
+#  phone_2                :string
+#  is_vice_major          :boolean          default(FALSE)
+#  unavailable            :boolean          default(FALSE)
 #
 
 class Profile < ActiveRecord::Base
   belongs_to :commonplace
   belongs_to :politic_group
   validate :only_one_major
+  validate :only_one_vice_major
+  validate :major_is_not_vice
 
   validates_presence_of :name
 
@@ -43,9 +49,41 @@ class Profile < ActiveRecord::Base
   phony_normalize :phone, default_country_code: 'IT'
   validates :phone, phony_plausible: true
 
+  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, allow_blank: true
+
   def only_one_major
-    if self.commonplace.major && self.is_major && self.new_record?
-      errors.add(:is_major, "only one major is allowed")
+    if self.new_record?
+      if self.commonplace.major && self.is_major
+        errors.add(:is_major, "only one major is allowed")
+      end
+    else
+      if self.commonplace.major && self.is_major
+        if self.commonplace.major.id != self.id
+          errors.add(:is_major, "only one major is allowed")
+        end
+      end
+    end
+
+  end
+
+  def only_one_vice_major
+    if self.new_record?
+      if self.commonplace.vice_major && self.is_vice_major
+        errors.add(:is_vice_major, "only one vice major is allowed")
+      end
+    else
+      if self.commonplace.vice_major && self.is_vice_major
+        if self.commonplace.vice_major.id !=  self.id
+          errors.add(:is_vice_major, "only one vice major is allowed")
+        end
+      end
+    end
+
+  end
+
+  def major_is_not_vice
+    if self.is_major && self.is_vice_major
+      errors.add(:is_vice_major, "vice major can't be the major")
     end
   end
 end

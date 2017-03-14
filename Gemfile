@@ -49,11 +49,8 @@ gem 'cloudinary'
 gem 'forecast_io'
 
 gem 'puma'
-gem 'newrelic_rpm'
 
 gem 'browser'
-
-gem 'skylight'
 
 gem 'httparty'
 
@@ -62,6 +59,18 @@ gem 'ruby-duration'
 gem 'cocoon'
 
 gem 'phony_rails'
+
+gem 'raygun4ruby'
+
+gem 'i18n_generators'
+gem 'globalize', '~> 5.0.0'
+
+gem 'faker'
+
+gem 'rubycritic', require: false
+
+gem 'sidekiq'
+
 
 group :production do
   gem 'rails_12factor'
@@ -86,4 +95,5 @@ group :development do
   gem 'quiet_assets'
   gem 'capistrano', '~> 3.6'
   gem 'capistrano-rbenv', '~> 2.0'
+  gem 'rails_real_favicon'
 end

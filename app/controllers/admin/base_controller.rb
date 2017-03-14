@@ -8,10 +8,18 @@ class Admin::BaseController < ApplicationController
   def set_cities
     begin
       @selected_city = session[:current_city_id].blank? ? City.first :  City.find(session[:current_city_id])
-      @cities = City.all
+      if current_admin.has_role? :merchant_admin
+        @cities = City.where('id in (?)', current_admin.merchants.map(&:city_id)).order('Name ASC').page(20).page params[:page]
+      else
+        @cities = City.all.order('Name ASC').page(20).page params[:page]
+      end
     rescue ActiveRecord::RecordNotFound => exception
       @selected_city = City.first
-      @cities = City.all
+      if current_admin.has_role? :merchant_admin
+        @cities = City.where('id in (?)', current_admin.merchants.map(&:city_id)).order('Name ASC').page(20).page params[:page]
+      else
+        @cities = City.all.order('Name ASC').page(20).page params[:page]
+      end
     end
   end
 
@@ -231,6 +239,29 @@ class Admin::BaseController < ApplicationController
       end
     end
 
+
+    if params["school"]
+      if params["school"]["photos_attributes"]
+        params["school"]["photos_attributes"].each do |photo_params|
+          if photo_params.last["picture"].class.to_s != 'ActionDispatch::Http::UploadedFile' && !photo_params.last["picture"].blank?
+            image_json =  JSON.parse(photo_params.last["picture"]["_values"].gsub("'",'"').gsub('=>',':'))
+            photo_params.last["picture"] = image_json["data"]
+          end
+        end
+      end
+    end
+
+    if params["sport"]
+      if params["sport"]["photos_attributes"]
+        params["sport"]["photos_attributes"].each do |photo_params|
+          if photo_params.last["picture"].class.to_s != 'ActionDispatch::Http::UploadedFile' && !photo_params.last["picture"].blank?
+            image_json =  JSON.parse(photo_params.last["picture"]["_values"].gsub("'",'"').gsub('=>',':'))
+            photo_params.last["picture"] = image_json["data"]
+          end
+        end
+      end
+    end
+
     if params["advertisement"]
       if params["advertisement"]["photo"]
         unless params["advertisement"]["photo"].class.to_s == 'ActionDispatch::Http::UploadedFile'
@@ -245,6 +276,43 @@ class Admin::BaseController < ApplicationController
         unless params["commonplace"]["icon"].class.to_s == 'ActionDispatch::Http::UploadedFile'
           image_json =  JSON.parse(params["commonplace"]["icon"]["_values"].gsub("'",'"').gsub('=>',':'))
           params["commonplace"]["icon"] = image_json["data"]
+        end
+      end
+      if params["commonplace"]["replaceable_icon"]
+        unless params["commonplace"]["replaceable_icon"].class.to_s == 'ActionDispatch::Http::UploadedFile'
+          image_json =  JSON.parse(params["commonplace"]["replaceable_icon"]["_values"].gsub("'",'"').gsub('=>',':'))
+          params["commonplace"]["replaceable_icon"] = image_json["data"]
+        end
+      end
+    end
+
+    if params["sport"]
+      if params["sport"]["icon"]
+        unless params["sport"]["icon"].class.to_s == 'ActionDispatch::Http::UploadedFile'
+          image_json =  JSON.parse(params["sport"]["icon"]["_values"].gsub("'",'"').gsub('=>',':'))
+          params["sport"]["icon"] = image_json["data"]
+        end
+      end
+    end
+
+    if params["parking_lot"]
+      if params["parking_lot"]["photos_attributes"]
+        params["parking_lot"]["photos_attributes"].each do |photo_params|
+          if photo_params.last["picture"].class.to_s != 'ActionDispatch::Http::UploadedFile' && !photo_params.last["picture"].blank?
+            image_json =  JSON.parse(photo_params.last["picture"]["_values"].gsub("'",'"').gsub('=>',':'))
+            photo_params.last["picture"] = image_json["data"]
+          end
+        end
+      end
+    end
+
+    if params["course"]
+      if params["course"]["photos_attributes"]
+        params["course"]["photos_attributes"].each do |photo_params|
+          if photo_params.last["picture"].class.to_s != 'ActionDispatch::Http::UploadedFile' && !photo_params.last["picture"].blank?
+            image_json =  JSON.parse(photo_params.last["picture"]["_values"].gsub("'",'"').gsub('=>',':'))
+            photo_params.last["picture"] = image_json["data"]
+          end
         end
       end
     end

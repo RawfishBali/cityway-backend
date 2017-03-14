@@ -1,5 +1,6 @@
 class Admin::CulinariesController < Admin::BaseController
   before_action :set_admin_culinary, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource param_method: :admin_culinary_params
 
   # GET /admin/culinaries
   # GET /admin/culinaries.json
@@ -16,6 +17,7 @@ class Admin::CulinariesController < Admin::BaseController
   def new
     @discover_id = City.find(session[:current_city_id]).discover.id
     @admin_culinary = Culinary.new
+    @culinary_type = params[:culinary_type]
   end
 
   # GET /admin/culinaries/1/edit
@@ -26,10 +28,11 @@ class Admin::CulinariesController < Admin::BaseController
   # POST /admin/culinaries.json
   def create
     @admin_culinary = City.find(session[:current_city_id]).discover.culinaries.new(admin_culinary_params)
-
+    @culinary_type = params[:culinary][:culinary_type]
     respond_to do |format|
       if @admin_culinary.save
-        format.html { redirect_to session['previous_url'] || admin_culinaries_url(culinary_type: @admin_culinary.culinary_type), notice: 'Culinary è stato creato con successo.' }
+        italian_type = { gastronomy: 'Gastronomia', traditional: 'Piatti della Tradizione' }
+        format.html { redirect_to session['previous_url'] || admin_culinaries_url(culinary_type: @admin_culinary.culinary_type), notice: "#{italian_type[@culinary_type.to_sym]} è stato creato con successo." }
         format.json { render :show, status: :created, location: @admin_culinary }
       else
         format.html { render :new }
@@ -43,7 +46,9 @@ class Admin::CulinariesController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_culinary.update(admin_culinary_params)
-        format.html { redirect_to session['previous_url'] || admin_culinaries_url(culinary_type: @admin_culinary.culinary_type), notice: 'Culinary è stato aggiornato con successo.' }
+        italian_type = { gastronomy: 'Gastronomia', traditional: 'Piatti della Tradizione' }
+        format.html { redirect_to session['previous_url'] || admin_culinaries_url(culinary_type: @admin_culinary.culinary_type), notice:
+          "#{italian_type[@culinary_type.to_sym]} è stato aggiornato con successo." }
         format.json { render :show, status: :ok, location: @admin_culinary }
       else
         format.html { render :edit }
@@ -57,7 +62,8 @@ class Admin::CulinariesController < Admin::BaseController
   def destroy
     @admin_culinary.destroy
     respond_to do |format|
-      format.html { redirect_to session['previous_url'] || admin_culinaries_url, notice: 'Culinary è stato distrutto con successo.' }
+      italian_type = { gastronomy: 'Gastronomia', traditional: 'Piatti della Tradizione' }
+      format.html { redirect_to session['previous_url'] || admin_culinaries_url, notice: "#{italian_type[@culinary_type.to_sym]} cancellata con successo!." }
       format.json { head :no_content }
     end
   end
@@ -67,10 +73,11 @@ class Admin::CulinariesController < Admin::BaseController
     def set_admin_culinary
       @admin_culinary = Culinary.find(params[:id])
       @discover_id = @admin_culinary.discover.id
+      @culinary_type = @admin_culinary.culinary_type
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_culinary_params
-      params.require(:culinary).permit(:name, :description, :culinary_type, photos_attributes: [:id, :picture, :position, :is_primary, :_destroy])
+      params.require(:culinary).permit(:name, :description, :culinary_type, :external_link, :support_disabilities, photos_attributes: [:id, :picture, :position, :is_primary, :_destroy])
     end
 end

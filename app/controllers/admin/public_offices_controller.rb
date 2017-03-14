@@ -1,5 +1,6 @@
 class Admin::PublicOfficesController < Admin::BaseController
   before_action :set_admin_public_office, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource param_method: :admin_public_office_params
 
   # GET /admin/public_offices
   # GET /admin/public_offices.json
@@ -29,7 +30,7 @@ class Admin::PublicOfficesController < Admin::BaseController
 
     respond_to do |format|
       if @admin_public_office.save
-        format.html { redirect_to session['previous_url'] || admin_public_offices_url, notice: 'Public office è stato creato con successo.' }
+        format.html { redirect_to session['previous_url'] || admin_public_offices_url, notice: 'Uffici Pubblici è stato creato con successo.' }
         format.json { render :show, status: :created, location: @admin_public_office }
       else
         format.html { render :new }
@@ -43,7 +44,7 @@ class Admin::PublicOfficesController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_public_office.update(admin_public_office_params)
-        format.html { redirect_to session['previous_url'] || admin_public_offices_url, notice: 'Public office è stato aggiornato con successo.' }
+        format.html { redirect_to session['previous_url'] || admin_public_offices_url, notice: 'Uffici Pubblici è stato aggiornato con successo.' }
         format.json { render :show, status: :ok, location: @admin_public_office }
       else
         format.html { render :edit }
@@ -57,7 +58,7 @@ class Admin::PublicOfficesController < Admin::BaseController
   def destroy
     @admin_public_office.destroy
     respond_to do |format|
-      format.html { redirect_to session['previous_url'] || admin_public_offices_url, notice: 'Public office è stato distrutto con successo.' }
+      format.html { redirect_to session['previous_url'] || admin_public_offices_url, notice: 'Uffici Pubblici cancellata con successo!.' }
       format.json { head :no_content }
     end
   end
@@ -71,7 +72,7 @@ class Admin::PublicOfficesController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_public_office_params
-      params.require(:public_office).permit(:name, :address, :description, :commonplace_id, :website, :fax, :phone, business_hours_attributes: [:id, :morning_open_time, :morning_close_time, :evening_open_time,
+      params.require(:public_office).permit(:name, :address, :description, :commonplace_id, :website, :fax, :phone, :phone_1, :phone_2, :support_disabilities, business_hours_attributes: [:id, :morning_open_time, :morning_close_time, :evening_open_time,
         :evening_close_time, :day, :_destroy] , photos_attributes: [:id, :picture,:is_primary,:position,:_destroy])
     end
 end

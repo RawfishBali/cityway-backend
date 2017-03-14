@@ -1,5 +1,6 @@
 class Admin::PublicTransportsController < Admin::BaseController
   before_action :set_admin_public_transport, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource param_method: :admin_public_transport_params
 
   # GET /admin/public_transports
   # GET /admin/public_transports.json
@@ -28,7 +29,7 @@ class Admin::PublicTransportsController < Admin::BaseController
 
     respond_to do |format|
       if @admin_public_transport.save
-        format.html { redirect_to session['previous_url'] || admin_public_transports_url, notice: 'Public transport è stato creato con successo.' }
+        format.html { redirect_to session['previous_url'] || admin_public_transports_url, notice: 'Mezzi pubblici è stato creato con successo.' }
         format.json { render :show, status: :created, location: @admin_public_transport }
       else
         format.html { render :new }
@@ -42,7 +43,7 @@ class Admin::PublicTransportsController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_public_transport.update(admin_public_transport_params)
-        format.html { redirect_to session['previous_url'] || admin_public_transports_url, notice: 'Public transport è stato aggiornato con successo.' }
+        format.html { redirect_to session['previous_url'] || admin_public_transports_url, notice: 'Mezzi pubblici è stato aggiornato con successo.' }
         format.json { render :show, status: :ok, location: @admin_public_transport }
       else
         format.html { render :edit }
@@ -56,7 +57,7 @@ class Admin::PublicTransportsController < Admin::BaseController
   def destroy
     @admin_public_transport.destroy
     respond_to do |format|
-      format.html { redirect_to session['previous_url'] || admin_public_transports_url, notice: 'Public transport è stato distrutto con successo.' }
+      format.html { redirect_to session['previous_url'] || admin_public_transports_url, notice: 'Mezzi pubblici cancellata con successo!.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +70,6 @@ class Admin::PublicTransportsController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_public_transport_params
-      params.require(:public_transport).permit(:name, :attachment, :transport_type, paths_attributes: [:id, :path, :_destroy])
+      params.require(:public_transport).permit(:name, :attachment, :transport_type, :support_disabilities, paths_attributes: [:id, :path, :_destroy])
     end
 end

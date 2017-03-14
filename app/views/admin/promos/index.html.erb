@@ -1,3 +1,4 @@
+<h1>Gestisci Promozioni</h1>
 <div class="md-card uk-margin-medium-bottom">
     <div class="md-card-content">
         <div class="uk-overflow-container">
@@ -18,11 +19,16 @@
                     <tr>
 
                         <td class=""><%= truncate(promo.title, length: 25, omission: '...') %></td>
-                        <td class="uk-text-center"><%= promo.discount%></td>
-                        <td class="uk-text-center"><%= promo.original_price%></td>
-                        <td class="uk-text-center"><%= promo.discount_price%></td>
+                        <td class="uk-text-center"><%= number_with_precision(promo.discount, precision: 0, separator: '.', delimiter: ',') %> %</td>
+                        <td class="uk-text-center">€ <%= number_with_precision(promo.original_price, precision: 2, separator: '.', delimiter: ',') %></td>
+                        <td class="uk-text-center">€ <%= number_with_precision(promo.discount_price, precision: 2, separator: '.', delimiter: ',') %></td>
                         <td class="uk-text-center"><%= image_tag promo.photo.url, class: 'width100pixel' %></td>
-                        <td class="uk-text-center"><%= promo.approval ? "Approvato" : "Pendente"%></td>
+                        <td class="uk-text-center">
+                          <% if promo.is_active || promo.is_active_for_tommorow %>
+                            <span class="uk-badge uk-badge-success">Approvato</span>
+                          <% else %>
+                            <span class="uk-badge uk-badge-danger">Pendente</span>
+                          <% end %>
                         <td class="uk-text-center">
                             <%= link_to '<i class="md-icon material-icons">&#xE254;</i>'.html_safe , edit_admin_promo_path(promo)%>
 

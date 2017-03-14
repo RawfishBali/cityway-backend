@@ -1,3 +1,5 @@
+<h1>Gestisci Categorie</h1>
+<p>Puoi trascinare l'intera categoria per scegliere la posizione visualizzata in app.</p>
 <ul class="uk-nestable" id="nestable">
     <% @admin_categories.each do  |category|%>
     <li data-id="<%= category.id %>" class="uk-nestable-item">
@@ -5,7 +7,7 @@
             <%= link_to category.name, edit_admin_category_path(category) %>
             <%= link_to '<i class="md-icon material-icons float-right">&#xE872;</i>'.html_safe, admin_category_path(category), method: :delete , :data => {:confirm => 'Sei sicuro di voler cancellare?'} %>
             <%= link_to '<i class="md-icon material-icons float-right">&#xE254;</i>'.html_safe, edit_admin_category_path(category) %>  <br/>
-            <span class="uk-text-muted uk-text-small"><%= category.subcategories.map(&:name).join(', ')%></span>
+            <span class="uk-text-muted uk-text-small"><%= category.subcategories.map(&:name).sort_by!{ |e| e.downcase }.join(', ')%></span>
         </div>
     </li>
     <% end %>

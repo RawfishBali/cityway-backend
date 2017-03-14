@@ -32,11 +32,15 @@ module CityWay
           end
           get '/:id/events' do
             around = Around.find(params[:id])
+            city_id = around.city.id
 
             if params[:day]
-              events = (Event.events_open_on params[:day]).page params[:page]
+              events = Event.joins(:cities_events).joins(:event_dates).where('cities_events.city_id = ?  and event_dates.event_date >= ? and event_dates.event_date = ?',city_id, Time.now, Date.parse(params[:day])).page params[:page]
+
+              # events = (Event.events_open_on params[:day]).page params[:page]
             else
-              events = around.active_events.page params[:page]
+              events = Event.joins(:cities_events).joins(:event_dates).where('cities_events.city_id = ?  and event_dates.event_date >= ?',city_id, Time.now).page params[:page]
+              # events = around.active_events.page params[:page]
             end
 
 
@@ -55,9 +59,10 @@ module CityWay
           get '/:id/markets' do
             around = Around.find(params[:id])
             if params[:day]
-              markets = (Market.markets_open_on params[:day]).page params[:page]
+              markets = Kaminari.paginate_array(Market.markets_open_on(params[:day])).page(params[:page])
+
             else
-              markets = around.markets.page params[:page]
+              markets = around.markets.page(params[:page])
             end
 
             add_pagination_headers markets

@@ -37,15 +37,26 @@ class Event < ActiveRecord::Base
   has_many :event_dates, dependent: :destroy
   accepts_nested_attributes_for :event_dates, reject_if: :all_blank, allow_destroy: true
 
+  has_many :cities , through: :cities_events
+  has_many :cities_events, dependent: :destroy
+
   def self.events_open_on day
-    Event.joins(:event_dates).where('event_dates.day_name = ? AND event_dates.event_date >= ?', day.titleize, Time.now)
+    Event.joins(:event_dates).where('event_dates.event_date = ?', Date.parse(day))
   end
 
   def is_open_today
     event_dates.each do |event_date|
-      return true if event_date.event_date == Date.today
+      if event_date.event_date == Date.today
+        return true if parsed_time(event_date.open_time) <= Time.zone.now && parsed_time(event_date.close_time) >= Time.zone.now
+      else
+        next
+      end
     end
     return false
+  end
+
+  def parsed_time field_time
+    Time.zone.parse "#{field_time.hour}:#{field_time.min}"
   end
 
   def primary_photo

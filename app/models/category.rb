@@ -9,10 +9,12 @@
 #  updated_at :datetime         not null
 #  photo      :string
 #  icon       :string
+#  predifined :boolean          default(FALSE)
+#  priority   :integer          default(0)
 #
 
 class Category < ActiveRecord::Base
-  has_many :subcategories, :class_name => "Category", :foreign_key => "parent_id", :dependent => :destroy
+  has_many :subcategories , -> { order 'name asc' }, :class_name => "Category", :foreign_key => "parent_id", :dependent => :destroy
   accepts_nested_attributes_for :subcategories, reject_if: :all_blank, allow_destroy: true
   belongs_to :parent_category, :class_name => "Category", :foreign_key => "parent_id"
   has_many :merchants, dependent: :nullify
@@ -20,7 +22,7 @@ class Category < ActiveRecord::Base
   has_many :cities, through: :categories_cities
   has_many :categories_cities, dependent: :destroy
 
-  validates :name, uniqueness: {scope: :parent_id, allow_blank: false}
+  # validates :name, uniqueness: {scope: :parent_id, allow_blank: false}
   # validates :photo, presence: true, if: :parent_id?
   # validates :icon, presence: true, if: :parent_id?
 
@@ -37,5 +39,9 @@ class Category < ActiveRecord::Base
     end
     order_by << "end"
     order(order_by.join(" "))
+  end
+
+  def self.find_in_order(ids)
+    self.where(id: ids).order("FIELD(id, #{ids.join(',')})")
   end
 end

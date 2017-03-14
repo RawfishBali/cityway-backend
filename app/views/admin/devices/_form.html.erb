@@ -3,7 +3,7 @@
     <%= form_for(@admin_device, url: (@admin_device.new_record? ? admin_devices_path(@admin_device) : admin_device_path(@admin_device)), multipart: true) do |f| %>
     <% if @admin_device.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@admin_device.errors.count, "error") %> Questa categoria non può essere salvata:</h2>
+      <h2>Qualcosa è andato storto durante il salvataggio dei dati</h2>
 
       <ul>
         <% @admin_device.errors.full_messages.each do |message| %>
@@ -17,7 +17,7 @@
       <% if @admin_device.new_record?%>
       Aggiungi <%= params[:device_type].titleize%>
       <% else %>
-      Gestisci <%= @admin_device.name %>
+      Gestisci <%= params[:device_type].titleize%>
       <% end %>
       <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, :back, class:'float-right' %>
     </h2>
@@ -34,14 +34,6 @@
             </div>
           </div>
         </div>
-        <div class="uk-form-row">
-          <div class="uk-grid" data-uk-grid-margin>
-            <div class="uk-width-medium-1-1">
-              <label>Url Esterno</label>
-              <%= f.text_field :external_url,class: 'md-input', required: true  %>
-            </div>
-          </div>
-        </div>
       </div>
 
       <div class="uk-width-medium-1-2">
@@ -49,7 +41,7 @@
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
               <label>Indirizzo</label>
-              <%= f.text_field :address,class: 'md-input', required: true  %>
+              <%= f.text_field :address,class: 'md-input addressable', required: true  %>
             </div>
           </div>
         </div>

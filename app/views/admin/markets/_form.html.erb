@@ -3,7 +3,7 @@
     <%= form_for(@admin_market, url: (@admin_market.new_record? ? admin_markets_path(@admin_market) : admin_market_path(@admin_market)), multipart: true) do |f| %>
     <% if @admin_market.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@admin_market.errors.count, "error") %> Questa categoria non può essere salvata:</h2>
+      <h2>Qualcosa è andato storto durante il salvataggio dei dati</h2>
 
       <ul>
         <% @admin_market.errors.full_messages.each do |message| %>
@@ -16,7 +16,7 @@
       <% if @admin_market.new_record?%>
       Aggiungi Mercati
       <% else %>
-      Gestisci <%= @admin_market.name %>
+      Gestisci Mercati
       <% end %>
       <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, :back, class:'float-right' %>
     </h2>
@@ -36,7 +36,7 @@
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
               <label>Indirizzo</label>
-              <%= f.text_field :address, required: true,class: 'md-input'  %>
+              <%= f.text_field :address, required: true,class: 'md-input addressable'  %>
             </div>
           </div>
         </div>
@@ -45,6 +45,14 @@
             <div class="uk-width-medium-1-1">
               <label>Descrizione</label>
               <%= f.text_area :description, required: true,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <%= f.label :support_disabilities, 'Città Accessibile', class: 'inline-label'%>
+              <%= f.check_box :support_disabilities,class: 'md-input', 'data-switchery': true  %>
             </div>
           </div>
         </div>

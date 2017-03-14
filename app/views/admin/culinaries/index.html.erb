@@ -1,3 +1,5 @@
+<% italian_type = { gastronomy: 'Gastronomia', traditional: 'Piatti della Tradizione' }%>
+<h1>Gestisci <%= italian_type[params[:culinary_type].to_sym].titleize %></h1>
 <div class="md-card uk-margin-medium-bottom">
     <div class="md-card-content">
         <div class="uk-overflow-container">
@@ -15,7 +17,7 @@
                     <tr>
                         <td ><%= culinary.name %></td>
                         <td ><%= truncate(culinary.description, length: 25, omission: '...') %></td>
-                        <td class="uk-text-center"><%= image_tag culinary.primary_photo.first.picture.url , class: 'width100pixel'%></td>
+                        <td class="uk-text-center"><%= image_tag culinary.primary_photo.first.picture.url , class: 'width100pixel' if culinary.photos.length > 0 %></td>
 
 
                         <td class="">

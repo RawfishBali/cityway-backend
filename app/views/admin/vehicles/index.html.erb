@@ -1,3 +1,5 @@
+<% italian_type = {parking:'Parcheggi', bike:'Bici', taxi:'Taxi'} %>
+<h1>Gestisci <%= italian_type[params[:vehicle_type].to_sym].titleize%></h1>
 <div class="md-card uk-margin-medium-bottom">
   <div class="md-card-content">
     <div class="uk-overflow-container">

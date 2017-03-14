@@ -2,20 +2,23 @@
 #
 # Table name: public_offices
 #
-#  id             :integer          not null, primary key
-#  name           :string           not null
-#  photo          :string
-#  description    :text
-#  email          :string
-#  address        :string
-#  phone          :string
-#  fax            :string
-#  commonplace_id :integer
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#  website        :string
-#  latitude       :float
-#  longitude      :float
+#  id                   :integer          not null, primary key
+#  name                 :string           not null
+#  photo                :string
+#  description          :text
+#  email                :string
+#  address              :string
+#  phone                :string
+#  fax                  :string
+#  commonplace_id       :integer
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  website              :string
+#  latitude             :float
+#  longitude            :float
+#  support_disabilities :boolean          default(TRUE)
+#  phone_1              :string
+#  phone_2              :string
 #
 
 class PublicOffice < ActiveRecord::Base
@@ -49,5 +52,12 @@ class PublicOffice < ActiveRecord::Base
   def all_business_hours
     mb = (self.business_hours).to_a
     return mb.sort_by(&:day)
+  end
+
+  def is_open_now?
+    business_hours.each do |business_hour|
+      return true if business_hour.is_open? Time.zone.now
+    end
+    return false
   end
 end

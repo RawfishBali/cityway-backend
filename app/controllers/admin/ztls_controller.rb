@@ -1,10 +1,13 @@
 class Admin::ZtlsController < Admin::BaseController
   before_action :set_admin_ztl, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource param_method: :admin_ztl_params
 
   # GET /admin/ztls
   # GET /admin/ztls.json
   def index
-    @admin_ztls = City.find(session[:current_city_id]).utility.ztls.page(params[:page]).per(10)
+    city = City.find(session[:current_city_id])
+    @admin_ztls = city.utility.ztls.page(params[:page]).per(10)
+    @allowed_new_ztl = city.utility.ztls.count <= 0
   end
 
   # GET /admin/ztls/1
@@ -14,7 +17,8 @@ class Admin::ZtlsController < Admin::BaseController
 
   # GET /admin/ztls/new
   def new
-    @admin_ztl = City.find(session[:current_city_id]).utility.ztls.new
+    city = City.find(session[:current_city_id])
+    @admin_ztl = city.utility.ztls.new
   end
 
   # GET /admin/ztls/1/edit
@@ -24,6 +28,7 @@ class Admin::ZtlsController < Admin::BaseController
   # POST /admin/ztls
   # POST /admin/ztls.json
   def create
+    city = City.find(session[:current_city_id])
     @admin_ztl = City.find(session[:current_city_id]).utility.ztls.new(admin_ztl_params)
 
     respond_to do |format|
@@ -56,7 +61,7 @@ class Admin::ZtlsController < Admin::BaseController
   def destroy
     @admin_ztl.destroy
     respond_to do |format|
-      format.html { redirect_to session['previous_url'] || admin_ztls_url, notice: 'Ztl è stato distrutto con successo.' }
+      format.html { redirect_to session['previous_url'] || admin_ztls_url, notice: 'Ztl cancellata con successo!.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +74,6 @@ class Admin::ZtlsController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_ztl_params
-      params.require(:ztl).permit(:name, :description, coordinates_attributes: [:id, :latitude, :longitude, :_destroy])
+      params.require(:ztl).permit(:name, :description, :color, coordinates_attributes: [:id, :latitude, :longitude, :_destroy])
     end
 end

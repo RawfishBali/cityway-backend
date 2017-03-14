@@ -10,7 +10,7 @@ module CityWay
             authenticate!
           end
 
-          desc "List Cities"
+          desc 'List Cities'
           params do
             optional :page , type: Integer
             optional :sort, type: Hash do
@@ -37,25 +37,32 @@ module CityWay
               alpha_cities = City.where.not(name: city.name).near([params[:latitude],params[:longitude]], 20000, units: :km, order: 'name ASC').page params[:page]
 
               add_pagination_headers alpha_cities
-              present city, with: CityWay::Api::V1::Entities::CityStructure, cities: alpha_cities, message: message, list: params[:list], actual_city: city_name, simple: 'true'
+              present city, with: CityWay::Api::V1::Entities::CityStructure, cities: alpha_cities, message: message, list: params[:list], actual_city: city_name, simple: 'true', with_nearest_city: true
             else
               alpha_cities = City.all.order('name ASC').page params[:page]
               add_pagination_headers alpha_cities
-              present alpha_cities, with: CityWay::Api::V1::Entities::CityWithoutSection, simple: 'true'
+
+              present alpha_cities.first, with: CityWay::Api::V1::Entities::CityStructureWithoutActualCity, simple: 'true',cities: alpha_cities, list: true
             end
           end
 
-          desc "City Detail"
+          desc 'City Detail'
           params do
             requires :id , type: Integer, values: -> { City.ids }
           end
           get '/:id' do
             city = City.find(params[:id])
-            advertisements = city.active_advertisements
-            present city, with: CityWay::Api::V1::Entities::City, sections: params[:sections], simple: 'false', advertisements: advertisements
+            home_active_advertisements = city.home_active_advertisements
+            around_active_advertisements = city.around_active_advertisements
+            commonplace_active_advertisements = city.commonplace_active_advertisements
+            discover_active_advertisements = city.discover_active_advertisements
+            utility_active_advertisements = city.utility_active_advertisements
+
+            present city, with: CityWay::Api::V1::Entities::City, sections: params[:sections], simple: 'false', home_active_advertisements: home_active_advertisements, around_active_advertisements: around_active_advertisements, commonplace_active_advertisements: commonplace_active_advertisements, discover_active_advertisements: discover_active_advertisements,
+            utility_active_advertisements: utility_active_advertisements
           end
 
-          desc "City Weather"
+          desc 'City Weather'
           params do
             requires :id , type: Integer, values: -> { City.ids }
           end
@@ -77,10 +84,33 @@ module CityWay
           get '/:id/merchants' do
             category = Category.find(params[:category_id])
             if params[:subcategory_id].blank?
-              subcategories = category.subcategories
-              merchants = Merchant.where(city_id: params[:id] , category_id: params[:category_id]).page params[:page]
+              # subcategories = category.subcategories
+
+              if params[:latitude] && params[:longitude]
+                merchants = Merchant.near([params[:latitude], params[:longitude]], 20000).active_merchants.joins(:cities_merchants).uniq.where('cities_merchants.city_id = ? AND merchants.category_id = ? AND merchants.active = ?',params[:id], params[:category_id], true).page params[:page]
+              else
+                merchants = Merchant.active_merchants.joins(:cities_merchants).uniq.where('cities_merchants.city_id = ? AND merchants.category_id = ? AND merchants.active = ?',params[:id], params[:category_id], true).order('id ASC').page params[:page]
+              end
+
+
+              subcategories = []
+              merchants.each do |merchant|
+                merchant.subcategories.each do |subcategory|
+                  subcategories << subcategory
+                end
+
+              end
+              subcategories = subcategories.uniq
+              subcategories = subcategories.sort_by(&:name)
             else
-              merchants = Merchant.joins(:subcategories).where('merchants.city_id = ? AND categories_merchants.category_id = ?' ,params[:id], params[:subcategory_id]).page params[:page]
+              if params[:latitude] && params[:longitude]
+                merchants = Merchant.near([params[:latitude], params[:longitude]], 20000).active_merchants.joins(:cities_merchants).joins(:subcategories).uniq.where('cities_merchants.city_id = ? AND categories_merchants.category_id = ? AND merchants.active = ? ',params[:id], params[:subcategory_i],true).page params[:page]
+              else
+                merchants = Merchant.active_merchants.joins(:cities_merchants).joins(:subcategories).uniq.where('cities_merchants.city_id = ? 
+                  AND categories_merchants.category_id = ? AND merchants.active = ? ',params[:id], params[:subcategory_id],true).order('id ASC').page params[:page]
+              end
+
+
             end
             add_pagination_headers merchants
 
@@ -99,6 +129,7 @@ module CityWay
           end
 
           get '/:id/promos' do
+            city = City.find(params[:id])
             if params[:merchant_id]
               merchant = Merchant.find(params[:merchant_id])
               promos = merchant.active_promos.page params[:page]
@@ -107,7 +138,6 @@ module CityWay
               if params[:category_id]
                 category = Category.find(params[:category_id])
                 if params[:subcategory_id].blank?
-                  subcategories = category.subcategories
                   merchants = Merchant.where(city_id: params[:id] , category_id: params[:category_id])
                 else
                   merchants = Merchant.joins(:subcategories).where('merchants.city_id = ? AND categories_merchants.category_id = ?' ,params[:id], params[:subcategory_id])
@@ -115,8 +145,6 @@ module CityWay
               else
                 merchants = Merchant.where(city_id: params[:id])
               end
-
-              # merchants = merchants.near([params[:latitude],params[:longitude]], 100, units: :km) if params[:latitude] && params[:longitude]
               temp_promos = []
               merchants.each do |m|
                 m.active_promos.each do |promo|
@@ -127,10 +155,17 @@ module CityWay
             end
 
             add_pagination_headers promos
-            present promos, with: CityWay::Api::V1::Entities::Promo, latitude: params[:latitude], longitude: params[:longitude]
+            subcategories = []
+            promos.each do |promo|
+              promo.merchant.subcategories.each do |subcategory|
+                subcategories << subcategory
+              end
+            end
+            subcategories = subcategories.uniq
+            subcategories = subcategories.sort_by(&:name)
+            present city, with: CityWay::Api::V1::Entities::PromoWithSubcategories, latitude: params[:latitude], longitude: params[:longitude], subcategories: subcategories, promos: promos
           end
         end
-
       end
     end
   end

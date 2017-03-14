@@ -17,6 +17,7 @@
 #  utility_id            :integer
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
+#  support_disabilities  :boolean          default(FALSE)
 #
 
 class Vehicle < ActiveRecord::Base

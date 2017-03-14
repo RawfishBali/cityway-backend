@@ -3,7 +3,7 @@
     <%= form_for(@admin_utility_number, url: (@admin_utility_number.new_record? ? admin_utility_numbers_path(@admin_utility_number) : admin_utility_number_path(@admin_utility_number)), multipart: true) do |f| %>
     <% if @admin_utility_number.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@admin_utility_number.errors.count, "error") %> Questa categoria non può essere salvata:</h2>
+      <h2>Qualcosa è andato storto durante il salvataggio dei dati</h2>
 
       <ul>
         <% @admin_utility_number.errors.full_messages.each do |message| %>
@@ -16,7 +16,7 @@
       <% if @admin_utility_number.new_record?%>
       Aggiungi Numeri utili
       <% else %>
-      Gestisci <%= @admin_utility_number.name %>
+      Gestisci Numeri utili
       <% end %>
       <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, :back, class:'float-right' %>
     </h2>
@@ -47,7 +47,7 @@
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
               <label>Numero Verde</label>
-              <%= f.text_field :national_number,class: 'md-input', required: true  %>
+              <%= f.text_field :national_number,class: 'md-input'  %>
             </div>
           </div>
         </div>
@@ -55,7 +55,19 @@
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
               <label>Indirizzo</label>
-              <%= f.text_field :address,class: 'md-input', required: true  %>
+              <%= f.text_field :address,class: 'md-input addressable' %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="uk-width-medium-1-2">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <label>Cellulare</label>
+              <%= f.text_field :mobile_number,class: 'md-input'  %>
             </div>
           </div>
         </div>

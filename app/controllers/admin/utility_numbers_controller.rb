@@ -1,5 +1,6 @@
 class Admin::UtilityNumbersController < Admin::BaseController
   before_action :set_admin_utility_number, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource param_method: :admin_utility_number_params
 
   # GET /admin/utility_numbers
   # GET /admin/utility_numbers.json
@@ -29,7 +30,7 @@ class Admin::UtilityNumbersController < Admin::BaseController
     @utility_id = City.find(session[:current_city_id]).utility.id
     respond_to do |format|
       if @admin_utility_number.save
-        format.html { redirect_to session['previous_url'] || admin_utility_numbers_url, notice: 'Utility number è stato creato con successo.' }
+        format.html { redirect_to session['previous_url'] || admin_utility_numbers_url, notice: 'Numeri utili è stato creato con successo.' }
         format.json { render :show, status: :created, location: @admin_utility_number }
       else
         format.html { render :new }
@@ -43,7 +44,7 @@ class Admin::UtilityNumbersController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_utility_number.update(admin_utility_number_params)
-        format.html { redirect_to session['previous_url'] || admin_utility_numbers_url, notice: 'Utility number è stato aggiornato con successo.' }
+        format.html { redirect_to session['previous_url'] || admin_utility_numbers_url, notice: 'Numeri utili è stato aggiornato con successo.' }
         format.json { render :show, status: :ok, location: @admin_utility_number }
       else
         format.html { render :edit }
@@ -57,7 +58,7 @@ class Admin::UtilityNumbersController < Admin::BaseController
   def destroy
     @admin_utility_number.destroy
     respond_to do |format|
-      format.html { redirect_to session['previous_url'] || admin_utility_numbers_url, notice: 'Utility number è stato distrutto con successo.' }
+      format.html { redirect_to session['previous_url'] || admin_utility_numbers_url, notice: 'Numeri utili cancellata con successo!.' }
       format.json { head :no_content }
     end
   end
@@ -71,6 +72,6 @@ class Admin::UtilityNumbersController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_utility_number_params
-      params.require(:utility_number).permit(:name, :national_number, :local_number, :utility_id,:address)
+      params.require(:utility_number).permit(:name, :national_number, :local_number, :utility_id,:address, :mobile_number)
     end
 end

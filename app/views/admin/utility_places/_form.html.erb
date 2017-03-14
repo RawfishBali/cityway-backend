@@ -3,7 +3,7 @@
     <%= form_for(@admin_utility_place, url: (@admin_utility_place.new_record? ? admin_utility_places_path(@admin_utility_place) : admin_utility_place_path(@admin_utility_place)), multipart: true) do |f| %>
     <% if @admin_utility_place.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@admin_utility_place.errors.count, "error") %> prohibited this admin_category from being saved:</h2>
+      <h2>Qualcosa è andato storto durante il salvataggio dei dati</h2>
       <ul>
         <% @admin_utility_place.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -14,10 +14,14 @@
     <h2 class=" ">
       <% place_type = {post_office: 'Uffici Postali' , pharmacies: 'Farmacie', water_house: 'Case dell’acqua', waste_recycling: 'Isole ecologiche', bikes: 'Bici', public_swimming_pool: 'Piscine comunali', tennis_court: 'Campi da tennis', stadium: 'Stadio', structures: '', social_services: 'Centri servizi sociali', voluntary_association: 'Associazioni di Volontariato', elder_home: 'Centri diurni per anziani', young_people_place: 'Giovani', kindergarten: 'Scuole Materne', primary_school: 'Scuole Primarie', first_secondary_school: 'Scuole Medie', second_secondary_school: 'Scuole Secondarie', universities: 'Università', music: 'Scuole di Musica', large_garbage: 'Ritiro ingombranti' ,institute: 'Istituti', professional_institute: 'Istituti Professionali', recycling_place: 'Isole ecologiche'} %>
       <% if @admin_utility_place.new_record?%>
-      Aggiungi <%= place_type[params[:place_type].to_sym]%>
+      Aggiungi <%= place_type[@place_type.to_sym]%>
       <% else %>
-      Gestisci <%= @admin_utility_place.name %>
+      Gestisci <%= place_type[@place_type.to_sym]%>
       <% end %>
+      <span class="marginL155">
+        <%= check_box_tag :map_trigger,:value,true,{class: 'float-right ', 'data-switchery': true, 'data-switchery-size':"large"}  %>
+        <span id="switchery_active_text">Map</span>
+      </span>
       <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, :back, class:'float-right' %>
     </h2>
     <div class="uk-grid" data-uk-grid-margin>
@@ -32,9 +36,28 @@
               <label>Nome</label>
               <%= f.text_field :name, required: true,class: 'md-input'  %>
             </div>
+            <% unless @place_type == 'post_office' %>
             <div class="uk-width-medium-1-2">
               <label>Denominazione</label>
               <%= f.text_field :denomination, required: true,class: 'md-input'  %>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="uk-width-medium-1-1" id="utility_map_container">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+              <div id="utility_map" class="not-basic"></div>
+            </div>
+            <div class="uk-width-medium-1-2">
+              <label class='not-basic'>Latitude</label>
+              <%= f.text_field :latitude, required: true,class: 'md-input not-basic'  %>
+              <label class='not-basic'>Longitude</label>
+              <%= f.text_field :longitude, required: true,class: 'md-input not-basic'  %>
             </div>
           </div>
         </div>
@@ -51,7 +74,7 @@
             </div>
             <div class="uk-width-medium-1-2">
               <label>Indirizzo</label>
-              <%= f.text_field :address, required: true,class: 'md-input'  %>
+              <%= f.text_field :address, required: true,class: 'md-input addressable'  %>
             </div>
           </div>
         </div>
@@ -64,8 +87,50 @@
               <%= f.email_field :email,class: 'md-input'  %>
             </div>
             <div class="uk-width-medium-1-2">
-              <label>Telefono</label>
+              <label>Cellulare</label>
               <%= f.text_field :phone,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+              <label>Fisso</label>
+              <%= f.text_field :phone_1,class: 'md-input'  %>
+            </div>
+            <div class="uk-width-medium-1-2">
+              <label>Numero Verde</label>
+              <%= f.text_field :phone_2,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+              <label>Facebook</label>
+              <%= f.text_field :facebook,class: 'md-input'  %>
+            </div>
+            <div class="uk-width-medium-1-2">
+              <label>Instagram</label>
+              <%= f.text_field :instagram,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+              <label>Twitter</label>
+              <%= f.text_field :twitter,class: 'md-input'  %>
+            </div>
+            <div class="uk-width-medium-1-2">
+              <label>Google+</label>
+              <%= f.text_field :google_plus,class: 'md-input'  %>
             </div>
           </div>
         </div>
@@ -78,9 +143,11 @@
 
             <div class="uk-width-medium-1-2">
               <label>Descrizione</label>
-              <%= f.text_area :description, required: true,class: 'md-input'  %>
+              <%= f.text_area :description,class: 'md-input'  %>
             </div>
             <div class="uk-width-medium-1-2">
+              <%= f.label :support_disabilities, 'Città Accessibile', class: 'inline-label'%>
+              <%= f.check_box :support_disabilities,class: 'md-input', 'data-switchery': true  %>
             </div>
           </div>
         </div>
@@ -93,6 +160,12 @@
             <div class="uk-width-medium-1-2">
               <div id="subcategories">
                 <h3>Orari</h3>
+                
+                <% if @place_type == 'pharmacies' %>
+                  <%= f.label :open_all_day, 'Sempre Aperto', class: 'inline-label'%>
+                  <%= f.check_box :open_all_day,class: 'md-input', 'data-switchery': true  %>
+                <% end %>
+
                 <%= f.fields_for :business_hours do |business_hour| %>
                 <%= render 'business_hour_fields', f: business_hour %>
                 <% end %>

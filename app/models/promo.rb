@@ -14,7 +14,10 @@
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  city_id              :integer
-#  approval             :boolean          default(FALSE)
+#  approval             :boolean          default(TRUE)
+#  activated_at         :datetime
+#  deactivated_at       :datetime
+#  duration             :integer          default(1)
 #
 
 class Promo < ActiveRecord::Base
@@ -24,7 +27,7 @@ class Promo < ActiveRecord::Base
   validates_presence_of :title
   validates_presence_of :photo
   validates_presence_of :description
-  validates_presence_of :terms_and_conditions
+  # validates_presence_of :terms_and_conditions
   validates_presence_of :discount
   validates_presence_of :original_price
   validates_presence_of :merchant
@@ -36,6 +39,9 @@ class Promo < ActiveRecord::Base
   mount_base64_uploader :photo, PhotoUploader
 
   before_save :calculate_discounted_price
+  before_save :set_activation, if: :activation_need_update?
+  after_save :send_email_notification, if: Proc.new {|model| model.approval }
+  before_create :set_activation
 
   def category
     merchant.category
@@ -45,9 +51,50 @@ class Promo < ActiveRecord::Base
     merchant.subcategories
   end
 
+  def is_active
+    return false unless approval
+    return false if self.activated_at.blank? && self.deactivated_at.blank?
+    return true if self.activated_at <= Time.zone.now && self.deactivated_at >= Time.zone.now
+    return false
+  end
+
+  def is_expired
+    return true if self.activated_at.blank? && self.deactivated_at.blank?
+    return true if self.deactivated_at > Time.zone.now
+    return false
+  end
+
+  def is_active_for_tommorow
+    return true if self.activated_at == Time.zone.parse("08:00 am") + 1.day
+    return false
+  end
+
   private
+
+  def activation_need_update?
+    approval_changed? || duration_changed?
+  end
 
   def calculate_discounted_price
     self.discount_price =  self.original_price - (self.original_price * (self.discount/100))
+  end
+
+  def set_activation
+    if approval
+      if Time.zone.now > Time.zone.parse("08:00 am")
+        self.activated_at = Time.zone.parse("08:00 am") + 1.day
+        self.deactivated_at = Time.zone.parse("08:00 pm") + (self.duration + 1).day
+      else
+        self.activated_at = Time.zone.parse("08:00 am")
+        self.deactivated_at = Time.zone.parse("08:00 pm") + self.duration.day
+      end
+    else
+      self.activated_at = nil
+      self.activated_at = nil
+    end
+  end
+
+  def send_email_notification
+    MessageMailer.activated_promos_notification(self.merchant.admin, self).deliver_now if self.merchant.admin
   end
 end

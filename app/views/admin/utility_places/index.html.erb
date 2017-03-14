@@ -1,4 +1,6 @@
-<div class="clear"></div>
+
+<% place_type = {post_office: 'Uffici Postali' , pharmacies: 'Farmacie', water_house: 'Case dell’acqua', waste_recycling: 'Isole ecologiche', bikes: 'Bici', public_swimming_pool: 'Piscine comunali', tennis_court: 'Campi da tennis', stadium: 'Stadio', structures: '', social_services: 'Centri servizi sociali', voluntary_association: 'Associazioni di Volontariato', elder_home: 'Centri diurni per anziani', young_people_place: 'Giovani', kindergarten: 'Scuole Materne', primary_school: 'Scuole Primarie', first_secondary_school: 'Scuole Medie', second_secondary_school: 'Scuole Secondarie', universities: 'Università', music: 'Scuole di Musica', large_garbage: 'Ritiro ingombranti' ,institute: 'Istituti', professional_institute: 'Istituti Professionali', recycling_place: 'Isole ecologiche'} %>
+<h1>Gestisci <%= place_type[params[:place_type].to_sym].titleize %></h1>
 <div class="md-card uk-margin-medium-bottom marginT30">
   <div class="md-card-content">
     <div class="uk-overflow-container">

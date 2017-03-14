@@ -14,7 +14,10 @@
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  city_id              :integer
-#  approval             :boolean          default(FALSE)
+#  approval             :boolean          default(TRUE)
+#  activated_at         :datetime
+#  deactivated_at       :datetime
+#  duration             :integer          default(1)
 #
 
 require 'rails_helper'

@@ -3,7 +3,7 @@
     <%= form_for(@admin_public_transport, url: (@admin_public_transport.new_record? ? admin_public_transports_path(@admin_public_transport) : admin_public_transport_path(@admin_public_transport)), multipart: true) do |f| %>
     <% if @admin_public_transport.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@admin_public_transport.errors.count, "error") %> Questa categoria non può essere salvata:</h2>
+      <h2>Qualcosa è andato storto durante il salvataggio dei dati</h2>
 
       <ul>
         <% @admin_public_transport.errors.full_messages.each do |message| %>
@@ -16,7 +16,7 @@
       <% if @admin_public_transport.new_record?%>
       Aggiungi Mezzi pubblici
       <% else %>
-      Gestisci <%= @admin_public_transport.name %>
+      Gestisci Mezzi pubblici
       <% end %>
       <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, :back, class:'float-right' %>
     </h2>
@@ -40,7 +40,9 @@
                 <%= f.file_field :attachment %>
               </div>
               <br />
-              <%= link_to(@admin_public_transport.attachment.url , @admin_public_transport.attachment.url) if @admin_public_transport.attachment %>
+              <br />
+
+              <%= link_to(truncate(@admin_public_transport.attachment.url, :length => 50, :omission => '...') , @admin_public_transport.attachment.url) if @admin_public_transport.attachment && !@admin_public_transport.new_record? %>
             </div>
           </div>
         </div>
@@ -49,6 +51,14 @@
             <div class="uk-width-medium-1-1">
               <label>Tipologia Trasporto</label>
               <%= f.select :transport_type, options_for_select([["Bus", "bus"],["Regional Bus", "regional_bus"], ["Autobus", "autobus"], ["Tram", "tram"], ["Metro", "underground"]], f.object.transport_type), {prompt: 'Seleziona Tipologia Trasporto'}, {'data-md-selectize': true, required: true, class: 'md-input'}  %>
+            </div>
+          </div>
+        </div>
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <%= f.label :support_disabilities, 'Città Accessibile', class: 'inline-label'%>
+              <%= f.check_box :support_disabilities,class: 'md-input', 'data-switchery': true  %>
             </div>
           </div>
         </div>

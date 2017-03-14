@@ -1,5 +1,6 @@
 class Admin::OnlineServicesController < Admin::BaseController
   before_action :set_admin_online_service, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource param_method: :admin_online_service_params
 
   # GET /admin/online_services
   # GET /admin/online_services.json
@@ -29,7 +30,7 @@ class Admin::OnlineServicesController < Admin::BaseController
     @commonplace_id = City.find(session[:current_city_id]).commonplace.id
     respond_to do |format|
       if @admin_online_service.save
-        format.html { redirect_to session['previous_url'] || admin_online_services_url, notice: 'Online service è stato creato con successo.' }
+        format.html { redirect_to session['previous_url'] || admin_online_services_url, notice: 'Servizi Online è stato creato con successo.' }
         format.json { render :show, status: :created, location: @admin_online_service }
       else
         format.html { render :new }
@@ -43,7 +44,7 @@ class Admin::OnlineServicesController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_online_service.update(admin_online_service_params)
-        format.html { redirect_to session['previous_url'] ||  admin_online_services_url, notice: 'Online service è stato aggiornato con successo.' }
+        format.html { redirect_to session['previous_url'] ||  admin_online_services_url, notice: 'Servizi Online è stato aggiornato con successo.' }
         format.json { render :show, status: :ok, location: @admin_online_service }
       else
         format.html { render :edit }
@@ -57,7 +58,7 @@ class Admin::OnlineServicesController < Admin::BaseController
   def destroy
     @admin_online_service.destroy
     respond_to do |format|
-      format.html { redirect_to admin_online_services_url, notice: 'Online service è stato distrutto con successo.' }
+      format.html { redirect_to admin_online_services_url, notice: 'Servizi Online cancellata con successo!.' }
       format.json { head :no_content }
     end
   end

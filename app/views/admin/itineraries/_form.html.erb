@@ -3,7 +3,7 @@
     <%= form_for(@admin_itinerary, url: (@admin_itinerary.new_record? ? admin_itineraries_path(@admin_itinerary) : admin_itinerary_path(@admin_itinerary)), multipart: true) do |f| %>
     <% if @admin_itinerary.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@admin_itinerary.errors.count, "error") %> Questa categoria non può essere salvata:</h2>
+      <h2>Qualcosa è andato storto durante il salvataggio dei dati</h2>
       <ul>
         <% @admin_itinerary.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -15,7 +15,7 @@
       <% if @admin_itinerary.new_record?%>
       Aggiungi Itinerari
       <% else %>
-      Gestisci <%= @admin_itinerary.name %>
+      Gestisci Itinerari
       <% end %>
       <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, :back, class:'float-right' %>
     </h2>
@@ -27,6 +27,19 @@
             <div class="uk-width-medium-1-1">
               <label>Nome</label>
               <%= f.text_field :name, required: true,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <div class="md-input-wrapper md-input-filled">
+                <label>Durata</label>
+                <% durations = [["15 minuti", "15 minuti"], ["30 minuti", "30 minuti"], ["45 minuti", "45 minuti"], ["1 ora", "1 ora"], ["1 ora e 15 minuti", "1 ora e 15 minuti"], ["1 ora e 30 minuti", "1 ora e 30 minuti"], ["1 ora e 45 minuti", "1 ora e 45 minuti"], ["2 ore", "2 ore"], ["2 ore e 15 minuti", "2 ore e 15 minuti"], ["2 ore e 30 minuti", "2 ore e 30 minuti"], ["2 ore e 45 minuti", "2 ora e 45 minuti"], ["3 ore", "3 ore"], ["3 ore e 15 minuti", "3 ore e 15 minuti"], ["3 ore e 30 minuti", "3 ore e 30 minuti"], ["3 ore e 45 minuti", "3 ora e 45 minuti"], ["4 ore", "4 ore"], ["4 ore e 15 minuti", "4 ore e 15 minuti"], ["4 ore e 30 minuti", "4 ore e 30 minuti"], ["4 ore e 45 minuti", "4 ora e 45 minuti"], ["5 ore", "5 ore"], ["5 ore e 15 minuti", "5 ore e 15 minuti"], ["5 ore e 30 minuti", "5 ore e 30 minuti"], ["5 ore e 45 minuti", "5 ora e 45 minuti"], ["6 ore", "6 ore"], ["6 ore e 15 minuti", "6 ore e 15 minuti"], ["6 ore e 30 minuti", "6 ore e 30 minuti"], ["6 ore e 45 minuti", "6 ora e 45 minuti"],["7 ore", "7 ore"]]%>
+
+                <%= f.select :visiting_time, options_for_select(durations, @admin_itinerary.visiting_time), {prompt: 'Seleziona Durata'}, {'data-md-selectize': true, required: true, class: 'md-input'}  %>
+
+              </div>
             </div>
           </div>
         </div>
@@ -73,7 +86,7 @@
     </div>
     <div class="md-fab-wrapper">
       <%= button_tag(type: 'submit' , class: 'md-fab md-fab-accent md-fab-wave waves-effect waves-button') do %>
-        <i class="fa fa-floppy-o" aria-hidden="true"></i>
+      <i class="fa fa-floppy-o" aria-hidden="true"></i>
       <% end %>
     </div>
 

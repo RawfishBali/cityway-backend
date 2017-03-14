@@ -47,7 +47,7 @@
 		width:				null,
 		height: 			null,
 		image:				null,
-		ghost:				true,
+		ghost:				false,
 		originalsize:		true,
 		url:				false,
 		removeurl:			null,
@@ -57,7 +57,7 @@
 		ajax:				true,
 		resize: 			false,
 		dimensionsonly:		false,
-		editstart:			false,
+		editstart:			true,
 		saveOriginal:		false,
 		save:				true,
 		download:			false,
@@ -543,10 +543,10 @@ imageCrop: function() {
 	finalWidth				= options.width;
 	finalHeight				= options.height;
 
-	finalTop				= parseInt(Math.round(parseInt($(image).css('top')) * factor))
-	finalLeft				= parseInt(Math.round(parseInt($(image).css('left')) * factor   ))
-	imageWidth				= parseInt(Math.round($(image).width() *  (factor *1.01) ));
-	imageHeight				= parseInt(Math.round($(image).height() * factor));
+	finalTop				= parseInt(parseInt($(image).css('top')) * factor * 0.995)
+	finalLeft				= parseInt(parseInt($(image).css('left')) * factor * 0.988)
+	imageWidth				= parseInt($(image).width() *  (factor * 1.001) );
+	imageHeight				= parseInt($(image).height() * (factor*1.001 )    );
 	imageOriginalWidth		= $(image).data('width');
 	imageOriginalHeight		= $(image).data('height');
 
@@ -635,11 +635,12 @@ imageCrop: function() {
 
 					$(input).data('required',$(input).prop('required'));
 					$(input).prop('required',false);
-					$(input).wrap('<form>').parent('form').trigger('reset');
-					$(input).unwrap();
+					$(input).val("")
+					// $(input).unwrap();
 
 					$(element).find('.tools .saving').remove();
 					$(element).find('.tools').children().toggle();
+
 
 					_self.imageFinal();
 				}
@@ -742,8 +743,13 @@ imageFinal: function() {
 	//edit option after crop
 	if (options.buttonEdit != false) {
 		$(tools).append($(_self.button.edit).click(function() {
-			// e.preventDefault();
-			_self.readImage(options.image, options.image, options.image,_self.imageMimes[options.image.split('.').pop()]);
+			e.preventDefault();
+
+
+			$(element).find('.cropWrapper').show()
+
+
+			// _self.readImage(options.image, options.image, options.image,_self.imageMimes[options.image.split('.').pop()]);
 			_self._tools();
 			// $(element).children().show();
 			$(element).find('.final').remove();
@@ -795,8 +801,9 @@ reset: function() {
 
 	$(element).find('.preview').remove();
 	$(element).removeClass('loading done').children().show().not('input[type=file]').remove();
-	$(input).wrap('<form>').parent('form').trigger('reset');
-	$(input).unwrap();
+	// $(input).wrap('<form>').parent('form').trigger('reset');
+	$(input).val("")
+	// $(input).unwrap();
 	$(input).prop('required',$(input).data('required') || options.required || false).data('valid',false);
 	_self._bind();
 

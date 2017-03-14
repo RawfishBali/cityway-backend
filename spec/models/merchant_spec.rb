@@ -22,6 +22,15 @@
 #  icon                 :string
 #  twitter              :string
 #  google_plus          :string
+#  active               :boolean          default(TRUE)
+#  activated_at         :datetime
+#  deactivated_at       :datetime
+#  secondary_phone      :string
+#  is_basic             :boolean          default(FALSE)
+#  open_all_day         :boolean          default(FALSE)
+#  phone_extra          :string
+#  admin_id             :integer
+#  hide_email           :boolean          default(FALSE)
 #
 
 require 'rails_helper'

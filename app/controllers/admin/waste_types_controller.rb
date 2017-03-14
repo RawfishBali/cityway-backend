@@ -1,5 +1,6 @@
 class Admin::WasteTypesController < Admin::BaseController
   before_action :set_admin_waste_type, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource param_method: :admin_waste_type_params
 
   # GET /admin/waste_types
   # GET /admin/waste_types.json
@@ -56,7 +57,7 @@ class Admin::WasteTypesController < Admin::BaseController
   def destroy
     @admin_waste_type.destroy
     respond_to do |format|
-      format.html { redirect_to session['previous_url'] || admin_waste_types_url, notice: 'Waste type è stato distrutto con successo.' }
+      format.html { redirect_to session['previous_url'] || admin_waste_types_url, notice: 'Waste type cancellata con successo!.' }
       format.json { head :no_content }
     end
   end

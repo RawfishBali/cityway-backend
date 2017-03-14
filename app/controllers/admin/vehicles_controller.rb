@@ -1,5 +1,6 @@
 class Admin::VehiclesController < Admin::BaseController
   before_action :set_admin_vehicle, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource param_method: :admin_vehicle_params
 
   # GET /admin/vehicles
   # GET /admin/vehicles.json
@@ -26,10 +27,11 @@ class Admin::VehiclesController < Admin::BaseController
   # POST /admin/vehicles.json
   def create
     @admin_vehicle = City.find(session[:current_city_id]).utility.vehicles.new(admin_vehicle_params)
-    @vehicle_type = Vehicle.vehicle_types[params[:vehicle_type]]
+    @vehicle_type = params[:vehicle][:vehicle_type]
+    italian_type = {parking:'Parcheggi', bike:'Bici', taxi:'Taxi'}
     respond_to do |format|
       if @admin_vehicle.save
-        format.html { redirect_to session['previous_url'] || admin_vehicles_url(vehicle_type: @admin_vehicle.vehicle_type), notice: 'Vehicle è stato creato con successo.' }
+        format.html { redirect_to session['previous_url'] || admin_vehicles_url(vehicle_type: @admin_vehicle.vehicle_type), notice: "#{italian_type[@vehicle_type.to_sym]} è stato creato con successo." }
         format.json { render :show, status: :created, location: @admin_vehicle }
       else
         format.html { render :new }
@@ -43,7 +45,7 @@ class Admin::VehiclesController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_vehicle.update(admin_vehicle_params)
-        format.html { redirect_to session['previous_url'] || admin_vehicles_url(vehicle_type: @admin_vehicle.vehicle_type), notice: 'Vehicle è stato aggiornato con successo.' }
+        format.html { redirect_to session['previous_url'] || admin_vehicles_url(vehicle_type: @admin_vehicle.vehicle_type), notice: "#{@italian_type[@vehicle_type.to_sym]} è stato aggiornato con successo." }
         format.json { render :show, status: :ok, location: @admin_vehicle }
       else
         format.html { render :edit }
@@ -57,7 +59,7 @@ class Admin::VehiclesController < Admin::BaseController
   def destroy
     @admin_vehicle.destroy
     respond_to do |format|
-      format.html { redirect_to session['previous_url'] || admin_vehicles_url, notice: 'Vehicle è stato distrutto con successo.' }
+      format.html { redirect_to session['previous_url'] || admin_vehicles_url, notice: "#{italian_type[@vehicle_type.to_sym]} cancellata con successo!." }
       format.json { head :no_content }
     end
   end
@@ -67,10 +69,12 @@ class Admin::VehiclesController < Admin::BaseController
     def set_admin_vehicle
       @admin_vehicle = Vehicle.find(params[:id])
       @vehicle_type = @admin_vehicle.vehicle_type
+      @utility_id = @admin_vehicle.utility_id
+      @italian_type = {parking:'Parcheggi', bike:'Bici', taxi:'Taxi'}
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_vehicle_params
-      params.require(:vehicle).permit(:name, :address, :utility_id,:phone_0, :phone_1, :total_parking_lot, :available_parking_lot, :vehicle_type, :web, :email)
+      params.require(:vehicle).permit(:name, :address, :utility_id,:phone_0, :phone_1, :total_parking_lot, :available_parking_lot, :vehicle_type, :web, :email, :website, :support_disabilities)
     end
 end

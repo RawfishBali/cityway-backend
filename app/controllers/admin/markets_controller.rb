@@ -1,5 +1,6 @@
 class Admin::MarketsController < Admin::BaseController
   before_action :set_admin_market, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource param_method: :admin_market_params
 
   # GET /admin/markets
   # GET /admin/markets.json
@@ -29,7 +30,7 @@ class Admin::MarketsController < Admin::BaseController
 
     respond_to do |format|
       if @admin_market.save
-        format.html { redirect_to session['previous_url'] || admin_markets_url, notice: 'Market è stato creato con successo.' }
+        format.html { redirect_to session['previous_url'] || admin_markets_url, notice: 'Mercati è stato creato con successo.' }
         format.json { render :show, status: :created, location: @admin_market }
       else
         format.html { render :new }
@@ -43,7 +44,7 @@ class Admin::MarketsController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_market.update(admin_market_params)
-        format.html { redirect_to session['previous_url'] || admin_markets_url, notice: 'Market è stato aggiornato con successo.' }
+        format.html { redirect_to session['previous_url'] || admin_markets_url, notice: 'Mercati è stato aggiornato con successo.' }
         format.json { render :show, status: :ok, location: @admin_market }
       else
         format.html { render :edit }
@@ -57,7 +58,7 @@ class Admin::MarketsController < Admin::BaseController
   def destroy
     @admin_market.destroy
     respond_to do |format|
-      format.html { redirect_to admin_markets_url, notice: 'Market è stato distrutto con successo.' }
+      format.html { redirect_to admin_markets_url, notice: 'Mercati cancellata con successo!.' }
       format.json { head :no_content }
     end
   end
@@ -71,7 +72,7 @@ class Admin::MarketsController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_market_params
-      params.require(:market).permit(:name, :address, :description, :around_id, business_hours_attributes: [:id, :morning_open_time, :morning_close_time, :evening_open_time,
+      params.require(:market).permit(:name, :address, :description, :around_id, :support_disabilities, business_hours_attributes: [:id, :morning_open_time, :morning_close_time, :evening_open_time,
         :evening_close_time, :day, :_destroy], photos_attributes: [:id, :picture,:is_primary,:position,:_destroy])
     end
 end

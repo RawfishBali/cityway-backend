@@ -1,0 +1,51 @@
+<h1>
+  Gestisci Corsi
+  <div class="uk-button-dropdown float-right" data-uk-dropdown>
+    <button class="md-btn"> Seleziona Categoria <i class="material-icons">&#xE313;</i></button>
+    <div class="uk-dropdown">
+      <ul class="uk-nav uk-nav-dropdown">
+        <li><a href="/admin/courses">Seleziona tutti</a></li>
+        <% (@course_types).each do |category| %>
+        <li><a href="/admin/courses?course_type=<%= category %>"><%= category.humanize.titleize%></a></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</h1>
+<div class="md-card uk-margin-medium-bottom marginT30">
+  <div class="md-card-content">
+    <div class="uk-overflow-container">
+      <table class="uk-table uk-table-nowrap table_check">
+        <thead>
+          <tr>
+            <th class="uk-width-1-10">Nome</th>
+            <th class="uk-width-1-10">Indirizzo</th>
+
+            <th class="uk-width-1-10 uk-text-center">Foto</th>
+            <th class="uk-width-1-10 uk-text-center">Azioni</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @admin_courses.each do  |utility_place|%>
+          <tr>
+            <td><%= utility_place.name %></td>
+            <td><%= utility_place.address %></td>
+
+            <td class="uk-text-center"><%= image_tag utility_place.primary_photo.first.picture.url, class: 'width100pixel' unless utility_place.primary_photo.first.blank? %></td>
+            <td class="uk-text-center">
+              <%= link_to '<i class="md-icon material-icons">&#xE254;</i>'.html_safe , edit_admin_course_path(utility_place, course_type: utility_place.course_type)%>
+              <%= link_to '<i class="md-icon material-icons ">&#xE872;</i>'.html_safe, admin_course_path(utility_place), method: :delete , :data => {:confirm => 'Sei sicuro di voler cancellare?'} %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= paginate @admin_courses %>
+    </div>
+  </div>
+  <div class="md-fab-wrapper">
+    <a class="md-fab md-fab-accent md-fab-wave-light waves-effect waves-button waves-light" href="/admin/courses/new" id="invoice_add">
+      <i class="material-icons"></i>
+    </a>
+  </div>
+</div>

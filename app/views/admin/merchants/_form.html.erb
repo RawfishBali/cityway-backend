@@ -3,8 +3,9 @@
     <%= form_for(@admin_merchant, url: (@admin_merchant.new_record? ? admin_merchants_path(@admin_merchant) : admin_merchant_path(@admin_merchant)), multipart: true) do |f| %>
     <% if @admin_merchant.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@admin_merchant.errors.count, "error") %> Questa categoria non può essere salvata:</h2>
+      <h2>Qualcosa è andato storto durante il salvataggio dei dati</h2>
 
+      <h2><%= t('errors.messages.not_saved', count: @admin_merchant.errors.count) %></h2>
       <ul>
         <% @admin_merchant.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -14,12 +15,29 @@
     <% end %>
     <h2 class=" ">
       <% if @admin_merchant.new_record?%>
-      Aggiungi Attività
+      <div class="uk-width-medium-1-2 uk-row-first">
+        Aggiungi Attività
+        <span class="marginL155">
+          <%= f.check_box :active,class: 'float-right ', 'data-switchery': true, 'data-switchery-size':"large"  %>
+          <span id="switchery_active_text">Visibilità</span>
+        </span>
+      </div>
+
+
       <% else %>
-      Gestisci <%= @admin_merchant.name %>
+      <div class="uk-width-medium-1-2 uk-row-first">
+        Gestisci Attività
+        <%#= f.label :support_disabilities, 'Città Accessibile', class: 'inline-label'%>
+        <span class="marginL170">
+          <%= f.check_box :active,class: 'float-right ', 'data-switchery': true, 'data-switchery-size':"large"  %>
+          <span id="switchery_active_text">Visibilità</span>
+        </span>
+      </div>
+
       <% end %>
-      <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, admin_merchants_path, class:'float-right' %>
+      <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, admin_merchants_path, class:'float-right marginTM40' %>
     </h2>
+    <div class="clear"></div>
 
     <div class="uk-grid" data-uk-grid-margin>
       <%= f.hidden_field :city_id , value: session[:current_city_id]%>
@@ -32,7 +50,25 @@
             </div>
             <div class="uk-width-medium-1-2">
               <label>Indirizzo</label>
-              <%= f.text_field :address, required: true,class: 'md-input'  %>
+              <%= f.text_field :address, required: true,class: 'md-input addressable'  %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+              <div id="map" class="not-basic"></div>
+            </div>
+            <div class="uk-width-medium-1-2">
+              <label class='not-basic'>Latitude</label>
+              <%= f.text_field :latitude, required: true,class: 'md-input not-basic'  %>
+              <label class='not-basic'>Longitude</label>
+              <%= f.text_field :longitude, required: true,class: 'md-input not-basic'  %>
+              <label>Città</label>
+              <%= f.select :city_ids, options_from_collection_for_select(City.all, 'id', 'name',@admin_merchant.cities.map(&:id)), {prompt: 'Seleziona Cities'}, {required: true, multiple: true, class: 'md-input'}  %>
             </div>
           </div>
         </div>
@@ -43,11 +79,25 @@
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-2">
               <label>Categoria</label>
-              <%= f.select :category_id, options_from_collection_for_select(Category.parent_categories.order('name ASC'), 'id', 'name',@admin_merchant.category_id), {prompt: 'Select Category'}, {'data-md-selectize': true, required: true, class: 'md-input'}  %>
+              <%= f.select :category_id, options_from_collection_for_select(@categories, 'id', 'name',@admin_merchant.category_id), {prompt: 'Seleziona categoria'}, {'data-md-selectize': true, required: true, class: 'md-input'}  %>
             </div>
             <div class="uk-width-medium-1-2">
               <label>Sottocategoria</label>
-              <%= f.select :subcategory_ids, options_from_collection_for_select(Category.subcategories.order('name ASC'), 'id', 'name', @admin_merchant.subcategory_ids), {prompt: 'Select Subcategory'}, {class: 'md-input', multiple: true}  %>
+              <%= f.select :subcategory_ids, options_from_collection_for_select(@subcategories, 'id', 'name', @admin_merchant.subcategory_ids), {prompt: 'Selezionare Sottocategoria'}, {class: 'md-input', multiple: true}  %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+              <label>Cellulare</label>
+              <%= f.text_field :phone,class: 'md-input'  %>
+            </div>
+            <div class="uk-width-medium-1-2">
+              <label>Fisso</label>
+              <%= f.text_field :secondary_phone,class: 'md-input'  %>
             </div>
           </div>
         </div>
@@ -57,16 +107,16 @@
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-2">
-              <label>Telefono</label>
-              <%= f.text_field :phone, required: true,class: 'md-input'  %>
             </div>
             <div class="uk-width-medium-1-2">
-              <label>Email</label>
-              <%= f.text_field :email, required: true,class: 'md-input'  %>
+              <label>Telefono Verde</label>
+              <%= f.text_field :phone_extra,class: 'md-input'  %>
             </div>
           </div>
         </div>
       </div>
+
+
       <div class="uk-width-medium-1-1">
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
@@ -85,12 +135,12 @@
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-2">
-              <label>Website</label>
-              <%= f.text_field :website,class: 'md-input'  %>
+              <label>Twitter</label>
+              <%= f.text_field :twitter,class: 'md-input'  %>
             </div>
             <div class="uk-width-medium-1-2">
-              <%= f.label :support_disabilities, class: 'inline-label'%>
-              <%= f.check_box :support_disabilities,class: 'md-input', 'data-switchery': true  %>
+              <label>Google+</label>
+              <%= f.text_field :google_plus,class: 'md-input'  %>
             </div>
           </div>
         </div>
@@ -100,16 +150,66 @@
       <div class="uk-width-medium-1-1">
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
-
             <div class="uk-width-medium-1-2">
+              <label>Email</label>
+              <%= f.text_field :email,required: true,class: 'md-input'  %>
+
+            </div>
+            <div class="uk-width-medium-1-2">
+              
+              <%= f.label :support_disabilities, 'Città Accessibile', class: 'inline-label'%>
+              <%= f.check_box :support_disabilities,class: 'md-input', 'data-switchery': true  %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+              <%= f.label :hide_email, 'Nascondere e-mail', class: 'inline-label'%>
+              <%= f.check_box :hide_email,class: 'md-input', 'data-switchery': true, 'data-switchery-size':"large"  %>
+            </div>
+            <div class="uk-width-medium-1-2">
+              <%= f.label :is_basic, 'Basic', class: 'inline-label'%>
+              <%= f.check_box :is_basic,class: 'md-input', 'data-switchery': true, 'data-switchery-size':"large"  %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+              <label>Website</label>
+              <%= f.text_field :website,class: 'md-input'  %>
+            </div>
+            <div class="uk-width-medium-1-2">
+              
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+
+            <div class="uk-width-medium-1-2 not-basic">
               <label>Descrizione</label>
-              <%= f.text_area :description, required: true,class: 'md-input'  %>
+              <%= f.text_area :description,class: 'md-input'  %>
             </div>
             <div class="uk-width-medium-1-2">
               <label>Icona</label>
+              <span class="font-size-11">(Suggerimento immagine 100 x 100px)</span>
               <br />
 
-              <div class="dropzone" data-width="200" data-originalsize="true" data-height="200"    data-image="<%= f.object.icon.url %>"  data-editstart="false" data-ajax="false",  data-canvas="true">
+              <div class="dropzone" data-width="200" data-originalsize="true" data-height="200"    data-image="<%= f.object.icon.url %>"  data-editstart="false" data-ajax="false",  data-canvas="true", data-removeurl="/admin/merchants/<%= f.object.id %>/remove_icon" >
                 <%= f.file_field :icon%>
               </div>
             </div>
@@ -120,29 +220,11 @@
       <div class="uk-width-medium-1-1">
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
-
-            <div class="uk-width-medium-1-2">
-
-            </div>
-            <div class="uk-width-medium-1-2">
-
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-
-
-
-
-
-      <div class="uk-width-medium-1-1">
-        <div class="uk-form-row">
-          <div class="uk-grid" data-uk-grid-margin>
-            <div class="uk-width-medium-1-2">
-              <div id="subcategories">
+            <div class="uk-width-medium-1-2 not-basic">
+              <div id="subcategories" >
                 <h3>Orari</h3>
+                <%= f.label :open_all_day, 'Sempre Aperto', class: 'inline-label'%>
+                <%= f.check_box :open_all_day,class: 'md-input', 'data-switchery': true  %>
                 <%= f.fields_for :business_hours do |business_hour| %>
                 <%= render 'business_hour_fields', f: business_hour %>
                 <% end %>

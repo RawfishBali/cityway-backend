@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161104073727) do
+ActiveRecord::Schema.define(version: 20170308100445) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,16 +54,23 @@ ActiveRecord::Schema.define(version: 20161104073727) do
 
   add_index "admins_roles", ["admin_id", "role_id"], name: "index_admins_roles_on_admin_id_and_role_id", using: :btree
 
+  create_table "advertisement_durations", force: :cascade do |t|
+    t.date     "start_date"
+    t.date     "end_date"
+    t.integer  "advertisement_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
   create_table "advertisements", force: :cascade do |t|
     t.string   "photo"
-    t.boolean  "active",            default: false
+    t.boolean  "active",     default: false
     t.integer  "position"
-    t.datetime "start_date"
-    t.datetime "end_date"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
-    t.datetime "second_start_date"
-    t.datetime "second_end_date"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.string   "sections",                                array: true
+    t.string   "name"
+    t.string   "url"
   end
 
   create_table "advertisements_cities", force: :cascade do |t|
@@ -85,8 +92,8 @@ ActiveRecord::Schema.define(version: 20161104073727) do
 
   create_table "business_hours", force: :cascade do |t|
     t.integer  "day",                                null: false
-    t.time     "morning_open_time",                  null: false
-    t.time     "morning_close_time",                 null: false
+    t.time     "morning_open_time"
+    t.time     "morning_close_time"
     t.time     "evening_open_time"
     t.time     "evening_close_time"
     t.boolean  "open_all_day",       default: false
@@ -100,12 +107,14 @@ ActiveRecord::Schema.define(version: 20161104073727) do
   add_index "business_hours", ["marketable_type", "marketable_id"], name: "index_business_hours_on_marketable_type_and_marketable_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
-    t.string   "name",       null: false
+    t.string   "name",                       null: false
     t.integer  "parent_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.string   "photo"
     t.string   "icon"
+    t.boolean  "predifined", default: false
+    t.integer  "priority",   default: 0
   end
 
   add_index "categories", ["parent_id"], name: "index_categories_on_parent_id", using: :btree
@@ -157,12 +166,33 @@ ActiveRecord::Schema.define(version: 20161104073727) do
 
   add_index "cities", ["latitude", "longitude"], name: "index_cities_on_latitude_and_longitude", using: :btree
 
+  create_table "cities_events", force: :cascade do |t|
+    t.integer  "city_id"
+    t.integer  "event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "cities_events", ["city_id"], name: "index_cities_events_on_city_id", using: :btree
+  add_index "cities_events", ["event_id"], name: "index_cities_events_on_event_id", using: :btree
+
+  create_table "cities_merchants", force: :cascade do |t|
+    t.integer  "city_id"
+    t.integer  "merchant_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "cities_merchants", ["city_id"], name: "index_cities_merchants_on_city_id", using: :btree
+  add_index "cities_merchants", ["merchant_id"], name: "index_cities_merchants_on_merchant_id", using: :btree
+
   create_table "city_hall_stories", force: :cascade do |t|
     t.text     "top_text",       null: false
     t.text     "bottom_text",    null: false
     t.integer  "commonplace_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.string   "external_link"
   end
 
   create_table "client_applications", force: :cascade do |t|
@@ -177,13 +207,18 @@ ActiveRecord::Schema.define(version: 20161104073727) do
     t.string   "photo"
     t.string   "icon"
     t.integer  "city_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.text     "history"
     t.string   "facebook"
     t.string   "instagram"
     t.string   "twitter"
     t.string   "google_plus"
+    t.string   "phone"
+    t.boolean  "override_major",    default: false
+    t.string   "replaceable_phone", default: ""
+    t.string   "replaceable_email", default: ""
+    t.string   "replaceable_icon",  default: ""
   end
 
   add_index "commonplaces", ["city_id"], name: "index_commonplaces_on_city_id", using: :btree
@@ -196,13 +231,38 @@ ActiveRecord::Schema.define(version: 20161104073727) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "courses", force: :cascade do |t|
+    t.string   "name",                                 null: false
+    t.string   "denomination"
+    t.text     "description"
+    t.string   "address"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "phone_1"
+    t.string   "phone_2"
+    t.string   "website"
+    t.integer  "utility_id"
+    t.boolean  "support_disabilities", default: false
+    t.string   "facebook"
+    t.string   "instagram"
+    t.string   "twitter"
+    t.string   "google_plus"
+    t.string   "course_type"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
+
   create_table "culinaries", force: :cascade do |t|
-    t.string   "name",          null: false
+    t.string   "name",                                 null: false
     t.text     "description"
     t.integer  "discover_id"
     t.integer  "culinary_type"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.string   "external_link"
+    t.boolean  "support_disabilities", default: false
   end
 
   create_table "devices", force: :cascade do |t|
@@ -299,14 +359,15 @@ ActiveRecord::Schema.define(version: 20161104073727) do
   end
 
   create_table "markets", force: :cascade do |t|
-    t.string   "name",        null: false
-    t.string   "address",     null: false
+    t.string   "name",                                 null: false
+    t.string   "address",                              null: false
     t.float    "latitude"
     t.float    "longitude"
     t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.integer  "around_id"
+    t.boolean  "support_disabilities", default: false
   end
 
   add_index "markets", ["around_id"], name: "index_markets_on_around_id", using: :btree
@@ -331,6 +392,15 @@ ActiveRecord::Schema.define(version: 20161104073727) do
     t.string   "icon"
     t.string   "twitter"
     t.string   "google_plus"
+    t.boolean  "active",               default: true
+    t.datetime "activated_at"
+    t.datetime "deactivated_at"
+    t.string   "secondary_phone"
+    t.boolean  "is_basic",             default: false
+    t.boolean  "open_all_day",         default: false
+    t.string   "phone_extra"
+    t.integer  "admin_id"
+    t.boolean  "hide_email",           default: false
   end
 
   add_index "merchants", ["category_id"], name: "index_merchants_on_category_id", using: :btree
@@ -353,7 +423,6 @@ ActiveRecord::Schema.define(version: 20161104073727) do
     t.string   "title",          null: false
     t.string   "photo"
     t.datetime "published_at",   null: false
-    t.text     "description",    null: false
     t.integer  "commonplace_id", null: false
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
@@ -382,16 +451,43 @@ ActiveRecord::Schema.define(version: 20161104073727) do
     t.datetime "updated_at",            null: false
   end
 
+  create_table "parking_lots", force: :cascade do |t|
+    t.string   "name",                                  null: false
+    t.string   "address",                               null: false
+    t.string   "phone"
+    t.string   "phone_1"
+    t.string   "phone_2"
+    t.string   "email"
+    t.string   "website"
+    t.string   "facebook"
+    t.string   "instagram"
+    t.string   "twitter"
+    t.string   "google_plus"
+    t.text     "description"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.boolean  "support_disabilities",  default: false
+    t.string   "photo"
+    t.string   "icon"
+    t.boolean  "is_basic",              default: false
+    t.boolean  "open_all_day"
+    t.integer  "total_parking_lot",     default: 0
+    t.integer  "available_parking_lot", default: 0
+    t.integer  "utility_id"
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+  end
+
   create_table "parks", force: :cascade do |t|
     t.string   "name"
     t.string   "address"
     t.float    "latitude"
     t.float    "longitude"
-    t.boolean  "support_disabilities"
+    t.boolean  "support_disabilities", default: false
     t.text     "description"
-    t.integer  "around_id",            null: false
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.integer  "around_id",                            null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
   end
 
   add_index "parks", ["around_id"], name: "index_parks_on_around_id", using: :btree
@@ -429,8 +525,13 @@ ActiveRecord::Schema.define(version: 20161104073727) do
     t.string   "google_plus"
     t.integer  "discover_id"
     t.integer  "place_type"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.string   "phone"
+    t.string   "external_link"
+    t.boolean  "support_disabilities", default: false
+    t.string   "phone_1"
+    t.string   "phone_2"
   end
 
   create_table "politic_groups", force: :cascade do |t|
@@ -465,6 +566,10 @@ ActiveRecord::Schema.define(version: 20161104073727) do
     t.string   "email"
     t.string   "city_hall_name"
     t.string   "major_icon"
+    t.string   "phone_1"
+    t.string   "phone_2"
+    t.boolean  "is_vice_major",          default: false
+    t.boolean  "unavailable",            default: false
   end
 
   add_index "profiles", ["commonplace_id"], name: "index_profiles_on_commonplace_id", using: :btree
@@ -479,17 +584,20 @@ ActiveRecord::Schema.define(version: 20161104073727) do
     t.float    "original_price"
     t.float    "discount_price"
     t.integer  "merchant_id"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.integer  "city_id"
-    t.boolean  "approval",             default: false
+    t.boolean  "approval",             default: true
+    t.datetime "activated_at"
+    t.datetime "deactivated_at"
+    t.integer  "duration",             default: 1
   end
 
   add_index "promos", ["city_id"], name: "index_promos_on_city_id", using: :btree
   add_index "promos", ["merchant_id"], name: "index_promos_on_merchant_id", using: :btree
 
   create_table "public_offices", force: :cascade do |t|
-    t.string   "name",           null: false
+    t.string   "name",                                null: false
     t.string   "photo"
     t.text     "description"
     t.string   "email"
@@ -497,11 +605,14 @@ ActiveRecord::Schema.define(version: 20161104073727) do
     t.string   "phone"
     t.string   "fax"
     t.integer  "commonplace_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.string   "website"
     t.float    "latitude"
     t.float    "longitude"
+    t.boolean  "support_disabilities", default: true
+    t.string   "phone_1"
+    t.string   "phone_2"
   end
 
   add_index "public_offices", ["commonplace_id"], name: "index_public_offices_on_commonplace_id", using: :btree
@@ -511,8 +622,9 @@ ActiveRecord::Schema.define(version: 20161104073727) do
     t.string   "attachment"
     t.integer  "transport_type"
     t.integer  "utility_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.boolean  "support_disabilities", default: false
   end
 
   create_table "roles", force: :cascade do |t|
@@ -526,6 +638,31 @@ ActiveRecord::Schema.define(version: 20161104073727) do
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
+  create_table "schools", force: :cascade do |t|
+    t.string   "name"
+    t.string   "denomination"
+    t.text     "description"
+    t.string   "address"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "school_type"
+    t.boolean  "is_public"
+    t.string   "website"
+    t.boolean  "commercial"
+    t.integer  "utility_id"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.boolean  "support_disabilities", default: false
+    t.string   "facebook"
+    t.string   "instagram"
+    t.string   "twitter"
+    t.string   "google_plus"
+    t.string   "phone_1"
+    t.string   "phone_2"
+  end
+
   create_table "securities", force: :cascade do |t|
     t.string   "name",           null: false
     t.string   "url",            null: false
@@ -535,6 +672,32 @@ ActiveRecord::Schema.define(version: 20161104073727) do
   end
 
   add_index "securities", ["commonplace_id"], name: "index_securities_on_commonplace_id", using: :btree
+
+  create_table "sports", force: :cascade do |t|
+    t.string   "name"
+    t.string   "denomination"
+    t.text     "description"
+    t.string   "address"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "sport_type"
+    t.boolean  "is_public"
+    t.string   "website"
+    t.boolean  "commercial"
+    t.integer  "utility_id"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.string   "phone_1"
+    t.string   "phone_2"
+    t.string   "icon"
+    t.string   "facebook"
+    t.string   "instagram"
+    t.string   "twitter"
+    t.string   "google_plus"
+    t.boolean  "support_disabilities", default: false
+  end
 
   create_table "steps", force: :cascade do |t|
     t.string   "address",      null: false
@@ -616,6 +779,7 @@ ActiveRecord::Schema.define(version: 20161104073727) do
     t.integer  "utility_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.string   "mobile_number"
   end
 
   create_table "utility_places", force: :cascade do |t|
@@ -630,11 +794,19 @@ ActiveRecord::Schema.define(version: 20161104073727) do
     t.integer  "place_type"
     t.integer  "visitable_id"
     t.string   "visitable_type"
-    t.boolean  "is_public",      default: true
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.boolean  "is_public",            default: true
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.string   "website"
     t.boolean  "commercial"
+    t.boolean  "support_disabilities", default: false
+    t.string   "facebook"
+    t.string   "instagram"
+    t.string   "twitter"
+    t.string   "google_plus"
+    t.string   "phone_1"
+    t.string   "phone_2"
+    t.boolean  "open_all_day",         default: false
   end
 
   add_index "utility_places", ["visitable_type", "visitable_id"], name: "index_utility_places_on_visitable_type_and_visitable_id", using: :btree
@@ -652,8 +824,9 @@ ActiveRecord::Schema.define(version: 20161104073727) do
     t.integer  "total_parking_lot"
     t.integer  "vehicle_type"
     t.integer  "utility_id"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.boolean  "support_disabilities",  default: false
   end
 
   create_table "waste_managements", force: :cascade do |t|
@@ -697,8 +870,9 @@ ActiveRecord::Schema.define(version: 20161104073727) do
     t.string   "name"
     t.text     "description"
     t.integer  "utility_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "color",       default: "#7FB1B6"
   end
 
   add_foreign_key "identities", "users"

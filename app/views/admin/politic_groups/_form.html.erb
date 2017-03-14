@@ -3,7 +3,7 @@
     <%= form_for(@admin_politic_group, url: (@admin_politic_group.new_record? ? admin_politic_groups_path(@admin_politic_group) : admin_politic_group_path(@admin_politic_group)), multipart: true) do |f| %>
     <% if @admin_politic_group.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@admin_politic_group.errors.count, "error") %> Questa categoria non può essere salvata:</h2>
+      <h2>Qualcosa è andato storto durante il salvataggio dei dati</h2>
       <ul>
         <% @admin_politic_group.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -15,9 +15,9 @@
       <% if @admin_politic_group.new_record?%>
       Aggiungi Consiglio
       <% else %>
-      Gestisci <%= @admin_politic_group.name %>
+      Gestisci Consiglio
       <% end %>
-      <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, :back, class:'float-right' %>
+      <%#= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, :back, class:'float-right' %>
     </h2>
     <div class="uk-grid" data-uk-grid-margin>
       <%= f.hidden_field :commonplace_id , value: @commonplace_id %>
@@ -33,12 +33,19 @@
         </div>
       </div>
       <% unless action_name == 'new' %>
-      <div class="uk-width-medium-1-1">
+      <div class="uk-width-medium-1-1 marginT60">
         <div class="uk-form-row">
           <h3>Membri</h3>
           <% @admin_politic_group.profiles.each do |profile| %>
-          <%= link_to (image_tag profile.photo.url, class: 'members-photo'), edit_admin_profile_path(profile) %>
+          <% if profile.photo.url %>
+            <%= link_to (image_tag profile.photo.url, class: 'members-photo'), edit_admin_profile_path(id: profile.id, politic_group_id: profile.politic_group_id) %>
+          <% else %>
+            <%= link_to "<i class='material-icons font100'>&#xE7FD;</i>".html_safe, edit_admin_profile_path(id: profile.id, politic_group_id: profile.politic_group_id) %>
           <% end %>
+
+          <%= link_to '<i class="md-icon material-icons ">&#xE872;</i>'.html_safe, admin_profile_path(profile), method: :delete , :data => {:confirm => 'Sei sicuro di voler cancellare?'} %>
+          <% end %>
+
           <%= link_to "<i class='material-icons font100'></i>".html_safe, new_admin_profile_path(politic_group_id: @admin_politic_group.id )%>
         </div>
       </div>

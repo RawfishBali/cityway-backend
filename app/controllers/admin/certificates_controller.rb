@@ -1,5 +1,6 @@
 class Admin::CertificatesController < Admin::BaseController
   before_action :set_admin_certificate, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource param_method: :admin_certificate_params
 
   # GET /admin/certificates
   # GET /admin/certificates.json
@@ -56,7 +57,7 @@ class Admin::CertificatesController < Admin::BaseController
   def destroy
     @admin_certificate.destroy
     respond_to do |format|
-      format.html { redirect_to admin_certificates_url, notice: 'Certificate è stato distrutto con successo.' }
+      format.html { redirect_to admin_certificates_url, notice: 'Certificate cancellata con successo!.' }
       format.json { head :no_content }
     end
   end

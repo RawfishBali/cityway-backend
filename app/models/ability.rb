@@ -6,10 +6,10 @@ class Ability
       can :manage, :all
     elsif user.has_role? :city_admin
       can :manage, City
-    elsif user.has_role? :retail_admin
-      # can :read, Forum
-      # can :manage, Forum if user.has_role?(:manager, Forum)
-      # can :write, Forum, :id => Forum.with_role(:moderator, user).pluck(:id)
+    elsif user.has_role? :merchant_admin
+      can [:read, :update, :destroy], Merchant, admin_id: user.id
+      can :create, Promo
+      can [:read, :update, :destroy], Promo, id: (Promo.where('merchant_id in (?)', Merchant.where(admin_id: user.id).map(&:id))).map(&:id)
     end
   end
 end

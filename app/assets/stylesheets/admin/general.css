@@ -113,6 +113,10 @@
   margin-top: 30px;
 }
 
+.marginT60{
+  margin-top: 60px !important;
+}
+
 .members-photo{
   width: 100px;
   margin-top: -86px;
@@ -137,4 +141,82 @@
 
 .block{
   display: block !important;
+}
+.kendo-timer-input{
+  margin-top: 10px;
+}
+
+.left{
+  float: left !important;
+}
+
+.marginTM40{
+  margin-top: -40px;
+}
+
+.marginL170{
+  margin-left: 170px !important;
+}
+
+.marginL155{
+  margin-left: 155px !important;
+}
+
+#switchery_active_text{
+  font-size: 15px !important;
+  font-weight: lighter !important;
+}
+
+.font-size-11{
+  font-size: 11px;
+}
+
+.marginB0{
+  margin-bottom: 0px;
+}
+
+.marginT10{
+  margin-top: 10px;
+}
+
+.marginT15{
+  margin-top: 15px;
+}
+
+#map{
+  height: 300px;
+}
+
+#course_map{
+  height: 300px;
+}
+
+#utility_map{
+  height: 300px;
+}
+
+#sport_map{
+  height: 300px;
+}
+
+#parking_lot_map{
+  height: 300px;
+}
+
+#school_map{
+  height: 300px;
+}
+
+#parking_lot_map{
+  height: 300px;
+}
+
+.new-city-label{
+  margin-top: 2px;
+  float: left;
+  margin-right: 10px;
+}
+
+.marginT20{
+  margin-top: 20px;
 }

@@ -3,7 +3,7 @@
     <%= form_for(@admin_public_office, url: (@admin_public_office.new_record? ? admin_public_offices_path(@admin_public_office) : admin_public_office_path(@admin_public_office)), multipart: true) do |f| %>
     <% if @admin_public_office.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@admin_public_office.errors.count, "error") %> prohibited this admin_category from being saved:</h2>
+      <h2>Qualcosa è andato storto durante il salvataggio dei dati</h2>
       <ul>
         <% @admin_public_office.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -15,7 +15,7 @@
       <% if @admin_public_office.new_record?%>
       Aggiungi Uffici Pubblici
       <% else %>
-      Gestisci <%= @admin_public_office.name %>
+      Gestisci Uffici Pubblici
       <% end %>
       <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, :back, class:'float-right' %>
     </h2>
@@ -35,7 +35,7 @@
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
               <label>Indirizzo</label>
-              <%= f.text_field :address,class: 'md-input'  %>
+              <%= f.text_field :address,class: 'md-input addressable'  %>
             </div>
           </div>
         </div>
@@ -66,8 +66,24 @@
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
-              <label>Telefono</label>
+              <label>Cellulare</label>
               <%= f.text_field :phone,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <label>Fisso</label>
+              <%= f.text_field :phone_1,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <label>Telefono Verde</label>
+              <%= f.text_field :phone_2,class: 'md-input'  %>
             </div>
           </div>
         </div>
@@ -76,6 +92,14 @@
             <div class="uk-width-medium-1-1">
               <label>Fax</label>
               <%= f.text_field :fax,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <%= f.label :support_disabilities, 'Città Accessibile', class: 'inline-label'%>
+              <%= f.check_box :support_disabilities,class: 'md-input', 'data-switchery': true  %>
             </div>
           </div>
         </div>

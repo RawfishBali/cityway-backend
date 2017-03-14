@@ -1,8 +1,14 @@
 class Admin::CitiesController < Admin::BaseController
   before_action :set_city, except: [:index, :new, :create]
+  load_and_authorize_resource param_method: :city_params
+  skip_authorize_resource :only => :edit
 
   def index
-    @cities = City.all.order('Name ASC').page(20).page params[:page]
+    if current_admin.has_role? :admin_merchant
+      @cities = City.where('id in (?)', current_admin.merchants.map(&:city_id)).order('Name ASC').page(20).page params[:page]
+    else
+      @cities = City.all.order('Name ASC').page(20).page params[:page]
+    end
   end
 
 
@@ -19,6 +25,7 @@ class Admin::CitiesController < Admin::BaseController
 
   def edit
     set_city
+    return redirect_to admin_merchants_path if current_admin.has_role? :merchant_admin
   end
 
   def create
@@ -26,7 +33,13 @@ class Admin::CitiesController < Admin::BaseController
 
     respond_to do |format|
       if @city.save
-        format.html { redirect_to root_path, notice: 'City è stato creato con successo.' }
+        session[:current_city_id] = @city.id
+        @selected_city = @city
+        @around = @city.around
+        @utility = @city.utility
+        @commonplace = @city.commonplace
+        @discover = @city.discover
+        format.html { redirect_to edit_admin_city_path(@city), notice: 'Città è stato creato con successo.' }
         format.json { render :show, status: :created, location: @city }
       else
         format.html { redirect_to :back, notice: @city.errors.full_messages }
@@ -39,7 +52,7 @@ class Admin::CitiesController < Admin::BaseController
     respond_to do |format|
 
       if @city.update(city_params)
-        format.html { redirect_to edit_admin_city_path(@city), notice: 'City è stato aggiornato con successo.' }
+        format.html { redirect_to edit_admin_city_path(@city), notice: 'Città è stato aggiornato con successo.' }
         format.json { render :show, status: :ok, location: @city }
       else
         format.html { redirect_to edit_admin_city_path(@city), notice: @city.errors.full_messages }
@@ -51,7 +64,7 @@ class Admin::CitiesController < Admin::BaseController
   def destroy
     @city.destroy
     respond_to do |format|
-      format.html { redirect_to root_path, notice: 'City è stato distrutto con successo.' }
+      format.html { redirect_to root_path, notice: 'Città cancellata con successo!.' }
       format.json { head :no_content }
     end
   end

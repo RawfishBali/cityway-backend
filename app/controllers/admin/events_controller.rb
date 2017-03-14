@@ -1,10 +1,16 @@
 class Admin::EventsController < Admin::BaseController
   before_action :set_admin_event, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource param_method: :admin_event_params
 
   # GET /admin/events
   # GET /admin/events.json
   def index
-    @admin_events = City.find(session[:current_city_id]).around.events.page(params[:page]).per(10)
+    if params[:name]
+      @admin_events = City.find(session[:current_city_id]).around.events.where('lower(title) like ?', "%#{params[:name].downcase}%").page(params[:page]).per(10)
+    else
+      @admin_events = City.find(session[:current_city_id]).around.events.page(params[:page]).per(10)
+    end
+
   end
 
   # GET /admin/events/1
@@ -29,7 +35,7 @@ class Admin::EventsController < Admin::BaseController
 
     respond_to do |format|
       if @admin_event.save
-        format.html { redirect_to session['previous_url'] || admin_events_url, notice: 'Event è stato creato con successo.' }
+        format.html { redirect_to session['previous_url'] || admin_events_url, notice: 'Eventi è stato creato con successo.' }
         format.json { render :show, status: :created, location: @admin_event }
       else
         @around_id = City.find(session[:current_city_id]).around.id
@@ -44,7 +50,7 @@ class Admin::EventsController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_event.update(admin_event_params)
-        format.html { redirect_to session['previous_url'] || admin_events_url, notice: 'Event è stato aggiornato con successo.' }
+        format.html { redirect_to session['previous_url'] || admin_events_url, notice: 'Eventi è stato aggiornato con successo.' }
         format.json { render :show, status: :ok, location: @admin_event }
       else
         @around_id = City.find(session[:current_city_id]).around.id
@@ -59,7 +65,7 @@ class Admin::EventsController < Admin::BaseController
   def destroy
     @admin_event.destroy
     respond_to do |format|
-      format.html { redirect_to session['previous_url'] || admin_events_url, notice: 'Event è stato distrutto con successo.' }
+      format.html { redirect_to session['previous_url'] || admin_events_url, notice: 'Eventi cancellata con successo!.' }
       format.json { head :no_content }
     end
   end
@@ -73,6 +79,6 @@ class Admin::EventsController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_event_params
-      params.require(:event).permit(:title, :address, :description, :around_id, :facebook, :website, :twitter, :instagram, :email, event_dates_attributes: [:id, :open_time, :close_time, :event_date, :_destroy], photos_attributes: [:id, :picture,:is_primary,:position,:_destroy])
+      params.require(:event).permit(:title, :address, :description, :around_id, :facebook, :website, :twitter, :instagram, :support_disabilities, :email,city_ids:[], event_dates_attributes: [:id, :open_time, :close_time, :event_date, :_destroy], photos_attributes: [:id, :picture,:is_primary,:position,:_destroy])
     end
 end

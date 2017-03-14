@@ -23,4 +23,6 @@ class Admin < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :timeoutable
   rolify strict: true
+  has_many :merchants
+
 end

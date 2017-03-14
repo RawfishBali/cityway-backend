@@ -3,7 +3,7 @@
     <%= form_for(@admin_ztl, url: (@admin_ztl.new_record? ? admin_ztls_path(@admin_ztl) : admin_ztl_path(@admin_ztl)), multipart: true) do |f| %>
     <% if @admin_ztl.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@admin_ztl.errors.count, "error") %> Questa categoria non può essere salvata:</h2>
+      <h2>Qualcosa è andato storto durante il salvataggio dei dati</h2>
 
       <ul>
         <% @admin_ztl.errors.full_messages.each do |message| %>
@@ -16,7 +16,7 @@
       <% if @admin_ztl.new_record?%>
       Aggiungi <%= @admin_ztl.class.name %>
       <% else %>
-      Gestisci <%= @admin_ztl.name %>
+      Gestisci <%= @admin_ztl.class.name %>
       <% end %>
       <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, :back, class:'float-right' %>
     </h2>
@@ -41,7 +41,8 @@
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
-
+              <label>Colore</label>
+              <%= f.text_field :color,class: 'md-input marginT10', required: true  %>
             </div>
           </div>
         </div>
@@ -60,13 +61,6 @@
                   <%= link_to_add_association '<i class="material-icons md-24"></i>'.html_safe, f, :coordinates %>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-        <div class="uk-form-row">
-          <div class="uk-grid" data-uk-grid-margin>
-            <div class="uk-width-medium-1-1">
-              <%= f.submit class: "md-btn default-submit"%>
             </div>
           </div>
         </div>

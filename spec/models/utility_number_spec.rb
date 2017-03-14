@@ -10,6 +10,7 @@
 #  utility_id      :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  mobile_number   :string
 #
 
 require 'rails_helper'

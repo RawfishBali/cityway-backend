@@ -2,27 +2,35 @@
 #
 # Table name: utility_places
 #
-#  id             :integer          not null, primary key
-#  name           :string
-#  denomination   :string
-#  description    :text
-#  address        :string
-#  latitude       :float
-#  longitude      :float
-#  email          :string
-#  phone          :string
-#  place_type     :integer
-#  visitable_id   :integer
-#  visitable_type :string
-#  is_public      :boolean          default(TRUE)
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#  website        :string
-#  commercial     :boolean
+#  id                   :integer          not null, primary key
+#  name                 :string
+#  denomination         :string
+#  description          :text
+#  address              :string
+#  latitude             :float
+#  longitude            :float
+#  email                :string
+#  phone                :string
+#  place_type           :integer
+#  visitable_id         :integer
+#  visitable_type       :string
+#  is_public            :boolean          default(TRUE)
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  website              :string
+#  commercial           :boolean
+#  support_disabilities :boolean          default(FALSE)
+#  facebook             :string
+#  instagram            :string
+#  twitter              :string
+#  google_plus          :string
+#  phone_1              :string
+#  phone_2              :string
+#  open_all_day         :boolean          default(FALSE)
 #
 
 class UtilityPlace < ActiveRecord::Base
-  enum place_type: [:post_office , :pharmacies, :water_house, :waste_recycling, :bikes, :public_swimming_pool, :tennis_court, :stadium, :structures, :social_services, :voluntary_association, :elder_home, :young_people_place, :kindergarten, :primary_school, :first_secondary_school, :second_secondary_school, :universities, :music, :large_garbage ,:institute, :professional_institute, :recycling_place ]
+  enum place_type: [:post_office, :pharmacies, :water_house, :waste_recycling, :structures, :social_services, :voluntary_association, :elder_home, :young_people_place,  :large_garbage, :recycling_place ]
 
   HAS_BUSINESSHOUR = ['voluntary_association', 'social_services', 'structures', 'tennis_court','public_swimming_pool', 'post_office', 'pharmacies', 'large_garbage']
 
@@ -37,6 +45,8 @@ class UtilityPlace < ActiveRecord::Base
   phony_normalize :phone, default_country_code: 'IT'
   validates :phone, phony_plausible: true
 
+  after_save :update_business_hours, if: :open_all_day_changed?
+
   def primary_photo
     primary_photo = photos.where(is_primary: true).limit(1)
     if primary_photo.length > 0
@@ -49,18 +59,20 @@ class UtilityPlace < ActiveRecord::Base
   def all_business_hours
     mb = (self.business_hours).to_a
     return mb.sort_by(&:day)
-    # if mb.size == 7
-    # ((0..6).to_a  - mb.map(&:day)).each do |m|
-    #   mb << BusinessHour.new(morning_open_time: '00:00', morning_close_time: '00:00', evening_open_time: nil, evening_close_time: nil, day: m, marketable_type: self.class.name, marketable_id: self.id)
-    # end
-    # mb.sort_by(&:day)
   end
 
   def is_open_now?
+    return true if open_all_day
     business_hours.each do |business_hour|
-      return true if business_hour.is_open? Time.now
+      return true if business_hour.is_open? Time.zone.now
     end
     return false
+  end
+
+  def update_business_hours
+    if open_all_day
+      business_hours.destroy_all
+    end
   end
 
 end

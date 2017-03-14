@@ -1,5 +1,6 @@
 class Admin::ItinerariesController < Admin::BaseController
   before_action :set_admin_itinerary, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource param_method: :admin_itinerary_params
 
   # GET /admin/itineraries
   # GET /admin/itineraries.json
@@ -29,7 +30,7 @@ class Admin::ItinerariesController < Admin::BaseController
 
     respond_to do |format|
       if @admin_itinerary.save
-        format.html { redirect_to session['previous_url'] || admin_itineraries_url, notice: 'Itinerary è stato creato con successo.' }
+        format.html { redirect_to session['previous_url'] || admin_itineraries_url, notice: 'Itinerari è stato creato con successo.' }
         format.json { render :show, status: :created, location: @admin_itinerary }
       else
         format.html { render :new }
@@ -43,7 +44,7 @@ class Admin::ItinerariesController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_itinerary.update(admin_itinerary_params)
-        format.html { redirect_to session['previous_url'] || admin_itineraries_url, notice: 'Itinerary è stato aggiornato con successo.' }
+        format.html { redirect_to session['previous_url'] || admin_itineraries_url, notice: 'Itinerari è stato aggiornato con successo.' }
         format.json { render :show, status: :ok, location: @admin_itinerary }
       else
         format.html { render :edit }
@@ -57,7 +58,7 @@ class Admin::ItinerariesController < Admin::BaseController
   def destroy
     @admin_itinerary.destroy
     respond_to do |format|
-      format.html { redirect_to admin_itineraries_url, notice: 'Itinerary è stato distrutto con successo.' }
+      format.html { redirect_to admin_itineraries_url, notice: 'Itinerari cancellata con successo!.' }
       format.json { head :no_content }
     end
   end
@@ -71,6 +72,6 @@ class Admin::ItinerariesController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_itinerary_params
-      params.require(:itinerary).permit(:name, :description, :discover_id,photos_attributes: [:id, :picture, :position, :is_primary, :_destroy], steps_attributes: [:id, :address, :_destroy])
+      params.require(:itinerary).permit(:name, :description, :visiting_time, :discover_id,photos_attributes: [:id, :picture, :position, :is_primary, :_destroy], steps_attributes: [:id, :address, :_destroy])
     end
 end

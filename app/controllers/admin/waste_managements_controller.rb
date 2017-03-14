@@ -1,5 +1,6 @@
 class Admin::WasteManagementsController < Admin::BaseController
   before_action :set_admin_waste_management, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource param_method: :admin_waste_management_params
 
   # GET /admin/waste_managements
   # GET /admin/waste_managements.json
@@ -28,7 +29,7 @@ class Admin::WasteManagementsController < Admin::BaseController
 
     respond_to do |format|
       if @admin_waste_management.save
-        format.html { redirect_to session['previous_url'] || admin_waste_managements_url, notice: 'Waste management è stato creato con successo.' }
+        format.html { redirect_to session['previous_url'] || admin_waste_managements_url, notice: 'Raccolta differenziata è stato creato con successo.' }
         format.json { render :show, status: :created, location: @admin_waste_management }
       else
         format.html { render :new }
@@ -42,7 +43,7 @@ class Admin::WasteManagementsController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_waste_management.update(admin_waste_management_params)
-        format.html { redirect_to session['previous_url'] || admin_waste_managements_url, notice: 'Waste management è stato aggiornato con successo.' }
+        format.html { redirect_to session['previous_url'] || admin_waste_managements_url, notice: 'Raccolta differenziata è stato aggiornato con successo.' }
         format.json { render :show, status: :ok, location: @admin_waste_management }
       else
         format.html { render :edit }
@@ -56,7 +57,7 @@ class Admin::WasteManagementsController < Admin::BaseController
   def destroy
     @admin_waste_management.destroy
     respond_to do |format|
-      format.html { redirect_to session['previous_url'] || admin_waste_managements_url, notice: 'Waste management è stato distrutto con successo.' }
+      format.html { redirect_to session['previous_url'] || admin_waste_managements_url, notice: 'Raccolta differenziata cancellata con successo!.' }
       format.json { head :no_content }
     end
   end

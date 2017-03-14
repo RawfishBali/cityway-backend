@@ -1,5 +1,6 @@
 class Admin::ParksController < Admin::BaseController
   before_action :set_admin_park, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource param_method: :admin_park_params
 
   # GET /admin/parks
   # GET /admin/parks.json
@@ -29,7 +30,7 @@ class Admin::ParksController < Admin::BaseController
 
     respond_to do |format|
       if @admin_park.save
-        format.html { redirect_to session['previous_url'] ||  admin_parks_path, notice: 'Park è stato creato con successo.' }
+        format.html { redirect_to session['previous_url'] ||  admin_parks_path, notice: 'Parchi è stato creato con successo.' }
         format.json { render :show, status: :created, location: @admin_park }
       else
         format.html { render :new }
@@ -43,7 +44,7 @@ class Admin::ParksController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_park.update(admin_park_params)
-        format.html { redirect_to session['previous_url'] ||  admin_parks_path, notice: 'Park è stato aggiornato con successo.' }
+        format.html { redirect_to session['previous_url'] ||  admin_parks_path, notice: 'Parchi è stato aggiornato con successo.' }
         format.json { render :show, status: :ok, location: @admin_park }
       else
         format.html { render :edit }
@@ -57,7 +58,7 @@ class Admin::ParksController < Admin::BaseController
   def destroy
     @admin_park.destroy
     respond_to do |format|
-      format.html { redirect_to session['previous_url'] ||  admin_parks_path, notice: 'Park è stato distrutto con successo.' }
+      format.html { redirect_to session['previous_url'] ||  admin_parks_path, notice: 'Parchi cancellata con successo!.' }
       format.json { head :no_content }
     end
   end
@@ -71,7 +72,7 @@ class Admin::ParksController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_park_params
-      params.require(:park).permit(:name, :address, :description, :around_id, business_hours_attributes: [:id, :morning_open_time, :morning_close_time, :evening_open_time,
+      params.require(:park).permit(:name, :address, :description, :around_id, :support_disabilities, business_hours_attributes: [:id, :morning_open_time, :morning_close_time, :evening_open_time,
         :evening_close_time, :day, :_destroy], photos_attributes: [:id, :picture,:is_primary,:position,:_destroy])
     end
 end

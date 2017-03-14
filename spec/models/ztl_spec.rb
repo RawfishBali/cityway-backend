@@ -8,6 +8,7 @@
 #  utility_id  :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  color       :string           default("#7FB1B6")
 #
 
 require 'rails_helper'

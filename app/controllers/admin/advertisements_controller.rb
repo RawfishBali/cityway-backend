@@ -1,5 +1,6 @@
 class Admin::AdvertisementsController < Admin::BaseController
   before_action :set_advertisement, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource param_method: :admin_advertisement_params
 
   # GET /admin/advertisements
   # GET /admin/advertisements.json
@@ -29,10 +30,10 @@ class Admin::AdvertisementsController < Admin::BaseController
 
     respond_to do |format|
       if @advertisement.save
-        format.html { redirect_to (session['previous_url'] || admin_advertisements_path), notice: 'Advertisement è stato creato con successo.' }
+        format.html { redirect_to (session['previous_url'] || admin_advertisements_path), notice: 'Banner pubblicitari è stato creato con successo.' }
         format.json { render :show, status: :created, location: @advertisement }
       else
-        format.html { redirect_to admin_advertisements_path, notice: 'Advertisement è stato creato con successo.' }
+        format.html { redirect_to admin_advertisements_path, notice: 'Banner pubblicitari è stato creato con successo.' }
         format.json { render json: @advertisement.errors, status: :unprocessable_entity }
       end
     end
@@ -44,10 +45,10 @@ class Admin::AdvertisementsController < Admin::BaseController
     respond_to do |format|
       if @advertisement.update(admin_advertisement_params)
 
-        format.html { redirect_to (session['previous_url'] || admin_advertisements_path), notice: 'Advertisement è stato aggiornato con successo.' }
+        format.html { redirect_to (session['previous_url'] || admin_advertisements_path), notice: 'Banner pubblicitari è stato aggiornato con successo.' }
         format.json { render :show, status: :ok, location: @advertisement }
       else
-        format.html { redirect_to edit_admin_advertisement_path(@advertisement), notice: 'Advertisement è stato creato con successo.'}
+        format.html { redirect_to edit_admin_advertisement_path(@advertisement), notice: @advertisement.errors.full_messages.join(",")}
         format.json { render json: @advertisement.errors, status: :unprocessable_entity }
       end
     end
@@ -58,7 +59,7 @@ class Admin::AdvertisementsController < Admin::BaseController
   def destroy
     @advertisement.destroy
     respond_to do |format|
-      format.html { redirect_to admin_advertisements_url, notice: 'Advertisement è stato distrutto con successo.' }
+      format.html { redirect_to admin_advertisements_url, notice: 'Banner pubblicitari cancellata con successo!.' }
       format.json { head :no_content }
     end
   end
@@ -71,6 +72,7 @@ class Admin::AdvertisementsController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_advertisement_params
-      params.require(:advertisement).permit(:photo ,:start_date, :end_date, :second_start_date, :second_end_date, :position, city_ids:[])
+      params[:advertisement][:sections] = params[:advertisement][:sections].reject(&:empty?)
+      params.require(:advertisement).permit(:name, :url,:photo, :position, city_ids:[], sections:[], advertisement_durations_attributes: [:id, :start_date, :end_date, :_destroy])
     end
 end

@@ -4,13 +4,15 @@
   <title>CityWay</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1wjCJ5r9hwVMu4uxLNbcKOfBEaPpchnA&libraries=places"></script>
   <%= stylesheet_link_tag    'admin', media: 'all' %>
   <%= javascript_include_tag 'admin'%>
 
 
+  <%= render 'application/favicon' %>
   <%= csrf_meta_tags %>
 </head>
-<body class="<%= 'sidebar_main_open' if params[:controller] != 'home'%>">
+<body class="<%= 'sidebar_main_open' unless (params[:controller] == 'home' || (params[:controller] == 'admin/cities' && params[:action] == 'new') )%>">
 
   <!-- main header -->
   <header id="header_main">
@@ -20,7 +22,7 @@
         <!-- main sidebar switch -->
         <% unless params[:controller] == 'home'%>
         <a href="#" id="sidebar_main_toggle" class="sSwitch sSwitch_left">
-          <span class="sSwitchIcon"></span>
+          <i class="material-icons md-36 white_icon">&#xE5D2;</i>
         </a>
         <% end %>
 
@@ -28,6 +30,14 @@
 
         <div class="uk-navbar-flip marginTM3">
           <ul class="uk-navbar-nav user_actions">
+            <% if can? :create, City %>
+              <% if (params[:controller] == 'admin/cities' && params[:action] == 'new') %>
+                <%= link_to ('<span class="new-city-label white-label"></span> <i class="material-icons md-36 white_icon">&#xE5C4;</i>'.html_safe), :back , class: 'white-label user_action_image left'%>
+              <% else %>
+                <%= link_to ('<span class="new-city-label white-label">Aggiungi nuova città </span> <i class="material-icons md-36 white_icon">&#xE148;</i>'.html_safe), new_admin_city_path , class: 'white-label user_action_image left'%>
+              <% end %>
+            <% end %>
+
             <li data-uk-dropdown="{mode:'click',pos:'bottom-right'}">
               <%= link_to ('<i class="material-icons md-36 white_icon">&#xE8B8;</i>'.html_safe), '#', class: 'user_action_image'%>
               <div class="uk-dropdown uk-dropdown-small">
@@ -36,6 +46,8 @@
                 </ul>
               </div>
             </li>
+
+
           </ul>
         </div>
       </nav>
@@ -46,7 +58,8 @@
 
 
   <!-- main sidebar -->
-  <% unless params[:controller] == 'home'%>
+
+  <% unless params[:controller] == 'home' || (params[:controller] == 'admin/cities' && params[:action] == 'new') %>
     <%= render 'layouts/sidebar'%>
   <% end %>
 

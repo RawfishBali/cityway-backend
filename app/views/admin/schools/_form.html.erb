@@ -1,0 +1,203 @@
+<div class="md-card">
+  <div class="md-card-content">
+    <%= form_for(@admin_school, url: (@admin_school.new_record? ? admin_schools_path(@admin_school) : admin_school_path(@admin_school)), multipart: true) do |f| %>
+    <% if @admin_school.errors.any? %>
+    <div id="error_explanation">
+      <h2>Qualcosa è andato storto durante il salvataggio dei dati</h2>
+      <ul>
+        <% @admin_school.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
+    <h2 class=" ">
+      <% if @admin_school.new_record?%>
+      Aggiungi Istruzione
+      <% else %>
+      Gestisci Istruzione
+      <% end %>
+      <span class="marginL170">
+        <%= check_box_tag :sport_map_toggle, false,{},{class: 'float-right ', 'data-switchery': true, 'data-switchery-size':"large"}  %>
+        <span id="switchery_active_text">Map</span>
+      </span>
+      <%= link_to '<i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>'.html_safe, :back, class:'float-right' %>
+    </h2>
+    <%= hidden_field_tag :school_types, @school_types %>
+    <div class="uk-grid" data-uk-grid-margin>
+      <%#= f.hidden_field :place_type , value: @place_type %>
+      <%#= f.hidden_field :is_public , value: @is_public %>
+      <div class="uk-width-medium-2-5">
+        <p>
+          <%= f.radio_button :is_public, true , :value => false, 'data-md-icheck': true %>
+          <%= label :is_public, "Struttura A Gestione Pubblica", class:'inline-label' %>
+        </p>
+        <p>
+          <%= f.radio_button :is_public, false , :value => true, 'data-md-icheck': true %>
+          <%= label :is_public, "Struttura A Gestione Privata", class:'inline-label' %>
+        </p>
+      </div>
+
+
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+              <label>Nome</label>
+              <%= f.text_field :name, required: true,class: 'md-input'  %>
+            </div>
+            <div class="uk-width-medium-1-2">
+              <%= f.text_field :school_type, required: true, class: '', required: true, value: (@admin_school.school_type ? @admin_school.school_type.humanize.titleize : "") %>
+              <!-- <label>Denominazione</label> -->
+              <%#= f.text_field :denomination, required: false,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+              <label>Website</label>
+              <%= f.text_field :website,class: 'md-input'  %>
+            </div>
+            <div class="uk-width-medium-1-2">
+              <label>Indirizzo</label>
+              <%= f.text_field :address, required: true,class: 'md-input addressable'  %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+              <div id="school_map" class="not-basic"></div>
+            </div>
+            <div class="uk-width-medium-1-2">
+              <label class='not-basic'>Latitude</label>
+              <%= f.text_field :latitude, required: true,class: 'md-input not-basic'  %>
+              <label class='not-basic'>Longitude</label>
+              <%= f.text_field :longitude, required: true,class: 'md-input not-basic'  %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+              <label>Email</label>
+              <%= f.email_field :email,class: 'md-input'  %>
+            </div>
+            <div class="uk-width-medium-1-2">
+              <label>Cellulare</label>
+              <%= f.text_field :phone,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+              <label>Fisso</label>
+              <%= f.text_field :phone_1,class: 'md-input'  %>
+            </div>
+            <div class="uk-width-medium-1-2">
+              <label>Numero Verde</label>
+              <%= f.text_field :phone_2,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+              <label>Facebook</label>
+              <%= f.text_field :facebook,class: 'md-input'  %>
+            </div>
+            <div class="uk-width-medium-1-2">
+              <label>Instagram</label>
+              <%= f.text_field :instagram,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+              <label>Twitter</label>
+              <%= f.text_field :twitter,class: 'md-input'  %>
+            </div>
+            <div class="uk-width-medium-1-2">
+              <label>Google+</label>
+              <%= f.text_field :google_plus,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+
+            <div class="uk-width-medium-1-2">
+              <label>Descrizione</label>
+              <%= f.text_area :description, required: true,class: 'md-input'  %>
+            </div>
+            <div class="uk-width-medium-1-2">
+              <%= f.label :support_disabilities, 'Città Accessibile', class: 'inline-label'%>
+              <%= f.check_box :support_disabilities,class: 'md-input', 'data-switchery': true  %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="uk-width-medium-1-1">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2">
+              <div id="subcategories">
+                <h3>Orari</h3>
+                <%= f.fields_for :business_hours do |business_hour| %>
+                <%= render 'business_hour_fields', f: business_hour %>
+                <% end %>
+                <div class="links">
+                  <%= link_to_add_association '<i class="material-icons md-24"></i>'.html_safe, f, :business_hours %>
+                </div>
+              </div>
+            </div>
+            <div class="uk-width-medium-1-2">
+              <div class="uk-form-row">
+                <div id="photos">
+                  <h3>Foto</h3>
+                  <%= f.fields_for :photos do |photo| %>
+                  <%= render 'photo_fields', f: photo %>
+                  <% end %>
+                  <div class="links">
+                    <%= link_to_add_association '<i class="material-icons md-24"></i>'.html_safe, f, :photos %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="md-fab-wrapper">
+    <%= button_tag(type: 'submit' , class: 'md-fab md-fab-accent md-fab-wave waves-effect waves-button') do %>
+    <i class="fa fa-floppy-o" aria-hidden="true"></i>
+    <% end %>
+  </div>
+  <% end %>
+
+</div>

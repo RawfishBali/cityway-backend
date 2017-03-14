@@ -3,7 +3,7 @@
     <%= form_for(@admin_category, url: (@admin_category.new_record? ? admin_categories_path(@admin_category) : admin_category_path(@admin_category)), multipart: true) do |f| %>
     <% if @admin_category.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@admin_category.errors.count, "error") %> Questa categoria non può essere salvata.</h2>
+      <h2>Qualcosa è andato storto durante il salvataggio dei dati</h2>
       <ul>
         <% @admin_category.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -36,6 +36,7 @@
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
               <label>Icona Categoria</label>
+              <span class="font-size-11">(Suggerimento immagine 100 x 100px)</span>
               <br />
               <div class="dropzone" data-width="200"  data-image="<%= f.object.icon.url %>"  data-height="200" data-url="/" data-editstart="false" data-ajax="false"  data-canvas="true" >
                 <%= f.file_field :icon%>
@@ -47,7 +48,8 @@
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
               <label>Foto Categoria</label>
-              <div class="dropzone" data-width="750"   data-image="<%= f.object.photo.url %>"  data-height="410" data-url="/" data-editstart="false" data-ajax="false" data-canvas="true" style="width: 100%" >
+              <span class="font-size-11">(Suggerimento immagine 750 x 300px)</span>
+              <div class="dropzone" data-width="750"   data-image="<%= f.object.photo.url %>"  data-height="300" data-url="/" data-editstart="false" data-ajax="false" data-canvas="true" style="width: 100%" >
                 <%= f.file_field :photo%>
               </div>
             </div>

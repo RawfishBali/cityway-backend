@@ -3,7 +3,7 @@
     <%= form_for(@commonplace, url: (@commonplace.new_record? ? admin_commonplaces_path(@commonplace) : admin_commonplace_path(@commonplace)), multipart: true) do |f| %>
     <% if @commonplace.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@commonplace.errors.count, "error") %> Questa categoria non può essere salvata:</h2>
+      <h2>Qualcosa è andato storto durante il salvataggio dei dati</h2>
 
       <ul>
         <% @commonplace.errors.full_messages.each do |message| %>
@@ -14,9 +14,9 @@
     <% end %>
     <h2 class=" ">
       <% if @commonplace.new_record?%>
-      Aggiungi Social Links
+      Aggiungi Social Links & Contatti
       <% else %>
-      Gestisci Social Links
+      Gestisci Social Links & Contatti
       <% end %>
     </h2>
     <div class="uk-grid" data-uk-grid-margin>
@@ -57,12 +57,53 @@
         </div>
       </div>
       <div class="uk-width-medium-1-2 ">
+        
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+                <%= f.check_box :override_major,class: 'float-right ', 'data-switchery': true, 'data-switchery-size':"large"  %>
+                <span id="switchery_active_text">Sostituire il contatto del sindaco</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="uk-width-medium-1-2 ">
         <div class="uk-form-row">
           <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-1">
               <h3 class="  uk-margin-small-bottom">Icona Comune</h3>
               <div class="dropzone" data-width="222"  data-image="<%= f.object.icon.url %>"  data-height="300"  data-editstart="false" data-ajax="false" data-canvas="true" >
                 <%= f.file_field :icon%>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="uk-width-medium-1-2 replaceable_div">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <label>Telefono</label>
+              <%= f.text_field :replaceable_phone,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <label>Email</label>
+              <%= f.email_field :replaceable_email,class: 'md-input'  %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="uk-width-medium-1-2 replaceable_div">
+        <div class="uk-form-row">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+              <h3 class="  uk-margin-small-bottom">Foto</h3>
+              <div class="dropzone" data-width="200"  data-image="<%= f.object.replaceable_icon.url %>"  data-height="200"  data-editstart="false" data-ajax="false" data-canvas="true" >
+                <%= f.file_field :replaceable_icon %>
               </div>
             </div>
           </div>

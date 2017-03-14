@@ -1,5 +1,6 @@
 class Admin::CityHallStoriesController < Admin::BaseController
   before_action :set_admin_city_hall_story, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource param_method: :admin_city_hall_story_params
 
   # GET /admin/city_hall_stories
   # GET /admin/city_hall_stories.json
@@ -30,7 +31,7 @@ class Admin::CityHallStoriesController < Admin::BaseController
 
     respond_to do |format|
       if @admin_city_hall_story.save
-        format.html { redirect_to session['previous_url'] || admin_city_hall_stories_url, notice: 'City hall story è stato creato con successo.' }
+        format.html { redirect_to session['previous_url'] || admin_city_hall_stories_url, notice: 'Dati Comune è stato creato con successo.' }
         format.json { render :show, status: :created, location: @admin_city_hall_story }
       else
         format.html { render :new }
@@ -44,7 +45,7 @@ class Admin::CityHallStoriesController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_city_hall_story.update(admin_city_hall_story_params)
-        format.html { redirect_to session['previous_url'] || admin_city_hall_stories_url, notice: 'City hall story è stato aggiornato con successo.' }
+        format.html { redirect_to session['previous_url'] || admin_city_hall_stories_url, notice: 'Dati Comune è stato aggiornato con successo.' }
         format.json { render :show, status: :ok, location: @admin_city_hall_story }
       else
         format.html { render :edit }
@@ -58,7 +59,7 @@ class Admin::CityHallStoriesController < Admin::BaseController
   def destroy
     @admin_city_hall_story.destroy
     respond_to do |format|
-      format.html { redirect_to admin_city_hall_stories_url, notice: 'City hall story è stato distrutto con successo.' }
+      format.html { redirect_to admin_city_hall_stories_url, notice: 'Dati Comune cancellata con successo!.' }
       format.json { head :no_content }
     end
   end
@@ -72,6 +73,6 @@ class Admin::CityHallStoriesController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_city_hall_story_params
-      params.require(:city_hall_story).permit(:top_text, :bottom_text, :commonplace_id, photos_attributes: [:id, :picture,:is_primary,:position,:_destroy])
+      params.require(:city_hall_story).permit(:top_text, :bottom_text, :commonplace_id, :external_link, photos_attributes: [:id, :picture,:is_primary,:position,:_destroy])
     end
 end
